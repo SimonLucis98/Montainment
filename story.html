@@ -176,11 +176,24 @@
             color: #999;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
-        .story-card-footer .likes .heart {
+        .story-card-footer .likes .heart-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #ccc;
+            transition: 0.2s;
+            padding: 0 4px;
+            line-height: 1;
+        }
+        .story-card-footer .likes .heart-btn:hover {
             color: #e74c5e;
-            font-size: 16px;
+            transform: scale(1.1);
+        }
+        .story-card-footer .likes .heart-btn.liked {
+            color: #e74c5e;
         }
         .story-card-footer .chapters-count {
             font-size: 13px;
@@ -188,6 +201,10 @@
             background: #f5f2ed;
             padding: 2px 14px;
             border-radius: 20px;
+        }
+        .story-card-footer .updated-time {
+            font-size: 12px;
+            color: #bbb;
         }
 
         /* ========== 小说详情页 ========== */
@@ -285,14 +302,33 @@
             flex-wrap: wrap;
             font-size: 14px;
             color: #888;
+            align-items: center;
         }
         .detail-info .meta-row .likes {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
-        .detail-info .meta-row .likes .heart {
+        .detail-info .meta-row .likes .heart-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 22px;
+            color: #ccc;
+            transition: 0.2s;
+            padding: 0;
+            line-height: 1;
+        }
+        .detail-info .meta-row .likes .heart-btn:hover {
             color: #e74c5e;
+            transform: scale(1.1);
+        }
+        .detail-info .meta-row .likes .heart-btn.liked {
+            color: #e74c5e;
+        }
+        .detail-info .meta-row .updated-time {
+            color: #bbb;
+            font-size: 13px;
         }
 
         /* ========== 章节列表 ========== */
@@ -649,7 +685,7 @@
     <script>
         // ================================================================
         //  主逻辑 — 从 data/stories.json 加载，渲染列表 + 详情
-        //  支持显示 cover 封面图片
+        //  支持显示封面、简介、推荐、更新时间
         // ================================================================
 
         let allStories = [];
@@ -724,6 +760,28 @@
             return colors[Math.abs(hash) % colors.length];
         }
 
+        // 格式化时间
+        function formatTime(isoString) {
+            if (!isoString) return '未知';
+            const d = new Date(isoString);
+            return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
+        }
+
+        // ================================================================
+        //  推荐按钮逻辑
+        // ================================================================
+        function handleLike(storyIndex, event) {
+            event.stopPropagation(); // 防止触发卡片点击
+            const story = allStories[storyIndex];
+            if (!story) return;
+            story.likes = (story.likes || 0) + 1;
+            // 重新渲染当前视图（列表和详情）
+            renderList();
+            if (detailView.classList.contains('active')) {
+                showDetail(currentStoryIndex);
+            }
+        }
+
         // ================================================================
         //  渲染：小说列表
         // ================================================================
@@ -749,6 +807,7 @@
                 const desc = story.description || '📝 暂无简介';
                 const likes = story.likes || 0;
                 const chCount = story.chapters ? story.chapters.length : 0;
+                const updated = formatTime(story.updatedAt);
 
                 const hasCover = story.cover && story.cover.trim() !== '';
                 const coverHtml = hasCover
@@ -763,11 +822,15 @@
                         </div>
                         <div class="story-card-body">
                             <div class="title">${story.title}</div>
-                            <div class="author">✍️ ${story.author || '未知作者'}</div>
+                            <div class="author">作者：${story.author || '未知作者'}</div>
                             <div class="desc">${desc}</div>
                             <div class="story-card-footer">
-                                <span class="likes"><span class="heart">❤️</span> ${likes}</span>
+                                <span class="likes">
+                                    <button class="heart-btn" data-story-index="${idx}">❤️</button>
+                                    ${likes}
+                                </span>
                                 <span class="chapters-count">${chCount} 章</span>
+                                <span class="updated-time">🕒 ${updated}</span>
                             </div>
                         </div>
                     </div>
@@ -776,6 +839,15 @@
 
             storyGrid.innerHTML = html;
 
+            // 绑定推荐按钮事件
+            storyGrid.querySelectorAll('.heart-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const idx = parseInt(this.dataset.storyIndex);
+                    handleLike(idx, e);
+                });
+            });
+
+            // 点击卡片 → 打开详情
             storyGrid.querySelectorAll('.story-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -801,6 +873,7 @@
             const desc = story.description || '📝 暂无简介';
             const likes = story.likes || 0;
             const chapters = story.chapters || [];
+            const updated = formatTime(story.updatedAt);
 
             const hasCover = story.cover && story.cover.trim() !== '';
             const coverHtml = hasCover
@@ -813,15 +886,24 @@
                 </div>
                 <div class="detail-info">
                     <div class="title">${story.title}</div>
-                    <div class="author">✍️ ${story.author || '未知作者'}</div>
+                    <div class="author">作者：${story.author || '未知作者'}</div>
                     <div class="desc">${desc}</div>
                     <div class="meta-row">
-                        <span class="likes"><span class="heart">❤️</span> ${likes} 推荐</span>
+                        <span class="likes">
+                            <button class="heart-btn" data-story-index="${index}">❤️</button>
+                            ${likes}
+                        </span>
                         <span>📖 ${chapters.length} 章</span>
-                        ${hasCover ? '<span>🖼️ 有封面</span>' : ''}
+                        <span class="updated-time">🕒 更新于 ${updated}</span>
                     </div>
                 </div>
             `;
+
+            // 绑定详情页推荐按钮
+            detailHero.querySelector('.heart-btn').addEventListener('click', function(e) {
+                const idx = parseInt(this.dataset.storyIndex);
+                handleLike(idx, e);
+            });
 
             chapterCount.textContent = chapters.length + ' 章';
 
