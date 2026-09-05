@@ -330,6 +330,37 @@
             margin-top: 12px;
             padding: 4px 0;
         }
+
+        /* ========== 上传状态 ========== */
+        .upload-status {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+            min-height: 20px;
+        }
+        .upload-status.success { color: #1f8b4c; }
+        .upload-status.error { color: #d14c4c; }
+        .upload-status.loading { color: #2a6df4; }
+
+        .cover-preview {
+            margin-top: 8px;
+            max-width: 120px;
+            border-radius: 8px;
+            border: 2px solid #eef2f7;
+            overflow: hidden;
+        }
+        .cover-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .cover-preview .no-cover {
+            padding: 20px;
+            text-align: center;
+            color: #ccc;
+            font-size: 12px;
+            background: #fafcff;
+        }
     </style>
 </head>
 <body>
@@ -518,16 +549,38 @@
                     <div class="admin-list" id="qList"></div>
                 </div>
 
-                <!-- ========== Tab: 小说管理（新增） ========== -->
+                <!-- ========== Tab: 小说管理（含封面上传） ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-stories">
                     <h2>📚 小说管理 <span class="badge-count" id="storyBadge">0</span></h2>
 
-                    <!-- 小说表单 -->
+                    <!-- 小说表单（含封面上传） -->
                     <form id="storyForm" class="admin-form">
                         <div class="admin-form-row">
-                            <div class="admin-form-group"><label>小说标题</label><input type="text" id="storyTitleInput" placeholder="星辰之约" required /></div>
-                            <div class="admin-form-group"><label>作者</label><input type="text" id="storyAuthorInput" placeholder="西蒙" required /></div>
+                            <div class="admin-form-group">
+                                <label>小说标题</label>
+                                <input type="text" id="storyTitleInput" placeholder="星辰之约" required />
+                            </div>
+                            <div class="admin-form-group">
+                                <label>作者</label>
+                                <input type="text" id="storyAuthorInput" placeholder="西蒙" required />
+                            </div>
                         </div>
+
+                        <!-- ===== 封面图片上传 ===== -->
+                        <div class="admin-form-group">
+                            <label>📷 封面图片</label>
+                            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                                <input type="text" id="storyCover" placeholder="图片URL（上传后自动填入）" style="flex:1;" />
+                                <button type="button" class="btn-admin btn-admin-outline" id="uploadCoverBtn">📤 上传图片</button>
+                                <input type="file" id="coverFileInput" accept="image/*" style="display:none;" />
+                            </div>
+                            <div class="upload-status" id="uploadStatus"></div>
+                            <!-- 封面预览 -->
+                            <div class="cover-preview" id="coverPreview">
+                                <div class="no-cover">暂无封面</div>
+                            </div>
+                        </div>
+
                         <input type="hidden" id="storyEditIndex" value="-1" />
                         <div style="display:flex; gap:10px; flex-wrap:wrap;">
                             <button type="submit" class="btn-admin btn-admin-primary" id="storySubmitBtn">➕ 添加小说</button>
@@ -589,12 +642,18 @@
     <!-- ============================================================ -->
     <script>
         // ================================================================
-        //  ADMIN.JS — 完整后台逻辑（登录 + 测验管理 + 小说管理）
+        //  ADMIN.JS — 完整后台逻辑（登录 + 测验管理 + 小说管理 + 封面上传）
         // ================================================================
         (function() {
 
             // ---------- 密码配置 ----------
             const ADMIN_PASSWORD = 'Montainment@98'; // ← 修改此密码
+
+            // ================================================================
+            //  🔐 Cloudinary 配置（请替换成你的实际值）
+            // ================================================================
+            const CLOUDINARY_CLOUD_NAME = '你的CloudName';      // ← 从 Cloudinary Dashboard 获取
+            const CLOUDINARY_UPLOAD_PRESET = 'story_covers';    // ← 你创建的 Upload Preset 名称
 
             // ---------- 数据 ----------
             let data = { languages: [] };
@@ -637,7 +696,6 @@
 
             // ---------- 如果已登录则直接初始化 ----------
             if (checkLogin()) {
-                // 等 DOM 完全加载后再初始化
                 if (document.readyState === 'complete') {
                     initAdmin();
                 } else {
@@ -715,7 +773,6 @@
                 Object.keys(tabContents).forEach(key => {
                     tabContents[key].classList.toggle('hidden', key !== tabId);
                 });
-                // 如果切换到小说 Tab，刷新列表
                 if (tabId === 'stories') {
                     renderStories();
                 }
@@ -817,7 +874,6 @@
                     });
                     if (current && data.languages.find(l => l.id === current)) sel.value = current;
                 });
-                // 联动
                 document.getElementById('diffLangSelect').addEventListener('change', function() { renderDifficulties(); });
                 document.getElementById('paperLangSelect').addEventListener('change', function() { populatePaperDiffSelect();
                     renderPapers(); });
@@ -966,7 +1022,7 @@
                 showToast('已取消', 'info');
             });
 
-            // ---------- 试卷 CRUD（精简版，与之前逻辑一致） ----------
+            // ---------- 试卷 CRUD ----------
             function renderPapers() {
                 const langId = document.getElementById('paperLangSelect').value;
                 const level = parseInt(document.getElementById('paperDiffSelect').value);
@@ -1066,7 +1122,7 @@
                 showToast('已取消', 'info');
             });
 
-            // ---------- 题目 CRUD（精简） ----------
+            // ---------- 题目 CRUD ----------
             function renderQuestions() {
                 const langId = document.getElementById('qLangSelect').value;
                 const level = parseInt(document.getElementById('qDiffSelect').value);
@@ -1191,10 +1247,91 @@
             });
 
             // ================================================================
-            //  📚 小说管理（新增）
+            //  📚 小说管理（含封面上传）
             // ================================================================
-            let currentStoryIndex = -1; // 当前选中的小说索引
+            let currentStoryIndex = -1;
 
+            // ---------- 封面上传（Cloudinary） ----------
+            function updateCoverPreview(url) {
+                const preview = document.getElementById('coverPreview');
+                if (url && url.trim()) {
+                    preview.innerHTML = `<img src="${url.trim()}" alt="封面预览" />`;
+                } else {
+                    preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
+                }
+            }
+
+            document.getElementById('uploadCoverBtn').addEventListener('click', function() {
+                document.getElementById('coverFileInput').click();
+            });
+
+            document.getElementById('coverFileInput').addEventListener('change', function() {
+                const file = this.files[0];
+                if (!file) return;
+
+                // 验证文件类型
+                if (!file.type.startsWith('image/')) {
+                    showToast('❌ 请选择图片文件', 'error');
+                    this.value = '';
+                    return;
+                }
+
+                // 验证文件大小（限制 5MB）
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('❌ 图片大小不能超过 5MB', 'error');
+                    this.value = '';
+                    return;
+                }
+
+                const status = document.getElementById('uploadStatus');
+                const btn = document.getElementById('uploadCoverBtn');
+                const origText = btn.textContent;
+                btn.textContent = '⏳ 上传中...';
+                btn.disabled = true;
+                status.textContent = '⏳ 正在上传到 Cloudinary...';
+                status.className = 'upload-status loading';
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+                fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')');
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.secure_url) {
+                        document.getElementById('storyCover').value = data.secure_url;
+                        updateCoverPreview(data.secure_url);
+                        status.textContent = '✅ 上传成功！';
+                        status.className = 'upload-status success';
+                        showToast('✅ 封面上传成功！', 'success');
+                    } else {
+                        throw new Error(data.error?.message || '未知错误');
+                    }
+                })
+                .catch(err => {
+                    status.textContent = '❌ 上传失败：' + err.message;
+                    status.className = 'upload-status error';
+                    showToast('❌ 上传失败：' + err.message, 'error');
+                })
+                .finally(() => {
+                    btn.textContent = origText;
+                    btn.disabled = false;
+                    document.getElementById('coverFileInput').value = '';
+                });
+            });
+
+            // 当手动输入 URL 时，同步预览
+            document.getElementById('storyCover').addEventListener('input', function() {
+                updateCoverPreview(this.value);
+            });
+
+            // ---------- 渲染小说列表 ----------
             function renderStories() {
                 const container = document.getElementById('storyList');
                 if (storiesData.stories.length === 0) {
@@ -1205,8 +1342,9 @@
                 let html = '';
                 storiesData.stories.forEach((s, i) => {
                     const chCount = s.chapters ? s.chapters.length : 0;
+                    const hasCover = s.cover && s.cover.trim() !== '';
                     html +=
-                        `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">📚 ${s.title} <small>作者: ${s.author} · ${chCount} 章</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
+                        `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章${hasCover ? ' · 有封面' : ''}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
                 });
                 container.innerHTML = html;
 
@@ -1238,7 +1376,6 @@
                         }
                     });
                 });
-                // 点击整行选择
                 container.querySelectorAll('.admin-list-item').forEach(el => {
                     el.addEventListener('click', function() {
                         const idx = parseInt(this.dataset.storyIndex);
@@ -1246,7 +1383,6 @@
                     });
                 });
 
-                // 如果当前有选中的小说，高亮
                 if (currentStoryIndex >= 0 && currentStoryIndex < storiesData.stories.length) {
                     const items = container.querySelectorAll('.admin-list-item');
                     items.forEach((el, i) => {
@@ -1270,7 +1406,6 @@
                 document.getElementById('chapterStoryRef').value = idx;
                 renderChapters();
                 renderStories();
-                // 滚动到章节管理器
                 document.getElementById('chapterManager').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
@@ -1278,6 +1413,8 @@
                 const s = storiesData.stories[idx];
                 document.getElementById('storyTitleInput').value = s.title;
                 document.getElementById('storyAuthorInput').value = s.author;
+                document.getElementById('storyCover').value = s.cover || '';
+                updateCoverPreview(s.cover || '');
                 document.getElementById('storyEditIndex').value = idx;
                 document.getElementById('storySubmitBtn').textContent = '💾 保存修改';
                 document.getElementById('storyCancelBtn').style.display = 'inline-flex';
@@ -1288,15 +1425,23 @@
                 e.preventDefault();
                 const title = document.getElementById('storyTitleInput').value.trim();
                 const author = document.getElementById('storyAuthorInput').value.trim();
+                const cover = document.getElementById('storyCover').value.trim();
                 const editIdx = parseInt(document.getElementById('storyEditIndex').value);
                 if (!title || !author) { showToast('请填写完整', 'error'); return; }
                 if (editIdx === -1) {
-                    storiesData.stories.push({ id: Date.now(), title, author, chapters: [] });
+                    storiesData.stories.push({
+                        id: Date.now(),
+                        title,
+                        author,
+                        cover: cover,
+                        chapters: []
+                    });
                     showToast('已添加小说: ' + title, 'success');
                 } else {
                     const s = storiesData.stories[editIdx];
                     s.title = title;
                     s.author = author;
+                    s.cover = cover;
                     showToast('已更新: ' + title, 'success');
                     document.getElementById('storyEditIndex').value = -1;
                     document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
@@ -1306,6 +1451,10 @@
                 document.getElementById('storyEditIndex').value = -1;
                 document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
                 document.getElementById('storyCancelBtn').style.display = 'none';
+                document.getElementById('storyCover').value = '';
+                updateCoverPreview('');
+                document.getElementById('uploadStatus').textContent = '';
+                document.getElementById('uploadStatus').className = 'upload-status';
                 renderStories();
                 updateStats();
                 updateJsonEditor();
@@ -1318,7 +1467,11 @@
                 document.getElementById('storyForm').reset();
                 document.getElementById('storyEditIndex').value = -1;
                 document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
-                this.style.display = 'none';
+                document.getElementById('storyCancelBtn').style.display = 'none';
+                document.getElementById('storyCover').value = '';
+                updateCoverPreview('');
+                document.getElementById('uploadStatus').textContent = '';
+                document.getElementById('uploadStatus').className = 'upload-status';
                 showToast('已取消', 'info');
             });
 
@@ -1408,7 +1561,7 @@
                 document.getElementById('chapterForm').reset();
                 document.getElementById('chapterEditIndex').value = -1;
                 document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
-                this.style.display = 'none';
+                document.getElementById('chapterCancelBtn').style.display = 'none';
                 showToast('已取消', 'info');
             });
 
@@ -1473,13 +1626,11 @@
             //  加载数据
             // ================================================================
             function loadAllData() {
-                // 加载测验数据
                 fetch('data/papers.json')
                     .then(res => { if (!res.ok) throw new Error('papers.json 不存在'); return res.json(); })
                     .then(d => { if (d.languages) data.languages = d.languages; })
                     .catch(() => { data.languages = []; })
                     .finally(() => {
-                        // 加载小说数据
                         fetch('data/stories.json')
                             .then(res => { if (!res.ok) throw new Error('stories.json 不存在'); return res.json(); })
                             .then(d => { if (d.stories) storiesData.stories = d.stories; })
@@ -1513,11 +1664,9 @@
 
             function initAdmin() {
                 loadAllData();
-                // 切换到第一个 Tab
                 switchTab('languages');
             }
 
-            // 暴露给登录后使用
             window.initAdmin = initAdmin;
 
         })();
