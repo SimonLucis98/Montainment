@@ -549,11 +549,11 @@
                     <div class="admin-list" id="qList"></div>
                 </div>
 
-                <!-- ========== Tab: 小说管理（含封面上传） ========== -->
+                <!-- ========== Tab: 小说管理（含封面上传 + 简介 + 更新时间） ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-stories">
                     <h2>📚 小说管理 <span class="badge-count" id="storyBadge">0</span></h2>
 
-                    <!-- 小说表单（含封面上传） -->
+                    <!-- 小说表单（含封面上传、简介） -->
                     <form id="storyForm" class="admin-form">
                         <div class="admin-form-row">
                             <div class="admin-form-group">
@@ -566,7 +566,13 @@
                             </div>
                         </div>
 
-                        <!-- ===== 封面图片上传 ===== -->
+                        <!-- 新增：简介字段 -->
+                        <div class="admin-form-group">
+                            <label>📝 简介</label>
+                            <textarea id="storyDescriptionInput" rows="2" placeholder="请输入小说简介..."></textarea>
+                        </div>
+
+                        <!-- 封面图片上传 -->
                         <div class="admin-form-group">
                             <label>📷 封面图片</label>
                             <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -575,7 +581,6 @@
                                 <input type="file" id="coverFileInput" accept="image/*" style="display:none;" />
                             </div>
                             <div class="upload-status" id="uploadStatus"></div>
-                            <!-- 封面预览 -->
                             <div class="cover-preview" id="coverPreview">
                                 <div class="no-cover">暂无封面</div>
                             </div>
@@ -1247,7 +1252,7 @@
             });
 
             // ================================================================
-            //  📚 小说管理（含封面上传）
+            //  📚 小说管理（含封面上传 + 简介 + 更新时间）
             // ================================================================
             let currentStoryIndex = -1;
 
@@ -1269,14 +1274,11 @@
                 const file = this.files[0];
                 if (!file) return;
 
-                // 验证文件类型
                 if (!file.type.startsWith('image/')) {
                     showToast('❌ 请选择图片文件', 'error');
                     this.value = '';
                     return;
                 }
-
-                // 验证文件大小（限制 5MB）
                 if (file.size > 5 * 1024 * 1024) {
                     showToast('❌ 图片大小不能超过 5MB', 'error');
                     this.value = '';
@@ -1326,7 +1328,6 @@
                 });
             });
 
-            // 当手动输入 URL 时，同步预览
             document.getElementById('storyCover').addEventListener('input', function() {
                 updateCoverPreview(this.value);
             });
@@ -1343,8 +1344,9 @@
                 storiesData.stories.forEach((s, i) => {
                     const chCount = s.chapters ? s.chapters.length : 0;
                     const hasCover = s.cover && s.cover.trim() !== '';
+                    const updated = s.updatedAt ? new Date(s.updatedAt).toLocaleString('zh-CN', { hour12: false }) : '未知';
                     html +=
-                        `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章${hasCover ? ' · 有封面' : ''}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
+                        `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章 · 更新: ${updated}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
                 });
                 container.innerHTML = html;
 
@@ -1413,6 +1415,7 @@
                 const s = storiesData.stories[idx];
                 document.getElementById('storyTitleInput').value = s.title;
                 document.getElementById('storyAuthorInput').value = s.author;
+                document.getElementById('storyDescriptionInput').value = s.description || '';
                 document.getElementById('storyCover').value = s.cover || '';
                 updateCoverPreview(s.cover || '');
                 document.getElementById('storyEditIndex').value = idx;
@@ -1425,15 +1428,22 @@
                 e.preventDefault();
                 const title = document.getElementById('storyTitleInput').value.trim();
                 const author = document.getElementById('storyAuthorInput').value.trim();
+                const description = document.getElementById('storyDescriptionInput').value.trim();
                 const cover = document.getElementById('storyCover').value.trim();
                 const editIdx = parseInt(document.getElementById('storyEditIndex').value);
+                const now = new Date().toISOString();
+
                 if (!title || !author) { showToast('请填写完整', 'error'); return; }
+
                 if (editIdx === -1) {
                     storiesData.stories.push({
                         id: Date.now(),
                         title,
                         author,
+                        description: description,
                         cover: cover,
+                        likes: 0,
+                        updatedAt: now,
                         chapters: []
                     });
                     showToast('已添加小说: ' + title, 'success');
@@ -1441,12 +1451,15 @@
                     const s = storiesData.stories[editIdx];
                     s.title = title;
                     s.author = author;
+                    s.description = description;
                     s.cover = cover;
+                    s.updatedAt = now;
                     showToast('已更新: ' + title, 'success');
                     document.getElementById('storyEditIndex').value = -1;
                     document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
                     document.getElementById('storyCancelBtn').style.display = 'none';
                 }
+
                 this.reset();
                 document.getElementById('storyEditIndex').value = -1;
                 document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
@@ -1537,10 +1550,13 @@
                 if (!s.chapters) s.chapters = [];
                 if (editIdx === -1) {
                     s.chapters.push({ title, content });
+                    // 更新小说更新时间
+                    s.updatedAt = new Date().toISOString();
                     showToast('已添加章节: ' + title, 'success');
                 } else {
                     if (editIdx >= s.chapters.length) { showToast('章节不存在', 'error'); return; }
                     s.chapters[editIdx] = { title, content };
+                    s.updatedAt = new Date().toISOString();
                     showToast('已更新: ' + title, 'success');
                     document.getElementById('chapterEditIndex').value = -1;
                     document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
