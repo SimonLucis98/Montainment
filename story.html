@@ -1,96 +1,268 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 故事工坊 | EduFun</title>
-  <meta name="description" content="输入关键词，选择故事风格，AI 故事工坊为你现场生成一段独一无二的短篇故事。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI故事工坊 - EduFun</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* 小说阅读专用样式 */
+        .story-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #faf8f5;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            min-height: 70vh;
+        }
+
+        .story-title {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4px;
+            color: #1a1a2e;
+        }
+
+        .story-author {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .chapter-nav button {
+            padding: 8px 20px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+            flex: 1;
+            max-width: 140px;
+        }
+
+        .chapter-nav button:hover:not(:disabled) {
+            background: #1a1a2e;
+            color: white;
+            border-color: #1a1a2e;
+        }
+
+        .chapter-nav button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .chapter-indicator {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+            flex: 1;
+        }
+
+        .chapter-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .chapter-selector button {
+            padding: 6px 14px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .chapter-selector button.active {
+            background: #1a1a2e;
+            color: white;
+            border-color: #1a1a2e;
+        }
+
+        .chapter-selector button:hover:not(.active) {
+            background: #f0f0f0;
+        }
+
+        .chapter-content {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #2c2c2c;
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: 4px 0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .chapter-content p {
+            margin-bottom: 1.2em;
+            text-indent: 2em;
+        }
+
+        .ad-placeholder {
+            background: #f0f0f0;
+            text-align: center;
+            padding: 16px;
+            border-radius: 8px;
+            color: #999;
+            font-size: 13px;
+            margin: 24px 0 12px;
+        }
+
+        @media (max-width: 600px) {
+            .story-container {
+                padding: 16px;
+            }
+            .story-title {
+                font-size: 22px;
+            }
+            .chapter-content {
+                font-size: 16px;
+                line-height: 1.8;
+            }
+            .chapter-nav button {
+                font-size: 13px;
+                padding: 6px 14px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header class="site-header">
-    <nav class="nav-bar">
-      <a href="index.html" class="brand">
-        <span class="brand-mark">✦</span>
-        EduFun
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="quiz.html">语言测验</a></li>
-        <li><a href="game.html">记忆游戏</a></li>
-        <li><a href="story.html">AI 故事工坊</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
-    </nav>
-  </header>
+    <!-- 导航栏（与你网站一致） -->
+    <header>
+        <nav>
+            <div class="logo">EduFun</div>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="quiz.html">语言测验</a></li>
+                <li><a href="game.html">记忆游戏</a></li>
+                <li><a href="story.html" class="active">故事工坊</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <div class="container">
-      <div class="ad-slot ad-slot--banner" data-ad-slot="story-top-banner" style="margin-top:16px;">
-        <span>广告位 · 728×90</span>
-      </div>
-    </div>
+    <main>
+        <div class="story-container">
+            <h1 class="story-title" id="storyTitle">小说标题</h1>
+            <div class="story-author" id="storyAuthor">作者</div>
 
-    <div class="page-header container">
-      <span class="page-badge badge-coral">创意写作</span>
-      <h1>AI 故事工坊</h1>
-      <p>输入一两个关键词，挑一种故事风格，点击生成，工坊就会现场为你编织一段独一无二的短篇故事。</p>
-    </div>
+            <!-- 章节快捷跳转 -->
+            <div class="chapter-selector" id="chapterSelector"></div>
 
-    <div class="container">
-      <section class="story-panel">
-        <div class="story-form">
-          <div>
-            <label for="story-keyword">关键词 / 主题</label>
-            <input
-              type="text"
-              id="story-keyword"
-              placeholder="例如：星星、机器人、勇敢的兔子……"
-              maxlength="20"
-            />
-            <p class="story-hint">试试输入一个名词或短语，工坊会把它编进故事里。</p>
-          </div>
-
-          <div>
-            <label>故事风格</label>
-            <div class="story-genre-group" id="story-genre-group">
-              <button class="story-genre-chip active" data-genre="adventure">🧭 冒险</button>
-              <button class="story-genre-chip" data-genre="fantasy">🪄 奇幻</button>
-              <button class="story-genre-chip" data-genre="scifi">🚀 科幻</button>
-              <button class="story-genre-chip" data-genre="comedy">😄 幽默</button>
+            <!-- 上一章 / 下一章 -->
+            <div class="chapter-nav">
+                <button id="prevChapter">上一章</button>
+                <span class="chapter-indicator" id="chapterIndicator">第 1 / 1 章</span>
+                <button id="nextChapter">下一章</button>
             </div>
-          </div>
 
-          <div>
-            <button class="btn btn-coral" id="story-generate-btn" style="width:100%;">✨ 生成故事</button>
-          </div>
+            <!-- 正文 -->
+            <div class="chapter-content" id="chapterContent"></div>
+
+            <!-- 广告位 -->
+            <div class="ad-placeholder">📢 广告位</div>
         </div>
+    </main>
 
-        <!-- 生成结果展示区 -->
-        <div class="story-output" id="story-output">
-          <h3 id="story-title"></h3>
-          <div id="story-body"></div>
-          <div class="story-output-actions">
-            <button class="btn btn-outline" id="story-regenerate-btn">🔁 换一个版本</button>
-            <button class="btn btn-primary" id="story-copy-btn">📋 复制故事</button>
-          </div>
-        </div>
-      </section>
+    <script>
+        // ============================================================
+        // 📚 小说数据 —— 把你自己的内容填在这里
+        // ============================================================
+        const storyData = {
+            title: "星辰之约",
+            author: "Simon",
+            chapters: [
+                {
+                    title: "第一章：起点",
+                    content: `这是一个关于星辰与约定的故事。\n\n夜幕降临，城市的灯光逐渐熄灭，唯独天台上还亮着一盏昏黄的灯。\n\n林辞坐在那里，手里握着一枚旧旧的指南针。那是指南针，也是他父亲留给他的遗物。\n\n“你会找到方向。”\n\n那是父亲最后一句话。\n\n他抬头望向北方，北极星明亮如初。`
+                },
+                {
+                    title: "第二章：旧书店",
+                    content: `林辞推开那扇半掩的木门，灰尘在光线里浮动。\n\n“请问，这里有没有关于星座的书？”\n\n柜台后的老人抬起头，推了推眼镜：“星座？你找对地方了。”\n\n他从柜子底层翻出一本泛黄的书，封面写着《星辰与命运》。\n\n“这本书，是你父亲留下来的。”\n\n林辞愣住了。`
+                },
+                {
+                    title: "第三章：指南针的秘密",
+                    content: `林辞翻开那本书，书页里夹着一封信。\n\n信纸上只有一行字：\n\n“指南针指向的不是北方，而是你该去的地方。”\n\n他把指南针放在书页上，指针轻轻晃动，最终停在了东南方向。\n\n那里，是海的方向。\n\n“父亲……你究竟想告诉我什么？”`
+                }
+            ]
+        };
 
-      <div class="ad-slot ad-slot--inline" data-ad-slot="story-inline">
-        <span>广告位 · 内容间横幅</span>
-      </div>
-    </div>
-  </main>
+        // ============================================================
+        // 逻辑代码（不需要修改）
+        // ============================================================
+        let currentChapterIndex = 0;
+        const totalChapters = storyData.chapters.length;
 
-  <footer class="site-footer">
-    <div class="container">© 2026 EduFun · 一个让学习更好玩的静态网站</div>
-  </footer>
+        function renderChapter(index) {
+            const chapter = storyData.chapters[index];
+            document.getElementById('storyTitle').textContent = storyData.title;
+            document.getElementById('storyAuthor').textContent = `作者：${storyData.author}`;
+            document.getElementById('chapterContent').textContent = chapter.content;
+            document.getElementById('chapterIndicator').textContent = `第 ${index + 1} / ${totalChapters} 章`;
 
-  <script src="js/common.js"></script>
-  <script src="js/story.js"></script>
+            // 更新按钮状态
+            document.getElementById('prevChapter').disabled = (index === 0);
+            document.getElementById('nextChapter').disabled = (index === totalChapters - 1);
+
+            // 更新章节选择器高亮
+            document.querySelectorAll('.chapter-selector button').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+
+            // 滚动到顶部
+            document.querySelector('.story-container').scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function buildChapterSelector() {
+            const container = document.getElementById('chapterSelector');
+            container.innerHTML = '';
+            storyData.chapters.forEach((chapter, i) => {
+                const btn = document.createElement('button');
+                btn.textContent = chapter.title || `第${i + 1}章`;
+                btn.addEventListener('click', () => {
+                    currentChapterIndex = i;
+                    renderChapter(i);
+                });
+                container.appendChild(btn);
+            });
+        }
+
+        // 事件绑定
+        document.getElementById('prevChapter').addEventListener('click', () => {
+            if (currentChapterIndex > 0) {
+                currentChapterIndex--;
+                renderChapter(currentChapterIndex);
+            }
+        });
+
+        document.getElementById('nextChapter').addEventListener('click', () => {
+            if (currentChapterIndex < totalChapters - 1) {
+                currentChapterIndex++;
+                renderChapter(currentChapterIndex);
+            }
+        });
+
+        // 初始化
+        buildChapterSelector();
+        renderChapter(0);
+    </script>
+
 </body>
 </html>
