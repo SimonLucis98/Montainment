@@ -1,0 +1,45 @@
+{
+  "languages": [
+    {
+      "id": "ja",
+      "labelZh": "日语",
+      "labelEn": "Japanese",
+      "emoji": "🇯🇵",
+      "difficulties": [
+        {
+          "level": 1,
+          "labelZh": "1级 · 初学者",
+          "labelEn": "Level 1 · Beginner",
+          "papers": [
+            {
+              "id": 1,
+              "titleZh": "试卷1：平假名与基础问候",
+              "titleEn": "Paper 1: Hiragana & Basic Greetings",
+              "questions": [
+                {
+                  "q": {
+                    "zh": "\"こんにちは\" 在中文里是什么意思？",
+                    "en": "What does \"こんにちは\" mean in English?"
+                  },
+                  "opts": {
+                    "zh": ["早上好", "你好", "晚安", "谢谢"],
+                    "en": ["Good morning", "Hello / Good afternoon", "Good night", "Thank you"]
+                  },
+                  "ans": 1,
+                  "exp": {
+                    "zh": "こんにちは（Konnichiwa）是日语中最常用的白天问候语，意为\"你好\"。",
+                    "en": "こんにちは (Konnichiwa) is the most common daytime greeting in Japanese, meaning \"Hello\" or \"Good afternoon\"."
+                  }
+                }
+                // ... 更多题目
+              ]
+            }
+            // ... 更多试卷
+          ]
+        }
+        // ... 更多难度
+      ]
+    }
+    // ... 更多语言
+  ]
+}
