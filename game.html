@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>记忆配对游戏 | EduFun</title>
+  <meta name="description" content="经典翻牌记忆配对小游戏，考验你的记忆力，挑战最少步数通关。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-bar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">✦</span>
+        EduFun
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="quiz.html">语言测验</a></li>
+        <li><a href="game.html">记忆游戏</a></li>
+        <li><a href="story.html">AI 故事工坊</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="ad-slot ad-slot--banner" data-ad-slot="game-top-banner" style="margin-top:16px;">
+        <span>广告位 · 728×90</span>
+      </div>
+    </div>
+
+    <div class="page-header container">
+      <span class="page-badge badge-sunshine">记忆挑战</span>
+      <h1>翻牌配对游戏</h1>
+      <p>翻开卡片，找到两张一样的图案。挑战用最少的步数和最短的时间完成配对！</p>
+    </div>
+
+    <div class="container">
+      <!-- 数据统计条 -->
+      <div class="game-stats">
+        <div class="stat-chip">
+          <div class="stat-value" id="game-moves">0</div>
+          <div class="stat-label">步数</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-value" id="game-time">00:00</div>
+          <div class="stat-label">用时</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-value" id="game-matches">0 / 8</div>
+          <div class="stat-label">已配对</div>
+        </div>
+      </div>
+
+      <div class="game-controls">
+        <button class="btn btn-outline" id="game-restart-btn">🔄 重新开始</button>
+      </div>
+
+      <!-- 记忆卡片棋盘，卡片由 game.js 动态生成 -->
+      <div class="memory-board" id="memory-board"></div>
+
+      <div class="game-win-banner" id="game-win-banner"></div>
+
+      <div class="ad-slot ad-slot--inline" data-ad-slot="game-inline">
+        <span>广告位 · 内容间横幅</span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2026 EduFun · 一个让学习更好玩的静态网站</div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

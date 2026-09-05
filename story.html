@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 故事工坊 | EduFun</title>
+  <meta name="description" content="输入关键词，选择故事风格，AI 故事工坊为你现场生成一段独一无二的短篇故事。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-bar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">✦</span>
+        EduFun
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="quiz.html">语言测验</a></li>
+        <li><a href="game.html">记忆游戏</a></li>
+        <li><a href="story.html">AI 故事工坊</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="ad-slot ad-slot--banner" data-ad-slot="story-top-banner" style="margin-top:16px;">
+        <span>广告位 · 728×90</span>
+      </div>
+    </div>
+
+    <div class="page-header container">
+      <span class="page-badge badge-coral">创意写作</span>
+      <h1>AI 故事工坊</h1>
+      <p>输入一两个关键词，挑一种故事风格，点击生成，工坊就会现场为你编织一段独一无二的短篇故事。</p>
+    </div>
+
+    <div class="container">
+      <section class="story-panel">
+        <div class="story-form">
+          <div>
+            <label for="story-keyword">关键词 / 主题</label>
+            <input
+              type="text"
+              id="story-keyword"
+              placeholder="例如：星星、机器人、勇敢的兔子……"
+              maxlength="20"
+            />
+            <p class="story-hint">试试输入一个名词或短语，工坊会把它编进故事里。</p>
+          </div>
+
+          <div>
+            <label>故事风格</label>
+            <div class="story-genre-group" id="story-genre-group">
+              <button class="story-genre-chip active" data-genre="adventure">🧭 冒险</button>
+              <button class="story-genre-chip" data-genre="fantasy">🪄 奇幻</button>
+              <button class="story-genre-chip" data-genre="scifi">🚀 科幻</button>
+              <button class="story-genre-chip" data-genre="comedy">😄 幽默</button>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn btn-coral" id="story-generate-btn" style="width:100%;">✨ 生成故事</button>
+          </div>
+        </div>
+
+        <!-- 生成结果展示区 -->
+        <div class="story-output" id="story-output">
+          <h3 id="story-title"></h3>
+          <div id="story-body"></div>
+          <div class="story-output-actions">
+            <button class="btn btn-outline" id="story-regenerate-btn">🔁 换一个版本</button>
+            <button class="btn btn-primary" id="story-copy-btn">📋 复制故事</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="ad-slot ad-slot--inline" data-ad-slot="story-inline">
+        <span>广告位 · 内容间横幅</span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2026 EduFun · 一个让学习更好玩的静态网站</div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/story.js"></script>
+</body>
+</html>
