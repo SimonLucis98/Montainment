@@ -19,7 +19,7 @@
             min-height: 100vh;
         }
 
-        /* ========== 导航（与网站保持一致） ========== */
+        /* ========== 导航 ========== */
         header {
             background: #1a1a2e;
             padding: 0 24px;
@@ -100,7 +100,6 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
         }
 
-        /* 封面 */
         .story-cover {
             width: 100%;
             aspect-ratio: 16 / 10;
@@ -350,16 +349,6 @@
             font-size: 16px;
             font-weight: 600;
             color: #1a1a2e;
-        }
-        .chapter-item .ch-title .badge-new {
-            font-size: 10px;
-            font-weight: 700;
-            background: #f7c948;
-            color: #1a1a2e;
-            padding: 1px 10px;
-            border-radius: 20px;
-            margin-left: 10px;
-            vertical-align: middle;
         }
         .chapter-item .ch-preview {
             font-size: 14px;
@@ -645,7 +634,7 @@
     <!-- ========== 阅读弹窗 ========== -->
     <div class="reader-overlay" id="readerOverlay">
         <div class="reader-box">
-            <button class="close-reader" id="closeReader">✕</button>
+            <button class="close-reader" id="closeReaderBtn">✕</button>
             <div class="reader-title" id="readerTitle">章节标题</div>
             <div class="reader-chapter" id="readerChapter">第 1 章</div>
             <div class="reader-body" id="readerBody"></div>
@@ -678,7 +667,7 @@
 
         // 阅读器
         const readerOverlay = document.getElementById('readerOverlay');
-        const closeReader = document.getElementById('closeReader');
+        const closeReaderBtn = document.getElementById('closeReaderBtn');
         const readerTitle = document.getElementById('readerTitle');
         const readerChapter = document.getElementById('readerChapter');
         const readerBody = document.getElementById('readerBody');
@@ -761,7 +750,6 @@
                 const likes = story.likes || 0;
                 const chCount = story.chapters ? story.chapters.length : 0;
 
-                // 🔥 关键改动：如果有封面图片则显示图片，否则显示 Emoji
                 const hasCover = story.cover && story.cover.trim() !== '';
                 const coverHtml = hasCover
                     ? `<img src="${story.cover}" alt="${story.title}" />`
@@ -788,7 +776,6 @@
 
             storyGrid.innerHTML = html;
 
-            // 点击卡片 → 打开详情
             storyGrid.querySelectorAll('.story-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -806,7 +793,6 @@
             const story = allStories[index];
             if (!story) return;
 
-            // 隐藏列表，显示详情
             listView.style.display = 'none';
             detailView.classList.add('active');
 
@@ -816,13 +802,11 @@
             const likes = story.likes || 0;
             const chapters = story.chapters || [];
 
-            // 🔥 关键改动：详情页封面如果有图片则显示图片
             const hasCover = story.cover && story.cover.trim() !== '';
             const coverHtml = hasCover
                 ? `<img src="${story.cover}" alt="${story.title}" />`
                 : `<span class="cover-emoji">${coverEmoji}</span>`;
 
-            // 渲染头部
             detailHero.innerHTML = `
                 <div class="detail-cover" style="background:${hasCover ? '#1a1a2e' : coverColor};">
                     ${coverHtml}
@@ -839,7 +823,6 @@
                 </div>
             `;
 
-            // 渲染章节列表
             chapterCount.textContent = chapters.length + ' 章';
 
             if (chapters.length === 0) {
@@ -867,7 +850,6 @@
             });
             chapterItems.innerHTML = chHtml;
 
-            // 点击章节 → 打开阅读器
             chapterItems.querySelectorAll('.chapter-item').forEach(item => {
                 item.addEventListener('click', function() {
                     const chIdx = parseInt(this.dataset.chapter);
@@ -875,7 +857,6 @@
                 });
             });
 
-            // 滚动到顶部
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -927,7 +908,8 @@
             document.body.style.overflow = '';
         }
 
-        closeReader.addEventListener('click', closeReader);
+        // ========== 阅读器事件 ==========
+        closeReaderBtn.addEventListener('click', closeReader);
         readerOverlay.addEventListener('click', function(e) {
             if (e.target === this) closeReader();
         });
@@ -960,19 +942,23 @@
         // ================================================================
 
         function loadStories() {
+            console.log('⏳ 开始加载 stories.json...');
             fetch('data/stories.json')
                 .then(res => {
-                    if (!res.ok) throw new Error('stories.json 不存在');
+                    console.log('📦 响应状态:', res.status);
+                    if (!res.ok) throw new Error('stories.json 不存在 (状态码 ' + res.status + ')');
                     return res.json();
                 })
                 .then(data => {
+                    console.log('✅ 加载到的数据:', data);
                     if (data.stories && data.stories.length > 0) {
                         allStories = data.stories;
+                        console.log('📚 找到', allStories.length, '本小说');
                     } else {
                         allStories = [];
+                        console.warn('⚠️ stories 数组为空');
                     }
                     renderList();
-                    // 如果 URL 有 hash 指向某本书，自动打开
                     const hash = window.location.hash;
                     if (hash.startsWith('#story-')) {
                         const idx = parseInt(hash.replace('#story-', ''));
@@ -982,7 +968,7 @@
                     }
                 })
                 .catch(err => {
-                    console.warn('加载小说数据失败:', err);
+                    console.error('❌ 加载失败:', err);
                     allStories = [];
                     renderList();
                 });
