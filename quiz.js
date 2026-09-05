@@ -1,16 +1,8 @@
 /**
  * quiz.js —— 日语 Level 1 · 5份试卷 · 中英双语
- * 功能：
- *   - 试卷选择（5份，每卷10题）
- *   - 中英文界面切换
- *   - 选择题作答、计分、解析
- *   - 完成试卷后显示得分
- * 依赖 DOM：需存在 id 为 quiz-body, quiz-feedback, quiz-index,
- *   quiz-progress-bar, quiz-score, quiz-next-btn 的元素。
- *   语言切换按钮会自动创建并插入到 .quiz-header 中（若存在），
- *   否则追加到 document.body 开头。
+ * 适配 HTML 结构：quiz-panel, quiz-topbar, quiz-body, quiz-feedback, quiz-next-btn
+ * 功能：试卷选择、中英切换、答题计分
  */
-
 (function () {
   'use strict';
 
@@ -354,9 +346,9 @@
   ];
 
   // ---------- 2. 状态 ----------
-  let currentLang = 'zh';          // 'zh' 或 'en'
-  let currentPaperId = null;       // 1-5
-  let currentIndex = 0;            // 0-9
+  let currentLang = 'zh';
+  let currentPaperId = null;
+  let currentIndex = 0;
   let score = 0;
   let currentQuestionSolved = false;
 
@@ -368,9 +360,8 @@
   const quizScoreLabel = document.getElementById('quiz-score');
   const nextBtn = document.getElementById('quiz-next-btn');
 
-  // 如果缺少必要元素，则停止执行
   if (!quizBody || !quizFeedback || !quizIndexLabel || !quizProgressBar || !quizScoreLabel || !nextBtn) {
-    console.error('quiz.js: 缺少必要的 DOM 元素，请确保存在以下 id: quiz-body, quiz-feedback, quiz-index, quiz-progress-bar, quiz-score, quiz-next-btn');
+    console.error('quiz.js: 缺少必要的 DOM 元素');
     return;
   }
 
@@ -399,37 +390,60 @@
     if (quizScoreLabel) quizScoreLabel.textContent = score;
   }
 
-  // ---------- 5. 创建语言切换按钮（如果不存在） ----------
+  // ---------- 5. 创建语言切换按钮（插入到 quiz-panel 顶部） ----------
   function ensureLangToggle() {
-    // 查找是否存在 .lang-toggle 容器
     let toggle = document.querySelector('.lang-toggle');
     if (!toggle) {
-      // 创建并插入到 .quiz-header 或 body 开头
-      const header = document.querySelector('.quiz-header');
-      toggle = document.createElement('div');
-      toggle.className = 'lang-toggle';
-      toggle.style.cssText = 'display:flex; background:#eef2f7; border-radius:40px; padding:3px; gap:2px;';
+      const panel = document.querySelector('.quiz-panel');
+      if (!panel) {
+        // 保底：插入到 quiz-body 前面
+        toggle = document.createElement('div');
+        toggle.className = 'lang-toggle';
+        toggle.style.cssText = 'display:flex; background:#eef2f7; border-radius:40px; padding:3px; gap:2px; margin-bottom:16px;';
+        quizBody.parentNode.insertBefore(toggle, quizBody);
+      } else {
+        toggle = document.createElement('div');
+        toggle.className = 'lang-toggle';
+        toggle.style.cssText = 'display:flex; background:#eef2f7; border-radius:40px; padding:3px; gap:2px; margin-bottom:16px;';
+        // 插入到 quiz-topbar 之后，quiz-body 之前
+        const topbar = panel.querySelector('.quiz-topbar');
+        if (topbar) {
+          topbar.after(toggle);
+        } else {
+          panel.prepend(toggle);
+        }
+      }
+
       const zhBtn = document.createElement('button');
       zhBtn.className = 'lang-btn active';
       zhBtn.dataset.lang = 'zh';
       zhBtn.textContent = '中文';
-      zhBtn.style.cssText = 'border:none; background:transparent; padding:6px 18px; border-radius:30px; font-size:14px; font-weight:600; color:#6b7a8f; cursor:pointer; font-family:inherit;';
+      zhBtn.style.cssText = 'border:none; background:transparent; padding:6px 18px; border-radius:30px; font-size:14px; font-weight:600; color:#6b7a8f; cursor:pointer; font-family:inherit; transition:all 0.2s;';
       const enBtn = document.createElement('button');
       enBtn.className = 'lang-btn';
       enBtn.dataset.lang = 'en';
       enBtn.textContent = 'English';
-      enBtn.style.cssText = 'border:none; background:transparent; padding:6px 18px; border-radius:30px; font-size:14px; font-weight:600; color:#6b7a8f; cursor:pointer; font-family:inherit;';
+      enBtn.style.cssText = 'border:none; background:transparent; padding:6px 18px; border-radius:30px; font-size:14px; font-weight:600; color:#6b7a8f; cursor:pointer; font-family:inherit; transition:all 0.2s;';
       toggle.appendChild(zhBtn);
       toggle.appendChild(enBtn);
 
-      // 设置 active 样式
       function setActive(lang) {
         toggle.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        toggle.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
+        const activeBtn = toggle.querySelector(`.lang-btn[data-lang="${lang}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+          activeBtn.style.background = '#ffffff';
+          activeBtn.style.color = '#0b1c33';
+          activeBtn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+        }
+        toggle.querySelectorAll('.lang-btn:not(.active)').forEach(b => {
+          b.style.background = 'transparent';
+          b.style.color = '#6b7a8f';
+          b.style.boxShadow = 'none';
+        });
       }
       setActive('zh');
 
-      // 绑定事件
       toggle.addEventListener('click', function(e) {
         const btn = e.target.closest('.lang-btn');
         if (!btn) return;
@@ -451,20 +465,7 @@
           }
         }
       });
-
-      // 插入到 header 中，如果不存在则添加到 body 前
-      if (header) {
-        header.appendChild(toggle);
-      } else {
-        document.body.insertBefore(toggle, document.body.firstChild);
-      }
     }
-    // 更新按钮文字（如果已存在，确保文字正确）
-    const btns = toggle.querySelectorAll('.lang-btn');
-    btns.forEach(b => {
-      if (b.dataset.lang === 'zh') b.textContent = '中文';
-      else if (b.dataset.lang === 'en') b.textContent = 'English';
-    });
   }
 
   // ---------- 6. 渲染：试卷选择 ----------
@@ -479,13 +480,13 @@
     quizFeedback.className = 'quiz-feedback';
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
-    quizIndexLabel.textContent = t('选择试卷开始', 'Select a paper to start');
+    quizIndexLabel.textContent = t('📚 选择试卷', '📚 Select a paper');
 
     let html = `
       <div style="margin-bottom:12px; font-weight:600; color:#0b1c33; font-size:18px;">
-        ${t('📚 请选择一份试卷', '📚 Please select a paper')}
+        ${t('请选择一份试卷开始测验', 'Please select a paper to start')}
       </div>
-      <div class="paper-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:16px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:16px;">
     `;
 
     PAPERS.forEach(p => {
@@ -502,13 +503,11 @@
     html += `</div>`;
     quizBody.innerHTML = html;
 
-    // 绑定卡片点击事件
     document.querySelectorAll('.paper-card').forEach(card => {
       card.addEventListener('click', function() {
         const id = parseInt(this.dataset.paperId, 10);
         selectPaper(id);
       });
-      // 悬浮效果
       card.addEventListener('mouseenter', function() {
         this.style.borderColor = '#b8c9e0';
         this.style.background = '#f2f6fd';
@@ -614,7 +613,6 @@
           this.style.color = '#9e2d2d';
           this.querySelector('span').style.background = '#d14c4c';
           this.querySelector('span').style.color = '#fff';
-          // 高亮正确答案
           const correctBtn = optionButtons[q.ans];
           correctBtn.style.borderColor = '#1f8b4c';
           correctBtn.style.background = '#e6f7ee';
@@ -633,7 +631,6 @@
         nextBtn.textContent = (currentIndex === 9) ? t('完成试卷', 'Finish Paper') : t('下一题', 'Next');
       });
 
-      // 悬浮样式
       btn.addEventListener('mouseenter', function() {
         if (!this.disabled) {
           this.style.borderColor = '#b8c9e0';
@@ -715,7 +712,7 @@
     });
   }
 
-  // ---------- 12. 导航按钮 ----------
+  // ---------- 12. 导航 ----------
   nextBtn.addEventListener('click', function() {
     if (!currentQuestionSolved) return;
     const paper = getCurrentPaper();
@@ -735,7 +732,6 @@
     renderPaperSelection();
   }
 
-  // 如果 DOM 已加载，直接初始化；否则等待
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
