@@ -1,56 +1,21 @@
 /**
- * quiz.js —— 多语言 · 三级选择
+ * quiz.js —— 数据驱动 · 从 data/papers.json 加载语言、难度、试卷、题目
  * 流程：选择语言 → 选择难度 → 选择试卷 → 答题
  * 界面语言可切换（中文/English）
  */
 (function() {
   'use strict';
 
-  // ========== 语言配置 ==========
-  const LANGUAGES = [
-    { id: 'ja', labelZh: '日语', labelEn: 'Japanese', emoji: '🇯🇵' },
-    { id: 'zh', labelZh: '中文', labelEn: 'Chinese', emoji: '🇨🇳' },
-    { id: 'en', labelZh: '英文', labelEn: 'English', emoji: '🇬🇧' },
-    { id: 'ko', labelZh: '韩语', labelEn: 'Korean', emoji: '🇰🇷' },
-    { id: 'fr', labelZh: '法语', labelEn: 'French', emoji: '🇫🇷' },
-    { id: 'es', labelZh: '西班牙语', labelEn: 'Spanish', emoji: '🇪🇸' },
-    { id: 'th', labelZh: '泰语', labelEn: 'Thai', emoji: '🇹🇭' }
-  ];
-
-  const DIFFICULTIES = [
-    { level: 0, labelZh: '0级 · 字母', labelEn: 'Level 0 · Alphabet' },
-    { level: 1, labelZh: '1级 · 初学者', labelEn: 'Level 1 · Beginner' },
-    { level: 2, labelZh: '2级 · 简单日常', labelEn: 'Level 2 · Simple Daily' },
-    { level: 3, labelZh: '3级 · 普通对话', labelEn: 'Level 3 · Conversation' },
-    { level: 4, labelZh: '4级 · 中级', labelEn: 'Level 4 · Intermediate' },
-    { level: 5, labelZh: '5级 · 高级', labelEn: 'Level 5 · Advanced' }
-  ];
-
-  // ========== 题库（目前仅日语 Level 1 有数据） ==========
-  const PAPERS = [
-    // 标记语言和难度
-    { language: 'ja', difficulty: 1, id: 1, titleZh: '试卷1：平假名与基础问候', titleEn: 'Paper 1: Hiragana & Basic Greetings', questions: [/* 10题 */] },
-    { language: 'ja', difficulty: 1, id: 2, titleZh: '试卷2：指示代词与数字基础', titleEn: 'Paper 2: Demonstratives & Basic Numbers', questions: [/* 10题 */] },
-    { language: 'ja', difficulty: 1, id: 3, titleZh: '试卷3：基础判断句与名词助词', titleEn: 'Paper 3: Basic Sentences & Noun Particles', questions: [/* 10题 */] },
-    { language: 'ja', difficulty: 1, id: 4, titleZh: '试卷4：场所、时间与简单动词', titleEn: 'Paper 4: Locations, Time & Simple Verbs', questions: [/* 10题 */] },
-    { language: 'ja', difficulty: 1, id: 5, titleZh: '试卷5：日常活动与基础宾语', titleEn: 'Paper 5: Daily Activities & Direct Objects', questions: [/* 10题 */] }
-  ];
-
-  // ========== 为了不使代码过长，这里只放第一份试卷的题目作为示例，实际您需要把完整的50道题补全 ==========
-  // ⚠️ 重要：您需要把之前完整的50道题（每卷10题）填充到上面每个试卷的 questions 数组中。
-  // 由于之前的回复已经包含全部题目，这里为了篇幅只保留结构，您可以直接复制之前的完整 PAPERS 数据覆盖。
-
   // ========== 状态 ==========
-  let currentLang = 'zh';               // 界面语言
-  let selectedLanguage = null;          // 学习语言 id
-  let selectedDifficulty = null;        // 难度 level (0-5)
+  let allData = null;                  // 从 JSON 加载的完整数据
+  let currentLang = 'zh';              // 界面语言
+  let selectedLanguageId = null;       // 当前选择的学习语言 id
+  let selectedDifficultyLevel = null;  // 当前选择的难度 level
   let currentPaperId = null;
   let currentIndex = 0;
   let score = 0;
   let currentQuestionSolved = false;
-
-  // 界面状态: 'language' | 'difficulty' | 'paper' | 'quiz' | 'result'
-  let uiState = 'language';
+  let uiState = 'language';            // 'language' | 'difficulty' | 'paper' | 'quiz' | 'result'
 
   // ========== DOM 引用 ==========
   const quizBody = document.getElementById('quiz-body');
@@ -66,27 +31,74 @@
   }
 
   // ========== 工具函数 ==========
-  function t(zh, en) { return currentLang === 'zh' ? zh : en; }
+  function t(zh, en) {
+    return currentLang === 'zh' ? zh : en;
+  }
 
-  function getPaper(id) { return PAPERS.find(p => p.id === id); }
-  function getCurrentPaper() { return getPaper(currentPaperId); }
+  function getLanguage(id) {
+    return allData.languages.find(l => l.id === id);
+  }
+
+  function getDifficulty(langId, level) {
+    const lang = getLanguage(langId);
+    return lang ? lang.difficulties.find(d => d.level === level) : null;
+  }
+
+  function getPaper(langId, level, paperId) {
+    const diff = getDifficulty(langId, level);
+    return diff ? diff.papers.find(p => p.id === paperId) : null;
+  }
+
+  function getCurrentPaper() {
+    if (!selectedLanguageId || selectedDifficultyLevel === null || !currentPaperId) return null;
+    return getPaper(selectedLanguageId, selectedDifficultyLevel, currentPaperId);
+  }
+
   function getCurrentQuestion() {
     const paper = getCurrentPaper();
     return paper ? paper.questions[currentIndex] : null;
   }
 
-  function updateScoreDisplay() { quizScoreLabel.textContent = score; }
+  function updateScoreDisplay() {
+    quizScoreLabel.textContent = score;
+  }
 
-  // 获取某语言+难度下的试卷列表
-  function getPapersFor(lang, diff) {
-    return PAPERS.filter(p => p.language === lang && p.difficulty === diff);
+  function getAvailableDifficulties(langId) {
+    const lang = getLanguage(langId);
+    return lang ? lang.difficulties.map(d => d.level) : [];
+  }
+
+  function getPapersFor(langId, level) {
+    const diff = getDifficulty(langId, level);
+    return diff ? diff.papers : [];
+  }
+
+  // ========== 反馈 ==========
+  function showFeedback(text, isOk, explanation) {
+    quizFeedback.textContent = text;
+    quizFeedback.className = 'quiz-feedback ' + (isOk ? 'ok' : 'bad');
+    quizFeedback.style.borderLeft = isOk ? '4px solid #1f8b4c' : '4px solid #d14c4c';
+    quizFeedback.style.background = isOk ? '#e6f7ee' : '#fdeeec';
+    quizFeedback.style.color = isOk ? '#0f5a31' : '#9e2d2d';
+    if (explanation) {
+      const expl = document.createElement('div');
+      expl.className = 'explanation';
+      expl.style.fontWeight = '400';
+      expl.style.fontSize = '14px';
+      expl.style.opacity = '0.85';
+      expl.style.marginTop = '6px';
+      expl.style.paddingTop = '6px';
+      expl.style.borderTop = '1px dashed rgba(0,0,0,0.08)';
+      expl.innerHTML = '💡 <strong>' + t('解析：', 'Explanation: ') + '</strong>' + explanation;
+      quizFeedback.appendChild(expl);
+    }
   }
 
   // ========== 渲染：语言选择 ==========
   function renderLanguageSelection() {
     uiState = 'language';
-    selectedLanguage = null;
-    selectedDifficulty = null;
+    selectedLanguageId = null;
+    selectedDifficultyLevel = null;
     currentPaperId = null;
     score = 0;
     updateScoreDisplay();
@@ -96,19 +108,33 @@
     quizProgressBar.style.width = '0%';
     quizIndexLabel.textContent = t('🌍 选择语言', '🌍 Select Language');
 
+    if (!allData || !allData.languages || allData.languages.length === 0) {
+      quizBody.innerHTML = `
+        <div style="padding:30px; text-align:center; color:#6b7a8f;">
+          <div style="font-size:48px;">📭</div>
+          <h3>${t('暂无语言数据', 'No language data')}</h3>
+          <p>${t('请在后台添加语言并导出 JSON。', 'Please add languages in the admin panel and export JSON.')}</p>
+        </div>
+      `;
+      return;
+    }
+
     let html = `
       <div style="margin-bottom:16px; font-weight:500; color:#6b7a8f; font-size:15px;">
         ${t('你想学习哪种语言？', 'Which language do you want to learn?')}
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:14px;">
     `;
-    LANGUAGES.forEach(lang => {
+
+    allData.languages.forEach(lang => {
       const label = t(lang.labelZh, lang.labelEn);
+      const hasData = lang.difficulties && lang.difficulties.length > 0;
+      const disabledStyle = hasData ? '' : 'opacity:0.5; cursor:not-allowed;';
       html += `
-        <div class="lang-card" data-lang="${lang.id}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:20px 10px; text-align:center; cursor:pointer; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
-          <div style="font-size:32px; line-height:1.2;">${lang.emoji}</div>
+        <div class="lang-card" data-lang="${lang.id}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:20px 10px; text-align:center; cursor:${hasData ? 'pointer' : 'default'}; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02); ${disabledStyle}">
+          <div style="font-size:32px; line-height:1.2;">${lang.emoji || '🌐'}</div>
           <div style="font-weight:600; color:#0b1c33; margin-top:4px;">${label}</div>
-          <div style="font-size:12px; color:#6b7a8f;">${lang.id.toUpperCase()}</div>
+          <div style="font-size:12px; color:#6b7a8f;">${hasData ? lang.id.toUpperCase() : t('即将上线', 'Coming soon')}</div>
         </div>
       `;
     });
@@ -116,25 +142,22 @@
     quizBody.innerHTML = html;
 
     document.querySelectorAll('.lang-card').forEach(card => {
+      const langId = card.dataset.lang;
+      const hasData = getLanguage(langId)?.difficulties?.length > 0;
+      if (!hasData) return;
       card.addEventListener('click', function() {
-        const langId = this.dataset.lang;
-        selectedLanguage = langId;
-        // 检查该语言是否有任何试卷
-        const hasPapers = PAPERS.some(p => p.language === langId);
-        if (!hasPapers) {
-          showFeedback(t('⚠️ 该语言暂未上线，敬请期待！', '⚠️ This language is coming soon!'), false, '');
-          return;
-        }
+        selectedLanguageId = langId;
         renderDifficultySelection();
       });
-      // 悬浮效果
       card.addEventListener('mouseenter', function() {
+        if (!hasData) return;
         this.style.borderColor = '#b8c9e0';
         this.style.background = '#f2f6fd';
         this.style.transform = 'translateY(-3px)';
         this.style.boxShadow = '0 8px 24px rgba(0,20,40,0.08)';
       });
       card.addEventListener('mouseleave', function() {
+        if (!hasData) return;
         this.style.borderColor = '#e6ecf3';
         this.style.background = '#fafcff';
         this.style.transform = 'none';
@@ -146,7 +169,7 @@
   // ========== 渲染：难度选择 ==========
   function renderDifficultySelection() {
     uiState = 'difficulty';
-    selectedDifficulty = null;
+    selectedDifficultyLevel = null;
     currentPaperId = null;
     score = 0;
     updateScoreDisplay();
@@ -155,35 +178,37 @@
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
 
-    const langObj = LANGUAGES.find(l => l.id === selectedLanguage);
-    const langLabel = langObj ? t(langObj.labelZh, langObj.labelEn) : selectedLanguage;
+    const langObj = getLanguage(selectedLanguageId);
+    if (!langObj) { renderLanguageSelection(); return; }
+    const langLabel = t(langObj.labelZh, langObj.labelEn);
     quizIndexLabel.textContent = `${langLabel} · ${t('选择难度', 'Select Difficulty')}`;
 
-    // 获取该语言已支持的难度
-    const availableDiffs = PAPERS.filter(p => p.language === selectedLanguage).map(p => p.difficulty);
-    const uniqueDiffs = [...new Set(availableDiffs)];
+    const availableDiffs = langObj.difficulties.map(d => d.level);
 
     let html = `
       <div style="margin-bottom:16px; font-weight:500; color:#6b7a8f; font-size:15px;">
         ${t('选择难度等级', 'Choose your level')}
         <span style="display:block; font-size:13px; margin-top:4px; color:#9aabbf;">
-          ${t('已支持：', 'Available: ')} ${uniqueDiffs.map(d => DIFFICULTIES.find(di => di.level === d)?.labelZh || d).join('、')}
+          ${t('已支持：', 'Available: ')} ${availableDiffs.join('、')}
         </span>
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:14px;">
     `;
-    DIFFICULTIES.forEach(diff => {
-      const label = t(diff.labelZh, diff.labelEn);
-      const hasData = uniqueDiffs.includes(diff.level);
+
+    // 显示所有 0-5 级，但只让有数据的可点
+    for (let level = 0; level <= 5; level++) {
+      const hasData = availableDiffs.includes(level);
+      const diffObj = langObj.difficulties.find(d => d.level === level);
+      const label = diffObj ? t(diffObj.labelZh, diffObj.labelEn) : `${level}${t('级', '级')}`;
       const disabledStyle = hasData ? '' : 'opacity:0.5; cursor:not-allowed;';
       html += `
-        <div class="diff-card" data-level="${diff.level}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:16px 10px; text-align:center; cursor:${hasData ? 'pointer' : 'default'}; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02); ${disabledStyle}">
-          <div style="font-size:22px; font-weight:700; color:#2a6df4;">${diff.level}</div>
+        <div class="diff-card" data-level="${level}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:16px 10px; text-align:center; cursor:${hasData ? 'pointer' : 'default'}; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02); ${disabledStyle}">
+          <div style="font-size:22px; font-weight:700; color:#2a6df4;">${level}</div>
           <div style="font-weight:600; color:#0b1c33; font-size:14px; line-height:1.3;">${label}</div>
           ${!hasData ? `<div style="font-size:11px; color:#d14c4c; margin-top:4px;">${t('即将上线', 'Coming soon')}</div>` : ''}
         </div>
       `;
-    });
+    }
     html += `</div>
       <div style="margin-top:16px;">
         <button class="btn btn-secondary" id="back-to-lang" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选语言', 'Back to languages')}</button>
@@ -193,10 +218,10 @@
 
     document.querySelectorAll('.diff-card').forEach(card => {
       const level = parseInt(card.dataset.level, 10);
-      const hasData = uniqueDiffs.includes(level);
+      const hasData = availableDiffs.includes(level);
       if (!hasData) return;
       card.addEventListener('click', function() {
-        selectedDifficulty = level;
+        selectedDifficultyLevel = level;
         renderPaperSelection();
       });
       card.addEventListener('mouseenter', function() {
@@ -233,14 +258,17 @@
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
 
-    const langObj = LANGUAGES.find(l => l.id === selectedLanguage);
-    const langLabel = langObj ? t(langObj.labelZh, langObj.labelEn) : selectedLanguage;
-    const diffObj = DIFFICULTIES.find(d => d.level === selectedDifficulty);
-    const diffLabel = diffObj ? t(diffObj.labelZh, diffObj.labelEn) : selectedDifficulty;
+    const langObj = getLanguage(selectedLanguageId);
+    if (!langObj) { renderLanguageSelection(); return; }
+    const diffObj = getDifficulty(selectedLanguageId, selectedDifficultyLevel);
+    if (!diffObj) { renderDifficultySelection(); return; }
+
+    const langLabel = t(langObj.labelZh, langObj.labelEn);
+    const diffLabel = t(diffObj.labelZh, diffObj.labelEn);
     quizIndexLabel.textContent = `${langLabel} · ${diffLabel} · ${t('选择试卷', 'Select Paper')}`;
 
-    const papers = getPapersFor(selectedLanguage, selectedDifficulty);
-    if (papers.length === 0) {
+    const papers = diffObj.papers;
+    if (!papers || papers.length === 0) {
       quizBody.innerHTML = `
         <div style="padding:24px; text-align:center; color:#6b7a8f;">
           ${t('该组合暂无试卷，请返回重新选择。', 'No papers for this combination, please go back.')}
@@ -267,7 +295,7 @@
         <div class="paper-card" data-paper-id="${p.id}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:18px 12px 16px; text-align:center; cursor:pointer; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02);">
           <span style="font-size:28px; font-weight:800; color:#2a6df4; display:block; margin-bottom:4px;">${p.id}</span>
           <div style="font-weight:600; color:#0b1c33; font-size:15px; line-height:1.4;">${title}</div>
-          <div style="font-size:13px; color:#6b7a8f; margin-top:4px;">${t('10 道选择题', '10 MC questions')}</div>
+          <div style="font-size:13px; color:#6b7a8f; margin-top:4px;">${p.questions ? p.questions.length + ' ' + t('道选择题', 'MC questions') : ''}</div>
         </div>
       `;
     });
@@ -311,7 +339,7 @@
     });
   }
 
-  // ========== 渲染题目 ==========
+  // ========== 渲染：题目 ==========
   function renderQuestion() {
     uiState = 'quiz';
     const paper = getCurrentPaper();
@@ -333,7 +361,7 @@
     renderMultipleChoice(q);
   }
 
-  // ========== 选择题渲染 ==========
+  // ========== 选择题渲染（与之前一致，但数据来自 JSON） ==========
   function renderMultipleChoice(q) {
     const letters = ['A', 'B', 'C', 'D'];
     const questionText = t(q.q.zh, q.q.en);
@@ -403,8 +431,9 @@
           );
         }
 
+        const total = getCurrentPaper().questions.length;
         nextBtn.style.display = 'inline-flex';
-        nextBtn.textContent = (currentIndex === 9) ? t('完成试卷', 'Finish Paper') : t('下一题', 'Next');
+        nextBtn.textContent = (currentIndex === total - 1) ? t('完成试卷', 'Finish Paper') : t('下一题', 'Next');
       });
 
       btn.addEventListener('mouseenter', function() {
@@ -424,27 +453,6 @@
     document.getElementById('back-to-papers-from-quiz').addEventListener('click', function() {
       renderPaperSelection();
     });
-  }
-
-  // ========== 反馈 ==========
-  function showFeedback(text, isOk, explanation) {
-    quizFeedback.textContent = text;
-    quizFeedback.className = 'quiz-feedback ' + (isOk ? 'ok' : 'bad');
-    quizFeedback.style.borderLeft = isOk ? '4px solid #1f8b4c' : '4px solid #d14c4c';
-    quizFeedback.style.background = isOk ? '#e6f7ee' : '#fdeeec';
-    quizFeedback.style.color = isOk ? '#0f5a31' : '#9e2d2d';
-    if (explanation) {
-      const expl = document.createElement('div');
-      expl.className = 'explanation';
-      expl.style.fontWeight = '400';
-      expl.style.fontSize = '14px';
-      expl.style.opacity = '0.85';
-      expl.style.marginTop = '6px';
-      expl.style.paddingTop = '6px';
-      expl.style.borderTop = '1px dashed rgba(0,0,0,0.08)';
-      expl.innerHTML = '💡 <strong>' + t('解析：', 'Explanation: ') + '</strong>' + explanation;
-      quizFeedback.appendChild(expl);
-    }
   }
 
   // ========== 结果页 ==========
@@ -542,7 +550,6 @@
       if (lang === currentLang) return;
       currentLang = lang;
       setActive(lang);
-      // 刷新当前界面
       switch (uiState) {
         case 'language': renderLanguageSelection(); break;
         case 'difficulty': renderDifficultySelection(); break;
@@ -554,16 +561,39 @@
     });
   }
 
-  // ========== 初始化 ==========
-  function init() {
-    createLangToggle();
-    renderLanguageSelection();
+  // ========== 加载数据并初始化 ==========
+  function loadData() {
+    fetch('data/papers.json')
+      .then(res => {
+        if (!res.ok) throw new Error('数据加载失败，请确保 data/papers.json 存在');
+        return res.json();
+      })
+      .then(data => {
+        allData = data;
+        createLangToggle();
+        renderLanguageSelection();
+      })
+      .catch(err => {
+        console.error('加载数据出错:', err);
+        allData = { languages: [] };
+        quizBody.innerHTML = `
+          <div style="padding:40px; text-align:center; color:#d14c4c;">
+            <div style="font-size:48px; margin-bottom:16px;">⚠️</div>
+            <h3>数据加载失败</h3>
+            <p style="color:#6b7a8f; margin-top:8px;">请确保 data/papers.json 文件存在且格式正确。</p>
+            <p style="color:#6b7a8f; font-size:14px;">${err.message}</p>
+          </div>
+        `;
+        // 仍然尝试创建语言切换按钮
+        createLangToggle();
+      });
   }
 
+  // 启动
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', loadData);
   } else {
-    init();
+    loadData();
   }
 
 })();
