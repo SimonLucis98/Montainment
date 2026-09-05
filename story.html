@@ -6,7 +6,7 @@
     <title>故事工坊 - Montainment</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* 小说阅读专用样式 */
+        /* 小说阅读专用样式（保持原样） */
         .story-container {
             max-width: 720px;
             margin: 0 auto;
@@ -16,7 +16,6 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             min-height: 70vh;
         }
-
         .story-title {
             font-size: 28px;
             font-weight: 700;
@@ -24,14 +23,12 @@
             margin-bottom: 4px;
             color: #1a1a2e;
         }
-
         .story-author {
             text-align: center;
             color: #888;
             font-size: 14px;
             margin-bottom: 24px;
         }
-
         .chapter-nav {
             display: flex;
             justify-content: space-between;
@@ -40,7 +37,6 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-
         .chapter-nav button {
             padding: 8px 20px;
             border: 1px solid #ddd;
@@ -52,25 +48,21 @@
             flex: 1;
             max-width: 140px;
         }
-
         .chapter-nav button:hover:not(:disabled) {
             background: #1a1a2e;
             color: white;
             border-color: #1a1a2e;
         }
-
         .chapter-nav button:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
-
         .chapter-indicator {
             font-size: 14px;
             color: #555;
             text-align: center;
             flex: 1;
         }
-
         .chapter-selector {
             display: flex;
             gap: 8px;
@@ -78,7 +70,6 @@
             justify-content: center;
             margin-bottom: 24px;
         }
-
         .chapter-selector button {
             padding: 6px 14px;
             border: 1px solid #ddd;
@@ -88,17 +79,14 @@
             font-size: 13px;
             transition: 0.2s;
         }
-
         .chapter-selector button.active {
             background: #1a1a2e;
             color: white;
             border-color: #1a1a2e;
         }
-
         .chapter-selector button:hover:not(.active) {
             background: #f0f0f0;
         }
-
         .chapter-content {
             font-size: 18px;
             line-height: 1.9;
@@ -108,12 +96,10 @@
             padding: 4px 0;
             font-family: 'Georgia', 'Times New Roman', serif;
         }
-
         .chapter-content p {
             margin-bottom: 1.2em;
             text-indent: 2em;
         }
-
         .ad-placeholder {
             background: #f0f0f0;
             text-align: center;
@@ -123,28 +109,50 @@
             font-size: 13px;
             margin: 24px 0 12px;
         }
-
+        /* 小说选择器（新增） */
+        .story-selector {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .story-selector button {
+            padding: 10px 24px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.2s;
+            color: #1a1a2e;
+        }
+        .story-selector button.active {
+            border-color: #1a1a2e;
+            background: #1a1a2e;
+            color: white;
+        }
+        .story-selector button:hover:not(.active) {
+            background: #f5f5f5;
+        }
+        .loading-msg {
+            text-align: center;
+            color: #888;
+            padding: 40px 0;
+            font-size: 16px;
+        }
         @media (max-width: 600px) {
-            .story-container {
-                padding: 16px;
-            }
-            .story-title {
-                font-size: 22px;
-            }
-            .chapter-content {
-                font-size: 16px;
-                line-height: 1.8;
-            }
-            .chapter-nav button {
-                font-size: 13px;
-                padding: 6px 14px;
-            }
+            .story-container { padding: 16px; }
+            .story-title { font-size: 22px; }
+            .chapter-content { font-size: 16px; line-height: 1.8; }
+            .chapter-nav button { font-size: 13px; padding: 6px 14px; }
+            .story-selector button { padding: 8px 16px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 导航栏（与你网站一致） -->
     <header>
         <nav>
             <div class="logo">Montainment</div>
@@ -159,7 +167,11 @@
 
     <main>
         <div class="story-container">
-            <h1 class="story-title" id="storyTitle">小说标题</h1>
+            <!-- 小说选择器 -->
+            <div class="story-selector" id="storySelector"></div>
+
+            <!-- 标题 / 作者 -->
+            <h1 class="story-title" id="storyTitle">📖 选择一本小说</h1>
             <div class="story-author" id="storyAuthor">作者</div>
 
             <!-- 章节快捷跳转 -->
@@ -181,87 +193,160 @@
     </main>
 
     <script>
-        // ============================================================
-        // 📚 小说数据 —— 把你自己的内容填在这里
-        // ============================================================
-        const storyData = {
-            title: "星辰之约",
-            author: "西蒙",
-            chapters: [
-                {
-                    title: "第一章：起点",
-                    content: `这是一个关于星辰与约定的故事。\n\n夜幕降临，城市的灯光逐渐熄灭，唯独天台上还亮着一盏昏黄的灯。\n\n林辞坐在那里，手里握着一枚旧旧的指南针。那是指南针，也是他父亲留给他的遗物。\n\n“你会找到方向。”\n\n那是父亲最后一句话。\n\n他抬头望向北方，北极星明亮如初。`
-                },
-                {
-                    title: "第二章：旧书店",
-                    content: `林辞推开那扇半掩的木门，灰尘在光线里浮动。\n\n“请问，这里有没有关于星座的书？”\n\n柜台后的老人抬起头，推了推眼镜：“星座？你找对地方了。”\n\n他从柜子底层翻出一本泛黄的书，封面写着《星辰与命运》。\n\n“这本书，是你父亲留下来的。”\n\n林辞愣住了。`
-                },
-                {
-                    title: "第三章：指南针的秘密",
-                    content: `林辞翻开那本书，书页里夹着一封信。\n\n信纸上只有一行字：\n\n“指南针指向的不是北方，而是你该去的地方。”\n\n他把指南针放在书页上，指针轻轻晃动，最终停在了东南方向。\n\n那里，是海的方向。\n\n“父亲……你究竟想告诉我什么？”`
-                }
-            ]
-        };
+        // ================================================================
+        //  story.html — 从 data/stories.json 加载小说数据
+        // ================================================================
 
-        // ============================================================
-        // 逻辑代码（不需要修改）
-        // ============================================================
+        let allStories = [];
+        let currentStoryIndex = 0;
         let currentChapterIndex = 0;
-        const totalChapters = storyData.chapters.length;
 
-        function renderChapter(index) {
-            const chapter = storyData.chapters[index];
-            document.getElementById('storyTitle').textContent = storyData.title;
-            document.getElementById('storyAuthor').textContent = `作者：${storyData.author}`;
-            document.getElementById('chapterContent').textContent = chapter.content;
-            document.getElementById('chapterIndicator').textContent = `第 ${index + 1} / ${totalChapters} 章`;
+        const storyTitle = document.getElementById('storyTitle');
+        const storyAuthor = document.getElementById('storyAuthor');
+        const chapterSelector = document.getElementById('chapterSelector');
+        const chapterContent = document.getElementById('chapterContent');
+        const chapterIndicator = document.getElementById('chapterIndicator');
+        const prevBtn = document.getElementById('prevChapter');
+        const nextBtn = document.getElementById('nextChapter');
+        const storySelector = document.getElementById('storySelector');
 
-            // 更新按钮状态
-            document.getElementById('prevChapter').disabled = (index === 0);
-            document.getElementById('nextChapter').disabled = (index === totalChapters - 1);
+        function renderStorySelector() {
+            if (allStories.length === 0) {
+                storySelector.innerHTML = '<p style="color:#888;width:100%;text-align:center;">暂无小说，请等待添加 🚧</p>';
+                return;
+            }
+            let html = '';
+            allStories.forEach((s, i) => {
+                html += `<button class="${i === currentStoryIndex ? 'active' : ''}" data-index="${i}">${s.title}</button>`;
+            });
+            storySelector.innerHTML = html;
 
-            // 更新章节选择器高亮
-            document.querySelectorAll('.chapter-selector button').forEach((btn, i) => {
-                btn.classList.toggle('active', i === index);
+            storySelector.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    if (idx === currentStoryIndex) return;
+                    currentStoryIndex = idx;
+                    currentChapterIndex = 0;
+                    renderStorySelector();
+                    renderChapter(currentStoryIndex, currentChapterIndex);
+                });
+            });
+        }
+
+        function renderChapter(storyIdx, chapterIdx) {
+            const story = allStories[storyIdx];
+            if (!story) {
+                storyTitle.textContent = '📖 未找到小说';
+                storyAuthor.textContent = '';
+                chapterContent.textContent = '';
+                chapterIndicator.textContent = '';
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                chapterSelector.innerHTML = '';
+                return;
+            }
+
+            const chapters = story.chapters || [];
+            if (chapters.length === 0) {
+                storyTitle.textContent = story.title || '无标题';
+                storyAuthor.textContent = story.author || '未知作者';
+                chapterContent.textContent = '📝 此小说暂无章节';
+                chapterIndicator.textContent = '0 / 0 章';
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                chapterSelector.innerHTML = '';
+                return;
+            }
+
+            // 确保索引有效
+            if (chapterIdx >= chapters.length) chapterIdx = chapters.length - 1;
+            if (chapterIdx < 0) chapterIdx = 0;
+            currentChapterIndex = chapterIdx;
+
+            const ch = chapters[chapterIdx];
+            storyTitle.textContent = story.title || '无标题';
+            storyAuthor.textContent = story.author || '未知作者';
+            chapterContent.textContent = ch.content || '(内容为空)';
+            chapterIndicator.textContent = `第 ${chapterIdx + 1} / ${chapters.length} 章`;
+
+            prevBtn.disabled = (chapterIdx === 0);
+            nextBtn.disabled = (chapterIdx === chapters.length - 1);
+
+            // 渲染章节选择器
+            let selHtml = '';
+            chapters.forEach((c, i) => {
+                selHtml += `<button class="${i === chapterIdx ? 'active' : ''}" data-chapter="${i}">${c.title || '第' + (i+1) + '章'}</button>`;
+            });
+            chapterSelector.innerHTML = selHtml;
+            chapterSelector.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.chapter);
+                    renderChapter(currentStoryIndex, idx);
+                });
             });
 
             // 滚动到顶部
-            document.querySelector('.story-container').scrollTop = 0;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function buildChapterSelector() {
-            const container = document.getElementById('chapterSelector');
-            container.innerHTML = '';
-            storyData.chapters.forEach((chapter, i) => {
-                const btn = document.createElement('button');
-                btn.textContent = chapter.title || `第${i + 1}章`;
-                btn.addEventListener('click', () => {
-                    currentChapterIndex = i;
-                    renderChapter(i);
+        // 上一章 / 下一章
+        prevBtn.addEventListener('click', function() {
+            if (currentChapterIndex > 0) {
+                renderChapter(currentStoryIndex, currentChapterIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            const story = allStories[currentStoryIndex];
+            if (story && story.chapters && currentChapterIndex < story.chapters.length - 1) {
+                renderChapter(currentStoryIndex, currentChapterIndex + 1);
+            }
+        });
+
+        // ================================================================
+        //  加载数据
+        // ================================================================
+        function loadStories() {
+            fetch('data/stories.json')
+                .then(res => {
+                    if (!res.ok) throw new Error('stories.json 不存在');
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.stories && data.stories.length > 0) {
+                        allStories = data.stories;
+                    } else {
+                        allStories = [];
+                    }
+                    renderStorySelector();
+                    if (allStories.length > 0) {
+                        renderChapter(0, 0);
+                    } else {
+                        storyTitle.textContent = '📖 暂无小说';
+                        storyAuthor.textContent = '';
+                        chapterContent.textContent = '请在后台添加小说内容 🚧';
+                        chapterIndicator.textContent = '';
+                        prevBtn.disabled = true;
+                        nextBtn.disabled = true;
+                        chapterSelector.innerHTML = '';
+                    }
+                })
+                .catch(err => {
+                    console.warn('加载小说数据失败:', err);
+                    allStories = [];
+                    renderStorySelector();
+                    storyTitle.textContent = '📖 暂无小说';
+                    storyAuthor.textContent = '';
+                    chapterContent.textContent = '请在后台添加小说内容 🚧';
+                    chapterIndicator.textContent = '';
+                    prevBtn.disabled = true;
+                    nextBtn.disabled = true;
+                    chapterSelector.innerHTML = '';
                 });
-                container.appendChild(btn);
-            });
         }
 
-        // 事件绑定
-        document.getElementById('prevChapter').addEventListener('click', () => {
-            if (currentChapterIndex > 0) {
-                currentChapterIndex--;
-                renderChapter(currentChapterIndex);
-            }
-        });
-
-        document.getElementById('nextChapter').addEventListener('click', () => {
-            if (currentChapterIndex < totalChapters - 1) {
-                currentChapterIndex++;
-                renderChapter(currentChapterIndex);
-            }
-        });
-
-        // 初始化
-        buildChapterSelector();
-        renderChapter(0);
+        // 启动
+        loadStories();
     </script>
 
 </body>
