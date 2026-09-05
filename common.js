@@ -44,6 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // HTML 结构（.ad-slot 容器）不需要改动。
   document.querySelectorAll(".ad-slot").forEach(function (slot, index) {
     const slotName = slot.getAttribute("data-ad-slot") || "slot-" + index;
-    console.log("[EduFun 广告位] 已加载：" + slotName);
+    console.log("[Montaiment 广告位] 已加载：" + slotName);
   });
 });
