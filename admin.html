@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>测验后台管理 · Montainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 后台专用样式 */
+    .admin-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .admin-panel {
+      background: #fff;
+      border-radius: 24px;
+      padding: 28px 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+    }
+    .admin-panel h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0b1c33;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .admin-panel h2 .badge-count {
+      font-size: 14px;
+      font-weight: 600;
+      background: #eef2f7;
+      padding: 2px 14px;
+      border-radius: 20px;
+      color: #6b7a8f;
+    }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .stat-card {
+      background: #f6f8fc;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #eef2f7;
+    }
+    .stat-card .number {
+      font-size: 32px;
+      font-weight: 800;
+      color: #2a6df4;
+    }
+    .stat-card .label {
+      font-size: 14px;
+      color: #6b7a8f;
+      margin-top: 4px;
+    }
+
+    .admin-form-group {
+      margin-bottom: 16px;
+    }
+    .admin-form-group label {
+      display: block;
+      font-weight: 600;
+      color: #0b1c33;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    .admin-form-group input,
+    .admin-form-group select,
+    .admin-form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #e6ecf3;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: 0.2s;
+      background: #fafcff;
+    }
+    .admin-form-group input:focus,
+    .admin-form-group select:focus,
+    .admin-form-group textarea:focus {
+      outline: none;
+      border-color: #2a6df4;
+      box-shadow: 0 0 0 4px rgba(42,109,244,0.08);
+    }
+    .admin-form-group textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    .admin-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) {
+      .admin-form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn-admin {
+      padding: 10px 28px;
+      border: none;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-admin-primary {
+      background: #0b1c33;
+      color: #fff;
+    }
+    .btn-admin-primary:hover {
+      background: #1a3050;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(11,28,51,0.15);
+    }
+    .btn-admin-success {
+      background: #1f8b4c;
+      color: #fff;
+    }
+    .btn-admin-success:hover {
+      background: #167a40;
+      transform: translateY(-2px);
+    }
+    .btn-admin-danger {
+      background: #d14c4c;
+      color: #fff;
+    }
+    .btn-admin-danger:hover {
+      background: #b83a3a;
+    }
+    .btn-admin-outline {
+      background: transparent;
+      border: 2px solid #dce4ef;
+      color: #0b1c33;
+    }
+    .btn-admin-outline:hover {
+      background: #f2f6fd;
+    }
+
+    .admin-list {
+      margin-top: 12px;
+    }
+    .admin-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #fafcff;
+      border: 1px solid #eef2f7;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .admin-list-item .info {
+      font-weight: 500;
+      color: #0b1c33;
+    }
+    .admin-list-item .info small {
+      font-weight: 400;
+      color: #6b7a8f;
+      margin-left: 8px;
+    }
+    .admin-list-item .actions {
+      display: flex;
+      gap: 8px;
+    }
+    .admin-list-item .actions button {
+      padding: 4px 14px;
+      border: none;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .btn-edit {
+      background: #eef2f7;
+      color: #0b1c33;
+    }
+    .btn-edit:hover {
+      background: #dce4ef;
+    }
+    .btn-delete {
+      background: #fdeeec;
+      color: #d14c4c;
+    }
+    .btn-delete:hover {
+      background: #fcd8d6;
+    }
+
+    .json-output {
+      background: #0b1c33;
+      color: #e6f7ee;
+      padding: 20px;
+      border-radius: 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      max-height: 300px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-top: 12px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: #eef2f7;
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 8px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: transparent;
+      color: #6b7a8f;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: #0b1c33;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .tab-btn:hover:not(.active) {
+      color: #0b1c33;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .admin-actions-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #eef2f7;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 16px 28px;
+      border-radius: 16px;
+      font-weight: 600;
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      z-index: 999;
+      animation: slideIn 0.3s ease;
+    }
+    .toast-success { background: #1f8b4c; }
+    .toast-error { background: #d14c4c; }
+    .toast-info { background: #2a6df4; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-bar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">✦</span>
+        Montainment
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="quiz.html">语言测验</a></li>
+        <li><a href="game.html">记忆游戏</a></li>
+        <li><a href="story.html">故事工坊</a></li>
+        <li><a href="admin.html" class="active">🔧 后台管理</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="admin-container">
+
+      <!-- 页面标题 -->
+      <div class="page-header" style="padding: 16px 0 8px;">
+        <span class="page-badge badge-primary">🔧 后台管理</span>
+        <h1>测验内容管理</h1>
+        <p>添加、编辑或删除语言、难度、试卷和题目。所有数据将以 JSON 格式导出。</p>
+      </div>
+
+      <!-- 主要面板 -->
+      <div class="admin-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+          <h2>📊 Dashboard</h2>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-admin btn-admin-primary" id="loadDataBtn">📂 加载数据</button>
+            <button class="btn-admin btn-admin-success" id="exportJsonBtn">📤 导出 JSON</button>
+          </div>
+        </div>
+
+        <!-- 统计卡片 -->
+        <div class="admin-grid" id="statsGrid">
+          <div class="stat-card"><div class="number" id="langCount">0</div><div class="label">语言</div></div>
+          <div class="stat-card"><div class="number" id="diffCount">0</div><div class="label">难度</div></div>
+          <div class="stat-card"><div class="number" id="paperCount">0</div><div class="label">试卷</div></div>
+          <div class="stat-card"><div class="number" id="questionCount">0</div><div class="label">题目</div></div>
+        </div>
+      </div>
+
+      <!-- Tab 切换 -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="languages">🌍 语言</button>
+        <button class="tab-btn" data-tab="difficulties">📊 难度</button>
+        <button class="tab-btn" data-tab="papers">📄 试卷</button>
+        <button class="tab-btn" data-tab="questions">❓ 题目</button>
+        <button class="tab-btn" data-tab="json">📝 JSON 编辑器</button>
+      </div>
+
+      <!-- ===== Tab: 语言 ===== -->
+      <div class="admin-panel tab-content" id="tab-languages">
+        <h2>🌍 语言管理 <span class="badge-count" id="langBadge">0</span></h2>
+        <form id="langForm" class="admin-form">
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>语言代码 (如 ja, zh, en)</label>
+              <input type="text" id="langId" placeholder="ja" required />
+            </div>
+            <div class="admin-form-group">
+              <label>Emoji</label>
+              <input type="text" id="langEmoji" placeholder="🇯🇵" />
+            </div>
+          </div>
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>中文名称</label>
+              <input type="text" id="langLabelZh" placeholder="日语" required />
+            </div>
+            <div class="admin-form-group">
+              <label>英文名称</label>
+              <input type="text" id="langLabelEn" placeholder="Japanese" required />
+            </div>
+          </div>
+          <input type="hidden" id="langEditIndex" value="-1" />
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" class="btn-admin btn-admin-primary" id="langSubmitBtn">➕ 添加语言</button>
+            <button type="button" class="btn-admin btn-admin-outline" id="langCancelBtn" style="display:none;">取消编辑</button>
+          </div>
+        </form>
+        <div class="admin-list" id="langList"></div>
+      </div>
+
+      <!-- ===== Tab: 难度 ===== -->
+      <div class="admin-panel tab-content hidden" id="tab-difficulties">
+        <h2>📊 难度管理 <span class="badge-count" id="diffBadge">0</span></h2>
+        <div class="admin-form-group">
+          <label>所属语言</label>
+          <select id="diffLangSelect"><option value="">-- 请先添加语言 --</option></select>
+        </div>
+        <form id="diffForm" class="admin-form">
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>难度等级 (0-5)</label>
+              <input type="number" id="diffLevel" min="0" max="5" placeholder="1" required />
+            </div>
+            <div class="admin-form-group">
+              <label>中文名称</label>
+              <input type="text" id="diffLabelZh" placeholder="1级 · 初学者" required />
+            </div>
+          </div>
+          <div class="admin-form-group">
+            <label>英文名称</label>
+            <input type="text" id="diffLabelEn" placeholder="Level 1 · Beginner" required />
+          </div>
+          <input type="hidden" id="diffEditIndex" value="-1" />
+          <input type="hidden" id="diffLangRef" value="" />
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" class="btn-admin btn-admin-primary" id="diffSubmitBtn">➕ 添加难度</button>
+            <button type="button" class="btn-admin btn-admin-outline" id="diffCancelBtn" style="display:none;">取消编辑</button>
+          </div>
+        </form>
+        <div class="admin-list" id="diffList"></div>
+      </div>
+
+      <!-- ===== Tab: 试卷 ===== -->
+      <div class="admin-panel tab-content hidden" id="tab-papers">
+        <h2>📄 试卷管理 <span class="badge-count" id="paperBadge">0</span></h2>
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label>所属语言</label>
+            <select id="paperLangSelect"><option value="">-- 请选择 --</option></select>
+          </div>
+          <div class="admin-form-group">
+            <label>所属难度</label>
+            <select id="paperDiffSelect"><option value="">-- 请先选语言 --</option></select>
+          </div>
+        </div>
+        <form id="paperForm" class="admin-form">
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>试卷 ID (数字)</label>
+              <input type="number" id="paperId" placeholder="1" required />
+            </div>
+          </div>
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>中文标题</label>
+              <input type="text" id="paperTitleZh" placeholder="试卷1：平假名与基础问候" required />
+            </div>
+            <div class="admin-form-group">
+              <label>英文标题</label>
+              <input type="text" id="paperTitleEn" placeholder="Paper 1: Hiragana & Basic Greetings" required />
+            </div>
+          </div>
+          <input type="hidden" id="paperEditIndex" value="-1" />
+          <input type="hidden" id="paperLangRef" value="" />
+          <input type="hidden" id="paperDiffRef" value="" />
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" class="btn-admin btn-admin-primary" id="paperSubmitBtn">➕ 添加试卷</button>
+            <button type="button" class="btn-admin btn-admin-outline" id="paperCancelBtn" style="display:none;">取消编辑</button>
+          </div>
+        </form>
+        <div class="admin-list" id="paperList"></div>
+      </div>
+
+      <!-- ===== Tab: 题目 ===== -->
+      <div class="admin-panel tab-content hidden" id="tab-questions">
+        <h2>❓ 题目管理 <span class="badge-count" id="questionBadge">0</span></h2>
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label>所属语言</label>
+            <select id="qLangSelect"><option value="">-- 请选择 --</option></select>
+          </div>
+          <div class="admin-form-group">
+            <label>所属难度</label>
+            <select id="qDiffSelect"><option value="">-- 请先选语言 --</option></select>
+          </div>
+        </div>
+        <div class="admin-form-group">
+          <label>所属试卷</label>
+          <select id="qPaperSelect"><option value="">-- 请先选难度 --</option></select>
+        </div>
+        <form id="questionForm" class="admin-form">
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>题目 (中文)</label>
+              <input type="text" id="qZh" placeholder='"こんにちは" 在中文里是什么意思？' required />
+            </div>
+            <div class="admin-form-group">
+              <label>题目 (英文)</label>
+              <input type="text" id="qEn" placeholder='What does "こんにちは" mean?' required />
+            </div>
+          </div>
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>选项A (中文)</label>
+              <input type="text" id="qOptAzh" placeholder="早上好" required />
+            </div>
+            <div class="admin-form-group">
+              <label>选项A (英文)</label>
+              <input type="text" id="qOptAen" placeholder="Good morning" required />
+            </div>
+          </div>
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>选项B (中文)</label>
+              <input type="text" id="qOptBzh" placeholder="你好" required />
+            </div>
+            <div class="admin-form-group">
+              <label>选项B (英文)</label>
+              <input type="text" id="qOptBen" placeholder="Hello" required />
+            </div>
+          </div>
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>选项C (中文)</label>
+              <input type="text" id="qOptCzh" placeholder="晚安" required />
+            </div>
+            <div class="admin-form-group">
+              <label>选项C (英文)</label>
+              <input type="text" id="qOptCen" placeholder="Good night" required />
+            </div>
+          </div>
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>选项D (中文)</label>
+              <input type="text" id="qOptDzh" placeholder="谢谢" required />
+            </div>
+            <div class="admin-form-group">
+              <label>选项D (英文)</label>
+              <input type="text" id="qOptDen" placeholder="Thank you" required />
+            </div>
+          </div>
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>正确答案 (0=A, 1=B, 2=C, 3=D)</label>
+              <input type="number" id="qAnswer" min="0" max="3" placeholder="1" required />
+            </div>
+            <div class="admin-form-group">
+              <label>解析 (中文)</label>
+              <input type="text" id="qExpZh" placeholder="こんにちは是白天的问候语" required />
+            </div>
+          </div>
+          <div class="admin-form-group">
+            <label>解析 (英文)</label>
+            <input type="text" id="qExpEn" placeholder="Konnichiwa is a daytime greeting" required />
+          </div>
+          <input type="hidden" id="qEditIndex" value="-1" />
+          <input type="hidden" id="qPaperRef" value="" />
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" class="btn-admin btn-admin-primary" id="qSubmitBtn">➕ 添加题目</button>
+            <button type="button" class="btn-admin btn-admin-outline" id="qCancelBtn" style="display:none;">取消编辑</button>
+          </div>
+        </form>
+        <div class="admin-list" id="qList"></div>
+      </div>
+
+      <!-- ===== Tab: JSON 编辑器 ===== -->
+      <div class="admin-panel tab-content hidden" id="tab-json">
+        <h2>📝 JSON 数据编辑器</h2>
+        <p style="color:#6b7a8f; margin-bottom:12px;">直接编辑 JSON 数据，或点击"导出 JSON"获取完整数据。将内容复制到 <code>data/papers.json</code> 并提交到 GitHub 即可发布。</p>
+        <textarea id="jsonEditor" style="width:100%; min-height:300px; padding:16px; border:2px solid #e6ecf3; border-radius:16px; font-family:'Courier New',monospace; font-size:13px; background:#fafcff; resize:vertical; tab-size:2;"></textarea>
+        <div class="admin-actions-bar">
+          <button class="btn-admin btn-admin-success" id="jsonApplyBtn">✅ 应用到当前数据</button>
+          <button class="btn-admin btn-admin-primary" id="jsonFormatBtn">🔧 格式化 JSON</button>
+          <button class="btn-admin btn-admin-outline" id="jsonCopyBtn">📋 复制到剪贴板</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2026 Montainment · 后台管理 · 数据驱动</div>
+  </footer>
+
+  <script>
+    // ============================================================
+    //  ADMIN.JS — 完整后台管理逻辑
+    // ============================================================
+    (function() {
+
+      // ---------- 数据 ----------
+      let data = {
+        languages: []
+      };
+
+      let editState = {
+        lang: -1,
+        diff: -1,
+        paper: -1,
+        question: -1
+      };
+
+      // ---------- DOM 引用 ----------
+      const tabs = document.querySelectorAll('.tab-btn');
+      const contents = {
+        languages: document.getElementById('tab-languages'),
+        difficulties: document.getElementById('tab-difficulties'),
+        papers: document.getElementById('tab-papers'),
+        questions: document.getElementById('tab-questions'),
+        json: document.getElementById('tab-json')
+      };
+
+      // ---------- 工具函数 ----------
+      function getLang(id) { return data.languages.find(l => l.id === id); }
+      function getDiff(langId, level) {
+        const lang = getLang(langId);
+        return lang ? lang.difficulties.find(d => d.level === level) : null;
+      }
+      function getPaper(langId, level, paperId) {
+        const diff = getDiff(langId, level);
+        return diff ? diff.papers.find(p => p.id === paperId) : null;
+      }
+
+      function updateStats() {
+        let langCount = data.languages.length;
+        let diffCount = 0, paperCount = 0, questionCount = 0;
+        data.languages.forEach(l => {
+          diffCount += l.difficulties.length;
+          l.difficulties.forEach(d => {
+            paperCount += d.papers.length;
+            d.papers.forEach(p => {
+              questionCount += p.questions ? p.questions.length : 0;
+            });
+          });
+        });
+        document.getElementById('langCount').textContent = langCount;
+        document.getElementById('diffCount').textContent = diffCount;
+        document.getElementById('paperCount').textContent = paperCount;
+        document.getElementById('questionCount').textContent = questionCount;
+        document.getElementById('langBadge').textContent = langCount;
+        document.getElementById('diffBadge').textContent = diffCount;
+        document.getElementById('paperBadge').textContent = paperCount;
+        document.getElementById('questionBadge').textContent = questionCount;
+      }
+
+      function showToast(msg, type = 'info') {
+        const old = document.querySelector('.toast');
+        if (old) old.remove();
+        const t = document.createElement('div');
+        t.className = 'toast toast-' + type;
+        t.textContent = msg;
+        document.body.appendChild(t);
+        setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2500);
+      }
+
+      // ---------- 语言 CRUD ----------
+      function renderLanguages() {
+        const container = document.getElementById('langList');
+        if (data.languages.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无语言，请添加。</p>';
+          return;
+        }
+        let html = '';
+        data.languages.forEach((lang, i) => {
+          html += `
+            <div class="admin-list-item">
+              <div class="info">${lang.emoji || '🌐'} ${lang.labelZh} (${lang.id}) <small>${lang.difficulties.length} 个难度</small></div>
+              <div class="actions">
+                <button class="btn-edit" data-lang-index="${i}">编辑</button>
+                <button class="btn-delete" data-lang-index="${i}">删除</button>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+
+        container.querySelectorAll('.btn-edit').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.langIndex);
+            editLang(idx);
+          });
+        });
+        container.querySelectorAll('.btn-delete').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.langIndex);
+            if (confirm('确定删除此语言吗？将同时删除其下所有难度和试卷。')) {
+              data.languages.splice(idx, 1);
+              renderLanguages();
+              updateStats();
+              updateJsonEditor();
+              showToast('已删除语言', 'success');
+            }
+          });
+        });
+      }
+
+      function editLang(idx) {
+        const lang = data.languages[idx];
+        document.getElementById('langId').value = lang.id;
+        document.getElementById('langEmoji').value = lang.emoji || '';
+        document.getElementById('langLabelZh').value = lang.labelZh;
+        document.getElementById('langLabelEn').value = lang.labelEn;
+        document.getElementById('langEditIndex').value = idx;
+        document.getElementById('langSubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('langCancelBtn').style.display = 'inline-flex';
+        showToast('正在编辑: ' + lang.labelZh, 'info');
+      }
+
+      document.getElementById('langForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const id = document.getElementById('langId').value.trim();
+        const emoji = document.getElementById('langEmoji').value.trim();
+        const labelZh = document.getElementById('langLabelZh').value.trim();
+        const labelEn = document.getElementById('langLabelEn').value.trim();
+        const editIdx = parseInt(document.getElementById('langEditIndex').value);
+
+        if (!id || !labelZh || !labelEn) {
+          showToast('请填写完整信息', 'error');
+          return;
+        }
+
+        if (editIdx === -1) {
+          // 新增
+          if (data.languages.find(l => l.id === id)) {
+            showToast('语言代码已存在', 'error');
+            return;
+          }
+          data.languages.push({ id, emoji, labelZh, labelEn, difficulties: [] });
+          showToast('已添加语言: ' + labelZh, 'success');
+        } else {
+          // 编辑
+          const lang = data.languages[editIdx];
+          // 如果修改了 id，检查是否重复
+          if (id !== lang.id && data.languages.find(l => l.id === id)) {
+            showToast('语言代码已被其他语言使用', 'error');
+            return;
+          }
+          lang.id = id;
+          lang.emoji = emoji;
+          lang.labelZh = labelZh;
+          lang.labelEn = labelEn;
+          showToast('已更新语言: ' + labelZh, 'success');
+          document.getElementById('langEditIndex').value = -1;
+          document.getElementById('langSubmitBtn').textContent = '➕ 添加语言';
+          document.getElementById('langCancelBtn').style.display = 'none';
+        }
+
+        this.reset();
+        // 恢复隐藏字段
+        document.getElementById('langEditIndex').value = -1;
+        document.getElementById('langSubmitBtn').textContent = '➕ 添加语言';
+        document.getElementById('langCancelBtn').style.display = 'none';
+        renderLanguages();
+        updateStats();
+        updateJsonEditor();
+        populateLangSelects();
+      });
+
+      document.getElementById('langCancelBtn').addEventListener('click', function() {
+        document.getElementById('langForm').reset();
+        document.getElementById('langEditIndex').value = -1;
+        document.getElementById('langSubmitBtn').textContent = '➕ 添加语言';
+        this.style.display = 'none';
+        showToast('已取消编辑', 'info');
+      });
+
+      // ---------- 难度 CRUD ----------
+      function populateLangSelects() {
+        const selects = ['diffLangSelect', 'paperLangSelect', 'qLangSelect'];
+        selects.forEach(id => {
+          const sel = document.getElementById(id);
+          if (!sel) return;
+          const current = sel.value;
+          sel.innerHTML = '<option value="">-- 请选择 --</option>';
+          data.languages.forEach(l => {
+            const opt = document.createElement('option');
+            opt.value = l.id;
+            opt.textContent = l.emoji + ' ' + l.labelZh + ' (' + l.id + ')';
+            sel.appendChild(opt);
+          });
+          if (current && data.languages.find(l => l.id === current)) sel.value = current;
+        });
+        // 联动：难度选择里的语言变化 → 更新难度下拉
+        document.getElementById('diffLangSelect').addEventListener('change', function() {
+          renderDifficulties();
+        });
+        // 试卷选择：语言变化 → 更新难度下拉
+        document.getElementById('paperLangSelect').addEventListener('change', function() {
+          populatePaperDiffSelect();
+          renderPapers();
+        });
+        document.getElementById('paperDiffSelect').addEventListener('change', function() {
+          renderPapers();
+        });
+        // 题目选择：语言变化 → 更新难度 → 更新试卷
+        document.getElementById('qLangSelect').addEventListener('change', function() {
+          populateQDiffSelect();
+          populateQPaperSelect();
+          renderQuestions();
+        });
+        document.getElementById('qDiffSelect').addEventListener('change', function() {
+          populateQPaperSelect();
+          renderQuestions();
+        });
+        document.getElementById('qPaperSelect').addEventListener('change', function() {
+          renderQuestions();
+        });
+      }
+
+      function populatePaperDiffSelect() {
+        const langId = document.getElementById('paperLangSelect').value;
+        const sel = document.getElementById('paperDiffSelect');
+        sel.innerHTML = '<option value="">-- 请先选语言 --</option>';
+        if (!langId) return;
+        const lang = getLang(langId);
+        if (!lang) return;
+        lang.difficulties.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.level;
+          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function populateQDiffSelect() {
+        const langId = document.getElementById('qLangSelect').value;
+        const sel = document.getElementById('qDiffSelect');
+        sel.innerHTML = '<option value="">-- 请先选语言 --</option>';
+        if (!langId) return;
+        const lang = getLang(langId);
+        if (!lang) return;
+        lang.difficulties.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.level;
+          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function populateQPaperSelect() {
+        const langId = document.getElementById('qLangSelect').value;
+        const level = parseInt(document.getElementById('qDiffSelect').value);
+        const sel = document.getElementById('qPaperSelect');
+        sel.innerHTML = '<option value="">-- 请先选难度 --</option>';
+        if (!langId || isNaN(level)) return;
+        const diff = getDiff(langId, level);
+        if (!diff) return;
+        diff.papers.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          opt.textContent = p.titleZh + ' (ID: ' + p.id + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function renderDifficulties() {
+        const langId = document.getElementById('diffLangSelect').value;
+        const container = document.getElementById('diffList');
+        if (!langId) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">请先选择语言</p>';
+          return;
+        }
+        const lang = getLang(langId);
+        if (!lang) {
+          container.innerHTML = '<p style="color:#d14c4c; padding:12px 0;">语言不存在</p>';
+          return;
+        }
+        if (lang.difficulties.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无难度，请添加。</p>';
+          return;
+        }
+        let html = '';
+        lang.difficulties.forEach((d, i) => {
+          const paperCount = d.papers ? d.papers.length : 0;
+          html += `
+            <div class="admin-list-item">
+              <div class="info">Level ${d.level}: ${d.labelZh} <small>${paperCount} 份试卷</small></div>
+              <div class="actions">
+                <button class="btn-edit" data-lang="${langId}" data-diff-index="${i}">编辑</button>
+                <button class="btn-delete" data-lang="${langId}" data-diff-index="${i}">删除</button>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+
+        container.querySelectorAll('.btn-edit').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const langId = this.dataset.lang;
+            const idx = parseInt(this.dataset.diffIndex);
+            editDiff(langId, idx);
+          });
+        });
+        container.querySelectorAll('.btn-delete').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const langId = this.dataset.lang;
+            const idx = parseInt(this.dataset.diffIndex);
+            if (confirm('确定删除此难度吗？将同时删除其下所有试卷。')) {
+              const lang = getLang(langId);
+              if (lang) {
+                lang.difficulties.splice(idx, 1);
+                renderDifficulties();
+                updateStats();
+                updateJsonEditor();
+                showToast('已删除难度', 'success');
+              }
+            }
+          });
+        });
+      }
+
+      function editDiff(langId, idx) {
+        const lang = getLang(langId);
+        if (!lang) return;
+        const diff = lang.difficulties[idx];
+        document.getElementById('diffLangSelect').value = langId;
+        document.getElementById('diffLevel').value = diff.level;
+        document.getElementById('diffLabelZh').value = diff.labelZh;
+        document.getElementById('diffLabelEn').value = diff.labelEn;
+        document.getElementById('diffEditIndex').value = idx;
+        document.getElementById('diffLangRef').value = langId;
+        document.getElementById('diffSubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('diffCancelBtn').style.display = 'inline-flex';
+        showToast('正在编辑: ' + diff.labelZh, 'info');
+        renderDifficulties();
+      }
+
+      document.getElementById('diffForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const langId = document.getElementById('diffLangSelect').value;
+        const level = parseInt(document.getElementById('diffLevel').value);
+        const labelZh = document.getElementById('diffLabelZh').value.trim();
+        const labelEn = document.getElementById('diffLabelEn').value.trim();
+        const editIdx = parseInt(document.getElementById('diffEditIndex').value);
+        const langRef = document.getElementById('diffLangRef').value;
+
+        if (!langId) { showToast('请选择语言', 'error'); return; }
+        if (isNaN(level) || level < 0 || level > 5) { showToast('难度等级必须是 0-5', 'error'); return; }
+        if (!labelZh || !labelEn) { showToast('请填写完整信息', 'error'); return; }
+
+        const lang = getLang(langId);
+        if (!lang) { showToast('语言不存在', 'error'); return; }
+
+        // 检查同语言同等级是否已存在（编辑时排除自身）
+        const exists = lang.difficulties.find((d, i) => d.level === level && i !== editIdx);
+        if (exists) { showToast('该语言下已存在此难度等级', 'error'); return; }
+
+        if (editIdx === -1) {
+          lang.difficulties.push({ level, labelZh, labelEn, papers: [] });
+          showToast('已添加难度: ' + labelZh, 'success');
+        } else {
+          const diff = lang.difficulties[editIdx];
+          diff.level = level;
+          diff.labelZh = labelZh;
+          diff.labelEn = labelEn;
+          showToast('已更新难度: ' + labelZh, 'success');
+          document.getElementById('diffEditIndex').value = -1;
+          document.getElementById('diffLangRef').value = '';
+          document.getElementById('diffSubmitBtn').textContent = '➕ 添加难度';
+          document.getElementById('diffCancelBtn').style.display = 'none';
+        }
+
+        this.reset();
+        document.getElementById('diffEditIndex').value = -1;
+        document.getElementById('diffLangRef').value = '';
+        document.getElementById('diffSubmitBtn').textContent = '➕ 添加难度';
+        document.getElementById('diffCancelBtn').style.display = 'none';
+        document.getElementById('diffLangSelect').value = langId;
+        renderDifficulties();
+        updateStats();
+        updateJsonEditor();
+        populateLangSelects();
+      });
+
+      document.getElementById('diffCancelBtn').addEventListener('click', function() {
+        document.getElementById('diffForm').reset();
+        document.getElementById('diffEditIndex').value = -1;
+        document.getElementById('diffLangRef').value = '';
+        document.getElementById('diffSubmitBtn').textContent = '➕ 添加难度';
+        this.style.display = 'none';
+        showToast('已取消编辑', 'info');
+      });
+
+      // ---------- 试卷 CRUD ----------
+      function renderPapers() {
+        const langId = document.getElementById('paperLangSelect').value;
+        const level = parseInt(document.getElementById('paperDiffSelect').value);
+        const container = document.getElementById('paperList');
+
+        if (!langId || isNaN(level)) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">请先选择语言和难度</p>';
+          return;
+        }
+        const diff = getDiff(langId, level);
+        if (!diff) {
+          container.innerHTML = '<p style="color:#d14c4c; padding:12px 0;">难度不存在</p>';
+          return;
+        }
+        if (diff.papers.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无试卷，请添加。</p>';
+          return;
+        }
+        let html = '';
+        diff.papers.forEach((p, i) => {
+          const qCount = p.questions ? p.questions.length : 0;
+          html += `
+            <div class="admin-list-item">
+              <div class="info">📄 ${p.titleZh} (ID: ${p.id}) <small>${qCount} 道题目</small></div>
+              <div class="actions">
+                <button class="btn-edit" data-lang="${langId}" data-level="${level}" data-paper-index="${i}">编辑</button>
+                <button class="btn-delete" data-lang="${langId}" data-level="${level}" data-paper-index="${i}">删除</button>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+
+        container.querySelectorAll('.btn-edit').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const langId = this.dataset.lang;
+            const level = parseInt(this.dataset.level);
+            const idx = parseInt(this.dataset.paperIndex);
+            editPaper(langId, level, idx);
+          });
+        });
+        container.querySelectorAll('.btn-delete').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const langId = this.dataset.lang;
+            const level = parseInt(this.dataset.level);
+            const idx = parseInt(this.dataset.paperIndex);
+            if (confirm('确定删除此试卷吗？将同时删除其下所有题目。')) {
+              const diff = getDiff(langId, level);
+              if (diff) {
+                diff.papers.splice(idx, 1);
+                renderPapers();
+                updateStats();
+                updateJsonEditor();
+                showToast('已删除试卷', 'success');
+              }
+            }
+          });
+        });
+      }
+
+      function editPaper(langId, level, idx) {
+        const diff = getDiff(langId, level);
+        if (!diff) return;
+        const paper = diff.papers[idx];
+        document.getElementById('paperLangSelect').value = langId;
+        populatePaperDiffSelect();
+        document.getElementById('paperDiffSelect').value = level;
+        document.getElementById('paperId').value = paper.id;
+        document.getElementById('paperTitleZh').value = paper.titleZh;
+        document.getElementById('paperTitleEn').value = paper.titleEn;
+        document.getElementById('paperEditIndex').value = idx;
+        document.getElementById('paperLangRef').value = langId;
+        document.getElementById('paperDiffRef').value = level;
+        document.getElementById('paperSubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('paperCancelBtn').style.display = 'inline-flex';
+        showToast('正在编辑: ' + paper.titleZh, 'info');
+        renderPapers();
+      }
+
+      document.getElementById('paperForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const langId = document.getElementById('paperLangSelect').value;
+        const level = parseInt(document.getElementById('paperDiffSelect').value);
+        const id = parseInt(document.getElementById('paperId').value);
+        const titleZh = document.getElementById('paperTitleZh').value.trim();
+        const titleEn = document.getElementById('paperTitleEn').value.trim();
+        const editIdx = parseInt(document.getElementById('paperEditIndex').value);
+        const langRef = document.getElementById('paperLangRef').value;
+        const diffRef = parseInt(document.getElementById('paperDiffRef').value);
+
+        if (!langId || isNaN(level)) { showToast('请选择语言和难度', 'error'); return; }
+        if (isNaN(id) || id < 1) { showToast('请输入有效的试卷ID', 'error'); return; }
+        if (!titleZh || !titleEn) { showToast('请填写完整标题', 'error'); return; }
+
+        const diff = getDiff(langId, level);
+        if (!diff) { showToast('难度不存在', 'error'); return; }
+
+        const exists = diff.papers.find((p, i) => p.id === id && i !== editIdx);
+        if (exists) { showToast('该难度下已存在此试卷ID', 'error'); return; }
+
+        if (editIdx === -1) {
+          diff.papers.push({ id, titleZh, titleEn, questions: [] });
+          showToast('已添加试卷: ' + titleZh, 'success');
+        } else {
+          const paper = diff.papers[editIdx];
+          paper.id = id;
+          paper.titleZh = titleZh;
+          paper.titleEn = titleEn;
+          showToast('已更新试卷: ' + titleZh, 'success');
+          document.getElementById('paperEditIndex').value = -1;
+          document.getElementById('paperLangRef').value = '';
+          document.getElementById('paperDiffRef').value = '';
+          document.getElementById('paperSubmitBtn').textContent = '➕ 添加试卷';
+          document.getElementById('paperCancelBtn').style.display = 'none';
+        }
+
+        this.reset();
+        document.getElementById('paperEditIndex').value = -1;
+        document.getElementById('paperLangRef').value = '';
+        document.getElementById('paperDiffRef').value = '';
+        document.getElementById('paperSubmitBtn').textContent = '➕ 添加试卷';
+        document.getElementById('paperCancelBtn').style.display = 'none';
+        document.getElementById('paperLangSelect').value = langId;
+        populatePaperDiffSelect();
+        document.getElementById('paperDiffSelect').value = level;
+        renderPapers();
+        updateStats();
+        updateJsonEditor();
+        populateLangSelects();
+      });
+
+      document.getElementById('paperCancelBtn').addEventListener('click', function() {
+        document.getElementById('paperForm').reset();
+        document.getElementById('paperEditIndex').value = -1;
+        document.getElementById('paperLangRef').value = '';
+        document.getElementById('paperDiffRef').value = '';
+        document.getElementById('paperSubmitBtn').textContent = '➕ 添加试卷';
+        this.style.display = 'none';
+        showToast('已取消编辑', 'info');
+      });
+
+      // ---------- 题目 CRUD ----------
+      function renderQuestions() {
+        const langId = document.getElementById('qLangSelect').value;
+        const level = parseInt(document.getElementById('qDiffSelect').value);
+        const paperId = parseInt(document.getElementById('qPaperSelect').value);
+        const container = document.getElementById('qList');
+
+        if (!langId || isNaN(level) || isNaN(paperId)) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">请选择语言、难度和试卷</p>';
+          return;
+        }
+        const paper = getPaper(langId, level, paperId);
+        if (!paper) {
+          container.innerHTML = '<p style="color:#d14c4c; padding:12px 0;">试卷不存在</p>';
+          return;
+        }
+        if (!paper.questions || paper.questions.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无题目，请添加。</p>';
+          return;
+        }
+        let html = '';
+        paper.questions.forEach((q, i) => {
+          const qText = currentLang === 'zh' ? q.q.zh : q.q.en;
+          html += `
+            <div class="admin-list-item">
+              <div class="info">❓ ${qText} <small>答案: ${q.ans}</small></div>
+              <div class="actions">
+                <button class="btn-edit" data-lang="${langId}" data-level="${level}" data-paper="${paperId}" data-q-index="${i}">编辑</button>
+                <button class="btn-delete" data-lang="${langId}" data-level="${level}" data-paper="${paperId}" data-q-index="${i}">删除</button>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+
+        container.querySelectorAll('.btn-edit').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const langId = this.dataset.lang;
+            const level = parseInt(this.dataset.level);
+            const paperId = parseInt(this.dataset.paper);
+            const idx = parseInt(this.dataset.qIndex);
+            editQuestion(langId, level, paperId, idx);
+          });
+        });
+        container.querySelectorAll('.btn-delete').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const langId = this.dataset.lang;
+            const level = parseInt(this.dataset.level);
+            const paperId = parseInt(this.dataset.paper);
+            const idx = parseInt(this.dataset.qIndex);
+            if (confirm('确定删除此题吗？')) {
+              const paper = getPaper(langId, level, paperId);
+              if (paper && paper.questions) {
+                paper.questions.splice(idx, 1);
+                renderQuestions();
+                updateStats();
+                updateJsonEditor();
+                showToast('已删除题目', 'success');
+              }
+            }
+          });
+        });
+      }
+
+      function editQuestion(langId, level, paperId, idx) {
+        const paper = getPaper(langId, level, paperId);
+        if (!paper) return;
+        const q = paper.questions[idx];
+        document.getElementById('qLangSelect').value = langId;
+        populateQDiffSelect();
+        document.getElementById('qDiffSelect').value = level;
+        populateQPaperSelect();
+        document.getElementById('qPaperSelect').value = paperId;
+        document.getElementById('qZh').value = q.q.zh;
+        document.getElementById('qEn').value = q.q.en;
+        document.getElementById('qOptAzh').value = q.opts.zh[0];
+        document.getElementById('qOptAen').value = q.opts.en[0];
+        document.getElementById('qOptBzh').value = q.opts.zh[1];
+        document.getElementById('qOptBen').value = q.opts.en[1];
+        document.getElementById('qOptCzh').value = q.opts.zh[2];
+        document.getElementById('qOptCen').value = q.opts.en[2];
+        document.getElementById('qOptDzh').value = q.opts.zh[3];
+        document.getElementById('qOptDen').value = q.opts.en[3];
+        document.getElementById('qAnswer').value = q.ans;
+        document.getElementById('qExpZh').value = q.exp.zh;
+        document.getElementById('qExpEn').value = q.exp.en;
+        document.getElementById('qEditIndex').value = idx;
+        document.getElementById('qPaperRef').value = paperId;
+        document.getElementById('qSubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('qCancelBtn').style.display = 'inline-flex';
+        showToast('正在编辑题目', 'info');
+        renderQuestions();
+      }
+
+      document.getElementById('questionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const langId = document.getElementById('qLangSelect').value;
+        const level = parseInt(document.getElementById('qDiffSelect').value);
+        const paperId = parseInt(document.getElementById('qPaperSelect').value);
+        const qZh = document.getElementById('qZh').value.trim();
+        const qEn = document.getElementById('qEn').value.trim();
+        const optAzh = document.getElementById('qOptAzh').value.trim();
+        const optAen = document.getElementById('qOptAen').value.trim();
+        const optBzh = document.getElementById('qOptBzh').value.trim();
+        const optBen = document.getElementById('qOptBen').value.trim();
+        const optCzh = document.getElementById('qOptCzh').value.trim();
+        const optCen = document.getElementById('qOptCen').value.trim();
+        const optDzh = document.getElementById('qOptDzh').value.trim();
+        const optDen = document.getElementById('qOptDen').value.trim();
+        const ans = parseInt(document.getElementById('qAnswer').value);
+        const expZh = document.getElementById('qExpZh').value.trim();
+        const expEn = document.getElementById('qExpEn').value.trim();
+        const editIdx = parseInt(document.getElementById('qEditIndex').value);
+        const paperRef = parseInt(document.getElementById('qPaperRef').value);
+
+        if (!langId || isNaN(level) || isNaN(paperId)) {
+          showToast('请完整选择语言、难度和试卷', 'error');
+          return;
+        }
+        if (!qZh || !qEn) { showToast('请输入题目内容', 'error'); return; }
+        if (!optAzh || !optAen || !optBzh || !optBen || !optCzh || !optCen || !optDzh || !optDen) {
+          showToast('请填写所有选项', 'error');
+          return;
+        }
+        if (isNaN(ans) || ans < 0 || ans > 3) { showToast('答案必须是 0-3', 'error'); return; }
+        if (!expZh || !expEn) { showToast('请输入解析内容', 'error'); return; }
+
+        const paper = getPaper(langId, level, paperId);
+        if (!paper) { showToast('试卷不存在', 'error'); return; }
+        if (!paper.questions) paper.questions = [];
+
+        const newQ = {
+          q: { zh: qZh, en: qEn },
+          opts: {
+            zh: [optAzh, optBzh, optCzh, optDzh],
+            en: [optAen, optBen, optCen, optDen]
+          },
+          ans: ans,
+          exp: { zh: expZh, en: expEn }
+        };
+
+        if (editIdx === -1) {
+          paper.questions.push(newQ);
+          showToast('已添加题目', 'success');
+        } else {
+          paper.questions[editIdx] = newQ;
+          showToast('已更新题目', 'success');
+          document.getElementById('qEditIndex').value = -1;
+          document.getElementById('qPaperRef').value = '';
+          document.getElementById('qSubmitBtn').textContent = '➕ 添加题目';
+          document.getElementById('qCancelBtn').style.display = 'none';
+        }
+
+        this.reset();
+        document.getElementById('qEditIndex').value = -1;
+        document.getElementById('qPaperRef').value = '';
+        document.getElementById('qSubmitBtn').textContent = '➕ 添加题目';
+        document.getElementById('qCancelBtn').style.display = 'none';
+        document.getElementById('qLangSelect').value = langId;
+        populateQDiffSelect();
+        document.getElementById('qDiffSelect').value = level;
+        populateQPaperSelect();
+        document.getElementById('qPaperSelect').value = paperId;
+        renderQuestions();
+        updateStats();
+        updateJsonEditor();
+        populateLangSelects();
+      });
+
+      document.getElementById('qCancelBtn').addEventListener('click', function() {
+        document.getElementById('questionForm').reset();
+        document.getElementById('qEditIndex').value = -1;
+        document.getElementById('qPaperRef').value = '';
+        document.getElementById('qSubmitBtn').textContent = '➕ 添加题目';
+        this.style.display = 'none';
+        showToast('已取消编辑', 'info');
+      });
+
+      // ---------- JSON 编辑器 ----------
+      function updateJsonEditor() {
+        const editor = document.getElementById('jsonEditor');
+        editor.value = JSON.stringify(data, null, 2);
+      }
+
+      document.getElementById('jsonApplyBtn').addEventListener('click', function() {
+        try {
+          const raw = document.getElementById('jsonEditor').value;
+          const parsed = JSON.parse(raw);
+          if (!parsed.languages || !Array.isArray(parsed.languages)) {
+            throw new Error('数据必须包含 languages 数组');
+          }
+          data = parsed;
+          renderAll();
+          showToast('已应用 JSON 数据', 'success');
+        } catch (e) {
+          showToast('JSON 格式错误: ' + e.message, 'error');
+        }
+      });
+
+      document.getElementById('jsonFormatBtn').addEventListener('click', function() {
+        try {
+          const raw = document.getElementById('jsonEditor').value;
+          const parsed = JSON.parse(raw);
+          document.getElementById('jsonEditor').value = JSON.stringify(parsed, null, 2);
+          showToast('已格式化', 'success');
+        } catch (e) {
+          showToast('JSON 格式错误: ' + e.message, 'error');
+        }
+      });
+
+      document.getElementById('jsonCopyBtn').addEventListener('click', function() {
+        const text = document.getElementById('jsonEditor').value;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('已复制到剪贴板！请粘贴到 data/papers.json 并提交到 GitHub', 'success');
+        }).catch(() => {
+          // 降级方案
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+          showToast('已复制到剪贴板！', 'success');
+        });
+      });
+
+      // ---------- 导出 JSON ----------
+      document.getElementById('exportJsonBtn').addEventListener('click', function() {
+        updateJsonEditor();
+        showToast('已更新 JSON 编辑器，请复制内容到 data/papers.json', 'info');
+        // 自动切换到 JSON tab
+        switchTab('json');
+      });
+
+      // ---------- 加载数据 ----------
+      document.getElementById('loadDataBtn').addEventListener('click', function() {
+        fetch('data/papers.json')
+          .then(res => {
+            if (!res.ok) throw new Error('文件不存在或无法访问');
+            return res.json();
+          })
+          .then(loaded => {
+            if (loaded.languages && Array.isArray(loaded.languages)) {
+              data = loaded;
+              renderAll();
+              showToast('数据加载成功！', 'success');
+            } else {
+              throw new Error('数据格式无效');
+            }
+          })
+          .catch(err => {
+            showToast('加载失败: ' + err.message + '，将使用空数据', 'error');
+            data = { languages: [] };
+            renderAll();
+          });
+      });
+
+      // ---------- Tab 切换 ----------
+      function switchTab(tabId) {
+        tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabId));
+        Object.keys(contents).forEach(key => {
+          contents[key].classList.toggle('hidden', key !== tabId);
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          switchTab(this.dataset.tab);
+        });
+      });
+
+      // ---------- 渲染全部 ----------
+      function renderAll() {
+        renderLanguages();
+        renderDifficulties();
+        renderPapers();
+        renderQuestions();
+        updateStats();
+        updateJsonEditor();
+        populateLangSelects();
+      }
+
+      // ---------- 初始化 ----------
+      // 默认加载 data/papers.json
+      fetch('data/papers.json')
+        .then(res => {
+          if (!res.ok) throw new Error('文件不存在');
+          return res.json();
+        })
+        .then(loaded => {
+          if (loaded.languages && Array.isArray(loaded.languages)) {
+            data = loaded;
+          }
+          renderAll();
+        })
+        .catch(() => {
+          data = { languages: [] };
+          renderAll();
+          showToast('未找到 data/papers.json，已创建空数据', 'info');
+        });
+
+    })();
+  </script>
+
+</body>
+</html>
