@@ -100,7 +100,7 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
         }
 
-        /* 封面占位 */
+        /* 封面 */
         .story-cover {
             width: 100%;
             aspect-ratio: 16 / 10;
@@ -108,11 +108,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.15);
             position: relative;
             overflow: hidden;
+        }
+        .story-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .story-cover .cover-emoji {
             font-size: 52px;
@@ -127,12 +129,6 @@
             color: rgba(255, 255, 255, 0.3);
             font-weight: 400;
             letter-spacing: 2px;
-        }
-        /* 如果有真实封面图 */
-        .story-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .story-card-body {
@@ -247,9 +243,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 64px;
-            color: rgba(255, 255, 255, 0.10);
             position: relative;
+            overflow: hidden;
         }
         .detail-cover img {
             width: 100%;
@@ -343,6 +338,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
+            flex-wrap: wrap;
         }
         .chapter-item .num {
             font-size: 14px;
@@ -381,7 +377,7 @@
             transform: translateX(4px);
         }
 
-        /* ========== 阅读正文（点击章节后弹出） ========== */
+        /* ========== 阅读正文 ========== */
         .reader-overlay {
             display: none;
             position: fixed;
@@ -664,6 +660,7 @@
     <script>
         // ================================================================
         //  主逻辑 — 从 data/stories.json 加载，渲染列表 + 详情
+        //  支持显示 cover 封面图片
         // ================================================================
 
         let allStories = [];
@@ -696,150 +693,30 @@
         //  工具函数
         // ================================================================
 
-        // 获取首字母 / Emoji 占位
+        // 获取首字母 Emoji 占位（没有封面时使用）
         function getCoverEmoji(title) {
             const emojiMap = {
-                '灰': '🏚️',
-                '星': '⭐',
-                '魔': '🔮',
-                '时': '⏳',
-                '风': '🌪️',
-                '火': '🔥',
-                '水': '💧',
-                '暗': '🌙',
-                '光': '☀️',
-                '梦': '🌌',
-                '剑': '⚔️',
-                '龙': '🐉',
-                '凤': '🦅',
-                '雪': '❄️',
-                '月': '🌙',
-                '日': '☀️',
-                '海': '🌊',
-                '山': '⛰️',
-                '森': '🌲',
-                '林': '🌳',
-                '城': '🏰',
-                '塔': '🗼',
-                '桥': '🌉',
-                '夜': '🌃',
-                '晨': '🌅',
-                '星': '⭐',
-                '宇': '🌌',
-                '宙': '🌠',
-                '未': '🔮',
-                '来': '🚀',
-                '古': '🏛️',
-                '老': '🕰️',
-                '新': '✨',
-                '世': '🌍',
-                '界': '🌎',
-                '王': '👑',
-                '骑': '🐴',
-                '勇': '🛡️',
-                '士': '⚔️',
-                '法': '📜',
-                '师': '🧙',
-                '猎': '🏹',
-                '人': '🧑',
-                '神': '⚡',
-                '魔': '👹',
-                '妖': '🌸',
-                '怪': '👾',
-                '灵': '👻',
-                '魂': '💫',
-                '血': '🩸',
-                '骨': '💀',
-                '瞳': '👁️',
-                '翼': '🦇',
-                '羽': '🪶',
-                '鳞': '🐍',
-                '爪': '🐾',
-                '牙': '🦷',
-                '角': '🦌',
-                '尾': '🦊',
-                '耳': '🐰',
-                '鼻': '🐽',
-                '口': '👄',
-                '手': '✋',
-                '足': '🦶',
-                '心': '❤️',
-                '意': '🧠',
-                '念': '💭',
-                '情': '💝',
-                '爱': '💖',
-                '恨': '💔',
-                '喜': '😊',
-                '怒': '😡',
-                '哀': '😢',
-                '乐': '😄',
-                '生': '🌱',
-                '死': '🕊️',
-                '命': '🌀',
-                '运': '🎲',
-                '时': '⌛',
-                '空': '🌀',
-                '间': '🕳️',
-                '光': '☀️',
-                '影': '🌑',
-                '幻': '🌫️',
-                '真': '🔍',
-                '实': '📐',
-                '虚': '🌌',
-                '无': '🕳️',
-                '有': '✨',
-                '大': '🌟',
-                '小': '🔹',
-                '长': '📏',
-                '短': '📐',
-                '高': '🏔️',
-                '低': '🏞️',
-                '快': '⚡',
-                '慢': '🐢',
-                '强': '💪',
-                '弱': '🕊️',
-                '善': '😇',
-                '恶': '👿',
-                '美': '🌸',
-                '丑': '👹',
-                '真': '💎',
-                '假': '🎭',
-                '正': '⚖️',
-                '邪': '🌀',
-                '明': '🌞',
-                '暗': '🌚',
-                '白': '⬜',
-                '黑': '⬛',
-                '红': '🔴',
-                '蓝': '🔵',
-                '绿': '🟢',
-                '黄': '🟡',
-                '紫': '🟣',
-                '金': '🪙',
-                '银': '🥈',
-                '铜': '🥉',
-                '铁': '⚙️',
-                '钢': '🔩',
-                '木': '🪵',
-                '石': '🪨',
-                '玉': '💎',
-                '珠': '📿',
-                '宝': '💎',
-                '贝': '🐚',
-                '钱': '💰',
-                '财': '🏦',
-                '富': '🏰',
-                '贫': '🏚️',
-                '贵': '👑',
-                '贱': '🔗',
-                '尊': '🙇',
-                '卑': '🧎'
+                '灰': '🏚️', '星': '⭐', '魔': '🔮', '时': '⏳', '风': '🌪️',
+                '火': '🔥', '水': '💧', '暗': '🌙', '光': '☀️', '梦': '🌌',
+                '剑': '⚔️', '龙': '🐉', '凤': '🦅', '雪': '❄️', '月': '🌙',
+                '海': '🌊', '山': '⛰️', '森': '🌲', '林': '🌳', '城': '🏰',
+                '塔': '🗼', '桥': '🌉', '夜': '🌃', '晨': '🌅', '宇': '🌌',
+                '宙': '🌠', '未': '🔮', '来': '🚀', '古': '🏛️', '老': '🕰️',
+                '新': '✨', '世': '🌍', '界': '🌎', '王': '👑', '骑': '🐴',
+                '勇': '🛡️', '士': '⚔️', '法': '📜', '师': '🧙', '猎': '🏹',
+                '人': '🧑', '神': '⚡', '妖': '🌸', '怪': '👾', '灵': '👻',
+                '魂': '💫', '血': '🩸', '骨': '💀', '瞳': '👁️', '翼': '🦇',
+                '心': '❤️', '意': '🧠', '念': '💭', '情': '💝', '爱': '💖',
+                '生': '🌱', '死': '🕊️', '命': '🌀', '运': '🎲', '真': '💎',
+                '美': '🌸', '善': '😇', '恶': '👿', '明': '🌞', '白': '⬜',
+                '黑': '⬛', '红': '🔴', '蓝': '🔵', '绿': '🟢', '黄': '🟡',
+                '金': '🪙', '银': '🥈', '宝': '💎', '钱': '💰', '财': '🏦'
             };
             const first = title.charAt(0);
             return emojiMap[first] || '📖';
         }
 
-        // 获取封面颜色
+        // 获取封面颜色（没有封面时使用）
         function getCoverColor(title) {
             const colors = [
                 'linear-gradient(145deg, #2d2d44, #1a1a2e)',
@@ -884,10 +761,16 @@
                 const likes = story.likes || 0;
                 const chCount = story.chapters ? story.chapters.length : 0;
 
+                // 🔥 关键改动：如果有封面图片则显示图片，否则显示 Emoji
+                const hasCover = story.cover && story.cover.trim() !== '';
+                const coverHtml = hasCover
+                    ? `<img src="${story.cover}" alt="${story.title}" />`
+                    : `<span class="cover-emoji">${coverEmoji}</span>`;
+
                 html += `
                     <div class="story-card" data-index="${idx}">
-                        <div class="story-cover" style="background:${coverColor};">
-                            <span class="cover-emoji">${coverEmoji}</span>
+                        <div class="story-cover" style="background:${hasCover ? '#1a1a2e' : coverColor};">
+                            ${coverHtml}
                             <span class="cover-title">${story.title.substring(0, 4)}</span>
                         </div>
                         <div class="story-card-body">
@@ -933,10 +816,16 @@
             const likes = story.likes || 0;
             const chapters = story.chapters || [];
 
+            // 🔥 关键改动：详情页封面如果有图片则显示图片
+            const hasCover = story.cover && story.cover.trim() !== '';
+            const coverHtml = hasCover
+                ? `<img src="${story.cover}" alt="${story.title}" />`
+                : `<span class="cover-emoji">${coverEmoji}</span>`;
+
             // 渲染头部
             detailHero.innerHTML = `
-                <div class="detail-cover" style="background:${coverColor};">
-                    <span class="cover-emoji">${coverEmoji}</span>
+                <div class="detail-cover" style="background:${hasCover ? '#1a1a2e' : coverColor};">
+                    ${coverHtml}
                 </div>
                 <div class="detail-info">
                     <div class="title">${story.title}</div>
@@ -945,6 +834,7 @@
                     <div class="meta-row">
                         <span class="likes"><span class="heart">❤️</span> ${likes} 推荐</span>
                         <span>📖 ${chapters.length} 章</span>
+                        ${hasCover ? '<span>🖼️ 有封面</span>' : ''}
                     </div>
                 </div>
             `;
