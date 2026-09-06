@@ -3,154 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>游戏大厅 | Montainment</title>
+  <title>游戏大厅 · Montainment</title>
   <meta name="description" content="选择你喜欢的游戏，开始挑战！" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ========== 游戏大厅专用样式 ========== */
-    .game-hall {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    /* ========== 游戏大厅样式 ========== */
+    .game-hall { max-width: 900px; margin: 0 auto; }
 
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 24px;
-      margin-top: 16px;
+      margin-top: 8px;
     }
 
     .game-card {
       background: #fff;
       border-radius: 20px;
-      padding: 24px 20px 20px;
+      overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
-      text-align: center;
-      border: 2px solid transparent;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      text-decoration: none;
+      color: inherit;
     }
     .game-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
-      border-color: #f7c948;
     }
 
-    .game-card .icon {
-      font-size: 48px;
-      margin-bottom: 8px;
-      width: 64px;
-      height: 64px;
+    .game-cover {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(145deg, #2d2d44, #1a1a2e);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 16px;
-      background: #f6f8fc;
+      font-size: 52px;
+      color: rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
     }
-    .game-card .icon img {
-      width: 48px;
-      height: 48px;
+    .game-cover img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 12px;
     }
-    .game-card .title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 2px;
-    }
-    .game-card .desc {
-      font-size: 14px;
-      color: #888;
-      line-height: 1.4;
-      margin-bottom: 12px;
-      flex: 1;
-    }
-    .game-card .badge {
+    .game-cover .cover-icon { font-size: 52px; opacity: 0.6; }
+    .game-cover .cover-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
       font-size: 12px;
-      font-weight: 600;
-      color: #6b7a8f;
-      background: #eef2f7;
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(0,0,0,0.4);
       padding: 2px 14px;
       border-radius: 20px;
     }
-    .game-card .play-btn {
-      margin-top: 12px;
-      padding: 8px 28px;
-      border: none;
-      border-radius: 30px;
-      background: #0b1c33;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-      font-family: inherit;
-    }
-    .game-card .play-btn:hover {
-      background: #1a3050;
-      transform: scale(1.02);
-    }
 
-    /* ========== 游戏容器（加载游戏后） ========== */
-    .game-player {
-      display: none;
-      margin-top: 16px;
-      background: #fff;
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-      min-height: 400px;
+    .game-card-body {
+      padding: 16px 18px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
-    .game-player.active {
-      display: block;
-      animation: fadeUp 0.35s ease;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .game-player .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: none;
-      font-size: 15px;
-      font-weight: 600;
-      color: #666;
-      cursor: pointer;
-      padding: 0 0 16px;
-      transition: 0.2s;
-      font-family: inherit;
-    }
-    .game-player .back-btn:hover {
+    .game-card-body .title {
+      font-size: 17px;
+      font-weight: 700;
       color: #1a1a2e;
     }
+    .game-card-body .desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      flex: 1;
+      margin: 4px 0 12px;
+    }
+    .game-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #f0ede8;
+      padding-top: 12px;
+    }
+    .game-card-footer .status {
+      font-size: 13px;
+      color: #aaa;
+      background: #f5f2ed;
+      padding: 2px 14px;
+      border-radius: 20px;
+    }
+    .game-card-footer .play-hint {
+      font-size: 13px;
+      color: #2a6df4;
+      font-weight: 600;
+    }
 
-    /* ========== 空状态 ========== */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
       color: #aaa;
     }
     .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
-    .empty-state h3 { font-size: 20px; color: #666; margin-bottom: 4px; }
+    .empty-state h3 { font-size: 20px; color: #666; }
 
-    /* ========== 响应式 ========== */
     @media (max-width: 600px) {
-      .game-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
-      .game-card { padding: 16px 14px; }
-      .game-card .icon { font-size: 36px; width: 52px; height: 52px; }
-      .game-card .title { font-size: 15px; }
-      .game-card .desc { font-size: 13px; }
+      .game-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .game-card-body .title { font-size: 15px; }
+      .game-card-body .desc { font-size: 13px; }
+      .game-cover { aspect-ratio: 16 / 9; }
+      .game-cover .cover-icon { font-size: 36px; }
+    }
+    @media (max-width: 420px) {
+      .game-grid { gap: 10px; }
+      .game-card-body { padding: 12px; }
+      .game-card-body .title { font-size: 13px; }
+      .game-card-body .desc { font-size: 12px; }
     }
   </style>
 </head>
@@ -158,14 +130,11 @@
 
   <header class="site-header">
     <nav class="nav-bar">
-      <a href="index.html" class="brand">
-        <span class="brand-mark">✦</span>
-        Montainment
-      </a>
+      <a href="index.html" class="brand"><span class="brand-mark">✦</span> Montainment</a>
       <ul class="nav-links">
         <li><a href="index.html">首页</a></li>
         <li><a href="quiz.html">语言测验</a></li>
-        <li><a href="game.html" class="active">记忆游戏</a></li>
+        <li><a href="game.html" class="active">游戏大厅</a></li>
         <li><a href="story.html">故事工坊</a></li>
       </ul>
       <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
@@ -182,21 +151,12 @@
     <div class="page-header container">
       <span class="page-badge badge-sunshine">🎮 游戏大厅</span>
       <h1>选择游戏 · 开始挑战</h1>
-      <p>从下方选择一款游戏，享受学习与娱乐的乐趣！</p>
+      <p>点击任意游戏卡片，进入独立游戏页面，享受完整广告体验！</p>
     </div>
 
     <div class="container game-hall">
-
-      <!-- 游戏列表 -->
-      <div id="gameList" class="game-grid"></div>
-
-      <!-- 游戏容器（加载后显示） -->
-      <div class="game-player" id="gamePlayer">
-        <button class="back-btn" id="backToHallBtn">← 返回游戏列表</button>
-        <div id="gameContainer"></div>
-      </div>
-
-      <div class="ad-slot ad-slot--inline" data-ad-slot="game-inline">
+      <div class="game-grid" id="gameGrid"></div>
+      <div class="ad-slot ad-slot--inline" data-ad-slot="game-inline" style="margin-top:24px;">
         <span>广告位 · 内容间横幅</span>
       </div>
     </div>
@@ -209,22 +169,73 @@
   <script src="common.js"></script>
   <script>
     // ================================================================
-    //  🎮 游戏大厅逻辑
-    //  从 data/games.json 加载游戏列表，动态加载 JS 游戏
+    //  游戏大厅：从 data/games.json 加载，点击跳转到 game-play.html
     // ================================================================
-
     (function() {
-      const gameList = document.getElementById('gameList');
-      const gamePlayer = document.getElementById('gamePlayer');
-      const gameContainer = document.getElementById('gameContainer');
-      const backBtn = document.getElementById('backToHallBtn');
+      const gameGrid = document.getElementById('gameGrid');
 
-      let allGames = [];
-      let loadedScripts = {};
+      function getCoverDisplay(game) {
+        if (game.image) {
+          return `<img src="${game.image}" alt="${game.titleZh}" />`;
+        }
+        return `<span class="cover-icon">${game.icon || '🎮'}</span>`;
+      }
 
-      // ================================================================
-      //  加载游戏数据
-      // ================================================================
+      function getCoverColor(game) {
+        const colors = [
+          'linear-gradient(145deg, #2d2d44, #1a1a2e)',
+          'linear-gradient(145deg, #3d2d44, #2a1a2e)',
+          'linear-gradient(145deg, #2d3d44, #1a2a2e)',
+          'linear-gradient(145deg, #443d2d, #2e2a1a)',
+          'linear-gradient(145deg, #442d3d, #2e1a2a)',
+          'linear-gradient(145deg, #2d443d, #1a2e2a)',
+        ];
+        let hash = 0;
+        const str = game.id || game.titleZh || '';
+        for (let i = 0; i < str.length; i++) {
+          hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return colors[Math.abs(hash) % colors.length];
+      }
+
+      function renderList(games) {
+        if (games.length === 0) {
+          gameGrid.innerHTML = `
+            <div style="grid-column:1/-1;">
+              <div class="empty-state"><div class="icon">🎮</div><h3>暂无游戏</h3><p>请在后台添加游戏内容 🚧</p></div>
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        games.forEach((game) => {
+          const coverHtml = getCoverDisplay(game);
+          const coverColor = getCoverColor(game);
+          const typeLabel = game.type === 'js' ? '原生游戏' : 'H5 游戏';
+          const desc = game.descriptionZh || '📝 来挑战吧！';
+
+          html += `
+            <a href="game-play.html?game=${encodeURIComponent(game.id)}" class="game-card">
+              <div class="game-cover" style="background:${coverColor};">
+                ${coverHtml}
+                <span class="cover-badge">${typeLabel}</span>
+              </div>
+              <div class="game-card-body">
+                <div class="title">${game.titleZh}</div>
+                <div class="desc">${desc}</div>
+                <div class="game-card-footer">
+                  <span class="status">${typeLabel}</span>
+                  <span class="play-hint">开始游戏 →</span>
+                </div>
+              </div>
+            </a>
+          `;
+        });
+
+        gameGrid.innerHTML = html;
+      }
+
       function loadGames() {
         fetch('data/games.json')
           .then(res => {
@@ -232,165 +243,18 @@
             return res.json();
           })
           .then(data => {
-            if (data.games && data.games.length > 0) {
-              // 过滤出已启用的游戏，并按 sortOrder 排序
-              allGames = data.games
-                .filter(g => g.enabled !== false)
-                .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-            } else {
-              allGames = [];
-            }
-            renderGameList();
+            const games = (data.games || [])
+              .filter(g => g.enabled !== false)
+              .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+            renderList(games);
           })
           .catch(err => {
             console.warn('加载游戏数据失败:', err);
-            allGames = [];
-            renderGameList();
+            renderList([]);
           });
       }
 
-      // ================================================================
-      //  渲染游戏列表
-      // ================================================================
-      function renderGameList() {
-        if (allGames.length === 0) {
-          gameList.innerHTML = `
-            <div style="grid-column:1/-1;">
-              <div class="empty-state">
-                <div class="icon">🎮</div>
-                <h3>暂无游戏</h3>
-                <p>请在后台添加游戏内容 🚧</p>
-              </div>
-            </div>
-          `;
-          return;
-        }
-
-        let html = '';
-        allGames.forEach((game, idx) => {
-          const iconDisplay = game.image
-            ? `<img src="${game.image}" alt="${game.titleZh}" />`
-            : (game.icon || '🎮');
-          const desc = game.descriptionZh || '📝 来挑战吧！';
-
-          html += `
-            <div class="game-card" data-index="${idx}">
-              <div class="icon">${iconDisplay}</div>
-              <div class="title">${game.titleZh}</div>
-              <div class="desc">${desc}</div>
-              <span class="badge">${game.type === 'js' ? '原生游戏' : 'H5 游戏'}</span>
-              <button class="play-btn" data-index="${idx}">开始游戏</button>
-            </div>
-          `;
-        });
-
-        gameList.innerHTML = html;
-
-        // 绑定点击事件
-        gameList.querySelectorAll('.play-btn').forEach(btn => {
-          btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.index);
-            launchGame(idx);
-          });
-        });
-
-        // 点击卡片本身也可以启动
-        gameList.querySelectorAll('.game-card').forEach(card => {
-          card.addEventListener('click', function() {
-            const idx = parseInt(this.dataset.index);
-            launchGame(idx);
-          });
-        });
-      }
-
-      // ================================================================
-      //  启动游戏
-      // ================================================================
-      function launchGame(index) {
-        const game = allGames[index];
-        if (!game) return;
-
-        // 显示游戏容器，隐藏列表
-        gameList.style.display = 'none';
-        gamePlayer.classList.add('active');
-        gameContainer.innerHTML = '<div style="text-align:center;padding:40px;color:#888;">⏳ 加载中...</div>';
-
-        if (game.type === 'js') {
-          // 原生 JS 游戏：动态加载脚本
-          loadScript(game.entry, function() {
-            if (typeof window.initGame === 'function') {
-              // 清空容器并启动游戏
-              gameContainer.innerHTML = '';
-              window.initGame(gameContainer);
-            } else {
-              gameContainer.innerHTML = `
-                <div style="padding:40px;text-align:center;color:#d14c4c;">
-                  <div style="font-size:48px;">⚠️</div>
-                  <h3>游戏加载失败</h3>
-                  <p>游戏脚本未正确暴露 initGame 函数</p>
-                </div>
-              `;
-            }
-          });
-        } else if (game.type === 'iframe') {
-          // iframe 游戏
-          gameContainer.innerHTML = `
-            <iframe src="${game.entry}" style="width:100%;height:600px;border:none;border-radius:16px;"></iframe>
-          `;
-        } else {
-          gameContainer.innerHTML = `
-            <div style="padding:40px;text-align:center;color:#d14c4c;">
-              <div style="font-size:48px;">⚠️</div>
-              <h3>不支持的遊戲類型</h3>
-              <p>類型: ${game.type}</p>
-            </div>
-          `;
-        }
-      }
-
-      // ================================================================
-      //  动态加载脚本（带缓存）
-      // ================================================================
-      function loadScript(src, callback) {
-        // 如果已经加载过，直接执行回调
-        if (loadedScripts[src]) {
-          callback();
-          return;
-        }
-
-        const script = document.createElement('script');
-        script.src = src + '?v=' + Date.now(); // 防止缓存
-        script.onload = function() {
-          loadedScripts[src] = true;
-          callback();
-        };
-        script.onerror = function() {
-          gameContainer.innerHTML = `
-            <div style="padding:40px;text-align:center;color:#d14c4c;">
-              <div style="font-size:48px;">⚠️</div>
-              <h3>脚本加载失败</h3>
-              <p>${src}</p>
-            </div>
-          `;
-        };
-        document.head.appendChild(script);
-      }
-
-      // ================================================================
-      //  返回大厅
-      // ================================================================
-      backBtn.addEventListener('click', function() {
-        gamePlayer.classList.remove('active');
-        gameList.style.display = 'grid';
-        gameContainer.innerHTML = '';
-      });
-
-      // ================================================================
-      //  启动
-      // ================================================================
       loadGames();
-
     })();
   </script>
 
