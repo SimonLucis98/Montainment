@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "type": "text",
+      "category": "哲思短句",
+      "title": "静心集 · 第一篇",
+      "author": "蒙堂木下",
+      "preview": "你不需要急着成为谁。像竹子一样，先向下扎根，再向上生长...",
+      "content": "你不需要急着成为谁。\n\n像竹子一样，先向下扎根，再向上生长。\n\n生活不是一场竞赛，而是一场漫步。\n\n慢一点，才能听见风的声音。",
+      "url": ""
+    },
+    {
+      "id": 2,
+      "type": "video",
+      "category": "自然记录",
+      "title": "竹林 · 雨声",
+      "author": "蒙堂木下",
+      "preview": "沉浸式自然风光，雨打竹叶的白噪音",
+      "content": "",
+      "url": "https://www.youtube.com/embed/xxxxx"
+    },
+    {
+      "id": 3,
+      "type": "music",
+      "category": "古风音乐",
+      "title": "茶楼听书",
+      "author": "蒙堂木下",
+      "preview": "古风纯音乐，适合阅读背景",
+      "content": "",
+      "url": "https://www.youtube.com/embed/5g_vB_qs3to"
+    }
+  ]
+}
