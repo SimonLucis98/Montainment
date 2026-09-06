@@ -33,7 +33,9 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background-color: var(--bg);
+  /* ===== 🔹 新增：微妙的点状纹理（像纸张/沙地质感） ===== */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%238a9b7a' fill-opacity='0.04'%3E%3Ccircle cx='20' cy='20' r='1.2'/%3E%3Ccircle cx='60' cy='20' r='1.2'/%3E%3Ccircle cx='20' cy='60' r='1.2'/%3E%3Ccircle cx='60' cy='60' r='1.2'/%3E%3Ccircle cx='40' cy='40' r='1.8'/%3E%3C/g%3E%3C/svg%3E");
   color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -247,6 +249,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   gap: var(--gap-md);
   margin-top: var(--gap-md);
 }
+
+/* ===== 🔹 新增：卡片顶部装饰线 ===== */
 .feature-card {
   border-radius: var(--radius-lg);
   padding: 40px 32px;
@@ -259,7 +263,24 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   overflow: hidden;
   transition: transform 0.2s ease;
 }
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--sunshine), var(--coral));
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  pointer-events: none;
+}
+.feature-card:hover::before {
+  opacity: 0.9;
+}
 .feature-card:hover { transform: translateY(-6px); }
+
 .feature-card.quiz-card { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
 .feature-card.game-card { background: linear-gradient(135deg, var(--sunshine), #c4a060); color: var(--ink); }
 .feature-card.story-card {
@@ -450,6 +471,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   gap: 24px;
   margin-top: 8px;
 }
+/* ===== 🔹 新增：小说卡片顶部装饰线 ===== */
 .story-card {
   background: var(--surface);
   border-radius: 20px;
@@ -461,6 +483,24 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   flex-direction: column;
   text-decoration: none;
   color: inherit;
+  position: relative;
+}
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--sunshine), var(--coral));
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.story-card:hover::before {
+  opacity: 0.8;
 }
 .story-card:hover {
   transform: translateY(-6px);
