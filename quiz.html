@@ -18,10 +18,10 @@
         Montainment
       </a>
       <ul class="nav-links">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="quiz.html">语言测验</a></li>
-        <li><a href="game.html">游戏</a></li>
-        <li><a href="story.html">故事工坊</a></li>
+        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+        <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
+        <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
+        <li><a href="story.html" data-i18n="nav.story">故事工坊</a></li>
       </ul>
       <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
     </nav>
@@ -35,35 +35,31 @@
     </div>
 
     <div class="page-header container">
-      <span class="page-badge badge-primary">语言测验</span>
-      <h1>🌍 选择语言 · 开始挑战</h1>
-      <p>先选择要学习的语言，再选择难度，最后挑选试卷。</p>
+      <span class="page-badge badge-primary" data-i18n="quiz.badge">语言测验</span>
+      <h1 data-i18n="quiz.title">🌍 选择语言 · 开始挑战</h1>
+      <p data-i18n="quiz.desc">先选择要学习的语言，再选择难度，最后挑选试卷。</p>
     </div>
 
     <div class="container">
       <section class="quiz-panel" id="quiz-panel">
 
-        <!-- 顶部信息条：题号 / 进度条 / 得分 -->
+        <!-- 顶部信息条 -->
         <div class="quiz-topbar">
-          <span id="quiz-index">🌍 选择语言</span>
+          <span id="quiz-index" data-i18n="quiz.select_language">🌍 选择语言</span>
           <div class="quiz-progress">
             <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
           </div>
-          <span class="quiz-score">得分：<span id="quiz-score">0</span></span>
+          <span class="quiz-score"><span data-i18n="quiz.score">得分：</span><span id="quiz-score">0</span></span>
         </div>
 
-        <!-- 语言切换按钮（界面语言）会由 JS 动态插入 -->
         <div id="lang-toggle-placeholder"></div>
 
-        <!-- 动态内容区域 -->
         <div id="quiz-body"></div>
 
-        <!-- 反馈 -->
         <div class="quiz-feedback" id="quiz-feedback"></div>
 
-        <!-- 操作按钮 -->
         <div class="quiz-actions">
-          <button class="btn btn-primary" id="quiz-next-btn" style="display:none;">下一题 →</button>
+          <button class="btn btn-primary" id="quiz-next-btn" style="display:none;" data-i18n="quiz.next_btn">下一题 →</button>
         </div>
       </section>
 
@@ -74,9 +70,10 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2026 Montainment · 一个让学习更好玩的静态网站</div>
+    <div class="container" data-i18n="common.footer">© 2026 Montainment · 一个让学习更好玩的静态网站</div>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="common.js"></script>
   <script src="quiz.js"></script>
 </body>
