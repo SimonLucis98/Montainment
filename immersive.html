@@ -15,7 +15,6 @@
             color: #e8e0d8;
         }
 
-        /* ===== 动态竹林背景 ===== */
         .bamboo-bg {
             position: fixed;
             top: 0;
@@ -124,7 +123,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* ===== 页面内容 ===== */
         .immersive-container {
             position: relative;
             z-index: 1;
@@ -134,7 +132,6 @@
             min-height: 100vh;
         }
 
-        /* ===== 导航栏 ===== */
         .site-header {
             position: sticky;
             top: 0;
@@ -214,7 +211,6 @@
             flex-shrink: 0;
         }
 
-        /* ===== 语言切换按钮 ===== */
         .lang-toggle-container {
             display: flex;
             align-items: center;
@@ -252,7 +248,6 @@
             color: #e8e0d8;
         }
 
-        /* ===== 古风音乐播放器 ===== */
         .music-player {
             background: rgba(45, 42, 36, 0.6);
             backdrop-filter: blur(8px);
@@ -307,7 +302,6 @@
             color: #c9a87c;
         }
 
-        /* ===== 读物列表 ===== */
         .read-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -377,7 +371,6 @@
         }
         .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
 
-        /* ===== 阅读浮层 ===== */
         .reader-overlay {
             display: none;
             position: fixed;
@@ -492,7 +485,6 @@
             align-items: center;
         }
 
-        /* ===== 响应式 ===== */
         @media (max-width: 720px) {
             .nav-links {
                 position: absolute;
@@ -614,60 +606,6 @@
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  📚 读物数据
-        // ================================================================
-        const READ_DATA = [
-            {
-                id: 1,
-                title: "静心集 · 第一篇",
-                author: "蒙堂木下",
-                category: "哲思短句",
-                content: "你不需要急着成为谁。\n\n像竹子一样，先向下扎根，再向上生长。\n\n生活不是一场竞赛，而是一场漫步。\n\n慢一点，才能听见风的声音。\n\n安静下来，答案会自己浮现。",
-                preview: "你不需要急着成为谁。像竹子一样，先向下扎根，再向上生长..."
-            },
-            {
-                id: 2,
-                title: "生活随笔 · 一个下午",
-                author: "蒙堂木下",
-                category: "生活随笔",
-                content: "阳光透过竹叶，在地上投下细碎的光斑。\n\n你坐在石凳上，手里没有手机，只有一杯茶。\n\n水流声从远处传来，不紧不慢。\n\n时间在这里变得很轻。\n\n你突然想起，已经很久没有这样安静地坐过了。",
-                preview: "阳光透过竹叶，在地上投下细碎的光斑。你坐在石凳上，手里没有手机..."
-            },
-            {
-                id: 3,
-                title: "夜读 · 一盏灯",
-                author: "蒙堂木下",
-                category: "深夜随笔",
-                content: "灯下读书，是最古老的仪式。\n\n纸页翻动的声音，比任何音乐都更接近安静。\n\n窗外有风，远处有犬吠，但你不在那里。\n\n你在另一个世界里，和文字坐在一起。\n\n夜读的人，其实是在和自己对话。",
-                preview: "灯下读书，是最古老的仪式。纸页翻动的声音，比任何音乐都更接近安静..."
-            },
-            {
-                id: 4,
-                title: "风雨听竹",
-                author: "蒙堂木下",
-                category: "自然随想",
-                content: "雨打在竹叶上，不是噪音，是节奏。\n\n风穿过竹林，不是呼啸，是呼吸。\n\n你坐在檐下，什么都不做。\n\n看着雨丝连成线，看着竹叶弯了又直。\n\n这一刻，你也是自然的一部分。",
-                preview: "雨打在竹叶上，不是噪音，是节奏。风穿过竹林，不是呼啸，是呼吸..."
-            },
-            {
-                id: 5,
-                title: "慢生活·一则",
-                author: "蒙堂木下",
-                category: "生活哲思",
-                content: "在这个世界，最快的东西往往是噪音。\n\n最慢的东西，才是答案。\n\n慢下来，不是为了停下，\n\n而是为了看清楚该往哪里走。\n\n慢，是一种深度。",
-                preview: "在这个世界，最快的东西往往是噪音。最慢的东西，才是答案..."
-            },
-            {
-                id: 6,
-                title: "茶与静",
-                author: "蒙堂木下",
-                category: "茶文化",
-                content: "一杯茶，可以改变一个下午的质地。\n\n茶叶在水中舒展，如同思绪在安静中展开。\n\n第一泡，是清醒；第二泡，是思考；第三泡，是释然。\n\n茶凉之前，你还有很多时间。",
-                preview: "一杯茶，可以改变一个下午的质地。茶叶在水中舒展，如同思绪在安静中展开..."
-            }
-        ];
-
-        // ================================================================
         //  🎵 音乐播放器逻辑
         // ================================================================
         (function() {
@@ -711,7 +649,7 @@
                 container.innerHTML = `<iframe id="youtubePlayer" src="${YOUTUBE_URL}" width="1" height="1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 document.body.appendChild(container);
 
-                playBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMusic(); });
+                playBtn.addEventListener('click, (e) => { e.stopPropagation(); toggleMusic(); });
                 document.querySelector('.music-player').addEventListener('click', function(e) {
                     if (e.target.closest('button') || e.target.closest('input')) return;
                     toggleMusic();
@@ -741,104 +679,120 @@
         })();
 
         // ================================================================
-        //  📚 读物列表 + 阅读浮层逻辑
+        //  📚 读物数据（从 data/immersive.json 加载）
         // ================================================================
-        (function() {
-            const grid = document.getElementById('readGrid');
-            const overlay = document.getElementById('readerOverlay');
-            const closeBtn = document.getElementById('closeReader');
-            const readerTitle = document.getElementById('readerTitle');
-            const readerCategory = document.getElementById('readerCategory');
-            const readerAuthor = document.getElementById('readerAuthor');
-            const readerBody = document.getElementById('readerBody');
-            const readerPrev = document.getElementById('readerPrev');
-            const readerNext = document.getElementById('readerNext');
-            const readerIndicator = document.getElementById('readerIndicator');
 
-            let currentIndex = 0;
+        let READ_DATA = [];
+        let currentIndex = 0;
 
-            function renderList() {
-                if (!READ_DATA || READ_DATA.length === 0) {
-                    grid.innerHTML = `
-                        <div class="empty-state">
-                            <div class="icon">🍃</div>
-                            <p>暂无读物，请等待更新</p>
-                        </div>
-                    `;
-                    return;
-                }
+        const grid = document.getElementById('readGrid');
+        const overlay = document.getElementById('readerOverlay');
+        const closeBtn = document.getElementById('closeReader');
+        const readerTitle = document.getElementById('readerTitle');
+        const readerCategory = document.getElementById('readerCategory');
+        const readerAuthor = document.getElementById('readerAuthor');
+        const readerBody = document.getElementById('readerBody');
+        const readerPrev = document.getElementById('readerPrev');
+        const readerNext = document.getElementById('readerNext');
+        const readerIndicator = document.getElementById('readerIndicator');
 
-                let html = '';
-                READ_DATA.forEach((item, idx) => {
-                    const preview = item.preview || item.content.substring(0, 60) + '...';
-                    html += `
-                        <div class="read-card" data-index="${idx}">
-                            <div class="category">${item.category || '随笔'}</div>
-                            <div class="title">${item.title}</div>
-                            <div class="author">${item.author || '蒙堂木下'}</div>
-                            <div class="preview">${preview}</div>
-                            <div class="badge-read">📖</div>
-                        </div>
-                    `;
-                });
-                grid.innerHTML = html;
-
-                grid.querySelectorAll('.read-card').forEach(card => {
-                    card.addEventListener('click', function() {
-                        const idx = parseInt(this.dataset.index);
-                        openReader(idx);
-                    });
-                });
+        function renderList() {
+            if (!READ_DATA || READ_DATA.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🍃</div>
+                        <p>暂无读物，请在后台添加内容</p>
+                    </div>
+                `;
+                return;
             }
 
-            function openReader(idx) {
-                const item = READ_DATA[idx];
-                if (!item) return;
-                currentIndex = idx;
-                readerCategory.textContent = item.category || '随笔';
-                readerTitle.textContent = item.title;
-                readerAuthor.textContent = item.author || '蒙堂木下';
-                readerBody.textContent = item.content;
-                readerIndicator.textContent = `${idx + 1} / ${READ_DATA.length}`;
-                readerPrev.classList.toggle('disabled', idx === 0);
-                readerNext.classList.toggle('disabled', idx === READ_DATA.length - 1);
-                readerPrev.href = idx > 0 ? `#${idx - 1}` : '#';
-                readerNext.href = idx < READ_DATA.length - 1 ? `#${idx + 1}` : '#';
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeReader() {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            function goToPrev(e) {
-                e.preventDefault();
-                if (currentIndex > 0) openReader(currentIndex - 1);
-            }
-
-            function goToNext(e) {
-                e.preventDefault();
-                if (currentIndex < READ_DATA.length - 1) openReader(currentIndex + 1);
-            }
-
-            closeBtn.addEventListener('click', closeReader);
-            overlay.addEventListener('click', function(e) {
-                if (e.target === this) closeReader();
+            let html = '';
+            READ_DATA.forEach((item, idx) => {
+                const preview = item.preview || (item.content ? item.content.substring(0, 60) + '...' : '');
+                html += `
+                    <div class="read-card" data-index="${idx}">
+                        <div class="category">${item.category || '随笔'}</div>
+                        <div class="title">${item.title}</div>
+                        <div class="author">${item.author || '蒙堂木下'}</div>
+                        <div class="preview">${preview}</div>
+                        <div class="badge-read">📖</div>
+                    </div>
+                `;
             });
-            readerPrev.addEventListener('click', goToPrev);
-            readerNext.addEventListener('click', goToNext);
+            grid.innerHTML = html;
 
-            document.addEventListener('keydown', function(e) {
-                if (!overlay.classList.contains('active')) return;
-                if (e.key === 'Escape') { closeReader(); return; }
-                if (e.key === 'ArrowLeft') { if (currentIndex > 0) openReader(currentIndex - 1); }
-                if (e.key === 'ArrowRight') { if (currentIndex < READ_DATA.length - 1) openReader(currentIndex + 1); }
+            grid.querySelectorAll('.read-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    openReader(idx);
+                });
             });
+        }
 
-            renderList();
-        })();
+        function openReader(idx) {
+            const item = READ_DATA[idx];
+            if (!item) return;
+            currentIndex = idx;
+            readerCategory.textContent = item.category || '随笔';
+            readerTitle.textContent = item.title;
+            readerAuthor.textContent = item.author || '蒙堂木下';
+            readerBody.textContent = item.content || '(内容为空)';
+            readerIndicator.textContent = `${idx + 1} / ${READ_DATA.length}`;
+            readerPrev.classList.toggle('disabled', idx === 0);
+            readerNext.classList.toggle('disabled', idx === READ_DATA.length - 1);
+            readerPrev.href = idx > 0 ? `#${idx - 1}` : '#';
+            readerNext.href = idx < READ_DATA.length - 1 ? `#${idx + 1}` : '#';
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReader() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function goToPrev(e) {
+            e.preventDefault();
+            if (currentIndex > 0) openReader(currentIndex - 1);
+        }
+
+        function goToNext(e) {
+            e.preventDefault();
+            if (currentIndex < READ_DATA.length - 1) openReader(currentIndex + 1);
+        }
+
+        closeBtn.addEventListener('click', closeReader);
+        overlay.addEventListener('click', function(e) {
+            if (e.target === this) closeReader();
+        });
+        readerPrev.addEventListener('click', goToPrev);
+        readerNext.addEventListener('click', goToNext);
+
+        document.addEventListener('keydown', function(e) {
+            if (!overlay.classList.contains('active')) return;
+            if (e.key === 'Escape') { closeReader(); return; }
+            if (e.key === 'ArrowLeft') { if (currentIndex > 0) openReader(currentIndex - 1); }
+            if (e.key === 'ArrowRight') { if (currentIndex < READ_DATA.length - 1) openReader(currentIndex + 1); }
+        });
+
+        // ===== 加载数据 =====
+        function loadReadData() {
+            fetch('data/immersive.json')
+                .then(res => {
+                    if (!res.ok) throw new Error('immersive.json 不存在');
+                    return res.json();
+                })
+                .then(data => {
+                    READ_DATA = data.items || [];
+                    renderList();
+                })
+                .catch(err => {
+                    console.warn('加载沉浸式数据失败:', err);
+                    READ_DATA = [];
+                    renderList();
+                });
+        }
 
         // ===== 汉堡菜单 =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -857,6 +811,12 @@
                 });
             }
         });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadReadData);
+        } else {
+            loadReadData();
+        }
     </script>
 
 </body>
