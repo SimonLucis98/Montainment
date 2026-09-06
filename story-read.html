@@ -67,7 +67,6 @@
         .reader-nav a.disabled { opacity:0.3; pointer-events:none; }
         .reader-nav .indicator { font-size:14px; color:#888; display:flex; align-items:center; }
 
-        /* 回到顶部按钮 */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -123,13 +122,14 @@
         <nav class="nav-bar">
             <a href="index.html" class="brand">
                 <span class="brand-mark">✦</span>
-                Montainment
+                Montainment · 蒙堂木下
             </a>
             <ul class="nav-links">
                 <li><a href="index.html" data-i18n="nav.home">首页</a></li>
                 <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
                 <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
                 <li><a href="story.html" class="active" data-i18n="nav.story">故事工坊</a></li>
+                <li><a href="immersive.html" data-i18n="nav.immersive">🌙 沉浸式工坊</a></li>
             </ul>
             <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
         </nav>
@@ -403,7 +403,6 @@
             return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
         }
 
-        // 回到顶部按钮点击事件
         backToTopBtn.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
