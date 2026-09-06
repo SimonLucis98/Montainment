@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ========== 后台样式（保持不变） ========== */
+        /* ========== 后台样式 ========== */
         .admin-container {
             max-width: 960px;
             margin: 0 auto;
@@ -375,6 +375,22 @@
         }
         .toggle-badge.on { background: #e6f7ee; color: #1f8b4c; }
         .toggle-badge.off { background: #fdeeec; color: #d14c4c; }
+
+        /* 游戏列表中的小图标 */
+        .game-icon-thumb {
+            width: 28px;
+            height: 28px;
+            object-fit: cover;
+            border-radius: 6px;
+            vertical-align: middle;
+            margin-right: 6px;
+            border: 1px solid #eef2f7;
+        }
+        .game-icon-emoji {
+            font-size: 22px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
     </style>
 </head>
 <body>
@@ -440,7 +456,7 @@
                     </div>
                 </div>
 
-                <!-- Tabs（新增 🎮 游戏） -->
+                <!-- Tabs -->
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="languages">🌍 语言</button>
                     <button class="tab-btn" data-tab="difficulties">📊 难度</button>
@@ -451,7 +467,7 @@
                     <button class="tab-btn" data-tab="json">📝 JSON 编辑器</button>
                 </div>
 
-                <!-- ========== Tab: 语言（保持不变） ========== -->
+                <!-- ========== Tab: 语言 ========== -->
                 <div class="admin-panel tab-content" id="tab-languages">
                     <h2>🌍 语言管理 <span class="badge-count" id="langBadge">0</span></h2>
                     <form id="langForm" class="admin-form">
@@ -472,7 +488,7 @@
                     <div class="admin-list" id="langList"></div>
                 </div>
 
-                <!-- ========== Tab: 难度（保持不变） ========== -->
+                <!-- ========== Tab: 难度 ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-difficulties">
                     <h2>📊 难度管理 <span class="badge-count" id="diffBadge">0</span></h2>
                     <div class="admin-form-group">
@@ -495,7 +511,7 @@
                     <div class="admin-list" id="diffList"></div>
                 </div>
 
-                <!-- ========== Tab: 试卷（保持不变） ========== -->
+                <!-- ========== Tab: 试卷 ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-papers">
                     <h2>📄 试卷管理 <span class="badge-count" id="paperBadge">0</span></h2>
                     <div class="admin-form-row">
@@ -521,7 +537,7 @@
                     <div class="admin-list" id="paperList"></div>
                 </div>
 
-                <!-- ========== Tab: 题目（保持不变） ========== -->
+                <!-- ========== Tab: 题目 ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-questions">
                     <h2>❓ 题目管理 <span class="badge-count" id="questionBadge">0</span></h2>
                     <div class="admin-form-row">
@@ -565,7 +581,7 @@
                     <div class="admin-list" id="qList"></div>
                 </div>
 
-                <!-- ========== Tab: 小说管理（保持不变） ========== -->
+                <!-- ========== Tab: 小说管理 ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-stories">
                     <h2>📚 小说管理 <span class="badge-count" id="storyBadge">0</span></h2>
                     <form id="storyForm" class="admin-form">
@@ -608,12 +624,11 @@
                 </div>
 
                 <!-- ============================================================ -->
-                <!-- ========== ✨ 新增：Tab: 游戏管理 ========== -->
+                <!-- ========== 🎮 游戏管理（支持上传图标图片） ========== -->
                 <!-- ============================================================ -->
                 <div class="admin-panel tab-content hidden" id="tab-games">
                     <h2>🎮 游戏管理 <span class="badge-count" id="gameBadge">0</span></h2>
 
-                    <!-- 游戏表单 -->
                     <form id="gameForm" class="admin-form">
                         <div class="admin-form-row">
                             <div class="admin-form-group">
@@ -621,7 +636,7 @@
                                 <input type="text" id="gameId" placeholder="matching" required />
                             </div>
                             <div class="admin-form-group">
-                                <label>图标（Emoji）</label>
+                                <label>Emoji 后备（无图片时显示）</label>
                                 <input type="text" id="gameIcon" placeholder="🔗" />
                             </div>
                         </div>
@@ -645,6 +660,21 @@
                                 <input type="text" id="gameDescEn" placeholder="Match pairs to learn languages" />
                             </div>
                         </div>
+
+                        <!-- ===== 🖼️ 游戏图标图片上传 ===== -->
+                        <div class="admin-form-group">
+                            <label>🖼️ 游戏图标图片</label>
+                            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                                <input type="text" id="gameImage" placeholder="图片URL（上传后自动填入）" style="flex:1;" />
+                                <button type="button" class="btn-admin btn-admin-outline" id="uploadGameImageBtn">📤 上传图片</button>
+                                <input type="file" id="gameImageInput" accept="image/*" style="display:none;" />
+                            </div>
+                            <div class="upload-status" id="gameImageStatus"></div>
+                            <div class="cover-preview" id="gameImagePreview">
+                                <div class="no-cover">暂无图标</div>
+                            </div>
+                        </div>
+
                         <div class="admin-form-row">
                             <div class="admin-form-group">
                                 <label>类型</label>
@@ -678,11 +708,10 @@
                         </div>
                     </form>
 
-                    <!-- 游戏列表 -->
                     <div class="admin-list" id="gameList"></div>
                 </div>
 
-                <!-- ========== Tab: JSON 编辑器（含游戏数据） ========== -->
+                <!-- ========== Tab: JSON 编辑器 ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-json">
                     <h2>📝 JSON 数据编辑器</h2>
                     <p style="color:#6b7a8f; margin-bottom:12px;">编辑完整数据（测验 + 小说 + 游戏），复制到对应 JSON 文件并提交 GitHub。</p>
@@ -725,7 +754,7 @@
             // ---------- 数据 ----------
             let data = { languages: [] };
             let storiesData = { stories: [] };
-            let gamesData = { games: [] };  // ✨ 新增：游戏数据
+            let gamesData = { games: [] };
 
             // ---------- 登录 ----------
             function checkLogin() {
@@ -851,7 +880,7 @@
             });
 
             // ================================================================
-            //  🌍 语言 CRUD（保持不变）
+            //  🌍 语言 CRUD
             // ================================================================
             function renderLanguages() {
                 const container = document.getElementById('langList');
@@ -928,7 +957,7 @@
                 showToast('已取消', 'info');
             });
 
-            // ---------- 辅助下拉框（保持不变） ----------
+            // ---------- 辅助下拉框 ----------
             function populateLangSelects() {
                 ['diffLangSelect', 'paperLangSelect', 'qLangSelect'].forEach(id => {
                     const sel = document.getElementById(id);
@@ -1002,7 +1031,7 @@
             }
 
             // ================================================================
-            //  📊 难度 CRUD（保持不变）
+            //  📊 难度 CRUD
             // ================================================================
             function renderDifficulties() {
                 const langId = document.getElementById('diffLangSelect').value;
@@ -1094,7 +1123,7 @@
             });
 
             // ================================================================
-            //  📄 试卷 CRUD（保持不变）
+            //  📄 试卷 CRUD
             // ================================================================
             function renderPapers() {
                 const langId = document.getElementById('paperLangSelect').value;
@@ -1196,7 +1225,7 @@
             });
 
             // ================================================================
-            //  ❓ 题目 CRUD（保持不变）
+            //  ❓ 题目 CRUD
             // ================================================================
             function renderQuestions() {
                 const langId = document.getElementById('qLangSelect').value;
@@ -1322,7 +1351,7 @@
             });
 
             // ================================================================
-            //  📚 小说管理（保持不变）
+            //  📚 小说管理
             // ================================================================
             let currentStoryIndex = -1;
 
@@ -1629,27 +1658,107 @@
             });
 
             // ================================================================
-            //  ✨🎮 游戏管理（新增）
+            //  ✨🎮 游戏管理（支持图片图标）
             // ================================================================
-            let currentGameIndex = -1;
 
+            // ---------- 游戏图标上传 ----------
+            function updateGameImagePreview(url) {
+                const preview = document.getElementById('gameImagePreview');
+                if (url && url.trim()) {
+                    preview.innerHTML = `<img src="${url.trim()}" alt="游戏图标" />`;
+                } else {
+                    preview.innerHTML = `<div class="no-cover">暂无图标</div>`;
+                }
+            }
+
+            document.getElementById('uploadGameImageBtn').addEventListener('click', function() {
+                document.getElementById('gameImageInput').click();
+            });
+
+            document.getElementById('gameImageInput').addEventListener('change', function() {
+                const file = this.files[0];
+                if (!file) return;
+                if (!file.type.startsWith('image/')) {
+                    showToast('❌ 请选择图片文件', 'error');
+                    this.value = '';
+                    return;
+                }
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('❌ 图片大小不能超过 5MB', 'error');
+                    this.value = '';
+                    return;
+                }
+                const status = document.getElementById('gameImageStatus');
+                const btn = document.getElementById('uploadGameImageBtn');
+                const origText = btn.textContent;
+                btn.textContent = '⏳ 上传中...';
+                btn.disabled = true;
+                status.textContent = '⏳ 正在上传到 Cloudinary...';
+                status.className = 'upload-status loading';
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+                fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+                    .then(data => {
+                        if (data.secure_url) {
+                            document.getElementById('gameImage').value = data.secure_url;
+                            updateGameImagePreview(data.secure_url);
+                            status.textContent = '✅ 上传成功！';
+                            status.className = 'upload-status success';
+                            showToast('✅ 游戏图标上传成功！', 'success');
+                        } else {
+                            throw new Error(data.error?.message || '未知错误');
+                        }
+                    })
+                    .catch(err => {
+                        status.textContent = '❌ 上传失败：' + err.message;
+                        status.className = 'upload-status error';
+                        showToast('❌ 上传失败：' + err.message, 'error');
+                    })
+                    .finally(() => {
+                        btn.textContent = origText;
+                        btn.disabled = false;
+                        document.getElementById('gameImageInput').value = '';
+                    });
+            });
+
+            document.getElementById('gameImage').addEventListener('input', function() {
+                updateGameImagePreview(this.value);
+            });
+
+            // ---------- 渲染游戏列表 ----------
             function renderGames() {
                 const container = document.getElementById('gameList');
                 if (gamesData.games.length === 0) {
                     container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无游戏，添加一个吧！</p>';
                     return;
                 }
-                // 按 sortOrder 排序
                 const sorted = [...gamesData.games].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
                 let html = '';
                 sorted.forEach((g, idx) => {
                     const realIdx = gamesData.games.indexOf(g);
                     const statusClass = g.enabled !== false ? 'on' : 'off';
                     const statusText = g.enabled !== false ? '✅ 已启用' : '⛔ 已禁用';
+                    // 显示图标：优先显示图片，否则用 Emoji
+                    let iconHtml = '';
+                    if (g.image) {
+                        iconHtml =
+                            `<img src="${g.image}" alt="图标" class="game-icon-thumb" />`;
+                    } else if (g.icon) {
+                        iconHtml = `<span class="game-icon-emoji">${g.icon}</span>`;
+                    } else {
+                        iconHtml = `<span class="game-icon-emoji">🎮</span>`;
+                    }
                     html += `
                         <div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}">
                             <div class="info">
-                                ${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})
+                                ${iconHtml} <strong>${g.titleZh}</strong> (${g.id})
                                 <small>${g.type} · ${g.entry}</small>
                                 <span class="toggle-badge ${statusClass}">${statusText}</span>
                             </div>
@@ -1663,7 +1772,6 @@
                 });
                 container.innerHTML = html;
 
-                // 切换启用/禁用
                 container.querySelectorAll('.btn-toggle').forEach(b => {
                     b.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -1703,13 +1811,14 @@
                     });
                 });
 
-                // 点击整行选择（方便后续扩展）
                 container.querySelectorAll('.admin-list-item').forEach(el => {
                     el.addEventListener('click', function() {
-                        // 目前只是高亮演示，可扩展为选中
+                        // 可扩展选中效果
                     });
                 });
             }
+
+            let currentGameIndex = -1;
 
             function editGame(idx) {
                 const g = gamesData.games[idx];
@@ -1719,6 +1828,8 @@
                 document.getElementById('gameTitleEn').value = g.titleEn;
                 document.getElementById('gameDescZh').value = g.descriptionZh || '';
                 document.getElementById('gameDescEn').value = g.descriptionEn || '';
+                document.getElementById('gameImage').value = g.image || '';
+                updateGameImagePreview(g.image || '');
                 document.getElementById('gameType').value = g.type || 'js';
                 document.getElementById('gameEntry').value = g.entry || '';
                 document.getElementById('gameSortOrder').value = g.sortOrder || 1;
@@ -1737,6 +1848,7 @@
                 const titleEn = document.getElementById('gameTitleEn').value.trim();
                 const descriptionZh = document.getElementById('gameDescZh').value.trim();
                 const descriptionEn = document.getElementById('gameDescEn').value.trim();
+                const image = document.getElementById('gameImage').value.trim();
                 const type = document.getElementById('gameType').value;
                 const entry = document.getElementById('gameEntry').value.trim();
                 const sortOrder = parseInt(document.getElementById('gameSortOrder').value) || 1;
@@ -1748,12 +1860,11 @@
                     return;
                 }
 
-                // 检查 ID 重复
                 const exists = gamesData.games.find((g, i) => g.id === id && i !== editIdx);
                 if (exists) { showToast('游戏 ID 已存在，请换一个', 'error'); return; }
 
-                const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder,
-                    enabled };
+                const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, image, type, entry,
+                    sortOrder, enabled };
 
                 if (editIdx === -1) {
                     gamesData.games.push(gameData);
@@ -1770,10 +1881,13 @@
                 document.getElementById('gameEditIndex').value = -1;
                 document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
                 document.getElementById('gameCancelBtn').style.display = 'none';
-                // 恢复默认值
                 document.getElementById('gameType').value = 'js';
                 document.getElementById('gameEnabled').value = 'true';
                 document.getElementById('gameSortOrder').value = '1';
+                document.getElementById('gameImage').value = '';
+                updateGameImagePreview('');
+                document.getElementById('gameImageStatus').textContent = '';
+                document.getElementById('gameImageStatus').className = 'upload-status';
 
                 renderGames();
                 updateStats();
@@ -1788,11 +1902,15 @@
                 document.getElementById('gameType').value = 'js';
                 document.getElementById('gameEnabled').value = 'true';
                 document.getElementById('gameSortOrder').value = '1';
+                document.getElementById('gameImage').value = '';
+                updateGameImagePreview('');
+                document.getElementById('gameImageStatus').textContent = '';
+                document.getElementById('gameImageStatus').className = 'upload-status';
                 showToast('已取消', 'info');
             });
 
             // ================================================================
-            //  📝 JSON 编辑器（含游戏数据）
+            //  📝 JSON 编辑器
             // ================================================================
             function updateJsonEditor() {
                 const fullData = {
@@ -1851,7 +1969,6 @@
                 showToast('已导出小说数据到 JSON 编辑器', 'success');
             });
 
-            // ✨ 新增：导出游戏 JSON
             document.getElementById('jsonExportGamesBtn').addEventListener('click', function() {
                 const gamesDataOnly = { games: gamesData.games };
                 document.getElementById('jsonEditor').value = JSON.stringify(gamesDataOnly, null, 2);
@@ -1872,7 +1989,6 @@
                             .then(d => { if (d.stories) storiesData.stories = d.stories; })
                             .catch(() => { storiesData.stories = []; })
                             .finally(() => {
-                                // ✨ 加载游戏数据
                                 fetch('data/games.json')
                                     .then(res => { if (!res.ok) throw new Error('games.json 不存在'); return res
                                             .json(); })
