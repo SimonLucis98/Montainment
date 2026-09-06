@@ -12,10 +12,8 @@
 @media(max-height:700px) and (min-width:650px){body{padding:0}.game{height:100dvh;min-height:520px;border-radius:0;border-width:0}.hud{height:65px}.battlefield{height:calc(100% - 285px);min-height:235px}.controls{height:220px;padding-top:10px}.slots{margin:11px auto 12px}.slot,.tile{height:50px;width:49px;font-size:26px}.control-footer{margin-top:10px}.overlay{top:65px}.start-card{padding:18px 45px}h1{font-size:47px}h1 span{font-size:29px}.start-card p{margin:10px 0 15px}.title-kicker{margin-top:15px}.start-notes{margin-top:18px}.tree{scale:.8}.base{scale:.8;transform-origin:50% 100%;margin-left:-14px}.fire{height:54px}.stats{margin:15px 0;gap:8px}}
 @media(max-width:650px) and (orientation:portrait){.game{display:none}.rotate{display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff5d7;max-width:290px}.rotate>span{font-size:90px;color:#f1bc6b}.rotate strong{font-size:27px}.rotate p{line-height:1.6;color:#c2d4b6}}
 @media(max-height:519px) and (min-width:650px){.game{zoom:var(--compact-scale,1);width:calc(100vw / var(--compact-scale,1));height:520px;min-height:520px}}
-/* Longer fruit names keep their natural word spacing. */
 .slots{gap:clamp(4px,.65vw,8px)}.slot{width:clamp(38px,4.6vw,55px)}.slot.word-space{width:16px;background:transparent;border:0;box-shadow:none}.slot.word-space:after{display:none}.tray{min-width:0}.thought:has(.fruit-art){height:90px;width:96px;display:flex;flex-direction:column;justify-content:center;gap:3px}.thought small{font:700 13px Arial,sans-serif;color:#526c43}.fruit-art{position:relative;flex-shrink:0;width:52px;height:51px;border-radius:48%;box-shadow:inset -5px -4px #0002}.dragon{background:radial-gradient(ellipse at 40% 40%,#ff92b8,#e64184 75%);border:3px solid #ca3875;transform:rotate(-12deg)}.dragon:before{content:'';position:absolute;inset:-6px;background:#91bd55;clip-path:polygon(45% 0,55% 24%,90% 10%,77% 39%,100% 53%,77% 61%,80% 94%,54% 76%,23% 100%,28% 68%,0 49%,23% 33%,16% 4%,40% 24%)}.dragon:after{content:'';position:absolute;inset:9px;border-radius:50%;background:radial-gradient(#463545 1px,transparent 2px) 0 0/8px 8px,#fff3ed}.passion{background:#793f79;border:4px solid #65335e}.passion:after{content:'';position:absolute;inset:5px;border:3px solid #ffecd0;border-radius:50%;background:radial-gradient(#624b2b 1.5px,transparent 2px) 0 0/7px 7px,#facd4c}
 @media(max-width:1000px){.tray-row{gap:12px}.tray{gap:5px}.tray .tile{width:46px}.fire{padding:0 18px}.fire span{margin-left:8px}}
-/* Distinct silhouettes and costumes for all three waves. */
 .look-gardener .body{background:linear-gradient(120deg,#79abd0,#3974a4)}
 .look-gardener .body i{background:#e5b96b;clip-path:none;width:22px;height:16px;left:16px;top:17px;border:2px solid #bc904f;border-radius:3px}
 .look-gardener .head:before{content:'';position:absolute;left:-10px;top:-14px;width:90px;height:17px;border-radius:50%;background:#e4bf75;border:3px solid #b88a47;box-shadow:inset 0 5px #f5dca0;z-index:5}
@@ -35,8 +33,7 @@
 .look-king .head:before{content:'';position:absolute;top:-24px;left:9px;width:53px;height:30px;background:linear-gradient(#fff0a3,#e6a940);clip-path:polygon(0 0,27% 37%,50% 0,73% 37%,100% 0,90% 100%,10% 100%);filter:drop-shadow(0 2px 0 #97662d);z-index:6}
 .look-king .hair{display:none}.look-king .eye{border-top:5px solid #687f3c}.look-king .mouth{height:15px;width:30px}.look-king .mouth:after{box-shadow:13px 0 #fff8d9}
 .boss-health{font-size:16px;box-shadow:0 4px #64466525;border:2px solid #d7adc3}
-
-</style>
+  </style>
 </head>
 <body>
 <main class="game" id="game">
@@ -80,7 +77,7 @@
 </main>
 <div class="rotate"><span>↻</span><strong>Rotate your device</strong><p>Your garden adventure plays best in landscape.</p></div>
 <script>
-/* Separate, non-overlapping fruit decks for each wave. Spaces are always locked. */
+/* ----- 修正版 JavaScript（核心改动已标注） ----- */
 const categories = { fruit: [
  {word:'APPLE',icon:'🍎',wave:1}, {word:'PEAR',icon:'🍐',wave:1}, {word:'GRAPE',icon:'🍇',wave:1},
  {word:'PINEAPPLE',icon:'🍍',wave:2}, {word:'STRAWBERRY',icon:'🍓',wave:2},
@@ -94,76 +91,292 @@ const totalWords=12;
 const $ = id => document.getElementById(id);
 const ui = Object.fromEntries(['game','battlefield','score','health','waveLabel','waveDots','combo','bossHealth','enemy','thought','slots','tray','fire','hint','wordCount','feedback','effects','turret','overlay','mute'].map(id=>[id,$(id)]));
 let gameState, audioContext, muted=false, tutorialDone=false, timers=[], generation=0, selected=null, drag=null, lastTime=0;
+let gameActive = false; // 新增：控制动画循环是否继续
 const shuffle = values => { const a=[...values]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a; };
 function later(fn,ms){const run=generation;const id=setTimeout(()=>{timers=timers.filter(t=>t!==id);if(run===generation)fn();},ms);timers.push(id);}
 function sound(type){if(muted||!audioContext)return;const tones={pickup:[500,.045],drop:[670,.08],correct:[880,.19],wrong:[150,.16],fire:[390,.14],death:[580,.14],damage:[95,.23],win:[1050,.45]};const [freq,duration]=tones[type]||tones.drop;try{const o=audioContext.createOscillator(),g=audioContext.createGain(),t=audioContext.currentTime;o.type=['fire','damage','wrong'].includes(type)?'triangle':'sine';o.frequency.setValueAtTime(freq,t);o.frequency.exponentialRampToValueAtTime(type==='correct'||type==='win'?freq*1.5:freq*.4,t+duration);g.gain.setValueAtTime(.09,t);g.gain.exponentialRampToValueAtTime(.001,t+duration);o.connect(g);g.connect(audioContext.destination);o.start(t);o.stop(t+duration);}catch{}}
 function animateClass(el,name,ms=350){el.classList.remove(name);void el.offsetWidth;el.classList.add(name);later(()=>el.classList.remove(name),ms);}
 function feedback(text,wrong=false,ms=750){ui.feedback.textContent=text;ui.feedback.classList.toggle('wrong',wrong);later(()=>{if(ui.feedback.textContent===text)ui.feedback.textContent='';},ms);}
-function startGame(){generation++;timers.forEach(clearTimeout);timers=[];cancelDrag();selected=null;ui.effects.replaceChildren();ui.feedback.textContent='';ui.game.classList.remove('shaking','tiny-shake');ui.turret.classList.remove('shoot');ui.overlay.hidden=true;
-  if(!audioContext){try{audioContext=new(window.AudioContext||window.webkitAudioContext)();}catch{}}if(audioContext?.state==='suspended')audioContext.resume().catch(()=>{});
-  gameState={score:0,combo:0,bestCombo:0,baseHP:3,wave:1,zombieIndex:0,currentWord:null,currentZombie:null,bossHP:0,submissions:0,correctFullWords:0,incorrectAttempts:0,wordsCompleted:0,isPaused:false,gameOver:false,phase:'playing',encounter:0,deck:[],deckWave:0,slots:[],tiles:[],tutorial:!tutorialDone};
-  startMusic();spawnZombie();
+function startGame(){
+  generation++; // 增加generation，使旧定时器失效
+  timers.forEach(clearTimeout); timers=[];
+  cancelDrag(); selected=null;
+  ui.effects.replaceChildren(); ui.feedback.textContent=''; ui.game.classList.remove('shaking','tiny-shake'); ui.turret.classList.remove('shoot'); ui.overlay.hidden=true;
+  // 音频初始化及恢复
+  if(!audioContext){ try{ audioContext = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if(audioContext && audioContext.state === 'suspended'){
+    audioContext.resume().catch(()=>{});
+  }
+  if(audioContext) audioContext.resume().catch(()=>{});
+  gameActive = true;
+  gameState = { score:0, combo:0, bestCombo:0, baseHP:3, wave:1, zombieIndex:0, currentWord:null, currentZombie:null, bossHP:0, submissions:0, correctFullWords:0, incorrectAttempts:0, wordsCompleted:0, isPaused:false, gameOver:false, phase:'playing', encounter:0, deck:[], deckWave:0, slots:[], tiles:[], tutorial:!tutorialDone };
+  startMusic(); spawnZombie();
 }
-function chooseWord(){const s=gameState;if(s.deckWave!==s.wave||!s.deck.length){s.deck=shuffle(categories.fruit.filter(f=>f.wave===s.wave));s.deckWave=s.wave;if(s.encounter===0){s.deck=s.deck.filter(f=>f.word!=='APPLE');s.deck.unshift(categories.fruit[0]);}else if(s.deck[0]===s.currentWord)s.deck.push(s.deck.shift());}return s.deck.shift();}
-function makePuzzle(fruit,opening=false){selected=null;cancelDrag();gameState.currentWord=fruit;const n=fruit.word.length,w=gameState.wave;const letters=[...fruit.word].map((l,i)=>l===' '?-1:i).filter(i=>i>=0);const hidden=opening?[0,3]:shuffle(letters).slice(0,w===1?1:Math.ceil(letters.length*(w===2?.45:.6)));
+function chooseWord(){
+  const s=gameState;
+  if(s.deckWave!==s.wave || !s.deck.length){
+    s.deck=shuffle(categories.fruit.filter(f=>f.wave===s.wave));
+    s.deckWave=s.wave;
+    if(s.encounter===0){ s.deck=s.deck.filter(f=>f.word!=='APPLE'); s.deck.unshift(categories.fruit[0]); }
+  }
+  // 防空数组
+  if(s.deck.length===0){
+    s.deck=shuffle(categories.fruit.filter(f=>f.wave===s.wave));
+    s.deckWave=s.wave;
+  }
+  // 避免重复
+  if(s.deck[0] === s.currentWord){
+    s.deck.push(s.deck.shift());
+  }
+  return s.deck.shift();
+}
+function makePuzzle(fruit,opening=false){
+  selected=null; cancelDrag();
+  gameState.currentWord=fruit;
+  const n=fruit.word.length, w=gameState.wave;
+  const letters=[...fruit.word].map((l,i)=>l===' '?-1:i).filter(i=>i>=0);
+  const hidden=opening?[0,3]:shuffle(letters).slice(0,w===1?1:Math.ceil(letters.length*(w===2?.45:.6)));
   gameState.slots=[...fruit.word].map((letter,i)=>({answer:letter,locked:!hidden.includes(i),tileId:null}));
-  const missing=hidden.map(i=>fruit.word[i]);const distractors=shuffle([...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].filter(l=>!missing.includes(l))).slice(0,opening?2:3);
+  const missing=hidden.map(i=>fruit.word[i]);
+  const distractors=shuffle([...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].filter(l=>!missing.includes(l))).slice(0,opening?2:3);
   gameState.tiles=shuffle([...missing,...distractors]).map((letter,id)=>({letter,id}));
-  ui.thought.replaceChildren();if(fruit.clue){const art=document.createElement('div');art.className='fruit-art '+fruit.icon;ui.thought.append(art);const label=document.createElement('small');label.textContent=fruit.clue;ui.thought.append(label);}else ui.thought.textContent=fruit.icon;ui.thought.setAttribute('aria-label',fruit.clue||`Fruit clue: ${fruit.icon}`);renderPuzzle();
+  ui.thought.replaceChildren();
+  if(fruit.clue){ const art=document.createElement('div'); art.className='fruit-art '+fruit.icon; ui.thought.append(art); const label=document.createElement('small'); label.textContent=fruit.clue; ui.thought.append(label); }
+  else ui.thought.textContent=fruit.icon;
+  ui.thought.setAttribute('aria-label',fruit.clue||`Fruit clue: ${fruit.icon}`);
+  renderPuzzle();
 }
-function spawnZombie(){if(gameState.encounter>0)gameState.tutorial=false;gameState.phase='playing';gameState.isPaused=false;const boss=isBossWave();gameState.currentZombie={progress:0,x:boss?50:48+Math.random()*4};if(boss)gameState.bossHP=bossMaxHP;ui.enemy.className='enemy look-'+waves[gameState.wave-1].look+(boss?' boss':'');ui.enemy.hidden=false;makePuzzle(chooseWord(),gameState.encounter===0);gameState.encounter++;renderHUD();positionZombie();}
-function renderHUD(){const s=gameState;ui.score.textContent=s.score.toLocaleString();ui.health.textContent=Array.from({length:3},(_,i)=>i<s.baseHP?'♥':'♡').join(' ');ui.health.setAttribute('aria-label',`${s.baseHP} of 3 lives`);ui.waveLabel.textContent=`WAVE ${s.wave} / ${waves.length}${isBossWave()?' · BIG ZOMBIE':` · ${s.zombieIndex+1} OF ${waves[s.wave-1].count}`}`;ui.waveDots.innerHTML=waves.map((_,i)=>`<i class="${i<s.wave?'active':''}"></i>`).join('');ui.combo.textContent=s.combo?`COMBO ×${s.combo}  ${s.combo>=10?'⚡ LIGHTNING SHOT':s.combo>=5?'🚀 ROCKET SHOT':s.combo>=3?'🔥 FIRE SHOT':'✦ NICE SPELLING!'}`:'LET’S GROW A WIN!';ui.bossHealth.hidden=!isBossWave();ui.bossHealth.textContent=`BOSS ${'♥ '.repeat(s.bossHP)}${'♡ '.repeat(Math.max(0,bossMaxHP-s.bossHP))}`;ui.wordCount.textContent=`${String(s.wordsCompleted).padStart(2,'0')} / ${totalWords} WORDS`;}
-function renderPuzzle(){const s=gameState;ui.slots.replaceChildren();s.slots.forEach((slot,i)=>{const b=document.createElement('button');b.className='slot'+(slot.answer===' '?' word-space':'')+(slot.locked?' locked':slot.tileId!==null?' filled':'');b.dataset.slot=i;b.textContent=slot.locked?slot.answer:slot.tileId!==null?s.tiles[slot.tileId].letter:'';b.setAttribute('aria-label',slot.locked?`Letter ${i+1}: ${slot.answer}, locked`:`Letter ${i+1}: ${b.textContent||'empty'}`);b.disabled=slot.locked||s.phase!=='playing';b.onclick=()=>{if(s.phase!=='playing'||slot.locked)return;if(selected!==null)placeTile(selected,i);else if(slot.tileId!==null){slot.tileId=null;sound('pickup');renderPuzzle();}};ui.slots.append(b);});
-  ui.tray.replaceChildren();s.tiles.forEach(tile=>{const used=s.slots.some(slot=>slot.tileId===tile.id);const b=document.createElement('button');b.className='tile'+(used?' used':'')+(selected===tile.id?' selected':'')+(s.tutorial&&tile.letter==='A'&&!used?' tutorial':'');b.dataset.tile=tile.id;b.textContent=tile.letter;b.disabled=used||s.phase!=='playing';b.setAttribute('aria-label',`Letter ${tile.letter}`);b.addEventListener('pointerdown',pickup);b.onclick=()=>{if(s.phase!=='playing')return;selected=selected===tile.id?null:tile.id;renderPuzzle();};ui.tray.append(b);});
-  const complete=s.slots.every(slot=>slot.locked||slot.tileId!==null);ui.fire.disabled=s.phase!=='playing';ui.fire.classList.toggle('ready',complete&&s.tutorial);ui.hint.textContent=s.tutorial?(complete?'Press FIRE!':'Drag A and L into the spaces!'):'Look at the fruit. Fill the missing letters.';
+function spawnZombie(){
+  if(gameState.encounter>0) gameState.tutorial=false;
+  gameState.phase='playing'; gameState.isPaused=false;
+  const boss=isBossWave();
+  gameState.currentZombie={ progress:0, x:boss?50:48+Math.random()*4 };
+  if(boss) gameState.bossHP=bossMaxHP;
+  ui.enemy.className='enemy look-'+waves[gameState.wave-1].look+(boss?' boss':'');
+  ui.enemy.hidden=false;
+  makePuzzle(chooseWord(), gameState.encounter===0);
+  gameState.encounter++;
+  renderHUD(); positionZombie();
 }
-function placeTile(id,index){const s=gameState,slot=s.slots[index];if(s.phase!=='playing'||!slot||slot.locked)return;for(const other of s.slots)if(other.tileId===id)other.tileId=null;slot.tileId=id;selected=null;sound('drop');renderPuzzle();animateClass(ui.slots.children[index],'pop');}
-function pickup(event){if(event.button!==0||gameState.phase!=='playing')return;const tile=event.currentTarget;drag={id:Number(tile.dataset.tile),x:event.clientX,y:event.clientY,pointer:event.pointerId,source:tile,ghost:null};tile.setPointerCapture(event.pointerId);sound('pickup');}
-document.addEventListener('pointermove',event=>{if(!drag||event.pointerId!==drag.pointer)return;if(!drag.ghost&&Math.hypot(event.clientX-drag.x,event.clientY-drag.y)>5){drag.ghost=drag.source.cloneNode(true);drag.ghost.className='tile drag-ghost';drag.ghost.removeAttribute('id');drag.ghost.setAttribute('aria-hidden','true');document.body.append(drag.ghost);}if(!drag.ghost)return;event.preventDefault();drag.ghost.style.left=`${event.clientX-27}px`;drag.ghost.style.top=`${event.clientY-28}px`;const target=document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-slot]');[...ui.slots.children].forEach(el=>el.classList.toggle('target',el===target&&!gameState.slots[Number(el.dataset.slot)].locked));},{passive:false});
-document.addEventListener('pointerup',event=>{if(!drag||event.pointerId!==drag.pointer)return;const {id,ghost,source}=drag;if(ghost){const slot=document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-slot]');source.addEventListener('click',e=>{e.stopImmediatePropagation();e.preventDefault();},{once:true,capture:true});cancelDrag();if(slot)placeTile(id,Number(slot.dataset.slot));}else cancelDrag();});
-document.addEventListener('pointercancel',cancelDrag);
-function cancelDrag(){if(drag){drag.ghost?.remove();try{drag.source.releasePointerCapture(drag.pointer);}catch{}drag=null;}if(ui.slots)[...ui.slots.children].forEach(el=>el.classList.remove('target'));}
-document.addEventListener('keydown',event=>{if(!gameState||gameState.phase!=='playing'||event.ctrlKey||event.metaKey||event.altKey)return;if(event.key==='Enter'){event.preventDefault();submit();return;}if(event.key==='Backspace'){event.preventDefault();const slot=[...gameState.slots].reverse().find(s=>!s.locked&&s.tileId!==null);if(slot){slot.tileId=null;renderPuzzle();}return;}if(/^[a-z]$/i.test(event.key)){const tile=gameState.tiles.find(t=>t.letter===event.key.toUpperCase()&&!gameState.slots.some(s=>s.tileId===t.id));const i=gameState.slots.findIndex(s=>!s.locked&&s.tileId===null);if(tile&&i>=0){event.preventDefault();placeTile(tile.id,i);}}});
-function submit(){const s=gameState;if(!s||s.phase!=='playing')return;cancelDrag();const empty=s.slots.map((slot,i)=>!slot.locked&&slot.tileId===null?i:-1).filter(i=>i>=0);if(empty.length){empty.forEach(i=>animateClass(ui.slots.children[i],'bad'));feedback('Fill every space!',false,650);sound('wrong');return;}
-  s.submissions++;const wrong=[];s.slots.forEach((slot,i)=>{if(!slot.locked){if(s.tiles[slot.tileId].letter===slot.answer)slot.locked=true;else{wrong.push(i);slot.tileId=null;}}});
-  if(wrong.length){s.incorrectAttempts++;s.combo=0;selected=null;renderPuzzle();s.slots.forEach((slot,i)=>{if(slot.locked)animateClass(ui.slots.children[i],'good',450);});wrong.forEach(i=>animateClass(ui.slots.children[i],'bad',450));renderHUD();feedback('✕',true,400);sound('wrong');return;}
-  s.phase='attacking';s.isPaused=true;s.correctFullWords++;s.wordsCompleted++;s.combo++;s.bestCombo=Math.max(s.bestCombo,s.combo);const bonus=Math.round(100*(1-s.currentZombie.progress));const points=(100+bonus)*Math.min(s.combo,5);s.score+=points;tutorialDone=true;s.tutorial=false;renderPuzzle();renderHUD();animateClass(ui.combo,'pop');feedback('✓ PERFECT!',false,600);sound('correct');shoot(points);
+function renderHUD(){
+  const s=gameState;
+  ui.score.textContent=s.score.toLocaleString();
+  ui.health.textContent=Array.from({length:3},(_,i)=>i<s.baseHP?'♥':'♡').join(' ');
+  ui.health.setAttribute('aria-label',`${s.baseHP} of 3 lives`);
+  ui.waveLabel.textContent=`WAVE ${s.wave} / ${waves.length}${isBossWave()?' · BIG ZOMBIE':` · ${s.zombieIndex+1} OF ${waves[s.wave-1].count}`}`;
+  ui.waveDots.innerHTML=waves.map((_,i)=>`<i class="${i<s.wave?'active':''}"></i>`).join('');
+  ui.combo.textContent=s.combo?`COMBO ×${s.combo}  ${s.combo>=10?'⚡ LIGHTNING SHOT':s.combo>=5?'🚀 ROCKET SHOT':s.combo>=3?'🔥 FIRE SHOT':'✦ NICE SPELLING!'}`:'LET’S GROW A WIN!';
+  ui.bossHealth.hidden=!isBossWave();
+  ui.bossHealth.textContent=`BOSS ${'♥ '.repeat(s.bossHP)}${'♡ '.repeat(Math.max(0,bossMaxHP-s.bossHP))}`;
+  ui.wordCount.textContent=`${String(s.wordsCompleted).padStart(2,'0')} / ${totalWords} WORDS`;
 }
-function shoot(points){animateClass(ui.turret,'shoot',300);animateClass(ui.game,'tiny-shake',160);sound('fire');const field=ui.battlefield.getBoundingClientRect(),target=ui.enemy.getBoundingClientRect(),barrel=ui.turret.getBoundingClientRect();const scale=field.width/ui.battlefield.clientWidth;const start={x:(barrel.left+barrel.width/2-field.left)/scale-10,y:(barrel.top-field.top)/scale};const end={x:(target.left+target.width/2-field.left)/scale-10,y:(target.top-field.top)/scale+52};const bullet=document.createElement('div');bullet.className='projectile '+(gameState.combo>=10?'lightning-shot':gameState.combo>=5?'rocket-shot':gameState.combo>=3?'fire-shot':'');bullet.style.left=`${start.x}px`;bullet.style.top=`${start.y}px`;ui.effects.append(bullet);bullet.animate([{transform:'translate(0,0)'},{transform:`translate(${end.x-start.x}px,${end.y-start.y}px)`}],{duration:300,easing:'ease-in'});
-  later(()=>{bullet.remove();burst(end.x,end.y);sound('death');const float=document.createElement('div');float.className='float-score';float.textContent=`+${points}`;float.style.left=`${end.x-25}px`;float.style.top=`${end.y}px`;ui.effects.append(float);later(()=>float.remove(),900);
-    const boss=isBossWave();if(boss)gameState.bossHP--;renderHUD();ui.enemy.classList.add(boss&&gameState.bossHP>0?'hit':'dying');later(()=>{if(boss&&gameState.bossHP>0){ui.enemy.classList.remove('hit');gameState.currentZombie.progress=Math.max(0,gameState.currentZombie.progress-.2);gameState.phase='playing';gameState.isPaused=false;makePuzzle(chooseWord());positionZombie();}else if(boss){finish(true);}else nextEnemy();},550);
+function renderPuzzle(){
+  const s=gameState;
+  ui.slots.replaceChildren();
+  s.slots.forEach((slot,i)=>{
+    const b=document.createElement('button');
+    b.className='slot'+(slot.answer===' '?' word-space':'')+(slot.locked?' locked':slot.tileId!==null?' filled':'');
+    b.dataset.slot=i;
+    let displayChar = slot.locked ? slot.answer : (slot.tileId!==null ? (s.tiles[slot.tileId] ? s.tiles[slot.tileId].letter : '') : '');
+    b.textContent = displayChar;
+    b.setAttribute('aria-label',slot.locked?`Letter ${i+1}: ${slot.answer}, locked`:`Letter ${i+1}: ${b.textContent||'empty'}`);
+    b.disabled=slot.locked || s.phase!=='playing';
+    b.onclick=()=>{
+      if(s.phase!=='playing' || slot.locked) return;
+      if(selected!==null) placeTile(selected,i);
+      else if(slot.tileId!==null){ slot.tileId=null; sound('pickup'); renderPuzzle(); }
+    };
+    ui.slots.append(b);
+  });
+  ui.tray.replaceChildren();
+  s.tiles.forEach((tile, idx)=>{
+    const used=s.slots.some(slot=>slot.tileId===tile.id);
+    const b=document.createElement('button');
+    b.className='tile'+(used?' used':'')+(selected===tile.id?' selected':'')+(s.tutorial && tile.letter==='A' && !used?' tutorial':'');
+    b.dataset.tile=tile.id;
+    b.textContent=tile.letter;
+    b.disabled=used||s.phase!=='playing';
+    b.setAttribute('aria-label',`Letter ${tile.letter}`);
+    b.addEventListener('pointerdown',pickup);
+    b.onclick=()=>{
+      if(s.phase!=='playing') return;
+      selected=selected===tile.id?null:tile.id;
+      renderPuzzle();
+    };
+    ui.tray.append(b);
+  });
+  const complete=s.slots.every(slot=>slot.locked || slot.tileId!==null);
+  ui.fire.disabled=s.phase!=='playing';
+  ui.fire.classList.toggle('ready',complete && s.tutorial);
+  ui.hint.textContent=s.tutorial?(complete?'Press FIRE!':'Drag A and L into the spaces!'):'Look at the fruit. Fill the missing letters.';
+}
+function placeTile(id,index){
+  const s=gameState, slot=s.slots[index];
+  if(s.phase!=='playing'||!slot||slot.locked) return;
+  for(const other of s.slots) if(other.tileId===id) other.tileId=null;
+  slot.tileId=id; selected=null; sound('drop'); renderPuzzle(); animateClass(ui.slots.children[index],'pop');
+}
+function pickup(event){ if(event.button!==0 || gameState.phase!=='playing') return; const tile=event.currentTarget; drag={id:Number(tile.dataset.tile), x:event.clientX, y:event.clientY, pointer:event.pointerId, source:tile, ghost:null}; tile.setPointerCapture(event.pointerId); sound('pickup'); }
+document.addEventListener('pointermove', event=>{
+  if(!drag || event.pointerId!==drag.pointer) return;
+  if(!drag.ghost && Math.hypot(event.clientX-drag.x, event.clientY-drag.y)>5){ drag.ghost=drag.source.cloneNode(true); drag.ghost.className='tile drag-ghost'; drag.ghost.removeAttribute('id'); drag.ghost.setAttribute('aria-hidden','true'); document.body.append(drag.ghost); }
+  if(!drag.ghost) return; event.preventDefault();
+  drag.ghost.style.left=`${event.clientX-27}px`; drag.ghost.style.top=`${event.clientY-28}px`;
+  const target=document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-slot]');
+  [...ui.slots.children].forEach(el=>el.classList.toggle('target',el===target && !gameState.slots[Number(el.dataset.slot)].locked));
+},{passive:false});
+document.addEventListener('pointerup', event=>{
+  if(!drag || event.pointerId!==drag.pointer) return;
+  const {id,ghost,source}=drag;
+  if(ghost){
+    const slot=document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-slot]');
+    source.addEventListener('click', e=>{ e.stopImmediatePropagation(); e.preventDefault(); },{once:true,capture:true});
+    cancelDrag();
+    if(slot) placeTile(id, Number(slot.dataset.slot));
+  } else cancelDrag();
+});
+document.addEventListener('pointercancel', cancelDrag);
+function cancelDrag(){ if(drag){ drag.ghost?.remove(); try{ drag.source.releasePointerCapture(drag.pointer); }catch{} drag=null; } if(ui.slots) [...ui.slots.children].forEach(el=>el.classList.remove('target')); }
+document.addEventListener('keydown', event=>{
+  if(!gameState || gameState.phase!=='playing' || event.ctrlKey || event.metaKey || event.altKey) return;
+  if(event.key==='Enter'){ event.preventDefault(); submit(); return; }
+  if(event.key==='Backspace'){ event.preventDefault(); const slot=[...gameState.slots].reverse().find(s=>!s.locked && s.tileId!==null); if(slot){ slot.tileId=null; renderPuzzle(); } return; }
+  if(/^[a-z]$/i.test(event.key)){
+    const tile=gameState.tiles.find(t=>t.letter===event.key.toUpperCase() && !gameState.slots.some(s=>s.tileId===t.id));
+    const i=gameState.slots.findIndex(s=>!s.locked && s.tileId===null);
+    if(tile && i>=0){ event.preventDefault(); placeTile(tile.id,i); }
+  }
+});
+function submit(){
+  const s=gameState;
+  if(!s || s.phase!=='playing') return;
+  cancelDrag();
+  const empty=s.slots.map((slot,i)=>!slot.locked && slot.tileId===null ? i : -1).filter(i=>i>=0);
+  if(empty.length){ empty.forEach(i=>animateClass(ui.slots.children[i],'bad')); feedback('Fill every space!',false,650); sound('wrong'); return; }
+  s.submissions++;
+  const wrong=[];
+  s.slots.forEach((slot,i)=>{
+    if(!slot.locked){
+      if(s.tiles[slot.tileId] && s.tiles[slot.tileId].letter === slot.answer) slot.locked=true;
+      else { wrong.push(i); slot.tileId=null; }
+    }
+  });
+  if(wrong.length){ s.incorrectAttempts++; s.combo=0; selected=null; renderPuzzle(); s.slots.forEach((slot,i)=>{ if(slot.locked) animateClass(ui.slots.children[i],'good',450); }); wrong.forEach(i=>animateClass(ui.slots.children[i],'bad',450)); renderHUD(); feedback('✕',true,400); sound('wrong'); return; }
+  s.phase='attacking'; s.isPaused=true; s.correctFullWords++; s.wordsCompleted++; s.combo++; s.bestCombo=Math.max(s.bestCombo,s.combo);
+  const bonus=Math.round(100*(1-s.currentZombie.progress));
+  const points=(100+bonus)*Math.min(s.combo,5);
+  s.score+=points; tutorialDone=true; s.tutorial=false; renderPuzzle(); renderHUD(); animateClass(ui.combo,'pop'); feedback('✓ PERFECT!',false,600); sound('correct'); shoot(points);
+}
+function shoot(points){
+  animateClass(ui.turret,'shoot',300); animateClass(ui.game,'tiny-shake',160); sound('fire');
+  const field=ui.battlefield.getBoundingClientRect(), target=ui.enemy.getBoundingClientRect(), barrel=ui.turret.getBoundingClientRect();
+  const scale=field.width/ui.battlefield.clientWidth;
+  const start={x:(barrel.left+barrel.width/2-field.left)/scale-10, y:(barrel.top-field.top)/scale};
+  const end={x:(target.left+target.width/2-field.left)/scale-10, y:(target.top-field.top)/scale+52};
+  const bullet=document.createElement('div');
+  bullet.className='projectile '+(gameState.combo>=10?'lightning-shot':gameState.combo>=5?'rocket-shot':gameState.combo>=3?'fire-shot':'');
+  bullet.style.left=`${start.x}px`; bullet.style.top=`${start.y}px`; ui.effects.append(bullet);
+  bullet.animate([{transform:'translate(0,0)'},{transform:`translate(${end.x-start.x}px,${end.y-start.y}px)`}],{duration:300,easing:'ease-in'});
+  later(()=>{
+    bullet.remove(); burst(end.x,end.y); sound('death');
+    const float=document.createElement('div'); float.className='float-score'; float.textContent=`+${points}`; float.style.left=`${end.x-25}px`; float.style.top=`${end.y}px`; ui.effects.append(float); later(()=>float.remove(),900);
+    const boss=isBossWave();
+    if(boss) gameState.bossHP--;
+    renderHUD();
+    ui.enemy.classList.add(boss && gameState.bossHP>0 ? 'hit' : 'dying');
+    later(()=>{
+      if(boss && gameState.bossHP>0){ ui.enemy.classList.remove('hit'); gameState.currentZombie.progress=Math.max(0, gameState.currentZombie.progress-.2); gameState.phase='playing'; gameState.isPaused=false; makePuzzle(chooseWord()); positionZombie(); }
+      else if(boss){ finish(true); }
+      else nextEnemy();
+    },550);
   },300);
 }
-function burst(x,y){for(let i=0;i<12;i++){const p=document.createElement('i');p.className='particle';p.style.left=`${x}px`;p.style.top=`${y}px`;p.style.setProperty('--dx',`${Math.cos(i*Math.PI/6)*(35+Math.random()*35)}px`);p.style.setProperty('--dy',`${Math.sin(i*Math.PI/6)*(35+Math.random()*35)}px`);p.style.setProperty('--color',['#fff6ae','#b4dc78','#f5bf58'][i%3]);ui.effects.append(p);later(()=>p.remove(),650);}}
-function nextEnemy(){ui.enemy.hidden=true;gameState.zombieIndex++;if(gameState.zombieIndex>=waves[gameState.wave-1].count){gameState.wave++;gameState.zombieIndex=0;if(isBossWave())gameState.bossHP=bossMaxHP;gameState.phase='transition';gameState.isPaused=true;renderHUD();feedback(isBossWave()?'FINAL WAVE · BOSS!':'WAVE COMPLETE!',false,1200);later(spawnZombie,1300);}else spawnZombie();}
-function baseHit(){const s=gameState;if(s.phase!=='playing')return;cancelDrag();s.baseHP--;s.combo=0;s.phase='transition';s.isPaused=true;animateClass(ui.game,'shaking');feedback('OUCH! −1 ♥',true,600);sound('damage');renderHUD();renderPuzzle();
-  if(s.baseHP===0){later(()=>finish(false),650);return;}
+function burst(x,y){ for(let i=0;i<12;i++){ const p=document.createElement('i'); p.className='particle'; p.style.left=`${x}px`; p.style.top=`${y}px`; p.style.setProperty('--dx',`${Math.cos(i*Math.PI/6)*(35+Math.random()*35)}px`); p.style.setProperty('--dy',`${Math.sin(i*Math.PI/6)*(35+Math.random()*35)}px`); p.style.setProperty('--color',['#fff6ae','#b4dc78','#f5bf58'][i%3]); ui.effects.append(p); later(()=>p.remove(),650); } }
+function nextEnemy(){ ui.enemy.hidden=true; gameState.zombieIndex++; if(gameState.zombieIndex>=waves[gameState.wave-1].count){ gameState.wave++; gameState.zombieIndex=0; if(isBossWave()) gameState.bossHP=bossMaxHP; gameState.phase='transition'; gameState.isPaused=true; renderHUD(); feedback(isBossWave()?'FINAL WAVE · BOSS!':'WAVE COMPLETE!',false,1200); later(spawnZombie,1300); } else spawnZombie(); }
+function baseHit(){
+  const s=gameState;
+  if(s.gameOver) return; // 防止重复结束
+  if(s.phase!=='playing') return;
+  cancelDrag(); s.baseHP--; s.combo=0; s.phase='transition'; s.isPaused=true; animateClass(ui.game,'shaking'); feedback('OUCH! −1 ♥',true,600); sound('damage'); renderHUD(); renderPuzzle();
+  if(s.baseHP===0){ later(()=>finish(false),650); return; }
   if(isBossWave()){
-    // Keep the same boss, HP and puzzle. Retreat halfway along the lane, never respawn.
-    const from=s.currentZombie.progress,to=.5;
-    const h=ui.battlefield.clientHeight,start=102,end=Math.max(start+60,h*.8-105);
+    const from=s.currentZombie.progress, to=.5;
+    const h=ui.battlefield.clientHeight, start=102, end=Math.max(start+60,h*.8-105);
     ui.enemy.animate([{transform:'translateY('+(start+(end-start)*from)+'px)'},{transform:'translateY('+(start+(end-start)*to)+'px)'}],{duration:650,easing:'ease-out'});
-    s.currentZombie.progress=to;positionZombie();animateClass(ui.enemy,'hit',650);
-    later(()=>{s.phase='playing';s.isPaused=false;renderPuzzle();},650);
-  }else{ui.enemy.hidden=true;later(nextEnemy,850);}
+    s.currentZombie.progress=to; positionZombie(); animateClass(ui.enemy,'hit',650);
+    later(()=>{ s.phase='playing'; s.isPaused=false; renderPuzzle(); },650);
+  }else{ ui.enemy.hidden=true; later(nextEnemy,850); }
 }
-function finish(won){stopMusic();gameState.gameOver=true;gameState.phase=won?'victory':'gameover';gameState.isPaused=true;ui.enemy.hidden=true;cancelDrag();renderPuzzle();ui.feedback.textContent='';sound(won?'win':'damage');const s=gameState,accuracy=s.submissions?Math.round(s.correctFullWords/s.submissions*100):0;ui.overlay.innerHTML=`<section class="start-card"><div class="world-tag">🍎 FRUIT WORLD</div><div class="stars">${won?'⭐ ⭐ ⭐':'♡ ♡ ♡'}</div><h1 class="result-title">${won?'FRUIT MASTER!':'GAME OVER'}</h1><p>${won?'The garden is safe. Brilliant spelling!':'Your garden needs another hero.<br>Let’s give it another grow!'}</p><div class="stats"><div>SCORE<strong>${s.score.toLocaleString()}</strong></div><div>BEST COMBO<strong>×${s.bestCombo}</strong></div><div>ACCURACY<strong>${accuracy}%</strong></div><div>WORDS COMPLETED<strong>${s.wordsCompleted}</strong></div></div><button class="play" id="restart">${won?'PLAY AGAIN':'TRY AGAIN'} <span>➜</span></button></section>`;ui.overlay.hidden=false;$('restart').onclick=startGame;$('restart').focus();}
-function positionZombie(){if(!gameState?.currentZombie)return;const h=ui.battlefield.clientHeight;const start=isBossWave()?102:39;const end=Math.max(start+60,h*.8-105);ui.enemy.style.left=`${gameState.currentZombie.x}%`;ui.enemy.style.transform=`translateY(${start+(end-start)*gameState.currentZombie.progress}px)`;}
-function tick(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):0;lastTime=time;if(gameState?.phase==='playing'){// A 700px reference field keeps the time allowance consistent on tablets.
-  gameState.currentZombie.progress+=waves[gameState.wave-1].speed*dt/470;positionZombie();if(gameState.currentZombie.progress>=1)baseHit();}requestAnimationFrame(tick);}
-ui.fire.onclick=submit;$('play').onclick=startGame;ui.mute.onclick=()=>{muted=!muted;if(musicGain)musicGain.gain.setTargetAtTime(muted?0:.22,audioContext.currentTime,.04);ui.mute.textContent=muted?'♪̸':'♫';ui.mute.setAttribute('aria-label',muted?'Unmute sound':'Mute sound');ui.mute.setAttribute('aria-pressed',String(muted));};window.addEventListener('resize',positionZombie);requestAnimationFrame(tick);
-function fitCompactViewport(){ui.game.style.setProperty('--compact-scale',String(Math.min(1,window.innerHeight/520)));positionZombie();}
-window.addEventListener('resize',fitCompactViewport);fitCompactViewport();
+function finish(won){
+  stopMusic();
+  gameState.gameOver=true; gameState.phase=won?'victory':'gameover'; gameState.isPaused=true; ui.enemy.hidden=true; cancelDrag(); renderPuzzle(); ui.feedback.textContent=''; sound(won?'win':'damage');
+  const s=gameState, accuracy=s.submissions?Math.round(s.correctFullWords/s.submissions*100):0;
+  ui.overlay.innerHTML=`<section class="start-card"><div class="world-tag">🍎 FRUIT WORLD</div><div class="stars">${won?'⭐ ⭐ ⭐':'♡ ♡ ♡'}</div><h1 class="result-title">${won?'FRUIT MASTER!':'GAME OVER'}</h1><p>${won?'The garden is safe. Brilliant spelling!':'Your garden needs another hero.<br>Let’s give it another grow!'}</p><div class="stats"><div>SCORE<strong>${s.score.toLocaleString()}</strong></div><div>BEST COMBO<strong>×${s.bestCombo}</strong></div><div>ACCURACY<strong>${accuracy}%</strong></div><div>WORDS COMPLETED<strong>${s.wordsCompleted}</strong></div></div><button class="play" id="restart">${won?'PLAY AGAIN':'TRY AGAIN'} <span>➜</span></button></section>`;
+  ui.overlay.hidden=false; $('#restart').onclick=startGame; $('#restart').focus();
+}
+function positionZombie(){ if(!gameState?.currentZombie) return; const h=ui.battlefield.clientHeight; const start=isBossWave()?102:39; const end=Math.max(start+60,h*.8-105); ui.enemy.style.left=`${gameState.currentZombie.x}%`; ui.enemy.style.transform=`translateY(${start+(end-start)*gameState.currentZombie.progress}px)`; }
+function tick(time){
+  if(!gameActive) return; // 游戏未激活则停止更新
+  const dt=lastTime?Math.min((time-lastTime)/1000,.1):0; lastTime=time;
+  if(gameState?.phase==='playing'){
+    gameState.currentZombie.progress+=waves[gameState.wave-1].speed*dt/470;
+    positionZombie();
+    if(gameState.currentZombie.progress>=1) baseHit();
+  }
+  requestAnimationFrame(tick);
+}
+ui.fire.onclick=submit; $('#play').onclick=startGame;
+ui.mute.onclick=()=>{ muted=!muted; if(musicGain) musicGain.gain.setTargetAtTime(muted?0:.22, audioContext.currentTime,.04); ui.mute.textContent=muted?'♪̸':'♫'; ui.mute.setAttribute('aria-label',muted?'Unmute sound':'Mute sound'); ui.mute.setAttribute('aria-pressed',String(muted)); };
+window.addEventListener('resize',positionZombie);
+requestAnimationFrame(tick);
+function fitCompactViewport(){ ui.game.style.setProperty('--compact-scale',String(Math.min(1,window.innerHeight/520))); positionZombie(); }
+window.addEventListener('resize',fitCompactViewport); fitCompactViewport();
 
-// Original toy-music-box loop: minor-key bells, plucked bass and soft ticking.
-let musicGain=null,musicTimer=null,musicStep=0,musicNext=0;
+// 音乐循环（修正：增加generation检查）
+let musicGain=null, musicTimer=null, musicStep=0, musicNext=0;
 const musicVoices=new Set();
-function musicNote(midi,time,duration,type,volume){const o=audioContext.createOscillator(),g=audioContext.createGain();o.type=type;o.frequency.value=440*Math.pow(2,(midi-69)/12);g.gain.setValueAtTime(0,time);g.gain.linearRampToValueAtTime(volume,time+.012);g.gain.exponentialRampToValueAtTime(.0001,time+duration);o.connect(g);g.connect(musicGain);o.start(time);o.stop(time+duration+.03);musicVoices.add(o);o.onended=()=>{musicVoices.delete(o);o.disconnect();g.disconnect();};}
-function startMusic(){stopMusic();if(!audioContext)return;musicGain=audioContext.createGain();musicGain.gain.value=muted?0:.22;musicGain.connect(audioContext.destination);musicStep=0;musicNext=audioContext.currentTime+.06;scheduleMusic();}
-function scheduleMusic(){if(!musicGain)return;if(musicNext<audioContext.currentTime-.3)musicNext=audioContext.currentTime+.02;const melody=[81,null,84,88,87,null,84,83,81,null,76,79,80,null,83,76,77,null,81,84,83,null,81,80,76,null,80,83,88,87,83,null];const bass=[45,45,41,40];while(musicNext<audioContext.currentTime+.16){const step=musicStep%32,note=melody[step];if(note!==null){musicNote(note,musicNext,.34,'sine',.4);musicNote(note+12,musicNext,.14,'sine',.055);}if(step%4===0)musicNote(bass[Math.floor(step/8)],musicNext,.38,'triangle',.38);if(step%4===2)musicNote(bass[Math.floor(step/8)]+12,musicNext,.16,'triangle',.16);if(step%2===1)musicNote(98,musicNext,.035,'triangle',.04);musicNext+=60/108/2;musicStep++;}musicTimer=setTimeout(scheduleMusic,60);}
-function stopMusic(){clearTimeout(musicTimer);musicTimer=null;for(const o of musicVoices){try{o.stop();}catch{}}musicVoices.clear();if(musicGain){musicGain.disconnect();musicGain=null;}}
-
-
+function musicNote(midi,time,duration,type,volume){
+  if(!musicGain) return;
+  const o=audioContext.createOscillator(), g=audioContext.createGain();
+  o.type=type; o.frequency.value=440*Math.pow(2,(midi-69)/12);
+  g.gain.setValueAtTime(0,time); g.gain.linearRampToValueAtTime(volume,time+.012); g.gain.exponentialRampToValueAtTime(.0001,time+duration);
+  o.connect(g); g.connect(musicGain);
+  o.start(time); o.stop(time+duration+.03);
+  musicVoices.add(o);
+  o.onended=()=>{ musicVoices.delete(o); o.disconnect(); g.disconnect(); };
+}
+function startMusic(){
+  stopMusic();
+  if(!audioContext) return;
+  musicGain=audioContext.createGain();
+  musicGain.gain.value=muted?0:.22;
+  musicGain.connect(audioContext.destination);
+  musicStep=0; musicNext=audioContext.currentTime+.06;
+  scheduleMusic();
+}
+function scheduleMusic(){
+  if(!musicGain) return;
+  // 检查generation，若已变化则停止调度
+  if(!gameActive) return; // 如果游戏已结束，不再继续
+  if(musicNext < audioContext.currentTime-.3) musicNext=audioContext.currentTime+.02;
+  const melody=[81,null,84,88,87,null,84,83,81,null,76,79,80,null,83,76,77,null,81,84,83,null,81,80,76,null,80,83,88,87,83,null];
+  const bass=[45,45,41,40];
+  while(musicNext < audioContext.currentTime+.16){
+    const step=musicStep%32, note=melody[step];
+    if(note!==null){ musicNote(note,musicNext,.34,'sine',.4); musicNote(note+12,musicNext,.14,'sine',.055); }
+    if(step%4===0) musicNote(bass[Math.floor(step/8)],musicNext,.38,'triangle',.38);
+    if(step%4===2) musicNote(bass[Math.floor(step/8)]+12,musicNext,.16,'triangle',.16);
+    if(step%2===1) musicNote(98,musicNext,.035,'triangle',.04);
+    musicNext+=60/108/2; musicStep++;
+  }
+  musicTimer=setTimeout(scheduleMusic,60);
+}
+function stopMusic(){
+  clearTimeout(musicTimer); musicTimer=null;
+  for(const o of musicVoices){ try{ o.stop(); }catch{} }
+  musicVoices.clear();
+  if(musicGain){ musicGain.disconnect(); musicGain=null; }
+}
 </script>
 </body>
 </html>
