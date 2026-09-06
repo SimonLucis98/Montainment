@@ -15,7 +15,7 @@
             color: #e8e0d8;
         }
 
-        /* ===== 全屏 YouTube 视频背景 ===== */
+        /* ===== 全屏 YouTube 视频背景（完美覆盖，无黑边） ===== */
         .bg-video-wrapper {
             position: fixed;
             top: 0;
@@ -30,15 +30,13 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 100vw;
+            width: 177.78vh;
             height: 100vh;
+            min-width: 100vw;
+            min-height: 56.25vw;
             transform: translate(-50%, -50%);
             pointer-events: none;
             border: none;
-            min-width: 100vw;
-            min-height: 100vh;
-            width: auto;
-            height: auto;
         }
 
         /* ===== 页面内容（浮在视频上方） ===== */
@@ -470,11 +468,11 @@
 </head>
 <body>
 
-    <!-- ===== 全屏 YouTube 视频背景（稻草视频，静音循环） ===== -->
+    <!-- ===== 全屏 YouTube 视频背景（新视频） ===== -->
     <div class="bg-video-wrapper">
         <iframe
             id="bgVideo"
-            src="https://www.youtube.com/embed/U9-7pET_Z-Y?autoplay=1&mute=1&loop=1&playlist=U9-7pET_Z-Y&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+            src="https://www.youtube.com/embed/KjlRgSvoVhc?autoplay=1&mute=1&loop=1&playlist=KjlRgSvoVhc&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
             frameborder="0"
             allow="autoplay; encrypted-media"
             allowfullscreen
@@ -547,10 +545,8 @@
     <script>
         // ================================================================
         //  🎵 音乐播放器（纯音乐 5g_vB_qs3to，用户控制）
-        //  🎬 背景视频（稻草 U9-7pET_Z-Y，静音循环）独立运行
         // ================================================================
         (function() {
-            // 音乐播放器使用纯音乐视频 ID
             const YOUTUBE_VIDEO_ID = '5g_vB_qs3to';
             const YOUTUBE_URL =
                 `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&modestbranding=1&rel=0&showinfo=0`;
@@ -600,7 +596,6 @@
                     toggleMusic();
                 });
 
-                // 用户点击页面任意位置 → 音乐自动播放（仅一次）
                 document.addEventListener('click', function autoPlay(e) {
                     if (autoPlayUsed || isPlaying) return;
                     if (e.target.closest('.reader-overlay')) return;
