@@ -9,74 +9,6 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#f5f2ed; font-family:'Nunito', system-ui, sans-serif; min-height:100vh; }
 
-        /* ===== 导航栏（与首页一致） ===== */
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(251, 251, 255, 0.9);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #e7e7f5;
-        }
-        .nav-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 24px;
-            max-width: 1120px;
-            margin: 0 auto;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: "Fredoka", "Nunito", sans-serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: #1b1b2f;
-        }
-        .brand-mark {
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #5b5fef, #ff6b6b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 18px;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            list-style: none;
-        }
-        .nav-links a {
-            padding: 10px 16px;
-            border-radius: 999px;
-            font-weight: 600;
-            color: #5a5a72;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: #5b5fef;
-            color: #fff;
-        }
-        .nav-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            background: #ffffff;
-            border: 1px solid #e7e7f5;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
         .story-read-container { max-width:820px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
         .top-nav {
@@ -164,42 +96,7 @@
 
         .empty-state { text-align:center; padding:40px 20px; color:#aaa; }
 
-        /* ===== 响应式 ===== */
-        @media (max-width: 720px) {
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(251, 251, 255, 0.98);
-                flex-direction: column;
-                align-items: stretch;
-                padding: 12px 24px 20px;
-                border-bottom: 1px solid #e7e7f5;
-                display: none;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            }
-            .nav-links.open {
-                display: flex;
-            }
-            .nav-links a {
-                text-align: center;
-                padding: 12px 16px;
-            }
-            .nav-toggle {
-                display: flex;
-            }
-            .lang-toggle-container {
-                justify-content: center;
-                margin-left: 0 !important;
-                padding: 8px 0 !important;
-            }
-            .lang-toggle-container button {
-                font-size: 15px !important;
-                padding: 8px 16px !important;
-            }
-        }
-
+        /* ===== 响应式（导航栏样式已由 style.css 统一控制） ===== */
         @media (max-width:600px) {
             .detail-info { padding:18px; }
             .detail-info .title { font-size:21px; }
@@ -214,9 +111,6 @@
             .back-to-top { bottom:20px; right:20px; width:42px; height:42px; font-size:20px; }
             .top-nav { gap:12px; }
             .top-nav a { font-size:14px; }
-            .logo { font-size:18px; }
-            nav { height:56px; }
-            nav ul li a { font-size:13px; padding:6px 12px; }
         }
         @media (max-width:420px) {
             .chapter-item .ch-preview { padding-left:0; }
@@ -225,7 +119,7 @@
 </head>
 <body>
 
-    <!-- ===== 导航栏 ===== -->
+    <!-- ===== 导航栏（与 story.html 完全一致，由 style.css 控制样式） ===== -->
     <header class="site-header">
         <nav class="nav-bar">
             <a href="index.html" class="brand">
@@ -276,7 +170,7 @@
         </div>
     </main>
 
-    <!-- ===== 回到顶部按钮（已修复：↑ 不被翻译） ===== -->
+    <!-- ===== 回到顶部按钮（显示 ↑） ===== -->
     <button class="back-to-top" id="backToTopBtn" aria-label="回到顶部">↑</button>
 
     <script src="i18n.js"></script>
