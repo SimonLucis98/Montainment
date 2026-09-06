@@ -389,6 +389,17 @@
     .type-badge.text { background: #e6f7ee; color: #1f8b4c; }
     .type-badge.video { background: #ffe3e3; color: #d14c4c; }
     .type-badge.music { background: #fff4d6; color: #a06a00; }
+
+    /* 🎮 游戏封面缩略图（列表） */
+    .game-cover-thumb {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid #eef2f7;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -621,7 +632,9 @@
           </div>
         </div>
 
-        <!-- ========== Tab: 游戏管理 ========== -->
+        <!-- ============================================================ -->
+        <!-- ========== 🆕 Tab: 游戏管理（已添加封面上传） ========== -->
+        <!-- ============================================================ -->
         <div class="admin-panel tab-content hidden" id="tab-games">
           <h2>🎮 游戏管理 <span class="badge-count" id="gameBadge">0</span></h2>
           <form id="gameForm" class="admin-form">
@@ -645,6 +658,19 @@
               <div class="admin-form-group"><label>排序</label><input type="number" id="gameSortOrder" value="1" /></div>
               <div class="admin-form-group"><label>状态</label><select id="gameEnabled"><option value="true">✅ 启用</option><option value="false">⛔ 禁用</option></select></div>
             </div>
+
+            <!-- 🎮 GAME COVER UPLOAD：新增封面图片上传区域 -->
+            <div class="admin-form-group">
+              <label>🖼️ 游戏封面图片</label>
+              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <input type="text" id="gameCover" placeholder="图片URL（上传后自动填入）" style="flex:1;" />
+                <button type="button" class="btn-admin btn-admin-outline" id="uploadGameCoverBtn">📤 上传图片</button>
+                <input type="file" id="gameCoverFileInput" accept="image/*" style="display:none;" />
+              </div>
+              <div class="upload-status" id="gameUploadStatus"></div>
+              <div class="cover-preview" id="gameCoverPreview"><div class="no-cover">暂无封面</div></div>
+            </div>
+
             <input type="hidden" id="gameEditIndex" value="-1" />
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
               <button type="submit" class="btn-admin btn-admin-primary" id="gameSubmitBtn">➕ 添加游戏</button>
@@ -755,7 +781,7 @@
       let data = { languages: [] };
       let storiesData = { stories: [] };
       let gamesData = { games: [] };
-      let immersiveData = { items: [] }; // 🆕 沉浸式数据
+      let immersiveData = { items: [] };
 
       // ---------- 登录 ----------
       function checkLogin() {
@@ -1666,8 +1692,80 @@
       });
 
       // ================================================================
-      //  🎮 游戏管理
+      //  🎮 游戏管理（已增加封面上传功能）
       // ================================================================
+
+      // 🎮 GAME COVER UPLOAD：游戏封面上传逻辑（与小说完全一致）
+      function updateGameCoverPreview(url) {
+        const preview = document.getElementById('gameCoverPreview');
+        if (url && url.trim()) {
+          preview.innerHTML = `<img src="${url.trim()}" alt="游戏封面预览" />`;
+        } else {
+          preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
+        }
+      }
+
+      document.getElementById('uploadGameCoverBtn').addEventListener('click', function() {
+        document.getElementById('gameCoverFileInput').click();
+      });
+
+      document.getElementById('gameCoverFileInput').addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+          showToast('❌ 请选择图片文件', 'error');
+          this.value = '';
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          showToast('❌ 图片大小不能超过 5MB', 'error');
+          this.value = '';
+          return;
+        }
+        const status = document.getElementById('gameUploadStatus');
+        const btn = document.getElementById('uploadGameCoverBtn');
+        const origText = btn.textContent;
+        btn.textContent = '⏳ 上传中...';
+        btn.disabled = true;
+        status.textContent = '⏳ 正在上传到 Cloudinary...';
+        status.className = 'upload-status loading';
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+          .then(data => {
+            if (data.secure_url) {
+              document.getElementById('gameCover').value = data.secure_url;
+              updateGameCoverPreview(data.secure_url);
+              status.textContent = '✅ 上传成功！';
+              status.className = 'upload-status success';
+              showToast('✅ 游戏封面上传成功！', 'success');
+            } else {
+              throw new Error(data.error?.message || '未知错误');
+            }
+          })
+          .catch(err => {
+            status.textContent = '❌ 上传失败：' + err.message;
+            status.className = 'upload-status error';
+            showToast('❌ 上传失败：' + err.message, 'error');
+          })
+          .finally(() => {
+            btn.textContent = origText;
+            btn.disabled = false;
+            document.getElementById('gameCoverFileInput').value = '';
+          });
+      });
+
+      document.getElementById('gameCover').addEventListener('input', function() {
+        updateGameCoverPreview(this.value);
+      });
+
+      let currentGameIndex = -1;
+
       function renderGames() {
         const container = document.getElementById('gameList');
         if (gamesData.games.length === 0) {
@@ -1680,9 +1778,11 @@
           const realIdx = gamesData.games.indexOf(g);
           const statusClass = g.enabled !== false ? 'on' : 'off';
           const statusText = g.enabled !== false ? '✅ 已启用' : '⛔ 已禁用';
+          const coverHtml = g.cover && g.cover.trim() ? `<img src="${g.cover}" alt="封面" class="game-cover-thumb" />` : '';
           html += `
             <div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}">
               <div class="info">
+                ${coverHtml}
                 ${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})
                 <small>${g.type} · ${g.entry}</small>
                 <span class="toggle-badge ${statusClass}">${statusText}</span>
@@ -1737,11 +1837,9 @@
         });
 
         container.querySelectorAll('.admin-list-item').forEach(el => {
-          el.addEventListener('click', function() {});
+          el.addEventListener('click', function() { /* 可做其他操作，暂留空 */ });
         });
       }
-
-      let currentGameIndex = -1;
 
       function editGame(idx) {
         const g = gamesData.games[idx];
@@ -1755,6 +1853,9 @@
         document.getElementById('gameEntry').value = g.entry || '';
         document.getElementById('gameSortOrder').value = g.sortOrder || 1;
         document.getElementById('gameEnabled').value = g.enabled !== false ? 'true' : 'false';
+        // 🎮 填充封面
+        document.getElementById('gameCover').value = g.cover || '';
+        updateGameCoverPreview(g.cover || '');
         document.getElementById('gameEditIndex').value = idx;
         document.getElementById('gameSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('gameCancelBtn').style.display = 'inline-flex';
@@ -1773,6 +1874,7 @@
         const entry = document.getElementById('gameEntry').value.trim();
         const sortOrder = parseInt(document.getElementById('gameSortOrder').value) || 1;
         const enabled = document.getElementById('gameEnabled').value === 'true';
+        const cover = document.getElementById('gameCover').value.trim(); // 🎮 封面 URL
         const editIdx = parseInt(document.getElementById('gameEditIndex').value);
 
         if (!id || !titleZh || !titleEn || !entry) {
@@ -1784,7 +1886,7 @@
         if (exists) { showToast('游戏 ID 已存在，请换一个', 'error'); return; }
 
         const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder,
-          enabled };
+          enabled, cover }; // 🎮 保存封面
 
         if (editIdx === -1) {
           gamesData.games.push(gameData);
@@ -1797,6 +1899,7 @@
           document.getElementById('gameCancelBtn').style.display = 'none';
         }
 
+        // 重置表单（保留部分默认）
         this.reset();
         document.getElementById('gameEditIndex').value = -1;
         document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
@@ -1804,6 +1907,10 @@
         document.getElementById('gameType').value = 'js';
         document.getElementById('gameEnabled').value = 'true';
         document.getElementById('gameSortOrder').value = '1';
+        document.getElementById('gameCover').value = '';
+        updateGameCoverPreview('');
+        document.getElementById('gameUploadStatus').textContent = '';
+        document.getElementById('gameUploadStatus').className = 'upload-status';
 
         renderGames();
         updateStats();
@@ -1818,15 +1925,18 @@
         document.getElementById('gameType').value = 'js';
         document.getElementById('gameEnabled').value = 'true';
         document.getElementById('gameSortOrder').value = '1';
+        document.getElementById('gameCover').value = '';
+        updateGameCoverPreview('');
+        document.getElementById('gameUploadStatus').textContent = '';
+        document.getElementById('gameUploadStatus').className = 'upload-status';
         showToast('已取消', 'info');
       });
 
       // ================================================================
-      //  🍃 沉浸式管理（新增）
+      //  🍃 沉浸式管理（保持不变）
       // ================================================================
       let currentImmersiveIndex = -1;
 
-      // 切换类型时显示/隐藏对应字段
       document.getElementById('immersiveType').addEventListener('change', function() {
         const type = this.value;
         const contentGroup = document.getElementById('immersiveContentGroup');
@@ -1903,7 +2013,6 @@
         document.getElementById('immersiveEditIndex').value = idx;
         document.getElementById('immersiveSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('immersiveCancelBtn').style.display = 'inline-flex';
-        // 触发类型切换显示
         document.getElementById('immersiveType').dispatchEvent(new Event('change'));
         showToast('编辑: ' + item.title, 'info');
       }
