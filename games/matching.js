@@ -1,9 +1,9 @@
 /**
  * matching.js —— 数字配对（连一连）
- * 支持 7 种语言，显示格式：
- *   - 韩文、日文、中文：原文 (罗马音/拼音)
- *   - 英文、法文、西班牙文、泰文：仅原文
- * 每关从 1~1000 随机抽 10 个数字，无限关卡，左右列完全对齐
+ * 支持 7 种语言，显示原文 + 罗马音/拼音
+ * 每关从 1~1000 随机抽 10 个数字
+ * 无限关卡，左右列完全对齐
+ * 支持多语言切换（中/英）
  */
 (function() {
   'use strict';
@@ -26,7 +26,6 @@
 
   // ================================================================
   //  📚 数字生成器（1~1000）
-  //  每种语言返回 { native: 原文, roman: 读音（拼音/罗马音） }
   // ================================================================
 
   // ---------- 韩文 ----------
@@ -69,15 +68,13 @@
     return { native: nativeParts.join(''), roman: romanParts.join(' ') };
   }
 
-  // ---------- 中文（修正：返回拼音） ----------
+  // ---------- 中文 ----------
   function zhNumber(num) {
     if (num === 0) return { native: '零', roman: 'líng' };
-    // 汉字原文
     const hanUnits = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
     const hanTeens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
     const hanHundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
     const hanThousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
-    // 拼音
     const pyUnits = ['', 'yī', 'èr', 'sān', 'sì', 'wǔ', 'liù', 'qī', 'bā', 'jiǔ'];
     const pyTeens = ['shí', 'èr shí', 'sān shí', 'sì shí', 'wǔ shí', 'liù shí', 'qī shí', 'bā shí', 'jiǔ shí'];
     const pyHundreds = ['', 'bǎi', 'èr bǎi', 'sān bǎi', 'sì bǎi', 'wǔ bǎi', 'liù bǎi', 'qī bǎi', 'bā bǎi', 'jiǔ bǎi'];
@@ -151,7 +148,6 @@
     return { native: parts.join(' '), roman: '' };
   }
 
-  // ---------- 统一接口 ----------
   function getWordForNumber(num, lang) {
     switch (lang) {
       case 'ko': return koNumber(num);
@@ -182,8 +178,18 @@
     this.totalPairs = 10;
     this.round = 0;
     this.MAX_NUM = 1000;
+
+    // 监听语言切换事件，刷新界面
+    this.langChangeHandler = this.onLanguageChange.bind(this);
+    document.addEventListener('languageChanged', this.langChangeHandler);
+
     this.render();
   }
+
+  MatchingGame.prototype.onLanguageChange = function() {
+    // 重新渲染整个游戏（保留当前进度）
+    this.render();
+  };
 
   MatchingGame.prototype.generateNumbers = function() {
     const COUNT = 10;
@@ -234,45 +240,26 @@
     this.round++;
   };
 
-  // -------- 渲染 --------
+  // -------- 渲染（支持多语言） --------
   MatchingGame.prototype.render = function() {
     this.setupRound();
     this.container.innerHTML = '';
 
     const wrapper = document.createElement('div');
-    wrapper.style.cssText = `
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 20px 0;
-    `;
+    wrapper.className = 'matching-game';
+    wrapper.style.cssText = 'max-width:820px;margin:0 auto;padding:20px 0;';
 
     // Header
     const header = document.createElement('div');
-    header.style.cssText = `
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding: 0 4px;
-    `;
+    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;padding:0 4px;';
+
     const title = document.createElement('div');
-    title.style.cssText = 'font-size: 20px; font-weight: 700; color: #1a1a2e;';
-    title.textContent = '🔗 数字配对 · 连一连';
+    title.style.cssText = 'font-size:20px;font-weight:700;color:#1a1a2e;';
+    title.textContent = window.i18n ? i18n.t('game.matching_title') : '数字配对 · 连一连';
     header.appendChild(title);
 
     const langSelect = document.createElement('select');
-    langSelect.style.cssText = `
-      padding: 6px 14px;
-      border: 2px solid #e6ecf3;
-      border-radius: 30px;
-      font-size: 14px;
-      font-weight: 600;
-      background: #fff;
-      cursor: pointer;
-      font-family: inherit;
-    `;
+    langSelect.style.cssText = 'padding:6px 14px;border:2px solid #e6ecf3;border-radius:30px;font-size:14px;font-weight:600;background:#fff;cursor:pointer;font-family:inherit;';
     Object.keys(LANGUAGES).forEach(key => {
       const opt = document.createElement('option');
       opt.value = key;
@@ -287,74 +274,44 @@
     header.appendChild(langSelect);
 
     const info = document.createElement('div');
-    info.style.cssText = 'font-size: 14px; color: #888; font-weight: 600;';
-    info.textContent = `🏆 第 ${this.round} 关 · 得分 ${this.score}`;
+    info.style.cssText = 'font-size:14px;color:#888;font-weight:600;';
+    const roundLabel = window.i18n ? i18n.t('game.matching_round') : '第';
+    const scoreLabel = window.i18n ? i18n.t('game.matching_score') : '关 · 得分';
+    info.textContent = `${roundLabel} ${this.round} ${scoreLabel} ${this.score}`;
     header.appendChild(info);
     wrapper.appendChild(header);
 
     // Board
     const board = document.createElement('div');
-    board.style.cssText = `
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      background: #fff;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    `;
+    board.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:20px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,0.06);';
     wrapper.appendChild(board);
 
     const leftCol = document.createElement('div');
     leftCol.id = 'match-left';
-    leftCol.style.cssText = 'display:flex; flex-direction:column; gap:12px;';
+    leftCol.style.cssText = 'display:flex;flex-direction:column;gap:12px;';
     board.appendChild(leftCol);
 
     const rightCol = document.createElement('div');
     rightCol.id = 'match-right';
-    rightCol.style.cssText = 'display:flex; flex-direction:column; gap:12px;';
+    rightCol.style.cssText = 'display:flex;flex-direction:column;gap:12px;';
     board.appendChild(rightCol);
 
     // Status bar
     const statusBar = document.createElement('div');
-    statusBar.style.cssText = `
-      display: flex;
-      justify-content: space-between;
-      margin-top: 16px;
-      padding: 12px 20px;
-      background: #f6f8fc;
-      border-radius: 12px;
-      font-weight: 600;
-      color: #0b1c33;
-    `;
+    statusBar.style.cssText = 'display:flex;justify-content:space-between;margin-top:16px;padding:12px 20px;background:#f6f8fc;border-radius:12px;font-weight:600;color:#0b1c33;';
+    const matchedLabel = window.i18n ? i18n.t('game.matching_matched') : '已配对';
     statusBar.innerHTML = `
-      <span>✅ 已配对: <span id="match-progress">0/${this.totalPairs}</span></span>
-      <span id="match-status" style="color:#888;">点击左侧数字，再点击右侧单词配对</span>
+      <span>✅ ${matchedLabel}: <span id="match-progress">0/${this.totalPairs}</span></span>
+      <span id="match-status" style="color:#888;">${window.i18n ? i18n.t('game.matching_status_left') : '点击左侧数字，再点击右侧单词配对'}</span>
     `;
     wrapper.appendChild(statusBar);
 
     const resetBtn = document.createElement('button');
-    resetBtn.textContent = '🔄 重新洗牌';
-    resetBtn.style.cssText = `
-      display: block;
-      margin: 16px auto 0;
-      padding: 10px 32px;
-      border: 2px solid #dce4ef;
-      border-radius: 40px;
-      background: transparent;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      color: #0b1c33;
-      font-family: inherit;
-      transition: 0.2s;
-    `;
-    resetBtn.addEventListener('mouseenter', function() {
-      this.style.background = '#f2f6fd';
-    });
-    resetBtn.addEventListener('mouseleave', function() {
-      this.style.background = 'transparent';
-    });
+    const resetLabel = window.i18n ? i18n.t('game.matching_reset') : '重新洗牌';
+    resetBtn.textContent = '🔄 ' + resetLabel;
+    resetBtn.style.cssText = 'display:block;margin:16px auto 0;padding:10px 32px;border:2px solid #dce4ef;border-radius:40px;background:transparent;font-size:15px;font-weight:600;cursor:pointer;color:#0b1c33;font-family:inherit;transition:0.2s;';
+    resetBtn.addEventListener('mouseenter', function() { this.style.background = '#f2f6fd'; });
+    resetBtn.addEventListener('mouseleave', function() { this.style.background = 'transparent'; });
     resetBtn.addEventListener('click', () => this.render());
     wrapper.appendChild(resetBtn);
 
@@ -369,9 +326,6 @@
     this.updateProgress();
   };
 
-  // ================================================================
-  //  🔥 固定卡片高度 + 完美对齐 + 按语言决定是否显示读音
-  // ================================================================
   MatchingGame.prototype.renderCards = function() {
     const leftCol = document.getElementById('match-left');
     const rightCol = document.getElementById('match-right');
@@ -390,26 +344,13 @@
       card.dataset.side = 'left';
       card.textContent = item.num;
       card.style.cssText = `
-        padding: 8px 12px;
-        border: 2px solid ${item.matched ? '#1f8b4c' : '#e6ecf3'};
-        border-radius: 14px;
-        background: ${item.matched ? '#e6f7ee' : '#fafcff'};
-        font-size: 18px;
-        font-weight: 700;
-        text-align: center;
-        cursor: ${item.matched ? 'default' : 'pointer'};
-        color: ${item.matched ? '#0f5a31' : '#0b1c33'};
-        transition: all 0.2s;
-        opacity: ${item.matched ? '0.6' : '1'};
-        user-select: none;
-        height: ${CARD_HEIGHT};
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        box-sizing: border-box;
-        flex-shrink: 0;
-        line-height: 1.2;
+        padding:8px 12px;border:2px solid ${item.matched ? '#1f8b4c' : '#e6ecf3'};
+        border-radius:14px;background:${item.matched ? '#e6f7ee' : '#fafcff'};
+        font-size:18px;font-weight:700;text-align:center;
+        cursor:${item.matched ? 'default' : 'pointer'};color:${item.matched ? '#0f5a31' : '#0b1c33'};
+        transition:all 0.2s;opacity:${item.matched ? '0.6' : '1'};
+        user-select:none;height:${CARD_HEIGHT};display:flex;align-items:center;justify-content:center;
+        width:100%;box-sizing:border-box;flex-shrink:0;line-height:1.2;
       `;
       if (!item.matched) {
         card.addEventListener('mouseenter', function() {
@@ -435,34 +376,19 @@
       card.dataset.pairId = item.pairId;
       card.dataset.side = 'right';
       const wordData = item.wordData;
-      // 根据语言决定是否显示读音
       let displayText = wordData.native;
       if (needRoman && wordData.roman && wordData.roman.length > 0) {
         displayText = wordData.native + ' (' + wordData.roman + ')';
       }
       card.textContent = displayText;
       card.style.cssText = `
-        padding: 8px 12px;
-        border: 2px solid ${item.matched ? '#1f8b4c' : '#e6ecf3'};
-        border-radius: 14px;
-        background: ${item.matched ? '#e6f7ee' : '#fafcff'};
-        font-size: 14px;
-        font-weight: 600;
-        text-align: center;
-        cursor: ${item.matched ? 'default' : 'pointer'};
-        color: ${item.matched ? '#0f5a31' : '#0b1c33'};
-        transition: all 0.2s;
-        opacity: ${item.matched ? '0.6' : '1'};
-        user-select: none;
-        height: ${CARD_HEIGHT};
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        box-sizing: border-box;
-        flex-shrink: 0;
-        line-height: 1.3;
-        word-break: break-word;
+        padding:8px 12px;border:2px solid ${item.matched ? '#1f8b4c' : '#e6ecf3'};
+        border-radius:14px;background:${item.matched ? '#e6f7ee' : '#fafcff'};
+        font-size:14px;font-weight:600;text-align:center;
+        cursor:${item.matched ? 'default' : 'pointer'};color:${item.matched ? '#0f5a31' : '#0b1c33'};
+        transition:all 0.2s;opacity:${item.matched ? '0.6' : '1'};
+        user-select:none;height:${CARD_HEIGHT};display:flex;align-items:center;justify-content:center;
+        width:100%;box-sizing:border-box;flex-shrink:0;line-height:1.3;word-break:break-word;
       `;
       if (!item.matched) {
         card.addEventListener('mouseenter', function() {
@@ -482,7 +408,6 @@
     });
   };
 
-  // -------- 事件绑定（保持不变） --------
   MatchingGame.prototype.bindEvents = function() {
     const self = this;
     this.container.addEventListener('click', function(e) {
@@ -515,7 +440,8 @@
     card.style.background = '#e5edfe';
     card.style.boxShadow = '0 0 0 4px rgba(42,109,244,0.15)';
     this.selectedLeft = { card, pairId };
-    this.updateStatus('已选左侧数字，请点击右侧单词配对');
+    const statusText = window.i18n ? i18n.t('game.matching_status_left') : '点击左侧数字，再点击右侧单词配对';
+    this.updateStatus(statusText);
     if (this.selectedRight) this.attemptMatch();
   };
 
@@ -532,7 +458,8 @@
     card.style.background = '#e5edfe';
     card.style.boxShadow = '0 0 0 4px rgba(42,109,244,0.15)';
     this.selectedRight = { card, pairId };
-    this.updateStatus('已选右侧单词，请点击左侧数字配对');
+    const statusText = window.i18n ? i18n.t('game.matching_status_right') : '已选右侧单词，请点击左侧数字配对';
+    this.updateStatus(statusText);
     if (this.selectedLeft) this.attemptMatch();
   };
 
@@ -568,13 +495,15 @@
       rCard.style.boxShadow = 'none';
       this.matchedPairs.push(leftPairId);
       this.updateProgress();
-      this.updateStatus('✅ 配对正确！ +10分', 'success');
+      const correctText = window.i18n ? i18n.t('game.matching_status_correct') : '✅ 配对正确！ +10分';
+      this.updateStatus(correctText, 'success');
       this.selectedLeft = null;
       this.selectedRight = null;
       this.isProcessing = false;
       if (this.matchedPairs.length === this.totalPairs) {
+        const completeText = window.i18n ? i18n.t('game.matching_status_complete') : '🎉 全部配对完成！进入下一关...';
         setTimeout(() => {
-          this.updateStatus('🎉 全部配对完成！进入下一关...', 'win');
+          this.updateStatus(completeText, 'win');
           setTimeout(() => this.render(), 800);
         }, 400);
       }
@@ -585,7 +514,8 @@
       lCard.style.background = '#fdeeec';
       rCard.style.borderColor = '#d14c4c';
       rCard.style.background = '#fdeeec';
-      this.updateStatus('❌ 配对错误，再试试！', 'error');
+      const wrongText = window.i18n ? i18n.t('game.matching_status_wrong') : '❌ 配对错误，再试试！';
+      this.updateStatus(wrongText, 'error');
       setTimeout(() => {
         lCard.classList.remove('selected');
         rCard.classList.remove('selected');
@@ -598,19 +528,26 @@
         self.selectedLeft = null;
         self.selectedRight = null;
         self.isProcessing = false;
-        self.updateStatus('点击左侧数字，再点击右侧单词配对');
+        const statusText = window.i18n ? i18n.t('game.matching_status_left') : '点击左侧数字，再点击右侧单词配对';
+        self.updateStatus(statusText);
       }, 500);
     }
   };
 
-  // -------- UI 更新 --------
+  // -------- UI 更新（多语言） --------
   MatchingGame.prototype.updateProgress = function() {
-    if (this.progressEl) this.progressEl.textContent = `${this.matchedPairs.length}/${this.totalPairs}`;
+    if (this.progressEl) {
+      this.progressEl.textContent = `${this.matchedPairs.length}/${this.totalPairs}`;
+    }
   };
 
   MatchingGame.prototype.updateScore = function() {
     const info = this.container.querySelector('.matching-game > div:first-child > div:last-child');
-    if (info) info.textContent = `🏆 第 ${this.round} 关 · 得分 ${this.score}`;
+    if (info) {
+      const roundLabel = window.i18n ? i18n.t('game.matching_round') : '第';
+      const scoreLabel = window.i18n ? i18n.t('game.matching_score') : '关 · 得分';
+      info.textContent = `${roundLabel} ${this.round} ${scoreLabel} ${this.score}`;
+    }
   };
 
   MatchingGame.prototype.updateStatus = function(msg, type) {
@@ -629,7 +566,8 @@
   // ================================================================
   window.initGame = function(container) {
     container.innerHTML = '';
-    new MatchingGame(container);
+    const game = new MatchingGame(container);
+    return game;
   };
 
 })();
