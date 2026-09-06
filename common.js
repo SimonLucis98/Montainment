@@ -1,5 +1,5 @@
 /**
- * common.js —— 全站公共脚本
+ * common.js —— 全站公共脚本 · 自然大地风
  */
 document.addEventListener("DOMContentLoaded", function () {
   // ---------- 移动端导航菜单 ----------
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("[Montainment 广告位] 已加载：" + slotName);
   });
 
-  // ---------- 语言切换按钮（适配浅色导航栏） ----------
+  // ---------- 语言切换按钮（自然大地风） ----------
   function addLanguageToggle() {
     const navLinksContainer = document.querySelector(".nav-links");
     if (!navLinksContainer) {
@@ -60,15 +60,15 @@ document.addEventListener("DOMContentLoaded", function () {
       list-style: none;
     `;
 
-    // EN 按钮（深灰色文字，与导航链接一致）
+    // EN 按钮
     const enBtn = document.createElement('button');
     enBtn.className = 'lang-btn';
     enBtn.setAttribute('data-lang', 'en');
     enBtn.textContent = 'EN';
     enBtn.style.cssText = `
       background: transparent;
-      border: 2px solid #e7e7f5;
-      color: #5a5a72;
+      border: 2px solid rgba(138, 155, 122, 0.12);
+      color: rgba(61, 58, 53, 0.7);
       padding: 6px 12px;
       border-radius: 30px 0 0 30px;
       cursor: pointer;
@@ -79,16 +79,16 @@ document.addEventListener("DOMContentLoaded", function () {
       letter-spacing: 0.3px;
     `;
 
-    // 中文按钮（深灰色文字，与导航链接一致）
+    // 中文按钮
     const zhBtn = document.createElement('button');
     zhBtn.className = 'lang-btn';
     zhBtn.setAttribute('data-lang', 'zh');
     zhBtn.textContent = '中文';
     zhBtn.style.cssText = `
       background: transparent;
-      border: 2px solid #e7e7f5;
+      border: 2px solid rgba(138, 155, 122, 0.12);
       border-left: none;
-      color: #5a5a72;
+      color: rgba(61, 58, 53, 0.7);
       padding: 6px 12px;
       border-radius: 0 30px 30px 0;
       cursor: pointer;
@@ -99,19 +99,19 @@ document.addEventListener("DOMContentLoaded", function () {
       letter-spacing: 0.3px;
     `;
 
-    // 更新激活状态（高亮当前语言，与导航链接 active 一致）
+    // 更新激活状态
     function updateLangButtons() {
       const currentLang = localStorage.getItem('lang') || 'en';
       [enBtn, zhBtn].forEach(btn => {
         const lang = btn.getAttribute('data-lang');
         if (lang === currentLang) {
-          btn.style.background = '#5b5fef';
-          btn.style.borderColor = '#5b5fef';
+          btn.style.background = '#8a9b7a';
+          btn.style.borderColor = '#8a9b7a';
           btn.style.color = '#ffffff';
         } else {
           btn.style.background = 'transparent';
-          btn.style.borderColor = '#e7e7f5';
-          btn.style.color = '#5a5a72';
+          btn.style.borderColor = 'rgba(138, 155, 122, 0.12)';
+          btn.style.color = 'rgba(61, 58, 53, 0.7)';
         }
       });
     }
@@ -145,12 +145,12 @@ document.addEventListener("DOMContentLoaded", function () {
       setLang('zh');
     });
 
-    // 悬停效果（与导航链接一致）
+    // 悬停效果
     [enBtn, zhBtn].forEach(btn => {
       btn.addEventListener('mouseenter', function() {
         if (!this.classList.contains('active')) {
-          this.style.background = '#f0f0ff';
-          this.style.borderColor = '#c9c9e8';
+          this.style.background = 'rgba(138, 155, 122, 0.06)';
+          this.style.borderColor = 'rgba(138, 155, 122, 0.3)';
         }
       });
       btn.addEventListener('mouseleave', function() {
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentLang = localStorage.getItem('lang') || 'en';
         if (lang !== currentLang) {
           this.style.background = 'transparent';
-          this.style.borderColor = '#e7e7f5';
+          this.style.borderColor = 'rgba(138, 155, 122, 0.12)';
         }
       });
     });
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
     navLinksContainer.appendChild(langContainer);
 
     updateLangButtons();
-    console.log("✅ 语言切换按钮已插入（浅色版）");
+    console.log("✅ 语言切换按钮已插入（自然大地风）");
   }
 
   addLanguageToggle();
