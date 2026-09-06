@@ -3,311 +3,91 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="pageTitle">阅读 · Montainment</title>
+    <title>阅读 · Montainment</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ========== 全局重置 & 基础 ========== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #f5f2ed;
-            font-family: 'Nunito', system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:#f5f2ed; font-family:'Nunito', system-ui, sans-serif; min-height:100vh; }
 
-        /* ========== 导航 ========== */
-        header {
-            background: #1a1a2e;
-            padding: 0 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-        }
-        nav {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 64px;
-        }
-        .logo { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-        .logo span { color: #f7c948; }
-        nav ul { display: flex; gap: 8px; list-style: none; }
-        nav ul li a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-        nav ul li a:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
-        nav ul li a.active { color: #fff; background: #f7c948; color: #1a1a2e; }
+        header { background:#1a1a2e; padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.15); }
+        nav { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:64px; }
+        .logo { color:#fff; font-size:22px; font-weight:700; }
+        .logo span { color:#f7c948; }
+        nav ul { display:flex; gap:8px; list-style:none; }
+        nav ul li a { color:rgba(255,255,255,0.7); text-decoration:none; padding:8px 18px; border-radius:8px; font-size:15px; font-weight:600; transition:0.2s; }
+        nav ul li a:hover { color:#fff; background:rgba(255,255,255,0.08); }
+        nav ul li a.active { color:#fff; background:#f7c948; color:#1a1a2e; }
 
-        /* ========== 阅读容器 ========== */
-        .read-container {
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 24px 20px 40px;
-        }
+        .story-read-container { max-width:820px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
-        /* 返回 + 标题 */
-        .read-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .read-header .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #666;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: 0.2s;
-        }
-        .read-header .back-link:hover { color: #1a1a2e; }
-        .read-header .story-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a1a2e;
-        }
+        .back-link { display:inline-flex; align-items:center; gap:6px; color:#666; text-decoration:none; font-weight:600; font-size:15px; transition:0.2s; margin-bottom:16px; }
+        .back-link:hover { color:#1a1a2e; }
 
-        /* 小说详情卡片 */
-        .detail-hero {
-            background: #fff;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            margin-bottom: 28px;
-        }
-        .detail-cover {
-            width: 100%;
-            aspect-ratio: 16 / 7;
-            background: linear-gradient(145deg, #2d2d44, #1a1a2e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .detail-cover img { width: 100%; height: 100%; object-fit: cover; }
-        .detail-cover .cover-emoji { font-size: 64px; opacity: 0.5; }
+        /* 详情头部 */
+        .detail-hero { background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06); margin-bottom:28px; }
+        .detail-cover { width:100%; aspect-ratio:16/7; background:linear-gradient(145deg,#2d2d44,#1a1a2e); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+        .detail-cover img { width:100%; height:100%; object-fit:cover; }
+        .detail-cover .cover-emoji { font-size:64px; opacity:0.5; }
 
-        .detail-info { padding: 24px 28px 28px; }
-        .detail-info .title { font-size: 26px; font-weight: 800; color: #1a1a2e; margin-bottom: 2px; }
-        .detail-info .author { font-size: 16px; color: #888; margin-bottom: 12px; }
-        .detail-info .desc {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 16px;
-            padding: 14px 18px;
-            background: #f8f6f2;
-            border-radius: 12px;
-            border-left: 4px solid #f7c948;
-        }
-        .detail-info .meta-row {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            font-size: 14px;
-            color: #888;
-            align-items: center;
-        }
-        .detail-info .meta-row .likes {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .detail-info .meta-row .likes .heart-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 22px;
-            color: #ccc;
-            transition: 0.2s;
-            padding: 0;
-            line-height: 1;
-        }
-        .detail-info .meta-row .likes .heart-btn:hover { color: #e74c5e; transform: scale(1.1); }
-        .detail-info .meta-row .likes .heart-btn.liked { color: #e74c5e; }
-        .detail-info .meta-row .updated-time { color: #bbb; font-size: 13px; }
+        .detail-info { padding:24px 28px 28px; }
+        .detail-info .title { font-size:26px; font-weight:800; color:#1a1a2e; margin-bottom:2px; }
+        .detail-info .author { font-size:16px; color:#888; margin-bottom:12px; }
+        .detail-info .desc { font-size:16px; color:#555; line-height:1.7; margin-bottom:16px; padding:14px 18px; background:#f8f6f2; border-radius:12px; border-left:4px solid #f7c948; }
+        .detail-info .meta-row { display:flex; gap:24px; flex-wrap:wrap; font-size:14px; color:#888; align-items:center; }
+        .detail-info .meta-row .likes { display:flex; align-items:center; gap:8px; }
+        .detail-info .meta-row .likes .heart-btn { background:none; border:none; cursor:pointer; font-size:22px; color:#ccc; transition:0.2s; padding:0; line-height:1; }
+        .detail-info .meta-row .likes .heart-btn:hover { transform:scale(1.1); }
+        .detail-info .meta-row .likes .heart-btn.liked { color:#e74c5e; }
+        .detail-info .meta-row .updated-time { color:#bbb; font-size:13px; }
 
         /* 章节列表 */
-        .chapter-list {
-            background: #fff;
-            border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-        }
-        .chapter-list-header {
-            padding: 18px 24px;
-            font-weight: 700;
-            font-size: 18px;
-            color: #1a1a2e;
-            border-bottom: 1px solid #f0ede8;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .chapter-list-header .count { font-weight: 400; font-size: 14px; color: #999; }
+        .chapter-list { background:#fff; border-radius:24px; box-shadow:0 4px 20px rgba(0,0,0,0.06); overflow:hidden; }
+        .chapter-list-header { padding:18px 24px; font-weight:700; font-size:18px; color:#1a1a2e; border-bottom:1px solid #f0ede8; display:flex; justify-content:space-between; align-items:center; }
+        .chapter-list-header .count { font-weight:400; font-size:14px; color:#999; }
 
-        .chapter-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 24px;
-            border-bottom: 1px solid #f5f2ed;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .chapter-item:hover { background: #faf8f5; }
-        .chapter-item:last-child { border-bottom: none; }
-        .chapter-item .left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-        .chapter-item .num { font-size: 14px; font-weight: 700; color: #ccc; min-width: 32px; }
-        .chapter-item .ch-title { font-size: 16px; font-weight: 600; color: #1a1a2e; }
-        .chapter-item .ch-preview { font-size: 14px; color: #999; margin-left: 8px; font-weight: 400; }
-        .chapter-item .arrow { color: #ccc; font-size: 18px; transition: 0.2s; }
-        .chapter-item:hover .arrow { color: #888; transform: translateX(4px); }
+        .chapter-item { display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid #f5f2ed; cursor:pointer; transition:background 0.15s; }
+        .chapter-item:hover { background:#faf8f5; }
+        .chapter-item:last-child { border-bottom:none; }
+        .chapter-item .left { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+        .chapter-item .num { font-size:14px; font-weight:700; color:#ccc; min-width:32px; }
+        .chapter-item .ch-title { font-size:16px; font-weight:600; color:#1a1a2e; }
+        .chapter-item .ch-preview { font-size:14px; color:#999; margin-left:8px; font-weight:400; }
+        .chapter-item .arrow { color:#ccc; font-size:18px; transition:0.2s; }
+        .chapter-item:hover .arrow { color:#888; transform:translateX(4px); }
 
-        /* ========== 阅读弹窗 ========== */
-        .reader-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(6px);
-            z-index: 200;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-        }
-        .reader-overlay.active { display: flex; }
-        .reader-box {
-            background: #fcf9f5;
-            border-radius: 28px;
-            max-width: 720px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 32px 36px 40px;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
-            animation: fadeUp 0.3s ease;
-            position: relative;
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .reader-box .close-reader {
-            position: sticky;
-            top: 0;
-            float: right;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: #aaa;
-            cursor: pointer;
-            padding: 0 4px;
-            transition: 0.2s;
-            line-height: 1;
-        }
-        .reader-box .close-reader:hover { color: #1a1a2e; }
-        .reader-box .reader-title { font-size: 22px; font-weight: 700; color: #1a1a2e; margin: 4px 0 6px; }
-        .reader-box .reader-chapter { font-size: 14px; color: #888; margin-bottom: 20px; }
-        .reader-box .reader-body {
-            font-size: 18px;
-            line-height: 2;
-            color: #2c2c2c;
-            white-space: pre-wrap;
-            word-break: break-word;
-            font-family: 'Georgia', 'Times New Roman', serif;
-        }
-        .reader-box .reader-body p { margin-bottom: 1.2em; text-indent: 2em; }
-        .reader-box .reader-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 28px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        .reader-box .reader-nav button {
-            padding: 8px 24px;
-            border: 1px solid #ddd;
-            background: #fff;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.2s;
-            font-family: inherit;
-            color: #333;
-        }
-        .reader-box .reader-nav button:hover:not(:disabled) {
-            background: #1a1a2e;
-            color: #fff;
-            border-color: #1a1a2e;
-        }
-        .reader-box .reader-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
-        .reader-box .reader-nav .indicator { font-size: 14px; color: #888; display: flex; align-items: center; }
+        /* 阅读模式（隐藏章节列表，只显示章节内容） */
+        .reader-mode .detail-hero { display:none; }
+        .reader-mode .chapter-list { display:none; }
+        .reader-mode .reader-content { display:block; }
 
-        /* 空状态 */
-        .empty-state { text-align: center; padding: 60px 20px; color: #aaa; }
-        .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
-        .empty-state h3 { font-size: 20px; color: #666; margin-bottom: 4px; }
-        .empty-state p { font-size: 15px; }
+        .reader-content { display:none; background:#fff; border-radius:24px; padding:32px 36px; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+        .reader-content .reader-title { font-size:22px; font-weight:700; color:#1a1a2e; margin-bottom:4px; }
+        .reader-content .reader-chapter-label { font-size:14px; color:#888; margin-bottom:20px; }
+        .reader-content .reader-body { font-size:18px; line-height:2; color:#2c2c2c; white-space:pre-wrap; font-family:'Georgia','Times New Roman',serif; }
+        .reader-content .reader-body p { margin-bottom:1.2em; text-indent:2em; }
+        .reader-nav { display:flex; justify-content:space-between; margin-top:28px; padding-top:20px; border-top:1px solid #eee; }
+        .reader-nav a { padding:8px 24px; border:1px solid #ddd; border-radius:30px; text-decoration:none; font-size:14px; font-weight:600; color:#333; transition:0.2s; }
+        .reader-nav a:hover { background:#1a1a2e; color:#fff; border-color:#1a1a2e; }
+        .reader-nav a.disabled { opacity:0.3; pointer-events:none; }
+        .reader-nav .indicator { font-size:14px; color:#888; display:flex; align-items:center; }
 
-        /* 加载中 */
-        .loading-msg { text-align: center; padding: 60px 20px; color: #888; font-size: 16px; }
-        .loading-msg .spinner {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 4px solid #eef2f7;
-            border-top-color: #2a6df4;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 12px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .empty-state { text-align:center; padding:40px 20px; color:#aaa; }
 
-        .error-msg { text-align: center; padding: 60px 20px; color: #d14c4c; }
-        .error-msg h3 { font-size: 20px; margin-bottom: 8px; }
-
-        /* ========== 响应式 ========== */
-        @media (max-width: 600px) {
-            .read-container { padding: 16px 12px 32px; }
-            .detail-info { padding: 18px 18px 22px; }
-            .detail-info .title { font-size: 21px; }
-            .detail-info .desc { font-size: 14px; padding: 12px 14px; }
-            .chapter-item { padding: 14px 16px; }
-            .chapter-item .ch-title { font-size: 14px; }
-            .chapter-item .ch-preview { display: none; }
-            .reader-box { padding: 24px 20px 28px; }
-            .reader-box .reader-body { font-size: 16px; line-height: 1.9; }
-            .reader-box .reader-nav { flex-wrap: wrap; gap: 8px; justify-content: center; }
-            .reader-box .reader-nav button { flex: 1; min-width: 80px; text-align: center; }
-            .detail-cover { aspect-ratio: 16 / 6; }
-            .detail-cover .cover-emoji { font-size: 40px; }
-            nav ul li a { font-size: 13px; padding: 6px 12px; }
-            nav { height: 56px; }
-            .logo { font-size: 18px; }
+        @media (max-width:600px) {
+            .detail-info { padding:18px; }
+            .detail-info .title { font-size:21px; }
+            .detail-info .desc { font-size:14px; padding:12px; }
+            .chapter-item { padding:14px 16px; }
+            .chapter-item .ch-title { font-size:14px; }
+            .chapter-item .ch-preview { display:none; }
+            .reader-content { padding:20px; }
+            .reader-content .reader-body { font-size:16px; line-height:1.9; }
+            .reader-nav { flex-wrap:wrap; gap:8px; justify-content:center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ========== 导航 ========== -->
     <header>
         <nav>
             <div class="logo">Montainment</div>
@@ -320,226 +100,95 @@
         </nav>
     </header>
 
-    <!-- ========== 主内容 ========== -->
     <main>
-        <div class="read-container" id="app">
+        <div class="story-read-container" id="app">
 
-            <!-- 头部：返回 + 标题 -->
-            <div class="read-header">
-                <a href="story.html" class="back-link">← 返回小说列表</a>
-                <span class="story-title" id="pageStoryTitle">📖 加载中...</span>
+            <!-- 返回链接 -->
+            <a href="story.html" class="back-link">← 返回小说列表</a>
+
+            <!-- 详情区（包含点赞） -->
+            <div id="detailView">
+                <div class="detail-hero" id="detailHero"></div>
+                <div class="chapter-list" id="chapterList">
+                    <div class="chapter-list-header">
+                        <span>📖 章节列表</span>
+                        <span class="count" id="chapterCount">0 章</span>
+                    </div>
+                    <div id="chapterItems"></div>
+                </div>
             </div>
 
-            <!-- 小说详情 -->
-            <div id="detailHero" class="detail-hero"></div>
-
-            <!-- 章节列表 -->
-            <div class="chapter-list">
-                <div class="chapter-list-header">
-                    <span>📖 章节列表</span>
-                    <span class="count" id="chapterCount">0 章</span>
+            <!-- 阅读区（章节内容） -->
+            <div class="reader-content" id="readerContent">
+                <div class="reader-title" id="readerTitle"></div>
+                <div class="reader-chapter-label" id="readerChapterLabel"></div>
+                <div class="reader-body" id="readerBody"></div>
+                <div class="reader-nav">
+                    <a href="#" id="readerPrev" class="disabled">上一章</a>
+                    <span class="indicator" id="readerIndicator">1 / 1</span>
+                    <a href="#" id="readerNext" class="disabled">下一章</a>
                 </div>
-                <div id="chapterItems"></div>
             </div>
 
         </div>
     </main>
 
-    <!-- ========== 阅读弹窗 ========== -->
-    <div class="reader-overlay" id="readerOverlay">
-        <div class="reader-box">
-            <button class="close-reader" id="closeReaderBtn">✕</button>
-            <div class="reader-title" id="readerTitle">章节标题</div>
-            <div class="reader-chapter" id="readerChapter">第 1 章</div>
-            <div class="reader-body" id="readerBody"></div>
-            <div class="reader-nav">
-                <button id="readerPrev">上一章</button>
-                <span class="indicator" id="readerIndicator">1 / 1</span>
-                <button id="readerNext">下一章</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         // ================================================================
-        //  story-read.html — 独立小说阅读页
-        //  从 URL 参数 ?story=xxx 加载对应小说
-        //  支持点赞（本地存储持久化）
+        //  story-read.html —— 小说详情 + 阅读
+        //  支持点赞（localStorage持久化，toggle）
+        //  支持跳转阅读（通过 URL 参数 chapter）
         // ================================================================
 
-        // ---------- 全局 ----------
-        let currentStory = null;
-        let currentChapterIndex = 0;
-
-        // DOM 引用
-        const pageTitle = document.getElementById('pageTitle');
-        const pageStoryTitle = document.getElementById('pageStoryTitle');
         const detailHero = document.getElementById('detailHero');
         const chapterItems = document.getElementById('chapterItems');
         const chapterCount = document.getElementById('chapterCount');
+        const detailView = document.getElementById('detailView');
 
-        // 阅读器
-        const readerOverlay = document.getElementById('readerOverlay');
-        const closeReaderBtn = document.getElementById('closeReaderBtn');
+        const readerContent = document.getElementById('readerContent');
         const readerTitle = document.getElementById('readerTitle');
-        const readerChapter = document.getElementById('readerChapter');
+        const readerChapterLabel = document.getElementById('readerChapterLabel');
         const readerBody = document.getElementById('readerBody');
         const readerPrev = document.getElementById('readerPrev');
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
 
-        // ================================================================
-        //  点赞工具（localStorage 持久化）
-        // ================================================================
+        // 当前小说数据
+        let currentStory = null;
+        let currentChapterIndex = 0;
 
-        const STORAGE_KEY = 'montainment_story_likes';
-        const USER_LIKES_KEY = 'montainment_user_likes';
-
-        // 获取所有故事的点赞数据
-        function getLikesData() {
-            try {
-                return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-            } catch { return {}; }
+        // ---------- localStorage 工具 ----------
+        function getLikes(storyId) {
+            const val = localStorage.getItem('story_likes_' + storyId);
+            return val !== null ? parseInt(val, 10) : null;
+        }
+        function setLikes(storyId, count) {
+            localStorage.setItem('story_likes_' + storyId, String(count));
         }
 
-        // 保存点赞数据
-        function saveLikesData(data) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        // ---------- 获取 URL 参数 ----------
+        function getParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
         }
 
-        // 获取当前用户对某故事的点赞状态
-        function getUserLikeStatus(storyId) {
-            try {
-                const data = JSON.parse(localStorage.getItem(USER_LIKES_KEY)) || {};
-                return data[storyId] || false;
-            } catch { return false; }
-        }
-
-        // 切换用户点赞状态（返回新状态）
-        function toggleUserLike(storyId) {
-            const data = JSON.parse(localStorage.getItem(USER_LIKES_KEY)) || {};
-            const current = data[storyId] || false;
-            const newStatus = !current;
-            data[storyId] = newStatus;
-            localStorage.setItem(USER_LIKES_KEY, JSON.stringify(data));
-
-            // 同时更新点赞总数
-            const likesData = getLikesData();
-            if (!likesData[storyId]) likesData[storyId] = 0;
-            likesData[storyId] += newStatus ? 1 : -1;
-            if (likesData[storyId] < 0) likesData[storyId] = 0;
-            saveLikesData(likesData);
-
-            return newStatus;
-        }
-
-        // 获取某故事的显示点赞数（从 localStorage 读取）
-        function getStoryLikes(storyId) {
-            const data = getLikesData();
-            return data[storyId] || 0;
-        }
-
-        // 初始化点赞数据（如果不存在，从 story.likes 导入）
-        function initLikesForStory(storyId, initialLikes) {
-            const data = getLikesData();
-            if (!(storyId in data)) {
-                data[storyId] = initialLikes || 0;
-                saveLikesData(data);
-            }
-        }
-
-        // ================================================================
-        //  工具
-        // ================================================================
-
-        function getCoverEmoji(title) {
-            const emojiMap = {
-                '灰': '🏚️', '星': '⭐', '魔': '🔮', '时': '⏳', '风': '🌪️',
-                '火': '🔥', '水': '💧', '暗': '🌙', '光': '☀️', '梦': '🌌',
-                '剑': '⚔️', '龙': '🐉', '凤': '🦅', '雪': '❄️', '月': '🌙',
-                '海': '🌊', '山': '⛰️', '森': '🌲', '林': '🌳', '城': '🏰',
-                '塔': '🗼', '桥': '🌉', '夜': '🌃', '晨': '🌅', '宇': '🌌',
-                '宙': '🌠', '未': '🔮', '来': '🚀', '古': '🏛️', '老': '🕰️',
-                '新': '✨', '世': '🌍', '界': '🌎', '王': '👑', '骑': '🐴',
-                '勇': '🛡️', '士': '⚔️', '法': '📜', '师': '🧙', '猎': '🏹',
-                '人': '🧑', '神': '⚡', '妖': '🌸', '怪': '👾', '灵': '👻',
-                '魂': '💫', '血': '🩸', '骨': '💀', '瞳': '👁️', '翼': '🦇',
-                '心': '❤️', '意': '🧠', '念': '💭', '情': '💝', '爱': '💖',
-                '生': '🌱', '死': '🕊️', '命': '🌀', '运': '🎲', '真': '💎',
-                '美': '🌸', '善': '😇', '恶': '👿', '明': '🌞', '白': '⬜',
-                '黑': '⬛', '红': '🔴', '蓝': '🔵', '绿': '🟢', '黄': '🟡',
-                '金': '🪙', '银': '🥈', '宝': '💎', '钱': '💰', '财': '🏦'
-            };
-            const first = title.charAt(0);
-            return emojiMap[first] || '📖';
-        }
-
-        function getCoverColor(title) {
-            const colors = [
-                'linear-gradient(145deg, #2d2d44, #1a1a2e)',
-                'linear-gradient(145deg, #3d2d44, #2a1a2e)',
-                'linear-gradient(145deg, #2d3d44, #1a2a2e)',
-                'linear-gradient(145deg, #443d2d, #2e2a1a)',
-                'linear-gradient(145deg, #442d3d, #2e1a2a)',
-                'linear-gradient(145deg, #2d443d, #1a2e2a)',
-                'linear-gradient(145deg, #3d2d44, #2a1a3e)',
-                'linear-gradient(145deg, #3d442d, #2a2e1a)',
-            ];
-            let hash = 0;
-            for (let i = 0; i < title.length; i++) {
-                hash = title.charCodeAt(i) + ((hash << 5) - hash);
-            }
-            return colors[Math.abs(hash) % colors.length];
-        }
-
-        function formatTime(isoString) {
-            if (!isoString) return '未知';
-            const d = new Date(isoString);
-            return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
-        }
-
-        // ================================================================
-        //  渲染
-        // ================================================================
-
-        function renderStory(story) {
-            if (!story) {
-                detailHero.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">📚</div>
-                        <h3>小说不存在</h3>
-                        <p>请返回小说列表选择其他作品。</p>
-                    </div>
-                `;
-                chapterItems.innerHTML = '';
-                chapterCount.textContent = '0 章';
-                pageStoryTitle.textContent = '❌ 未找到';
-                return;
-            }
-
-            // 初始化点赞数据
-            initLikesForStory(story.id, story.likes || 0);
-
+        // ---------- 渲染详情 ----------
+        function renderDetail(story) {
             currentStory = story;
-            const likes = getStoryLikes(story.id);
-            const userLiked = getUserLikeStatus(story.id);
 
-            const coverEmoji = getCoverEmoji(story.title);
-            const coverColor = getCoverColor(story.title);
-            const desc = story.description || '📝 暂无简介';
-            const chapters = story.chapters || [];
-            const updated = formatTime(story.updatedAt);
+            // 点赞数
+            let likes = getLikes(story.id);
+            if (likes === null) {
+                likes = story.likes || 0;
+                setLikes(story.id, likes);
+            }
 
             const hasCover = story.cover && story.cover.trim() !== '';
-            const coverHtml = hasCover
-                ? `<img src="${story.cover}" alt="${story.title}" />`
-                : `<span class="cover-emoji">${coverEmoji}</span>`;
+            const coverEmoji = getCoverEmoji(story.title);
+            const coverColor = getCoverColor(story.title);
+            const coverHtml = hasCover ? `<img src="${story.cover}" alt="${story.title}" />` : `<span class="cover-emoji">${coverEmoji}</span>`;
 
-            // 更新页面标题
-            document.title = story.title + ' · Montainment';
-            pageStoryTitle.textContent = '📖 ' + story.title;
-
-            // 渲染详情
+            // 详情头部
             detailHero.innerHTML = `
                 <div class="detail-cover" style="background:${hasCover ? '#1a1a2e' : coverColor};">
                     ${coverHtml}
@@ -547,36 +196,31 @@
                 <div class="detail-info">
                     <div class="title">${story.title}</div>
                     <div class="author">作者：${story.author || '未知作者'}</div>
-                    <div class="desc">${desc}</div>
+                    <div class="desc">${story.description || '📝 暂无简介'}</div>
                     <div class="meta-row">
                         <span class="likes">
-                            <button class="heart-btn ${userLiked ? 'liked' : ''}" id="likeBtn">❤️</button>
+                            <button class="heart-btn" id="likeBtn" data-story-id="${story.id}">❤️</button>
                             <span id="likeCount">${likes}</span>
                         </span>
-                        <span>📖 ${chapters.length} 章</span>
-                        <span class="updated-time">🕒 更新于 ${updated}</span>
+                        <span>📖 ${story.chapters ? story.chapters.length : 0} 章</span>
+                        <span class="updated-time">🕒 更新于 ${formatTime(story.updatedAt)}</span>
                     </div>
                 </div>
             `;
 
             // 绑定点赞事件
-            document.getElementById('likeBtn').addEventListener('click', function() {
-                if (!currentStory) return;
-                const newStatus = toggleUserLike(currentStory.id);
-                const newLikes = getStoryLikes(currentStory.id);
-                this.classList.toggle('liked', newStatus);
-                document.getElementById('likeCount').textContent = newLikes;
+            const likeBtn = document.getElementById('likeBtn');
+            const likeSpan = document.getElementById('likeCount');
+            likeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleLike(story.id, likeBtn, likeSpan);
             });
 
-            // 渲染章节列表
+            // 章节列表
+            const chapters = story.chapters || [];
             chapterCount.textContent = chapters.length + ' 章';
-
             if (chapters.length === 0) {
-                chapterItems.innerHTML = `
-                    <div style="padding:32px 24px; text-align:center; color:#aaa; font-size:15px;">
-                        📝 暂无章节，请等待更新
-                    </div>
-                `;
+                chapterItems.innerHTML = `<div style="padding:32px 24px;text-align:center;color:#aaa;font-size:15px;">📝 暂无章节，请等待更新</div>`;
                 return;
             }
 
@@ -586,7 +230,7 @@
                 chHtml += `
                     <div class="chapter-item" data-chapter="${i}">
                         <div class="left">
-                            <span class="num">${String(i + 1).padStart(2, '0')}</span>
+                            <span class="num">${String(i+1).padStart(2,'0')}</span>
                             <span class="ch-title">${ch.title || '第' + (i+1) + '章'}</span>
                             <span class="ch-preview">${preview}</span>
                         </div>
@@ -596,94 +240,131 @@
             });
             chapterItems.innerHTML = chHtml;
 
-            chapterItems.querySelectorAll('.chapter-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const chIdx = parseInt(this.dataset.chapter);
-                    openReader(chIdx);
+            // 点击章节跳转到阅读模式（带 chapter 参数）
+            chapterItems.querySelectorAll('.chapter-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.chapter);
+                    // 跳转到同页但带 chapter 参数
+                    window.location.href = `story-read.html?story=${story.id}&chapter=${idx}`;
                 });
             });
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ================================================================
-        //  阅读器
-        // ================================================================
+        // ---------- 阅读模式 ----------
+        function renderReader(story, chapterIdx) {
+            if (!story || !story.chapters || chapterIdx >= story.chapters.length) {
+                // 如果 chapter 无效，回到详情模式
+                document.body.classList.remove('reader-mode');
+                detailView.style.display = 'block';
+                readerContent.style.display = 'none';
+                return;
+            }
 
-        function openReader(chapterIdx) {
-            if (!currentStory) return;
-            const chapters = currentStory.chapters || [];
-            if (chapters.length === 0 || chapterIdx >= chapters.length) return;
-            currentChapterIndex = chapterIdx;
-            renderReader();
-            readerOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            document.body.classList.add('reader-mode');
+            detailView.style.display = 'none';
+            readerContent.style.display = 'block';
 
-        function renderReader() {
-            if (!currentStory) return;
-            const chapters = currentStory.chapters || [];
-            if (chapters.length === 0) return;
-            const ch = chapters[currentChapterIndex];
-            readerTitle.textContent = currentStory.title;
-            readerChapter.textContent = ch.title || '第' + (currentChapterIndex + 1) + '章';
+            const ch = story.chapters[chapterIdx];
+            readerTitle.textContent = story.title;
+            readerChapterLabel.textContent = ch.title || '第' + (chapterIdx+1) + '章';
             readerBody.textContent = ch.content || '(内容为空)';
-            readerIndicator.textContent = `${currentChapterIndex + 1} / ${chapters.length}`;
-            readerPrev.disabled = (currentChapterIndex === 0);
-            readerNext.disabled = (currentChapterIndex === chapters.length - 1);
+
+            const total = story.chapters.length;
+            readerIndicator.textContent = `${chapterIdx+1} / ${total}`;
+
+            // 上一章 / 下一章
+            readerPrev.href = chapterIdx > 0 ? `story-read.html?story=${story.id}&chapter=${chapterIdx-1}` : '#';
+            readerPrev.classList.toggle('disabled', chapterIdx === 0);
+
+            readerNext.href = chapterIdx < total-1 ? `story-read.html?story=${story.id}&chapter=${chapterIdx+1}` : '#';
+            readerNext.classList.toggle('disabled', chapterIdx === total-1);
+
+            // 键盘左右键导航
+            document.removeEventListener('keydown', handleKeydown);
+            document.addEventListener('keydown', handleKeydown);
         }
 
-        function closeReader() {
-            readerOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+        function handleKeydown(e) {
+            if (e.key === 'ArrowLeft') {
+                const link = readerPrev.href;
+                if (link && link !== '#') window.location.href = link;
+            } else if (e.key === 'ArrowRight') {
+                const link = readerNext.href;
+                if (link && link !== '#') window.location.href = link;
+            }
         }
 
-        closeReaderBtn.addEventListener('click', closeReader);
-        readerOverlay.addEventListener('click', function(e) {
-            if (e.target === this) closeReader();
-        });
+        // ---------- 点赞 toggle ----------
+        function toggleLike(storyId, btn, span) {
+            let likes = getLikes(storyId);
+            if (likes === null) likes = 0;
 
-        readerPrev.addEventListener('click', function() {
-            if (currentChapterIndex > 0) {
-                currentChapterIndex--;
-                renderReader();
+            // 检查当前是否已点赞（使用一个单独的 flag）
+            const flagKey = 'story_liked_' + storyId;
+            const liked = localStorage.getItem(flagKey) === 'true';
+
+            if (liked) {
+                // 取消赞
+                likes = Math.max(0, likes - 1);
+                localStorage.setItem(flagKey, 'false');
+                btn.classList.remove('liked');
+            } else {
+                // 点赞
+                likes = likes + 1;
+                localStorage.setItem(flagKey, 'true');
+                btn.classList.add('liked');
             }
-        });
 
-        readerNext.addEventListener('click', function() {
-            if (currentStory && currentStory.chapters && currentChapterIndex < currentStory.chapters.length - 1) {
-                currentChapterIndex++;
-                renderReader();
-            }
-        });
+            setLikes(storyId, likes);
+            span.textContent = likes;
+        }
 
-        document.addEventListener('keydown', function(e) {
-            if (!readerOverlay.classList.contains('active')) return;
-            if (e.key === 'Escape') { closeReader(); return; }
-            if (e.key === 'ArrowLeft') { readerPrev.click(); }
-            if (e.key === 'ArrowRight') { readerNext.click(); }
-        });
+        // ---------- 工具函数 ----------
+        function getCoverEmoji(title) {
+            const map = {
+                '灰':'🏚️','星':'⭐','魔':'🔮','时':'⏳','风':'🌪️','火':'🔥','水':'💧','暗':'🌙','光':'☀️','梦':'🌌',
+                '剑':'⚔️','龙':'🐉','凤':'🦅','雪':'❄️','月':'🌙','海':'🌊','山':'⛰️','森':'🌲','林':'🌳','城':'🏰',
+                '塔':'🗼','桥':'🌉','夜':'🌃','晨':'🌅','宇':'🌌','宙':'🌠','未':'🔮','来':'🚀','古':'🏛️','老':'🕰️',
+                '新':'✨','世':'🌍','界':'🌎','王':'👑','骑':'🐴','勇':'🛡️','士':'⚔️','法':'📜','师':'🧙','猎':'🏹',
+                '人':'🧑','神':'⚡','妖':'🌸','怪':'👾','灵':'👻','魂':'💫','血':'🩸','骨':'💀','瞳':'👁️','翼':'🦇',
+                '心':'❤️','意':'🧠','念':'💭','情':'💝','爱':'💖','生':'🌱','死':'🕊️','命':'🌀','运':'🎲','真':'💎',
+                '美':'🌸','善':'😇','恶':'👿','明':'🌞','白':'⬜','黑':'⬛','红':'🔴','蓝':'🔵','绿':'🟢','黄':'🟡',
+                '金':'🪙','银':'🥈','宝':'💎','钱':'💰','财':'🏦'
+            };
+            return map[title.charAt(0)] || '📖';
+        }
+
+        function getCoverColor(title) {
+            const colors = [
+                'linear-gradient(145deg,#2d2d44,#1a1a2e)',
+                'linear-gradient(145deg,#3d2d44,#2a1a2e)',
+                'linear-gradient(145deg,#2d3d44,#1a2a2e)',
+                'linear-gradient(145deg,#443d2d,#2e2a1a)',
+                'linear-gradient(145deg,#442d3d,#2e1a2a)',
+                'linear-gradient(145deg,#2d443d,#1a2e2a)',
+                'linear-gradient(145deg,#3d2d44,#2a1a3e)',
+                'linear-gradient(145deg,#3d442d,#2a2e1a)',
+            ];
+            let hash = 0;
+            for (let i = 0; i < title.length; i++) hash = title.charCodeAt(i) + ((hash << 5) - hash);
+            return colors[Math.abs(hash) % colors.length];
+        }
+
+        function formatTime(iso) {
+            if (!iso) return '未知';
+            const d = new Date(iso);
+            return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
+        }
 
         // ================================================================
-        //  加载数据
+        //  主逻辑：加载数据，根据参数决定显示详情还是阅读
         // ================================================================
 
         function loadStory() {
-            const params = new URLSearchParams(window.location.search);
-            const storyId = params.get('story');
-
+            const storyId = getParam('story');
             if (!storyId) {
-                detailHero.innerHTML = `
-                    <div class="error-msg">
-                        <div style="font-size:48px;">⚠️</div>
-                        <h3>缺少参数</h3>
-                        <p>请从小说列表选择小说进入。</p>
-                        <a href="story.html" style="display:inline-block;margin-top:16px;padding:10px 28px;background:#0b1c33;color:#fff;border-radius:30px;text-decoration:none;font-weight:600;">返回小说列表</a>
-                    </div>
-                `;
-                chapterItems.innerHTML = '';
-                chapterCount.textContent = '0 章';
-                pageStoryTitle.textContent = '❌ 参数缺失';
+                // 没有指定故事，跳回列表
+                window.location.href = 'story.html';
                 return;
             }
 
@@ -698,21 +379,46 @@
                     if (!story) {
                         throw new Error('找不到该小说');
                     }
-                    renderStory(story);
+
+                    // 初始化 localStorage 点赞数（若不存在）
+                    if (getLikes(story.id) === null) {
+                        setLikes(story.id, story.likes || 0);
+                    }
+
+                    // 检查是否有 chapter 参数
+                    const chapterIdx = getParam('chapter');
+                    if (chapterIdx !== null) {
+                        const idx = parseInt(chapterIdx, 10);
+                        if (!isNaN(idx) && story.chapters && idx < story.chapters.length) {
+                            // 进入阅读模式
+                            renderDetail(story); // 先渲染详情（但会被隐藏）
+                            renderReader(story, idx);
+                            // 调整样式：隐藏详情，显示阅读
+                            document.body.classList.add('reader-mode');
+                            detailView.style.display = 'none';
+                            readerContent.style.display = 'block';
+                            return;
+                        }
+                    }
+
+                    // 否则显示详情模式
+                    document.body.classList.remove('reader-mode');
+                    detailView.style.display = 'block';
+                    readerContent.style.display = 'none';
+                    renderDetail(story);
                 })
                 .catch(err => {
                     console.error('加载失败:', err);
-                    detailHero.innerHTML = `
-                        <div class="error-msg">
+                    document.getElementById('detailHero').innerHTML = `
+                        <div style="padding:40px;text-align:center;color:#d14c4c;">
                             <div style="font-size:48px;">⚠️</div>
                             <h3>加载失败</h3>
                             <p>${err.message}</p>
-                            <a href="story.html" style="display:inline-block;margin-top:16px;padding:10px 28px;background:#0b1c33;color:#fff;border-radius:30px;text-decoration:none;font-weight:600;">返回小说列表</a>
+                            <a href="story.html" style="display:inline-block;margin-top:16px;padding:10px 28px;background:#0b1c33;color:#fff;border-radius:30px;text-decoration:none;">返回列表</a>
                         </div>
                     `;
-                    chapterItems.innerHTML = '';
+                    document.getElementById('chapterItems').innerHTML = '';
                     chapterCount.textContent = '0 章';
-                    pageStoryTitle.textContent = '❌ 加载失败';
                 });
         }
 
