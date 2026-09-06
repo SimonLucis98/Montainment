@@ -103,6 +103,7 @@ const i18n = {
       'game.matching_status_complete': '🎉 All matched! Next round...',
 
       // -------- 故事列表 --------
+      'story.badge': '📚 Library',
       'story.title': '📚 Story Workshop',
       'story.desc': 'Select a novel to start reading',
       'story.empty_title': 'No Novels Available',
@@ -237,6 +238,7 @@ const i18n = {
       'game.matching_status_complete': '🎉 全部配对完成！进入下一关...',
 
       // -------- 故事列表 --------
+      'story.badge': '📚 图书馆',
       'story.title': '📚 故事工坊',
       'story.desc': '选择一部小说，开始阅读',
       'story.empty_title': '暂无小说',
