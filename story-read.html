@@ -67,7 +67,7 @@
         .reader-nav a.disabled { opacity:0.3; pointer-events:none; }
         .reader-nav .indicator { font-size:14px; color:#888; display:flex; align-items:center; }
 
-        /* ===== 回到顶部按钮（修复：显示 ↑，不被翻译） ===== */
+        /* 回到顶部按钮 */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -96,7 +96,6 @@
 
         .empty-state { text-align:center; padding:40px 20px; color:#aaa; }
 
-        /* ===== 响应式（导航栏样式已由 style.css 统一控制） ===== */
         @media (max-width:600px) {
             .detail-info { padding:18px; }
             .detail-info .title { font-size:21px; }
@@ -119,7 +118,7 @@
 </head>
 <body>
 
-    <!-- ===== 导航栏（与 story.html 完全一致，由 style.css 控制样式） ===== -->
+    <!-- ===== 导航栏（与全局一致） ===== -->
     <header class="site-header">
         <nav class="nav-bar">
             <a href="index.html" class="brand">
@@ -170,7 +169,7 @@
         </div>
     </main>
 
-    <!-- ===== 回到顶部按钮（显示 ↑） ===== -->
+    <!-- 回到顶部按钮 -->
     <button class="back-to-top" id="backToTopBtn" aria-label="回到顶部">↑</button>
 
     <script src="i18n.js"></script>
@@ -178,6 +177,7 @@
     <script>
         // ================================================================
         //  story-read.html —— 小说详情 + 阅读
+        //  不包含汉堡菜单代码，由 common.js 统一处理
         // ================================================================
 
         const detailHero = document.getElementById('detailHero');
@@ -464,26 +464,6 @@
                     applyI18n();
                 });
         }
-
-        // ---------- 汉堡菜单 ----------
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.querySelector('.nav-toggle');
-            const links = document.querySelector('.nav-links');
-            if (toggle && links) {
-                toggle.addEventListener('click', function() {
-                    links.classList.toggle('open');
-                    const isOpen = links.classList.contains('open');
-                    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-                    toggle.textContent = isOpen ? '✕' : '☰';
-                });
-                links.querySelectorAll('a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        links.classList.remove('open');
-                        toggle.textContent = '☰';
-                    });
-                });
-            }
-        });
 
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadStory);
