@@ -1,8 +1,9 @@
 /**
  * matching.js —— 数字配对（连一连）
- * 支持 7 种语言，显示原文 + 罗马音
- * 每关从 1~1000 随机抽 10 个数字
- * 无限关卡，左右列完全对齐
+ * 支持 7 种语言，显示格式：
+ *   - 韩文、日文、中文：原文 (罗马音/拼音)
+ *   - 英文、法文、西班牙文、泰文：仅原文
+ * 每关从 1~1000 随机抽 10 个数字，无限关卡，左右列完全对齐
  */
 (function() {
   'use strict';
@@ -20,97 +21,79 @@
     es: { label: 'Español', flag: '🇪🇸' }
   };
 
+  // 需要显示读音的语言（韩文、日文、中文）
+  const SHOW_ROMAN_LANGS = ['ko', 'ja', 'zh'];
+
   // ================================================================
   //  📚 数字生成器（1~1000）
-  //  每种语言返回 { native: 原文, roman: 罗马音 }
+  //  每种语言返回 { native: 原文, roman: 读音（拼音/罗马音） }
   // ================================================================
 
   // ---------- 韩文 ----------
   function koNumber(num) {
     if (num === 0) return { native: '영', roman: 'yeong' };
-
     const units = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
     const teens = ['십', '이십', '삼십', '사십', '오십', '육십', '칠십', '팔십', '구십'];
     const hundreds = ['', '백', '이백', '삼백', '사백', '오백', '육백', '칠백', '팔백', '구백'];
     const thousands = ['', '천', '이천', '삼천', '사천', '오천', '육천', '칠천', '팔천', '구천'];
-
     const romUnits = ['', 'il', 'i', 'sam', 'sa', 'o', 'yuk', 'chil', 'pal', 'gu'];
     const romTeens = ['sip', 'i-sip', 'sam-sip', 'sa-sip', 'o-sip', 'yuk-sip', 'chil-sip', 'pal-sip', 'gu-sip'];
     const romHundreds = ['', 'baek', 'i-baek', 'sam-baek', 'sa-baek', 'o-baek', 'yuk-baek', 'chil-baek', 'pal-baek', 'gu-baek'];
     const romThousands = ['', 'cheon', 'i-cheon', 'sam-cheon', 'sa-cheon', 'o-cheon', 'yuk-cheon', 'chil-cheon', 'pal-cheon', 'gu-cheon'];
-
     let nativeParts = [], romanParts = [];
     let n = num;
-
-    // 千位
-    const t = Math.floor(n / 1000);
-    if (t > 0) { nativeParts.push(thousands[t]); romanParts.push(romThousands[t]); n %= 1000; }
-    // 百位
-    const h = Math.floor(n / 100);
-    if (h > 0) { nativeParts.push(hundreds[h]); romanParts.push(romHundreds[h]); n %= 100; }
-    // 十位
-    const ten = Math.floor(n / 10);
-    if (ten > 0) { nativeParts.push(teens[ten - 1]); romanParts.push(romTeens[ten - 1]); n %= 10; }
-    // 个位
+    const t = Math.floor(n / 1000); if (t > 0) { nativeParts.push(thousands[t]); romanParts.push(romThousands[t]); n %= 1000; }
+    const h = Math.floor(n / 100); if (h > 0) { nativeParts.push(hundreds[h]); romanParts.push(romHundreds[h]); n %= 100; }
+    const ten = Math.floor(n / 10); if (ten > 0) { nativeParts.push(teens[ten - 1]); romanParts.push(romTeens[ten - 1]); n %= 10; }
     if (n > 0) { nativeParts.push(units[n]); romanParts.push(romUnits[n]); }
-
-    return {
-      native: nativeParts.join(''),
-      roman: romanParts.join(' ')
-    };
+    return { native: nativeParts.join(''), roman: romanParts.join(' ') };
   }
 
   // ---------- 日文 ----------
   function jaNumber(num) {
     if (num === 0) return { native: '零', roman: 'rei' };
-
-    // 汉字数字（原文）
     const kanUnits = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
     const kanTeens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
     const kanHundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
     const kanThousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
-
-    // 罗马音
     const romUnits = ['', 'ichi', 'ni', 'san', 'yon', 'go', 'roku', 'nana', 'hachi', 'kyu'];
     const romTeens = ['juu', 'ni-juu', 'san-juu', 'yon-juu', 'go-juu', 'roku-juu', 'nana-juu', 'hachi-juu', 'kyu-juu'];
     const romHundreds = ['', 'hyaku', 'ni-hyaku', 'san-byaku', 'yon-hyaku', 'go-hyaku', 'roppyaku', 'nana-hyaku', 'happyaku', 'kyu-hyaku'];
     const romThousands = ['', 'sen', 'ni-sen', 'san-zen', 'yon-sen', 'go-sen', 'roku-sen', 'nana-sen', 'hassen', 'kyu-sen'];
-
     let nativeParts = [], romanParts = [];
     let n = num;
-
-    const t = Math.floor(n / 1000);
-    if (t > 0) { nativeParts.push(kanThousands[t]); romanParts.push(romThousands[t]); n %= 1000; }
-    const h = Math.floor(n / 100);
-    if (h > 0) { nativeParts.push(kanHundreds[h]); romanParts.push(romHundreds[h]); n %= 100; }
-    const ten = Math.floor(n / 10);
-    if (ten > 0) { nativeParts.push(kanTeens[ten - 1]); romanParts.push(romTeens[ten - 1]); n %= 10; }
+    const t = Math.floor(n / 1000); if (t > 0) { nativeParts.push(kanThousands[t]); romanParts.push(romThousands[t]); n %= 1000; }
+    const h = Math.floor(n / 100); if (h > 0) { nativeParts.push(kanHundreds[h]); romanParts.push(romHundreds[h]); n %= 100; }
+    const ten = Math.floor(n / 10); if (ten > 0) { nativeParts.push(kanTeens[ten - 1]); romanParts.push(romTeens[ten - 1]); n %= 10; }
     if (n > 0) { nativeParts.push(kanUnits[n]); romanParts.push(romUnits[n]); }
-
-    return {
-      native: nativeParts.join(''),
-      roman: romanParts.join(' ')
-    };
+    return { native: nativeParts.join(''), roman: romanParts.join(' ') };
   }
 
-  // ---------- 中文 ----------
+  // ---------- 中文（修正：返回拼音） ----------
   function zhNumber(num) {
     if (num === 0) return { native: '零', roman: 'líng' };
-    const units = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
-    const teens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
-    const hundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
-    const thousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
-    let parts = [], roman = [], n = num;
-    const t = Math.floor(n / 1000); if (t > 0) { parts.push(thousands[t]); roman.push(thousands[t]); n %= 1000; }
-    const h = Math.floor(n / 100); if (h > 0) { parts.push(hundreds[h]); roman.push(hundreds[h]); n %= 100; }
-    const ten = Math.floor(n / 10); if (ten > 0) { parts.push(teens[ten - 1]); roman.push(teens[ten - 1]); n %= 10; }
-    if (n > 0) { parts.push(units[n]); roman.push(units[n]); }
-    return { native: parts.join(''), roman: roman.join(' ').trim() };
+    // 汉字原文
+    const hanUnits = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    const hanTeens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
+    const hanHundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
+    const hanThousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
+    // 拼音
+    const pyUnits = ['', 'yī', 'èr', 'sān', 'sì', 'wǔ', 'liù', 'qī', 'bā', 'jiǔ'];
+    const pyTeens = ['shí', 'èr shí', 'sān shí', 'sì shí', 'wǔ shí', 'liù shí', 'qī shí', 'bā shí', 'jiǔ shí'];
+    const pyHundreds = ['', 'bǎi', 'èr bǎi', 'sān bǎi', 'sì bǎi', 'wǔ bǎi', 'liù bǎi', 'qī bǎi', 'bā bǎi', 'jiǔ bǎi'];
+    const pyThousands = ['', 'qiān', 'èr qiān', 'sān qiān', 'sì qiān', 'wǔ qiān', 'liù qiān', 'qī qiān', 'bā qiān', 'jiǔ qiān'];
+    let nativeParts = [], romanParts = [];
+    let n = num;
+    const t = Math.floor(n / 1000); if (t > 0) { nativeParts.push(hanThousands[t]); romanParts.push(pyThousands[t]); n %= 1000; }
+    const h = Math.floor(n / 100); if (h > 0) { nativeParts.push(hanHundreds[h]); romanParts.push(pyHundreds[h]); n %= 100; }
+    const ten = Math.floor(n / 10); if (ten > 0) { nativeParts.push(hanTeens[ten - 1]); romanParts.push(pyTeens[ten - 1]); n %= 10; }
+    if (n > 0) { nativeParts.push(hanUnits[n]); romanParts.push(pyUnits[n]); }
+    return { native: nativeParts.join(''), roman: romanParts.join(' ') };
   }
 
   // ---------- 英文 ----------
   function enNumber(num) {
-    if (num === 0) return { native: 'zero', roman: 'ˈzɪə.rəʊ' };
+    if (num === 0) return { native: 'zero', roman: '' };
     const units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     const teens = ['ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
     const special = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
@@ -120,28 +103,27 @@
     if (n >= 20) { const t = Math.floor(n / 10); parts.push(teens[t - 1]); n %= 10; }
     else if (n >= 10) { parts.push(special[n - 10]); n = 0; }
     if (n > 0) parts.push(units[n]);
-    const native = parts.join(' ');
-    return { native, roman: native };
+    return { native: parts.join(' '), roman: '' };
   }
 
   // ---------- 泰文 ----------
   function thNumber(num) {
-    if (num === 0) return { native: 'ศูนย์', roman: 'sǔun' };
+    if (num === 0) return { native: 'ศูนย์', roman: '' };
     const units = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
     const teens = ['สิบ', 'ยี่สิบ', 'สามสิบ', 'สี่สิบ', 'ห้าสิบ', 'หกสิบ', 'เจ็ดสิบ', 'แปดสิบ', 'เก้าสิบ'];
     const hundreds = ['', 'ร้อย', 'สองร้อย', 'สามร้อย', 'สี่ร้อย', 'ห้าร้อย', 'หกร้อย', 'เจ็ดร้อย', 'แปดร้อย', 'เก้าร้อย'];
     const thousands = ['', 'พัน', 'สองพัน', 'สามพัน', 'สี่พัน', 'ห้าพัน', 'หกพัน', 'เจ็ดพัน', 'แปดพัน', 'เก้าพัน'];
-    let parts = [], roman = [], n = num;
-    const t = Math.floor(n / 1000); if (t > 0) { parts.push(thousands[t]); roman.push(thousands[t]); n %= 1000; }
-    const h = Math.floor(n / 100); if (h > 0) { parts.push(hundreds[h]); roman.push(hundreds[h]); n %= 100; }
-    const ten = Math.floor(n / 10); if (ten > 0) { parts.push(teens[ten - 1]); roman.push(teens[ten - 1]); n %= 10; }
-    if (n > 0) { parts.push(units[n]); roman.push(units[n]); }
-    return { native: parts.join(''), roman: roman.join(' ').trim() };
+    let parts = [], n = num;
+    const t = Math.floor(n / 1000); if (t > 0) { parts.push(thousands[t]); n %= 1000; }
+    const h = Math.floor(n / 100); if (h > 0) { parts.push(hundreds[h]); n %= 100; }
+    const ten = Math.floor(n / 10); if (ten > 0) { parts.push(teens[ten - 1]); n %= 10; }
+    if (n > 0) parts.push(units[n]);
+    return { native: parts.join(''), roman: '' };
   }
 
   // ---------- 法语 ----------
   function frNumber(num) {
-    if (num === 0) return { native: 'zéro', roman: 'ze.ʁo' };
+    if (num === 0) return { native: 'zéro', roman: '' };
     const units = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'];
     const teens = ['dix', 'vingt', 'trente', 'quarante', 'cinquante', 'soixante', 'soixante-dix', 'quatre-vingts', 'quatre-vingt-dix'];
     const hundreds = ['', 'cent', 'deux cents', 'trois cents', 'quatre cents', 'cinq cents', 'six cents', 'sept cents', 'huit cents', 'neuf cents'];
@@ -151,13 +133,12 @@
     if (n >= 20) { const t = Math.floor(n / 10); parts.push(teens[t - 1]); n %= 10; }
     else if (n >= 10) { const sp = ['dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf']; parts.push(sp[n-10]); n=0; }
     if (n > 0) parts.push(units[n]);
-    const native = parts.join(' ');
-    return { native, roman: native };
+    return { native: parts.join(' '), roman: '' };
   }
 
   // ---------- 西班牙文 ----------
   function esNumber(num) {
-    if (num === 0) return { native: 'cero', roman: 'ˈθe.ɾo' };
+    if (num === 0) return { native: 'cero', roman: '' };
     const units = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
     const teens = ['diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
     const hundreds = ['', 'cien', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
@@ -167,8 +148,7 @@
     if (n >= 20) { const t = Math.floor(n / 10); parts.push(teens[t - 1]); n %= 10; }
     else if (n >= 10) { const sp = ['diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve']; parts.push(sp[n-10]); n=0; }
     if (n > 0) parts.push(units[n]);
-    const native = parts.join(' ');
-    return { native, roman: native };
+    return { native: parts.join(' '), roman: '' };
   }
 
   // ---------- 统一接口 ----------
@@ -390,7 +370,7 @@
   };
 
   // ================================================================
-  //  🔥 固定卡片高度 + 完美对齐
+  //  🔥 固定卡片高度 + 完美对齐 + 按语言决定是否显示读音
   // ================================================================
   MatchingGame.prototype.renderCards = function() {
     const leftCol = document.getElementById('match-left');
@@ -400,6 +380,7 @@
     rightCol.innerHTML = '';
 
     const CARD_HEIGHT = '60px';
+    const needRoman = SHOW_ROMAN_LANGS.includes(this.lang);
 
     this.leftItems.forEach((item, index) => {
       const card = document.createElement('div');
@@ -454,9 +435,9 @@
       card.dataset.pairId = item.pairId;
       card.dataset.side = 'right';
       const wordData = item.wordData;
-      // 显示格式：原文 (罗马音)
+      // 根据语言决定是否显示读音
       let displayText = wordData.native;
-      if (wordData.roman && wordData.roman.length > 0) {
+      if (needRoman && wordData.roman && wordData.roman.length > 0) {
         displayText = wordData.native + ' (' + wordData.roman + ')';
       }
       card.textContent = displayText;
@@ -501,7 +482,7 @@
     });
   };
 
-  // -------- 事件绑定 --------
+  // -------- 事件绑定（保持不变） --------
   MatchingGame.prototype.bindEvents = function() {
     const self = this;
     this.container.addEventListener('click', function(e) {
