@@ -11,7 +11,108 @@
 
         .story-container { max-width:900px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
-        /* 小说网格 */
+        /* ===== 古风音乐播放器 ===== */
+        .music-player {
+            background: linear-gradient(135deg, #2d2a24, #4a3f35);
+            border-radius: 40px;
+            padding: 8px 16px 8px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 1px solid rgba(201, 168, 124, 0.15);
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+            flex-wrap: wrap;
+        }
+        .music-player .icon {
+            font-size: 18px;
+            opacity: 0.6;
+            color: #c9a87c;
+        }
+        .music-player .info {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+        }
+        .music-player .info .title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e8e0d8;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .music-player .info .sub {
+            font-size: 11px;
+            color: rgba(232,224,216,0.4);
+            letter-spacing: 0.3px;
+        }
+        .music-player .controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .music-player .controls button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(201, 168, 124, 0.2);
+            background: rgba(255,255,255,0.04);
+            color: #e8e0d8;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+        }
+        .music-player .controls button:hover {
+            background: rgba(201, 168, 124, 0.12);
+            border-color: rgba(201, 168, 124, 0.3);
+        }
+        .music-player .controls button.playing {
+            background: rgba(201, 168, 124, 0.15);
+            border-color: #c9a87c;
+        }
+        .music-player .controls .volume-slider {
+            width: 60px;
+            height: 3px;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        .music-player .controls .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #c9a87c;
+            cursor: pointer;
+        }
+        .music-player .controls .volume-slider::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #c9a87c;
+            cursor: pointer;
+            border: none;
+        }
+
+        .music-player .badge {
+            font-size: 10px;
+            font-weight: 700;
+            color: #c9a87c;
+            background: rgba(201, 168, 124, 0.08);
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 168, 124, 0.06);
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== 小说网格 ===== */
         .story-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -67,7 +168,24 @@
         .empty-state .icon { font-size:56px; margin-bottom:12px; }
         .empty-state h3 { font-size:20px; color:#666; margin-bottom:4px; }
 
-        /* ===== 响应式 ===== */
+        /* ===== 音乐播放器在手机上的响应式 ===== */
+        @media (max-width:600px) {
+            .music-player {
+                padding: 6px 12px 6px 16px;
+                border-radius: 30px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .music-player .info .title { font-size: 12px; }
+            .music-player .controls .volume-slider { width: 40px; }
+            .music-player .badge { font-size: 9px; padding: 1px 8px; }
+        }
+        @media (max-width:420px) {
+            .music-player .info .sub { display: none; }
+            .music-player .controls .volume-slider { width: 30px; }
+        }
+
+        /* ===== 其他响应式 ===== */
         @media (max-width:720px) {
             .story-grid {
                 grid-template-columns: 1fr 1fr;
@@ -103,12 +221,12 @@
 </head>
 <body>
 
-    <!-- ===== 导航栏（与全局一致） ===== -->
+    <!-- ===== 导航栏 ===== -->
     <header class="site-header">
         <nav class="nav-bar">
             <a href="index.html" class="brand">
                 <span class="brand-mark">✦</span>
-                Montainment
+                Montainment · 蒙堂木下
             </a>
             <ul class="nav-links">
                 <li><a href="index.html" data-i18n="nav.home">首页</a></li>
@@ -121,37 +239,137 @@
     </header>
 
     <main>
-        <!-- ===== 页面头部（统一风格） ===== -->
+        <!-- ===== 页面头部 ===== -->
         <div class="page-header container">
-            <span class="page-badge badge-coral" data-i18n="story.badge">📚 故事工坊</span>
+            <span class="page-badge badge-coral" data-i18n="story.badge">📚 图书馆</span>
             <h1 data-i18n="story.title">选择一部小说，开始阅读</h1>
             <p data-i18n="story.desc">从下方选择一部小说，进入独立阅读页面，享受沉浸式阅读体验。</p>
         </div>
 
-        <!-- ===== 小说列表 ===== -->
         <div class="container">
             <div class="story-container" id="app">
+
+                <!-- ===== 🎵 古风音乐播放器 ===== -->
+                <div class="music-player" id="musicPlayer">
+                    <span class="icon">🏮</span>
+                    <div class="info">
+                        <span class="title">茶楼听书 · 纯音乐</span>
+                        <span class="sub">蒙堂木下 · 书卷气</span>
+                    </div>
+                    <span class="badge">🎵 背景音</span>
+                    <div class="controls">
+                        <button id="playBtn" class="playing" aria-label="播放/暂停">⏸</button>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="40" aria-label="音量" />
+                    </div>
+                </div>
+
+                <!-- ===== 小说列表 ===== -->
                 <div class="story-grid" id="storyGrid"></div>
             </div>
         </div>
     </main>
 
     <footer class="site-footer">
-        <div class="container" data-i18n="common.footer">© 2026 Montainment · 一个让学习更好玩的静态网站</div>
+        <div class="container" data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
     </footer>
 
     <script src="i18n.js"></script>
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  小说列表页（跳转模式）
-        //  从 data/stories.json 加载，显示卡片，点击跳转到 story-read.html?story=id
-        //  点赞数从 localStorage 读取（优先于服务器数据）
+        //  🎵 古风音乐播放器（YouTube 嵌入）
+        // ================================================================
+        (function() {
+            // 🔽 把「你的视频ID」替换成你实际复制的 11 位字符
+            const YOUTUBE_VIDEO_ID = '你的视频ID';
+            const YOUTUBE_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&modestbranding=1&rel=0&showinfo=0`;
+
+            let isPlaying = false;
+            const playBtn = document.getElementById('playBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+
+            // 创建隐藏的 YouTube iframe
+            function createPlayer() {
+                const container = document.createElement('div');
+                container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
+                container.innerHTML = `
+                    <iframe
+                        id="youtubePlayer"
+                        src="${YOUTUBE_URL}"
+                        width="1"
+                        height="1"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                    ></iframe>
+                `;
+                document.body.appendChild(container);
+
+                const iframe = document.getElementById('youtubePlayer');
+
+                // 播放/暂停切换
+                playBtn.addEventListener('click', function() {
+                    const iframe = document.getElementById('youtubePlayer');
+                    if (!iframe) return;
+
+                    if (isPlaying) {
+                        const currentSrc = iframe.src;
+                        iframe.src = '';
+                        setTimeout(() => {
+                            iframe.src = currentSrc.replace('autoplay=1', 'autoplay=0');
+                        }, 50);
+                        isPlaying = false;
+                        playBtn.textContent = '▶';
+                        playBtn.classList.remove('playing');
+                    } else {
+                        const currentSrc = iframe.src;
+                        iframe.src = currentSrc.replace('autoplay=0', 'autoplay=1');
+                        isPlaying = true;
+                        playBtn.textContent = '⏸';
+                        playBtn.classList.add('playing');
+                    }
+                });
+
+                // 点击播放器整体也可以切换
+                document.querySelector('.music-player').addEventListener('click', function(e) {
+                    if (e.target.closest('button') || e.target.closest('input')) return;
+                    playBtn.click();
+                });
+
+                // 初始状态：暂停
+                isPlaying = false;
+                playBtn.textContent = '▶';
+                playBtn.classList.remove('playing');
+
+                // 音量滑块（视觉反馈）
+                volumeSlider.addEventListener('input', function() {
+                    // 实际音量控制需要 YouTube API，这里保留 UI
+                });
+
+                // 预加载
+                setTimeout(() => {
+                    const src = iframe.src;
+                    iframe.src = src.replace('autoplay=0', 'autoplay=0');
+                }, 1000);
+            }
+
+            createPlayer();
+
+            window.musicPlayer = {
+                play: function() { playBtn.click(); },
+                pause: function() { if (isPlaying) playBtn.click(); },
+                toggle: function() { playBtn.click(); },
+                setVolume: function(val) { volumeSlider.value = val; }
+            };
+
+        })();
+
+        // ================================================================
+        //  小说列表逻辑
         // ================================================================
 
         const storyGrid = document.getElementById('storyGrid');
 
-        // ---------- localStorage 工具 ----------
         function getLikes(storyId) {
             const key = 'story_likes_' + storyId;
             const val = localStorage.getItem(key);
@@ -162,7 +380,6 @@
             localStorage.setItem('story_likes_' + storyId, String(count));
         }
 
-        // ---------- 获取首字母 Emoji ----------
         function getCoverEmoji(title) {
             const map = {
                 '灰':'🏚️','星':'⭐','魔':'🔮','时':'⏳','风':'🌪️','火':'🔥','水':'💧','暗':'🌙','光':'☀️','梦':'🌌',
@@ -199,7 +416,6 @@
             return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
         }
 
-        // ---------- 渲染列表 ----------
         function renderList(stories) {
             if (!stories || stories.length === 0) {
                 storyGrid.innerHTML = `
@@ -255,7 +471,6 @@
             applyI18n();
         }
 
-        // ---------- 加载数据 ----------
         function loadStories() {
             fetch('data/stories.json')
                 .then(res => {
@@ -277,7 +492,6 @@
                 });
         }
 
-        // 等待 i18n 加载完成
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadStories);
         } else {
