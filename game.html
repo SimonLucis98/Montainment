@@ -9,16 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ========== 游戏大厅样式 ========== */
     .game-hall { max-width: 900px; margin: 0 auto; }
-
     .game-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 24px;
       margin-top: 8px;
     }
-
     .game-card {
       background: #fff;
       border-radius: 20px;
@@ -31,94 +28,35 @@
       text-decoration: none;
       color: inherit;
     }
-    .game-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
-    }
-
+    .game-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.10); }
     .game-cover {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      background: linear-gradient(145deg, #2d2d44, #1a1a2e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 52px;
-      color: rgba(255, 255, 255, 0.15);
-      position: relative;
-      overflow: hidden;
+      width: 100%; aspect-ratio: 16/10; background: linear-gradient(145deg, #2d2d44, #1a1a2e);
+      display: flex; align-items: center; justify-content: center; font-size: 52px;
+      color: rgba(255,255,255,0.15); position: relative; overflow: hidden;
     }
-    .game-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .game-cover img { width: 100%; height: 100%; object-fit: cover; }
     .game-cover .cover-icon { font-size: 52px; opacity: 0.6; }
     .game-cover .cover-badge {
-      position: absolute;
-      bottom: 12px;
-      right: 16px;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.5);
-      background: rgba(0,0,0,0.4);
-      padding: 2px 14px;
-      border-radius: 20px;
+      position: absolute; bottom: 12px; right: 16px; font-size: 12px;
+      color: rgba(255,255,255,0.5); background: rgba(0,0,0,0.4); padding: 2px 14px; border-radius: 20px;
     }
-
-    .game-card-body {
-      padding: 16px 18px 18px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .game-card-body .title {
-      font-size: 17px;
-      font-weight: 700;
-      color: #1a1a2e;
-    }
-    .game-card-body .desc {
-      font-size: 14px;
-      color: #666;
-      line-height: 1.5;
-      flex: 1;
-      margin: 4px 0 12px;
-    }
-    .game-card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid #f0ede8;
-      padding-top: 12px;
-    }
-    .game-card-footer .status {
-      font-size: 13px;
-      color: #aaa;
-      background: #f5f2ed;
-      padding: 2px 14px;
-      border-radius: 20px;
-    }
-    .game-card-footer .play-hint {
-      font-size: 13px;
-      color: #2a6df4;
-      font-weight: 600;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: #aaa;
-    }
+    .game-card-body { padding: 16px 18px 18px; flex: 1; display: flex; flex-direction: column; }
+    .game-card-body .title { font-size: 17px; font-weight: 700; color: #1a1a2e; }
+    .game-card-body .desc { font-size: 14px; color: #666; line-height: 1.5; flex: 1; margin: 4px 0 12px; }
+    .game-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0ede8; padding-top: 12px; }
+    .game-card-footer .status { font-size: 13px; color: #aaa; background: #f5f2ed; padding: 2px 14px; border-radius: 20px; }
+    .game-card-footer .play-hint { font-size: 13px; color: #2a6df4; font-weight: 600; }
+    .empty-state { text-align: center; padding: 60px 20px; color: #aaa; }
     .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
     .empty-state h3 { font-size: 20px; color: #666; }
-
-    @media (max-width: 600px) {
+    @media (max-width:600px) {
       .game-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
       .game-card-body .title { font-size: 15px; }
       .game-card-body .desc { font-size: 13px; }
-      .game-cover { aspect-ratio: 16 / 9; }
+      .game-cover { aspect-ratio: 16/9; }
       .game-cover .cover-icon { font-size: 36px; }
     }
-    @media (max-width: 420px) {
+    @media (max-width:420px) {
       .game-grid { gap: 10px; }
       .game-card-body { padding: 12px; }
       .game-card-body .title { font-size: 13px; }
@@ -132,10 +70,10 @@
     <nav class="nav-bar">
       <a href="index.html" class="brand"><span class="brand-mark">✦</span> Montainment</a>
       <ul class="nav-links">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="quiz.html">语言测验</a></li>
-        <li><a href="game.html" class="active">游戏大厅</a></li>
-        <li><a href="story.html">故事工坊</a></li>
+        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+        <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
+        <li><a href="game.html" class="active" data-i18n="nav.game">游戏</a></li>
+        <li><a href="story.html" data-i18n="nav.story">故事工坊</a></li>
       </ul>
       <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
     </nav>
@@ -149,9 +87,9 @@
     </div>
 
     <div class="page-header container">
-      <span class="page-badge badge-sunshine">🎮 游戏大厅</span>
-      <h1>选择游戏 · 开始挑战</h1>
-      <p>点击任意游戏卡片，进入独立游戏页面，享受完整广告体验！</p>
+      <span class="page-badge badge-sunshine" data-i18n="game.badge">🎮 游戏大厅</span>
+      <h1 data-i18n="game.title">选择游戏 · 开始挑战</h1>
+      <p data-i18n="game.desc">点击任意游戏卡片，进入独立游戏页面，享受完整广告体验！</p>
     </div>
 
     <div class="container game-hall">
@@ -163,14 +101,12 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2026 Montainment · 一个让学习更好玩的静态网站</div>
+    <div class="container" data-i18n="common.footer">© 2026 Montainment · 一个让学习更好玩的静态网站</div>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="common.js"></script>
   <script>
-    // ================================================================
-    //  游戏大厅：从 data/games.json 加载，点击跳转到 game-play.html
-    // ================================================================
     (function() {
       const gameGrid = document.getElementById('gameGrid');
 
@@ -202,9 +138,14 @@
         if (games.length === 0) {
           gameGrid.innerHTML = `
             <div style="grid-column:1/-1;">
-              <div class="empty-state"><div class="icon">🎮</div><h3>暂无游戏</h3><p>请在后台添加游戏内容 🚧</p></div>
+              <div class="empty-state">
+                <div class="icon">🎮</div>
+                <h3 data-i18n="game.empty_title">暂无游戏</h3>
+                <p data-i18n="game.empty_desc">请在后台添加游戏内容 🚧</p>
+              </div>
             </div>
           `;
+          applyI18n();
           return;
         }
 
@@ -212,21 +153,23 @@
         games.forEach((game) => {
           const coverHtml = getCoverDisplay(game);
           const coverColor = getCoverColor(game);
-          const typeLabel = game.type === 'js' ? '原生游戏' : 'H5 游戏';
+          const typeLabel = game.type === 'js' ? 
+            `<span data-i18n="game.native_badge">原生游戏</span>` : 
+            `<span data-i18n="game.h5_badge">H5 游戏</span>`;
           const desc = game.descriptionZh || '📝 来挑战吧！';
 
           html += `
             <a href="game-play.html?game=${encodeURIComponent(game.id)}" class="game-card">
               <div class="game-cover" style="background:${coverColor};">
                 ${coverHtml}
-                <span class="cover-badge">${typeLabel}</span>
+                <span class="cover-badge">${game.type === 'js' ? '原生游戏' : 'H5 游戏'}</span>
               </div>
               <div class="game-card-body">
                 <div class="title">${game.titleZh}</div>
                 <div class="desc">${desc}</div>
                 <div class="game-card-footer">
-                  <span class="status">${typeLabel}</span>
-                  <span class="play-hint">开始游戏 →</span>
+                  <span class="status">${game.type === 'js' ? '原生游戏' : 'H5 游戏'}</span>
+                  <span class="play-hint" data-i18n="game.play_hint">开始游戏 →</span>
                 </div>
               </div>
             </a>
@@ -234,6 +177,7 @@
         });
 
         gameGrid.innerHTML = html;
+        applyI18n();
       }
 
       function loadGames() {
