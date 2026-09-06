@@ -17,6 +17,7 @@ const i18n = {
       'nav.quiz': 'Language Quiz',
       'nav.game': 'Games',
       'nav.story': 'Story Workshop',
+      'nav.immersive': '🌙 Immersive Studio',
 
       // -------- 首页 --------
       'index.eyebrow': 'Learn + Play',
@@ -139,7 +140,7 @@ const i18n = {
       'storyread.back_to_top': 'Back to top',
 
       // -------- 通用 --------
-      'common.footer': '© 2026 Montainment · A static website that makes learning more fun',
+      'common.footer': '© 2026 Montainment · 蒙堂木下 · A static website that makes learning more fun',
       'common.lang_switch': 'EN',
     },
 
@@ -152,6 +153,7 @@ const i18n = {
       'nav.quiz': '语言测验',
       'nav.game': '游戏',
       'nav.story': '故事工坊',
+      'nav.immersive': '🌙 沉浸式工坊',
 
       // -------- 首页 --------
       'index.eyebrow': '学习 + 娱乐，两不耽误',
@@ -274,7 +276,7 @@ const i18n = {
       'storyread.back_to_top': '回到顶部',
 
       // -------- 通用 --------
-      'common.footer': '© 2026 Montainment · 一个让学习更好玩的静态网站',
+      'common.footer': '© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站',
       'common.lang_switch': '中文',
     }
   },
