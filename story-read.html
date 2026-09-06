@@ -9,74 +9,6 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#f5f2ed; font-family:'Nunito', system-ui, sans-serif; min-height:100vh; }
 
-        /* ===== 导航栏（与首页一致） ===== */
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(251, 251, 255, 0.9);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #e7e7f5;
-        }
-        .nav-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 24px;
-            max-width: 1120px;
-            margin: 0 auto;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: "Fredoka", "Nunito", sans-serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: #1b1b2f;
-        }
-        .brand-mark {
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #5b5fef, #ff6b6b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 18px;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            list-style: none;
-        }
-        .nav-links a {
-            padding: 10px 16px;
-            border-radius: 999px;
-            font-weight: 600;
-            color: #5a5a72;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: #5b5fef;
-            color: #fff;
-        }
-        .nav-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            background: #ffffff;
-            border: 1px solid #e7e7f5;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
         .story-read-container { max-width:820px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
         .top-nav {
@@ -115,7 +47,7 @@
         .chapter-item .left { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px; flex:1; }
         .chapter-item .num { font-size:14px; font-weight:700; color:#ccc; min-width:32px; }
         .chapter-item .ch-title { font-size:16px; font-weight:600; color:#1a1a2e; }
-        .chapter-item .ch-preview { font-size:14px; color:#999; font-weight:400; width:100%; margin-left:0; padding-left:40px; }
+        .chapter-item .ch-preview { font-size:14px; color:#999; font-weight:400; width:100%; margin-left:0; padding-left:40px; word-break:break-word; }
         .chapter-item .arrow { color:#ccc; font-size:18px; transition:0.2s; margin-left:auto; }
         .chapter-item:hover .arrow { color:#888; transform:translateX(4px); }
 
@@ -145,7 +77,9 @@
 
         .empty-state { text-align:center; padding:40px 20px; color:#aaa; }
 
-        /* ===== 响应式 ===== */
+        /* ============================================================
+           移动端导航（汉堡菜单）- 与首页完全一致，居中
+           ============================================================ */
         @media (max-width: 720px) {
             .nav-links {
                 position: absolute;
@@ -155,34 +89,43 @@
                 background: rgba(251, 251, 255, 0.98);
                 flex-direction: column;
                 align-items: stretch;
-                padding: 12px 24px 20px;
+                padding: 16px 24px 24px;
                 border-bottom: 1px solid #e7e7f5;
                 display: none;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             }
             .nav-links.open {
                 display: flex;
             }
             .nav-links a {
+                display: block;
                 text-align: center;
-                padding: 12px 16px;
+                padding: 14px 16px;
+                border-radius: 12px;
+                font-size: 16px;
+            }
+            .nav-links a:hover,
+            .nav-links a.active {
+                background: #5b5fef;
+                color: #fff;
             }
             .nav-toggle {
                 display: flex;
             }
-            /* 语言切换按钮在移动端 */
+
+            /* 语言切换按钮在移动端居中 */
             .lang-toggle-container {
                 justify-content: center;
                 margin-left: 0 !important;
-                padding: 8px 0 !important;
+                padding: 12px 0 4px !important;
+                border-top: 1px solid #e7e7f5;
+                margin-top: 8px;
             }
             .lang-toggle-container button {
                 font-size: 15px !important;
-                padding: 8px 16px !important;
+                padding: 8px 18px !important;
             }
-        }
 
-        @media (max-width:600px) {
             .detail-info { padding:18px; }
             .detail-info .title { font-size:21px; }
             .detail-info .desc { font-size:14px; padding:12px; }
@@ -197,14 +140,15 @@
             .top-nav { gap:12px; }
             .top-nav a { font-size:14px; }
         }
-        @media (max-width:420px) {
+
+        @media (max-width: 420px) {
             .chapter-item .ch-preview { padding-left:0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== 导航栏（与首页一致，含汉堡菜单） ===== -->
+    <!-- ===== 导航栏（与首页一致） ===== -->
     <header class="site-header">
         <nav class="nav-bar">
             <a href="index.html" class="brand">
@@ -286,7 +230,6 @@
         let currentStory = null;
         let currentStoryId = null;
 
-        // ---------- localStorage 工具 ----------
         function getLikes(storyId) {
             const val = localStorage.getItem('story_likes_' + storyId);
             return val !== null ? parseInt(val, 10) : null;
@@ -559,7 +502,6 @@
                     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                     toggle.textContent = isOpen ? '✕' : '☰';
                 });
-                // 点击链接后自动关闭
                 links.querySelectorAll('a').forEach(function(link) {
                     link.addEventListener('click', function() {
                         links.classList.remove('open');
