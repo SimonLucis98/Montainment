@@ -197,8 +197,9 @@
       }
 
       function getCoverDisplay(game) {
-        if (game.image) {
-          return `<img src="${game.image}" alt="${game.titleZh}" />`;
+        // ✅ 修复：使用 game.cover 而不是 game.image
+        if (game.cover) {
+          return `<img src="${game.cover}" alt="${game.titleZh}" />`;
         }
         return `<span class="cover-icon">${game.icon || '🎮'}</span>`;
       }
