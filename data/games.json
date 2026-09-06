@@ -7,11 +7,11 @@
       "titleEn": "Matching Challenge",
       "descriptionZh": "左右配对，学习语言",
       "descriptionEn": "Match pairs to learn language",
-      "image": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788680688/ffqj3kzwpuc3kxyq56ma.png",
       "type": "js",
       "entry": "games/matching.js",
       "sortOrder": 1,
-      "enabled": true
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788729414/gtbdihkmmr7axzxyaymi.png"
     },
     {
       "id": "2",
@@ -23,7 +23,8 @@
       "type": "js",
       "entry": "games/wordzombie.js",
       "sortOrder": 2,
-      "enabled": true
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788729319/qk9qqxkjiklgprgtucx8.png"
     }
   ]
 }
