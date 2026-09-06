@@ -8,6 +8,7 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#f5f2ed; font-family:'Nunito', system-ui, sans-serif; min-height:100vh; }
+
         header { background:#1a1a2e; padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.15); }
         nav { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:64px; }
         .logo { color:#fff; font-size:22px; font-weight:700; letter-spacing:-0.5px; }
@@ -16,6 +17,16 @@
         nav ul li a { color:rgba(255,255,255,0.7); text-decoration:none; padding:8px 18px; border-radius:8px; font-size:15px; font-weight:600; transition:0.2s; }
         nav ul li a:hover { color:#fff; background:rgba(255,255,255,0.08); }
         nav ul li a.active { color:#fff; background:#f7c948; color:#1a1a2e; }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
 
         .story-container { max-width:900px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
@@ -36,10 +47,21 @@
         .story-cover .cover-title { position:absolute; bottom:12px; right:16px; font-size:13px; color:rgba(255,255,255,0.3); font-weight:400; letter-spacing:2px; }
 
         .story-card-body { padding:16px 18px 18px; flex:1; display:flex; flex-direction:column; }
-        .story-card-body .title { font-size:17px; font-weight:700; color:#1a1a2e; line-height:1.3; margin-bottom:2px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+        .story-card-body .title {
+            font-size:17px; font-weight:700; color:#1a1a2e; line-height:1.3; margin-bottom:2px;
+            word-break: break-word;
+            hyphens: auto;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+        }
         .story-card-body .author { font-size:14px; color:#888; margin-bottom:8px; }
-        .story-card-body .desc { font-size:14px; color:#666; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; flex:1; margin-bottom:12px; }
-        .story-card-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid #f0ede8; padding-top:12px; margin-top:auto; }
+        .story-card-body .desc {
+            font-size:14px; color:#666; line-height:1.5;
+            word-break: break-word;
+            hyphens: auto;
+            display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+            flex:1; margin-bottom:12px;
+        }
+        .story-card-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid #f0ede8; padding-top:12px; margin-top:auto; flex-wrap:wrap; gap:4px; }
         .story-card-footer .likes { font-size:14px; color:#999; display:flex; align-items:center; gap:4px; }
         .story-card-footer .likes .heart { color:#e74c5e; font-size:16px; }
         .story-card-footer .chapters-count { font-size:13px; color:#aaa; background:#f5f2ed; padding:2px 14px; border-radius:20px; }
@@ -53,17 +75,20 @@
             .story-container { padding:16px 12px 32px; }
             .story-grid { grid-template-columns:1fr 1fr; gap:14px; }
             .story-card-body .title { font-size:15px; }
-            .story-card-body .desc { font-size:13px; -webkit-line-clamp:1; }
-            nav ul li a { font-size:13px; padding:6px 12px; }
-            nav { height:56px; }
+            .story-card-body .desc { font-size:13px; -webkit-line-clamp:2; }
+            nav ul { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:#1a1a2e; padding:16px 24px; gap:6px; border-bottom:1px solid rgba(255,255,255,0.1); }
+            nav ul.open { display:flex; }
+            nav ul li a { display:block; padding:12px 16px; text-align:center; }
+            .nav-toggle { display:block; }
             .logo { font-size:18px; }
+            nav { height:56px; }
         }
         @media (max-width:420px) {
-            .story-grid { grid-template-columns:1fr 1fr; gap:10px; }
+            .story-grid { grid-template-columns:1fr; gap:12px; }
             .story-card-body { padding:12px; }
-            .story-card-body .title { font-size:13px; }
+            .story-card-body .title { font-size:14px; }
             .story-card-body .author { font-size:12px; }
-            .story-card-body .desc { font-size:12px; -webkit-line-clamp:1; }
+            .story-card-body .desc { font-size:12px; -webkit-line-clamp:2; }
             .story-card-footer .likes { font-size:12px; }
             .story-card-footer .chapters-count { font-size:11px; padding:1px 10px; }
         }
@@ -74,12 +99,13 @@
     <header>
         <nav>
             <div class="logo">Montainment</div>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="index.html" data-i18n="nav.home">首页</a></li>
                 <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
                 <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
                 <li><a href="story.html" class="active" data-i18n="nav.story">故事工坊</a></li>
             </ul>
+            <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
         </nav>
     </header>
 
@@ -219,7 +245,6 @@
                 });
         }
 
-        // 等待 i18n 加载完成
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadStories);
         } else {
