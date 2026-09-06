@@ -7,12 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <style>
         /* ========== 全局重置 & 基础 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #f5f2ed;
             font-family: 'Nunito', system-ui, -apple-system, sans-serif;
@@ -36,20 +31,9 @@
             align-items: center;
             height: 64px;
         }
-        .logo {
-            color: #fff;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        .logo span {
-            color: #f7c948;
-        }
-        nav ul {
-            display: flex;
-            gap: 8px;
-            list-style: none;
-        }
+        .logo { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+        .logo span { color: #f7c948; }
+        nav ul { display: flex; gap: 8px; list-style: none; }
         nav ul li a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
@@ -59,15 +43,8 @@
             font-weight: 600;
             transition: 0.2s;
         }
-        nav ul li a:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.08);
-        }
-        nav ul li a.active {
-            color: #fff;
-            background: #f7c948;
-            color: #1a1a2e;
-        }
+        nav ul li a:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+        nav ul li a.active { color: #fff; background: #f7c948; color: #1a1a2e; }
 
         /* ========== 主容器 ========== */
         .story-container {
@@ -94,6 +71,8 @@
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             display: flex;
             flex-direction: column;
+            text-decoration: none;
+            color: inherit;
         }
         .story-card:hover {
             transform: translateY(-6px);
@@ -110,16 +89,8 @@
             position: relative;
             overflow: hidden;
         }
-        .story-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .story-cover .cover-emoji {
-            font-size: 52px;
-            opacity: 0.6;
-            filter: grayscale(0.2);
-        }
+        .story-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .story-cover .cover-emoji { font-size: 52px; opacity: 0.6; filter: grayscale(0.2); }
         .story-cover .cover-title {
             position: absolute;
             bottom: 12px;
@@ -188,13 +159,8 @@
             padding: 0 4px;
             line-height: 1;
         }
-        .story-card-footer .likes .heart-btn:hover {
-            color: #e74c5e;
-            transform: scale(1.1);
-        }
-        .story-card-footer .likes .heart-btn.liked {
-            color: #e74c5e;
-        }
+        .story-card-footer .likes .heart-btn:hover { color: #e74c5e; transform: scale(1.1); }
+        .story-card-footer .likes .heart-btn.liked { color: #e74c5e; }
         .story-card-footer .chapters-count {
             font-size: 13px;
             color: #aaa;
@@ -202,424 +168,32 @@
             padding: 2px 14px;
             border-radius: 20px;
         }
-        .story-card-footer .updated-time {
-            font-size: 12px;
-            color: #bbb;
-        }
-
-        /* ========== 小说详情页 ========== */
-        .story-detail {
-            display: none;
-            animation: fadeUp 0.35s ease;
-        }
-        .story-detail.active {
-            display: block;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .detail-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: none;
-            border: none;
-            font-size: 15px;
-            font-weight: 600;
-            color: #666;
-            cursor: pointer;
-            padding: 8px 0 16px;
-            transition: 0.2s;
-            font-family: inherit;
-        }
-        .detail-back:hover {
-            color: #1a1a2e;
-        }
-
-        .detail-hero {
-            background: #fff;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            margin-bottom: 28px;
-        }
-        .detail-cover {
-            width: 100%;
-            aspect-ratio: 16 / 7;
-            background: linear-gradient(145deg, #2d2d44, #1a1a2e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .detail-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .detail-cover .cover-emoji {
-            font-size: 64px;
-            opacity: 0.5;
-        }
-
-        .detail-info {
-            padding: 24px 28px 28px;
-        }
-        .detail-info .title {
-            font-size: 26px;
-            font-weight: 800;
-            color: #1a1a2e;
-            margin-bottom: 2px;
-        }
-        .detail-info .author {
-            font-size: 16px;
-            color: #888;
-            margin-bottom: 12px;
-        }
-        .detail-info .desc {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 16px;
-            padding: 14px 18px;
-            background: #f8f6f2;
-            border-radius: 12px;
-            border-left: 4px solid #f7c948;
-        }
-        .detail-info .meta-row {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            font-size: 14px;
-            color: #888;
-            align-items: center;
-        }
-        .detail-info .meta-row .likes {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .detail-info .meta-row .likes .heart-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 22px;
-            color: #ccc;
-            transition: 0.2s;
-            padding: 0;
-            line-height: 1;
-        }
-        .detail-info .meta-row .likes .heart-btn:hover {
-            color: #e74c5e;
-            transform: scale(1.1);
-        }
-        .detail-info .meta-row .likes .heart-btn.liked {
-            color: #e74c5e;
-        }
-        .detail-info .meta-row .updated-time {
-            color: #bbb;
-            font-size: 13px;
-        }
-
-        /* ========== 章节列表 ========== */
-        .chapter-list {
-            background: #fff;
-            border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-        }
-        .chapter-list-header {
-            padding: 18px 24px;
-            font-weight: 700;
-            font-size: 18px;
-            color: #1a1a2e;
-            border-bottom: 1px solid #f0ede8;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .chapter-list-header .count {
-            font-weight: 400;
-            font-size: 14px;
-            color: #999;
-        }
-
-        .chapter-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 24px;
-            border-bottom: 1px solid #f5f2ed;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .chapter-item:hover {
-            background: #faf8f5;
-        }
-        .chapter-item:last-child {
-            border-bottom: none;
-        }
-        .chapter-item .left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-        .chapter-item .num {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ccc;
-            min-width: 32px;
-        }
-        .chapter-item .ch-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1a1a2e;
-        }
-        .chapter-item .ch-preview {
-            font-size: 14px;
-            color: #999;
-            margin-left: 8px;
-            font-weight: 400;
-        }
-        .chapter-item .arrow {
-            color: #ccc;
-            font-size: 18px;
-            transition: 0.2s;
-        }
-        .chapter-item:hover .arrow {
-            color: #888;
-            transform: translateX(4px);
-        }
-
-        /* ========== 阅读正文 ========== */
-        .reader-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(6px);
-            z-index: 200;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-        }
-        .reader-overlay.active {
-            display: flex;
-        }
-        .reader-box {
-            background: #fcf9f5;
-            border-radius: 28px;
-            max-width: 720px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 32px 36px 40px;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
-            animation: fadeUp 0.3s ease;
-            position: relative;
-        }
-        .reader-box .close-reader {
-            position: sticky;
-            top: 0;
-            float: right;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: #aaa;
-            cursor: pointer;
-            padding: 0 4px;
-            transition: 0.2s;
-            line-height: 1;
-        }
-        .reader-box .close-reader:hover {
-            color: #1a1a2e;
-        }
-        .reader-box .reader-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin: 4px 0 6px;
-        }
-        .reader-box .reader-chapter {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 20px;
-        }
-        .reader-box .reader-body {
-            font-size: 18px;
-            line-height: 2;
-            color: #2c2c2c;
-            white-space: pre-wrap;
-            word-break: break-word;
-            font-family: 'Georgia', 'Times New Roman', serif;
-        }
-        .reader-box .reader-body p {
-            margin-bottom: 1.2em;
-            text-indent: 2em;
-        }
-        .reader-box .reader-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 28px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        .reader-box .reader-nav button {
-            padding: 8px 24px;
-            border: 1px solid #ddd;
-            background: #fff;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.2s;
-            font-family: inherit;
-            color: #333;
-        }
-        .reader-box .reader-nav button:hover:not(:disabled) {
-            background: #1a1a2e;
-            color: #fff;
-            border-color: #1a1a2e;
-        }
-        .reader-box .reader-nav button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-        .reader-box .reader-nav .indicator {
-            font-size: 14px;
-            color: #888;
-            display: flex;
-            align-items: center;
-        }
+        .story-card-footer .updated-time { font-size: 12px; color: #bbb; }
 
         /* ========== 空状态 ========== */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #aaa;
-        }
-        .empty-state .icon {
-            font-size: 56px;
-            margin-bottom: 12px;
-        }
-        .empty-state h3 {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 4px;
-        }
-        .empty-state p {
-            font-size: 15px;
-        }
+        .empty-state { text-align: center; padding: 60px 20px; color: #aaa; }
+        .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
+        .empty-state h3 { font-size: 20px; color: #666; margin-bottom: 4px; }
+        .empty-state p { font-size: 15px; }
 
         /* ========== 响应式 ========== */
         @media (max-width: 600px) {
-            .story-container {
-                padding: 16px 12px 32px;
-            }
-            .story-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-            }
-            .story-card-body .title {
-                font-size: 15px;
-            }
-            .story-card-body .desc {
-                font-size: 13px;
-                -webkit-line-clamp: 1;
-            }
-            .detail-info {
-                padding: 18px 18px 22px;
-            }
-            .detail-info .title {
-                font-size: 21px;
-            }
-            .detail-info .desc {
-                font-size: 14px;
-                padding: 12px 14px;
-            }
-            .chapter-item {
-                padding: 14px 16px;
-            }
-            .chapter-item .ch-title {
-                font-size: 14px;
-            }
-            .chapter-item .ch-preview {
-                display: none;
-            }
-            .reader-box {
-                padding: 24px 20px 28px;
-            }
-            .reader-box .reader-body {
-                font-size: 16px;
-                line-height: 1.9;
-            }
-            .reader-box .reader-nav {
-                flex-wrap: wrap;
-                gap: 8px;
-                justify-content: center;
-            }
-            .reader-box .reader-nav button {
-                flex: 1;
-                min-width: 80px;
-                text-align: center;
-            }
-            .detail-cover {
-                aspect-ratio: 16 / 6;
-            }
-            .detail-cover .cover-emoji {
-                font-size: 40px;
-            }
-            nav ul li a {
-                font-size: 13px;
-                padding: 6px 12px;
-            }
-            nav {
-                height: 56px;
-            }
-            .logo {
-                font-size: 18px;
-            }
+            .story-container { padding: 16px 12px 32px; }
+            .story-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+            .story-card-body .title { font-size: 15px; }
+            .story-card-body .desc { font-size: 13px; -webkit-line-clamp: 1; }
+            nav ul li a { font-size: 13px; padding: 6px 12px; }
+            nav { height: 56px; }
+            .logo { font-size: 18px; }
         }
-
         @media (max-width: 420px) {
-            .story-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .story-card-body {
-                padding: 12px 12px 14px;
-            }
-            .story-card-body .title {
-                font-size: 13px;
-            }
-            .story-card-body .author {
-                font-size: 12px;
-            }
-            .story-card-body .desc {
-                font-size: 12px;
-                -webkit-line-clamp: 1;
-            }
-            .story-card-footer .likes {
-                font-size: 12px;
-            }
-            .story-card-footer .chapters-count {
-                font-size: 11px;
-                padding: 1px 10px;
-            }
+            .story-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .story-card-body { padding: 12px 12px 14px; }
+            .story-card-body .title { font-size: 13px; }
+            .story-card-body .author { font-size: 12px; }
+            .story-card-body .desc { font-size: 12px; -webkit-line-clamp: 1; }
+            .story-card-footer .likes { font-size: 12px; }
+            .story-card-footer .chapters-count { font-size: 11px; padding: 1px 10px; }
         }
     </style>
 </head>
@@ -641,84 +215,24 @@
     <!-- ========== 主内容 ========== -->
     <main>
         <div class="story-container" id="app">
-
-            <!-- 列表视图 -->
-            <div id="listView">
-                <div style="margin-bottom:20px;">
-                    <h1 style="font-size:28px; font-weight:800; color:#1a1a2e;">📚 故事工坊</h1>
-                    <p style="color:#888; font-size:15px;">选择一部小说，开始阅读</p>
-                </div>
-                <div class="story-grid" id="storyGrid"></div>
+            <div style="margin-bottom:20px;">
+                <h1 style="font-size:28px; font-weight:800; color:#1a1a2e;">📚 故事工坊</h1>
+                <p style="color:#888; font-size:15px;">选择一部小说，开始阅读</p>
             </div>
-
-            <!-- 详情视图 -->
-            <div id="detailView" class="story-detail">
-                <button class="detail-back" id="backToListBtn">← 返回列表</button>
-                <div class="detail-hero" id="detailHero"></div>
-                <div class="chapter-list" id="chapterList">
-                    <div class="chapter-list-header">
-                        <span>📖 章节列表</span>
-                        <span class="count" id="chapterCount">0 章</span>
-                    </div>
-                    <div id="chapterItems"></div>
-                </div>
-            </div>
-
+            <div class="story-grid" id="storyGrid"></div>
         </div>
     </main>
 
-    <!-- ========== 阅读弹窗 ========== -->
-    <div class="reader-overlay" id="readerOverlay">
-        <div class="reader-box">
-            <button class="close-reader" id="closeReaderBtn">✕</button>
-            <div class="reader-title" id="readerTitle">章节标题</div>
-            <div class="reader-chapter" id="readerChapter">第 1 章</div>
-            <div class="reader-body" id="readerBody"></div>
-            <div class="reader-nav">
-                <button id="readerPrev">上一章</button>
-                <span class="indicator" id="readerIndicator">1 / 1</span>
-                <button id="readerNext">下一章</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         // ================================================================
-        //  主逻辑 — 从 data/stories.json 加载，渲染列表 + 详情
-        //  支持显示封面、简介、推荐、更新时间
+        //  小说大厅（跳转模式）
+        //  点击卡片 → 跳转到 story-read.html?story=xxx
+        //  点赞数据由 story-read.html 管理（localStorage 持久化）
         // ================================================================
 
-        let allStories = [];
-        let currentStoryIndex = 0;
-        let currentChapterIndex = 0;
-
-        // DOM 引用
         const storyGrid = document.getElementById('storyGrid');
-        const listView = document.getElementById('listView');
-        const detailView = document.getElementById('detailView');
-        const backToListBtn = document.getElementById('backToListBtn');
-        const detailHero = document.getElementById('detailHero');
-        const chapterItems = document.getElementById('chapterItems');
-        const chapterCount = document.getElementById('chapterCount');
 
-        // 阅读器
-        const readerOverlay = document.getElementById('readerOverlay');
-        const closeReaderBtn = document.getElementById('closeReaderBtn');
-        const readerTitle = document.getElementById('readerTitle');
-        const readerChapter = document.getElementById('readerChapter');
-        const readerBody = document.getElementById('readerBody');
-        const readerPrev = document.getElementById('readerPrev');
-        const readerNext = document.getElementById('readerNext');
-        const readerIndicator = document.getElementById('readerIndicator');
-
-        let readerStoryIdx = 0;
-        let readerChapterIdx = 0;
-
-        // ================================================================
-        //  工具函数
-        // ================================================================
-
-        // 获取首字母 Emoji 占位（没有封面时使用）
+        // 工具函数
         function getCoverEmoji(title) {
             const emojiMap = {
                 '灰': '🏚️', '星': '⭐', '魔': '🔮', '时': '⏳', '风': '🌪️',
@@ -737,11 +251,9 @@
                 '黑': '⬛', '红': '🔴', '蓝': '🔵', '绿': '🟢', '黄': '🟡',
                 '金': '🪙', '银': '🥈', '宝': '💎', '钱': '💰', '财': '🏦'
             };
-            const first = title.charAt(0);
-            return emojiMap[first] || '📖';
+            return emojiMap[title.charAt(0)] || '📖';
         }
 
-        // 获取封面颜色（没有封面时使用）
         function getCoverColor(title) {
             const colors = [
                 'linear-gradient(145deg, #2d2d44, #1a1a2e)',
@@ -760,34 +272,24 @@
             return colors[Math.abs(hash) % colors.length];
         }
 
-        // 格式化时间
         function formatTime(isoString) {
             if (!isoString) return '未知';
             const d = new Date(isoString);
             return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
         }
 
-        // ================================================================
-        //  推荐按钮逻辑
-        // ================================================================
-        function handleLike(storyIndex, event) {
-            event.stopPropagation(); // 防止触发卡片点击
-            const story = allStories[storyIndex];
-            if (!story) return;
-            story.likes = (story.likes || 0) + 1;
-            // 重新渲染当前视图（列表和详情）
-            renderList();
-            if (detailView.classList.contains('active')) {
-                showDetail(currentStoryIndex);
-            }
+        // 获取点赞数（从 localStorage 读取）
+        const STORAGE_KEY = 'montainment_story_likes';
+        function getStoryLikes(storyId) {
+            try {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+                return data[storyId] || 0;
+            } catch { return 0; }
         }
 
-        // ================================================================
-        //  渲染：小说列表
-        // ================================================================
-
-        function renderList() {
-            if (allStories.length === 0) {
+        // 渲染列表
+        function renderList(stories) {
+            if (!stories || stories.length === 0) {
                 storyGrid.innerHTML = `
                     <div style="grid-column:1/-1;">
                         <div class="empty-state">
@@ -801,21 +303,20 @@
             }
 
             let html = '';
-            allStories.forEach((story, idx) => {
+            stories.forEach((story) => {
                 const coverEmoji = getCoverEmoji(story.title);
                 const coverColor = getCoverColor(story.title);
                 const desc = story.description || '📝 暂无简介';
-                const likes = story.likes || 0;
+                const likes = getStoryLikes(story.id);
                 const chCount = story.chapters ? story.chapters.length : 0;
                 const updated = formatTime(story.updatedAt);
-
                 const hasCover = story.cover && story.cover.trim() !== '';
                 const coverHtml = hasCover
                     ? `<img src="${story.cover}" alt="${story.title}" />`
                     : `<span class="cover-emoji">${coverEmoji}</span>`;
 
                 html += `
-                    <div class="story-card" data-index="${idx}">
+                    <a href="story-read.html?story=${story.id}" class="story-card">
                         <div class="story-cover" style="background:${hasCover ? '#1a1a2e' : coverColor};">
                             ${coverHtml}
                             <span class="cover-title">${story.title.substring(0, 4)}</span>
@@ -825,240 +326,34 @@
                             <div class="author">作者：${story.author || '未知作者'}</div>
                             <div class="desc">${desc}</div>
                             <div class="story-card-footer">
-                                <span class="likes">
-                                    <button class="heart-btn" data-story-index="${idx}">❤️</button>
-                                    ${likes}
-                                </span>
+                                <span class="likes">❤️ ${likes}</span>
                                 <span class="chapters-count">${chCount} 章</span>
                                 <span class="updated-time">🕒 ${updated}</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 `;
             });
 
             storyGrid.innerHTML = html;
-
-            // 绑定推荐按钮事件
-            storyGrid.querySelectorAll('.heart-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    const idx = parseInt(this.dataset.storyIndex);
-                    handleLike(idx, e);
-                });
-            });
-
-            // 点击卡片 → 打开详情
-            storyGrid.querySelectorAll('.story-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
-                    showDetail(idx);
-                });
-            });
         }
 
-        // ================================================================
-        //  渲染：小说详情
-        // ================================================================
-
-        function showDetail(index) {
-            currentStoryIndex = index;
-            const story = allStories[index];
-            if (!story) return;
-
-            listView.style.display = 'none';
-            detailView.classList.add('active');
-
-            const coverEmoji = getCoverEmoji(story.title);
-            const coverColor = getCoverColor(story.title);
-            const desc = story.description || '📝 暂无简介';
-            const likes = story.likes || 0;
-            const chapters = story.chapters || [];
-            const updated = formatTime(story.updatedAt);
-
-            const hasCover = story.cover && story.cover.trim() !== '';
-            const coverHtml = hasCover
-                ? `<img src="${story.cover}" alt="${story.title}" />`
-                : `<span class="cover-emoji">${coverEmoji}</span>`;
-
-            detailHero.innerHTML = `
-                <div class="detail-cover" style="background:${hasCover ? '#1a1a2e' : coverColor};">
-                    ${coverHtml}
-                </div>
-                <div class="detail-info">
-                    <div class="title">${story.title}</div>
-                    <div class="author">作者：${story.author || '未知作者'}</div>
-                    <div class="desc">${desc}</div>
-                    <div class="meta-row">
-                        <span class="likes">
-                            <button class="heart-btn" data-story-index="${index}">❤️</button>
-                            ${likes}
-                        </span>
-                        <span>📖 ${chapters.length} 章</span>
-                        <span class="updated-time">🕒 更新于 ${updated}</span>
-                    </div>
-                </div>
-            `;
-
-            // 绑定详情页推荐按钮
-            detailHero.querySelector('.heart-btn').addEventListener('click', function(e) {
-                const idx = parseInt(this.dataset.storyIndex);
-                handleLike(idx, e);
-            });
-
-            chapterCount.textContent = chapters.length + ' 章';
-
-            if (chapters.length === 0) {
-                chapterItems.innerHTML = `
-                    <div style="padding:32px 24px; text-align:center; color:#aaa; font-size:15px;">
-                        📝 暂无章节，请等待更新
-                    </div>
-                `;
-                return;
-            }
-
-            let chHtml = '';
-            chapters.forEach((ch, i) => {
-                const preview = ch.content ? ch.content.substring(0, 40) + (ch.content.length > 40 ? '...' : '') : '';
-                chHtml += `
-                    <div class="chapter-item" data-chapter="${i}">
-                        <div class="left">
-                            <span class="num">${String(i + 1).padStart(2, '0')}</span>
-                            <span class="ch-title">${ch.title || '第' + (i+1) + '章'}</span>
-                            <span class="ch-preview">${preview}</span>
-                        </div>
-                        <span class="arrow">›</span>
-                    </div>
-                `;
-            });
-            chapterItems.innerHTML = chHtml;
-
-            chapterItems.querySelectorAll('.chapter-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const chIdx = parseInt(this.dataset.chapter);
-                    openReader(index, chIdx);
-                });
-            });
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ================================================================
-        //  返回列表
-        // ================================================================
-
-        backToListBtn.addEventListener('click', function() {
-            detailView.classList.remove('active');
-            listView.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // ================================================================
-        //  阅读器
-        // ================================================================
-
-        function openReader(storyIdx, chapterIdx) {
-            const story = allStories[storyIdx];
-            if (!story) return;
-            const chapters = story.chapters || [];
-            if (chapters.length === 0 || chapterIdx >= chapters.length) return;
-
-            readerStoryIdx = storyIdx;
-            readerChapterIdx = chapterIdx;
-            renderReader();
-            readerOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function renderReader() {
-            const story = allStories[readerStoryIdx];
-            if (!story) return;
-            const chapters = story.chapters || [];
-            if (chapters.length === 0) return;
-
-            const ch = chapters[readerChapterIdx];
-            readerTitle.textContent = story.title;
-            readerChapter.textContent = ch.title || '第' + (readerChapterIdx + 1) + '章';
-            readerBody.textContent = ch.content || '(内容为空)';
-            readerIndicator.textContent = `${readerChapterIdx + 1} / ${chapters.length}`;
-
-            readerPrev.disabled = (readerChapterIdx === 0);
-            readerNext.disabled = (readerChapterIdx === chapters.length - 1);
-        }
-
-        function closeReader() {
-            readerOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // ========== 阅读器事件 ==========
-        closeReaderBtn.addEventListener('click', closeReader);
-        readerOverlay.addEventListener('click', function(e) {
-            if (e.target === this) closeReader();
-        });
-
-        readerPrev.addEventListener('click', function() {
-            if (readerChapterIdx > 0) {
-                readerChapterIdx--;
-                renderReader();
-            }
-        });
-
-        readerNext.addEventListener('click', function() {
-            const story = allStories[readerStoryIdx];
-            if (story && story.chapters && readerChapterIdx < story.chapters.length - 1) {
-                readerChapterIdx++;
-                renderReader();
-            }
-        });
-
-        // 键盘事件
-        document.addEventListener('keydown', function(e) {
-            if (!readerOverlay.classList.contains('active')) return;
-            if (e.key === 'Escape') { closeReader(); return; }
-            if (e.key === 'ArrowLeft') { readerPrev.click(); }
-            if (e.key === 'ArrowRight') { readerNext.click(); }
-        });
-
-        // ================================================================
-        //  加载数据
-        // ================================================================
-
+        // 加载数据
         function loadStories() {
-            console.log('⏳ 开始加载 stories.json...');
             fetch('data/stories.json')
                 .then(res => {
-                    console.log('📦 响应状态:', res.status);
-                    if (!res.ok) throw new Error('stories.json 不存在 (状态码 ' + res.status + ')');
+                    if (!res.ok) throw new Error('stories.json 不存在');
                     return res.json();
                 })
                 .then(data => {
-                    console.log('✅ 加载到的数据:', data);
-                    if (data.stories && data.stories.length > 0) {
-                        allStories = data.stories;
-                        console.log('📚 找到', allStories.length, '本小说');
-                    } else {
-                        allStories = [];
-                        console.warn('⚠️ stories 数组为空');
-                    }
-                    renderList();
-                    const hash = window.location.hash;
-                    if (hash.startsWith('#story-')) {
-                        const idx = parseInt(hash.replace('#story-', ''));
-                        if (!isNaN(idx) && idx >= 0 && idx < allStories.length) {
-                            showDetail(idx);
-                        }
-                    }
+                    const stories = data.stories || [];
+                    renderList(stories);
                 })
                 .catch(err => {
-                    console.error('❌ 加载失败:', err);
-                    allStories = [];
-                    renderList();
+                    console.warn('加载小说数据失败:', err);
+                    renderList([]);
                 });
         }
-
-        // ================================================================
-        //  启动
-        // ================================================================
 
         loadStories();
     </script>
