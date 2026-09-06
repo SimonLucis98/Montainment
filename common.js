@@ -37,148 +37,139 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("[Montainment 广告位] 已加载：" + slotName);
   });
 
-  // ---------- 语言切换按钮（与导航链接样式一致） ----------
+  // ---------- 语言切换按钮（适配浅色导航栏） ----------
   function addLanguageToggle() {
     const navLinksContainer = document.querySelector(".nav-links");
-    if (!navLinksContainer) return;
-    if (navLinksContainer.querySelector('.lang-toggle-container')) return;
+    if (!navLinksContainer) {
+      console.warn("未找到 .nav-links");
+      return;
+    }
+
+    if (navLinksContainer.querySelector('.lang-toggle-container')) {
+      return;
+    }
 
     const langContainer = document.createElement('li');
     langContainer.className = 'lang-toggle-container';
     langContainer.style.cssText = `
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 0px;
       margin-left: 12px;
-      padding: 0 4px;
+      padding: 0;
+      list-style: none;
     `;
 
-    // EN 按钮 - 与导航链接颜色一致（白色）
+    // EN 按钮（深灰色文字，与导航链接一致）
     const enBtn = document.createElement('button');
     enBtn.className = 'lang-btn';
     enBtn.setAttribute('data-lang', 'en');
     enBtn.textContent = 'EN';
     enBtn.style.cssText = `
       background: transparent;
-      border: none;
-      color: #ffffff;
-      padding: 4px 8px;
-      border-radius: 4px;
+      border: 2px solid #e7e7f5;
+      color: #5a5a72;
+      padding: 6px 12px;
+      border-radius: 30px 0 0 30px;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
-      transition: 0.2s;
       font-family: inherit;
+      transition: 0.2s;
       letter-spacing: 0.3px;
     `;
 
-    // 中文按钮 - 与导航链接颜色一致（白色）
+    // 中文按钮（深灰色文字，与导航链接一致）
     const zhBtn = document.createElement('button');
     zhBtn.className = 'lang-btn';
     zhBtn.setAttribute('data-lang', 'zh');
     zhBtn.textContent = '中文';
     zhBtn.style.cssText = `
       background: transparent;
-      border: none;
-      color: #ffffff;
-      padding: 4px 8px;
-      border-radius: 4px;
+      border: 2px solid #e7e7f5;
+      border-left: none;
+      color: #5a5a72;
+      padding: 6px 12px;
+      border-radius: 0 30px 30px 0;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
-      transition: 0.2s;
       font-family: inherit;
+      transition: 0.2s;
       letter-spacing: 0.3px;
     `;
 
-    // 分隔符（小竖线）
-    const divider = document.createElement('span');
-    divider.textContent = '|';
-    divider.style.cssText = `
-      color: rgba(255,255,255,0.25);
-      font-size: 16px;
-      padding: 0 2px;
-    `;
-
-    // 更新激活状态（当前语言高亮）
+    // 更新激活状态（高亮当前语言，与导航链接 active 一致）
     function updateLangButtons() {
-      const currentLang = window.i18n ? i18n.currentLang : 'en';
+      const currentLang = localStorage.getItem('lang') || 'en';
       [enBtn, zhBtn].forEach(btn => {
         const lang = btn.getAttribute('data-lang');
         if (lang === currentLang) {
+          btn.style.background = '#5b5fef';
+          btn.style.borderColor = '#5b5fef';
           btn.style.color = '#ffffff';
-          btn.style.background = 'rgba(255,255,255,0.12)';
         } else {
-          btn.style.color = 'rgba(255,255,255,0.6)';
           btn.style.background = 'transparent';
+          btn.style.borderColor = '#e7e7f5';
+          btn.style.color = '#5a5a72';
         }
       });
     }
 
-    // 点击切换
+    // 切换语言
+    function setLang(lang) {
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+      updateLangButtons();
+      if (window.i18n && typeof i18n.setLang === 'function') {
+        i18n.setLang(lang);
+      }
+      if (typeof applyI18n === 'function') {
+        applyI18n();
+      }
+      if (typeof loadGames === 'function') {
+        loadGames();
+      }
+    }
+
+    // 点击事件
     enBtn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      if (window.i18n) {
-        i18n.setLang('en');
-        updateLangButtons();
-        if (typeof applyI18n === 'function') applyI18n();
-        if (typeof loadGames === 'function') loadGames();
-      }
+      setLang('en');
     });
 
     zhBtn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      if (window.i18n) {
-        i18n.setLang('zh');
-        updateLangButtons();
-        if (typeof applyI18n === 'function') applyI18n();
-        if (typeof loadGames === 'function') loadGames();
-      }
+      setLang('zh');
     });
 
-    // 悬停效果
+    // 悬停效果（与导航链接一致）
     [enBtn, zhBtn].forEach(btn => {
       btn.addEventListener('mouseenter', function() {
-        this.style.color = '#ffffff';
-        this.style.background = 'rgba(255,255,255,0.08)';
+        if (!this.classList.contains('active')) {
+          this.style.background = '#f0f0ff';
+          this.style.borderColor = '#c9c9e8';
+        }
       });
       btn.addEventListener('mouseleave', function() {
         const lang = this.getAttribute('data-lang');
-        const currentLang = window.i18n ? i18n.currentLang : 'en';
-        if (lang === currentLang) {
-          this.style.background = 'rgba(255,255,255,0.12)';
-          this.style.color = '#ffffff';
-        } else {
+        const currentLang = localStorage.getItem('lang') || 'en';
+        if (lang !== currentLang) {
           this.style.background = 'transparent';
-          this.style.color = 'rgba(255,255,255,0.6)';
+          this.style.borderColor = '#e7e7f5';
         }
       });
     });
 
     langContainer.appendChild(enBtn);
-    langContainer.appendChild(divider);
     langContainer.appendChild(zhBtn);
     navLinksContainer.appendChild(langContainer);
 
     updateLangButtons();
+    console.log("✅ 语言切换按钮已插入（浅色版）");
   }
 
-  // 加载语言切换
-  if (window.i18n) {
-    addLanguageToggle();
-  } else {
-    document.addEventListener('i18nLoaded', addLanguageToggle);
-    let retries = 0;
-    const interval = setInterval(function() {
-      if (window.i18n) {
-        addLanguageToggle();
-        clearInterval(interval);
-      } else if (retries > 5) {
-        clearInterval(interval);
-      }
-      retries++;
-    }, 300);
-  }
+  addLanguageToggle();
 });
