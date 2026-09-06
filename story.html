@@ -9,96 +9,107 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#f5f2ed; font-family:'Nunito', system-ui, sans-serif; min-height:100vh; }
 
-        header { background:#1a1a2e; padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.15); }
-        nav { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:64px; }
-        .logo { color:#fff; font-size:22px; font-weight:700; letter-spacing:-0.5px; }
-        .logo span { color:#f7c948; }
-        nav ul { display:flex; gap:8px; list-style:none; }
-        nav ul li a { color:rgba(255,255,255,0.7); text-decoration:none; padding:8px 18px; border-radius:8px; font-size:15px; font-weight:600; transition:0.2s; }
-        nav ul li a:hover { color:#fff; background:rgba(255,255,255,0.08); }
-        nav ul li a.active { color:#fff; background:#f7c948; color:#1a1a2e; }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 28px;
-            cursor: pointer;
-            padding: 4px 8px;
-        }
-
         .story-container { max-width:900px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
-        .story-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:24px; margin-top:8px; }
-        .story-card {
-            background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06);
-            cursor:pointer; transition:transform 0.25s ease, box-shadow 0.25s ease; display:flex; flex-direction:column;
-            text-decoration:none; color:inherit;
+        /* 小说网格 */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
         }
-        .story-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(0,0,0,0.10); }
-
+        .story-card {
+            background: #faf8f5;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(61, 58, 53, 0.06);
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #8a9b7a, #d4b87a, #c97a6b) 1;
+        }
+        .story-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(61, 58, 53, 0.08);
+        }
         .story-cover {
-            width:100%; aspect-ratio:16/10; background:linear-gradient(145deg,#2d2d44,#1a1a2e);
-            display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(145deg, #3d3a35, #5a4f45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
         .story-cover img { width:100%; height:100%; object-fit:cover; }
         .story-cover .cover-emoji { font-size:52px; opacity:0.6; filter:grayscale(0.2); }
-        .story-cover .cover-title { position:absolute; bottom:12px; right:16px; font-size:13px; color:rgba(255,255,255,0.3); font-weight:400; letter-spacing:2px; }
-
-        .story-card-body { padding:16px 18px 18px; flex:1; display:flex; flex-direction:column; }
-        .story-card-body .title {
-            font-size:17px; font-weight:700; color:#1a1a2e; line-height:1.3; margin-bottom:2px;
-            word-break: break-word;
-            hyphens: auto;
-            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+        .story-cover .cover-title {
+            position: absolute; bottom: 12px; right: 16px;
+            font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 400; letter-spacing: 2px;
         }
-        .story-card-body .author { font-size:14px; color:#888; margin-bottom:8px; }
-        .story-card-body .desc {
-            font-size:14px; color:#666; line-height:1.5;
-            word-break: break-word;
-            hyphens: auto;
-            display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
-            flex:1; margin-bottom:12px;
-        }
-        .story-card-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid #f0ede8; padding-top:12px; margin-top:auto; flex-wrap:wrap; gap:4px; }
-        .story-card-footer .likes { font-size:14px; color:#999; display:flex; align-items:center; gap:4px; }
-        .story-card-footer .likes .heart { color:#e74c5e; font-size:16px; }
-        .story-card-footer .chapters-count { font-size:13px; color:#aaa; background:#f5f2ed; padding:2px 14px; border-radius:20px; }
-        .story-card-footer .updated-time { font-size:12px; color:#bbb; }
+        .story-card-body { padding: 16px 18px 18px; flex:1; display:flex; flex-direction:column; }
+        .story-card-body .title { font-size:17px; font-weight:700; color:#3d3a35; line-height:1.3; margin-bottom:2px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+        .story-card-body .author { font-size:14px; color:rgba(61,58,53,0.7); margin-bottom:8px; }
+        .story-card-body .desc { font-size:14px; color:rgba(61,58,53,0.6); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; flex:1; margin-bottom:12px; }
+        .story-card-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(138,155,122,0.12); padding-top:12px; margin-top:auto; flex-wrap:wrap; gap:6px; }
+        .story-card-footer .likes { font-size:14px; color:rgba(61,58,53,0.7); display:flex; align-items:center; gap:4px; }
+        .story-card-footer .likes .heart { color:#c97a6b; }
+        .story-card-footer .chapters-count { font-size:13px; color:rgba(61,58,53,0.7); background:#f0ede8; padding:2px 14px; border-radius:20px; white-space:nowrap; }
+        .story-card-footer .updated-time { font-size:12px; color:rgba(61,58,53,0.4); white-space:nowrap; }
 
         .empty-state { text-align:center; padding:60px 20px; color:#aaa; }
         .empty-state .icon { font-size:56px; margin-bottom:12px; }
         .empty-state h3 { font-size:20px; color:#666; margin-bottom:4px; }
 
+        /* ===== 响应式 ===== */
+        @media (max-width:720px) {
+            .story-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+            .story-card-body .title { font-size:15px; }
+            .story-card-body .desc { font-size:13px; -webkit-line-clamp:1; }
+            .story-card-footer { flex-wrap:wrap; gap:4px; }
+            .story-card-footer .chapters-count { font-size:12px; padding:2px 10px; }
+            .story-card-footer .updated-time { font-size:11px; }
+        }
         @media (max-width:600px) {
             .story-container { padding:16px 12px 32px; }
-            .story-grid { grid-template-columns:1fr 1fr; gap:14px; }
-            .story-card-body .title { font-size:15px; }
-            .story-card-body .desc { font-size:13px; -webkit-line-clamp:2; }
-            nav ul { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:#1a1a2e; padding:16px 24px; gap:6px; border-bottom:1px solid rgba(255,255,255,0.1); }
-            nav ul.open { display:flex; }
-            nav ul li a { display:block; padding:12px 16px; text-align:center; }
-            .nav-toggle { display:block; }
-            .logo { font-size:18px; }
-            nav { height:56px; }
-        }
-        @media (max-width:420px) {
-            .story-grid { grid-template-columns:1fr; gap:12px; }
+            .story-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
             .story-card-body { padding:12px; }
             .story-card-body .title { font-size:14px; }
             .story-card-body .author { font-size:12px; }
-            .story-card-body .desc { font-size:12px; -webkit-line-clamp:2; }
+            .story-card-body .desc { font-size:12px; -webkit-line-clamp:1; }
             .story-card-footer .likes { font-size:12px; }
             .story-card-footer .chapters-count { font-size:11px; padding:1px 10px; }
+            .story-card-footer .updated-time { font-size:10px; }
+        }
+        @media (max-width:420px) {
+            .story-grid { grid-template-columns:1fr 1fr; gap:10px; }
+            .story-card-body .title { font-size:13px; }
+            .story-card-footer .chapters-count { font-size:10px; padding:1px 8px; }
+            .story-card-footer .updated-time { font-size:9px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">Montainment</div>
+    <!-- ===== 导航栏（与全局一致） ===== -->
+    <header class="site-header">
+        <nav class="nav-bar">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">✦</span>
+                Montainment
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html" data-i18n="nav.home">首页</a></li>
                 <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
@@ -110,29 +121,48 @@
     </header>
 
     <main>
-        <div class="story-container" id="app">
-            <div style="margin-bottom:20px;">
-                <h1 style="font-size:28px; font-weight:800; color:#1a1a2e;" data-i18n="story.title">📚 故事工坊</h1>
-                <p style="color:#888; font-size:15px;" data-i18n="story.desc">选择一部小说，开始阅读</p>
+        <!-- ===== 页面头部（统一风格） ===== -->
+        <div class="page-header container">
+            <span class="page-badge badge-coral" data-i18n="story.badge">📚 故事工坊</span>
+            <h1 data-i18n="story.title">选择一部小说，开始阅读</h1>
+            <p data-i18n="story.desc">从下方选择一部小说，进入独立阅读页面，享受沉浸式阅读体验。</p>
+        </div>
+
+        <!-- ===== 小说列表 ===== -->
+        <div class="container">
+            <div class="story-container" id="app">
+                <div class="story-grid" id="storyGrid"></div>
             </div>
-            <div class="story-grid" id="storyGrid"></div>
         </div>
     </main>
+
+    <footer class="site-footer">
+        <div class="container" data-i18n="common.footer">© 2026 Montainment · 一个让学习更好玩的静态网站</div>
+    </footer>
 
     <script src="i18n.js"></script>
     <script src="common.js"></script>
     <script>
+        // ================================================================
+        //  小说列表页（跳转模式）
+        //  从 data/stories.json 加载，显示卡片，点击跳转到 story-read.html?story=id
+        //  点赞数从 localStorage 读取（优先于服务器数据）
+        // ================================================================
+
         const storyGrid = document.getElementById('storyGrid');
 
+        // ---------- localStorage 工具 ----------
         function getLikes(storyId) {
             const key = 'story_likes_' + storyId;
             const val = localStorage.getItem(key);
             return val !== null ? parseInt(val, 10) : null;
         }
+
         function setLikes(storyId, count) {
             localStorage.setItem('story_likes_' + storyId, String(count));
         }
 
+        // ---------- 获取首字母 Emoji ----------
         function getCoverEmoji(title) {
             const map = {
                 '灰':'🏚️','星':'⭐','魔':'🔮','时':'⏳','风':'🌪️','火':'🔥','水':'💧','暗':'🌙','光':'☀️','梦':'🌌',
@@ -164,11 +194,12 @@
         }
 
         function formatTime(iso) {
-            if (!iso) return i18n.t('story.unknown_time');
+            if (!iso) return '未知';
             const d = new Date(iso);
             return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
         }
 
+        // ---------- 渲染列表 ----------
         function renderList(stories) {
             if (!stories || stories.length === 0) {
                 storyGrid.innerHTML = `
@@ -194,7 +225,7 @@
 
                 const coverEmoji = getCoverEmoji(story.title);
                 const coverColor = getCoverColor(story.title);
-                const desc = story.description || '📝 ' + i18n.t('story.no_desc');
+                const desc = story.description || '📝 ' + (window.i18n ? i18n.t('story.no_desc') : '暂无简介');
                 const chCount = story.chapters ? story.chapters.length : 0;
                 const updated = formatTime(story.updatedAt);
                 const hasCover = story.cover && story.cover.trim() !== '';
@@ -208,7 +239,7 @@
                         </div>
                         <div class="story-card-body">
                             <div class="title">${story.title}</div>
-                            <div class="author"><span data-i18n="story.author_prefix">作者：</span>${story.author || i18n.t('story.unknown_author')}</div>
+                            <div class="author"><span data-i18n="story.author_prefix">作者：</span>${story.author || (window.i18n ? i18n.t('story.unknown_author') : '未知作者')}</div>
                             <div class="desc">${desc}</div>
                             <div class="story-card-footer">
                                 <span class="likes"><span class="heart">❤️</span> ${likes}</span>
@@ -224,6 +255,7 @@
             applyI18n();
         }
 
+        // ---------- 加载数据 ----------
         function loadStories() {
             fetch('data/stories.json')
                 .then(res => {
@@ -245,6 +277,7 @@
                 });
         }
 
+        // 等待 i18n 加载完成
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadStories);
         } else {
