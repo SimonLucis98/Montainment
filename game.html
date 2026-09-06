@@ -80,23 +80,14 @@
   </header>
 
   <main>
-    <div class="container">
-      <div class="ad-slot ad-slot--banner" data-ad-slot="game-top-banner" style="margin-top:16px;">
-        <span>广告位 · 728×90</span>
-      </div>
-    </div>
-
     <div class="page-header container">
       <span class="page-badge badge-sunshine" data-i18n="game.badge">🎮 游戏大厅</span>
       <h1 data-i18n="game.title">选择游戏 · 开始挑战</h1>
-      <p data-i18n="game.desc">点击任意游戏卡片，进入独立游戏页面，享受完整广告体验！</p>
+      <p data-i18n="game.desc">点击任意游戏卡片，进入独立游戏页面，享受完整游戏体验！</p>
     </div>
 
     <div class="container game-hall">
       <div class="game-grid" id="gameGrid"></div>
-      <div class="ad-slot ad-slot--inline" data-ad-slot="game-inline" style="margin-top:24px;">
-        <span>广告位 · 内容间横幅</span>
-      </div>
     </div>
   </main>
 
@@ -107,14 +98,10 @@
   <script src="i18n.js"></script>
   <script src="common.js"></script>
   <script>
-    // ================================================================
-    //  游戏大厅：从 data/games.json 加载，支持多语言
-    // ================================================================
     (function() {
       const gameGrid = document.getElementById('gameGrid');
       let allGames = [];
 
-      // 获取当前语言
       function getLang() {
         return window.i18n ? i18n.currentLang : 'en';
       }
@@ -164,7 +151,6 @@
         games.forEach((game) => {
           const coverHtml = getCoverDisplay(game);
           const coverColor = getCoverColor(game);
-          // 根据语言选择标题和描述
           const title = lang === 'zh' ? game.titleZh : (game.titleEn || game.titleZh);
           const desc = lang === 'zh' ? (game.descriptionZh || '📝 来挑战吧！') : (game.descriptionEn || game.descriptionZh || '📝 Let\'s go!');
           const typeLabel = game.type === 'js' ? 
@@ -211,10 +197,8 @@
           });
       }
 
-      // 暴露给全局，以便语言切换时重新加载
       window.loadGames = loadGames;
 
-      // 监听语言切换
       document.addEventListener('languageChanged', function() {
         if (allGames.length > 0) {
           renderList(allGames);
@@ -223,7 +207,6 @@
         }
       });
 
-      // 启动
       loadGames();
     })();
   </script>
