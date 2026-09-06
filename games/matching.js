@@ -1,6 +1,6 @@
 /**
  * matching.js —— 数字配对（连一连）
- * 支持 7 种语言，显示原文 + 读音
+ * 支持 7 种语言，显示原文 + 罗马音
  * 每关从 1~1000 随机抽 10 个数字
  * 无限关卡，左右列完全对齐
  */
@@ -22,43 +22,78 @@
 
   // ================================================================
   //  📚 数字生成器（1~1000）
+  //  每种语言返回 { native: 原文, roman: 罗马音 }
   // ================================================================
 
-  // 韩语
+  // ---------- 韩文 ----------
   function koNumber(num) {
     if (num === 0) return { native: '영', roman: 'yeong' };
+
     const units = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
     const teens = ['십', '이십', '삼십', '사십', '오십', '육십', '칠십', '팔십', '구십'];
     const hundreds = ['', '백', '이백', '삼백', '사백', '오백', '육백', '칠백', '팔백', '구백'];
     const thousands = ['', '천', '이천', '삼천', '사천', '오천', '육천', '칠천', '팔천', '구천'];
-    let parts = [], roman = [], n = num;
-    const t = Math.floor(n / 1000); if (t > 0) { parts.push(thousands[t]); roman.push(thousands[t]); n %= 1000; }
-    const h = Math.floor(n / 100); if (h > 0) { parts.push(hundreds[h]); roman.push(hundreds[h]); n %= 100; }
-    const ten = Math.floor(n / 10); if (ten > 0) { parts.push(teens[ten - 1]); roman.push(teens[ten - 1]); n %= 10; }
-    if (n > 0) { parts.push(units[n]); roman.push(units[n]); }
-    return { native: parts.join(''), roman: roman.join(' ').trim() };
+
+    const romUnits = ['', 'il', 'i', 'sam', 'sa', 'o', 'yuk', 'chil', 'pal', 'gu'];
+    const romTeens = ['sip', 'i-sip', 'sam-sip', 'sa-sip', 'o-sip', 'yuk-sip', 'chil-sip', 'pal-sip', 'gu-sip'];
+    const romHundreds = ['', 'baek', 'i-baek', 'sam-baek', 'sa-baek', 'o-baek', 'yuk-baek', 'chil-baek', 'pal-baek', 'gu-baek'];
+    const romThousands = ['', 'cheon', 'i-cheon', 'sam-cheon', 'sa-cheon', 'o-cheon', 'yuk-cheon', 'chil-cheon', 'pal-cheon', 'gu-cheon'];
+
+    let nativeParts = [], romanParts = [];
+    let n = num;
+
+    // 千位
+    const t = Math.floor(n / 1000);
+    if (t > 0) { nativeParts.push(thousands[t]); romanParts.push(romThousands[t]); n %= 1000; }
+    // 百位
+    const h = Math.floor(n / 100);
+    if (h > 0) { nativeParts.push(hundreds[h]); romanParts.push(romHundreds[h]); n %= 100; }
+    // 十位
+    const ten = Math.floor(n / 10);
+    if (ten > 0) { nativeParts.push(teens[ten - 1]); romanParts.push(romTeens[ten - 1]); n %= 10; }
+    // 个位
+    if (n > 0) { nativeParts.push(units[n]); romanParts.push(romUnits[n]); }
+
+    return {
+      native: nativeParts.join(''),
+      roman: romanParts.join(' ')
+    };
   }
 
-  // 日语
+  // ---------- 日文 ----------
   function jaNumber(num) {
     if (num === 0) return { native: '零', roman: 'rei' };
-    const kanjiUnits = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
-    const kanjiTeens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
-    const kanjiHundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
-    const kanjiThousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
-    const romajiUnits = ['', 'ichi', 'ni', 'san', 'yon', 'go', 'roku', 'nana', 'hachi', 'kyu'];
-    const romajiTeens = ['juu', 'nijuu', 'sanjuu', 'yonjuu', 'gojuu', 'rokujuu', 'nanajuu', 'hachijuu', 'kyuujuu'];
-    const romajiHundreds = ['', 'hyaku', 'nihyaku', 'sanbyaku', 'yonhyaku', 'gohyaku', 'roppyaku', 'nanahyaku', 'happyaku', 'kyuuhyaku'];
-    const romajiThousands = ['', 'sen', 'nisen', 'sanzen', 'yonsen', 'gosen', 'rokusen', 'nanasen', 'hassen', 'kyuusen'];
-    let kanji = [], romaji = [], n = num;
-    const t = Math.floor(n / 1000); if (t > 0) { kanji.push(kanjiThousands[t]); romaji.push(romajiThousands[t]); n %= 1000; }
-    const h = Math.floor(n / 100); if (h > 0) { kanji.push(kanjiHundreds[h]); romaji.push(romajiHundreds[h]); n %= 100; }
-    const ten = Math.floor(n / 10); if (ten > 0) { kanji.push(kanjiTeens[ten - 1]); romaji.push(romajiTeens[ten - 1]); n %= 10; }
-    if (n > 0) { kanji.push(kanjiUnits[n]); romaji.push(romajiUnits[n]); }
-    return { native: kanji.join(''), roman: romaji.join(' ') };
+
+    // 汉字数字（原文）
+    const kanUnits = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    const kanTeens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
+    const kanHundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
+    const kanThousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
+
+    // 罗马音
+    const romUnits = ['', 'ichi', 'ni', 'san', 'yon', 'go', 'roku', 'nana', 'hachi', 'kyu'];
+    const romTeens = ['juu', 'ni-juu', 'san-juu', 'yon-juu', 'go-juu', 'roku-juu', 'nana-juu', 'hachi-juu', 'kyu-juu'];
+    const romHundreds = ['', 'hyaku', 'ni-hyaku', 'san-byaku', 'yon-hyaku', 'go-hyaku', 'roppyaku', 'nana-hyaku', 'happyaku', 'kyu-hyaku'];
+    const romThousands = ['', 'sen', 'ni-sen', 'san-zen', 'yon-sen', 'go-sen', 'roku-sen', 'nana-sen', 'hassen', 'kyu-sen'];
+
+    let nativeParts = [], romanParts = [];
+    let n = num;
+
+    const t = Math.floor(n / 1000);
+    if (t > 0) { nativeParts.push(kanThousands[t]); romanParts.push(romThousands[t]); n %= 1000; }
+    const h = Math.floor(n / 100);
+    if (h > 0) { nativeParts.push(kanHundreds[h]); romanParts.push(romHundreds[h]); n %= 100; }
+    const ten = Math.floor(n / 10);
+    if (ten > 0) { nativeParts.push(kanTeens[ten - 1]); romanParts.push(romTeens[ten - 1]); n %= 10; }
+    if (n > 0) { nativeParts.push(kanUnits[n]); romanParts.push(romUnits[n]); }
+
+    return {
+      native: nativeParts.join(''),
+      roman: romanParts.join(' ')
+    };
   }
 
-  // 中文
+  // ---------- 中文 ----------
   function zhNumber(num) {
     if (num === 0) return { native: '零', roman: 'líng' };
     const units = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
@@ -73,7 +108,7 @@
     return { native: parts.join(''), roman: roman.join(' ').trim() };
   }
 
-  // 英文（简化，只到1000）
+  // ---------- 英文 ----------
   function enNumber(num) {
     if (num === 0) return { native: 'zero', roman: 'ˈzɪə.rəʊ' };
     const units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
@@ -89,7 +124,7 @@
     return { native, roman: native };
   }
 
-  // 泰文（简化规则）
+  // ---------- 泰文 ----------
   function thNumber(num) {
     if (num === 0) return { native: 'ศูนย์', roman: 'sǔun' };
     const units = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
@@ -104,7 +139,7 @@
     return { native: parts.join(''), roman: roman.join(' ').trim() };
   }
 
-  // 法语（简化）
+  // ---------- 法语 ----------
   function frNumber(num) {
     if (num === 0) return { native: 'zéro', roman: 'ze.ʁo' };
     const units = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'];
@@ -120,7 +155,7 @@
     return { native, roman: native };
   }
 
-  // 西班牙文
+  // ---------- 西班牙文 ----------
   function esNumber(num) {
     if (num === 0) return { native: 'cero', roman: 'ˈθe.ɾo' };
     const units = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
@@ -136,6 +171,7 @@
     return { native, roman: native };
   }
 
+  // ---------- 统一接口 ----------
   function getWordForNumber(num, lang) {
     switch (lang) {
       case 'ko': return koNumber(num);
@@ -354,7 +390,7 @@
   };
 
   // ================================================================
-  //  🔥 关键：固定卡片高度 + 完美对齐
+  //  🔥 固定卡片高度 + 完美对齐
   // ================================================================
   MatchingGame.prototype.renderCards = function() {
     const leftCol = document.getElementById('match-left');
@@ -363,7 +399,7 @@
     leftCol.innerHTML = '';
     rightCol.innerHTML = '';
 
-    const CARD_HEIGHT = '60px'; // 固定高度，确保每行对齐
+    const CARD_HEIGHT = '60px';
 
     this.leftItems.forEach((item, index) => {
       const card = document.createElement('div');
@@ -418,6 +454,7 @@
       card.dataset.pairId = item.pairId;
       card.dataset.side = 'right';
       const wordData = item.wordData;
+      // 显示格式：原文 (罗马音)
       let displayText = wordData.native;
       if (wordData.roman && wordData.roman.length > 0) {
         displayText = wordData.native + ' (' + wordData.roman + ')';
@@ -428,7 +465,7 @@
         border: 2px solid ${item.matched ? '#1f8b4c' : '#e6ecf3'};
         border-radius: 14px;
         background: ${item.matched ? '#e6f7ee' : '#fafcff'};
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 600;
         text-align: center;
         cursor: ${item.matched ? 'default' : 'pointer'};
@@ -443,7 +480,7 @@
         width: 100%;
         box-sizing: border-box;
         flex-shrink: 0;
-        line-height: 1.2;
+        line-height: 1.3;
         word-break: break-word;
       `;
       if (!item.matched) {
@@ -464,7 +501,7 @@
     });
   };
 
-  // -------- 事件绑定（与之前相同） --------
+  // -------- 事件绑定 --------
   MatchingGame.prototype.bindEvents = function() {
     const self = this;
     this.container.addEventListener('click', function(e) {
