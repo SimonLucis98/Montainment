@@ -6,7 +6,6 @@
     <title>故事工坊 - Montainment</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ========== 全局 & 导航（同原版） ========== */
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#f5f2ed; font-family:'Nunito', system-ui, sans-serif; min-height:100vh; }
         header { background:#1a1a2e; padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.15); }
@@ -20,7 +19,6 @@
 
         .story-container { max-width:900px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
-        /* 网格列表 */
         .story-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:24px; margin-top:8px; }
         .story-card {
             background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06);
@@ -77,10 +75,10 @@
         <nav>
             <div class="logo">Montainment</div>
             <ul>
-                <li><a href="index.html">首页</a></li>
-                <li><a href="quiz.html">语言测验</a></li>
-                <li><a href="game.html">游戏</a></li>
-                <li><a href="story.html" class="active">故事工坊</a></li>
+                <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+                <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
+                <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
+                <li><a href="story.html" class="active" data-i18n="nav.story">故事工坊</a></li>
             </ul>
         </nav>
     </header>
@@ -88,34 +86,27 @@
     <main>
         <div class="story-container" id="app">
             <div style="margin-bottom:20px;">
-                <h1 style="font-size:28px; font-weight:800; color:#1a1a2e;">📚 故事工坊</h1>
-                <p style="color:#888; font-size:15px;">选择一部小说，开始阅读</p>
+                <h1 style="font-size:28px; font-weight:800; color:#1a1a2e;" data-i18n="story.title">📚 故事工坊</h1>
+                <p style="color:#888; font-size:15px;" data-i18n="story.desc">选择一部小说，开始阅读</p>
             </div>
             <div class="story-grid" id="storyGrid"></div>
         </div>
     </main>
 
+    <script src="i18n.js"></script>
+    <script src="common.js"></script>
     <script>
-        // ================================================================
-        //  小说列表页（跳转模式）
-        //  从 data/stories.json 加载，显示卡片，点击跳转到 story-read.html?story=id
-        //  点赞数从 localStorage 读取（优先于服务器数据）
-        // ================================================================
-
         const storyGrid = document.getElementById('storyGrid');
 
-        // ---------- localStorage 工具 ----------
         function getLikes(storyId) {
             const key = 'story_likes_' + storyId;
             const val = localStorage.getItem(key);
             return val !== null ? parseInt(val, 10) : null;
         }
-
         function setLikes(storyId, count) {
             localStorage.setItem('story_likes_' + storyId, String(count));
         }
 
-        // ---------- 获取首字母 Emoji ----------
         function getCoverEmoji(title) {
             const map = {
                 '灰':'🏚️','星':'⭐','魔':'🔮','时':'⏳','风':'🌪️','火':'🔥','水':'💧','暗':'🌙','光':'☀️','梦':'🌌',
@@ -147,30 +138,37 @@
         }
 
         function formatTime(iso) {
-            if (!iso) return '未知';
+            if (!iso) return i18n.t('story.unknown_time');
             const d = new Date(iso);
             return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
         }
 
-        // ---------- 渲染列表 ----------
         function renderList(stories) {
             if (!stories || stories.length === 0) {
-                storyGrid.innerHTML = `<div style="grid-column:1/-1;"><div class="empty-state"><div class="icon">📚</div><h3>暂无小说</h3><p>请在后台添加小说内容 🚧</p></div></div>`;
+                storyGrid.innerHTML = `
+                    <div style="grid-column:1/-1;">
+                        <div class="empty-state">
+                            <div class="icon">📚</div>
+                            <h3 data-i18n="story.empty_title">暂无小说</h3>
+                            <p data-i18n="story.empty_desc">请在后台添加小说内容 🚧</p>
+                        </div>
+                    </div>
+                `;
+                applyI18n();
                 return;
             }
 
             let html = '';
-            stories.forEach((story, idx) => {
-                // 从 localStorage 获取点赞数，若没有则用服务器数据
+            stories.forEach((story) => {
                 let likes = getLikes(story.id);
                 if (likes === null) {
                     likes = story.likes || 0;
-                    setLikes(story.id, likes); // 初始化
+                    setLikes(story.id, likes);
                 }
 
                 const coverEmoji = getCoverEmoji(story.title);
                 const coverColor = getCoverColor(story.title);
-                const desc = story.description || '📝 暂无简介';
+                const desc = story.description || '📝 ' + i18n.t('story.no_desc');
                 const chCount = story.chapters ? story.chapters.length : 0;
                 const updated = formatTime(story.updatedAt);
                 const hasCover = story.cover && story.cover.trim() !== '';
@@ -184,12 +182,12 @@
                         </div>
                         <div class="story-card-body">
                             <div class="title">${story.title}</div>
-                            <div class="author">作者：${story.author || '未知作者'}</div>
+                            <div class="author"><span data-i18n="story.author_prefix">作者：</span>${story.author || i18n.t('story.unknown_author')}</div>
                             <div class="desc">${desc}</div>
                             <div class="story-card-footer">
                                 <span class="likes"><span class="heart">❤️</span> ${likes}</span>
-                                <span class="chapters-count">${chCount} 章</span>
-                                <span class="updated-time">🕒 ${updated}</span>
+                                <span class="chapters-count">${chCount} <span data-i18n="story.chapters">章</span></span>
+                                <span class="updated-time"><span data-i18n="story.updated">🕒</span> ${updated}</span>
                             </div>
                         </div>
                     </a>
@@ -197,9 +195,9 @@
             });
 
             storyGrid.innerHTML = html;
+            applyI18n();
         }
 
-        // ---------- 加载数据 ----------
         function loadStories() {
             fetch('data/stories.json')
                 .then(res => {
@@ -208,7 +206,6 @@
                 })
                 .then(data => {
                     const stories = data.stories || [];
-                    // 初始化 localStorage 中不存在点赞数的条目（确保所有小说都有本地记录）
                     stories.forEach(s => {
                         if (getLikes(s.id) === null) {
                             setLikes(s.id, s.likes || 0);
@@ -222,7 +219,12 @@
                 });
         }
 
-        loadStories();
+        // 等待 i18n 加载完成
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadStories);
+        } else {
+            loadStories();
+        }
     </script>
 
 </body>
