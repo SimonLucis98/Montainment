@@ -15,7 +15,7 @@
             color: #e8e0d8;
         }
 
-        /* ===== 动态竹林背景 ===== */
+        /* ===== 动态竹林背景（YouTube 视频 + CSS 降级） ===== */
         .bamboo-bg {
             position: fixed;
             top: 0;
@@ -27,7 +27,7 @@
             pointer-events: none;
         }
 
-        /* ===== YouTube 视频背景 ===== */
+        /* ===== YouTube 视频背景（默认显示） ===== */
         .bg-video-wrapper {
             position: absolute;
             top: 0;
@@ -35,11 +35,11 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            overflow: hidden;
             opacity: 0;
             transition: opacity 2s ease;
-            overflow: hidden;
         }
-        .bg-video-wrapper.active {
+        .bg-video-wrapper.loaded {
             opacity: 1;
         }
         .bg-video-wrapper iframe {
@@ -59,7 +59,7 @@
             .bg-video-wrapper iframe { width: 300%; left: -100%; }
         }
 
-        /* ===== CSS 竹竿 ===== */
+        /* ===== CSS 降级动画（视频加载前显示） ===== */
         .bamboo-stalk {
             position: absolute;
             bottom: 0;
@@ -111,7 +111,6 @@
             100% { transform: rotate(0.8deg); }
         }
 
-        /* ===== 竹叶飘落 ===== */
         .leaf {
             position: absolute;
             font-size: 20px;
@@ -137,7 +136,6 @@
             100% { transform: translateY(105vh) rotate(720deg) scale(0.5); opacity: 0; }
         }
 
-        /* ===== 流水 ===== */
         .water {
             position: absolute;
             bottom: 0;
@@ -161,51 +159,6 @@
         @keyframes flow {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
-        }
-
-        /* ===== 背景切换按钮 ===== */
-        .bg-toggle {
-            position: fixed;
-            bottom: 90px;
-            right: 30px;
-            z-index: 150;
-            background: rgba(45, 42, 36, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(201, 168, 124, 0.15);
-            border-radius: 40px;
-            padding: 8px 16px 8px 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            color: #e8e0d8;
-            font-size: 13px;
-            font-weight: 600;
-            font-family: inherit;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-        }
-        .bg-toggle:hover {
-            background: rgba(45, 42, 36, 0.95);
-            border-color: rgba(201, 168, 124, 0.3);
-            transform: scale(1.03);
-        }
-        .bg-toggle .indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            transition: 0.3s;
-        }
-        .bg-toggle .indicator.on {
-            background: #4ade80;
-            box-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
-        }
-        .bg-toggle .indicator.off {
-            background: #888;
-        }
-        .bg-toggle .icon {
-            font-size: 16px;
         }
 
         /* ===== 页面内容 ===== */
@@ -626,18 +579,11 @@
             .music-player { width: 100%; justify-content: space-between; }
             .music-player .controls .volume-slider { width: 40px; }
             .top-bar .page-title { font-size: 18px; }
-            .bg-toggle {
-                bottom: 80px;
-                right: 16px;
-                padding: 6px 12px 6px 14px;
-                font-size: 12px;
-            }
         }
         @media (max-width: 420px) {
             .read-grid { grid-template-columns: 1fr; gap: 12px; }
             .music-player .info .sub { display: none; }
             .music-player .controls .volume-slider { width: 30px; }
-            .bg-toggle .label { display: none; }
         }
     </style>
 </head>
@@ -656,7 +602,7 @@
             ></iframe>
         </div>
 
-        <!-- CSS 竹竿 -->
+        <!-- CSS 降级动画（视频加载前显示） -->
         <div class="bamboo-stalk"></div>
         <div class="bamboo-stalk"></div>
         <div class="bamboo-stalk"></div>
@@ -666,7 +612,6 @@
         <div class="bamboo-stalk"></div>
         <div class="bamboo-stalk"></div>
 
-        <!-- 竹叶飘落 -->
         <span class="leaf">🍃</span>
         <span class="leaf">🍃</span>
         <span class="leaf">🍃</span>
@@ -676,16 +621,8 @@
         <span class="leaf">🍃</span>
         <span class="leaf">🍃</span>
 
-        <!-- 流水 -->
         <div class="water"></div>
     </div>
-
-    <!-- ===== 背景切换按钮 ===== -->
-    <button class="bg-toggle" id="bgToggle">
-        <span class="icon">🎬</span>
-        <span class="indicator off" id="bgIndicator"></span>
-        <span class="label" id="bgLabel">开启真实背景</span>
-    </button>
 
     <!-- ===== 导航栏 ===== -->
     <header class="site-header">
@@ -751,62 +688,24 @@
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  🎬 背景视频切换（方案D：默认关闭，用户手动开启）
+        //  🎬 YouTube 背景视频（默认加载，淡入效果）
         // ================================================================
         (function() {
             const wrapper = document.getElementById('bgVideoWrapper');
-            const toggle = document.getElementById('bgToggle');
-            const indicator = document.getElementById('bgIndicator');
-            const label = document.getElementById('bgLabel');
             const iframe = document.getElementById('bgVideo');
 
-            // 状态：0 = 关闭（CSS动画），1 = 开启（视频）
-            let bgState = 0;
-
-            // 从 localStorage 读取偏好
-            const savedState = localStorage.getItem('immersiveBg');
-            if (savedState === '1') {
-                bgState = 1;
-                wrapper.classList.add('active');
-                indicator.className = 'indicator on';
-                label.textContent = '关闭真实背景';
-            }
-
-            // 视频加载完成后自动显示（如果用户已开启）
+            // 视频加载完成后显示（淡入）
             if (iframe) {
                 iframe.addEventListener('load', function() {
-                    if (bgState === 1) {
-                        wrapper.classList.add('active');
-                    }
+                    wrapper.classList.add('loaded');
                 });
-                // 兜底：3秒后如果还没触发 load 事件，检查状态
+                // 兜底：3秒后如果还没触发 load 事件，直接显示
                 setTimeout(function() {
-                    if (bgState === 1) {
-                        wrapper.classList.add('active');
-                    }
+                    wrapper.classList.add('loaded');
                 }, 3000);
+            } else {
+                wrapper.style.opacity = '0';
             }
-
-            // 切换按钮事件
-            toggle.addEventListener('click', function() {
-                if (bgState === 0) {
-                    // 开启视频
-                    bgState = 1;
-                    wrapper.classList.add('active');
-                    indicator.className = 'indicator on';
-                    label.textContent = '关闭真实背景';
-                    localStorage.setItem('immersiveBg', '1');
-                } else {
-                    // 关闭视频
-                    bgState = 0;
-                    wrapper.classList.remove('active');
-                    indicator.className = 'indicator off';
-                    label.textContent = '开启真实背景';
-                    localStorage.setItem('immersiveBg', '0');
-                }
-            });
-
-            // 如果用户点击页面时视频还没加载好，不影响
         })();
 
         // ================================================================
@@ -866,7 +765,6 @@
                     if (autoPlayUsed || isPlaying) return;
                     if (e.target.closest('.reader-overlay')) return;
                     if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
-                    if (e.target.closest('#bgToggle')) return;
                     playMusic();
                     autoPlayUsed = true;
                     document.removeEventListener('click', autoPlay);
