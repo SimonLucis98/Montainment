@@ -8,14 +8,17 @@ const i18n = {
   currentLang: 'en',
 
   messages: {
+    // ================================================================
+    //  🇬🇧 英文
+    // ================================================================
     en: {
-      // ===== 导航 =====
+      // -------- 导航 --------
       'nav.home': 'Home',
       'nav.quiz': 'Language Quiz',
       'nav.game': 'Games',
       'nav.story': 'Story Workshop',
 
-      // ===== 首页 =====
+      // -------- 首页 --------
       'index.eyebrow': 'Learn + Play',
       'index.title': 'Turn learning into a fun adventure',
       'index.desc': 'At Montainment, you can take a language quiz, play a memory matching game, or let the story workshop create a personalized tale for you.',
@@ -31,7 +34,7 @@ const i18n = {
       'index.feature_game_link': 'Start Game →',
       'index.feature_story_link': 'Start Searching →',
 
-      // ===== 测验页 =====
+      // -------- 测验页 --------
       'quiz.badge': 'Language Quiz',
       'quiz.title': '🌍 Select Language · Start Challenge',
       'quiz.desc': 'First select the language to learn, then the difficulty, and finally pick a paper.',
@@ -63,7 +66,7 @@ const i18n = {
       'quiz.loading_failed': 'Data loading failed',
       'quiz.loading_failed_prompt': 'Please ensure data/papers.json exists and is properly formatted.',
 
-      // ===== 游戏大厅 =====
+      // -------- 游戏大厅 --------
       'game.badge': '🎮 Game Hall',
       'game.title': 'Select Game · Start Challenge',
       'game.desc': 'Click on any game card to enter the standalone game page and enjoy the full ad experience!',
@@ -73,7 +76,7 @@ const i18n = {
       'game.h5_badge': 'H5 Game',
       'game.play_hint': 'Start Game →',
 
-      // ===== 游戏独立页 =====
+      // -------- 游戏独立页 --------
       'gameplay.back': '← Back to Game Hall',
       'gameplay.loading': '⏳ Loading game...',
       'gameplay.loading_spinner': 'Loading game...',
@@ -86,7 +89,20 @@ const i18n = {
       'gameplay.script_load_error': 'Script loading failed',
       'gameplay.unsupported': 'Unsupported game type',
 
-      // ===== 故事列表 =====
+      // -------- 连一连游戏（matching.js） --------
+      'game.matching_title': 'Number Matching · Connect',
+      'game.matching_desc': 'Match numbers with foreign words, 7 languages supported',
+      'game.matching_round': 'Round',
+      'game.matching_score': '· Score',
+      'game.matching_matched': 'Matched',
+      'game.matching_reset': 'Reset',
+      'game.matching_status_left': 'Click left number, then click right word to match',
+      'game.matching_status_right': 'Click right word, then click left number to match',
+      'game.matching_status_correct': '✅ Correct! +10 pts',
+      'game.matching_status_wrong': '❌ Wrong, try again!',
+      'game.matching_status_complete': '🎉 All matched! Next round...',
+
+      // -------- 故事列表 --------
       'story.title': '📚 Story Workshop',
       'story.desc': 'Select a novel to start reading',
       'story.empty_title': 'No Novels Available',
@@ -99,7 +115,7 @@ const i18n = {
       'story.updated': '🕒',
       'story.unknown_time': 'Unknown',
 
-      // ===== 小说阅读页 =====
+      // -------- 小说阅读页 --------
       'storyread.back_to_list': '← Back to Novel List',
       'storyread.back_to_catalog': '← Back to Catalog',
       'storyread.author_prefix': 'Author:',
@@ -121,19 +137,22 @@ const i18n = {
       'storyread.next_chapter': 'Next Chapter',
       'storyread.back_to_top': 'Back to top',
 
-      // ===== 通用 =====
+      // -------- 通用 --------
       'common.footer': '© 2026 Montainment · A static website that makes learning more fun',
       'common.lang_switch': 'EN',
     },
 
+    // ================================================================
+    //  🇨🇳 中文
+    // ================================================================
     zh: {
-      // ===== 导航 =====
+      // -------- 导航 --------
       'nav.home': '首页',
       'nav.quiz': '语言测验',
       'nav.game': '游戏',
       'nav.story': '故事工坊',
 
-      // ===== 首页 =====
+      // -------- 首页 --------
       'index.eyebrow': '学习 + 娱乐，两不耽误',
       'index.title': '把学习变成一场好玩的探险',
       'index.desc': '在 Montainment，你可以做一套语言小测验、玩一局记忆配对游戏，或者让故事工坊为你生成专属故事。',
@@ -149,7 +168,7 @@ const i18n = {
       'index.feature_game_link': '开始游戏 →',
       'index.feature_story_link': '开始搜索 →',
 
-      // ===== 测验页 =====
+      // -------- 测验页 --------
       'quiz.badge': '语言测验',
       'quiz.title': '🌍 选择语言 · 开始挑战',
       'quiz.desc': '先选择要学习的语言，再选择难度，最后挑选试卷。',
@@ -181,7 +200,7 @@ const i18n = {
       'quiz.loading_failed': '数据加载失败',
       'quiz.loading_failed_prompt': '请确保 data/papers.json 文件存在且格式正确。',
 
-      // ===== 游戏大厅 =====
+      // -------- 游戏大厅 --------
       'game.badge': '🎮 游戏大厅',
       'game.title': '选择游戏 · 开始挑战',
       'game.desc': '点击任意游戏卡片，进入独立游戏页面，享受完整广告体验！',
@@ -191,7 +210,7 @@ const i18n = {
       'game.h5_badge': 'H5 游戏',
       'game.play_hint': '开始游戏 →',
 
-      // ===== 游戏独立页 =====
+      // -------- 游戏独立页 --------
       'gameplay.back': '← 返回游戏大厅',
       'gameplay.loading': '⏳ 加载游戏中...',
       'gameplay.loading_spinner': '加载游戏中...',
@@ -204,7 +223,20 @@ const i18n = {
       'gameplay.script_load_error': '脚本加载失败',
       'gameplay.unsupported': '不支持的遊戲類型',
 
-      // ===== 故事列表 =====
+      // -------- 连一连游戏（matching.js） --------
+      'game.matching_title': '数字配对 · 连一连',
+      'game.matching_desc': '配对数字和外语单词，支持7种语言',
+      'game.matching_round': '第',
+      'game.matching_score': '关 · 得分',
+      'game.matching_matched': '已配对',
+      'game.matching_reset': '重新洗牌',
+      'game.matching_status_left': '点击左侧数字，再点击右侧单词配对',
+      'game.matching_status_right': '已选右侧单词，请点击左侧数字配对',
+      'game.matching_status_correct': '✅ 配对正确！ +10分',
+      'game.matching_status_wrong': '❌ 配对错误，再试试！',
+      'game.matching_status_complete': '🎉 全部配对完成！进入下一关...',
+
+      // -------- 故事列表 --------
       'story.title': '📚 故事工坊',
       'story.desc': '选择一部小说，开始阅读',
       'story.empty_title': '暂无小说',
@@ -217,7 +249,7 @@ const i18n = {
       'story.updated': '🕒',
       'story.unknown_time': '未知',
 
-      // ===== 小说阅读页 =====
+      // -------- 小说阅读页 --------
       'storyread.back_to_list': '← 返回小说列表',
       'storyread.back_to_catalog': '← 返回目录',
       'storyread.author_prefix': '作者：',
@@ -239,7 +271,7 @@ const i18n = {
       'storyread.next_chapter': '下一章',
       'storyread.back_to_top': '回到顶部',
 
-      // ===== 通用 =====
+      // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 一个让学习更好玩的静态网站',
       'common.lang_switch': '中文',
     }
