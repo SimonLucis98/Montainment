@@ -107,8 +107,17 @@
   <script src="i18n.js"></script>
   <script src="common.js"></script>
   <script>
+    // ================================================================
+    //  游戏大厅：从 data/games.json 加载，支持多语言
+    // ================================================================
     (function() {
       const gameGrid = document.getElementById('gameGrid');
+      let allGames = [];
+
+      // 获取当前语言
+      function getLang() {
+        return window.i18n ? i18n.currentLang : 'en';
+      }
 
       function getCoverDisplay(game) {
         if (game.image) {
@@ -135,6 +144,7 @@
       }
 
       function renderList(games) {
+        allGames = games;
         if (games.length === 0) {
           gameGrid.innerHTML = `
             <div style="grid-column:1/-1;">
@@ -145,30 +155,33 @@
               </div>
             </div>
           `;
-          applyI18n();
+          if (typeof applyI18n === 'function') applyI18n();
           return;
         }
 
+        const lang = getLang();
         let html = '';
         games.forEach((game) => {
           const coverHtml = getCoverDisplay(game);
           const coverColor = getCoverColor(game);
+          // 根据语言选择标题和描述
+          const title = lang === 'zh' ? game.titleZh : (game.titleEn || game.titleZh);
+          const desc = lang === 'zh' ? (game.descriptionZh || '📝 来挑战吧！') : (game.descriptionEn || game.descriptionZh || '📝 Let\'s go!');
           const typeLabel = game.type === 'js' ? 
-            `<span data-i18n="game.native_badge">原生游戏</span>` : 
-            `<span data-i18n="game.h5_badge">H5 游戏</span>`;
-          const desc = game.descriptionZh || '📝 来挑战吧！';
+            (lang === 'zh' ? '原生游戏' : 'Native Game') : 
+            (lang === 'zh' ? 'H5 游戏' : 'H5 Game');
 
           html += `
             <a href="game-play.html?game=${encodeURIComponent(game.id)}" class="game-card">
               <div class="game-cover" style="background:${coverColor};">
                 ${coverHtml}
-                <span class="cover-badge">${game.type === 'js' ? '原生游戏' : 'H5 游戏'}</span>
+                <span class="cover-badge">${typeLabel}</span>
               </div>
               <div class="game-card-body">
-                <div class="title">${game.titleZh}</div>
+                <div class="title">${title}</div>
                 <div class="desc">${desc}</div>
                 <div class="game-card-footer">
-                  <span class="status">${game.type === 'js' ? '原生游戏' : 'H5 游戏'}</span>
+                  <span class="status">${typeLabel}</span>
                   <span class="play-hint" data-i18n="game.play_hint">开始游戏 →</span>
                 </div>
               </div>
@@ -177,7 +190,7 @@
         });
 
         gameGrid.innerHTML = html;
-        applyI18n();
+        if (typeof applyI18n === 'function') applyI18n();
       }
 
       function loadGames() {
@@ -198,6 +211,19 @@
           });
       }
 
+      // 暴露给全局，以便语言切换时重新加载
+      window.loadGames = loadGames;
+
+      // 监听语言切换
+      document.addEventListener('languageChanged', function() {
+        if (allGames.length > 0) {
+          renderList(allGames);
+        } else {
+          loadGames();
+        }
+      });
+
+      // 启动
       loadGames();
     })();
   </script>
