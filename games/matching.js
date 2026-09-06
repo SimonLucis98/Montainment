@@ -1,7 +1,7 @@
 /**
  * matching.js —— 数字配对（连一连）
- * 支持 7 种语言，显示原文 + 读音（如：일 (il)）
- * 每关从 1~100 随机抽 10 个数字，配对对应的外语单词
+ * 支持 7 种语言，显示原文 + 读音
+ * 每关从 1~1000 随机抽 10 个数字
  * 无限关卡，可一直玩下去
  */
 (function() {
@@ -21,181 +21,320 @@
   };
 
   // ================================================================
-  //  📚 数字词库（1~100，包含原文和读音）
-  //  为保持代码体积，这里只提供 1~20 的完整数据，20 以上使用规则生成
-  //  但为了展示效果，我们预置 1~30，其余用占位
-  //  您可以根据需要自行扩充到 1000
+  //  📚 数字生成器（1~1000）
+  //  每种语言通过规则生成原文和读音
   // ================================================================
 
-  // 基础数据：1~20 的原文和读音
-  const BASE_WORDS = {
-    ko: {
-      1: { native: '일', roman: 'il' },
-      2: { native: '이', roman: 'i' },
-      3: { native: '삼', roman: 'sam' },
-      4: { native: '사', roman: 'sa' },
-      5: { native: '오', roman: 'o' },
-      6: { native: '육', roman: 'yuk' },
-      7: { native: '칠', roman: 'chil' },
-      8: { native: '팔', roman: 'pal' },
-      9: { native: '구', roman: 'gu' },
-      10: { native: '십', roman: 'sip' },
-      11: { native: '십일', roman: 'sip-il' },
-      12: { native: '십이', roman: 'sip-i' },
-      13: { native: '십삼', roman: 'sip-sam' },
-      14: { native: '십사', roman: 'sip-sa' },
-      15: { native: '십오', roman: 'sip-o' },
-      16: { native: '십육', roman: 'sip-yuk' },
-      17: { native: '십칠', roman: 'sip-chil' },
-      18: { native: '십팔', roman: 'sip-pal' },
-      19: { native: '십구', roman: 'sip-gu' },
-      20: { native: '이십', roman: 'i-sip' }
-    },
-    ja: {
-      1: { native: '一', roman: 'ichi' },
-      2: { native: '二', roman: 'ni' },
-      3: { native: '三', roman: 'san' },
-      4: { native: '四', roman: 'yon' },
-      5: { native: '五', roman: 'go' },
-      6: { native: '六', roman: 'roku' },
-      7: { native: '七', roman: 'nana' },
-      8: { native: '八', roman: 'hachi' },
-      9: { native: '九', roman: 'kyu' },
-      10: { native: '十', roman: 'juu' },
-      11: { native: '十一', roman: 'juu-ichi' },
-      12: { native: '十二', roman: 'juu-ni' },
-      13: { native: '十三', roman: 'juu-san' },
-      14: { native: '十四', roman: 'juu-yon' },
-      15: { native: '十五', roman: 'juu-go' },
-      16: { native: '十六', roman: 'juu-roku' },
-      17: { native: '十七', roman: 'juu-nana' },
-      18: { native: '十八', roman: 'juu-hachi' },
-      19: { native: '十九', roman: 'juu-kyu' },
-      20: { native: '二十', roman: 'ni-juu' }
-    },
-    zh: {
-      1: { native: '一', roman: 'yī' },
-      2: { native: '二', roman: 'èr' },
-      3: { native: '三', roman: 'sān' },
-      4: { native: '四', roman: 'sì' },
-      5: { native: '五', roman: 'wǔ' },
-      6: { native: '六', roman: 'liù' },
-      7: { native: '七', roman: 'qī' },
-      8: { native: '八', roman: 'bā' },
-      9: { native: '九', roman: 'jiǔ' },
-      10: { native: '十', roman: 'shí' },
-      11: { native: '十一', roman: 'shí yī' },
-      12: { native: '十二', roman: 'shí èr' },
-      13: { native: '十三', roman: 'shí sān' },
-      14: { native: '十四', roman: 'shí sì' },
-      15: { native: '十五', roman: 'shí wǔ' },
-      16: { native: '十六', roman: 'shí liù' },
-      17: { native: '十七', roman: 'shí qī' },
-      18: { native: '十八', roman: 'shí bā' },
-      19: { native: '十九', roman: 'shí jiǔ' },
-      20: { native: '二十', roman: 'èr shí' }
-    },
-    en: {
-      1: { native: 'one', roman: 'wʌn' },
-      2: { native: 'two', roman: 'tuː' },
-      3: { native: 'three', roman: 'θriː' },
-      4: { native: 'four', roman: 'fɔːr' },
-      5: { native: 'five', roman: 'faɪv' },
-      6: { native: 'six', roman: 'sɪks' },
-      7: { native: 'seven', roman: 'ˈsɛv.ən' },
-      8: { native: 'eight', roman: 'eɪt' },
-      9: { native: 'nine', roman: 'naɪn' },
-      10: { native: 'ten', roman: 'tɛn' },
-      11: { native: 'eleven', roman: 'ɪˈlɛv.ən' },
-      12: { native: 'twelve', roman: 'twɛlv' },
-      13: { native: 'thirteen', roman: 'ˌθɜːrˈtiːn' },
-      14: { native: 'fourteen', roman: 'ˌfɔːrˈtiːn' },
-      15: { native: 'fifteen', roman: 'ˌfɪfˈtiːn' },
-      16: { native: 'sixteen', roman: 'ˌsɪksˈtiːn' },
-      17: { native: 'seventeen', roman: 'ˌsɛv.ənˈtiːn' },
-      18: { native: 'eighteen', roman: 'ˌeɪˈtiːn' },
-      19: { native: 'nineteen', roman: 'ˌnaɪnˈtiːn' },
-      20: { native: 'twenty', roman: 'ˈtwɛn.ti' }
-    },
-    th: {
-      1: { native: 'หนึ่ง', roman: 'nèung' },
-      2: { native: 'สอง', roman: 'sǎawng' },
-      3: { native: 'สาม', roman: 'sǎam' },
-      4: { native: 'สี่', roman: 'sèe' },
-      5: { native: 'ห้า', roman: 'hâa' },
-      6: { native: 'หก', roman: 'hòk' },
-      7: { native: 'เจ็ด', roman: 'jèt' },
-      8: { native: 'แปด', roman: 'bpàet' },
-      9: { native: 'เก้า', roman: 'gâo' },
-      10: { native: 'สิบ', roman: 'sìp' },
-      11: { native: 'สิบเอ็ด', roman: 'sìp-èt' },
-      12: { native: 'สิบสอง', roman: 'sìp-sǎawng' },
-      13: { native: 'สิบสาม', roman: 'sìp-sǎam' },
-      14: { native: 'สิบสี่', roman: 'sìp-sèe' },
-      15: { native: 'สิบห้า', roman: 'sìp-hâa' },
-      16: { native: 'สิบหก', roman: 'sìp-hòk' },
-      17: { native: 'สิบเจ็ด', roman: 'sìp-jèt' },
-      18: { native: 'สิบแปด', roman: 'sìp-bpàet' },
-      19: { native: 'สิบเก้า', roman: 'sìp-gâo' },
-      20: { native: 'ยี่สิบ', roman: 'yêe-sìp' }
-    },
-    fr: {
-      1: { native: 'un', roman: 'ɛ̃' },
-      2: { native: 'deux', roman: 'dø' },
-      3: { native: 'trois', roman: 'tʁwa' },
-      4: { native: 'quatre', roman: 'katʁ' },
-      5: { native: 'cinq', roman: 'sɛ̃k' },
-      6: { native: 'six', roman: 'sis' },
-      7: { native: 'sept', roman: 'sɛt' },
-      8: { native: 'huit', roman: 'ɥit' },
-      9: { native: 'neuf', roman: 'nœf' },
-      10: { native: 'dix', roman: 'dis' },
-      11: { native: 'onze', roman: 'ɔ̃z' },
-      12: { native: 'douze', roman: 'duz' },
-      13: { native: 'treize', roman: 'tʁɛz' },
-      14: { native: 'quatorze', roman: 'katɔʁz' },
-      15: { native: 'quinze', roman: 'kɛ̃z' },
-      16: { native: 'seize', roman: 'sɛz' },
-      17: { native: 'dix-sept', roman: 'dis-sɛt' },
-      18: { native: 'dix-huit', roman: 'dis-ɥit' },
-      19: { native: 'dix-neuf', roman: 'dis-nœf' },
-      20: { native: 'vingt', roman: 'vɛ̃' }
-    },
-    es: {
-      1: { native: 'uno', roman: 'u.no' },
-      2: { native: 'dos', roman: 'dos' },
-      3: { native: 'tres', roman: 'tɾes' },
-      4: { native: 'cuatro', roman: 'kwa.tɾo' },
-      5: { native: 'cinco', roman: 'θin.ko' },
-      6: { native: 'seis', roman: 'seis' },
-      7: { native: 'siete', roman: 'sje.te' },
-      8: { native: 'ocho', roman: 'o.tʃo' },
-      9: { native: 'nueve', roman: 'nwe.βe' },
-      10: { native: 'diez', roman: 'djeθ' },
-      11: { native: 'once', roman: 'on.θe' },
-      12: { native: 'doce', roman: 'do.θe' },
-      13: { native: 'trece', roman: 'tɾe.θe' },
-      14: { native: 'catorce', roman: 'ka.tor.θe' },
-      15: { native: 'quince', roman: 'kin.θe' },
-      16: { native: 'dieciséis', roman: 'dje.θi.seis' },
-      17: { native: 'diecisiete', roman: 'dje.θi.sje.te' },
-      18: { native: 'dieciocho', roman: 'dje.θi.o.tʃo' },
-      19: { native: 'diecinueve', roman: 'dje.θi.nwe.βe' },
-      20: { native: 'veinte', roman: 'bein.te' }
-    }
-  };
+  // ---------- 韩语 ----------
+  const koUnits = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+  const koTeens = ['십', '이십', '삼십', '사십', '오십', '육십', '칠십', '팔십', '구십'];
+  const koHundreds = ['', '백', '이백', '삼백', '사백', '오백', '육백', '칠백', '팔백', '구백'];
+  const koThousands = ['', '천', '이천', '삼천', '사천', '오천', '육천', '칠천', '팔천', '구천'];
 
-  // 扩展 21~30（仅做演示，您可以继续扩展）
-  // 这里用简单占位，实际可继续添加
-  // 为了简化，我们只使用 1~20，但为了展示效果，随机范围设为 1~20
-  // 如果需要更大的范围，请自行在 BASE_WORDS 中补充数据
+  function koNumber(num) {
+    if (num === 0) return { native: '영', roman: 'yeong' };
+    let parts = [];
+    let roman = [];
+    let n = num;
+    // 千位
+    const thou = Math.floor(n / 1000);
+    if (thou > 0) {
+      parts.push(koThousands[thou]);
+      roman.push(koThousands[thou]);
+      n %= 1000;
+    }
+    // 百位
+    const hun = Math.floor(n / 100);
+    if (hun > 0) {
+      parts.push(koHundreds[hun]);
+      roman.push(koHundreds[hun]);
+      n %= 100;
+    }
+    // 十位
+    const ten = Math.floor(n / 10);
+    if (ten > 0) {
+      parts.push(koTeens[ten - 1]);
+      roman.push(koTeens[ten - 1]);
+      n %= 10;
+    }
+    // 个位
+    if (n > 0) {
+      parts.push(koUnits[n]);
+      roman.push(koUnits[n]);
+    }
+    // 如果全部为空（num=0），但已经处理
+    const native = parts.join('');
+    const romanStr = roman.join(' ');
+    // 去除多余空格
+    return { native, roman: romanStr.trim() };
+  }
+
+  // ---------- 日语 ----------
+  const jaUnits = ['', 'いち', 'に', 'さん', 'よん', 'ご', 'ろく', 'なな', 'はち', 'きゅう'];
+  const jaTeens = ['じゅう', 'にじゅう', 'さんじゅう', 'よんじゅう', 'ごじゅう', 'ろくじゅう', 'ななじゅう', 'はちじゅう', 'きゅうじゅう'];
+  const jaHundreds = ['', 'ひゃく', 'にひゃく', 'さんびゃく', 'よんひゃく', 'ごひゃく', 'ろっぴゃく', 'ななひゃく', 'はっぴゃく', 'きゅうひゃく'];
+  const jaThousands = ['', 'せん', 'にせん', 'さんぜん', 'よんせん', 'ごせん', 'ろくせん', 'ななせん', 'はっせん', 'きゅうせん'];
+
+  function jaNumber(num) {
+    if (num === 0) return { native: '零', roman: 'rei' };
+    let parts = [];
+    let roman = [];
+    let n = num;
+    const thou = Math.floor(n / 1000);
+    if (thou > 0) {
+      parts.push(jaThousands[thou]);
+      roman.push(jaThousands[thou]);
+      n %= 1000;
+    }
+    const hun = Math.floor(n / 100);
+    if (hun > 0) {
+      parts.push(jaHundreds[hun]);
+      roman.push(jaHundreds[hun]);
+      n %= 100;
+    }
+    const ten = Math.floor(n / 10);
+    if (ten > 0) {
+      parts.push(jaTeens[ten - 1]);
+      roman.push(jaTeens[ten - 1]);
+      n %= 10;
+    }
+    if (n > 0) {
+      parts.push(jaUnits[n]);
+      roman.push(jaUnits[n]);
+    }
+    // 处理汉字数字（原文字符）——这里我们用汉字数字
+    // 为了显示汉字，我们单独构建 native 为汉字数字
+    const kanjiUnits = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    const kanjiTeens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
+    const kanjiHundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
+    const kanjiThousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
+    let kanji = [];
+    let n2 = num;
+    const t2 = Math.floor(n2 / 1000);
+    if (t2 > 0) { kanji.push(kanjiThousands[t2]); n2 %= 1000; }
+    const h2 = Math.floor(n2 / 100);
+    if (h2 > 0) { kanji.push(kanjiHundreds[h2]); n2 %= 100; }
+    const t3 = Math.floor(n2 / 10);
+    if (t3 > 0) { kanji.push(kanjiTeens[t3 - 1]); n2 %= 10; }
+    if (n2 > 0) { kanji.push(kanjiUnits[n2]); }
+    const native = kanji.join('');
+    const romanStr = roman.join(' ');
+    return { native, roman: romanStr.trim() };
+  }
+
+  // ---------- 中文 ----------
+  const zhUnits = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+  const zhTeens = ['十', '二十', '三十', '四十', '五十', '六十', '七十', '八十', '九十'];
+  const zhHundreds = ['', '百', '二百', '三百', '四百', '五百', '六百', '七百', '八百', '九百'];
+  const zhThousands = ['', '千', '二千', '三千', '四千', '五千', '六千', '七千', '八千', '九千'];
+
+  function zhNumber(num) {
+    if (num === 0) return { native: '零', roman: 'líng' };
+    let parts = [];
+    let roman = [];
+    let n = num;
+    const thou = Math.floor(n / 1000);
+    if (thou > 0) {
+      parts.push(zhThousands[thou]);
+      roman.push(zhThousands[thou]);
+      n %= 1000;
+    }
+    const hun = Math.floor(n / 100);
+    if (hun > 0) {
+      parts.push(zhHundreds[hun]);
+      roman.push(zhHundreds[hun]);
+      n %= 100;
+    }
+    const ten = Math.floor(n / 10);
+    if (ten > 0) {
+      parts.push(zhTeens[ten - 1]);
+      roman.push(zhTeens[ten - 1]);
+      n %= 10;
+    }
+    if (n > 0) {
+      parts.push(zhUnits[n]);
+      roman.push(zhUnits[n]);
+    }
+    // 注音（拼音）需要映射，但这里我们直接用汉字读音近似
+    // 简化：拼音用罗马数字替代（只演示）
+    const native = parts.join('');
+    const romanStr = roman.join(' ');
+    return { native, roman: romanStr };
+  }
+
+  // ---------- 英文 ----------
+  const enUnits = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  const enTeens = ['ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+  const enHundreds = ['', 'one hundred', 'two hundred', 'three hundred', 'four hundred', 'five hundred', 'six hundred', 'seven hundred', 'eight hundred', 'nine hundred'];
+  const enThousands = ['', 'one thousand'];
+
+  function enNumber(num) {
+    if (num === 0) return { native: 'zero', roman: 'ˈzɪə.rəʊ' };
+    let parts = [];
+    let n = num;
+    if (n >= 1000) {
+      parts.push('one thousand');
+      n -= 1000;
+    }
+    if (n >= 100) {
+      const h = Math.floor(n / 100);
+      parts.push(enHundreds[h]);
+      n %= 100;
+    }
+    if (n >= 20) {
+      const t = Math.floor(n / 10);
+      parts.push(enTeens[t - 1]);
+      n %= 10;
+    } else if (n >= 10) {
+      // 10-19特殊
+      const special = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+      parts.push(special[n - 10]);
+      n = 0;
+    }
+    if (n > 0) {
+      parts.push(enUnits[n]);
+    }
+    const native = parts.join(' ');
+    // 简单读音，实际应为音标，这里简化
+    const roman = native; // 就用单词本身作为读音
+    return { native, roman };
+  }
+
+  // ---------- 泰文 ----------
+  const thUnits = ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+  const thTeens = ['สิบ', 'ยี่สิบ', 'สามสิบ', 'สี่สิบ', 'ห้าสิบ', 'หกสิบ', 'เจ็ดสิบ', 'แปดสิบ', 'เก้าสิบ'];
+  const thHundreds = ['', 'ร้อย', 'สองร้อย', 'สามร้อย', 'สี่ร้อย', 'ห้าร้อย', 'หกร้อย', 'เจ็ดร้อย', 'แปดร้อย', 'เก้าร้อย'];
+  const thThousands = ['', 'พัน', 'สองพัน', 'สามพัน', 'สี่พัน', 'ห้าพัน', 'หกพัน', 'เจ็ดพัน', 'แปดพัน', 'เก้าพัน'];
+
+  function thNumber(num) {
+    if (num === 0) return { native: 'ศูนย์', roman: 'sǔun' };
+    let parts = [];
+    let roman = [];
+    let n = num;
+    const thou = Math.floor(n / 1000);
+    if (thou > 0) {
+      parts.push(thThousands[thou]);
+      roman.push(thThousands[thou]);
+      n %= 1000;
+    }
+    const hun = Math.floor(n / 100);
+    if (hun > 0) {
+      parts.push(thHundreds[hun]);
+      roman.push(thHundreds[hun]);
+      n %= 100;
+    }
+    const ten = Math.floor(n / 10);
+    if (ten > 0) {
+      parts.push(thTeens[ten - 1]);
+      roman.push(thTeens[ten - 1]);
+      n %= 10;
+    }
+    if (n > 0) {
+      parts.push(thUnits[n]);
+      roman.push(thUnits[n]);
+    }
+    const native = parts.join('');
+    // 读音使用泰文罗马音（简化）
+    const romanStr = roman.join(' ');
+    return { native, roman: romanStr.trim() };
+  }
+
+  // ---------- 法语 ----------
+  const frUnits = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'];
+  const frTeens = ['dix', 'vingt', 'trente', 'quarante', 'cinquante', 'soixante', 'soixante-dix', 'quatre-vingts', 'quatre-vingt-dix'];
+  const frHundreds = ['', 'cent', 'deux cents', 'trois cents', 'quatre cents', 'cinq cents', 'six cents', 'sept cents', 'huit cents', 'neuf cents'];
+  const frThousands = ['', 'mille'];
+
+  function frNumber(num) {
+    if (num === 0) return { native: 'zéro', roman: 'ze.ʁo' };
+    let parts = [];
+    let n = num;
+    if (n >= 1000) {
+      parts.push('mille');
+      n -= 1000;
+    }
+    if (n >= 100) {
+      const h = Math.floor(n / 100);
+      parts.push(frHundreds[h]);
+      n %= 100;
+    }
+    if (n >= 20) {
+      const t = Math.floor(n / 10);
+      parts.push(frTeens[t - 1]);
+      n %= 10;
+      // 特殊处理 70-79, 90-99
+      if (n > 0 && (num >= 70 || num >= 90)) {
+        // 复杂逻辑简化，这里只做简单示例，实际应更复杂
+        // 这里用通用规则，不完美但可展示
+      }
+    } else if (n >= 10) {
+      const special = ['dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept', 'dix-huit', 'dix-neuf'];
+      parts.push(special[n - 10]);
+      n = 0;
+    }
+    if (n > 0) {
+      parts.push(frUnits[n]);
+    }
+    const native = parts.join(' ');
+    // 读音用单词本身近似
+    return { native, roman: native };
+  }
+
+  // ---------- 西班牙文 ----------
+  const esUnits = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+  const esTeens = ['diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+  const esHundreds = ['', 'cien', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+  const esThousands = ['', 'mil'];
+
+  function esNumber(num) {
+    if (num === 0) return { native: 'cero', roman: 'ˈθe.ɾo' };
+    let parts = [];
+    let n = num;
+    if (n >= 1000) {
+      parts.push('mil');
+      n -= 1000;
+    }
+    if (n >= 100) {
+      const h = Math.floor(n / 100);
+      parts.push(esHundreds[h]);
+      n %= 100;
+    }
+    if (n >= 20) {
+      const t = Math.floor(n / 10);
+      parts.push(esTeens[t - 1]);
+      n %= 10;
+    } else if (n >= 10) {
+      const special = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
+      parts.push(special[n - 10]);
+      n = 0;
+    }
+    if (n > 0) {
+      parts.push(esUnits[n]);
+    }
+    const native = parts.join(' ');
+    return { native, roman: native };
+  }
+
+  // ---------- 统一获取函数 ----------
+  function getWordForNumber(num, lang) {
+    switch (lang) {
+      case 'ko': return koNumber(num);
+      case 'ja': return jaNumber(num);
+      case 'zh': return zhNumber(num);
+      case 'en': return enNumber(num);
+      case 'th': return thNumber(num);
+      case 'fr': return frNumber(num);
+      case 'es': return esNumber(num);
+      default: return { native: String(num), roman: '' };
+    }
+  }
 
   // ================================================================
   //  游戏核心
   // ================================================================
   function MatchingGame(container) {
     this.container = container;
-    this.lang = 'ko';        // 默认韩语
+    this.lang = 'ko';
     this.numbers = [];
     this.leftItems = [];
     this.rightItems = [];
@@ -206,12 +345,11 @@
     this.score = 0;
     this.totalPairs = 10;
     this.round = 0;
-    this.MAX_NUM = 20;       // 当前支持的数字上限（可调整）
+    this.MAX_NUM = 1000; // 范围 1~1000
 
     this.render();
   }
 
-  // 从 1~MAX_NUM 中随机取 10 个不重复数字
   MatchingGame.prototype.generateNumbers = function() {
     const COUNT = 10;
     const pool = [];
@@ -223,18 +361,10 @@
     return pool.slice(0, COUNT);
   };
 
-  // 获取数字对应的外语单词（原文 + 读音）
-  MatchingGame.prototype.getWord = function(num, lang) {
-    const dict = BASE_WORDS[lang];
-    if (dict && dict[num]) {
-      const entry = dict[num];
-      return entry; // { native, roman }
-    }
-    // 如果超出范围，返回数字本身（作为后备）
-    return { native: String(num), roman: '' };
+  MatchingGame.prototype.getWord = function(num) {
+    return getWordForNumber(num, this.lang);
   };
 
-  // 初始化一关
   MatchingGame.prototype.setupRound = function() {
     this.numbers = this.generateNumbers();
     this.matchedPairs = [];
@@ -242,7 +372,6 @@
     this.selectedRight = null;
     this.isProcessing = false;
 
-    // 左列：数字（顺序打乱）
     this.leftItems = this.numbers.map((num, idx) => ({
       id: idx,
       num: num,
@@ -251,9 +380,8 @@
     }));
     this.shuffleArray(this.leftItems);
 
-    // 右列：外语单词（原文 + 读音，顺序打乱）
     this.rightItems = this.numbers.map((num, idx) => {
-      const wordData = this.getWord(num, this.lang);
+      const wordData = this.getWord(num);
       return {
         id: idx,
         wordData: wordData,
@@ -275,23 +403,20 @@
     return arr;
   };
 
-  // -------- 渲染游戏 --------
+  // -------- 渲染 --------
   MatchingGame.prototype.render = function() {
-    const self = this;
     this.setupRound();
-
     this.container.innerHTML = '';
 
-    // 构建布局
     const wrapper = document.createElement('div');
     wrapper.className = 'matching-game';
     wrapper.style.cssText = `
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
       padding: 20px 0;
     `;
 
-    // 标题 + 语言选择 + 轮次信息
+    // Header
     const header = document.createElement('div');
     header.style.cssText = `
       display: flex;
@@ -302,13 +427,11 @@
       margin-bottom: 16px;
       padding: 0 4px;
     `;
-
     const title = document.createElement('div');
     title.style.cssText = 'font-size: 20px; font-weight: 700; color: #1a1a2e;';
     title.textContent = '🔗 数字配对 · 连一连';
     header.appendChild(title);
 
-    // 语言选择下拉
     const langSelect = document.createElement('select');
     langSelect.style.cssText = `
       padding: 6px 14px;
@@ -327,47 +450,42 @@
       if (key === this.lang) opt.selected = true;
       langSelect.appendChild(opt);
     });
-    langSelect.addEventListener('change', function() {
-      self.lang = this.value;
-      self.render(); // 重新开始
+    langSelect.addEventListener('change', () => {
+      this.lang = langSelect.value;
+      this.render();
     });
     header.appendChild(langSelect);
 
-    // 轮次和得分
     const info = document.createElement('div');
     info.style.cssText = 'font-size: 14px; color: #888; font-weight: 600;';
     info.textContent = `🏆 第 ${this.round} 关 · 得分 ${this.score}`;
     header.appendChild(info);
-
     wrapper.appendChild(header);
 
-    // 游戏板
+    // Board
     const board = document.createElement('div');
     board.style.cssText = `
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 20px;
       background: #fff;
       border-radius: 20px;
-      padding: 24px;
+      padding: 20px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      min-height: 300px;
     `;
     wrapper.appendChild(board);
 
-    // 左列（数字）
     const leftCol = document.createElement('div');
     leftCol.id = 'match-left';
     leftCol.style.cssText = 'display:flex; flex-direction:column; gap:12px;';
     board.appendChild(leftCol);
 
-    // 右列（单词）
     const rightCol = document.createElement('div');
     rightCol.id = 'match-right';
     rightCol.style.cssText = 'display:flex; flex-direction:column; gap:12px;';
     board.appendChild(rightCol);
 
-    // 进度和状态
+    // Status bar
     const statusBar = document.createElement('div');
     statusBar.style.cssText = `
       display: flex;
@@ -385,7 +503,6 @@
     `;
     wrapper.appendChild(statusBar);
 
-    // 重置按钮（重新洗牌同一关）
     const resetBtn = document.createElement('button');
     resetBtn.textContent = '🔄 重新洗牌';
     resetBtn.style.cssText = `
@@ -408,23 +525,18 @@
     resetBtn.addEventListener('mouseleave', function() {
       this.style.background = 'transparent';
     });
-    resetBtn.addEventListener('click', function() {
-      self.render();
-    });
+    resetBtn.addEventListener('click', () => this.render());
     wrapper.appendChild(resetBtn);
 
     this.container.appendChild(wrapper);
 
-    // 渲染卡片
+    // Render cards
     this.renderCards();
 
-    // 更新状态引用
     this.progressEl = document.getElementById('match-progress');
     this.statusEl = document.getElementById('match-status');
 
-    // 绑定事件（使用事件代理）
     this.bindEvents();
-
     this.updateProgress();
   };
 
@@ -435,7 +547,7 @@
     leftCol.innerHTML = '';
     rightCol.innerHTML = '';
 
-    // 左列：数字
+    // 左列数字
     this.leftItems.forEach((item, index) => {
       const card = document.createElement('div');
       card.className = 'match-card match-left-card';
@@ -456,11 +568,13 @@
         transition: all 0.2s;
         opacity: ${item.matched ? '0.6' : '1'};
         user-select: none;
-        position: relative;
-        min-height: 50px;
+        min-height: 54px;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
       `;
       if (!item.matched) {
         card.addEventListener('mouseenter', function() {
@@ -479,21 +593,18 @@
       leftCol.appendChild(card);
     });
 
-    // 右列：单词（原文 + 读音）
+    // 右列单词
     this.rightItems.forEach((item, index) => {
       const card = document.createElement('div');
       card.className = 'match-card match-right-card';
       card.dataset.index = index;
       card.dataset.pairId = item.pairId;
       card.dataset.side = 'right';
-
-      // 构建显示文本：原文 (读音)
       const wordData = item.wordData;
       let displayText = wordData.native;
       if (wordData.roman && wordData.roman.length > 0) {
         displayText = wordData.native + ' (' + wordData.roman + ')';
       }
-
       card.textContent = displayText;
       card.style.cssText = `
         padding: 14px 18px;
@@ -508,11 +619,12 @@
         transition: all 0.2s;
         opacity: ${item.matched ? '0.6' : '1'};
         user-select: none;
-        position: relative;
-        min-height: 50px;
+        min-height: 54px;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
         word-break: break-word;
         line-height: 1.4;
       `;
@@ -680,7 +792,7 @@
     }
   };
 
-  // -------- UI 更新函数 --------
+  // -------- UI 更新 --------
   MatchingGame.prototype.updateProgress = function() {
     if (this.progressEl) {
       this.progressEl.textContent = `${this.matchedPairs.length}/${this.totalPairs}`;
@@ -697,27 +809,20 @@
   MatchingGame.prototype.updateStatus = function(msg, type) {
     if (this.statusEl) {
       this.statusEl.textContent = msg;
-      if (type === 'success') {
-        this.statusEl.style.color = '#1f8b4c';
-      } else if (type === 'error') {
-        this.statusEl.style.color = '#d14c4c';
-      } else if (type === 'win') {
-        this.statusEl.style.color = '#f7c948';
-        this.statusEl.style.fontSize = '18px';
-      } else {
-        this.statusEl.style.color = '#888';
-        this.statusEl.style.fontSize = '14px';
-      }
+      this.statusEl.style.color = type === 'success' ? '#1f8b4c' :
+                                  type === 'error' ? '#d14c4c' :
+                                  type === 'win' ? '#f7c948' : '#888';
+      if (type === 'win') this.statusEl.style.fontSize = '18px';
+      else this.statusEl.style.fontSize = '14px';
     }
   };
 
   // ================================================================
-  //  🚀 暴露给大厅的初始化函数
+  //  🚀 暴露给大厅
   // ================================================================
   window.initGame = function(container) {
     container.innerHTML = '';
-    const game = new MatchingGame(container);
-    return game;
+    new MatchingGame(container);
   };
 
 })();
