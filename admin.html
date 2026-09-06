@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ========== 后台样式 ========== */
+        /* ========== 后台样式（保持不变） ========== */
         .admin-container {
             max-width: 960px;
             margin: 0 auto;
@@ -175,6 +175,9 @@
         .btn-edit:hover { background: #dce4ef; }
         .btn-delete { background: #fdeeec; color: #d14c4c; }
         .btn-delete:hover { background: #fcd8d6; }
+        .btn-toggle { background: #e6f7ee; color: #1f8b4c; }
+        .btn-toggle.off { background: #fdeeec; color: #d14c4c; }
+        .btn-toggle:hover { opacity: 0.8; }
 
         /* ========== Tabs ========== */
         .tabs {
@@ -361,6 +364,17 @@
             font-size: 12px;
             background: #fafcff;
         }
+
+        /* ========== 开关样式 ========== */
+        .toggle-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .toggle-badge.on { background: #e6f7ee; color: #1f8b4c; }
+        .toggle-badge.off { background: #fdeeec; color: #d14c4c; }
     </style>
 </head>
 <body>
@@ -407,7 +421,7 @@
                     <div>
                         <span class="page-badge badge-primary">🔧 后台管理</span>
                         <h1>内容管理系统</h1>
-                        <p>管理测验数据与小说内容，修改后导出 JSON 并提交到 GitHub。</p>
+                        <p>管理测验、小说和游戏数据，修改后导出 JSON 并提交到 GitHub。</p>
                     </div>
                     <button class="btn-admin btn-admin-danger" id="logoutBtn">🚪 退出</button>
                 </div>
@@ -422,20 +436,22 @@
                         <div class="stat-card"><div class="number" id="questionCount">0</div><div class="label">题目</div></div>
                         <div class="stat-card"><div class="number" id="storyCount">0</div><div class="label">小说</div></div>
                         <div class="stat-card"><div class="number" id="chapterCount">0</div><div class="label">章节</div></div>
+                        <div class="stat-card"><div class="number" id="gameCount">0</div><div class="label">游戏</div></div>
                     </div>
                 </div>
 
-                <!-- Tabs -->
+                <!-- Tabs（新增 🎮 游戏） -->
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="languages">🌍 语言</button>
                     <button class="tab-btn" data-tab="difficulties">📊 难度</button>
                     <button class="tab-btn" data-tab="papers">📄 试卷</button>
                     <button class="tab-btn" data-tab="questions">❓ 题目</button>
                     <button class="tab-btn" data-tab="stories">📚 小说</button>
+                    <button class="tab-btn" data-tab="games">🎮 游戏</button>
                     <button class="tab-btn" data-tab="json">📝 JSON 编辑器</button>
                 </div>
 
-                <!-- ========== Tab: 语言 ========== -->
+                <!-- ========== Tab: 语言（保持不变） ========== -->
                 <div class="admin-panel tab-content" id="tab-languages">
                     <h2>🌍 语言管理 <span class="badge-count" id="langBadge">0</span></h2>
                     <form id="langForm" class="admin-form">
@@ -456,7 +472,7 @@
                     <div class="admin-list" id="langList"></div>
                 </div>
 
-                <!-- ========== Tab: 难度 ========== -->
+                <!-- ========== Tab: 难度（保持不变） ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-difficulties">
                     <h2>📊 难度管理 <span class="badge-count" id="diffBadge">0</span></h2>
                     <div class="admin-form-group">
@@ -479,7 +495,7 @@
                     <div class="admin-list" id="diffList"></div>
                 </div>
 
-                <!-- ========== Tab: 试卷 ========== -->
+                <!-- ========== Tab: 试卷（保持不变） ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-papers">
                     <h2>📄 试卷管理 <span class="badge-count" id="paperBadge">0</span></h2>
                     <div class="admin-form-row">
@@ -505,7 +521,7 @@
                     <div class="admin-list" id="paperList"></div>
                 </div>
 
-                <!-- ========== Tab: 题目 ========== -->
+                <!-- ========== Tab: 题目（保持不变） ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-questions">
                     <h2>❓ 题目管理 <span class="badge-count" id="questionBadge">0</span></h2>
                     <div class="admin-form-row">
@@ -549,30 +565,15 @@
                     <div class="admin-list" id="qList"></div>
                 </div>
 
-                <!-- ========== Tab: 小说管理（含封面上传 + 简介 + 更新时间） ========== -->
+                <!-- ========== Tab: 小说管理（保持不变） ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-stories">
                     <h2>📚 小说管理 <span class="badge-count" id="storyBadge">0</span></h2>
-
-                    <!-- 小说表单（含封面上传、简介） -->
                     <form id="storyForm" class="admin-form">
                         <div class="admin-form-row">
-                            <div class="admin-form-group">
-                                <label>小说标题</label>
-                                <input type="text" id="storyTitleInput" placeholder="星辰之约" required />
-                            </div>
-                            <div class="admin-form-group">
-                                <label>作者</label>
-                                <input type="text" id="storyAuthorInput" placeholder="西蒙" required />
-                            </div>
+                            <div class="admin-form-group"><label>小说标题</label><input type="text" id="storyTitleInput" placeholder="星辰之约" required /></div>
+                            <div class="admin-form-group"><label>作者</label><input type="text" id="storyAuthorInput" placeholder="西蒙" required /></div>
                         </div>
-
-                        <!-- 新增：简介字段 -->
-                        <div class="admin-form-group">
-                            <label>📝 简介</label>
-                            <textarea id="storyDescriptionInput" rows="2" placeholder="请输入小说简介..."></textarea>
-                        </div>
-
-                        <!-- 封面图片上传 -->
+                        <div class="admin-form-group"><label>📝 简介</label><textarea id="storyDescriptionInput" rows="2" placeholder="请输入小说简介..."></textarea></div>
                         <div class="admin-form-group">
                             <label>📷 封面图片</label>
                             <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -581,33 +582,20 @@
                                 <input type="file" id="coverFileInput" accept="image/*" style="display:none;" />
                             </div>
                             <div class="upload-status" id="uploadStatus"></div>
-                            <div class="cover-preview" id="coverPreview">
-                                <div class="no-cover">暂无封面</div>
-                            </div>
+                            <div class="cover-preview" id="coverPreview"><div class="no-cover">暂无封面</div></div>
                         </div>
-
                         <input type="hidden" id="storyEditIndex" value="-1" />
                         <div style="display:flex; gap:10px; flex-wrap:wrap;">
                             <button type="submit" class="btn-admin btn-admin-primary" id="storySubmitBtn">➕ 添加小说</button>
                             <button type="button" class="btn-admin btn-admin-outline" id="storyCancelBtn" style="display:none;">取消编辑</button>
                         </div>
                     </form>
-
-                    <!-- 小说列表 -->
                     <div class="admin-list" id="storyList"></div>
-
-                    <!-- 章节管理（当前选中小说下） -->
                     <div id="chapterManager" style="display:none; margin-top:24px; padding-top:20px; border-top:2px solid #eef2f7;">
-                        <h3 style="font-size:17px; font-weight:700; color:#0b1c33; margin-bottom:12px;">
-                            📖 章节管理 — <span id="chapterManagerTitle">(请先选择小说)</span>
-                        </h3>
+                        <h3 style="font-size:17px; font-weight:700; color:#0b1c33; margin-bottom:12px;">📖 章节管理 — <span id="chapterManagerTitle">(请先选择小说)</span></h3>
                         <form id="chapterForm" class="admin-form">
-                            <div class="admin-form-row">
-                                <div class="admin-form-group"><label>章节标题</label><input type="text" id="chapterTitleInput" placeholder="第一章：起点" required /></div>
-                            </div>
-                            <div class="admin-form-group"><label>章节内容</label>
-                                <textarea id="chapterContentInput" rows="4" placeholder="请输入章节正文..." required></textarea>
-                            </div>
+                            <div class="admin-form-row"><div class="admin-form-group"><label>章节标题</label><input type="text" id="chapterTitleInput" placeholder="第一章：起点" required /></div></div>
+                            <div class="admin-form-group"><label>章节内容</label><textarea id="chapterContentInput" rows="4" placeholder="请输入章节正文..." required></textarea></div>
                             <input type="hidden" id="chapterEditIndex" value="-1" />
                             <input type="hidden" id="chapterStoryRef" value="" />
                             <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -619,10 +607,85 @@
                     </div>
                 </div>
 
-                <!-- ========== Tab: JSON 编辑器 ========== -->
+                <!-- ============================================================ -->
+                <!-- ========== ✨ 新增：Tab: 游戏管理 ========== -->
+                <!-- ============================================================ -->
+                <div class="admin-panel tab-content hidden" id="tab-games">
+                    <h2>🎮 游戏管理 <span class="badge-count" id="gameBadge">0</span></h2>
+
+                    <!-- 游戏表单 -->
+                    <form id="gameForm" class="admin-form">
+                        <div class="admin-form-row">
+                            <div class="admin-form-group">
+                                <label>游戏 ID（唯一标识）</label>
+                                <input type="text" id="gameId" placeholder="matching" required />
+                            </div>
+                            <div class="admin-form-group">
+                                <label>图标（Emoji）</label>
+                                <input type="text" id="gameIcon" placeholder="🔗" />
+                            </div>
+                        </div>
+                        <div class="admin-form-row">
+                            <div class="admin-form-group">
+                                <label>中文标题</label>
+                                <input type="text" id="gameTitleZh" placeholder="连一连 · 配对挑战" required />
+                            </div>
+                            <div class="admin-form-group">
+                                <label>英文标题</label>
+                                <input type="text" id="gameTitleEn" placeholder="Matching Challenge" required />
+                            </div>
+                        </div>
+                        <div class="admin-form-row">
+                            <div class="admin-form-group">
+                                <label>中文描述</label>
+                                <input type="text" id="gameDescZh" placeholder="左右配对，学习语言" />
+                            </div>
+                            <div class="admin-form-group">
+                                <label>英文描述</label>
+                                <input type="text" id="gameDescEn" placeholder="Match pairs to learn languages" />
+                            </div>
+                        </div>
+                        <div class="admin-form-row">
+                            <div class="admin-form-group">
+                                <label>类型</label>
+                                <select id="gameType">
+                                    <option value="js">原生 JS（动态加载）</option>
+                                    <option value="iframe">独立 H5 包（iframe 嵌入）</option>
+                                </select>
+                            </div>
+                            <div class="admin-form-group">
+                                <label>入口文件路径</label>
+                                <input type="text" id="gameEntry" placeholder="games/matching.js" required />
+                            </div>
+                        </div>
+                        <div class="admin-form-row">
+                            <div class="admin-form-group">
+                                <label>排序权重（数字越小越靠前）</label>
+                                <input type="number" id="gameSortOrder" value="1" />
+                            </div>
+                            <div class="admin-form-group">
+                                <label>状态</label>
+                                <select id="gameEnabled">
+                                    <option value="true">✅ 启用（显示）</option>
+                                    <option value="false">⛔ 禁用（隐藏）</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" id="gameEditIndex" value="-1" />
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button type="submit" class="btn-admin btn-admin-primary" id="gameSubmitBtn">➕ 添加游戏</button>
+                            <button type="button" class="btn-admin btn-admin-outline" id="gameCancelBtn" style="display:none;">取消编辑</button>
+                        </div>
+                    </form>
+
+                    <!-- 游戏列表 -->
+                    <div class="admin-list" id="gameList"></div>
+                </div>
+
+                <!-- ========== Tab: JSON 编辑器（含游戏数据） ========== -->
                 <div class="admin-panel tab-content hidden" id="tab-json">
                     <h2>📝 JSON 数据编辑器</h2>
-                    <p style="color:#6b7a8f; margin-bottom:12px;">编辑完整数据（测验 + 小说），复制到对应 JSON 文件并提交 GitHub。</p>
+                    <p style="color:#6b7a8f; margin-bottom:12px;">编辑完整数据（测验 + 小说 + 游戏），复制到对应 JSON 文件并提交 GitHub。</p>
                     <textarea id="jsonEditor"></textarea>
                     <div class="admin-actions-bar">
                         <button class="btn-admin btn-admin-success" id="jsonApplyBtn">✅ 应用到当前数据</button>
@@ -630,6 +693,7 @@
                         <button class="btn-admin btn-admin-outline" id="jsonCopyBtn">📋 复制</button>
                         <button class="btn-admin btn-admin-outline" id="jsonExportPapersBtn">📤 导出测验 JSON</button>
                         <button class="btn-admin btn-admin-outline" id="jsonExportStoriesBtn">📤 导出小说 JSON</button>
+                        <button class="btn-admin btn-admin-outline" id="jsonExportGamesBtn">📤 导出游戏 JSON</button>
                     </div>
                 </div>
 
@@ -647,22 +711,21 @@
     <!-- ============================================================ -->
     <script>
         // ================================================================
-        //  ADMIN.JS — 完整后台逻辑（登录 + 测验管理 + 小说管理 + 封面上传）
+        //  ADMIN.JS — 完整后台逻辑（登录 + 测验 + 小说 + 游戏）
         // ================================================================
         (function() {
 
-            // ---------- 密码配置 ----------
-            const ADMIN_PASSWORD = 'Montainment@98'; // ← 修改此密码
+            // ---------- 密码 ----------
+            const ADMIN_PASSWORD = 'Montainment@98';
 
-            // ================================================================
-            //  🔐 Cloudinary 配置（请替换成你的实际值）
-            // ================================================================
-            const CLOUDINARY_CLOUD_NAME = 'mv0w5fs5';      // ← 从 Cloudinary Dashboard 获取
-            const CLOUDINARY_UPLOAD_PRESET = 'story_covers';    // ← 你创建的 Upload Preset 名称
+            // ---------- Cloudinary 配置 ----------
+            const CLOUDINARY_CLOUD_NAME = 'mv0w5fs5';
+            const CLOUDINARY_UPLOAD_PRESET = 'story_covers';
 
             // ---------- 数据 ----------
             let data = { languages: [] };
             let storiesData = { stories: [] };
+            let gamesData = { games: [] };  // ✨ 新增：游戏数据
 
             // ---------- 登录 ----------
             function checkLogin() {
@@ -699,7 +762,6 @@
                 location.reload();
             });
 
-            // ---------- 如果已登录则直接初始化 ----------
             if (checkLogin()) {
                 if (document.readyState === 'complete') {
                     initAdmin();
@@ -716,6 +778,7 @@
                 papers: document.getElementById('tab-papers'),
                 questions: document.getElementById('tab-questions'),
                 stories: document.getElementById('tab-stories'),
+                games: document.getElementById('tab-games'),
                 json: document.getElementById('tab-json')
             };
 
@@ -737,15 +800,12 @@
                 t.className = 'toast toast-' + type;
                 t.textContent = msg;
                 document.body.appendChild(t);
-                setTimeout(() => { t.style.opacity = '0';
-                    setTimeout(() => t.remove(), 300); }, 2500);
+                setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2500);
             }
 
             function updateStats() {
                 let langCount = data.languages.length;
-                let diffCount = 0,
-                    paperCount = 0,
-                    questionCount = 0;
+                let diffCount = 0, paperCount = 0, questionCount = 0;
                 data.languages.forEach(l => {
                     diffCount += l.difficulties.length;
                     l.difficulties.forEach(d => {
@@ -758,6 +818,7 @@
                 const storyCount = storiesData.stories.length;
                 let chapterCount = 0;
                 storiesData.stories.forEach(s => { chapterCount += s.chapters ? s.chapters.length : 0; });
+                const gameCount = gamesData.games.length;
 
                 document.getElementById('langCount').textContent = langCount;
                 document.getElementById('diffCount').textContent = diffCount;
@@ -765,11 +826,13 @@
                 document.getElementById('questionCount').textContent = questionCount;
                 document.getElementById('storyCount').textContent = storyCount;
                 document.getElementById('chapterCount').textContent = chapterCount;
+                document.getElementById('gameCount').textContent = gameCount;
                 document.getElementById('langBadge').textContent = langCount;
                 document.getElementById('diffBadge').textContent = diffCount;
                 document.getElementById('paperBadge').textContent = paperCount;
                 document.getElementById('questionBadge').textContent = questionCount;
                 document.getElementById('storyBadge').textContent = storyCount;
+                document.getElementById('gameBadge').textContent = gameCount;
             }
 
             // ---------- Tab 切换 ----------
@@ -778,9 +841,8 @@
                 Object.keys(tabContents).forEach(key => {
                     tabContents[key].classList.toggle('hidden', key !== tabId);
                 });
-                if (tabId === 'stories') {
-                    renderStories();
-                }
+                if (tabId === 'stories') renderStories();
+                if (tabId === 'games') renderGames();
                 if (tabId === 'json') updateJsonEditor();
             }
 
@@ -788,7 +850,9 @@
                 tab.addEventListener('click', function() { switchTab(this.dataset.tab); });
             });
 
-            // ---------- 语言 CRUD ----------
+            // ================================================================
+            //  🌍 语言 CRUD（保持不变）
+            // ================================================================
             function renderLanguages() {
                 const container = document.getElementById('langList');
                 if (data.languages.length === 0) { container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无语言。</p>'; return; }
@@ -864,7 +928,7 @@
                 showToast('已取消', 'info');
             });
 
-            // ---------- 辅助：填充下拉框 ----------
+            // ---------- 辅助下拉框（保持不变） ----------
             function populateLangSelects() {
                 ['diffLangSelect', 'paperLangSelect', 'qLangSelect'].forEach(id => {
                     const sel = document.getElementById(id);
@@ -937,7 +1001,9 @@
                 });
             }
 
-            // ---------- 难度 CRUD ----------
+            // ================================================================
+            //  📊 难度 CRUD（保持不变）
+            // ================================================================
             function renderDifficulties() {
                 const langId = document.getElementById('diffLangSelect').value;
                 const container = document.getElementById('diffList');
@@ -1027,7 +1093,9 @@
                 showToast('已取消', 'info');
             });
 
-            // ---------- 试卷 CRUD ----------
+            // ================================================================
+            //  📄 试卷 CRUD（保持不变）
+            // ================================================================
             function renderPapers() {
                 const langId = document.getElementById('paperLangSelect').value;
                 const level = parseInt(document.getElementById('paperDiffSelect').value);
@@ -1127,7 +1195,9 @@
                 showToast('已取消', 'info');
             });
 
-            // ---------- 题目 CRUD ----------
+            // ================================================================
+            //  ❓ 题目 CRUD（保持不变）
+            // ================================================================
             function renderQuestions() {
                 const langId = document.getElementById('qLangSelect').value;
                 const level = parseInt(document.getElementById('qDiffSelect').value);
@@ -1252,11 +1322,10 @@
             });
 
             // ================================================================
-            //  📚 小说管理（含封面上传 + 简介 + 更新时间）
+            //  📚 小说管理（保持不变）
             // ================================================================
             let currentStoryIndex = -1;
 
-            // ---------- 封面上传（Cloudinary） ----------
             function updateCoverPreview(url) {
                 const preview = document.getElementById('coverPreview');
                 if (url && url.trim()) {
@@ -1273,7 +1342,6 @@
             document.getElementById('coverFileInput').addEventListener('change', function() {
                 const file = this.files[0];
                 if (!file) return;
-
                 if (!file.type.startsWith('image/')) {
                     showToast('❌ 请选择图片文件', 'error');
                     this.value = '';
@@ -1284,7 +1352,6 @@
                     this.value = '';
                     return;
                 }
-
                 const status = document.getElementById('uploadStatus');
                 const btn = document.getElementById('uploadCoverBtn');
                 const origText = btn.textContent;
@@ -1292,47 +1359,41 @@
                 btn.disabled = true;
                 status.textContent = '⏳ 正在上传到 Cloudinary...';
                 status.className = 'upload-status loading';
-
                 const formData = new FormData();
                 formData.append('file', file);
                 formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
                 fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(res => {
-                    if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')');
-                    return res.json();
-                })
-                .then(data => {
-                    if (data.secure_url) {
-                        document.getElementById('storyCover').value = data.secure_url;
-                        updateCoverPreview(data.secure_url);
-                        status.textContent = '✅ 上传成功！';
-                        status.className = 'upload-status success';
-                        showToast('✅ 封面上传成功！', 'success');
-                    } else {
-                        throw new Error(data.error?.message || '未知错误');
-                    }
-                })
-                .catch(err => {
-                    status.textContent = '❌ 上传失败：' + err.message;
-                    status.className = 'upload-status error';
-                    showToast('❌ 上传失败：' + err.message, 'error');
-                })
-                .finally(() => {
-                    btn.textContent = origText;
-                    btn.disabled = false;
-                    document.getElementById('coverFileInput').value = '';
-                });
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+                    .then(data => {
+                        if (data.secure_url) {
+                            document.getElementById('storyCover').value = data.secure_url;
+                            updateCoverPreview(data.secure_url);
+                            status.textContent = '✅ 上传成功！';
+                            status.className = 'upload-status success';
+                            showToast('✅ 封面上传成功！', 'success');
+                        } else {
+                            throw new Error(data.error?.message || '未知错误');
+                        }
+                    })
+                    .catch(err => {
+                        status.textContent = '❌ 上传失败：' + err.message;
+                        status.className = 'upload-status error';
+                        showToast('❌ 上传失败：' + err.message, 'error');
+                    })
+                    .finally(() => {
+                        btn.textContent = origText;
+                        btn.disabled = false;
+                        document.getElementById('coverFileInput').value = '';
+                    });
             });
 
             document.getElementById('storyCover').addEventListener('input', function() {
                 updateCoverPreview(this.value);
             });
 
-            // ---------- 渲染小说列表 ----------
             function renderStories() {
                 const container = document.getElementById('storyList');
                 if (storiesData.stories.length === 0) {
@@ -1344,12 +1405,12 @@
                 storiesData.stories.forEach((s, i) => {
                     const chCount = s.chapters ? s.chapters.length : 0;
                     const hasCover = s.cover && s.cover.trim() !== '';
-                    const updated = s.updatedAt ? new Date(s.updatedAt).toLocaleString('zh-CN', { hour12: false }) : '未知';
+                    const updated = s.updatedAt ? new Date(s.updatedAt).toLocaleString('zh-CN', { hour12: false }) :
+                        '未知';
                     html +=
                         `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章 · 更新: ${updated}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
                 });
                 container.innerHTML = html;
-
                 container.querySelectorAll('.btn-edit').forEach(b => {
                     b.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -1384,7 +1445,6 @@
                         selectStory(idx);
                     });
                 });
-
                 if (currentStoryIndex >= 0 && currentStoryIndex < storiesData.stories.length) {
                     const items = container.querySelectorAll('.admin-list-item');
                     items.forEach((el, i) => {
@@ -1432,20 +1492,10 @@
                 const cover = document.getElementById('storyCover').value.trim();
                 const editIdx = parseInt(document.getElementById('storyEditIndex').value);
                 const now = new Date().toISOString();
-
                 if (!title || !author) { showToast('请填写完整', 'error'); return; }
-
                 if (editIdx === -1) {
-                    storiesData.stories.push({
-                        id: Date.now(),
-                        title,
-                        author,
-                        description: description,
-                        cover: cover,
-                        likes: 0,
-                        updatedAt: now,
-                        chapters: []
-                    });
+                    storiesData.stories.push({ id: Date.now(), title, author, description: description, cover: cover,
+                        likes: 0, updatedAt: now, chapters: [] });
                     showToast('已添加小说: ' + title, 'success');
                 } else {
                     const s = storiesData.stories[editIdx];
@@ -1459,7 +1509,6 @@
                     document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
                     document.getElementById('storyCancelBtn').style.display = 'none';
                 }
-
                 this.reset();
                 document.getElementById('storyEditIndex').value = -1;
                 document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
@@ -1488,7 +1537,6 @@
                 showToast('已取消', 'info');
             });
 
-            // ---------- 章节 CRUD ----------
             function renderChapters() {
                 const container = document.getElementById('chapterList');
                 const storyIdx = parseInt(document.getElementById('chapterStoryRef').value);
@@ -1550,7 +1598,6 @@
                 if (!s.chapters) s.chapters = [];
                 if (editIdx === -1) {
                     s.chapters.push({ title, content });
-                    // 更新小说更新时间
                     s.updatedAt = new Date().toISOString();
                     showToast('已添加章节: ' + title, 'success');
                 } else {
@@ -1582,10 +1629,177 @@
             });
 
             // ================================================================
-            //  JSON 编辑器
+            //  ✨🎮 游戏管理（新增）
+            // ================================================================
+            let currentGameIndex = -1;
+
+            function renderGames() {
+                const container = document.getElementById('gameList');
+                if (gamesData.games.length === 0) {
+                    container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无游戏，添加一个吧！</p>';
+                    return;
+                }
+                // 按 sortOrder 排序
+                const sorted = [...gamesData.games].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+                let html = '';
+                sorted.forEach((g, idx) => {
+                    const realIdx = gamesData.games.indexOf(g);
+                    const statusClass = g.enabled !== false ? 'on' : 'off';
+                    const statusText = g.enabled !== false ? '✅ 已启用' : '⛔ 已禁用';
+                    html += `
+                        <div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}">
+                            <div class="info">
+                                ${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})
+                                <small>${g.type} · ${g.entry}</small>
+                                <span class="toggle-badge ${statusClass}">${statusText}</span>
+                            </div>
+                            <div class="actions">
+                                <button class="btn-toggle ${statusClass}" data-game-index="${realIdx}">${g.enabled !== false ? '🔛 关闭' : '🔓 开启'}</button>
+                                <button class="btn-edit" data-game-index="${realIdx}">编辑</button>
+                                <button class="btn-delete" data-game-index="${realIdx}">删除</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+
+                // 切换启用/禁用
+                container.querySelectorAll('.btn-toggle').forEach(b => {
+                    b.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = parseInt(this.dataset.gameIndex);
+                        const g = gamesData.games[idx];
+                        if (g) {
+                            g.enabled = g.enabled === false ? true : false;
+                            renderGames();
+                            updateStats();
+                            updateJsonEditor();
+                            showToast(`已${g.enabled !== false ? '启用' : '禁用'}: ${g.titleZh}`, 'success');
+                        }
+                    });
+                });
+
+                container.querySelectorAll('.btn-edit').forEach(b => {
+                    b.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = parseInt(this.dataset.gameIndex);
+                        editGame(idx);
+                    });
+                });
+
+                container.querySelectorAll('.btn-delete').forEach(b => {
+                    b.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = parseInt(this.dataset.gameIndex);
+                        if (confirm('删除游戏 "' + gamesData.games[idx].titleZh + '" ？')) {
+                            gamesData.games.splice(idx, 1);
+                            if (currentGameIndex === idx) currentGameIndex = -1;
+                            if (currentGameIndex > idx) currentGameIndex--;
+                            renderGames();
+                            updateStats();
+                            updateJsonEditor();
+                            showToast('已删除', 'success');
+                        }
+                    });
+                });
+
+                // 点击整行选择（方便后续扩展）
+                container.querySelectorAll('.admin-list-item').forEach(el => {
+                    el.addEventListener('click', function() {
+                        // 目前只是高亮演示，可扩展为选中
+                    });
+                });
+            }
+
+            function editGame(idx) {
+                const g = gamesData.games[idx];
+                document.getElementById('gameId').value = g.id;
+                document.getElementById('gameIcon').value = g.icon || '';
+                document.getElementById('gameTitleZh').value = g.titleZh;
+                document.getElementById('gameTitleEn').value = g.titleEn;
+                document.getElementById('gameDescZh').value = g.descriptionZh || '';
+                document.getElementById('gameDescEn').value = g.descriptionEn || '';
+                document.getElementById('gameType').value = g.type || 'js';
+                document.getElementById('gameEntry').value = g.entry || '';
+                document.getElementById('gameSortOrder').value = g.sortOrder || 1;
+                document.getElementById('gameEnabled').value = g.enabled !== false ? 'true' : 'false';
+                document.getElementById('gameEditIndex').value = idx;
+                document.getElementById('gameSubmitBtn').textContent = '💾 保存修改';
+                document.getElementById('gameCancelBtn').style.display = 'inline-flex';
+                showToast('编辑: ' + g.titleZh, 'info');
+            }
+
+            document.getElementById('gameForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const id = document.getElementById('gameId').value.trim();
+                const icon = document.getElementById('gameIcon').value.trim();
+                const titleZh = document.getElementById('gameTitleZh').value.trim();
+                const titleEn = document.getElementById('gameTitleEn').value.trim();
+                const descriptionZh = document.getElementById('gameDescZh').value.trim();
+                const descriptionEn = document.getElementById('gameDescEn').value.trim();
+                const type = document.getElementById('gameType').value;
+                const entry = document.getElementById('gameEntry').value.trim();
+                const sortOrder = parseInt(document.getElementById('gameSortOrder').value) || 1;
+                const enabled = document.getElementById('gameEnabled').value === 'true';
+                const editIdx = parseInt(document.getElementById('gameEditIndex').value);
+
+                if (!id || !titleZh || !titleEn || !entry) {
+                    showToast('请填写完整（ID、标题、入口文件）', 'error');
+                    return;
+                }
+
+                // 检查 ID 重复
+                const exists = gamesData.games.find((g, i) => g.id === id && i !== editIdx);
+                if (exists) { showToast('游戏 ID 已存在，请换一个', 'error'); return; }
+
+                const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder,
+                    enabled };
+
+                if (editIdx === -1) {
+                    gamesData.games.push(gameData);
+                    showToast('已添加游戏: ' + titleZh, 'success');
+                } else {
+                    gamesData.games[editIdx] = gameData;
+                    showToast('已更新: ' + titleZh, 'success');
+                    document.getElementById('gameEditIndex').value = -1;
+                    document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
+                    document.getElementById('gameCancelBtn').style.display = 'none';
+                }
+
+                this.reset();
+                document.getElementById('gameEditIndex').value = -1;
+                document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
+                document.getElementById('gameCancelBtn').style.display = 'none';
+                // 恢复默认值
+                document.getElementById('gameType').value = 'js';
+                document.getElementById('gameEnabled').value = 'true';
+                document.getElementById('gameSortOrder').value = '1';
+
+                renderGames();
+                updateStats();
+                updateJsonEditor();
+            });
+
+            document.getElementById('gameCancelBtn').addEventListener('click', function() {
+                document.getElementById('gameForm').reset();
+                document.getElementById('gameEditIndex').value = -1;
+                document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
+                this.style.display = 'none';
+                document.getElementById('gameType').value = 'js';
+                document.getElementById('gameEnabled').value = 'true';
+                document.getElementById('gameSortOrder').value = '1';
+                showToast('已取消', 'info');
+            });
+
+            // ================================================================
+            //  📝 JSON 编辑器（含游戏数据）
             // ================================================================
             function updateJsonEditor() {
-                const fullData = { languages: data.languages, stories: storiesData.stories };
+                const fullData = {
+                    languages: data.languages,
+                    stories: storiesData.stories,
+                    games: gamesData.games
+                };
                 document.getElementById('jsonEditor').value = JSON.stringify(fullData, null, 2);
             }
 
@@ -1595,6 +1809,7 @@
                     const parsed = JSON.parse(raw);
                     if (parsed.languages) data.languages = parsed.languages;
                     if (parsed.stories) storiesData.stories = parsed.stories;
+                    if (parsed.games) gamesData.games = parsed.games;
                     renderAll();
                     showToast('已应用 JSON 数据', 'success');
                 } catch (e) { showToast('JSON 格式错误: ' + e.message, 'error'); }
@@ -1626,16 +1841,21 @@
 
             document.getElementById('jsonExportPapersBtn').addEventListener('click', function() {
                 const papersData = { languages: data.languages };
-                const json = JSON.stringify(papersData, null, 2);
-                document.getElementById('jsonEditor').value = json;
+                document.getElementById('jsonEditor').value = JSON.stringify(papersData, null, 2);
                 showToast('已导出测验数据到 JSON 编辑器', 'success');
             });
 
             document.getElementById('jsonExportStoriesBtn').addEventListener('click', function() {
                 const storiesDataOnly = { stories: storiesData.stories };
-                const json = JSON.stringify(storiesDataOnly, null, 2);
-                document.getElementById('jsonEditor').value = json;
+                document.getElementById('jsonEditor').value = JSON.stringify(storiesDataOnly, null, 2);
                 showToast('已导出小说数据到 JSON 编辑器', 'success');
+            });
+
+            // ✨ 新增：导出游戏 JSON
+            document.getElementById('jsonExportGamesBtn').addEventListener('click', function() {
+                const gamesDataOnly = { games: gamesData.games };
+                document.getElementById('jsonEditor').value = JSON.stringify(gamesDataOnly, null, 2);
+                showToast('已导出游戏数据到 JSON 编辑器', 'success');
             });
 
             // ================================================================
@@ -1652,7 +1872,15 @@
                             .then(d => { if (d.stories) storiesData.stories = d.stories; })
                             .catch(() => { storiesData.stories = []; })
                             .finally(() => {
-                                renderAll();
+                                // ✨ 加载游戏数据
+                                fetch('data/games.json')
+                                    .then(res => { if (!res.ok) throw new Error('games.json 不存在'); return res
+                                            .json(); })
+                                    .then(d => { if (d.games) gamesData.games = d.games; })
+                                    .catch(() => { gamesData.games = []; })
+                                    .finally(() => {
+                                        renderAll();
+                                    });
                             });
                     });
             }
@@ -1664,6 +1892,7 @@
                 renderQuestions();
                 renderStories();
                 renderChapters();
+                renderGames();
                 updateStats();
                 updateJsonEditor();
                 populateLangSelects();
