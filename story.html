@@ -233,6 +233,7 @@
                 <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
                 <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
                 <li><a href="story.html" class="active" data-i18n="nav.story">故事工坊</a></li>
+                <li><a href="immersive.html" data-i18n="nav.immersive">🌙 沉浸式工坊</a></li>
             </ul>
             <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
         </nav>
@@ -261,6 +262,7 @@
                         <button id="playBtn" aria-label="播放/暂停">▶</button>
                         <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="40" aria-label="音量" />
                     </div>
+                    <a href="immersive.html" class="immersive-entry" style="display:inline-flex;align-items:center;gap:4px;color:#c9a87c;font-size:12px;font-weight:600;text-decoration:none;padding:4px 12px;border:1px solid rgba(201,168,124,0.15);border-radius:20px;transition:0.2s;letter-spacing:0.3px;">🎧 沉浸式</a>
                 </div>
 
                 <!-- ===== 小说列表 ===== -->
@@ -281,16 +283,14 @@
         //  用户点击页面任意位置 → 音乐自动播放（仅一次）
         // ================================================================
         (function() {
-            // 🔽 你的 YouTube 视频 ID
             const YOUTUBE_VIDEO_ID = '5g_vB_qs3to';
             const YOUTUBE_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&modestbranding=1&rel=0&showinfo=0`;
 
             let isPlaying = false;
-            let autoPlayUsed = false; // 标记是否已经触发过自动播放
+            let autoPlayUsed = false;
             const playBtn = document.getElementById('playBtn');
             const volumeSlider = document.getElementById('volumeSlider');
 
-            // 更新按钮状态
             function updateButton(state) {
                 isPlaying = state;
                 if (state) {
@@ -302,7 +302,6 @@
                 }
             }
 
-            // 播放
             function playMusic() {
                 const iframe = document.getElementById('youtubePlayer');
                 if (!iframe) return;
@@ -312,7 +311,6 @@
                 updateButton(true);
             }
 
-            // 暂停
             function pauseMusic() {
                 const iframe = document.getElementById('youtubePlayer');
                 if (!iframe) return;
@@ -325,7 +323,6 @@
                 updateButton(false);
             }
 
-            // 切换播放/暂停
             function toggleMusic() {
                 if (isPlaying) {
                     pauseMusic();
@@ -334,7 +331,6 @@
                 }
             }
 
-            // 创建隐藏的 YouTube iframe
             function createPlayer() {
                 const container = document.createElement('div');
                 container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
@@ -351,40 +347,27 @@
                 `;
                 document.body.appendChild(container);
 
-                // 播放按钮点击事件
                 playBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     toggleMusic();
                 });
 
-                // 点击播放器整体也可以切换
                 document.querySelector('.music-player').addEventListener('click', function(e) {
                     if (e.target.closest('button') || e.target.closest('input')) return;
                     toggleMusic();
                 });
 
-                // ===== 🎵 用户点击页面任意位置 → 音乐自动播放（仅一次） =====
                 document.addEventListener('click', function autoPlay(e) {
-                    // 如果已经触发过自动播放，或者正在播放，就不重复触发
                     if (autoPlayUsed || isPlaying) return;
-
-                    // 如果点击的是播放器里面的按钮，让按钮自己处理，不触发自动播放
                     if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
-
-                    // 触发播放
+                    if (e.target.closest('.immersive-entry')) return;
                     playMusic();
                     autoPlayUsed = true;
-
-                    // 移除监听器，只触发一次
                     document.removeEventListener('click', autoPlay);
                 });
 
-                // 音量滑块（视觉反馈）
-                volumeSlider.addEventListener('input', function() {
-                    // 实际音量控制需要 YouTube API，这里保留 UI
-                });
+                volumeSlider.addEventListener('input', function() {});
 
-                // 预加载
                 setTimeout(() => {
                     const iframe = document.getElementById('youtubePlayer');
                     if (iframe) {
@@ -393,13 +376,11 @@
                     }
                 }, 1000);
 
-                // 初始状态：暂停
                 updateButton(false);
             }
 
             createPlayer();
 
-            // 暴露给全局
             window.musicPlayer = {
                 play: playMusic,
                 pause: pauseMusic,
