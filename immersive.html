@@ -32,7 +32,6 @@
             opacity: 1;
         }
 
-        /* 视频加载前的占位渐变 */
         .bg-video-wrapper .placeholder {
             position: absolute;
             top: 0;
@@ -58,7 +57,6 @@
             z-index: 0;
         }
 
-        /* 视频加载中提示（极淡） */
         .bg-video-wrapper .loading-text {
             position: absolute;
             bottom: 40px;
@@ -70,6 +68,11 @@
             z-index: 2;
             pointer-events: none;
             font-weight: 300;
+            transition: opacity 0.8s ease;
+        }
+        .bg-video-wrapper .loading-text.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* ===== 页面内容（浮在视频上方） ===== */
@@ -511,7 +514,7 @@
             allow="autoplay; encrypted-media"
             allowfullscreen
         ></iframe>
-        <div class="loading-text">✦ 加载中 · 片刻即至 ✦</div>
+        <div class="loading-text" id="loadingText">✦ 加载中 · 片刻即至 ✦</div>
     </div>
 
     <!-- ===== 导航栏 ===== -->
@@ -579,38 +582,58 @@
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  🎬 背景视频加载过渡
+        //  🎬 背景视频加载 —— 双重保障（load 事件 + 超时强制显示）
         // ================================================================
         (function() {
             const wrapper = document.getElementById('bgVideoWrapper');
             const iframe = document.getElementById('bgVideo');
+            const loadingText = document.getElementById('loadingText');
+
+            let shown = false;
 
             function showVideo() {
+                if (shown) return;
+                shown = true;
                 wrapper.classList.add('loaded');
                 // 隐藏加载文字
-                const loadingText = wrapper.querySelector('.loading-text');
                 if (loadingText) {
+                    loadingText.classList.add('hidden');
+                    // 彻底移除（避免占位）
                     setTimeout(() => {
-                        loadingText.style.opacity = '0';
-                        setTimeout(() => loadingText.style.display = 'none', 500);
-                    }, 500);
+                        if (loadingText.parentNode) loadingText.style.display = 'none';
+                    }, 800);
                 }
             }
 
-            // 监听 iframe 加载完成
+            // 1. 监听 iframe 的 load 事件（部分浏览器会触发）
             if (iframe) {
-                iframe.addEventListener('load', showVideo);
-                // 备用方案：如果 load 事件不触发，3.5 秒后强制显示
-                setTimeout(showVideo, 3500);
-            } else {
-                showVideo();
+                iframe.addEventListener('load', function() {
+                    showVideo();
+                });
+                // 如果 iframe 已经加载完成（但事件未触发），检查 readyState
+                if (iframe.contentWindow && iframe.contentWindow.document && iframe.contentWindow.document.readyState === 'complete') {
+                    showVideo();
+                }
             }
 
-            // 如果用户点击页面但视频还没加载好，不影响
+            // 2. 超时强制显示（2.5 秒后无论是否加载完成都显示背景）
+            setTimeout(showVideo, 2500);
+
+            // 3. 如果页面完全加载后仍未显示，再强制一次（兜底）
+            window.addEventListener('load', function() {
+                setTimeout(showVideo, 500);
+            });
+
+            // 如果用户点击页面，可以提前显示（增加用户交互响应）
+            document.addEventListener('click', function() {
+                showVideo();
+            }, { once: true });
+
         })();
 
+
         // ================================================================
-        //  🎵 音乐播放器（纯音乐 5g_vB_qs3to，用户控制）
+        //  🎵 音乐播放器（纯音乐 5g_vB_qs3to，用户控制）—— 完全保留原逻辑
         // ================================================================
         (function() {
             const YOUTUBE_VIDEO_ID = '5g_vB_qs3to';
@@ -685,8 +708,9 @@
             window.musicPlayer = { play: playMusic, pause: pauseMusic, toggle: toggleMusic };
         })();
 
+
         // ================================================================
-        //  📚 读物数据（从 data/immersive.json 加载）
+        //  📚 读物数据（从 data/immersive.json 加载）—— 完全保留
         // ================================================================
 
         let READ_DATA = [];
