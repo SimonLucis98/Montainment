@@ -20,8 +20,10 @@
 
         .story-read-container { max-width:820px; margin:0 auto; padding:24px 20px 40px; min-height:70vh; }
 
-        .back-link { display:inline-flex; align-items:center; gap:6px; color:#666; text-decoration:none; font-weight:600; font-size:15px; transition:0.2s; margin-bottom:16px; }
-        .back-link:hover { color:#1a1a2e; }
+        /* 顶部返回链接（外部） */
+        .top-nav { margin-bottom:16px; }
+        .top-nav a { display:inline-flex; align-items:center; gap:6px; color:#666; text-decoration:none; font-weight:600; font-size:15px; transition:0.2s; }
+        .top-nav a:hover { color:#1a1a2e; }
 
         /* 详情头部 */
         .detail-hero { background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06); margin-bottom:28px; }
@@ -61,13 +63,6 @@
         .reader-mode .reader-content { display:block; }
 
         .reader-content { display:none; background:#fff; border-radius:24px; padding:32px 36px; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
-
-        /* 阅读器顶部：返回目录 + 标题 */
-        .reader-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px; }
-        .reader-header .back-to-catalog { font-size:15px; font-weight:600; color:#666; text-decoration:none; transition:0.2s; display:inline-flex; align-items:center; gap:4px; }
-        .reader-header .back-to-catalog:hover { color:#1a1a2e; }
-        .reader-header .reader-title-small { font-size:14px; color:#888; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:200px; }
-
         .reader-content .reader-chapter-label { font-size:14px; color:#888; margin-bottom:20px; }
         .reader-content .reader-body { font-size:18px; line-height:2; color:#2c2c2c; white-space:pre-wrap; font-family:'Georgia','Times New Roman',serif; }
         .reader-content .reader-body p { margin-bottom:1.2em; text-indent:2em; }
@@ -117,7 +112,6 @@
             .reader-content { padding:20px; }
             .reader-content .reader-body { font-size:16px; line-height:1.9; }
             .reader-nav { flex-wrap:wrap; gap:8px; justify-content:center; }
-            .reader-header .reader-title-small { max-width:120px; font-size:13px; }
             .back-to-top { bottom:20px; right:20px; width:42px; height:42px; font-size:20px; }
         }
     </style>
@@ -139,11 +133,13 @@
     <main>
         <div class="story-read-container" id="app">
 
+            <!-- 顶部返回链接（外部，根据模式切换） -->
+            <div class="top-nav" id="topNav">
+                <a href="#" id="backLink">← 返回小说列表</a>
+            </div>
+
             <!-- 小说详情模式（目录模式） -->
             <div id="detailView">
-                <!-- 返回小说列表（仅在目录模式显示） -->
-                <a href="story.html" class="back-link">← 返回小说列表</a>
-
                 <div class="detail-hero" id="detailHero"></div>
                 <div class="chapter-list" id="chapterList">
                     <div class="chapter-list-header">
@@ -156,11 +152,6 @@
 
             <!-- 阅读模式 -->
             <div class="reader-content" id="readerContent">
-                <!-- 阅读器顶部：返回目录 + 标题 -->
-                <div class="reader-header">
-                    <a href="#" id="backToCatalogBtn" class="back-to-catalog">← 返回目录</a>
-                    <span class="reader-title-small" id="readerTitleSmall"></span>
-                </div>
                 <div class="reader-chapter-label" id="readerChapterLabel"></div>
                 <div class="reader-body" id="readerBody"></div>
                 <div class="reader-nav">
@@ -189,13 +180,15 @@
         const detailView = document.getElementById('detailView');
 
         const readerContent = document.getElementById('readerContent');
-        const readerTitleSmall = document.getElementById('readerTitleSmall');
         const readerChapterLabel = document.getElementById('readerChapterLabel');
         const readerBody = document.getElementById('readerBody');
         const readerPrev = document.getElementById('readerPrev');
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
-        const backToCatalogBtn = document.getElementById('backToCatalogBtn');
+
+        const backLink = document.getElementById('backLink');
+        const topNav = document.getElementById('topNav');
+
         const backToTopBtn = document.getElementById('backToTopBtn');
 
         // 当前小说数据
@@ -220,6 +213,10 @@
         // ---------- 渲染详情（目录模式） ----------
         function renderDetail(story) {
             currentStory = story;
+
+            // 设置返回链接为“返回小说列表”
+            backLink.textContent = '← 返回小说列表';
+            backLink.href = 'story.html';
 
             let likes = getLikes(story.id);
             if (likes === null) {
@@ -299,6 +296,9 @@
                 document.body.classList.remove('reader-mode');
                 detailView.style.display = 'block';
                 readerContent.style.display = 'none';
+                // 恢复返回链接为“返回小说列表”
+                backLink.textContent = '← 返回小说列表';
+                backLink.href = 'story.html';
                 return;
             }
 
@@ -306,14 +306,13 @@
             detailView.style.display = 'none';
             readerContent.style.display = 'block';
 
+            // 设置返回链接为“返回目录”
+            backLink.textContent = '← 返回目录';
+            backLink.href = `story-read.html?story=${story.id}`;
+
             const ch = story.chapters[chapterIdx];
-            // 设置顶部信息
-            readerTitleSmall.textContent = story.title;
             readerChapterLabel.textContent = ch.title || '第' + (chapterIdx+1) + '章';
             readerBody.textContent = ch.content || '(内容为空)';
-
-            // 设置返回目录链接（回到详情模式，不带 chapter）
-            backToCatalogBtn.href = `story-read.html?story=${story.id}`;
 
             const total = story.chapters.length;
             readerIndicator.textContent = `${chapterIdx+1} / ${total}`;
@@ -405,9 +404,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // 滚动时显示/隐藏按钮（可选，这里始终显示，符合“一直保持在用户页面”）
-        // 我们保持始终可见。
-
         // ================================================================
         //  主逻辑：加载数据，根据参数决定显示详情还是阅读
         // ================================================================
@@ -450,6 +446,9 @@
                     document.body.classList.remove('reader-mode');
                     detailView.style.display = 'block';
                     readerContent.style.display = 'none';
+                    // 恢复返回链接为“返回小说列表”
+                    backLink.textContent = '← 返回小说列表';
+                    backLink.href = 'story.html';
                     renderDetail(story);
                 })
                 .catch(err => {
