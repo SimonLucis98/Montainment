@@ -553,6 +553,9 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .match-board { grid-template-columns: 1fr 1fr; }
 }
 
+/* ============================================================
+   移动端导航（汉堡菜单）- 所有页面统一居中
+   ============================================================ */
 @media (max-width: 720px) {
   .nav-links {
     position: absolute;
@@ -562,23 +565,41 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     background: rgba(251, 251, 255, 0.98);
     flex-direction: column;
     align-items: stretch;
-    padding: 12px 24px 20px;
+    padding: 16px 24px 24px;
     border-bottom: 1px solid var(--border);
     display: none;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
-  .nav-links.open { display: flex; }
-  .nav-links a { text-align: center; padding: 12px 16px; }
-  .nav-toggle { display: flex; }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: var(--primary);
+    color: #fff;
+  }
+  .nav-toggle {
+    display: flex;
+  }
 
+  /* 语言切换按钮在移动端居中 */
   .lang-toggle-container {
     justify-content: center;
     margin-left: 0 !important;
-    padding: 8px 0 !important;
+    padding: 12px 0 4px !important;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
   }
   .lang-toggle-container button {
     font-size: 15px !important;
-    padding: 8px 16px !important;
+    padding: 8px 18px !important;
   }
 
   /* 故事卡片在手机上优化 */
