@@ -55,12 +55,15 @@
         .chapter-item .arrow { color:#ccc; font-size:18px; transition:0.2s; }
         .chapter-item:hover .arrow { color:#888; transform:translateX(4px); }
 
-        /* 阅读模式（隐藏章节列表，只显示章节内容） */
+        /* 阅读模式 */
         .reader-mode .detail-hero { display:none; }
         .reader-mode .chapter-list { display:none; }
         .reader-mode .reader-content { display:block; }
 
         .reader-content { display:none; background:#fff; border-radius:24px; padding:32px 36px; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+        .reader-content .reader-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px; }
+        .reader-content .reader-header .back-to-toc { background:none; border:none; color:#2a6df4; font-weight:600; font-size:14px; cursor:pointer; font-family:inherit; padding:4px 12px; border-radius:20px; border:1px solid #e0e7ef; transition:0.2s; }
+        .reader-content .reader-header .back-to-toc:hover { background:#eef5ff; border-color:#2a6df4; }
         .reader-content .reader-title { font-size:22px; font-weight:700; color:#1a1a2e; margin-bottom:4px; }
         .reader-content .reader-chapter-label { font-size:14px; color:#888; margin-bottom:20px; }
         .reader-content .reader-body { font-size:18px; line-height:2; color:#2c2c2c; white-space:pre-wrap; font-family:'Georgia','Times New Roman',serif; }
@@ -120,6 +123,10 @@
 
             <!-- 阅读区（章节内容） -->
             <div class="reader-content" id="readerContent">
+                <div class="reader-header">
+                    <span></span>
+                    <button class="back-to-toc" id="backToTocBtn">📚 返回目录</button>
+                </div>
                 <div class="reader-title" id="readerTitle"></div>
                 <div class="reader-chapter-label" id="readerChapterLabel"></div>
                 <div class="reader-body" id="readerBody"></div>
@@ -138,6 +145,7 @@
         //  story-read.html —— 小说详情 + 阅读
         //  支持点赞（localStorage持久化，toggle）
         //  支持跳转阅读（通过 URL 参数 chapter）
+        //  支持返回目录
         // ================================================================
 
         const detailHero = document.getElementById('detailHero');
@@ -152,6 +160,7 @@
         const readerPrev = document.getElementById('readerPrev');
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
+        const backToTocBtn = document.getElementById('backToTocBtn');
 
         // 当前小说数据
         let currentStory = null;
@@ -211,6 +220,11 @@
             // 绑定点赞事件
             const likeBtn = document.getElementById('likeBtn');
             const likeSpan = document.getElementById('likeCount');
+            // 检查是否已点赞
+            const flagKey = 'story_liked_' + story.id;
+            if (localStorage.getItem(flagKey) === 'true') {
+                likeBtn.classList.add('liked');
+            }
             likeBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 toggleLike(story.id, likeBtn, likeSpan);
@@ -244,7 +258,6 @@
             chapterItems.querySelectorAll('.chapter-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.chapter);
-                    // 跳转到同页但带 chapter 参数
                     window.location.href = `story-read.html?story=${story.id}&chapter=${idx}`;
                 });
             });
@@ -296,12 +309,10 @@
 
         // ---------- 点赞 toggle ----------
         function toggleLike(storyId, btn, span) {
-            let likes = getLikes(storyId);
-            if (likes === null) likes = 0;
-
-            // 检查当前是否已点赞（使用一个单独的 flag）
             const flagKey = 'story_liked_' + storyId;
             const liked = localStorage.getItem(flagKey) === 'true';
+            let likes = getLikes(storyId);
+            if (likes === null) likes = 0;
 
             if (liked) {
                 // 取消赞
@@ -317,6 +328,18 @@
 
             setLikes(storyId, likes);
             span.textContent = likes;
+        }
+
+        // ---------- 返回目录 ----------
+        function goToToc() {
+            document.body.classList.remove('reader-mode');
+            detailView.style.display = 'block';
+            readerContent.style.display = 'none';
+            // 滚动到章节列表
+            const chapterListEl = document.getElementById('chapterList');
+            if (chapterListEl) {
+                chapterListEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         // ---------- 工具函数 ----------
@@ -363,7 +386,6 @@
         function loadStory() {
             const storyId = getParam('story');
             if (!storyId) {
-                // 没有指定故事，跳回列表
                 window.location.href = 'story.html';
                 return;
             }
@@ -390,10 +412,13 @@
                     if (chapterIdx !== null) {
                         const idx = parseInt(chapterIdx, 10);
                         if (!isNaN(idx) && story.chapters && idx < story.chapters.length) {
+                            // 先渲染详情（供返回目录用）
+                            renderDetail(story);
                             // 进入阅读模式
-                            renderDetail(story); // 先渲染详情（但会被隐藏）
                             renderReader(story, idx);
-                            // 调整样式：隐藏详情，显示阅读
+                            // 绑定返回目录按钮
+                            backToTocBtn.addEventListener('click', goToToc);
+                            // 调整样式
                             document.body.classList.add('reader-mode');
                             detailView.style.display = 'none';
                             readerContent.style.display = 'block';
