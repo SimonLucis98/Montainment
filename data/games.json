@@ -1,0 +1,17 @@
+{
+  "games": [
+    {
+      "id": "1",
+      "icon": "",
+      "titleZh": "连一连",
+      "titleEn": "Matching Challenge",
+      "descriptionZh": "左右配对，学习语言",
+      "descriptionEn": "Match pairs to learn language",
+      "image": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788680688/ffqj3kzwpuc3kxyq56ma.png",
+      "type": "js",
+      "entry": "games/matching.js",
+      "sortOrder": 1,
+      "enabled": true
+    }
+  ]
+}
