@@ -12,6 +12,18 @@
       "entry": "games/matching.js",
       "sortOrder": 1,
       "enabled": true
+    },
+    {
+      "id": "2",
+      "icon": "",
+      "titleZh": "字体大战僵尸",
+      "titleEn": "Word vs Zombie",
+      "descriptionZh": "正确的词汇赋予你力量",
+      "descriptionEn": "The right word empowers you",
+      "type": "js",
+      "entry": "games/wordzombie.js",
+      "sortOrder": 2,
+      "enabled": true
     }
   ]
 }
