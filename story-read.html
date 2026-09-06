@@ -68,11 +68,33 @@
         .chapter-item { display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid #f5f2ed; cursor:pointer; transition:background 0.15s; }
         .chapter-item:hover { background:#faf8f5; }
         .chapter-item:last-child { border-bottom:none; }
-        .chapter-item .left { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-        .chapter-item .num { font-size:14px; font-weight:700; color:#ccc; min-width:32px; }
-        .chapter-item .ch-title { font-size:16px; font-weight:600; color:#1a1a2e; }
-        .chapter-item .ch-preview { font-size:14px; color:#999; margin-left:8px; font-weight:400; }
-        .chapter-item .arrow { color:#ccc; font-size:18px; transition:0.2s; }
+        .chapter-item .left {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 4px 8px;
+            flex: 1;
+        }
+        .chapter-item .num {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ccc;
+            min-width: 32px;
+        }
+        .chapter-item .ch-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .chapter-item .ch-preview {
+            font-size: 14px;
+            color: #999;
+            font-weight: 400;
+            width: 100%; /* 强制换行到下一行 */
+            margin-left: 0;
+            padding-left: 40px; /* 与编号+标题对齐 */
+        }
+        .chapter-item .arrow { color:#ccc; font-size:18px; transition:0.2s; margin-left:auto; }
         .chapter-item:hover .arrow { color:#888; transform:translateX(4px); }
 
         /* 阅读模式 */
@@ -82,7 +104,7 @@
 
         .reader-content { display:none; background:#fff; border-radius:24px; padding:32px 36px; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
 
-        /* 阅读模式：章节标题大字体（与详情页标题一致） */
+        /* 阅读模式：章节标题大字体 */
         .reader-content .reader-chapter-title {
             font-size: 26px;
             font-weight: 800;
@@ -140,13 +162,14 @@
 
         .empty-state { text-align:center; padding:40px 20px; color:#aaa; }
 
+        /* ========== 响应式 ========== */
         @media (max-width:600px) {
             .detail-info { padding:18px; }
             .detail-info .title { font-size:21px; }
             .detail-info .desc { font-size:14px; padding:12px; }
             .chapter-item { padding:14px 16px; }
             .chapter-item .ch-title { font-size:14px; }
-            .chapter-item .ch-preview { display:none; }
+            .chapter-item .ch-preview { font-size:13px; padding-left:32px; }
             .reader-content { padding:20px; }
             .reader-content .reader-chapter-title { font-size:20px; }
             .reader-content .reader-body { font-size:16px; line-height:1.9; }
@@ -154,6 +177,14 @@
             .back-to-top { bottom:20px; right:20px; width:42px; height:42px; font-size:20px; }
             .top-nav { gap:12px; }
             .top-nav a { font-size:14px; }
+
+            /* 修复手机端 Logo 变大 */
+            .logo { font-size: 18px; }
+            nav { height: 56px; }
+            nav ul li a { font-size: 13px; padding: 6px 12px; }
+        }
+        @media (max-width:420px) {
+            .chapter-item .ch-preview { padding-left: 0; }
         }
     </style>
 </head>
@@ -315,7 +346,7 @@
 
             let chHtml = '';
             chapters.forEach((ch, i) => {
-                const preview = ch.content ? ch.content.substring(0, 40) + (ch.content.length > 40 ? '...' : '') : '';
+                const preview = ch.content ? ch.content.substring(0, 60) + (ch.content.length > 60 ? '...' : '') : '';
                 chHtml += `
                     <div class="chapter-item" data-chapter="${i}">
                         <div class="left">
@@ -363,7 +394,6 @@
             navDivider.style.display = 'inline';
 
             const ch = story.chapters[chapterIdx];
-            // 章节标题大字体
             readerChapterTitle.textContent = ch.title || '第' + (chapterIdx+1) + '章';
             readerChapterLabel.textContent = story.title;
             readerBody.textContent = ch.content || '(内容为空)';
