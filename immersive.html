@@ -363,6 +363,24 @@
             color: rgba(232,224,216,0.15);
         }
 
+        /* 视频/音乐卡片特殊样式 */
+        .read-card .media-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .read-card .media-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            background: rgba(201,168,124,0.1);
+            color: #c9a87c;
+            margin-bottom: 6px;
+            border: 1px solid rgba(201,168,124,0.06);
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -371,6 +389,7 @@
         }
         .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
 
+        /* ===== 阅读浮层 ===== */
         .reader-overlay {
             display: none;
             position: fixed;
@@ -485,6 +504,24 @@
             align-items: center;
         }
 
+        /* 浮层内的 iframe */
+        .reader-modal .reader-iframe-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-top: 12px;
+        }
+        .reader-modal .reader-iframe-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            border: none;
+        }
+
+        /* ===== 响应式 ===== */
         @media (max-width: 720px) {
             .nav-links {
                 position: absolute;
@@ -561,7 +598,6 @@
     <main>
         <div class="immersive-container">
 
-            <!-- ===== 顶部：标题 + 播放器 ===== -->
             <div class="top-bar">
                 <div class="page-title">🌙 沉浸式<span>工坊</span></div>
                 <div class="music-player" id="musicPlayer">
@@ -578,9 +614,8 @@
                 </div>
             </div>
 
-            <!-- ===== 读物列表 ===== -->
             <div class="read-grid" id="readGrid">
-                <!-- 由 JS 动态渲染 -->
+                <!-- 由 JS 从 data/immersive.json 动态渲染 -->
             </div>
 
         </div>
@@ -610,7 +645,8 @@
         // ================================================================
         (function() {
             const YOUTUBE_VIDEO_ID = '5g_vB_qs3to';
-            const YOUTUBE_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&modestbranding=1&rel=0&showinfo=0`;
+            const YOUTUBE_URL =
+                `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&modestbranding=1&rel=0&showinfo=0`;
 
             let isPlaying = false;
             let autoPlayUsed = false;
@@ -646,10 +682,12 @@
             function createPlayer() {
                 const container = document.createElement('div');
                 container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
-                container.innerHTML = `<iframe id="youtubePlayer" src="${YOUTUBE_URL}" width="1" height="1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                container.innerHTML =
+                    `<iframe id="youtubePlayer" src="${YOUTUBE_URL}" width="1" height="1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 document.body.appendChild(container);
 
-                playBtn.addEventListener('click, (e) => { e.stopPropagation(); toggleMusic(); });
+                playBtn.addEventListener('click', (e) => { e.stopPropagation();
+                    toggleMusic(); });
                 document.querySelector('.music-player').addEventListener('click', function(e) {
                     if (e.target.closest('button') || e.target.closest('input')) return;
                     toggleMusic();
@@ -679,7 +717,7 @@
         })();
 
         // ================================================================
-        //  📚 读物数据（从 data/immersive.json 加载）
+        //  📚 读物数据（完全由 data/immersive.json 驱动，无硬编码）
         // ================================================================
 
         let READ_DATA = [];
@@ -696,12 +734,13 @@
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
 
+        // ===== 渲染列表 =====
         function renderList() {
             if (!READ_DATA || READ_DATA.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state">
                         <div class="icon">🍃</div>
-                        <p>暂无读物，请在后台添加内容</p>
+                        <p>暂无沉浸式内容，请在后台添加</p>
                     </div>
                 `;
                 return;
@@ -709,10 +748,14 @@
 
             let html = '';
             READ_DATA.forEach((item, idx) => {
+                const typeIcon = item.type === 'video' ? '🎬' : item.type === 'music' ? '🎵' : '📝';
+                const typeLabel = item.type === 'video' ? '视频' : item.type === 'music' ? '音乐' : '文本';
                 const preview = item.preview || (item.content ? item.content.substring(0, 60) + '...' : '');
+
                 html += `
                     <div class="read-card" data-index="${idx}">
-                        <div class="category">${item.category || '随笔'}</div>
+                        <div class="media-badge">${typeIcon} ${typeLabel}</div>
+                        <div class="category">${item.category || '未分类'}</div>
                         <div class="title">${item.title}</div>
                         <div class="author">${item.author || '蒙堂木下'}</div>
                         <div class="preview">${preview}</div>
@@ -730,14 +773,47 @@
             });
         }
 
+        // ===== 打开阅读浮层 =====
         function openReader(idx) {
             const item = READ_DATA[idx];
             if (!item) return;
             currentIndex = idx;
+
             readerCategory.textContent = item.category || '随笔';
             readerTitle.textContent = item.title;
             readerAuthor.textContent = item.author || '蒙堂木下';
-            readerBody.textContent = item.content || '(内容为空)';
+
+            // 根据类型渲染内容
+            if (item.type === 'text') {
+                // 文本内容
+                readerBody.innerHTML = item.content || '(内容为空)';
+                // 移除可能存在的 iframe 容器
+                const existingIframe = readerBody.querySelector('.reader-iframe-wrapper');
+                if (existingIframe) existingIframe.remove();
+                readerBody.style.display = 'block';
+            } else if (item.type === 'video' || item.type === 'music') {
+                // 视频/音乐：显示 iframe
+                const wrapper = document.createElement('div');
+                wrapper.className = 'reader-iframe-wrapper';
+                wrapper.innerHTML = `
+                    <iframe src="${item.url || ''}" 
+                            allow="autoplay; encrypted-media; fullscreen"
+                            allowfullscreen
+                            loading="lazy"
+                    ></iframe>
+                    <div style="text-align:center;color:rgba(232,224,216,0.3);font-size:12px;margin-top:8px;letter-spacing:0.5px;">
+                        ${item.type === 'video' ? '🎬 视频内容' : '🎵 音乐播放中'}
+                    </div>
+                `;
+                // 清空并插入
+                readerBody.innerHTML = '';
+                readerBody.appendChild(wrapper);
+                readerBody.style.display = 'block';
+            } else {
+                readerBody.textContent = item.content || '(内容为空)';
+                readerBody.style.display = 'block';
+            }
+
             readerIndicator.textContent = `${idx + 1} / ${READ_DATA.length}`;
             readerPrev.classList.toggle('disabled', idx === 0);
             readerNext.classList.toggle('disabled', idx === READ_DATA.length - 1);
@@ -747,6 +823,7 @@
             document.body.style.overflow = 'hidden';
         }
 
+        // ===== 关闭浮层 =====
         function closeReader() {
             overlay.classList.remove('active');
             document.body.style.overflow = '';
@@ -776,8 +853,8 @@
             if (e.key === 'ArrowRight') { if (currentIndex < READ_DATA.length - 1) openReader(currentIndex + 1); }
         });
 
-        // ===== 加载数据 =====
-        function loadReadData() {
+        // ===== 加载数据（完全由后台管理） =====
+        function loadImmersiveData() {
             fetch('data/immersive.json')
                 .then(res => {
                     if (!res.ok) throw new Error('immersive.json 不存在');
@@ -812,10 +889,11 @@
             }
         });
 
+        // ===== 启动 =====
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadReadData);
+            document.addEventListener('DOMContentLoaded', loadImmersiveData);
         } else {
-            loadReadData();
+            loadImmersiveData();
         }
     </script>
 
