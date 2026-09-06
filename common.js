@@ -62,40 +62,32 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     // 英文按钮
-    const enBtn = document.createElement('button');
-    enBtn.className = 'lang-btn';
-    enBtn.setAttribute('data-lang', 'en');
-    enBtn.textContent = 'EN';
-    enBtn.style.cssText = `
-      background: transparent;
-      border: none;
-      color: rgba(255,255,255,0.5);
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      transition: 0.2s;
-      font-family: inherit;
-    `;
+enBtn.style.cssText = `
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s;
+  font-family: inherit;
+`;
 
-    // 中文按钮
-    const zhBtn = document.createElement('button');
-    zhBtn.className = 'lang-btn';
-    zhBtn.setAttribute('data-lang', 'zh');
-    zhBtn.textContent = '中文';
-    zhBtn.style.cssText = `
-      background: transparent;
-      border: none;
-      color: rgba(255,255,255,0.5);
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      transition: 0.2s;
-      font-family: inherit;
-    `;
+// 中文按钮同样修改
+zhBtn.style.cssText = `
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s;
+  font-family: inherit;
+`;
 
     // 分隔符
     const divider = document.createElement('span');
