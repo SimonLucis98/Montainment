@@ -44,19 +44,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // ---------- 4. 语言切换按钮（新增） ----------
-  const navBar = document.querySelector(".nav-bar");
-  if (navBar) {
-    // 检查是否已经存在语言切换按钮
-    let existingToggle = navBar.querySelector('.lang-toggle-container');
-    if (existingToggle) return;
+  // 查找导航栏中的 ul.nav-links
+  const navLinksContainer = document.querySelector(".nav-links");
+  if (navLinksContainer) {
+    // 检查是否已经存在语言切换按钮，避免重复添加
+    if (navLinksContainer.querySelector('.lang-toggle-container')) return;
 
-    const toggleContainer = document.createElement('div');
-    toggleContainer.className = 'lang-toggle-container';
-    toggleContainer.style.cssText = `
+    // 创建语言切换容器（放在 nav-links 的末尾）
+    const langContainer = document.createElement('li');
+    langContainer.className = 'lang-toggle-container';
+    langContainer.style.cssText = `
       display: flex;
       align-items: center;
       gap: 4px;
-      margin-left: 12px;
+      margin-left: 8px;
+      padding: 0 4px;
     `;
 
     // 英文按钮
@@ -67,8 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
     enBtn.style.cssText = `
       background: transparent;
       border: none;
-      color: rgba(255,255,255,0.6);
-      padding: 4px 8px;
+      color: rgba(255,255,255,0.5);
+      padding: 4px 10px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 13px;
@@ -85,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
     zhBtn.style.cssText = `
       background: transparent;
       border: none;
-      color: rgba(255,255,255,0.6);
-      padding: 4px 8px;
+      color: rgba(255,255,255,0.5);
+      padding: 4px 10px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 13px;
@@ -99,11 +101,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const divider = document.createElement('span');
     divider.textContent = '|';
     divider.style.cssText = `
-      color: rgba(255,255,255,0.2);
-      font-size: 13px;
+      color: rgba(255,255,255,0.15);
+      font-size: 14px;
     `;
 
-    // 激活状态样式
+    // 更新按钮状态（高亮当前语言）
     function updateLangButtons() {
       const currentLang = window.i18n ? i18n.currentLang : 'en';
       [enBtn, zhBtn].forEach(btn => {
@@ -112,59 +114,55 @@ document.addEventListener("DOMContentLoaded", function () {
           btn.style.color = '#fff';
           btn.style.background = 'rgba(255,255,255,0.12)';
         } else {
-          btn.style.color = 'rgba(255,255,255,0.6)';
+          btn.style.color = 'rgba(255,255,255,0.5)';
           btn.style.background = 'transparent';
         }
       });
     }
 
-    // 点击事件
-    enBtn.addEventListener('click', function() {
+    // 点击切换
+    enBtn.addEventListener('click', function(e) {
+      e.preventDefault();
       if (window.i18n) {
         i18n.setLang('en');
         updateLangButtons();
-        // 触发页面语言更新
-        if (typeof applyI18n === 'function') {
-          applyI18n();
-        }
+        if (typeof applyI18n === 'function') applyI18n();
       }
     });
 
-    zhBtn.addEventListener('click', function() {
+    zhBtn.addEventListener('click', function(e) {
+      e.preventDefault();
       if (window.i18n) {
         i18n.setLang('zh');
         updateLangButtons();
-        if (typeof applyI18n === 'function') {
-          applyI18n();
-        }
+        if (typeof applyI18n === 'function') applyI18n();
       }
     });
 
-    // 鼠标悬停效果
+    // 悬停效果
     [enBtn, zhBtn].forEach(btn => {
       btn.addEventListener('mouseenter', function() {
-        if (!this.classList.contains('active')) {
+        const lang = this.getAttribute('data-lang');
+        if (lang !== (window.i18n ? i18n.currentLang : 'en')) {
           this.style.color = '#fff';
         }
       });
       btn.addEventListener('mouseleave', function() {
-        if (!this.classList.contains('active')) {
-          const lang = this.getAttribute('data-lang');
-          if (lang === i18n.currentLang) {
-            this.style.color = '#fff';
-          } else {
-            this.style.color = 'rgba(255,255,255,0.6)';
-          }
+        const lang = this.getAttribute('data-lang');
+        const currentLang = window.i18n ? i18n.currentLang : 'en';
+        if (lang !== currentLang) {
+          this.style.color = 'rgba(255,255,255,0.5)';
         }
       });
     });
 
-    toggleContainer.appendChild(enBtn);
-    toggleContainer.appendChild(divider);
-    toggleContainer.appendChild(zhBtn);
-    navBar.appendChild(toggleContainer);
+    // 组装
+    langContainer.appendChild(enBtn);
+    langContainer.appendChild(divider);
+    langContainer.appendChild(zhBtn);
+    navLinksContainer.appendChild(langContainer);
 
-    // 初始更新
-    setTimeout(updateLangButtons, 100);
+    // 初始更新按钮状态
+    setTimeout(updateLangButtons, 150);
   }
 });
