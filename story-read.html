@@ -61,9 +61,14 @@
         .reader-mode .reader-content { display:block; }
 
         .reader-content { display:none; background:#fff; border-radius:24px; padding:32px 36px; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
-        .reader-content .reader-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px; }
-        .reader-content .reader-header .back-to-toc { background:none; border:none; color:#2a6df4; font-weight:600; font-size:14px; cursor:pointer; font-family:inherit; padding:4px 12px; border-radius:20px; border:1px solid #e0e7ef; transition:0.2s; }
-        .reader-content .reader-header .back-to-toc:hover { background:#eef5ff; border-color:#2a6df4; }
+        .reader-content .reader-nav-top { display:flex; gap:16px; margin-bottom:20px; align-items:center; flex-wrap:wrap; }
+        .reader-content .reader-nav-top a { text-decoration:none; font-weight:600; font-size:15px; }
+        .reader-content .reader-nav-top .back-link { color:#666; }
+        .reader-content .reader-nav-top .back-link:hover { color:#1a1a2e; }
+        .reader-content .reader-nav-top .to-catalog { color:#2a6df4; }
+        .reader-content .reader-nav-top .to-catalog:hover { color:#1a4fbf; }
+        .reader-content .reader-nav-top .divider { color:#ddd; }
+
         .reader-content .reader-title { font-size:22px; font-weight:700; color:#1a1a2e; margin-bottom:4px; }
         .reader-content .reader-chapter-label { font-size:14px; color:#888; margin-bottom:20px; }
         .reader-content .reader-body { font-size:18px; line-height:2; color:#2c2c2c; white-space:pre-wrap; font-family:'Georgia','Times New Roman',serif; }
@@ -86,6 +91,7 @@
             .reader-content { padding:20px; }
             .reader-content .reader-body { font-size:16px; line-height:1.9; }
             .reader-nav { flex-wrap:wrap; gap:8px; justify-content:center; }
+            .reader-content .reader-nav-top { gap:10px; }
         }
     </style>
 </head>
@@ -106,7 +112,7 @@
     <main>
         <div class="story-read-container" id="app">
 
-            <!-- 返回链接 -->
+            <!-- 返回小说列表链接（始终显示） -->
             <a href="story.html" class="back-link">← 返回小说列表</a>
 
             <!-- 详情区（包含点赞） -->
@@ -123,9 +129,11 @@
 
             <!-- 阅读区（章节内容） -->
             <div class="reader-content" id="readerContent">
-                <div class="reader-header">
-                    <span></span>
-                    <button class="back-to-toc" id="backToTocBtn">📚 返回目录</button>
+                <!-- 阅读导航条：返回列表 + 返回目录 -->
+                <div class="reader-nav-top">
+                    <a href="story.html" class="back-link">← 返回小说列表</a>
+                    <span class="divider">|</span>
+                    <a href="#" class="to-catalog" id="backToCatalogBtn">返回目录</a>
                 </div>
                 <div class="reader-title" id="readerTitle"></div>
                 <div class="reader-chapter-label" id="readerChapterLabel"></div>
@@ -145,7 +153,7 @@
         //  story-read.html —— 小说详情 + 阅读
         //  支持点赞（localStorage持久化，toggle）
         //  支持跳转阅读（通过 URL 参数 chapter）
-        //  支持返回目录
+        //  返回目录按钮
         // ================================================================
 
         const detailHero = document.getElementById('detailHero');
@@ -160,7 +168,7 @@
         const readerPrev = document.getElementById('readerPrev');
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
-        const backToTocBtn = document.getElementById('backToTocBtn');
+        const backToCatalogBtn = document.getElementById('backToCatalogBtn');
 
         // 当前小说数据
         let currentStory = null;
@@ -192,6 +200,10 @@
                 setLikes(story.id, likes);
             }
 
+            // 检查点赞状态
+            const flagKey = 'story_liked_' + story.id;
+            const liked = localStorage.getItem(flagKey) === 'true';
+
             const hasCover = story.cover && story.cover.trim() !== '';
             const coverEmoji = getCoverEmoji(story.title);
             const coverColor = getCoverColor(story.title);
@@ -208,7 +220,7 @@
                     <div class="desc">${story.description || '📝 暂无简介'}</div>
                     <div class="meta-row">
                         <span class="likes">
-                            <button class="heart-btn" id="likeBtn" data-story-id="${story.id}">❤️</button>
+                            <button class="heart-btn ${liked ? 'liked' : ''}" id="likeBtn" data-story-id="${story.id}">❤️</button>
                             <span id="likeCount">${likes}</span>
                         </span>
                         <span>📖 ${story.chapters ? story.chapters.length : 0} 章</span>
@@ -220,11 +232,6 @@
             // 绑定点赞事件
             const likeBtn = document.getElementById('likeBtn');
             const likeSpan = document.getElementById('likeCount');
-            // 检查是否已点赞
-            const flagKey = 'story_liked_' + story.id;
-            if (localStorage.getItem(flagKey) === 'true') {
-                likeBtn.classList.add('liked');
-            }
             likeBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 toggleLike(story.id, likeBtn, likeSpan);
@@ -267,15 +274,11 @@
         function renderReader(story, chapterIdx) {
             if (!story || !story.chapters || chapterIdx >= story.chapters.length) {
                 // 如果 chapter 无效，回到详情模式
-                document.body.classList.remove('reader-mode');
-                detailView.style.display = 'block';
-                readerContent.style.display = 'none';
+                showDetailMode();
                 return;
             }
 
-            document.body.classList.add('reader-mode');
-            detailView.style.display = 'none';
-            readerContent.style.display = 'block';
+            showReaderMode();
 
             const ch = story.chapters[chapterIdx];
             readerTitle.textContent = story.title;
@@ -297,6 +300,18 @@
             document.addEventListener('keydown', handleKeydown);
         }
 
+        function showDetailMode() {
+            document.body.classList.remove('reader-mode');
+            detailView.style.display = 'block';
+            readerContent.style.display = 'none';
+        }
+
+        function showReaderMode() {
+            document.body.classList.add('reader-mode');
+            detailView.style.display = 'none';
+            readerContent.style.display = 'block';
+        }
+
         function handleKeydown(e) {
             if (e.key === 'ArrowLeft') {
                 const link = readerPrev.href;
@@ -309,18 +324,17 @@
 
         // ---------- 点赞 toggle ----------
         function toggleLike(storyId, btn, span) {
-            const flagKey = 'story_liked_' + storyId;
-            const liked = localStorage.getItem(flagKey) === 'true';
             let likes = getLikes(storyId);
             if (likes === null) likes = 0;
 
+            const flagKey = 'story_liked_' + storyId;
+            const liked = localStorage.getItem(flagKey) === 'true';
+
             if (liked) {
-                // 取消赞
                 likes = Math.max(0, likes - 1);
                 localStorage.setItem(flagKey, 'false');
                 btn.classList.remove('liked');
             } else {
-                // 点赞
                 likes = likes + 1;
                 localStorage.setItem(flagKey, 'true');
                 btn.classList.add('liked');
@@ -331,16 +345,16 @@
         }
 
         // ---------- 返回目录 ----------
-        function goToToc() {
-            document.body.classList.remove('reader-mode');
-            detailView.style.display = 'block';
-            readerContent.style.display = 'none';
+        backToCatalogBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // 回到详情模式，并滚动到章节列表位置
+            showDetailMode();
             // 滚动到章节列表
-            const chapterListEl = document.getElementById('chapterList');
-            if (chapterListEl) {
-                chapterListEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const chapterList = document.getElementById('chapterList');
+            if (chapterList) {
+                chapterList.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-        }
+        });
 
         // ---------- 工具函数 ----------
         function getCoverEmoji(title) {
@@ -412,24 +426,15 @@
                     if (chapterIdx !== null) {
                         const idx = parseInt(chapterIdx, 10);
                         if (!isNaN(idx) && story.chapters && idx < story.chapters.length) {
-                            // 先渲染详情（供返回目录用）
-                            renderDetail(story);
                             // 进入阅读模式
+                            renderDetail(story);
                             renderReader(story, idx);
-                            // 绑定返回目录按钮
-                            backToTocBtn.addEventListener('click', goToToc);
-                            // 调整样式
-                            document.body.classList.add('reader-mode');
-                            detailView.style.display = 'none';
-                            readerContent.style.display = 'block';
                             return;
                         }
                     }
 
                     // 否则显示详情模式
-                    document.body.classList.remove('reader-mode');
-                    detailView.style.display = 'block';
-                    readerContent.style.display = 'none';
+                    showDetailMode();
                     renderDetail(story);
                 })
                 .catch(err => {
