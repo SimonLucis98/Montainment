@@ -133,20 +133,17 @@ zhBtn.style.cssText = `
 
     // 悬停效果
     [enBtn, zhBtn].forEach(btn => {
-      btn.addEventListener('mouseenter', function() {
-        const lang = this.getAttribute('data-lang');
-        if (lang !== (window.i18n ? i18n.currentLang : 'en')) {
-          this.style.color = '#fff';
-        }
-      });
-      btn.addEventListener('mouseleave', function() {
-        const lang = this.getAttribute('data-lang');
-        const currentLang = window.i18n ? i18n.currentLang : 'en';
-        if (lang !== currentLang) {
-          this.style.color = 'rgba(255,255,255,0.5)';
-        }
-      });
-    });
+  btn.addEventListener('mouseenter', function() {
+    this.style.color = '#ffffff';
+  });
+  btn.addEventListener('mouseleave', function() {
+    const lang = this.getAttribute('data-lang');
+    const currentLang = window.i18n ? i18n.currentLang : 'en';
+    if (lang !== currentLang) {
+      this.style.color = 'rgba(255,255,255,0.85)';
+    }
+  });
+});
 
     // 组装
     langContainer.appendChild(enBtn);
