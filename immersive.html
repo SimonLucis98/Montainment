@@ -15,7 +15,7 @@
             color: #e8e0d8;
         }
 
-        /* ===== 全屏 YouTube 视频背景（完美覆盖，无黑边） ===== */
+        /* ===== 全屏 YouTube 视频背景（带加载过渡） ===== */
         .bg-video-wrapper {
             position: fixed;
             top: 0;
@@ -25,7 +25,25 @@
             z-index: 0;
             overflow: hidden;
             background: #1a1a2e;
+            opacity: 0;
+            transition: opacity 1.5s ease;
         }
+        .bg-video-wrapper.loaded {
+            opacity: 1;
+        }
+
+        /* 视频加载前的占位渐变 */
+        .bg-video-wrapper .placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #1a1a2e, #2a2a3e);
+            z-index: 1;
+            pointer-events: none;
+        }
+
         .bg-video-wrapper iframe {
             position: absolute;
             top: 50%;
@@ -37,6 +55,21 @@
             transform: translate(-50%, -50%);
             pointer-events: none;
             border: none;
+            z-index: 0;
+        }
+
+        /* 视频加载中提示（极淡） */
+        .bg-video-wrapper .loading-text {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.1);
+            font-size: 13px;
+            letter-spacing: 3px;
+            z-index: 2;
+            pointer-events: none;
+            font-weight: 300;
         }
 
         /* ===== 页面内容（浮在视频上方） ===== */
@@ -468,8 +501,9 @@
 </head>
 <body>
 
-    <!-- ===== 全屏 YouTube 视频背景（新视频） ===== -->
-    <div class="bg-video-wrapper">
+    <!-- ===== 全屏 YouTube 视频背景（带加载过渡） ===== -->
+    <div class="bg-video-wrapper" id="bgVideoWrapper">
+        <div class="placeholder"></div>
         <iframe
             id="bgVideo"
             src="https://www.youtube.com/embed/KjlRgSvoVhc?autoplay=1&mute=1&loop=1&playlist=KjlRgSvoVhc&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
@@ -477,6 +511,7 @@
             allow="autoplay; encrypted-media"
             allowfullscreen
         ></iframe>
+        <div class="loading-text">✦ 加载中 · 片刻即至 ✦</div>
     </div>
 
     <!-- ===== 导航栏 ===== -->
@@ -543,6 +578,37 @@
     <script src="i18n.js"></script>
     <script src="common.js"></script>
     <script>
+        // ================================================================
+        //  🎬 背景视频加载过渡
+        // ================================================================
+        (function() {
+            const wrapper = document.getElementById('bgVideoWrapper');
+            const iframe = document.getElementById('bgVideo');
+
+            function showVideo() {
+                wrapper.classList.add('loaded');
+                // 隐藏加载文字
+                const loadingText = wrapper.querySelector('.loading-text');
+                if (loadingText) {
+                    setTimeout(() => {
+                        loadingText.style.opacity = '0';
+                        setTimeout(() => loadingText.style.display = 'none', 500);
+                    }, 500);
+                }
+            }
+
+            // 监听 iframe 加载完成
+            if (iframe) {
+                iframe.addEventListener('load', showVideo);
+                // 备用方案：如果 load 事件不触发，3.5 秒后强制显示
+                setTimeout(showVideo, 3500);
+            } else {
+                showVideo();
+            }
+
+            // 如果用户点击页面但视频还没加载好，不影响
+        })();
+
         // ================================================================
         //  🎵 音乐播放器（纯音乐 5g_vB_qs3to，用户控制）
         // ================================================================
