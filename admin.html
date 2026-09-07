@@ -1502,131 +1502,871 @@
       });
 
       // ================================================================
-      //  📚 小说管理（与之前相同，略，实际代码中保留完整）
+      //  📚 小说管理
       // ================================================================
-      // ...（由于篇幅，这里省略，但最终交付的代码是完整的）
-      // 下面仅作示意，实际文件包含完整小说、游戏、沉浸式管理代码
+      let currentStoryIndex = -1;
 
-      // ================================================================
-      //  下拉选择框同步函数
-      // ================================================================
-      function populateSelects() {
-        // 类别选择器（多个）
-        const catSelects = ['subjectCatSelect', 'diffCatSelect', 'paperCatSelect', 'qCatSelect'];
-        catSelects.forEach(id => {
-          const sel = document.getElementById(id);
-          if (!sel) return;
-          const current = sel.value;
-          sel.innerHTML = '<option value="">-- 请选择 --</option>';
-          data.categories.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = c.nameZh + ' (' + c.id + ')';
-            sel.appendChild(opt);
+      function updateCoverPreview(url) {
+        const preview = document.getElementById('coverPreview');
+        if (url && url.trim()) {
+          preview.innerHTML = `<img src="${url.trim()}" alt="封面预览" />`;
+        } else {
+          preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
+        }
+      }
+
+      document.getElementById('uploadCoverBtn').addEventListener('click', function() {
+        document.getElementById('coverFileInput').click();
+      });
+
+      document.getElementById('coverFileInput').addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+          showToast('❌ 请选择图片文件', 'error');
+          this.value = '';
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          showToast('❌ 图片大小不能超过 5MB', 'error');
+          this.value = '';
+          return;
+        }
+        const status = document.getElementById('uploadStatus');
+        const btn = document.getElementById('uploadCoverBtn');
+        const origText = btn.textContent;
+        btn.textContent = '⏳ 上传中...';
+        btn.disabled = true;
+        status.textContent = '⏳ 正在上传到 Cloudinary...';
+        status.className = 'upload-status loading';
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+          .then(data => {
+            if (data.secure_url) {
+              document.getElementById('storyCover').value = data.secure_url;
+              updateCoverPreview(data.secure_url);
+              status.textContent = '✅ 上传成功！';
+              status.className = 'upload-status success';
+              showToast('✅ 封面上传成功！', 'success');
+            } else {
+              throw new Error(data.error?.message || '未知错误');
+            }
+          })
+          .catch(err => {
+            status.textContent = '❌ 上传失败：' + err.message;
+            status.className = 'upload-status error';
+            showToast('❌ 上传失败：' + err.message, 'error');
+          })
+          .finally(() => {
+            btn.textContent = origText;
+            btn.disabled = false;
+            document.getElementById('coverFileInput').value = '';
           });
-          if (current && data.categories.find(c => c.id === current)) sel.value = current;
+      });
+
+      document.getElementById('storyCover').addEventListener('input', function() {
+        updateCoverPreview(this.value);
+      });
+
+      function renderStories() {
+        const container = document.getElementById('storyList');
+        if (storiesData.stories.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无小说，添加一本吧！</p>';
+          document.getElementById('chapterManager').style.display = 'none';
+          return;
+        }
+        let html = '';
+        storiesData.stories.forEach((s, i) => {
+          const chCount = s.chapters ? s.chapters.length : 0;
+          const hasCover = s.cover && s.cover.trim() !== '';
+          const updated = s.updatedAt ? new Date(s.updatedAt).toLocaleString('zh-CN', { hour12: false }) :
+            '未知';
+          html += `
+            <div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章 · 更新: ${updated}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
         });
-
-        // 科目选择器（依赖类别）
-        document.getElementById('subjectCatSelect').addEventListener('change', function() { renderSubjects(); });
-        document.getElementById('diffCatSelect').addEventListener('change', function() { populateDiffSubjectSelect(this.value); });
-        document.getElementById('paperCatSelect').addEventListener('change', function() { populatePaperSubjectSelect(this.value); });
-        document.getElementById('qCatSelect').addEventListener('change', function() { populateQSubjectSelect(this.value); });
-
-        // 科目→难度 联动
-        document.getElementById('diffSubjectSelect').addEventListener('change', function() { renderDifficulties(); });
-        document.getElementById('paperSubjectSelect').addEventListener('change', function() { populatePaperDiffSelect(document.getElementById('paperCatSelect').value, this.value); });
-        document.getElementById('qSubjectSelect').addEventListener('change', function() { populateQDiffSelect(document.getElementById('qCatSelect').value, this.value); });
-
-        // 难度→试卷 联动
-        document.getElementById('paperDiffSelect').addEventListener('change', function() { renderPapers(); });
-        document.getElementById('qDiffSelect').addEventListener('change', function() { populateQPaperSelect(document.getElementById('qCatSelect').value, document.getElementById('qSubjectSelect').value, parseInt(this.value)); });
-        document.getElementById('qPaperSelect').addEventListener('change', function() { renderQuestions(); });
+        container.innerHTML = html;
+        container.querySelectorAll('.btn-edit').forEach(b => {
+          b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.storyIndex);
+            if (this.dataset.select === 'true') {
+              selectStory(idx);
+            } else {
+              editStory(idx);
+            }
+          });
+        });
+        container.querySelectorAll('.btn-delete').forEach(b => {
+          b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.storyIndex);
+            if (confirm('删除小说 "' + storiesData.stories[idx].title + '" 及其所有章节？')) {
+              storiesData.stories.splice(idx, 1);
+              if (currentStoryIndex === idx) { currentStoryIndex = -1;
+                document.getElementById('chapterManager').style.display = 'none'; }
+              if (currentStoryIndex > idx) currentStoryIndex--;
+              renderStories();
+              renderChapters();
+              updateStats();
+              updateJsonEditor();
+              showToast('已删除', 'success');
+            }
+          });
+        });
+        container.querySelectorAll('.admin-list-item').forEach(el => {
+          el.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.storyIndex);
+            selectStory(idx);
+          });
+        });
+        if (currentStoryIndex >= 0 && currentStoryIndex < storiesData.stories.length) {
+          const items = container.querySelectorAll('.admin-list-item');
+          items.forEach((el, i) => {
+            if (i === currentStoryIndex) {
+              el.style.borderColor = '#2a6df4';
+              el.style.background = '#f0f5ff';
+            } else {
+              el.style.borderColor = '#eef2f7';
+              el.style.background = '#fafcff';
+            }
+          });
+        }
       }
 
-      function populateDiffSubjectSelect(catId) {
-        const sel = document.getElementById('diffSubjectSelect');
-        sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
-        if (!catId) return;
-        const cat = getCategory(catId);
-        if (!cat) return;
-        cat.subjects.forEach(s => {
-          const opt = document.createElement('option');
-          opt.value = s.id;
-          opt.textContent = s.labelZh + ' (' + s.id + ')';
-          sel.appendChild(opt);
+      function selectStory(idx) {
+        if (idx < 0 || idx >= storiesData.stories.length) return;
+        currentStoryIndex = idx;
+        const s = storiesData.stories[idx];
+        document.getElementById('chapterManager').style.display = 'block';
+        document.getElementById('chapterManagerTitle').textContent = s.title;
+        document.getElementById('chapterStoryRef').value = idx;
+        renderChapters();
+        renderStories();
+        document.getElementById('chapterManager').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      function editStory(idx) {
+        const s = storiesData.stories[idx];
+        document.getElementById('storyTitleInput').value = s.title;
+        document.getElementById('storyAuthorInput').value = s.author;
+        document.getElementById('storyDescriptionInput').value = s.description || '';
+        document.getElementById('storyCover').value = s.cover || '';
+        updateCoverPreview(s.cover || '');
+        document.getElementById('storyEditIndex').value = idx;
+        document.getElementById('storySubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('storyCancelBtn').style.display = 'inline-flex';
+        showToast('编辑: ' + s.title, 'info');
+      }
+
+      document.getElementById('storyForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const title = document.getElementById('storyTitleInput').value.trim();
+        const author = document.getElementById('storyAuthorInput').value.trim();
+        const description = document.getElementById('storyDescriptionInput').value.trim();
+        const cover = document.getElementById('storyCover').value.trim();
+        const editIdx = parseInt(document.getElementById('storyEditIndex').value);
+        const now = new Date().toISOString();
+        if (!title || !author) { showToast('请填写完整', 'error'); return; }
+        if (editIdx === -1) {
+          storiesData.stories.push({ id: Date.now(), title, author, description: description, cover: cover,
+            likes: 0, updatedAt: now, chapters: [] });
+          showToast('已添加小说: ' + title, 'success');
+        } else {
+          const s = storiesData.stories[editIdx];
+          s.title = title;
+          s.author = author;
+          s.description = description;
+          s.cover = cover;
+          s.updatedAt = now;
+          showToast('已更新: ' + title, 'success');
+          document.getElementById('storyEditIndex').value = -1;
+          document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
+          document.getElementById('storyCancelBtn').style.display = 'none';
+        }
+        this.reset();
+        document.getElementById('storyEditIndex').value = -1;
+        document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
+        document.getElementById('storyCancelBtn').style.display = 'none';
+        document.getElementById('storyCover').value = '';
+        updateCoverPreview('');
+        document.getElementById('uploadStatus').textContent = '';
+        document.getElementById('uploadStatus').className = 'upload-status';
+        renderStories();
+        updateStats();
+        updateJsonEditor();
+        if (editIdx === currentStoryIndex) {
+          document.getElementById('chapterManagerTitle').textContent = title;
+        }
+      });
+
+      document.getElementById('storyCancelBtn').addEventListener('click', function() {
+        document.getElementById('storyForm').reset();
+        document.getElementById('storyEditIndex').value = -1;
+        document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
+        document.getElementById('storyCancelBtn').style.display = 'none';
+        document.getElementById('storyCover').value = '';
+        updateCoverPreview('');
+        document.getElementById('uploadStatus').textContent = '';
+        document.getElementById('uploadStatus').className = 'upload-status';
+        showToast('已取消', 'info');
+      });
+
+      function renderChapters() {
+        const container = document.getElementById('chapterList');
+        const storyIdx = parseInt(document.getElementById('chapterStoryRef').value);
+        if (isNaN(storyIdx) || storyIdx < 0 || storyIdx >= storiesData.stories.length) {
+          container.innerHTML = '<p style="color:#6b7a8f;">请先选择一本小说</p>';
+          return;
+        }
+        const s = storiesData.stories[storyIdx];
+        if (!s.chapters || s.chapters.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f;">暂无章节，添加一章吧！</p>';
+          return;
+        }
+        let html = '';
+        s.chapters.forEach((ch, i) => {
+          const preview = ch.content ? ch.content.substring(0, 80) + (ch.content.length > 80 ? '...' :
+            '') : '';
+          html += `
+            <div class="admin-list-item"><div class="info">📖 ${ch.title} <small>${preview}</small></div><div class="actions"><button class="btn-edit" data-chapter-index="${i}">编辑</button><button class="btn-delete" data-chapter-index="${i}">删除</button></div></div>`;
+        });
+        container.innerHTML = html;
+        container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editChapter(
+            parseInt(this.dataset.chapterIndex)); }));
+        container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', function() {
+          const idx = parseInt(this.dataset.chapterIndex);
+          if (confirm('删除此章节？')) { const s2 = storiesData.stories[storyIdx]; if (s2 && s2.chapters) { s2
+              .chapters.splice(idx, 1);
+              renderChapters();
+              updateStats();
+              updateJsonEditor();
+              showToast('已删除', 'success'); } }
+        }));
+      }
+
+      function editChapter(idx) {
+        const storyIdx = parseInt(document.getElementById('chapterStoryRef').value);
+        const s = storiesData.stories[storyIdx];
+        if (!s || !s.chapters || idx >= s.chapters.length) return;
+        const ch = s.chapters[idx];
+        document.getElementById('chapterTitleInput').value = ch.title;
+        document.getElementById('chapterContentInput').value = ch.content;
+        document.getElementById('chapterEditIndex').value = idx;
+        document.getElementById('chapterSubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('chapterCancelBtn').style.display = 'inline-flex';
+        showToast('编辑章节: ' + ch.title, 'info');
+      }
+
+      document.getElementById('chapterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const storyIdx = parseInt(document.getElementById('chapterStoryRef').value);
+        if (isNaN(storyIdx) || storyIdx < 0 || storyIdx >= storiesData.stories.length) {
+          showToast('请先选择小说', 'error');
+          return;
+        }
+        const s = storiesData.stories[storyIdx];
+        const title = document.getElementById('chapterTitleInput').value.trim();
+        const content = document.getElementById('chapterContentInput').value.trim();
+        const editIdx = parseInt(document.getElementById('chapterEditIndex').value);
+        if (!title || !content) { showToast('请填写完整', 'error'); return; }
+        if (!s.chapters) s.chapters = [];
+        if (editIdx === -1) {
+          s.chapters.push({ title, content });
+          s.updatedAt = new Date().toISOString();
+          showToast('已添加章节: ' + title, 'success');
+        } else {
+          if (editIdx >= s.chapters.length) { showToast('章节不存在', 'error'); return; }
+          s.chapters[editIdx] = { title, content };
+          s.updatedAt = new Date().toISOString();
+          showToast('已更新: ' + title, 'success');
+          document.getElementById('chapterEditIndex').value = -1;
+          document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
+          document.getElementById('chapterCancelBtn').style.display = 'none';
+        }
+        this.reset();
+        document.getElementById('chapterEditIndex').value = -1;
+        document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
+        document.getElementById('chapterCancelBtn').style.display = 'none';
+        document.getElementById('chapterStoryRef').value = storyIdx;
+        renderChapters();
+        renderStories();
+        updateStats();
+        updateJsonEditor();
+      });
+
+      document.getElementById('chapterCancelBtn').addEventListener('click', function() {
+        document.getElementById('chapterForm').reset();
+        document.getElementById('chapterEditIndex').value = -1;
+        document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
+        document.getElementById('chapterCancelBtn').style.display = 'none';
+        showToast('已取消', 'info');
+      });
+
+      // ================================================================
+      //  🎮 游戏管理
+      // ================================================================
+
+      function updateGameCoverPreview(url) {
+        const preview = document.getElementById('gameCoverPreview');
+        if (url && url.trim()) {
+          preview.innerHTML = `<img src="${url.trim()}" alt="游戏封面预览" />`;
+        } else {
+          preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
+        }
+      }
+
+      document.getElementById('uploadGameCoverBtn').addEventListener('click', function() {
+        document.getElementById('gameCoverFileInput').click();
+      });
+
+      document.getElementById('gameCoverFileInput').addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+          showToast('❌ 请选择图片文件', 'error');
+          this.value = '';
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          showToast('❌ 图片大小不能超过 5MB', 'error');
+          this.value = '';
+          return;
+        }
+        const status = document.getElementById('gameUploadStatus');
+        const btn = document.getElementById('uploadGameCoverBtn');
+        const origText = btn.textContent;
+        btn.textContent = '⏳ 上传中...';
+        btn.disabled = true;
+        status.textContent = '⏳ 正在上传到 Cloudinary...';
+        status.className = 'upload-status loading';
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+          .then(data => {
+            if (data.secure_url) {
+              document.getElementById('gameCover').value = data.secure_url;
+              updateGameCoverPreview(data.secure_url);
+              status.textContent = '✅ 上传成功！';
+              status.className = 'upload-status success';
+              showToast('✅ 游戏封面上传成功！', 'success');
+            } else {
+              throw new Error(data.error?.message || '未知错误');
+            }
+          })
+          .catch(err => {
+            status.textContent = '❌ 上传失败：' + err.message;
+            status.className = 'upload-status error';
+            showToast('❌ 上传失败：' + err.message, 'error');
+          })
+          .finally(() => {
+            btn.textContent = origText;
+            btn.disabled = false;
+            document.getElementById('gameCoverFileInput').value = '';
+          });
+      });
+
+      document.getElementById('gameCover').addEventListener('input', function() {
+        updateGameCoverPreview(this.value);
+      });
+
+      let currentGameIndex = -1;
+
+      function renderGames() {
+        const container = document.getElementById('gameList');
+        if (gamesData.games.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无游戏，添加一个吧！</p>';
+          return;
+        }
+        const sorted = [...gamesData.games].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+        let html = '';
+        sorted.forEach((g, idx) => {
+          const realIdx = gamesData.games.indexOf(g);
+          const statusClass = g.enabled !== false ? 'on' : 'off';
+          const statusText = g.enabled !== false ? '✅ 已启用' : '⛔ 已禁用';
+          const coverHtml = g.cover && g.cover.trim() ? `<img src="${g.cover}" alt="封面" class="cover-thumb" />` : '';
+          html += `
+            <div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}">
+              <div class="info">
+                ${coverHtml}
+                ${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})
+                <small>${g.type} · ${g.entry}</small>
+                <span class="toggle-badge ${statusClass}">${statusText}</span>
+              </div>
+              <div class="actions">
+                <button class="btn-toggle ${statusClass}" data-game-index="${realIdx}">${g.enabled !== false ? '🔛 关闭' : '🔓 开启'}</button>
+                <button class="btn-edit" data-game-index="${realIdx}">编辑</button>
+                <button class="btn-delete" data-game-index="${realIdx}">删除</button>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+
+        container.querySelectorAll('.btn-toggle').forEach(b => {
+          b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.gameIndex);
+            const g = gamesData.games[idx];
+            if (g) {
+              g.enabled = g.enabled === false ? true : false;
+              renderGames();
+              updateStats();
+              updateJsonEditor();
+              showToast(`已${g.enabled !== false ? '启用' : '禁用'}: ${g.titleZh}`, 'success');
+            }
+          });
+        });
+
+        container.querySelectorAll('.btn-edit').forEach(b => {
+          b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.gameIndex);
+            editGame(idx);
+          });
+        });
+
+        container.querySelectorAll('.btn-delete').forEach(b => {
+          b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.gameIndex);
+            if (confirm('删除游戏 "' + gamesData.games[idx].titleZh + '" ？')) {
+              gamesData.games.splice(idx, 1);
+              if (currentGameIndex === idx) currentGameIndex = -1;
+              if (currentGameIndex > idx) currentGameIndex--;
+              renderGames();
+              updateStats();
+              updateJsonEditor();
+              showToast('已删除', 'success');
+            }
+          });
         });
       }
 
-      function populatePaperSubjectSelect(catId) {
-        const sel = document.getElementById('paperSubjectSelect');
-        sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
-        if (!catId) return;
-        const cat = getCategory(catId);
-        if (!cat) return;
-        cat.subjects.forEach(s => {
-          const opt = document.createElement('option');
-          opt.value = s.id;
-          opt.textContent = s.labelZh + ' (' + s.id + ')';
-          sel.appendChild(opt);
+      function editGame(idx) {
+        const g = gamesData.games[idx];
+        document.getElementById('gameId').value = g.id;
+        document.getElementById('gameIcon').value = g.icon || '';
+        document.getElementById('gameTitleZh').value = g.titleZh;
+        document.getElementById('gameTitleEn').value = g.titleEn;
+        document.getElementById('gameDescZh').value = g.descriptionZh || '';
+        document.getElementById('gameDescEn').value = g.descriptionEn || '';
+        document.getElementById('gameType').value = g.type || 'js';
+        document.getElementById('gameEntry').value = g.entry || '';
+        document.getElementById('gameSortOrder').value = g.sortOrder || 1;
+        document.getElementById('gameEnabled').value = g.enabled !== false ? 'true' : 'false';
+        document.getElementById('gameCover').value = g.cover || '';
+        updateGameCoverPreview(g.cover || '');
+        document.getElementById('gameEditIndex').value = idx;
+        document.getElementById('gameSubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('gameCancelBtn').style.display = 'inline-flex';
+        showToast('编辑: ' + g.titleZh, 'info');
+      }
+
+      document.getElementById('gameForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const id = document.getElementById('gameId').value.trim();
+        const icon = document.getElementById('gameIcon').value.trim();
+        const titleZh = document.getElementById('gameTitleZh').value.trim();
+        const titleEn = document.getElementById('gameTitleEn').value.trim();
+        const descriptionZh = document.getElementById('gameDescZh').value.trim();
+        const descriptionEn = document.getElementById('gameDescEn').value.trim();
+        const type = document.getElementById('gameType').value;
+        const entry = document.getElementById('gameEntry').value.trim();
+        const sortOrder = parseInt(document.getElementById('gameSortOrder').value) || 1;
+        const enabled = document.getElementById('gameEnabled').value === 'true';
+        const cover = document.getElementById('gameCover').value.trim();
+        const editIdx = parseInt(document.getElementById('gameEditIndex').value);
+
+        if (!id || !titleZh || !titleEn || !entry) {
+          showToast('请填写完整（ID、标题、入口文件）', 'error');
+          return;
+        }
+
+        const exists = gamesData.games.find((g, i) => g.id === id && i !== editIdx);
+        if (exists) { showToast('游戏 ID 已存在，请换一个', 'error'); return; }
+
+        const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder,
+          enabled, cover };
+
+        if (editIdx === -1) {
+          gamesData.games.push(gameData);
+          showToast('已添加游戏: ' + titleZh, 'success');
+        } else {
+          gamesData.games[editIdx] = gameData;
+          showToast('已更新: ' + titleZh, 'success');
+          document.getElementById('gameEditIndex').value = -1;
+          document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
+          document.getElementById('gameCancelBtn').style.display = 'none';
+        }
+
+        this.reset();
+        document.getElementById('gameEditIndex').value = -1;
+        document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
+        document.getElementById('gameCancelBtn').style.display = 'none';
+        document.getElementById('gameType').value = 'js';
+        document.getElementById('gameEnabled').value = 'true';
+        document.getElementById('gameSortOrder').value = '1';
+        document.getElementById('gameCover').value = '';
+        updateGameCoverPreview('');
+        document.getElementById('gameUploadStatus').textContent = '';
+        document.getElementById('gameUploadStatus').className = 'upload-status';
+
+        renderGames();
+        updateStats();
+        updateJsonEditor();
+      });
+
+      document.getElementById('gameCancelBtn').addEventListener('click', function() {
+        document.getElementById('gameForm').reset();
+        document.getElementById('gameEditIndex').value = -1;
+        document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
+        this.style.display = 'none';
+        document.getElementById('gameType').value = 'js';
+        document.getElementById('gameEnabled').value = 'true';
+        document.getElementById('gameSortOrder').value = '1';
+        document.getElementById('gameCover').value = '';
+        updateGameCoverPreview('');
+        document.getElementById('gameUploadStatus').textContent = '';
+        document.getElementById('gameUploadStatus').className = 'upload-status';
+        showToast('已取消', 'info');
+      });
+
+      // ================================================================
+      //  🍃 沉浸式管理（含封面上传）
+      // ================================================================
+      let currentImmersiveIndex = -1;
+
+      // ---------- 沉浸式封面上传（与小说/游戏一致） ----------
+      function updateImmersiveCoverPreview(url) {
+        const preview = document.getElementById('immersiveCoverPreview');
+        if (url && url.trim()) {
+          preview.innerHTML = `<img src="${url.trim()}" alt="封面预览" />`;
+        } else {
+          preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
+        }
+      }
+
+      document.getElementById('uploadImmersiveCoverBtn').addEventListener('click', function() {
+        document.getElementById('immersiveCoverFileInput').click();
+      });
+
+      document.getElementById('immersiveCoverFileInput').addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+          showToast('❌ 请选择图片文件', 'error');
+          this.value = '';
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          showToast('❌ 图片大小不能超过 5MB', 'error');
+          this.value = '';
+          return;
+        }
+        const status = document.getElementById('immersiveUploadStatus');
+        const btn = document.getElementById('uploadImmersiveCoverBtn');
+        const origText = btn.textContent;
+        btn.textContent = '⏳ 上传中...';
+        btn.disabled = true;
+        status.textContent = '⏳ 正在上传到 Cloudinary...';
+        status.className = 'upload-status loading';
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+          })
+          .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+          .then(data => {
+            if (data.secure_url) {
+              document.getElementById('immersiveCover').value = data.secure_url;
+              updateImmersiveCoverPreview(data.secure_url);
+              status.textContent = '✅ 上传成功！';
+              status.className = 'upload-status success';
+              showToast('✅ 封面上传成功！', 'success');
+            } else {
+              throw new Error(data.error?.message || '未知错误');
+            }
+          })
+          .catch(err => {
+            status.textContent = '❌ 上传失败：' + err.message;
+            status.className = 'upload-status error';
+            showToast('❌ 上传失败：' + err.message, 'error');
+          })
+          .finally(() => {
+            btn.textContent = origText;
+            btn.disabled = false;
+            document.getElementById('immersiveCoverFileInput').value = '';
+          });
+      });
+
+      document.getElementById('immersiveCover').addEventListener('input', function() {
+        updateImmersiveCoverPreview(this.value);
+      });
+
+      // ---------- 类型切换：控制封面、内容、URL 区域 ----------
+      document.getElementById('immersiveType').addEventListener('change', function() {
+        const type = this.value;
+        const contentGroup = document.getElementById('immersiveContentGroup');
+        const urlGroup = document.getElementById('immersiveUrlGroup');
+        const coverGroup = document.getElementById('immersiveCoverGroup');
+        if (type === 'text') {
+          contentGroup.style.display = 'block';
+          urlGroup.style.display = 'none';
+          coverGroup.style.display = 'block';
+        } else {
+          contentGroup.style.display = 'none';
+          urlGroup.style.display = 'block';
+          coverGroup.style.display = 'none';
+        }
+      });
+
+      // ---------- 渲染列表 ----------
+      function renderImmersive() {
+        const container = document.getElementById('immersiveList');
+        if (immersiveData.items.length === 0) {
+          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无沉浸式内容，添加一条吧！</p>';
+          return;
+        }
+        let html = '';
+        immersiveData.items.forEach((item, i) => {
+          const typeLabel = item.type === 'text' ? '📝 文本' : item.type === 'video' ? '🎬 视频' : '🎵 音乐';
+          const typeClass = item.type === 'text' ? 'text' : item.type === 'video' ? 'video' : 'music';
+          const coverHtml = item.cover && item.cover.trim() ? `<img src="${item.cover}" alt="封面" class="cover-thumb" />` : '';
+          html += `
+            <div class="admin-list-item" style="cursor:pointer;" data-item-index="${i}">
+              <div class="info">
+                ${coverHtml}
+                <span class="type-badge ${typeClass}">${typeLabel}</span>
+                <strong>${item.title || '无标题'}</strong>
+                <small>${item.category || '未分类'} · ${item.author || '未知作者'}</small>
+              </div>
+              <div class="actions">
+                <button class="btn-edit" data-item-index="${i}">编辑</button>
+                <button class="btn-delete" data-item-index="${i}">删除</button>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+
+        container.querySelectorAll('.btn-edit').forEach(b => {
+          b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.itemIndex);
+            editImmersive(idx);
+          });
+        });
+
+        container.querySelectorAll('.btn-delete').forEach(b => {
+          b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.itemIndex);
+            if (confirm('删除此条目？')) {
+              immersiveData.items.splice(idx, 1);
+              if (currentImmersiveIndex === idx) currentImmersiveIndex = -1;
+              if (currentImmersiveIndex > idx) currentImmersiveIndex--;
+              renderImmersive();
+              updateStats();
+              updateJsonEditor();
+              showToast('已删除', 'success');
+            }
+          });
         });
       }
 
-      function populatePaperDiffSelect(catId, subjectId) {
-        const sel = document.getElementById('paperDiffSelect');
-        sel.innerHTML = '<option value="">-- 请先选科目 --</option>';
-        if (!catId || !subjectId) return;
-        const subj = getSubject(catId, subjectId);
-        if (!subj) return;
-        subj.difficulties.forEach(d => {
-          const opt = document.createElement('option');
-          opt.value = d.level;
-          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
-          sel.appendChild(opt);
-        });
+      // ---------- 编辑 ----------
+      function editImmersive(idx) {
+        const item = immersiveData.items[idx];
+        document.getElementById('immersiveType').value = item.type || 'text';
+        document.getElementById('immersiveCategory').value = item.category || '';
+        document.getElementById('immersiveTitle').value = item.title || '';
+        document.getElementById('immersiveAuthor').value = item.author || '';
+        document.getElementById('immersivePreview').value = item.preview || '';
+        document.getElementById('immersiveContent').value = item.content || '';
+        document.getElementById('immersiveUrl').value = item.url || '';
+        document.getElementById('immersiveCover').value = item.cover || '';
+        updateImmersiveCoverPreview(item.cover || '');
+        document.getElementById('immersiveEditIndex').value = idx;
+        document.getElementById('immersiveSubmitBtn').textContent = '💾 保存修改';
+        document.getElementById('immersiveCancelBtn').style.display = 'inline-flex';
+        document.getElementById('immersiveType').dispatchEvent(new Event('change'));
+        showToast('编辑: ' + item.title, 'info');
       }
 
-      function populateQSubjectSelect(catId) {
-        const sel = document.getElementById('qSubjectSelect');
-        sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
-        if (!catId) return;
-        const cat = getCategory(catId);
-        if (!cat) return;
-        cat.subjects.forEach(s => {
-          const opt = document.createElement('option');
-          opt.value = s.id;
-          opt.textContent = s.labelZh + ' (' + s.id + ')';
-          sel.appendChild(opt);
-        });
+      // ---------- 提交 ----------
+      document.getElementById('immersiveForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const type = document.getElementById('immersiveType').value;
+        const category = document.getElementById('immersiveCategory').value.trim();
+        const title = document.getElementById('immersiveTitle').value.trim();
+        const author = document.getElementById('immersiveAuthor').value.trim();
+        const preview = document.getElementById('immersivePreview').value.trim();
+        const content = document.getElementById('immersiveContent').value.trim();
+        const url = document.getElementById('immersiveUrl').value.trim();
+        const cover = document.getElementById('immersiveCover').value.trim();
+        const editIdx = parseInt(document.getElementById('immersiveEditIndex').value);
+
+        if (!title) { showToast('请填写标题', 'error'); return; }
+        if (type === 'text' && !content) { showToast('请填写正文内容', 'error'); return; }
+        if ((type === 'video' || type === 'music') && !url) { showToast('请填写嵌入 URL', 'error'); return; }
+
+        const newItem = {
+          id: Date.now() + Math.floor(Math.random() * 1000),
+          type: type,
+          category: category,
+          title: title,
+          author: author || '蒙堂木下',
+          preview: preview || (content ? content.substring(0, 60) + '...' : ''),
+          content: content,
+          url: url,
+          cover: cover
+        };
+
+        if (editIdx === -1) {
+          immersiveData.items.push(newItem);
+          showToast('已添加: ' + title, 'success');
+        } else {
+          immersiveData.items[editIdx] = newItem;
+          showToast('已更新: ' + title, 'success');
+          document.getElementById('immersiveEditIndex').value = -1;
+          document.getElementById('immersiveSubmitBtn').textContent = '➕ 添加条目';
+          document.getElementById('immersiveCancelBtn').style.display = 'none';
+        }
+
+        this.reset();
+        document.getElementById('immersiveEditIndex').value = -1;
+        document.getElementById('immersiveSubmitBtn').textContent = '➕ 添加条目';
+        document.getElementById('immersiveCancelBtn').style.display = 'none';
+        document.getElementById('immersiveType').value = 'text';
+        document.getElementById('immersiveCover').value = '';
+        updateImmersiveCoverPreview('');
+        document.getElementById('immersiveUploadStatus').textContent = '';
+        document.getElementById('immersiveUploadStatus').className = 'upload-status';
+        document.getElementById('immersiveContentGroup').style.display = 'block';
+        document.getElementById('immersiveUrlGroup').style.display = 'none';
+        document.getElementById('immersiveCoverGroup').style.display = 'block';
+
+        renderImmersive();
+        updateStats();
+        updateJsonEditor();
+      });
+
+      document.getElementById('immersiveCancelBtn').addEventListener('click', function() {
+        document.getElementById('immersiveForm').reset();
+        document.getElementById('immersiveEditIndex').value = -1;
+        document.getElementById('immersiveSubmitBtn').textContent = '➕ 添加条目';
+        this.style.display = 'none';
+        document.getElementById('immersiveType').value = 'text';
+        document.getElementById('immersiveCover').value = '';
+        updateImmersiveCoverPreview('');
+        document.getElementById('immersiveUploadStatus').textContent = '';
+        document.getElementById('immersiveUploadStatus').className = 'upload-status';
+        document.getElementById('immersiveContentGroup').style.display = 'block';
+        document.getElementById('immersiveUrlGroup').style.display = 'none';
+        document.getElementById('immersiveCoverGroup').style.display = 'block';
+        showToast('已取消', 'info');
+      });
+
+      // ================================================================
+      //  📝 JSON 编辑器
+      // ================================================================
+      function updateJsonEditor() {
+        const fullData = {
+          languages: data.categories?.[0]?.subjects || data.languages || [], // 兼容新旧
+          categories: data.categories,
+          stories: storiesData.stories,
+          games: gamesData.games,
+          immersive: immersiveData.items
+        };
+        document.getElementById('jsonEditor').value = JSON.stringify(fullData, null, 2);
       }
 
-      function populateQDiffSelect(catId, subjectId) {
-        const sel = document.getElementById('qDiffSelect');
-        sel.innerHTML = '<option value="">-- 请先选科目 --</option>';
-        if (!catId || !subjectId) return;
-        const subj = getSubject(catId, subjectId);
-        if (!subj) return;
-        subj.difficulties.forEach(d => {
-          const opt = document.createElement('option');
-          opt.value = d.level;
-          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
-          sel.appendChild(opt);
-        });
-      }
+      document.getElementById('jsonApplyBtn').addEventListener('click', function() {
+        try {
+          const raw = document.getElementById('jsonEditor').value;
+          const parsed = JSON.parse(raw);
+          // 兼容：如果顶层的 categories 存在则优先，否则尝试从 languages 重建
+          if (parsed.categories) {
+            data.categories = parsed.categories;
+          } else if (parsed.languages && Array.isArray(parsed.languages)) {
+            // 旧结构转换为新结构
+            data.categories = [{
+              id: "lang",
+              nameZh: "语言",
+              nameEn: "Language",
+              subjects: parsed.languages
+            }];
+          } else {
+            data.categories = [];
+          }
+          if (parsed.stories) storiesData.stories = parsed.stories;
+          if (parsed.games) gamesData.games = parsed.games;
+          if (parsed.immersive) immersiveData.items = parsed.immersive;
+          renderAll();
+          showToast('已应用 JSON 数据', 'success');
+        } catch (e) { showToast('JSON 格式错误: ' + e.message, 'error'); }
+      });
 
-      function populateQPaperSelect(catId, subjectId, level) {
-        const sel = document.getElementById('qPaperSelect');
-        sel.innerHTML = '<option value="">-- 请先选难度 --</option>';
-        if (!catId || !subjectId || isNaN(level)) return;
-        const diff = getDifficulty(catId, subjectId, level);
-        if (!diff) return;
-        diff.papers.forEach(p => {
-          const opt = document.createElement('option');
-          opt.value = p.id;
-          opt.textContent = p.titleZh + ' (ID: ' + p.id + ')';
-          sel.appendChild(opt);
+      document.getElementById('jsonFormatBtn').addEventListener('click', function() {
+        try {
+          const raw = document.getElementById('jsonEditor').value;
+          const parsed = JSON.parse(raw);
+          document.getElementById('jsonEditor').value = JSON.stringify(parsed, null, 2);
+          showToast('已格式化', 'success');
+        } catch (e) { showToast('JSON 格式错误: ' + e.message, 'error'); }
+      });
+
+      document.getElementById('jsonCopyBtn').addEventListener('click', function() {
+        const text = document.getElementById('jsonEditor').value;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('已复制到剪贴板！请粘贴到对应 JSON 文件并提交 GitHub', 'success');
+        }).catch(() => {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+          showToast('已复制', 'success');
         });
-      }
+      });
+
+      document.getElementById('jsonExportPapersBtn').addEventListener('click', function() {
+        const papersData = { languages: data.categories?.[0]?.subjects || [] };
+        document.getElementById('jsonEditor').value = JSON.stringify(papersData, null, 2);
+        showToast('已导出测验数据到 JSON 编辑器', 'success');
+      });
+
+      document.getElementById('jsonExportStoriesBtn').addEventListener('click', function() {
+        const storiesDataOnly = { stories: storiesData.stories };
+        document.getElementById('jsonEditor').value = JSON.stringify(storiesDataOnly, null, 2);
+        showToast('已导出小说数据到 JSON 编辑器', 'success');
+      });
+
+      document.getElementById('jsonExportGamesBtn').addEventListener('click', function() {
+        const gamesDataOnly = { games: gamesData.games };
+        document.getElementById('jsonEditor').value = JSON.stringify(gamesDataOnly, null, 2);
+        showToast('已导出游戏数据到 JSON 编辑器', 'success');
+      });
+
+      document.getElementById('jsonExportImmersiveBtn').addEventListener('click', function() {
+        const immersiveOnly = { items: immersiveData.items };
+        document.getElementById('jsonEditor').value = JSON.stringify(immersiveOnly, null, 2);
+        showToast('已导出沉浸式数据到 JSON 编辑器', 'success');
+      });
 
       // ================================================================
       //  加载数据
@@ -1634,7 +2374,21 @@
       function loadAllData() {
         fetch('data/papers.json')
           .then(res => { if (!res.ok) throw new Error('papers.json 不存在'); return res.json(); })
-          .then(d => { if (d.categories) data.categories = d.categories; })
+          .then(d => {
+            // 自动转换旧结构
+            if (d.languages && !d.categories) {
+              data.categories = [{
+                id: "lang",
+                nameZh: "语言",
+                nameEn: "Language",
+                subjects: d.languages
+              }];
+            } else if (d.categories) {
+              data.categories = d.categories;
+            } else {
+              data.categories = [];
+            }
+          })
           .catch(() => { data.categories = []; })
           .finally(() => {
             fetch('data/stories.json')
@@ -1666,11 +2420,21 @@
         renderPapers();
         renderQuestions();
         renderStories();
+        renderChapters();
         renderGames();
         renderImmersive();
         updateStats();
         updateJsonEditor();
         populateSelects();
+        if (currentStoryIndex >= 0 && currentStoryIndex < storiesData.stories.length) {
+          document.getElementById('chapterManager').style.display = 'block';
+          document.getElementById('chapterManagerTitle').textContent = storiesData.stories[currentStoryIndex]
+            .title;
+          document.getElementById('chapterStoryRef').value = currentStoryIndex;
+          renderChapters();
+        } else {
+          document.getElementById('chapterManager').style.display = 'none';
+        }
       }
 
       function initAdmin() {
