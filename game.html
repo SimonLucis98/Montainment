@@ -253,13 +253,14 @@
           const title = lang === 'zh' ? game.titleZh : (game.titleEn || game.titleZh);
           const desc = lang === 'zh' ? (game.descriptionZh || '📝 来挑战吧！') : (game.descriptionEn || game.descriptionZh || '📝 Let\'s go!');
 
-          // ===== 判断是否为外部链接 =====
           const isExternal = game.type === 'external' || game.type === 'redirect';
           const linkUrl = isExternal ? game.entry : `game-play.html?game=${encodeURIComponent(game.id)}`;
           const linkTarget = isExternal ? 'target="_blank"' : '';
-          const externalBadge = isExternal ? '<span class="external-badge">🔗 外部</span>' : '';
 
-          // ===== 🆕 使用 i18n.t 获取类型标签 =====
+          // ===== 🔥 关键修改：使用 i18n.t 翻译 "外部" 标签 =====
+          const externalBadge = isExternal ? `<span class="external-badge">${window.i18n ? i18n.t('game.external_badge') : '🔗 外部'}</span>` : '';
+
+          // 类型标签
           let typeKey = '';
           if (game.type === 'js') {
             typeKey = 'game.type_js';
