@@ -71,7 +71,7 @@ const i18n = {
       'quiz.loading_failed': 'Data loading failed',
       'quiz.loading_failed_prompt': 'Please ensure data/papers.json exists and is properly formatted.',
 
-      // -------- 游戏大厅（新增游戏类型翻译） --------
+      // -------- 游戏大厅 --------
       'game.badge': '🎮 Game Hall',
       'game.title': 'Select Game · Start Challenge',
       'game.desc': 'Click on any game card to enter the standalone game page and enjoy the full ad experience!',
@@ -82,6 +82,7 @@ const i18n = {
       'game.type_iframe': 'H5 Game',
       'game.type_external': 'External Link',
       'game.type_unknown': 'Unknown',
+      'game.external_badge': '🔗 External',
 
       // -------- 游戏独立页 --------
       'gameplay.back': '← Back to Game Hall',
@@ -220,7 +221,7 @@ const i18n = {
       'quiz.loading_failed': '数据加载失败',
       'quiz.loading_failed_prompt': '请确保 data/papers.json 文件存在且格式正确。',
 
-      // -------- 游戏大厅（新增游戏类型翻译） --------
+      // -------- 游戏大厅 --------
       'game.badge': '🎮 游戏大厅',
       'game.title': '选择游戏 · 开始挑战',
       'game.desc': '点击任意游戏卡片，进入独立游戏页面，享受完整广告体验！',
@@ -231,6 +232,7 @@ const i18n = {
       'game.type_iframe': 'H5 游戏',
       'game.type_external': '外部链接',
       'game.type_unknown': '未知类型',
+      'game.external_badge': '🔗 外部',
 
       // -------- 游戏独立页 --------
       'gameplay.back': '← 返回游戏大厅',
