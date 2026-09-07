@@ -20,8 +20,8 @@
       "titleEn": "Word vs Zombie",
       "descriptionZh": "正确的词汇赋予你力量",
       "descriptionEn": "The right word empowers you",
-      "type": "js",
-      "entry": "games/wordzombie.js",
+      "type": "iframe",
+      "entry": "<iframe width=\"552\" src=\"https://itch.io/embed/4980190\" height=\"167\" frameborder=\"0\"><a href=\"https://yoloyu.itch.io/wordvszombie\">Word Vs Zombie by yoloyu</a></iframe>",
       "sortOrder": 2,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788729319/qk9qqxkjiklgprgtucx8.png"
