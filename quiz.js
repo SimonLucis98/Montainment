@@ -1,21 +1,21 @@
 /**
  * quiz.js —— 数据驱动 · 从 data/papers.json 加载语言、难度、试卷、题目
- * 流程：选择语言 → 选择难度 → 选择试卷 → 答题
+ * 流程：选择学科 → 选择难度 → 选择试卷 → 答题
  * 界面语言可切换（中文/English）
  */
 (function() {
   'use strict';
 
   // ========== 状态 ==========
-  let allData = null;                  // 从 JSON 加载的完整数据
-  let currentLang = 'zh';              // 界面语言
-  let selectedLanguageId = null;       // 当前选择的学习语言 id
-  let selectedDifficultyLevel = null;  // 当前选择的难度 level
+  let allData = null;
+  let currentLang = 'zh';
+  let selectedLanguageId = null;
+  let selectedDifficultyLevel = null;
   let currentPaperId = null;
   let currentIndex = 0;
   let score = 0;
   let currentQuestionSolved = false;
-  let uiState = 'language';            // 'language' | 'difficulty' | 'paper' | 'quiz' | 'result'
+  let uiState = 'language';
 
   // ========== DOM 引用 ==========
   const quizBody = document.getElementById('quiz-body');
@@ -94,7 +94,7 @@
     }
   }
 
-  // ========== 渲染：语言选择 ==========
+  // ========== 渲染：学科选择 ==========
   function renderLanguageSelection() {
     uiState = 'language';
     selectedLanguageId = null;
@@ -106,14 +106,14 @@
     quizFeedback.className = 'quiz-feedback';
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
-    quizIndexLabel.textContent = t('🌍 选择语言', '🌍 Select Language');
+    quizIndexLabel.textContent = t('🌍 选择学科', '🌍 Select Subject');
 
     if (!allData || !allData.languages || allData.languages.length === 0) {
       quizBody.innerHTML = `
         <div style="padding:30px; text-align:center; color:#6b7a8f;">
           <div style="font-size:48px;">📭</div>
-          <h3>${t('暂无语言数据', 'No language data')}</h3>
-          <p>${t('请在后台添加语言并导出 JSON。', 'Please add languages in the admin panel and export JSON.')}</p>
+          <h3>${t('暂无学科数据', 'No subject data')}</h3>
+          <p>${t('请在后台添加学科并导出 JSON。', 'Please add subjects in the admin panel and export JSON.')}</p>
         </div>
       `;
       return;
@@ -121,7 +121,7 @@
 
     let html = `
       <div style="margin-bottom:16px; font-weight:500; color:#6b7a8f; font-size:15px;">
-        ${t('你想学习哪种语言？', 'Which language do you want to learn?')}
+        ${t('你想学习哪种学科？', 'Which subject do you want to learn?')}
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:14px;">
     `;
@@ -195,7 +195,6 @@
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:14px;">
     `;
 
-    // 显示所有 0-5 级，但只让有数据的可点
     for (let level = 0; level <= 5; level++) {
       const hasData = availableDiffs.includes(level);
       const diffObj = langObj.difficulties.find(d => d.level === level);
@@ -211,7 +210,7 @@
     }
     html += `</div>
       <div style="margin-top:16px;">
-        <button class="btn btn-secondary" id="back-to-lang" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选语言', 'Back to languages')}</button>
+        <button class="btn btn-secondary" id="back-to-lang" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选学科', 'Back to subjects')}</button>
       </div>
     `;
     quizBody.innerHTML = html;
@@ -302,7 +301,7 @@
     html += `</div>
       <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
         <button class="btn btn-secondary" id="back-to-diff-from-paper" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选难度', 'Back to difficulty')}</button>
-        <button class="btn btn-secondary" id="back-to-lang-from-paper" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选语言', 'Back to languages')}</button>
+        <button class="btn btn-secondary" id="back-to-lang-from-paper" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选学科', 'Back to subjects')}</button>
       </div>
     `;
     quizBody.innerHTML = html;
@@ -361,7 +360,7 @@
     renderMultipleChoice(q);
   }
 
-  // ========== 选择题渲染（与之前一致，但数据来自 JSON） ==========
+  // ========== 选择题渲染 ==========
   function renderMultipleChoice(q) {
     const letters = ['A', 'B', 'C', 'D'];
     const questionText = t(q.q.zh, q.q.en);
@@ -584,7 +583,6 @@
             <p style="color:#6b7a8f; font-size:14px;">${err.message}</p>
           </div>
         `;
-        // 仍然尝试创建语言切换按钮
         createLangToggle();
       });
   }
