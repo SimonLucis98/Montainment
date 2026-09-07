@@ -51,6 +51,19 @@
       "sortOrder": 4,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788801416/gg26pk5tlyzfmdhjdgmz.jpg"
+    },
+    {
+      "id": "5",
+      "icon": "",
+      "titleZh": "MBTI性格",
+      "titleEn": "MBTI Character",
+      "descriptionZh": "做成引导，找寻你的性格",
+      "descriptionEn": "Discover Your True Self",
+      "type": "js",
+      "entry": "games/.mbti.js",
+      "sortOrder": 5,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788803217/wnpwkbl9b64dicnyoxfr.jpg"
     }
   ]
 }
