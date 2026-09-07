@@ -25,6 +25,19 @@
       "sortOrder": 2,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788729319/qk9qqxkjiklgprgtucx8.png"
+    },
+    {
+      "id": "3",
+      "icon": "",
+      "titleZh": "贪吃蛇",
+      "titleEn": "Snake",
+      "descriptionZh": "控制小蛇吞食，挑战极限长度与反应力！",
+      "descriptionEn": "Control the snake to eat and challenge your limit of length and reflexes!",
+      "type": "js",
+      "entry": "games/snake.js",
+      "sortOrder": 3,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788799210/fphvfdbgmmhgkrffoceu.jpg"
     }
   ]
 }
