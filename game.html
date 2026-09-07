@@ -116,6 +116,16 @@
       font-size: 20px;
       color: #666;
     }
+    /* 新增：外部链接标签 */
+    .external-badge {
+      font-size: 11px;
+      background: #f7c948;
+      color: #0b1c33;
+      padding: 1px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
     @media (max-width:600px) {
       .game-grid {
         grid-template-columns: 1fr 1fr;
@@ -197,7 +207,7 @@
       }
 
       function getCoverDisplay(game) {
-        // ✅ 修复：使用 game.cover 而不是 game.image
+        // 使用 cover 字段
         if (game.cover) {
           return `<img src="${game.cover}" alt="${game.titleZh}" />`;
         }
@@ -244,22 +254,38 @@
           const coverColor = getCoverColor(game);
           const title = lang === 'zh' ? game.titleZh : (game.titleEn || game.titleZh);
           const desc = lang === 'zh' ? (game.descriptionZh || '📝 来挑战吧！') : (game.descriptionEn || game.descriptionZh || '📝 Let\'s go!');
-          const typeLabel = game.type === 'js' ?
-            (lang === 'zh' ? '原生游戏' : 'Native Game') :
-            (lang === 'zh' ? 'H5 游戏' : 'H5 Game');
+
+          // ===== 🔥 核心改动：判断是否为外部链接 =====
+          const isExternal = game.type === 'external' || game.type === 'redirect';
+          // 如果是外部链接，直接跳转 entry，否则走内部游戏页
+          const linkUrl = isExternal ? game.entry : `game-play.html?game=${encodeURIComponent(game.id)}`;
+          const linkTarget = isExternal ? 'target="_blank"' : '';
+          const externalBadge = isExternal ? '<span class="external-badge">🔗 外部</span>' : '';
+
+          // 状态标签
+          let typeLabel = '';
+          if (game.type === 'js') {
+            typeLabel = lang === 'zh' ? '原生游戏' : 'Native Game';
+          } else if (game.type === 'iframe') {
+            typeLabel = lang === 'zh' ? 'H5 游戏' : 'H5 Game';
+          } else if (isExternal) {
+            typeLabel = lang === 'zh' ? '外部链接' : 'External Link';
+          } else {
+            typeLabel = lang === 'zh' ? '未知类型' : 'Unknown';
+          }
 
           html += `
-            <a href="game-play.html?game=${encodeURIComponent(game.id)}" class="game-card">
+            <a href="${linkUrl}" ${linkTarget} class="game-card">
               <div class="game-cover" style="background:${coverColor};">
                 ${coverHtml}
                 <span class="cover-badge">${typeLabel}</span>
               </div>
               <div class="game-card-body">
-                <div class="title">${title}</div>
+                <div class="title">${title} ${externalBadge}</div>
                 <div class="desc">${desc}</div>
                 <div class="game-card-footer">
                   <span class="status">${typeLabel}</span>
-                  <span class="play-hint" data-i18n="game.play_hint">开始游戏 →</span>
+                  <span class="play-hint" data-i18n="game.play_hint">${isExternal ? '前往游玩 →' : '开始游戏 →'}</span>
                 </div>
               </div>
             </a>
