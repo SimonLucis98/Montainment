@@ -57,7 +57,7 @@
       "icon": "",
       "titleZh": "MBTI性格",
       "titleEn": "MBTI Character",
-      "descriptionZh": "做成引导，找寻你的性格",
+      "descriptionZh": "找寻你的性格",
       "descriptionEn": "Discover Your True Self",
       "type": "js",
       "entry": "games/mbti.js",
