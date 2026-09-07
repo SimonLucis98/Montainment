@@ -684,7 +684,7 @@
                 <select id="gameType">
                   <option value="js">原生 JS</option>
                   <option value="iframe">iframe 嵌入</option>
-                  <option value="external">外部链接（直接跳转）</option>  <!-- 🆕 新增 -->
+                  <option value="external">外部链接（直接跳转）</option>
                 </select>
               </div>
               <div class="admin-form-group"><label>入口文件</label>
@@ -2338,7 +2338,7 @@
         });
       });
 
-      // ---------- 导出按钮（修改为 categories） ----------
+      // ---------- 导出按钮 ----------
       document.getElementById('jsonExportPapersBtn').addEventListener('click', function() {
         const papersData = { categories: data.categories };
         document.getElementById('jsonEditor').value = JSON.stringify(papersData, null, 2);
@@ -2364,13 +2364,12 @@
       });
 
       // ================================================================
-      //  加载数据（移除了兼容层）
+      //  加载数据
       // ================================================================
       function loadAllData() {
         fetch('data/papers.json')
           .then(res => { if (!res.ok) throw new Error('papers.json 不存在'); return res.json(); })
           .then(d => {
-            // 直接使用 categories，不再兼容 languages
             if (d.categories) {
               data.categories = d.categories;
             } else {
@@ -2424,6 +2423,166 @@
         } else {
           document.getElementById('chapterManager').style.display = 'none';
         }
+      }
+
+      // ================================================================
+      //  🔽 下拉框同步函数（已修复：自动填充科目/难度/试卷）
+      // ================================================================
+      function populateSelects() {
+        // 类别选择器（多个）
+        const catSelects = ['subjectCatSelect', 'diffCatSelect', 'paperCatSelect', 'qCatSelect'];
+        catSelects.forEach(id => {
+          const sel = document.getElementById(id);
+          if (!sel) return;
+          const current = sel.value;
+          sel.innerHTML = '<option value="">-- 请选择 --</option>';
+          data.categories.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.nameZh + ' (' + c.id + ')';
+            sel.appendChild(opt);
+          });
+          if (current && data.categories.find(c => c.id === current)) sel.value = current;
+        });
+
+        // 绑定事件监听
+        document.getElementById('subjectCatSelect').addEventListener('change', function() { renderSubjects(); });
+        document.getElementById('diffCatSelect').addEventListener('change', function() { populateDiffSubjectSelect(this.value); });
+        document.getElementById('paperCatSelect').addEventListener('change', function() { populatePaperSubjectSelect(this.value); });
+        document.getElementById('qCatSelect').addEventListener('change', function() { populateQSubjectSelect(this.value); });
+
+        document.getElementById('diffSubjectSelect').addEventListener('change', function() { renderDifficulties(); });
+        document.getElementById('paperSubjectSelect').addEventListener('change', function() { populatePaperDiffSelect(document.getElementById('paperCatSelect').value, this.value); });
+        document.getElementById('qSubjectSelect').addEventListener('change', function() { populateQDiffSelect(document.getElementById('qCatSelect').value, this.value); });
+
+        document.getElementById('paperDiffSelect').addEventListener('change', function() { renderPapers(); });
+        document.getElementById('qDiffSelect').addEventListener('change', function() { populateQPaperSelect(document.getElementById('qCatSelect').value, document.getElementById('qSubjectSelect').value, parseInt(this.value)); });
+        document.getElementById('qPaperSelect').addEventListener('change', function() { renderQuestions(); });
+
+        // ===== 🆕 关键修复：手动触发一次填充，让下拉框立即显示数据 =====
+        const diffCat = document.getElementById('diffCatSelect');
+        if (diffCat.value) {
+          populateDiffSubjectSelect(diffCat.value);
+        }
+
+        const paperCat = document.getElementById('paperCatSelect');
+        if (paperCat.value) {
+          populatePaperSubjectSelect(paperCat.value);
+          const paperSubj = document.getElementById('paperSubjectSelect');
+          if (paperSubj.value) {
+            populatePaperDiffSelect(paperCat.value, paperSubj.value);
+          }
+        }
+
+        const qCat = document.getElementById('qCatSelect');
+        if (qCat.value) {
+          populateQSubjectSelect(qCat.value);
+          const qSubj = document.getElementById('qSubjectSelect');
+          if (qSubj.value) {
+            populateQDiffSelect(qCat.value, qSubj.value);
+            const qDiff = document.getElementById('qDiffSelect');
+            if (qDiff.value) {
+              populateQPaperSelect(qCat.value, qSubj.value, parseInt(qDiff.value));
+            }
+          }
+        }
+
+        // 刷新当前 Tab 的列表
+        const activeTab = document.querySelector('.tab-btn.active');
+        if (activeTab) {
+          const tabId = activeTab.dataset.tab;
+          if (tabId === 'subjects') renderSubjects();
+          else if (tabId === 'difficulties') renderDifficulties();
+          else if (tabId === 'papers') renderPapers();
+          else if (tabId === 'questions') renderQuestions();
+        }
+      }
+
+      // ================================================================
+      //  科目填充函数
+      // ================================================================
+      function populateDiffSubjectSelect(catId) {
+        const sel = document.getElementById('diffSubjectSelect');
+        sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
+        if (!catId) return;
+        const cat = getCategory(catId);
+        if (!cat) return;
+        cat.subjects.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = s.labelZh + ' (' + s.id + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function populatePaperSubjectSelect(catId) {
+        const sel = document.getElementById('paperSubjectSelect');
+        sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
+        if (!catId) return;
+        const cat = getCategory(catId);
+        if (!cat) return;
+        cat.subjects.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = s.labelZh + ' (' + s.id + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function populatePaperDiffSelect(catId, subjectId) {
+        const sel = document.getElementById('paperDiffSelect');
+        sel.innerHTML = '<option value="">-- 请先选科目 --</option>';
+        if (!catId || !subjectId) return;
+        const subj = getSubject(catId, subjectId);
+        if (!subj) return;
+        subj.difficulties.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.level;
+          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function populateQSubjectSelect(catId) {
+        const sel = document.getElementById('qSubjectSelect');
+        sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
+        if (!catId) return;
+        const cat = getCategory(catId);
+        if (!cat) return;
+        cat.subjects.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = s.labelZh + ' (' + s.id + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function populateQDiffSelect(catId, subjectId) {
+        const sel = document.getElementById('qDiffSelect');
+        sel.innerHTML = '<option value="">-- 请先选科目 --</option>';
+        if (!catId || !subjectId) return;
+        const subj = getSubject(catId, subjectId);
+        if (!subj) return;
+        subj.difficulties.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.level;
+          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
+          sel.appendChild(opt);
+        });
+      }
+
+      function populateQPaperSelect(catId, subjectId, level) {
+        const sel = document.getElementById('qPaperSelect');
+        sel.innerHTML = '<option value="">-- 请先选难度 --</option>';
+        if (!catId || !subjectId || isNaN(level)) return;
+        const diff = getDifficulty(catId, subjectId, level);
+        if (!diff) return;
+        diff.papers.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          opt.textContent = p.titleZh + ' (ID: ' + p.id + ')';
+          sel.appendChild(opt);
+        });
       }
 
       function initAdmin() {
