@@ -25,11 +25,11 @@
             z-index: 0;
             overflow: hidden;
             background: #1a1a2e;
-            opacity: 0;                     /* 初始透明，加载后淡入 */
-            transition: opacity 1.5s ease;  /* 平滑过渡 */
+            opacity: 0;
+            transition: opacity 1.5s ease;
         }
         .bg-video-wrapper.loaded {
-            opacity: 1;                     /* 视频加载完成后不透明 */
+            opacity: 1;
         }
 
         .bg-video-wrapper iframe {
@@ -45,7 +45,6 @@
             border: none;
         }
 
-        /* 加载文字提示 */
         .bg-video-wrapper .loading-text {
             position: absolute;
             bottom: 40px;
@@ -527,7 +526,8 @@
         <div class="immersive-container">
 
             <div class="top-bar">
-                <div class="page-title">🌙 沉浸式<span>工坊</span></div>
+                <!-- 修改：使用 data-i18n-html 让标题支持 HTML 标签 -->
+                <div class="page-title" data-i18n-html="immersive.title">🌙 沉浸式<span>工坊</span></div>
                 <!-- ===== 音乐播放器（纯音乐，用户控制） ===== -->
                 <div class="music-player" id="musicPlayer">
                     <span class="icon">🏮</span>
@@ -583,28 +583,22 @@
                 if (shown) return;
                 shown = true;
                 wrapper.classList.add('loaded');
-                // 隐藏加载文字
                 if (loadingText) {
                     loadingText.classList.add('hidden');
-                    // 完全移除
                     setTimeout(() => { loadingText.style.display = 'none'; }, 800);
                 }
             }
 
-            // 1. 监听 iframe 的 load 事件（部分浏览器会触发）
             if (iframe) {
                 iframe.addEventListener('load', showVideo);
             }
 
-            // 2. 超时强制显示（3 秒后无论是否加载完成都显示背景，解决加载慢或事件未触发问题）
             setTimeout(showVideo, 3000);
 
-            // 3. 用户点击页面任何位置时立即显示（增加交互响应）
             document.addEventListener('click', function() {
                 showVideo();
             }, { once: true });
 
-            // 4. 页面完全加载后若仍未显示，再强制一次（兜底）
             window.addEventListener('load', function() {
                 setTimeout(showVideo, 200);
             });
@@ -707,21 +701,29 @@
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
 
+        // ===== 新增：获取 i18n 翻译的辅助函数 =====
+        function getTypeLabel(type) {
+            if (type === 'video') return i18n.t('immersive.type_video');
+            if (type === 'music') return i18n.t('immersive.type_music');
+            return i18n.t('immersive.type_text');
+        }
+
         function renderList() {
             if (!READ_DATA || READ_DATA.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state">
                         <div class="icon">🍃</div>
-                        <p>暂无沉浸式内容，请在后台添加</p>
+                        <p data-i18n="immersive.empty">暂无沉浸式内容，请在后台添加</p>
                     </div>
                 `;
+                applyI18n();
                 return;
             }
 
             let html = '';
             READ_DATA.forEach((item, idx) => {
                 const typeIcon = item.type === 'video' ? '🎬' : item.type === 'music' ? '🎵' : '📝';
-                const typeLabel = item.type === 'video' ? '视频' : item.type === 'music' ? '音乐' : '文本';
+                const typeLabel = getTypeLabel(item.type); // 翻译后的类型名称
                 const preview = item.preview || (item.content ? item.content.substring(0, 60) + '...' : '');
 
                 html += `
@@ -743,6 +745,9 @@
                     openReader(idx);
                 });
             });
+
+            // 应用 i18n 到空状态（如果有）
+            applyI18n();
         }
 
         function openReader(idx) {
@@ -769,7 +774,7 @@
                             loading="lazy"
                     ></iframe>
                     <div style="text-align:center;color:rgba(232,224,216,0.3);font-size:12px;margin-top:8px;letter-spacing:0.5px;">
-                        ${item.type === 'video' ? '🎬 视频内容' : '🎵 音乐播放中'}
+                        ${item.type === 'video' ? '🎬 ' + i18n.t('immersive.type_video') : '🎵 ' + i18n.t('immersive.type_music')}
                     </div>
                 `;
                 readerBody.innerHTML = '';
@@ -816,6 +821,13 @@
             if (e.key === 'Escape') { closeReader(); return; }
             if (e.key === 'ArrowLeft') { if (currentIndex > 0) openReader(currentIndex - 1); }
             if (e.key === 'ArrowRight') { if (currentIndex < READ_DATA.length - 1) openReader(currentIndex + 1); }
+        });
+
+        // 监听语言变化，重新渲染列表（更新类型标签）
+        document.addEventListener('languageChanged', function() {
+            if (READ_DATA.length > 0) {
+                renderList();
+            }
         });
 
         function loadImmersiveData() {
