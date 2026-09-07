@@ -14,7 +14,7 @@ const i18n = {
     en: {
       // -------- 导航 --------
       'nav.home': 'Home',
-      'nav.quiz': 'Language Quiz',
+      'nav.quiz': 'Academy',
       'nav.game': 'Games',
       'nav.story': 'Story Workshop',
       'nav.immersive': '🌙 Immersive Studio',
@@ -22,11 +22,11 @@ const i18n = {
       // -------- 首页 --------
       'index.eyebrow': 'Learn + Play',
       'index.title': 'Turn learning into a fun adventure',
-      'index.desc': 'At Montainment, you can take language quizzes, play games, or let the story workshop provide you with a unique story.',
+      'index.desc': 'At Montainment, you can take quizzes, play games, or let the story workshop provide you with a unique story.',
       'index.quiz_btn': 'Start Quiz',
       'index.game_btn': 'Play a Game',
-      'index.feature_quiz_title': 'Language Learning Quiz',
-      'index.feature_quiz_desc': 'Word matching + multiple choice, learn vocabulary while playing with instant feedback.',
+      'index.feature_quiz_title': 'Study & Test',
+      'index.feature_quiz_desc': 'Curated quizzes with instant feedback, making learning efficient and fun.',
       'index.feature_game_title': 'Games',
       'index.feature_game_desc': 'Games paired with learning, deepening your memory.',
       'index.feature_story_title': 'Story Workshop',
@@ -36,19 +36,19 @@ const i18n = {
       'index.feature_story_link': 'Start Searching →',
 
       // -------- 测验页 --------
-      'quiz.badge': 'Language Quiz',
-      'quiz.title': '🌍 Select Language · Start Challenge',
-      'quiz.desc': 'First select the language to learn, then the difficulty, and finally pick a paper.',
+      'quiz.badge': 'Academy',
+      'quiz.title': '🌍 Select Subject · Start Challenge',
+      'quiz.desc': 'First select the subject you want to learn, then the difficulty, and finally a paper.',
       'quiz.score': 'Score:',
       'quiz.next_btn': 'Next →',
-      'quiz.select_language': '🌍 Select Language',
-      'quiz.select_language_prompt': 'Which language do you want to learn?',
+      'quiz.select_language': '🌍 Select Subject',
+      'quiz.select_language_prompt': 'Which subject do you want to learn?',
       'quiz.select_difficulty': 'Select Difficulty',
       'quiz.select_difficulty_prompt': 'Choose your level',
       'quiz.select_paper': 'Select Paper',
       'quiz.select_paper_prompt': 'Please select a paper',
       'quiz.coming_soon': 'Coming soon',
-      'quiz.back_to_lang': 'Back to languages',
+      'quiz.back_to_lang': 'Back to subjects',
       'quiz.back_to_diff': 'Back to difficulty',
       'quiz.back_to_papers': 'Back to papers',
       'quiz.finish_paper': 'Finish Paper',
@@ -62,8 +62,8 @@ const i18n = {
       'quiz.result_practice': '📖 Practice more, you\'ll get better!',
       'quiz.retry': 'Retry this paper',
       'quiz.back_to_papers_result': 'Back to papers',
-      'quiz.no_data': 'No language data',
-      'quiz.no_data_prompt': 'Please add languages in the admin panel and export JSON.',
+      'quiz.no_data': 'No subject data',
+      'quiz.no_data_prompt': 'Please add subjects in the admin panel and export JSON.',
       'quiz.loading_failed': 'Data loading failed',
       'quiz.loading_failed_prompt': 'Please ensure data/papers.json exists and is properly formatted.',
 
@@ -150,7 +150,7 @@ const i18n = {
     zh: {
       // -------- 导航 --------
       'nav.home': '首页',
-      'nav.quiz': '语言测验',
+      'nav.quiz': '学堂',
       'nav.game': '游戏',
       'nav.story': '故事工坊',
       'nav.immersive': '🌙 沉浸式工坊',
@@ -158,11 +158,11 @@ const i18n = {
       // -------- 首页 --------
       'index.eyebrow': '学习 + 娱乐，两不耽误',
       'index.title': '把学习变成一场好玩的探险',
-      'index.desc': '在 Montainment，你可以做语言小测验、玩游戏，或者让故事工坊提供你专属故事。',
+      'index.desc': '在 Montainment，你可以做小测验、玩游戏，或者让故事工坊提供你专属故事。',
       'index.quiz_btn': '开始测验',
       'index.game_btn': '玩个游戏',
-      'index.feature_quiz_title': '语言学习测验',
-      'index.feature_quiz_desc': '单词配对 + 选择题，边玩边巩固词汇量，答对还有即时反馈。',
+      'index.feature_quiz_title': '修业与测试',
+      'index.feature_quiz_desc': '寓教于乐的精选测试，即答即反馈，轻松高效巩固。',
       'index.feature_game_title': '游戏',
       'index.feature_game_desc': '游戏搭配学习，深刻你的记忆。',
       'index.feature_story_title': '故事工坊',
@@ -172,19 +172,19 @@ const i18n = {
       'index.feature_story_link': '开始搜索 →',
 
       // -------- 测验页 --------
-      'quiz.badge': '语言测验',
-      'quiz.title': '🌍 选择语言 · 开始挑战',
-      'quiz.desc': '先选择要学习的语言，再选择难度，最后挑选试卷。',
+      'quiz.badge': '学堂',
+      'quiz.title': '🌍 选择学科 · 开始挑战',
+      'quiz.desc': '先选择要学习的学科，再选择难度，最后挑选试卷。',
       'quiz.score': '得分：',
       'quiz.next_btn': '下一题 →',
-      'quiz.select_language': '🌍 选择语言',
-      'quiz.select_language_prompt': '你想学习哪种语言？',
+      'quiz.select_language': '🌍 选择学科',
+      'quiz.select_language_prompt': '你想学习哪种学科？',
       'quiz.select_difficulty': '选择难度',
       'quiz.select_difficulty_prompt': '选择难度等级',
       'quiz.select_paper': '选择试卷',
       'quiz.select_paper_prompt': '请选择一份试卷',
       'quiz.coming_soon': '即将上线',
-      'quiz.back_to_lang': '返回选语言',
+      'quiz.back_to_lang': '返回选学科',
       'quiz.back_to_diff': '返回选难度',
       'quiz.back_to_papers': '返回试卷列表',
       'quiz.finish_paper': '完成试卷',
@@ -198,8 +198,8 @@ const i18n = {
       'quiz.result_practice': '📖 再练练，你一定能更好！',
       'quiz.retry': '重做此卷',
       'quiz.back_to_papers_result': '返回试卷列表',
-      'quiz.no_data': '暂无语言数据',
-      'quiz.no_data_prompt': '请在后台添加语言并导出 JSON。',
+      'quiz.no_data': '暂无学科数据',
+      'quiz.no_data_prompt': '请在后台添加学科并导出 JSON。',
       'quiz.loading_failed': '数据加载失败',
       'quiz.loading_failed_prompt': '请确保 data/papers.json 文件存在且格式正确。',
 
@@ -301,7 +301,7 @@ const i18n = {
     if (saved && this.messages[saved]) {
       this.currentLang = saved;
     } else {
-      this.currentLang = 'en'; // 默认英文
+      this.currentLang = 'en';
     }
     document.documentElement.lang = this.currentLang;
   }
