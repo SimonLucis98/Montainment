@@ -1,13 +1,13 @@
-/* 贪吃蛇 · 即开即玩，适配任意容器 */
+/* Snake · Classic (English + Tutorial) */
 (function () {
   'use strict';
 
   const gameHTML = `<!doctype html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>贪吃蛇 · 经典</title>
+  <title>Snake · Classic</title>
   <style>
     * { box-sizing: border-box; user-select: none; }
     body {
@@ -25,6 +25,7 @@
       border-radius: 3rem;
       box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.06);
       text-align: center;
+      position: relative;
     }
     canvas {
       display: block;
@@ -96,35 +97,131 @@
       font-size: 0.9rem;
       letter-spacing: 0.5px;
     }
+    /* Overlay (start / tutorial) */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 28, 30, 0.85);
+      backdrop-filter: blur(4px);
+      border-radius: 3rem;
+      display: grid;
+      place-items: center;
+      z-index: 20;
+      padding: 20px;
+    }
+    .overlay.hidden { display: none; }
+    .start-card {
+      background: #f5f3e8;
+      border-radius: 2rem;
+      padding: 2rem 3rem;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      text-align: center;
+      color: #1f2e35;
+    }
+    .start-card h1 {
+      font-size: 2.8rem;
+      margin: 0 0 0.2rem;
+      letter-spacing: -1px;
+      color: #2d4a3e;
+    }
+    .start-card h1 small {
+      display: block;
+      font-size: 1rem;
+      color: #6f8b7a;
+      letter-spacing: 2px;
+      margin-top: 0.2rem;
+    }
+    .start-card .rules {
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 1.2rem 0;
+      color: #3a4f45;
+    }
+    .start-card .rules span {
+      display: inline-block;
+      background: #dbe8d0;
+      padding: 0.1rem 0.6rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      color: #1d3a2a;
+    }
+    .btn-play {
+      background: #d68a5c;
+      border: none;
+      padding: 0.7rem 2.5rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #1f1a16;
+      box-shadow: 0 6px 0 #8f5e3d, 0 8px 16px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .btn-play:hover { transform: translateY(-2px); }
+    .btn-play:active { transform: translateY(4px); box-shadow: 0 2px 0 #8f5e3d; }
+    .key-hint {
+      display: inline-block;
+      background: #2e424b;
+      color: #e3f0e8;
+      padding: 0.1rem 0.6rem;
+      border-radius: 0.3rem;
+      font-family: monospace;
+      font-weight: 700;
+    }
     @media (max-width: 480px) {
       .game-wrapper { padding: 1rem; border-radius: 2rem; }
       canvas { width: 300px; height: 300px; }
       .score-box { font-size: 1rem; padding: 0.3rem 0.8rem; }
       .btn { font-size: 0.8rem; padding: 0.3rem 1rem; }
+      .start-card { padding: 1.5rem; }
+      .start-card h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
-<div class="game-wrapper">
+<div class="game-wrapper" id="gameWrapper">
   <canvas id="gameCanvas" width="400" height="400"></canvas>
   <div class="info-panel">
     <div class="score-box">🍎 <span id="scoreDisplay">0</span></div>
     <div class="btn-group">
-      <button class="btn" id="pauseBtn">⏸️ 暂停</button>
-      <button class="btn btn-restart" id="restartBtn">🔄 重来</button>
+      <button class="btn" id="pauseBtn">⏸️ Pause</button>
+      <button class="btn btn-restart" id="restartBtn">🔄 Restart</button>
     </div>
   </div>
-  <div class="hint">⬆ ⬇ ⬅ ➡  方向键 · 空格暂停</div>
+  <div class="hint">⬆ ⬇ ⬅ ➡  Arrow keys · Space to pause</div>
+
+  <!-- Overlay (Tutorial / Start) -->
+  <div class="overlay" id="overlay">
+    <div class="start-card">
+      <h1>🐍 SNAKE <small>Classic</small></h1>
+      <div class="rules">
+        <p><strong>🎯 Goal:</strong> Eat the <span>🍎</span> to grow and score.</p>
+        <p><strong>🕹️ Controls:</strong> Use <span class="key-hint">⬆ ⬇ ⬅ ➡</span> to move.<br>
+        Press <span class="key-hint">Space</span> to pause / resume.</p>
+        <p><strong>⚠️ Rules:</strong><br>
+        • Don't hit the wall or your own tail.<br>
+        • Each apple gives <strong>+1</strong> point.<br>
+        • The game speeds up a little every 5 points.</p>
+      </div>
+      <button class="btn-play" id="playBtn">▶ PLAY</button>
+    </div>
+  </div>
 </div>
+
 <script>
   (function() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     const scoreSpan = document.getElementById('scoreDisplay');
+    const overlay = document.getElementById('overlay');
+    const playBtn = document.getElementById('playBtn');
 
     const GRID_SIZE = 20;
     const CELL_SIZE = 400 / GRID_SIZE;
-    const MOVE_INTERVAL = 150;
+    let MOVE_INTERVAL = 150; // will decrease with score
 
     let snake = [[8,10],[7,10],[6,10]];
     let food = { x:6, y:10 };
@@ -135,6 +232,7 @@
     let winFlag = false;
     let paused = false;
     let gameInterval = null;
+    let gameStarted = false;
 
     function generateFood() {
       const totalCells = GRID_SIZE * GRID_SIZE;
@@ -177,7 +275,7 @@
     }
 
     function moveSnake() {
-      if (gameOver || paused) return;
+      if (gameOver || paused || !gameStarted) return;
       const opposite = { 'up':'down','down':'up','left':'right','right':'left' };
       if (nextDirection && opposite[nextDirection] !== direction) {
         direction = nextDirection;
@@ -209,6 +307,12 @@
       if (isEating) {
         score++;
         scoreSpan.textContent = score;
+        // Increase speed every 5 points (capped at 70ms)
+        if (score % 5 === 0 && MOVE_INTERVAL > 70) {
+          MOVE_INTERVAL -= 8;
+          clearInterval(gameInterval);
+          gameInterval = setInterval(moveSnake, MOVE_INTERVAL);
+        }
         generateFood();
         if (gameOver) { drawCanvas(); return; }
       }
@@ -283,7 +387,7 @@
         ctx.shadowColor = '#000';
         ctx.shadowBlur = 16;
         ctx.fillStyle = winFlag ? '#f7d44a' : '#f28b82';
-        ctx.fillText(winFlag ? '🏆 你赢了！' : '💀 游戏结束', 200, 190);
+        ctx.fillText(winFlag ? '🏆 You Win!' : '💀 Game Over', 200, 190);
         ctx.shadowBlur = 0;
       }
     }
@@ -305,9 +409,9 @@
     };
 
     function togglePause() {
-      if (gameOver) return;
+      if (gameOver || !gameStarted) return;
       paused = !paused;
-      document.getElementById('pauseBtn').textContent = paused ? '▶️ 继续' : '⏸️ 暂停';
+      document.getElementById('pauseBtn').textContent = paused ? '▶️ Resume' : '⏸️ Pause';
       drawCanvas();
       if (paused) {
         ctx.fillStyle = 'rgba(10,20,22,0.5)';
@@ -318,7 +422,7 @@
         ctx.textBaseline = 'middle';
         ctx.shadowColor = '#000';
         ctx.shadowBlur = 12;
-        ctx.fillText('⏸ 暂停中', 200, 200);
+        ctx.fillText('⏸ Paused', 200, 200);
         ctx.shadowBlur = 0;
       }
     }
@@ -335,7 +439,7 @@
         e.preventDefault();
       }
       if (key === ' ') { togglePause(); return; }
-      if (gameOver || paused) return;
+      if (gameOver || paused || !gameStarted) return;
       switch (key) {
         case 'ArrowUp':    if (direction !== 'down')  nextDirection = 'up'; break;
         case 'ArrowDown':  if (direction !== 'up')    nextDirection = 'down'; break;
@@ -352,7 +456,8 @@
       gameOver = false;
       winFlag = false;
       paused = false;
-      document.getElementById('pauseBtn').textContent = '⏸️ 暂停';
+      MOVE_INTERVAL = 150;
+      document.getElementById('pauseBtn').textContent = '⏸️ Pause';
       scoreSpan.textContent = '0';
       generateFood();
       clearInterval(gameInterval);
@@ -360,15 +465,33 @@
       drawCanvas();
     }
 
+    // Start game when PLAY is clicked
+    function startGame() {
+      overlay.classList.add('hidden');
+      gameStarted = true;
+      initGame();
+    }
+
+    playBtn.addEventListener('click', startGame);
     window.addEventListener('keydown', handleKey);
     document.getElementById('pauseBtn').addEventListener('click', togglePause);
     document.getElementById('restartBtn').addEventListener('click', restartGame);
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initGame);
-    } else {
-      initGame();
-    }
+    // Initial draw (show snake and food, but overlay covers it)
+    (function setup() {
+      snake = [[8,10],[7,10],[6,10]];
+      direction = 'right';
+      nextDirection = 'right';
+      score = 0;
+      gameOver = false;
+      winFlag = false;
+      paused = false;
+      MOVE_INTERVAL = 150;
+      scoreSpan.textContent = '0';
+      generateFood();
+      drawCanvas();
+      // Don't start interval until PLAY clicked
+    })();
   })();
 </script>
 </body>
@@ -379,9 +502,9 @@
       throw new Error('initGame requires a container element.');
     }
     const frame = document.createElement('iframe');
-    frame.title = '贪吃蛇 · 经典';
+    frame.title = 'Snake · Classic';
     frame.setAttribute('allow', 'autoplay; fullscreen');
-    frame.style.cssText = 'display:block;width:100%;height:520px;border:0;border-radius:16px;background:#1a2a2f;';
+    frame.style.cssText = 'display:block;width:100%;height:560px;border:0;border-radius:16px;background:#1a2a2f;';
     frame.srcdoc = gameHTML;
     wrapper.replaceChildren(frame);
     return frame;
