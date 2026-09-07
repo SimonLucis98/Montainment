@@ -2285,19 +2285,12 @@
       // ================================================================
       function updateJsonEditor() {
         const fullData = {
-          languages: data.languages,   // ⚠️ 注意：此句已废弃，我们改为 categories
-          stories: storiesData.stories,
-          games: gamesData.games,
-          immersive: immersiveData.items
-        };
-        // 改成 categories
-        const fullDataNew = {
           categories: data.categories,
           stories: storiesData.stories,
           games: gamesData.games,
           immersive: immersiveData.items
         };
-        document.getElementById('jsonEditor').value = JSON.stringify(fullDataNew, null, 2);
+        document.getElementById('jsonEditor').value = JSON.stringify(fullData, null, 2);
       }
 
       document.getElementById('jsonApplyBtn').addEventListener('click', function() {
