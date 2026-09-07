@@ -86,9 +86,14 @@
       const wrapper = document.getElementById('gameWrapper');
       const titleDisplay = document.getElementById('gameTitleDisplay');
       const pageTitle = document.getElementById('pageTitle');
+      const pageDesc = document.getElementById('pageDesc');
 
       const params = new URLSearchParams(window.location.search);
       const gameId = params.get('game');
+
+      function getLang() {
+        return window.i18n ? i18n.currentLang : 'en';
+      }
 
       if (!gameId) {
         wrapper.innerHTML = `
@@ -121,9 +126,14 @@
             throw new Error('该游戏已下架');
           }
 
-          titleDisplay.textContent = game.icon + ' ' + game.titleZh;
-          document.title = game.titleZh + ' · Montainment';
-          document.getElementById('pageDesc').content = game.descriptionZh || '';
+          // ===== 多语言标题 =====
+          const lang = getLang();
+          const displayTitle = (lang === 'zh' ? game.titleZh : game.titleEn) || game.titleZh;
+          const desc = (lang === 'zh' ? game.descriptionZh : game.descriptionEn) || game.descriptionZh || '';
+
+          titleDisplay.textContent = (game.icon || '🎮') + ' ' + displayTitle;
+          document.title = displayTitle + ' · Montainment';
+          pageDesc.content = desc;
 
           loadGame(game);
         })
@@ -141,8 +151,24 @@
           applyI18n();
         });
 
+      // 语言切换时更新标题
+      document.addEventListener('languageChanged', function() {
+        if (window.currentGameData) {
+          const lang = getLang();
+          const game = window.currentGameData;
+          const displayTitle = (lang === 'zh' ? game.titleZh : game.titleEn) || game.titleZh;
+          const desc = (lang === 'zh' ? game.descriptionZh : game.descriptionEn) || game.descriptionZh || '';
+          titleDisplay.textContent = (game.icon || '🎮') + ' ' + displayTitle;
+          document.title = displayTitle + ' · Montainment';
+          pageDesc.content = desc;
+        }
+      });
+
       function loadGame(game) {
+        window.currentGameData = game; // 保存供语言切换使用
+
         if (game.type === 'js') {
+          // 原生 JS 游戏
           const script = document.createElement('script');
           script.src = game.entry + '?v=' + Date.now();
           script.onload = function() {
@@ -174,9 +200,14 @@
           document.head.appendChild(script);
 
         } else if (game.type === 'iframe') {
+          // iframe 嵌入
           wrapper.innerHTML = `
             <iframe src="${game.entry}" style="width:100%;min-height:600px;border:none;border-radius:16px;"></iframe>
           `;
+
+        } else if (game.type === 'external' || game.type === 'redirect') {
+          // 外部链接直接跳转（但实际上 game.html 已经处理了，这里作为备用）
+          window.location.href = game.entry;
 
         } else {
           wrapper.innerHTML = `
