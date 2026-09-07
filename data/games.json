@@ -38,6 +38,19 @@
       "sortOrder": 3,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788799210/fphvfdbgmmhgkrffoceu.jpg"
+    },
+    {
+      "id": "4",
+      "icon": "",
+      "titleZh": "宇宙纷争",
+      "titleEn": "Galaxy Conflict",
+      "descriptionZh": "探索宇宙，掌握天文与策略知识！",
+      "descriptionEn": "Explore the universe to master astronomy and strategy!",
+      "type": "js",
+      "entry": "games/space.js",
+      "sortOrder": 4,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788801416/gg26pk5tlyzfmdhjdgmz.jpg"
     }
   ]
 }
