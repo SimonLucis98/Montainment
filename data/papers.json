@@ -1,172 +1,159 @@
 {
-  "languages": [
+  "categories": [
     {
-      "id": "JP",
-      "emoji": "JP",
-      "labelZh": "日文",
-      "labelEn": "Japanese",
-      "difficulties": [
+      "id": "lang",
+      "nameZh": "语言",
+      "nameEn": "Language",
+      "subjects": [
         {
-          "level": 0,
-          "labelZh": "零基础",
-          "labelEn": "Zero Foundation",
-          "papers": []
-        },
-        {
-          "level": 1,
-          "labelZh": "初学者",
-          "labelEn": "Beginner",
-          "papers": [
+          "id": "JP",
+          "emoji": "JP",
+          "labelZh": "日文",
+          "labelEn": "Japanese",
+          "difficulties": [
             {
-              "id": 1,
-              "titleZh": "试卷 1：平假名与基础问候",
-              "titleEn": "Paper 1: Hiragana & Basic Greetings",
-              "questions": [
+              "level": 0,
+              "labelZh": "零基础",
+              "labelEn": "Zero Foundation",
+              "papers": []
+            },
+            {
+              "level": 1,
+              "labelZh": "初学者",
+              "labelEn": "Beginner",
+              "papers": [
                 {
-                  "q": {
-                    "zh": "こんにちは”在中文里是什么意思？",
-                    "en": "What does \"こんにちは\" mean in English?"
-                  },
-                  "opts": {
-                    "zh": [
-                      "早上好",
-                      "你好",
-                      "晚安",
-                      "谢谢"
-                    ],
-                    "en": [
-                      "Good morning",
-                      "Hello",
-                      "Good night",
-                      "Thank you"
-                    ]
-                  },
-                  "ans": 1,
-                  "exp": {
-                    "zh": "こんにちは（Konnichiwa）是日语中最常用的白天问候语，意为“你好”",
-                    "en": "こんにちは (Konnichiwa) is the most common daytime greeting in Japanese, meaning \"Hello\""
-                  }
+                  "id": 1,
+                  "titleZh": "试卷 1：平假名与基础问候",
+                  "titleEn": "Paper 1: Hiragana & Basic Greetings",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "こんにちは”在中文里是什么意思？",
+                        "en": "What does \"こんにちは\" mean in English?"
+                      },
+                      "opts": {
+                        "zh": ["早上好", "你好", "晚安", "谢谢"],
+                        "en": ["Good morning", "Hello", "Good night", "Thank you"]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "こんにちは（Konnichiwa）是日语中最常用的白天问候语，意为“你好”",
+                        "en": "こんにちは (Konnichiwa) is the most common daytime greeting in Japanese, meaning \"Hello\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“さ”的正确罗马字发音是？",
+                        "en": "What is the correct Romaji pronunciation for the Hiragana \"さ\"?"
+                      },
+                      "opts": {
+                        "zh": ["sa", "shi", "su", "se"],
+                        "en": ["sa", "shi", "su", "se"]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "さ 属于 サ 行假名，读作 sa",
+                        "en": "さ belongs to the Sa-row假名 and is pronounced as \"sa\""
+                      }
+                    }
+                  ]
                 },
                 {
-                  "q": {
-                    "zh": "平假名“さ”的正确罗马字发音是？",
-                    "en": "What is the correct Romaji pronunciation for the Hiragana \"さ\"?"
-                  },
-                  "opts": {
-                    "zh": [
-                      "sa",
-                      "shi",
-                      "su",
-                      "se"
-                    ],
-                    "en": [
-                      "sa",
-                      "shi",
-                      "su",
-                      "se"
-                    ]
-                  },
-                  "ans": 0,
-                  "exp": {
-                    "zh": "さ 属于 サ 行假名，读作 sa",
-                    "en": "さ belongs to the Sa-row假名 and is pronounced as \"sa\""
-                  }
+                  "id": 2,
+                  "titleZh": "试卷 2：指示代词与数字基础",
+                  "titleEn": "Paper 2: Demonstratives & Basic Numbers",
+                  "questions": []
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：基础判断句与名词助词",
+                  "titleEn": "Paper 3: Basic Sentences & Noun Particles",
+                  "questions": []
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：场所、时间与简单动词",
+                  "titleEn": "Paper 4: Locations, Time & Simple Verbs",
+                  "questions": []
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：日常活动与基础宾语",
+                  "titleEn": "Paper 5: Daily Activities & Direct Objects",
+                  "questions": []
                 }
               ]
             },
             {
-              "id": 2,
-              "titleZh": "试卷 2：指示代词与数字基础",
-              "titleEn": "Paper 2: Demonstratives & Basic Numbers",
-              "questions": []
+              "level": 2,
+              "labelZh": "高级初学者",
+              "labelEn": "Advanced Beginner",
+              "papers": []
             },
             {
-              "id": 3,
-              "titleZh": "试卷 3：基础判断句与名词助词",
-              "titleEn": "Paper 3: Basic Sentences & Noun Particles",
-              "questions": []
+              "level": 3,
+              "labelZh": "中级",
+              "labelEn": "Intermediate",
+              "papers": []
             },
             {
-              "id": 4,
-              "titleZh": "试卷 4：场所、时间与简单动词",
-              "titleEn": "Paper 4: Locations, Time & Simple Verbs",
-              "questions": []
+              "level": 4,
+              "labelZh": "高级",
+              "labelEn": "Advanced",
+              "papers": []
             },
             {
-              "id": 5,
-              "titleZh": "试卷 5：日常活动与基础宾语",
-              "titleEn": "Paper 5: Daily Activities & Direct Objects",
-              "questions": []
+              "level": 5,
+              "labelZh": "大师",
+              "labelEn": "Expert",
+              "papers": []
             }
           ]
         },
         {
-          "level": 2,
-          "labelZh": "高级初学者",
-          "labelEn": "Advanced Beginner",
-          "papers": []
+          "id": "CN",
+          "emoji": "CN",
+          "labelZh": "中文",
+          "labelEn": "Chinese",
+          "difficulties": []
         },
         {
-          "level": 3,
-          "labelZh": "中级",
-          "labelEn": "Intermediate",
-          "papers": []
+          "id": "KR",
+          "emoji": "KR",
+          "labelZh": "韩文",
+          "labelEn": "Korean",
+          "difficulties": []
         },
         {
-          "level": 4,
-          "labelZh": "高级",
-          "labelEn": "Advanced",
-          "papers": []
+          "id": "EN",
+          "emoji": "EN",
+          "labelZh": "英文",
+          "labelEn": "English",
+          "difficulties": []
         },
         {
-          "level": 5,
-          "labelZh": "大师",
-          "labelEn": "Expert",
-          "papers": []
+          "id": "TH",
+          "emoji": "TH",
+          "labelZh": "泰文",
+          "labelEn": "Thai",
+          "difficulties": []
+        },
+        {
+          "id": "SP",
+          "emoji": "SP",
+          "labelZh": "西班牙文",
+          "labelEn": "Spanish",
+          "difficulties": []
+        },
+        {
+          "id": "FR",
+          "emoji": "FR",
+          "labelZh": "法文",
+          "labelEn": "French",
+          "difficulties": []
         }
       ]
-    },
-    {
-      "id": "CN",
-      "emoji": "CN",
-      "labelZh": "中文",
-      "labelEn": "Chinese",
-      "difficulties": []
-    },
-    {
-      "id": "KR",
-      "emoji": "KR",
-      "labelZh": "韩文",
-      "labelEn": "Korean",
-      "difficulties": []
-    },
-    {
-      "id": "EN",
-      "emoji": "EN",
-      "labelZh": "英文",
-      "labelEn": "English",
-      "difficulties": []
-    },
-    {
-      "id": "TH",
-      "emoji": "TH",
-      "labelZh": "泰文",
-      "labelEn": "Thai",
-      "difficulties": []
-    },
-    {
-      "id": "SP",
-      "emoji": "SP",
-      "labelZh": "西班牙文",
-      "labelEn": "Spanish",
-      "difficulties": []
-    },
-    {
-      "id": "FR",
-      "emoji": "FR",
-      "labelZh": "法文",
-      "labelEn": "French",
-      "difficulties": []
     }
   ]
 }
