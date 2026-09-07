@@ -1,4 +1,4 @@
-/* Space Impact · Classic Shooter (Encapsulated) */
+/* Space Impact · Classic (Stable Encapsulated Version) */
 (function () {
   'use strict';
 
@@ -66,7 +66,6 @@
     .btn-restart { background: #c07a5a; color: #1a1f22; box-shadow: 0 4px 0 #7a4f3a; }
     .btn-restart:hover { background: #d68f6a; }
 
-    /* Overlay (Start / Tutorial) */
     .overlay {
       position: absolute;
       inset: 0;
@@ -164,7 +163,6 @@
     <button class="btn btn-restart" id="restartBtn">↺ Restart</button>
   </div>
 
-  <!-- Overlay (Tutorial) -->
   <div class="overlay" id="overlay">
     <div class="start-card">
       <h1>🛸 SPACE <small>IMPACT · CLASSIC</small></h1>
@@ -185,40 +183,30 @@
 
 <script>
   (function() {
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const scoreSpan = document.getElementById('scoreDisplay');
-    const livesSpan = document.getElementById('livesDisplay');
-    const waveSpan = document.getElementById('waveDisplay');
-    const overlay = document.getElementById('overlay');
-    const playBtn = document.getElementById('playBtn');
+    // --- DOM refs ---
+    var canvas = document.getElementById('gameCanvas');
+    var ctx = canvas.getContext('2d');
+    var scoreSpan = document.getElementById('scoreDisplay');
+    var livesSpan = document.getElementById('livesDisplay');
+    var waveSpan = document.getElementById('waveDisplay');
+    var overlay = document.getElementById('overlay');
+    var playBtn = document.getElementById('playBtn');
+    var restartBtn = document.getElementById('restartBtn');
 
-    const W = 500, H = 400;
+    var W = 500, H = 400;
 
-    // ----- Game State -----
-    let player, bullets, enemies, enemyBullets, stars, particles, boss;
-    let score, lives, wave, killCount, gameOver, gameStarted, paused;
-    let keys = {};
-    let animationId = null;
-    let frameCounter = 0;
-    let enemySpawnTimer = 0;
-    let bossActive = false;
-    let bossHitCount = 0;
-    const BOSS_MAX_HP = 5;
+    // --- Game state ---
+    var player, bullets, enemies, enemyBullets, stars, particles, boss;
+    var score, lives, wave, killCount, gameOver, gameStarted, paused;
+    var keys = {};
+    var animationId = null;
+    var frameCounter = 0;
+    var enemySpawnTimer = 0;
+    var bossActive = false;
+    var bossHitCount = 0;
+    var BOSS_MAX_HP = 5;
 
-    // ----- Input -----
-    document.addEventListener('keydown', e => {
-      keys[e.key] = true;
-      if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        e.preventDefault();
-      }
-      if (e.key === ' ' && gameStarted && !gameOver && !paused) {
-        shoot();
-      }
-    });
-    document.addEventListener('keyup', e => { keys[e.key] = false; });
-
-    // ----- Helpers -----
+    // --- Helpers ---
     function rand(min, max) { return Math.random() * (max - min) + min; }
     function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
     function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
@@ -227,7 +215,43 @@
              a.y < b.y + b.h && a.y + a.h > b.y;
     }
 
-    // ----- Initialize -----
+    // --- Polyfill roundRect (if needed) ---
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+        if (r > w/2) r = w/2;
+        if (r > h/2) r = h/2;
+        this.moveTo(x + r, y);
+        this.lineTo(x + w - r, y);
+        this.quadraticCurveTo(x + w, y, x + w, y + r);
+        this.lineTo(x + w, y + h - r);
+        this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        this.lineTo(x + r, y + h);
+        this.quadraticCurveTo(x, y + h, x, y + h - r);
+        this.lineTo(x, y + r);
+        this.quadraticCurveTo(x, y, x + r, y);
+        this.closePath();
+        return this;
+      };
+    }
+
+    // --- Particle ---
+    function spawnParticles(x, y, color, count) {
+      count = count || 15;
+      for (var i = 0; i < count; i++) {
+        var angle = rand(0, Math.PI * 2);
+        var speed = rand(1, 5);
+        particles.push({
+          x: x, y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 1,
+          size: rand(2, 5),
+          color: color,
+          life: randInt(20, 50)
+        });
+      }
+    }
+
+    // --- Initialize ---
     function initGame() {
       player = { x: 50, y: H/2 - 15, w: 30, h: 30, speed: 4, cooldown: 0, shootDelay: 10 };
       bullets = [];
@@ -249,23 +273,25 @@
       scoreSpan.textContent = '0';
       livesSpan.textContent = '3';
       waveSpan.textContent = '1';
+
       // Init stars
-      for (let i = 0; i < 120; i++) {
+      for (var i = 0; i < 120; i++) {
         stars.push({ x: rand(0, W), y: rand(0, H), size: rand(1, 3), speed: rand(0.5, 2.5) });
       }
     }
 
-    // ----- Spawning -----
+    // --- Spawning ---
     function spawnEnemy() {
-      const baseSpeed = 0.8 + wave * 0.2;
-      const type = Math.random() < 0.2 ? 'tank' : 'scout';
-      const hp = type === 'tank' ? 3 : 1;
-      const w = type === 'tank' ? 32 : 22;
-      const h = type === 'tank' ? 30 : 22;
+      var baseSpeed = 0.8 + wave * 0.2;
+      var type = Math.random() < 0.2 ? 'tank' : 'scout';
+      var hp = type === 'tank' ? 3 : 1;
+      var w = type === 'tank' ? 32 : 22;
+      var h = type === 'tank' ? 30 : 22;
       enemies.push({
         x: W + 10,
         y: rand(20, H - 20),
-        w, h,
+        w: w,
+        h: h,
         hp: hp,
         maxHp: hp,
         speed: baseSpeed * (type === 'tank' ? 0.7 : 1.2),
@@ -314,11 +340,12 @@
         y: e.y + e.h/2 - 4,
         w: 10,
         h: 8,
-        speed: 2.5 + wave * 0.2
+        speed: 2.5 + wave * 0.2,
+        angle: 0
       });
     }
 
-    // ----- Update -----
+    // --- Update ---
     function update() {
       if (gameOver || paused || !gameStarted) return;
       frameCounter++;
@@ -334,21 +361,21 @@
       player.x = Math.max(5, Math.min(W - player.w - 5, player.x));
       player.y = Math.max(5, Math.min(H - player.h - 5, player.y));
 
-      // Auto-fire if holding space (already handled by keydown)
+      // Auto-fire with space (handled by keydown)
 
       // Update bullets
-      for (let i = bullets.length - 1; i >= 0; i--) {
-        const b = bullets[i];
+      for (var i = bullets.length - 1; i >= 0; i--) {
+        var b = bullets[i];
         b.x += b.speed;
         if (b.x > W) { bullets.splice(i, 1); continue; }
+
+        var removed = false;
         // Check vs enemies
-        let removed = false;
-        for (let j = enemies.length - 1; j >= 0; j--) {
-          const e = enemies[j];
+        for (var j = enemies.length - 1; j >= 0; j--) {
+          var e = enemies[j];
           if (rectCollide(b, e)) {
             e.hp -= b.damage;
             if (e.hp <= 0) {
-              // Destroy enemy
               spawnParticles(e.x + e.w/2, e.y + e.h/2, e.color, 12);
               enemies.splice(j, 1);
               score += (e.type === 'tank' ? 3 : 1);
@@ -366,6 +393,7 @@
           }
         }
         if (removed) continue;
+
         // Check vs boss
         if (boss && rectCollide(b, boss)) {
           boss.hp -= b.damage;
@@ -376,33 +404,32 @@
             scoreSpan.textContent = score;
             boss = null;
             bossActive = false;
-            killCount = 0; // reset kill counter after boss
+            killCount = 0;
           }
           bullets.splice(i, 1);
         }
       }
 
       // Update enemies
-      const enemySpeedMult = 1 + (wave - 1) * 0.08;
-      for (let i = enemies.length - 1; i >= 0; i--) {
-        const e = enemies[i];
-        e.phase += 0.03;
-        e.x -= e.speed * enemySpeedMult;
-        e.y += Math.sin(e.phase) * 1.2;
-        e.y = Math.max(10, Math.min(H - e.h - 10, e.y));
-        e.shootTimer--;
-        if (e.shootTimer <= 0) {
-          enemyShoot(e);
-          e.shootTimer = randInt(40, 100) / (1 + wave * 0.1);
+      var enemySpeedMult = 1 + (wave - 1) * 0.08;
+      for (var i2 = enemies.length - 1; i2 >= 0; i2--) {
+        var e2 = enemies[i2];
+        e2.phase += 0.03;
+        e2.x -= e2.speed * enemySpeedMult;
+        e2.y += Math.sin(e2.phase) * 1.2;
+        e2.y = Math.max(10, Math.min(H - e2.h - 10, e2.y));
+        e2.shootTimer--;
+        if (e2.shootTimer <= 0) {
+          enemyShoot(e2);
+          e2.shootTimer = randInt(40, 100) / (1 + wave * 0.1);
         }
-        if (e.x < -e.w - 10) {
-          enemies.splice(i, 1);
+        if (e2.x < -e2.w - 10) {
+          enemies.splice(i2, 1);
           continue;
         }
-        // Collision with player
-        if (rectCollide(player, e)) {
+        if (rectCollide(player, e2)) {
           playerHit();
-          enemies.splice(i, 1);
+          enemies.splice(i2, 1);
           continue;
         }
       }
@@ -419,8 +446,8 @@
         }
         boss.shootTimer--;
         if (boss.shootTimer <= 0) {
-          // Boss fires 3-way spread
-          for (let k = -1; k <= 1; k++) {
+          // 3-way spread
+          for (var k = -1; k <= 1; k++) {
             enemyBullets.push({
               x: boss.x - 8,
               y: boss.y + boss.h/2 - 4 + k * 18,
@@ -438,42 +465,42 @@
       }
 
       // Update enemy bullets
-      for (let i = enemyBullets.length - 1; i >= 0; i--) {
-        const b = enemyBullets[i];
-        b.x -= b.speed * (1 + wave * 0.05);
-        if (b.angle) b.y += Math.sin(b.angle) * 0.5;
-        if (b.x < -20) { enemyBullets.splice(i, 1); continue; }
-        if (rectCollide(player, b)) {
+      for (var i3 = enemyBullets.length - 1; i3 >= 0; i3--) {
+        var eb = enemyBullets[i3];
+        eb.x -= eb.speed * (1 + wave * 0.05);
+        if (eb.angle) eb.y += Math.sin(eb.angle) * 0.5;
+        if (eb.x < -20) { enemyBullets.splice(i3, 1); continue; }
+        if (rectCollide(player, eb)) {
           playerHit();
-          enemyBullets.splice(i, 1);
+          enemyBullets.splice(i3, 1);
         }
       }
 
-      // Stars (scrolling)
-      for (const star of stars) {
-        star.x -= star.speed * (1 + wave * 0.05);
-        if (star.x < 0) { star.x = W; star.y = rand(0, H); }
+      // Stars
+      for (var i4 = 0; i4 < stars.length; i4++) {
+        var s = stars[i4];
+        s.x -= s.speed * (1 + wave * 0.05);
+        if (s.x < 0) { s.x = W; s.y = rand(0, H); }
       }
 
       // Particles
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
+      for (var i5 = particles.length - 1; i5 >= 0; i5--) {
+        var p = particles[i5];
         p.x += p.vx;
         p.y += p.vy;
         p.vy += 0.05;
         p.life--;
-        if (p.life <= 0) particles.splice(i, 1);
+        if (p.life <= 0) particles.splice(i5, 1);
       }
 
       // Spawn enemies
       if (!bossActive) {
-        const spawnRate = Math.max(20, 55 - wave * 3);
+        var spawnRate = Math.max(20, 55 - wave * 3);
         if (frameCounter % spawnRate === 0 && enemies.length < 8 + wave) {
           spawnEnemy();
         }
       }
 
-      // Game over check
       if (lives <= 0) {
         gameOver = true;
       }
@@ -486,36 +513,21 @@
       if (lives <= 0) {
         gameOver = true;
       } else {
-        // Blink invincibility is simplified - just reset position a bit
         player.x = 50;
         player.y = H/2 - 15;
       }
     }
 
-    function spawnParticles(x, y, color, count = 15) {
-      for (let i = 0; i < count; i++) {
-        const angle = rand(0, Math.PI * 2);
-        const speed = rand(1, 5);
-        particles.push({
-          x, y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 1,
-          size: rand(2, 5),
-          color: color,
-          life: randInt(20, 50)
-        });
-      }
-    }
-
-    // ----- Draw -----
+    // --- Draw ---
     function draw() {
       ctx.clearRect(0, 0, W, H);
 
       // Stars
-      for (const star of stars) {
-        ctx.fillStyle = `rgba(200, 230, 255, ${rand(0.3, 0.9)})`;
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        ctx.fillStyle = 'rgba(200, 230, 255, ' + (0.3 + Math.random() * 0.6) + ')';
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -536,8 +548,9 @@
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      // Bullets
-      for (const b of bullets) {
+      // Player bullets
+      for (var i2 = 0; i2 < bullets.length; i2++) {
+        var b = bullets[i2];
         ctx.fillStyle = '#88ffcc';
         ctx.shadowColor = '#88ffcc';
         ctx.shadowBlur = 12;
@@ -546,7 +559,8 @@
       ctx.shadowBlur = 0;
 
       // Enemies
-      for (const e of enemies) {
+      for (var i3 = 0; i3 < enemies.length; i3++) {
+        var e = enemies[i3];
         ctx.shadowColor = e.color;
         ctx.shadowBlur = 10;
         ctx.fillStyle = e.color;
@@ -561,7 +575,6 @@
         }
         ctx.fill();
         ctx.shadowBlur = 0;
-        // HP bar for tanks
         if (e.maxHp > 1) {
           ctx.fillStyle = '#2a3a44';
           ctx.fillRect(e.x, e.y - 6, e.w, 4);
@@ -583,7 +596,6 @@
         ctx.textAlign = 'center';
         ctx.fillText('👾', boss.x + boss.w/2, boss.y + boss.h/2 + 7);
         ctx.shadowBlur = 0;
-        // HP bar
         ctx.fillStyle = '#1a2a2f';
         ctx.fillRect(boss.x, boss.y - 14, boss.w, 8);
         ctx.fillStyle = '#ff4466';
@@ -593,17 +605,19 @@
         ctx.fillText('BOSS', boss.x + boss.w/2, boss.y - 18);
       }
 
-      // Enemy Bullets
-      for (const b of enemyBullets) {
+      // Enemy bullets
+      for (var i4 = 0; i4 < enemyBullets.length; i4++) {
+        var eb = enemyBullets[i4];
         ctx.fillStyle = '#ff6644';
         ctx.shadowColor = '#ff6644';
         ctx.shadowBlur = 10;
-        ctx.fillRect(b.x, b.y, b.w, b.h);
+        ctx.fillRect(eb.x, eb.y, eb.w, eb.h);
       }
       ctx.shadowBlur = 0;
 
       // Particles
-      for (const p of particles) {
+      for (var i5 = 0; i5 < particles.length; i5++) {
+        var p = particles[i5];
         ctx.globalAlpha = p.life / 50;
         ctx.fillStyle = p.color;
         ctx.fillRect(p.x - p.size/2, p.y - p.size/2, p.size, p.size);
@@ -631,33 +645,23 @@
       ctx.shadowBlur = 0;
     }
 
-    // Extend canvas for roundRect
-    if (!CanvasRenderingContext2D.prototype.roundRect) {
-      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
-        if (r > w/2) r = w/2;
-        if (r > h/2) r = h/2;
-        this.moveTo(x + r, y);
-        this.lineTo(x + w - r, y);
-        this.quadraticCurveTo(x + w, y, x + w, y + r);
-        this.lineTo(x + w, y + h - r);
-        this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        this.lineTo(x + r, y + h);
-        this.quadraticCurveTo(x, y + h, x, y + h - r);
-        this.lineTo(x, y + r);
-        this.quadraticCurveTo(x, y, x + r, y);
-        this.closePath();
-        return this;
-      };
-    }
-
-    // ----- Game Loop -----
+    // --- Game Loop ---
     function gameLoop() {
-      update();
-      draw();
-      animationId = requestAnimationFrame(gameLoop);
+      try {
+        update();
+        draw();
+        animationId = requestAnimationFrame(gameLoop);
+      } catch (err) {
+        // If any error occurs, display it on canvas
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = '#ff4444';
+        ctx.font = '16px monospace';
+        ctx.fillText('ERROR: ' + err.message, 20, 40);
+        console.error(err);
+      }
     }
 
-    // ----- Start / Restart -----
+    // --- Start / Restart ---
     function startGame() {
       overlay.classList.add('hidden');
       if (animationId) cancelAnimationFrame(animationId);
@@ -668,25 +672,36 @@
 
     function restartGame() {
       if (animationId) cancelAnimationFrame(animationId);
-      initGame();
       if (!gameStarted) {
+        // If game not started, just reset state and show overlay
+        initGame();
         overlay.classList.remove('hidden');
         return;
       }
+      initGame();
       gameLoop();
     }
 
-    // ----- Event Bindings -----
+    // --- Event binding ---
+    document.addEventListener('keydown', function(e) {
+      keys[e.key] = true;
+      if (e.key === ' ' || e.key.startsWith('Arrow')) {
+        e.preventDefault();
+      }
+      if (e.key === ' ' && gameStarted && !gameOver && !paused) {
+        shoot();
+      }
+    });
+    document.addEventListener('keyup', function(e) {
+      keys[e.key] = false;
+    });
+
     playBtn.addEventListener('click', startGame);
-    document.getElementById('restartBtn').addEventListener('click', restartGame);
+    restartBtn.addEventListener('click', restartGame);
 
-    // Initial setup (draw empty space with stars)
+    // --- Initial setup ---
     initGame();
-    draw();
-
-    // Expose restart for iframe context
-    window.restartGame = restartGame;
-
+    draw(); // draw initial background
   })();
 </script>
 </body>
@@ -696,7 +711,7 @@
     if (!wrapper || typeof wrapper.replaceChildren !== 'function') {
       throw new Error('initGame requires a container element.');
     }
-    const frame = document.createElement('iframe');
+    var frame = document.createElement('iframe');
     frame.title = 'Space Impact · Classic';
     frame.setAttribute('allow', 'autoplay; fullscreen');
     frame.style.cssText = 'display:block;width:100%;height:520px;border:0;border-radius:16px;background:#0a0f14;';
