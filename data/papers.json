@@ -29,7 +29,7 @@
                   "questions": [
                     {
                       "q": {
-                        "zh": "こんにちは”在中文里是什么意思？",
+                        "zh": "“こんにちは”在中文里是什么意思？",
                         "en": "What does \"こんにちは\" mean in English?"
                       },
                       "opts": {
@@ -75,6 +75,206 @@
                       "exp": {
                         "zh": "さ 属于 サ 行假名，读作 sa",
                         "en": "さ belongs to the Sa-row假名 and is pronounced as \"sa\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“ありがとう”的意思是？",
+                        "en": "What is the meaning of \"ありがとう\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "对不起",
+                          "没关系",
+                          "谢谢",
+                          "再见"
+                        ],
+                        "en": [
+                          "I'm sorry",
+                          "You're welcome",
+                          "Thank you",
+                          "Goodbye"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ありがとう（Arigatou）是表达感谢的常用语，意为“谢谢”",
+                        "en": "ありがとう (Arigatou) is a common expression used to say \"Thank you\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“すみません”通常在什么场合使用？",
+                        "en": "When is \"すみません\" typically used?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "向人打招呼或道歉（不好意思/对不起）",
+                          "睡觉前说晚安",
+                          "吃饭前表达感谢",
+                          "道别时说再见"
+                        ],
+                        "en": [
+                          "To get someone's attention or apologize (Excuse me / I'm sorry)",
+                          "Before going to bed (Good night)",
+                          "Before eating a meal",
+                          "When saying goodbye"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "すみません（Sumimasen）用于引起他人注意（不好意思）或表示轻微道歉（对不起）",
+                        "en": "すみません (Sumimasen) is used to get attention (\"Excuse me\") or express a mild apology (\"I'm sorry\")"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ねこ”对应的中文法含义是？",
+                        "en": "What does the Hiragana \"ねこ\" refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "狗",
+                          "猫",
+                          "鸟",
+                          "鱼"
+                        ],
+                        "en": [
+                          "Dog",
+                          "Cat",
+                          "Bird",
+                          "Fish"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ねこ（Neko）在日语中写作汉字“猫”，意为猫",
+                        "en": "ねこ (Neko) is written as \"猫\" in Kanji, which means \"Cat\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名“カメラ”表示什么？",
+                        "en": "What does the Katakana \"カメラ\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "电视",
+                          "电脑",
+                          "相机",
+                          "手机"
+                        ],
+                        "en": [
+                          "Television",
+                          "Computer",
+                          "Camera",
+                          "Mobile phone"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "カメラ（Kamera）来自外来语 Camera，意为相机",
+                        "en": "カメラ (Kamera) comes from the English loanword \"Camera\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表达“我开动了（吃饭前说）”的日语是？",
+                        "en": "Which phrase is used before eating a meal (\"Bon appétit\")?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ごちそうさまでした",
+                          "いただきます",
+                          "いってきます",
+                          "ただいま"
+                        ],
+                        "en": [
+                          "ごちそうさまでした",
+                          "いただきます",
+                          "いってきます",
+                          "ただいま"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "いただきます（Itadakimasu）是日式饮食文化中用餐前说的礼貌用语",
+                        "en": "いただきます (Itadakimasu) is a polite expression said before eating in Japanese culture"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“さようなら”的意思是？",
+                        "en": "What does \"さようなら\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "欢迎光临",
+                          "再见",
+                          "早上好",
+                          "请多指教"
+                        ],
+                        "en": [
+                          "Welcome",
+                          "Goodbye",
+                          "Good morning",
+                          "Nice to meet you"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "さようなら（Sayounara）表示告别，即“再见”",
+                        "en": "さようなら (Sayounara) means \"Goodbye\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“いぬ”指的是哪种动物？",
+                        "en": "What animal does the Hiragana \"いぬ\" refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "猫",
+                          "兔子",
+                          "狗",
+                          "熊"
+                        ],
+                        "en": [
+                          "Cat",
+                          "Rabbit",
+                          "Dog",
+                          "Bear"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "いぬ（Inu）汉字写作“犬”，即“狗”",
+                        "en": "いぬ (Inu) is written as \"犬\" in Kanji, which means \"Dog\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“おはようございます”适用于哪个时间段？",
+                        "en": "When is \"おはようございます\" used?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "早晨",
+                          "中午",
+                          "晚上",
+                          "睡前"
+                        ],
+                        "en": [
+                          "Morning",
+                          "Afternoon",
+                          "Evening",
+                          "Before sleeping"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "おはようございます（Ohayou gozaimasu）是早晨使用的礼貌问候语",
+                        "en": "おはようございます (Ohayou gozaimasu) is a polite morning greeting (\"Good morning\")"
                       }
                     }
                   ]
