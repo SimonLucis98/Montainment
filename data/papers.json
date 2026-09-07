@@ -379,7 +379,29 @@
       "id": "kd",
       "nameZh": "儿童",
       "nameEn": "Kids",
-      "subjects": []
+      "subjects": [
+        {
+          "id": "en",
+          "emoji": "EN",
+          "labelZh": "英文",
+          "labelEn": "English",
+          "difficulties": []
+        },
+        {
+          "id": "mth",
+          "emoji": "MTH",
+          "labelZh": "数学",
+          "labelEn": "Maths",
+          "difficulties": []
+        },
+        {
+          "id": "cn",
+          "emoji": "CN",
+          "labelZh": "中文",
+          "labelEn": "Chinese",
+          "difficulties": []
+        }
+      ]
     },
     {
       "id": "tng",
