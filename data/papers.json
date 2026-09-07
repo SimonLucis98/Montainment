@@ -33,8 +33,18 @@
                         "en": "What does \"こんにちは\" mean in English?"
                       },
                       "opts": {
-                        "zh": ["早上好", "你好", "晚安", "谢谢"],
-                        "en": ["Good morning", "Hello", "Good night", "Thank you"]
+                        "zh": [
+                          "早上好",
+                          "你好",
+                          "晚安",
+                          "谢谢"
+                        ],
+                        "en": [
+                          "Good morning",
+                          "Hello",
+                          "Good night",
+                          "Thank you"
+                        ]
                       },
                       "ans": 1,
                       "exp": {
@@ -48,8 +58,18 @@
                         "en": "What is the correct Romaji pronunciation for the Hiragana \"さ\"?"
                       },
                       "opts": {
-                        "zh": ["sa", "shi", "su", "se"],
-                        "en": ["sa", "shi", "su", "se"]
+                        "zh": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "se"
+                        ],
+                        "en": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "se"
+                        ]
                       },
                       "ans": 0,
                       "exp": {
@@ -154,6 +174,24 @@
           "difficulties": []
         }
       ]
+    },
+    {
+      "id": "kd",
+      "nameZh": "儿童",
+      "nameEn": "Kids",
+      "subjects": []
+    },
+    {
+      "id": "tng",
+      "nameZh": "青少年",
+      "nameEn": "Teenage",
+      "subjects": []
+    },
+    {
+      "id": "lf",
+      "nameZh": "日常生活",
+      "nameEn": "Daily Life",
+      "subjects": []
     }
   ]
 }
