@@ -52,7 +52,7 @@ const i18n = {
       'quiz.select_paper': 'Select Paper',
       'quiz.select_paper_prompt': 'Please select a paper',
       'quiz.coming_soon': 'Coming soon',
-      'quiz.back_to_lang': 'Back to subjects', // 保留兼容，但不再使用
+      'quiz.back_to_lang': 'Back to subjects',
       'quiz.back_to_diff': 'Back to difficulty',
       'quiz.back_to_papers': 'Back to papers',
       'quiz.finish_paper': 'Finish Paper',
@@ -143,6 +143,13 @@ const i18n = {
       'storyread.next_chapter': 'Next Chapter',
       'storyread.back_to_top': 'Back to top',
 
+      // -------- 沉浸式工坊 --------
+      'immersive.title': '🌙 Immersive <span>Studio</span>',
+      'immersive.type_text': '📝 Text',
+      'immersive.type_video': '🎬 Video',
+      'immersive.type_music': '🎵 Music',
+      'immersive.empty': 'No immersive content yet, please add in admin',
+
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · A static website that makes learning more fun',
       'common.lang_switch': 'EN',
@@ -192,7 +199,7 @@ const i18n = {
       'quiz.select_paper': '选择试卷',
       'quiz.select_paper_prompt': '请选择一份试卷',
       'quiz.coming_soon': '即将上线',
-      'quiz.back_to_lang': '返回科目', // 保留兼容，但不再使用
+      'quiz.back_to_lang': '返回科目',
       'quiz.back_to_diff': '返回选难度',
       'quiz.back_to_papers': '返回试卷列表',
       'quiz.finish_paper': '完成试卷',
@@ -282,6 +289,13 @@ const i18n = {
       'storyread.prev_chapter': '上一章',
       'storyread.next_chapter': '下一章',
       'storyread.back_to_top': '回到顶部',
+
+      // -------- 沉浸式工坊 --------
+      'immersive.title': '🌙 沉浸式<span>工坊</span>',
+      'immersive.type_text': '📝 文本',
+      'immersive.type_video': '🎬 视频',
+      'immersive.type_music': '🎵 音乐',
+      'immersive.empty': '暂无沉浸式内容，请在后台添加',
 
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站',
