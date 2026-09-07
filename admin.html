@@ -663,7 +663,7 @@
           </div>
         </div>
 
-        <!-- ========== Tab: 游戏管理 ========== -->
+        <!-- ========== 🆕 Tab: 游戏管理（已增加 external 类型） ========== -->
         <div class="admin-panel tab-content hidden" id="tab-games">
           <h2>🎮 游戏管理 <span class="badge-count" id="gameBadge">0</span></h2>
           <form id="gameForm" class="admin-form">
@@ -680,8 +680,16 @@
               <div class="admin-form-group"><label>英文描述</label><input type="text" id="gameDescEn" placeholder="Match pairs to learn languages" /></div>
             </div>
             <div class="admin-form-row">
-              <div class="admin-form-group"><label>类型</label><select id="gameType"><option value="js">原生 JS</option><option value="iframe">iframe 嵌入</option></select></div>
-              <div class="admin-form-group"><label>入口文件</label><input type="text" id="gameEntry" placeholder="games/matching.js" required /></div>
+              <div class="admin-form-group"><label>类型</label>
+                <select id="gameType">
+                  <option value="js">原生 JS</option>
+                  <option value="iframe">iframe 嵌入</option>
+                  <option value="external">外部链接（直接跳转）</option>  <!-- 🆕 新增 -->
+                </select>
+              </div>
+              <div class="admin-form-group"><label>入口文件</label>
+                <input type="text" id="gameEntry" placeholder="games/matching.js 或 https://xxx.com" required />
+              </div>
             </div>
             <div class="admin-form-row">
               <div class="admin-form-group"><label>排序</label><input type="number" id="gameSortOrder" value="1" /></div>
