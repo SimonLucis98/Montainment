@@ -20,8 +20,8 @@
       "titleEn": "Word vs Zombie",
       "descriptionZh": "正确的词汇赋予你力量",
       "descriptionEn": "The right word empowers you",
-      "type": "external",
-      "entry": "https://yoloyu.itch.io/wordvszombie",
+      "type": "js",
+      "entry": "games/wordzombie.js",
       "sortOrder": 2,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788729319/qk9qqxkjiklgprgtucx8.png"
