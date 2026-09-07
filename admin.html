@@ -1587,8 +1587,8 @@
           const hasCover = s.cover && s.cover.trim() !== '';
           const updated = s.updatedAt ? new Date(s.updatedAt).toLocaleString('zh-CN', { hour12: false }) :
             '未知';
-          html += `
-            <div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章 · 更新: ${updated}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
+          html +=
+            `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章 · 更新: ${updated}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-edit').forEach(b => {
@@ -1733,8 +1733,8 @@
         s.chapters.forEach((ch, i) => {
           const preview = ch.content ? ch.content.substring(0, 80) + (ch.content.length > 80 ? '...' :
             '') : '';
-          html += `
-            <div class="admin-list-item"><div class="info">📖 ${ch.title} <small>${preview}</small></div><div class="actions"><button class="btn-edit" data-chapter-index="${i}">编辑</button><button class="btn-delete" data-chapter-index="${i}">删除</button></div></div>`;
+          html +=
+            `<div class="admin-list-item"><div class="info">📖 ${ch.title} <small>${preview}</small></div><div class="actions"><button class="btn-edit" data-chapter-index="${i}">编辑</button><button class="btn-delete" data-chapter-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editChapter(
@@ -2285,33 +2285,26 @@
       // ================================================================
       function updateJsonEditor() {
         const fullData = {
-          languages: data.categories?.[0]?.subjects || data.languages || [], // 兼容新旧
+          languages: data.languages,   // ⚠️ 注意：此句已废弃，我们改为 categories
+          stories: storiesData.stories,
+          games: gamesData.games,
+          immersive: immersiveData.items
+        };
+        // 改成 categories
+        const fullDataNew = {
           categories: data.categories,
           stories: storiesData.stories,
           games: gamesData.games,
           immersive: immersiveData.items
         };
-        document.getElementById('jsonEditor').value = JSON.stringify(fullData, null, 2);
+        document.getElementById('jsonEditor').value = JSON.stringify(fullDataNew, null, 2);
       }
 
       document.getElementById('jsonApplyBtn').addEventListener('click', function() {
         try {
           const raw = document.getElementById('jsonEditor').value;
           const parsed = JSON.parse(raw);
-          // 兼容：如果顶层的 categories 存在则优先，否则尝试从 languages 重建
-          if (parsed.categories) {
-            data.categories = parsed.categories;
-          } else if (parsed.languages && Array.isArray(parsed.languages)) {
-            // 旧结构转换为新结构
-            data.categories = [{
-              id: "lang",
-              nameZh: "语言",
-              nameEn: "Language",
-              subjects: parsed.languages
-            }];
-          } else {
-            data.categories = [];
-          }
+          if (parsed.categories) data.categories = parsed.categories;
           if (parsed.stories) storiesData.stories = parsed.stories;
           if (parsed.games) gamesData.games = parsed.games;
           if (parsed.immersive) immersiveData.items = parsed.immersive;
@@ -2344,8 +2337,9 @@
         });
       });
 
+      // ---------- 导出按钮（修改为 categories） ----------
       document.getElementById('jsonExportPapersBtn').addEventListener('click', function() {
-        const papersData = { languages: data.categories?.[0]?.subjects || [] };
+        const papersData = { categories: data.categories };
         document.getElementById('jsonEditor').value = JSON.stringify(papersData, null, 2);
         showToast('已导出测验数据到 JSON 编辑器', 'success');
       });
@@ -2369,24 +2363,18 @@
       });
 
       // ================================================================
-      //  加载数据
+      //  加载数据（移除了兼容层）
       // ================================================================
       function loadAllData() {
         fetch('data/papers.json')
           .then(res => { if (!res.ok) throw new Error('papers.json 不存在'); return res.json(); })
           .then(d => {
-            // 自动转换旧结构
-            if (d.languages && !d.categories) {
-              data.categories = [{
-                id: "lang",
-                nameZh: "语言",
-                nameEn: "Language",
-                subjects: d.languages
-              }];
-            } else if (d.categories) {
+            // 直接使用 categories，不再兼容 languages
+            if (d.categories) {
               data.categories = d.categories;
             } else {
               data.categories = [];
+              showToast('papers.json 中未找到 categories 字段，请检查结构', 'error');
             }
           })
           .catch(() => { data.categories = []; })
