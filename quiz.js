@@ -1,6 +1,6 @@
 /**
- * quiz.js —— 数据驱动 · 从 data/papers.json 加载语言、难度、试卷、题目
- * 流程：选择学科 → 选择难度 → 选择试卷 → 答题
+ * quiz.js —— 数据驱动 · 从 data/papers.json 加载类别 → 科目 → 难度 → 试卷 → 题目
+ * 流程：选择类别 → 选择科目 → 选择难度 → 选择试卷 → 答题
  * 界面语言可切换（中文/English）
  */
 (function() {
@@ -9,13 +9,14 @@
   // ========== 状态 ==========
   let allData = null;
   let currentLang = 'zh';
-  let selectedLanguageId = null;
+  let selectedCategoryId = null;
+  let selectedSubjectId = null;
   let selectedDifficultyLevel = null;
   let currentPaperId = null;
   let currentIndex = 0;
   let score = 0;
   let currentQuestionSolved = false;
-  let uiState = 'language';
+  let uiState = 'category'; // 'category' | 'subject' | 'difficulty' | 'paper' | 'quiz' | 'result'
 
   // ========== DOM 引用 ==========
   const quizBody = document.getElementById('quiz-body');
@@ -35,23 +36,28 @@
     return currentLang === 'zh' ? zh : en;
   }
 
-  function getLanguage(id) {
-    return allData.languages.find(l => l.id === id);
+  function getCategory(id) {
+    return allData.categories.find(c => c.id === id);
   }
 
-  function getDifficulty(langId, level) {
-    const lang = getLanguage(langId);
-    return lang ? lang.difficulties.find(d => d.level === level) : null;
+  function getSubject(catId, subjectId) {
+    const cat = getCategory(catId);
+    return cat ? cat.subjects.find(s => s.id === subjectId) : null;
   }
 
-  function getPaper(langId, level, paperId) {
-    const diff = getDifficulty(langId, level);
+  function getDifficulty(catId, subjectId, level) {
+    const subj = getSubject(catId, subjectId);
+    return subj ? subj.difficulties.find(d => d.level === level) : null;
+  }
+
+  function getPaper(catId, subjectId, level, paperId) {
+    const diff = getDifficulty(catId, subjectId, level);
     return diff ? diff.papers.find(p => p.id === paperId) : null;
   }
 
   function getCurrentPaper() {
-    if (!selectedLanguageId || selectedDifficultyLevel === null || !currentPaperId) return null;
-    return getPaper(selectedLanguageId, selectedDifficultyLevel, currentPaperId);
+    if (!selectedCategoryId || !selectedSubjectId || selectedDifficultyLevel === null || !currentPaperId) return null;
+    return getPaper(selectedCategoryId, selectedSubjectId, selectedDifficultyLevel, currentPaperId);
   }
 
   function getCurrentQuestion() {
@@ -61,16 +67,6 @@
 
   function updateScoreDisplay() {
     quizScoreLabel.textContent = score;
-  }
-
-  function getAvailableDifficulties(langId) {
-    const lang = getLanguage(langId);
-    return lang ? lang.difficulties.map(d => d.level) : [];
-  }
-
-  function getPapersFor(langId, level) {
-    const diff = getDifficulty(langId, level);
-    return diff ? diff.papers : [];
   }
 
   // ========== 反馈 ==========
@@ -94,10 +90,11 @@
     }
   }
 
-  // ========== 渲染：学科选择 ==========
-  function renderLanguageSelection() {
-    uiState = 'language';
-    selectedLanguageId = null;
+  // ========== 渲染：类别选择 ==========
+  function renderCategorySelection() {
+    uiState = 'category';
+    selectedCategoryId = null;
+    selectedSubjectId = null;
     selectedDifficultyLevel = null;
     currentPaperId = null;
     score = 0;
@@ -106,14 +103,14 @@
     quizFeedback.className = 'quiz-feedback';
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
-    quizIndexLabel.textContent = t('🌍 选择学科', '🌍 Select Subject');
+    quizIndexLabel.textContent = t('📂 选择类别', '📂 Select Category');
 
-    if (!allData || !allData.languages || allData.languages.length === 0) {
+    if (!allData || !allData.categories || allData.categories.length === 0) {
       quizBody.innerHTML = `
         <div style="padding:30px; text-align:center; color:#6b7a8f;">
           <div style="font-size:48px;">📭</div>
-          <h3>${t('暂无学科数据', 'No subject data')}</h3>
-          <p>${t('请在后台添加学科并导出 JSON。', 'Please add subjects in the admin panel and export JSON.')}</p>
+          <h3>${t('暂无类别数据', 'No category data')}</h3>
+          <p>${t('请在后台添加类别并导出 JSON。', 'Please add categories in the admin panel and export JSON.')}</p>
         </div>
       `;
       return;
@@ -121,33 +118,32 @@
 
     let html = `
       <div style="margin-bottom:16px; font-weight:500; color:#6b7a8f; font-size:15px;">
-        ${t('你想学习哪种学科？', 'Which subject do you want to learn?')}
+        ${t('选择学习类别', 'Select a learning category')}
       </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:14px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:14px;">
     `;
-
-    allData.languages.forEach(lang => {
-      const label = t(lang.labelZh, lang.labelEn);
-      const hasData = lang.difficulties && lang.difficulties.length > 0;
+    allData.categories.forEach(cat => {
+      const name = t(cat.nameZh, cat.nameEn);
+      const hasData = cat.subjects && cat.subjects.length > 0;
       const disabledStyle = hasData ? '' : 'opacity:0.5; cursor:not-allowed;';
       html += `
-        <div class="lang-card" data-lang="${lang.id}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:20px 10px; text-align:center; cursor:${hasData ? 'pointer' : 'default'}; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02); ${disabledStyle}">
-          <div style="font-size:32px; line-height:1.2;">${lang.emoji || '🌐'}</div>
-          <div style="font-weight:600; color:#0b1c33; margin-top:4px;">${label}</div>
-          <div style="font-size:12px; color:#6b7a8f;">${hasData ? lang.id.toUpperCase() : t('即将上线', 'Coming soon')}</div>
+        <div class="cat-card" data-cat="${cat.id}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:20px 10px; text-align:center; cursor:${hasData ? 'pointer' : 'default'}; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02); ${disabledStyle}">
+          <div style="font-size:28px; font-weight:700; color:#2a6df4;">📂</div>
+          <div style="font-weight:600; color:#0b1c33; margin-top:4px;">${name}</div>
+          <div style="font-size:12px; color:#6b7a8f;">${hasData ? cat.subjects.length + ' ' + t('个科目', 'subjects') : t('即将上线', 'Coming soon')}</div>
         </div>
       `;
     });
     html += `</div>`;
     quizBody.innerHTML = html;
 
-    document.querySelectorAll('.lang-card').forEach(card => {
-      const langId = card.dataset.lang;
-      const hasData = getLanguage(langId)?.difficulties?.length > 0;
+    document.querySelectorAll('.cat-card').forEach(card => {
+      const catId = card.dataset.cat;
+      const hasData = getCategory(catId)?.subjects?.length > 0;
       if (!hasData) return;
       card.addEventListener('click', function() {
-        selectedLanguageId = langId;
-        renderDifficultySelection();
+        selectedCategoryId = catId;
+        renderSubjectSelection();
       });
       card.addEventListener('mouseenter', function() {
         if (!hasData) return;
@@ -166,6 +162,78 @@
     });
   }
 
+  // ========== 渲染：科目选择 ==========
+  function renderSubjectSelection() {
+    uiState = 'subject';
+    selectedSubjectId = null;
+    selectedDifficultyLevel = null;
+    currentPaperId = null;
+    score = 0;
+    updateScoreDisplay();
+    quizFeedback.textContent = '';
+    quizFeedback.className = 'quiz-feedback';
+    nextBtn.style.display = 'none';
+    quizProgressBar.style.width = '0%';
+
+    const cat = getCategory(selectedCategoryId);
+    if (!cat) { renderCategorySelection(); return; }
+    const catName = t(cat.nameZh, cat.nameEn);
+    quizIndexLabel.textContent = `${catName} · ${t('选择科目', 'Select Subject')}`;
+
+    let html = `
+      <div style="margin-bottom:16px; font-weight:500; color:#6b7a8f; font-size:15px;">
+        ${t('选择要学习的科目', 'Select the subject to learn')}
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:14px;">
+    `;
+    cat.subjects.forEach(subj => {
+      const label = t(subj.labelZh, subj.labelEn);
+      const hasData = subj.difficulties && subj.difficulties.length > 0;
+      const disabledStyle = hasData ? '' : 'opacity:0.5; cursor:not-allowed;';
+      html += `
+        <div class="subject-card" data-subj="${subj.id}" style="background:#fafcff; border:2px solid #e6ecf3; border-radius:20px; padding:16px 10px; text-align:center; cursor:${hasData ? 'pointer' : 'default'}; transition:all 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.02); ${disabledStyle}">
+          <div style="font-size:32px; line-height:1.2;">${subj.emoji || '📚'}</div>
+          <div style="font-weight:600; color:#0b1c33; margin-top:4px;">${label}</div>
+          <div style="font-size:12px; color:#6b7a8f;">${hasData ? subj.difficulties.length + ' ' + t('个难度', 'levels') : t('即将上线', 'Coming soon')}</div>
+        </div>
+      `;
+    });
+    html += `</div>
+      <div style="margin-top:16px;">
+        <button class="btn btn-secondary" id="back-to-cat" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回类别', 'Back to categories')}</button>
+      </div>
+    `;
+    quizBody.innerHTML = html;
+
+    document.querySelectorAll('.subject-card').forEach(card => {
+      const subjId = card.dataset.subj;
+      const hasData = getSubject(selectedCategoryId, subjId)?.difficulties?.length > 0;
+      if (!hasData) return;
+      card.addEventListener('click', function() {
+        selectedSubjectId = subjId;
+        renderDifficultySelection();
+      });
+      card.addEventListener('mouseenter', function() {
+        if (!hasData) return;
+        this.style.borderColor = '#b8c9e0';
+        this.style.background = '#f2f6fd';
+        this.style.transform = 'translateY(-3px)';
+        this.style.boxShadow = '0 8px 24px rgba(0,20,40,0.08)';
+      });
+      card.addEventListener('mouseleave', function() {
+        if (!hasData) return;
+        this.style.borderColor = '#e6ecf3';
+        this.style.background = '#fafcff';
+        this.style.transform = 'none';
+        this.style.boxShadow = '0 2px 6px rgba(0,0,0,0.02)';
+      });
+    });
+
+    document.getElementById('back-to-cat').addEventListener('click', function() {
+      renderCategorySelection();
+    });
+  }
+
   // ========== 渲染：难度选择 ==========
   function renderDifficultySelection() {
     uiState = 'difficulty';
@@ -178,12 +246,14 @@
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
 
-    const langObj = getLanguage(selectedLanguageId);
-    if (!langObj) { renderLanguageSelection(); return; }
-    const langLabel = t(langObj.labelZh, langObj.labelEn);
-    quizIndexLabel.textContent = `${langLabel} · ${t('选择难度', 'Select Difficulty')}`;
+    const subj = getSubject(selectedCategoryId, selectedSubjectId);
+    if (!subj) { renderSubjectSelection(); return; }
+    const cat = getCategory(selectedCategoryId);
+    const catName = t(cat.nameZh, cat.nameEn);
+    const subjLabel = t(subj.labelZh, subj.labelEn);
+    quizIndexLabel.textContent = `${catName} · ${subjLabel} · ${t('选择难度', 'Select Difficulty')}`;
 
-    const availableDiffs = langObj.difficulties.map(d => d.level);
+    const availableDiffs = subj.difficulties.map(d => d.level);
 
     let html = `
       <div style="margin-bottom:16px; font-weight:500; color:#6b7a8f; font-size:15px;">
@@ -194,10 +264,9 @@
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:14px;">
     `;
-
     for (let level = 0; level <= 5; level++) {
       const hasData = availableDiffs.includes(level);
-      const diffObj = langObj.difficulties.find(d => d.level === level);
+      const diffObj = subj.difficulties.find(d => d.level === level);
       const label = diffObj ? t(diffObj.labelZh, diffObj.labelEn) : `${level}${t('级', '级')}`;
       const disabledStyle = hasData ? '' : 'opacity:0.5; cursor:not-allowed;';
       html += `
@@ -210,7 +279,7 @@
     }
     html += `</div>
       <div style="margin-top:16px;">
-        <button class="btn btn-secondary" id="back-to-lang" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选学科', 'Back to subjects')}</button>
+        <button class="btn btn-secondary" id="back-to-subj" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回科目', 'Back to subjects')}</button>
       </div>
     `;
     quizBody.innerHTML = html;
@@ -239,8 +308,8 @@
       });
     });
 
-    document.getElementById('back-to-lang').addEventListener('click', function() {
-      renderLanguageSelection();
+    document.getElementById('back-to-subj').addEventListener('click', function() {
+      renderSubjectSelection();
     });
   }
 
@@ -257,16 +326,17 @@
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
 
-    const langObj = getLanguage(selectedLanguageId);
-    if (!langObj) { renderLanguageSelection(); return; }
-    const diffObj = getDifficulty(selectedLanguageId, selectedDifficultyLevel);
-    if (!diffObj) { renderDifficultySelection(); return; }
+    const subj = getSubject(selectedCategoryId, selectedSubjectId);
+    if (!subj) { renderSubjectSelection(); return; }
+    const diff = getDifficulty(selectedCategoryId, selectedSubjectId, selectedDifficultyLevel);
+    if (!diff) { renderDifficultySelection(); return; }
+    const cat = getCategory(selectedCategoryId);
+    const catName = t(cat.nameZh, cat.nameEn);
+    const subjLabel = t(subj.labelZh, subj.labelEn);
+    const diffLabel = t(diff.labelZh, diff.labelEn);
+    quizIndexLabel.textContent = `${catName} · ${subjLabel} · ${diffLabel} · ${t('选择试卷', 'Select Paper')}`;
 
-    const langLabel = t(langObj.labelZh, langObj.labelEn);
-    const diffLabel = t(diffObj.labelZh, diffObj.labelEn);
-    quizIndexLabel.textContent = `${langLabel} · ${diffLabel} · ${t('选择试卷', 'Select Paper')}`;
-
-    const papers = diffObj.papers;
+    const papers = diff.papers;
     if (!papers || papers.length === 0) {
       quizBody.innerHTML = `
         <div style="padding:24px; text-align:center; color:#6b7a8f;">
@@ -301,7 +371,7 @@
     html += `</div>
       <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
         <button class="btn btn-secondary" id="back-to-diff-from-paper" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选难度', 'Back to difficulty')}</button>
-        <button class="btn btn-secondary" id="back-to-lang-from-paper" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回选学科', 'Back to subjects')}</button>
+        <button class="btn btn-secondary" id="back-to-subj-from-paper" style="display:inline-flex; align-items:center; gap:6px; padding:8px 20px; border:none; border-radius:40px; font-size:14px; font-weight:600; cursor:pointer; background:#eef2f7; color:#0b1c33;">← ${t('返回科目', 'Back to subjects')}</button>
       </div>
     `;
     quizBody.innerHTML = html;
@@ -333,12 +403,12 @@
     document.getElementById('back-to-diff-from-paper').addEventListener('click', function() {
       renderDifficultySelection();
     });
-    document.getElementById('back-to-lang-from-paper').addEventListener('click', function() {
-      renderLanguageSelection();
+    document.getElementById('back-to-subj-from-paper').addEventListener('click', function() {
+      renderSubjectSelection();
     });
   }
 
-  // ========== 渲染：题目 ==========
+  // ========== 渲染：题目（与之前相同，但使用新数据） ==========
   function renderQuestion() {
     uiState = 'quiz';
     const paper = getCurrentPaper();
@@ -360,7 +430,7 @@
     renderMultipleChoice(q);
   }
 
-  // ========== 选择题渲染 ==========
+  // ========== 选择题渲染（与之前一致，略） ==========
   function renderMultipleChoice(q) {
     const letters = ['A', 'B', 'C', 'D'];
     const questionText = t(q.q.zh, q.q.en);
@@ -454,7 +524,7 @@
     });
   }
 
-  // ========== 结果页 ==========
+  // ========== 结果页（与之前相同） ==========
   function renderResult() {
     uiState = 'result';
     const paper = getCurrentPaper();
@@ -550,12 +620,13 @@
       currentLang = lang;
       setActive(lang);
       switch (uiState) {
-        case 'language': renderLanguageSelection(); break;
+        case 'category': renderCategorySelection(); break;
+        case 'subject': renderSubjectSelection(); break;
         case 'difficulty': renderDifficultySelection(); break;
         case 'paper': renderPaperSelection(); break;
         case 'quiz': renderQuestion(); break;
         case 'result': renderResult(); break;
-        default: renderLanguageSelection();
+        default: renderCategorySelection();
       }
     });
   }
@@ -570,11 +641,11 @@
       .then(data => {
         allData = data;
         createLangToggle();
-        renderLanguageSelection();
+        renderCategorySelection();
       })
       .catch(err => {
         console.error('加载数据出错:', err);
-        allData = { languages: [] };
+        allData = { categories: [] };
         quizBody.innerHTML = `
           <div style="padding:40px; text-align:center; color:#d14c4c;">
             <div style="font-size:48px; margin-bottom:16px;">⚠️</div>
