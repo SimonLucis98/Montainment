@@ -60,7 +60,7 @@
       "descriptionZh": "做成引导，找寻你的性格",
       "descriptionEn": "Discover Your True Self",
       "type": "js",
-      "entry": "games/.mbti.js",
+      "entry": "games/mbti.js",
       "sortOrder": 5,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788803217/wnpwkbl9b64dicnyoxfr.jpg"
