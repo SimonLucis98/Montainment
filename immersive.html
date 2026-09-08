@@ -6,6 +6,7 @@
     <title>沉浸式工坊 · 蒙堂木下</title>
     <link rel="stylesheet" href="style.css" />
     <style>
+        /* ===== 原有样式保留（略作精简，但完全保留功能） ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             background: #1a1a2e;
@@ -15,7 +16,7 @@
             color: #e8e0d8;
         }
 
-        /* ===== 全屏 YouTube 视频背景（完美覆盖，无黑边，带加载过渡） ===== */
+        /* ===== 全屏 YouTube 视频背景 ===== */
         .bg-video-wrapper {
             position: fixed;
             top: 0;
@@ -28,27 +29,19 @@
             opacity: 0;
             transition: opacity 1.5s ease;
         }
-        .bg-video-wrapper.loaded {
-            opacity: 1;
-        }
-
+        .bg-video-wrapper.loaded { opacity: 1; }
         .bg-video-wrapper iframe {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 177.78vh;
-            height: 100vh;
-            min-width: 100vw;
-            min-height: 56.25vw;
+            top: 50%; left: 50%;
+            width: 177.78vh; height: 100vh;
+            min-width: 100vw; min-height: 56.25vw;
             transform: translate(-50%, -50%);
             pointer-events: none;
             border: none;
         }
-
         .bg-video-wrapper .loading-text {
             position: absolute;
-            bottom: 40px;
-            left: 50%;
+            bottom: 40px; left: 50%;
             transform: translateX(-50%);
             color: rgba(255,255,255,0.1);
             font-size: 13px;
@@ -58,141 +51,113 @@
             font-weight: 300;
             transition: opacity 0.8s ease;
         }
-        .bg-video-wrapper .loading-text.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+        .bg-video-wrapper .loading-text.hidden { opacity:0; pointer-events:none; }
 
-        /* ===== 页面内容（浮在视频上方） ===== */
+        /* ===== 页面内容 ===== */
         .immersive-container {
             position: relative;
             z-index: 1;
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px 20px 40px;
+            padding: 16px 20px 40px;
             min-height: 100vh;
         }
 
         /* ===== 导航栏 ===== */
         .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(20, 20, 30, 0.6);
+            position: sticky; top:0; z-index:100;
+            background: rgba(20,20,30,0.6);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(201, 168, 124, 0.08);
+            border-bottom: 1px solid rgba(201,168,124,0.08);
             margin-bottom: 16px;
             border-radius: 0 0 16px 16px;
         }
         .nav-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            max-width: 1100px;
-            margin: 0 auto;
-            min-height: 56px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; max-width: 1100px; margin:0 auto; min-height:56px;
         }
         .brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: "Fredoka", "Nunito", sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: #e8e0d8;
-            text-decoration: none;
-            flex-shrink: 0;
-            white-space: nowrap;
+            display:flex; align-items:center; gap:8px;
+            font-family:"Fredoka","Nunito",sans-serif; font-size:20px; font-weight:600;
+            color:#e8e0d8; text-decoration:none; flex-shrink:0; white-space:nowrap;
         }
         .brand-mark {
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #8a9b7a, #c97a6b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 16px;
+            width:32px; height:32px; border-radius:10px;
+            background:linear-gradient(135deg,#8a9b7a,#c97a6b);
+            display:flex; align-items:center; justify-content:center;
+            color:#fff; font-size:16px;
         }
         .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            flex-wrap: wrap;
-            justify-content: center;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+            display:flex; align-items:center; gap:2px; flex-wrap:wrap;
+            list-style:none; margin:0; padding:0;
         }
         .nav-links a {
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-weight: 600;
-            color: rgba(232, 224, 216, 0.6);
-            text-decoration: none;
-            transition: 0.2s;
-            font-size: 14px;
-            white-space: nowrap;
+            padding:6px 10px; border-radius:999px; font-weight:600;
+            color:rgba(232,224,216,0.6); text-decoration:none; transition:0.2s;
+            font-size:14px; white-space:nowrap;
         }
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: rgba(201, 168, 124, 0.12);
-            color: #e8e0d8;
+        .nav-links a:hover, .nav-links a.active {
+            background:rgba(201,168,124,0.12); color:#e8e0d8;
         }
         .nav-toggle {
-            display: none;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #e8e0d8;
-            font-size: 22px;
-            padding: 4px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            flex-shrink: 0;
+            display:none; background:transparent; border:1px solid rgba(255,255,255,0.1);
+            color:#e8e0d8; font-size:22px; padding:4px 12px; border-radius:8px;
+            cursor:pointer; flex-shrink:0;
         }
-
         .lang-toggle-container {
-            display: flex;
-            align-items: center;
-            gap: 0px;
-            margin-left: 4px;
-            padding: 0;
-            flex-shrink: 0;
+            display:flex; align-items:center; gap:0px; margin-left:4px;
         }
         .lang-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: rgba(232, 224, 216, 0.6);
-            padding: 4px 8px;
-            cursor: pointer;
-            font-size: 12px;
+            background:transparent; border:1px solid rgba(255,255,255,0.15);
+            color:rgba(232,224,216,0.6); padding:4px 8px; cursor:pointer;
+            font-size:12px; font-weight:600; font-family:inherit; transition:0.2s;
+        }
+        .lang-btn:first-child { border-radius:30px 0 0 30px; }
+        .lang-btn:last-child { border-radius:0 30px 30px 0; border-left:none; }
+        .lang-btn:hover { background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.25); }
+        .lang-btn.active { background:rgba(201,168,124,0.15); border-color:#c9a87c; color:#e8e0d8; }
+
+        /* ===== 场景选择器 ===== */
+        .scene-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .scene-btn {
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(201,168,124,0.15);
+            background: rgba(45,42,36,0.4);
+            backdrop-filter: blur(4px);
+            color: rgba(232,224,216,0.6);
+            font-size: 14px;
             font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
             font-family: inherit;
-            transition: 0.2s;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
         }
-        .lang-btn:first-child {
-            border-radius: 30px 0 0 30px;
+        .scene-btn:hover {
+            background: rgba(201,168,124,0.12);
+            border-color: rgba(201,168,124,0.3);
+            color: #e8e0d8;
+            transform: translateY(-2px);
         }
-        .lang-btn:last-child {
-            border-radius: 0 30px 30px 0;
-            border-left: none;
-        }
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-        .lang-btn.active {
-            background: rgba(201, 168, 124, 0.15);
+        .scene-btn.active {
+            background: rgba(201,168,124,0.18);
             border-color: #c9a87c;
             color: #e8e0d8;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .scene-btn .scene-icon {
+            margin-right: 6px;
         }
 
-        /* ===== 音乐播放器 ===== */
+        /* ===== 音乐播放器（改良版，显示当前场景名称） ===== */
         .music-player {
-            background: rgba(45, 42, 36, 0.6);
+            background: rgba(45,42,36,0.6);
             backdrop-filter: blur(8px);
             border-radius: 40px;
             padding: 8px 16px 8px 20px;
@@ -200,50 +165,84 @@
             align-items: center;
             gap: 14px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            border: 1px solid rgba(201, 168, 124, 0.1);
+            border: 1px solid rgba(201,168,124,0.1);
             margin-bottom: 20px;
             flex-wrap: wrap;
+            width: 100%;
+            justify-content: space-between;
         }
-        .music-player .icon { font-size:18px; opacity:0.6; color:#c9a87c; }
-        .music-player .info { display:flex; flex-direction:column; gap:0px; }
-        .music-player .info .title { font-size:13px; font-weight:600; color:#e8e0d8; letter-spacing:0.5px; white-space:nowrap; }
-        .music-player .info .sub { font-size:11px; color:rgba(232,224,216,0.4); letter-spacing:0.3px; }
-        .music-player .controls { display:flex; align-items:center; gap:6px; }
+        .music-player .info {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .music-player .info .title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e8e0d8;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .music-player .info .sub {
+            font-size: 11px;
+            color: rgba(232,224,216,0.4);
+            letter-spacing: 0.3px;
+        }
+        .music-player .controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
         .music-player .controls button {
-            width:32px; height:32px; border-radius:50%; border:1px solid rgba(201,168,124,0.2);
-            background:rgba(255,255,255,0.04); color:#e8e0d8; font-size:14px; cursor:pointer; transition:0.2s;
-            display:flex; align-items:center; justify-content:center; font-family:inherit;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,168,124,0.2);
+            background: rgba(255,255,255,0.04);
+            color: #e8e0d8;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
         }
-        .music-player .controls button:hover { background:rgba(201,168,124,0.12); border-color:rgba(201,168,124,0.3); }
-        .music-player .controls button.playing { background:rgba(201,168,124,0.15); border-color:#c9a87c; }
+        .music-player .controls button:hover {
+            background: rgba(201,168,124,0.12);
+            border-color: rgba(201,168,124,0.3);
+        }
+        .music-player .controls button.playing {
+            background: rgba(201,168,124,0.15);
+            border-color: #c9a87c;
+        }
         .music-player .controls .volume-slider {
-            width:60px; height:3px; -webkit-appearance:none; background:rgba(255,255,255,0.1); border-radius:2px; outline:none; cursor:pointer;
+            width: 60px; height: 3px;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
         }
         .music-player .controls .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance:none; width:10px; height:10px; border-radius:50%; background:#c9a87c; cursor:pointer;
+            -webkit-appearance: none;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: #c9a87c;
+            cursor: pointer;
         }
-        .music-player .badge {
-            font-size:10px; font-weight:700; color:#c9a87c; background:rgba(201,168,124,0.08);
-            padding:2px 10px; border-radius:20px; border:1px solid rgba(201,168,124,0.06); letter-spacing:0.5px;
-        }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .top-bar .page-title {
-            font-size: 22px;
+        .music-player .badge-scene {
+            font-size: 10px;
             font-weight: 700;
-            color: #e8e0d8;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-        }
-        .top-bar .page-title span {
             color: #c9a87c;
+            background: rgba(201,168,124,0.08);
+            padding: 2px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(201,168,124,0.06);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
         /* ===== 读物列表 ===== */
@@ -253,13 +252,12 @@
             gap: 20px;
             margin-top: 8px;
         }
-
         .read-card {
-            background: rgba(45, 42, 36, 0.4);
+            background: rgba(45,42,36,0.4);
             backdrop-filter: blur(4px);
             border-radius: 20px;
             padding: 24px 20px 20px;
-            border: 1px solid rgba(201, 168, 124, 0.06);
+            border: 1px solid rgba(201,168,124,0.06);
             cursor: pointer;
             transition: 0.3s;
             position: relative;
@@ -267,8 +265,8 @@
         }
         .read-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(201, 168, 124, 0.2);
-            background: rgba(45, 42, 36, 0.6);
+            border-color: rgba(201,168,124,0.2);
+            background: rgba(45,42,36,0.6);
             box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
         .read-card .category {
@@ -288,24 +286,17 @@
         }
         .read-card .author {
             font-size: 13px;
-            color: rgba(232, 224, 216, 0.4);
+            color: rgba(232,224,216,0.4);
             margin-bottom: 12px;
         }
         .read-card .preview {
             font-size: 14px;
-            color: rgba(232, 224, 216, 0.6);
+            color: rgba(232,224,216,0.6);
             line-height: 1.6;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-        }
-        .read-card .badge-read {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            font-size: 12px;
-            color: rgba(232,224,216,0.15);
         }
         .read-card .media-badge {
             display: inline-block;
@@ -318,7 +309,6 @@
             margin-bottom: 6px;
             border: 1px solid rgba(201,168,124,0.06);
         }
-
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -331,172 +321,116 @@
         .reader-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            z-index: 200;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
+            top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.7);
+            backdrop-filter:blur(8px);
+            z-index:200;
+            justify-content:center; align-items:center;
+            padding:24px;
         }
-        .reader-overlay.active {
-            display: flex;
-        }
+        .reader-overlay.active { display:flex; }
         .reader-modal {
-            background: rgba(30, 28, 24, 0.95);
-            border-radius: 28px;
-            max-width: 680px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 32px 36px 40px;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.6);
-            border: 1px solid rgba(201, 168, 124, 0.08);
-            position: relative;
-            animation: fadeUp 0.35s ease;
+            background:rgba(30,28,24,0.95);
+            border-radius:28px;
+            max-width:680px; width:100%; max-height:85vh; overflow-y:auto;
+            padding:32px 36px 40px;
+            box-shadow:0 24px 64px rgba(0,0,0,0.6);
+            border:1px solid rgba(201,168,124,0.08);
+            position:relative;
+            animation:fadeUp 0.35s ease;
         }
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity:0; transform:translateY(30px); }
+            to { opacity:1; transform:translateY(0); }
         }
         .reader-modal .close-btn {
-            position: sticky;
-            top: 0;
-            float: right;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: rgba(232,224,216,0.3);
-            cursor: pointer;
-            padding: 0 4px;
-            transition: 0.2s;
-            line-height: 1;
+            position:sticky; top:0; float:right;
+            background:none; border:none;
+            font-size:28px; color:rgba(232,224,216,0.3);
+            cursor:pointer; padding:0 4px; transition:0.2s; line-height:1;
         }
-        .reader-modal .close-btn:hover {
-            color: #e8e0d8;
-        }
+        .reader-modal .close-btn:hover { color:#e8e0d8; }
         .reader-modal .reader-category {
-            font-size: 12px;
-            font-weight: 700;
-            color: #c9a87c;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
+            font-size:12px; font-weight:700; color:#c9a87c;
+            letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;
         }
         .reader-modal .reader-title {
-            font-size: 26px;
-            font-weight: 800;
-            color: #e8e0d8;
-            margin-bottom: 4px;
-            line-height: 1.3;
+            font-size:26px; font-weight:800; color:#e8e0d8;
+            margin-bottom:4px; line-height:1.3;
         }
         .reader-modal .reader-author {
-            font-size: 14px;
-            color: rgba(232,224,216,0.4);
-            margin-bottom: 20px;
+            font-size:14px; color:rgba(232,224,216,0.4); margin-bottom:20px;
         }
         .reader-modal .reader-body {
-            font-size: 17px;
-            line-height: 2.2;
-            color: rgba(232,224,216,0.85);
-            white-space: pre-wrap;
-            font-family: 'Georgia', 'Times New Roman', serif;
-            border-top: 1px solid rgba(201,168,124,0.06);
-            padding-top: 20px;
+            font-size:17px; line-height:2.2; color:rgba(232,224,216,0.85);
+            white-space:pre-wrap; font-family:'Georgia','Times New Roman',serif;
+            border-top:1px solid rgba(201,168,124,0.06); padding-top:20px;
         }
         .reader-modal .reader-iframe-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            margin-top: 12px;
+            position:relative; padding-bottom:56.25%; height:0; margin-top:12px;
         }
         .reader-modal .reader-iframe-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            border: none;
+            position:absolute; top:0; left:0; width:100%; height:100%;
+            border-radius:12px; border:none;
         }
         .reader-modal .reader-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 28px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(201,168,124,0.06);
-            gap: 12px;
-            flex-wrap: wrap;
+            display:flex; justify-content:space-between; margin-top:28px;
+            padding-top:20px; border-top:1px solid rgba(201,168,124,0.06);
+            gap:12px; flex-wrap:wrap;
         }
         .reader-modal .reader-nav a {
-            padding: 8px 24px;
-            border: 1px solid rgba(201,168,124,0.1);
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            color: rgba(232,224,216,0.6);
-            transition: 0.2s;
+            padding:8px 24px; border:1px solid rgba(201,168,124,0.1);
+            border-radius:30px; text-decoration:none; font-size:14px;
+            font-weight:600; color:rgba(232,224,216,0.6); transition:0.2s;
         }
         .reader-modal .reader-nav a:hover {
-            background: rgba(201,168,124,0.08);
-            border-color: rgba(201,168,124,0.2);
-            color: #e8e0d8;
+            background:rgba(201,168,124,0.08); border-color:rgba(201,168,124,0.2);
+            color:#e8e0d8;
         }
         .reader-modal .reader-nav a.disabled {
-            opacity: 0.2;
-            pointer-events: none;
+            opacity:0.2; pointer-events:none;
         }
         .reader-modal .reader-nav .indicator {
-            font-size: 14px;
-            color: rgba(232,224,216,0.3);
-            display: flex;
-            align-items: center;
+            font-size:14px; color:rgba(232,224,216,0.3);
+            display:flex; align-items:center;
         }
 
         /* ===== 响应式 ===== */
-        @media (max-width: 720px) {
+        @media (max-width:720px) {
             .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(20,20,30,0.95);
-                flex-direction: column;
-                align-items: stretch;
-                padding: 12px 24px 20px;
-                border-bottom: 1px solid rgba(201,168,124,0.06);
-                display: none;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+                position:absolute; top:100%; left:0; right:0;
+                background:rgba(20,20,30,0.95);
+                flex-direction:column; align-items:stretch;
+                padding:12px 24px 20px;
+                border-bottom:1px solid rgba(201,168,124,0.06);
+                display:none; box-shadow:0 8px 24px rgba(0,0,0,0.3);
             }
-            .nav-links.open { display: flex; }
-            .nav-links a { text-align: center; padding: 12px 16px; }
-            .nav-toggle { display: block; }
-            .read-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-            .reader-modal { padding: 24px 20px 28px; max-height: 90vh; }
-            .reader-modal .reader-title { font-size: 20px; }
-            .reader-modal .reader-body { font-size: 15px; }
-            .music-player { width: 100%; justify-content: space-between; }
-            .music-player .controls .volume-slider { width: 40px; }
-            .top-bar .page-title { font-size: 18px; }
+            .nav-links.open { display:flex; }
+            .nav-links a { text-align:center; padding:12px 16px; }
+            .nav-toggle { display:block; }
+            .read-grid { grid-template-columns:1fr 1fr; gap:14px; }
+            .reader-modal { padding:24px 20px 28px; max-height:90vh; }
+            .reader-modal .reader-title { font-size:20px; }
+            .reader-modal .reader-body { font-size:15px; }
+            .music-player { width:100%; justify-content:space-between; }
+            .music-player .controls .volume-slider { width:40px; }
+            .scene-btn { padding:8px 16px; font-size:13px; }
         }
-        @media (max-width: 420px) {
-            .read-grid { grid-template-columns: 1fr; gap: 12px; }
-            .music-player .info .sub { display: none; }
-            .music-player .controls .volume-slider { width: 30px; }
+        @media (max-width:420px) {
+            .read-grid { grid-template-columns:1fr; gap:12px; }
+            .music-player .info .sub { display:none; }
+            .music-player .controls .volume-slider { width:30px; }
+            .scene-btn { padding:6px 12px; font-size:12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== 全屏 YouTube 视频背景（新视频：z0dtCkTcOEU） ===== -->
+    <!-- ===== 全屏 YouTube 视频背景 ===== -->
     <div class="bg-video-wrapper" id="bgVideoWrapper">
         <iframe
             id="bgVideo"
-            src="https://www.youtube.com/embed/z0dtCkTcOEU?autoplay=1&mute=1&loop=1&playlist=z0dtCkTcOEU&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+            src=""
             frameborder="0"
             allow="autoplay; encrypted-media"
             allowfullscreen
@@ -525,24 +459,33 @@
     <main>
         <div class="immersive-container">
 
-            <div class="top-bar">
-                <!-- 修改：使用 data-i18n-html 让标题支持 HTML 标签 -->
-                <div class="page-title" data-i18n-html="immersive.title">🌙 沉浸式<span>工坊</span></div>
-                <!-- ===== 音乐播放器（纯音乐，用户控制） ===== -->
-                <div class="music-player" id="musicPlayer">
-                    <span class="icon">🏮</span>
-                    <div class="info">
-                        <span class="title">茶楼听书 · 纯音乐</span>
-                        <span class="sub">蒙堂木下 · 书卷气</span>
-                    </div>
-                    <span class="badge">🎵 背景音</span>
-                    <div class="controls">
-                        <button id="playBtn" aria-label="播放/暂停">▶</button>
-                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="40" aria-label="音量" />
-                    </div>
+            <!-- ===== 场景选择按钮 ===== -->
+            <div class="scene-selector" id="sceneSelector">
+                <!-- 由 JS 动态生成 -->
+            </div>
+
+            <!-- ===== 顶部信息栏 + 音乐播放器 ===== -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:6px;">
+                <div class="page-title" data-i18n-html="immersive.title" style="font-size:22px; font-weight:700; color:#e8e0d8; letter-spacing:2px; text-shadow:0 2px 20px rgba(0,0,0,0.3);">
+                    🌙 沉浸式<span style="color:#c9a87c;">工坊</span>
                 </div>
             </div>
 
+            <!-- ===== 音乐播放器（集成场景信息） ===== -->
+            <div class="music-player" id="musicPlayer">
+                <span class="icon">🏮</span>
+                <div class="info">
+                    <span class="title" id="musicTitle">茶楼听书 · 纯音乐</span>
+                    <span class="sub" id="musicSub">蒙堂木下 · 书卷气</span>
+                </div>
+                <span class="badge-scene" id="sceneBadge">🎵 当前场景</span>
+                <div class="controls">
+                    <button id="playBtn" aria-label="播放/暂停">▶</button>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="40" aria-label="音量" />
+                </div>
+            </div>
+
+            <!-- ===== 读物列表 ===== -->
             <div class="read-grid" id="readGrid">
                 <!-- 由 JS 从 data/immersive.json 动态渲染 -->
             </div>
@@ -570,126 +513,293 @@
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  🎬 背景视频加载 —— 监听 iframe 加载 + 超时强制显示 + 点击兜底
+        //  🎬 场景配置（你可以自由增删改）
         // ================================================================
-        (function() {
-            const wrapper = document.getElementById('bgVideoWrapper');
-            const iframe = document.getElementById('bgVideo');
-            const loadingText = document.getElementById('loadingText');
+        const SCENES = [
+            {
+                id: 'cafe',
+                nameZh: '☕ 咖啡馆',
+                nameEn: 'Café',
+                bgVideoId: 'z0dtCkTcOEU',      // 背景视频 ID（YouTube）
+                musicVideoId: '5g_vB_qs3to',   // 音乐视频 ID
+                musicTitleZh: '咖啡馆 · 爵士钢琴',
+                musicTitleEn: 'Café Jazz Piano',
+                musicSubZh: '蒙堂木下 · 慵懒午后',
+                musicSubEn: 'Montainment · Lazy Afternoon'
+            },
+            {
+                id: 'fireplace',
+                nameZh: '🔥 壁炉',
+                nameEn: 'Fireplace',
+                bgVideoId: '8ZfR2b_91YE',      // 壁炉燃烧视频（示例）
+                musicVideoId: '9n6TQwPqHNE',   // 轻柔钢琴曲
+                musicTitleZh: '壁炉 · 冬日暖阳',
+                musicTitleEn: 'Fireplace · Winter Sun',
+                musicSubZh: '蒙堂木下 · 温暖静谧',
+                musicSubEn: 'Montainment · Warm & Quiet'
+            },
+            {
+                id: 'forest',
+                nameZh: '🌲 森林',
+                nameEn: 'Forest',
+                bgVideoId: 'gK1WzB1R5yA',      // 森林溪流
+                musicVideoId: 'bP9gMh_JfR8',   // 自然音乐
+                musicTitleZh: '森林 · 溪水潺潺',
+                musicTitleEn: 'Forest · Stream',
+                musicSubZh: '蒙堂木下 · 自然之声',
+                musicSubEn: 'Montainment · Nature Sounds'
+            },
+            {
+                id: 'study',
+                nameZh: '📖 书斋',
+                nameEn: 'Study',
+                bgVideoId: 'qQmG8kC3BlI',      // 书斋雨景
+                musicVideoId: 't8uCv8rP9W8',   // 古琴曲
+                musicTitleZh: '书斋 · 雨打芭蕉',
+                musicTitleEn: 'Study · Rain & Guqin',
+                musicSubZh: '蒙堂木下 · 静心研读',
+                musicSubEn: 'Montainment · Deep Reading'
+            },
+            {
+                id: 'rainy_night',
+                nameZh: '🌧️ 雨夜',
+                nameEn: 'Rainy Night',
+                bgVideoId: 'Vn7Z6zL8jys',      // 雨夜街景
+                musicVideoId: 'oUwD-Q6Jk5M',   // 舒缓钢琴
+                musicTitleZh: '雨夜 · 城市灯光',
+                musicTitleEn: 'Rainy Night · City Lights',
+                musicSubZh: '蒙堂木下 · 孤独浪漫',
+                musicSubEn: 'Montainment · Lonely Romance'
+            }
+        ];
 
-            let shown = false;
+        // ================================================================
+        //  🎬 背景视频加载与切换
+        // ================================================================
+        const bgWrapper = document.getElementById('bgVideoWrapper');
+        const bgIframe = document.getElementById('bgVideo');
+        const loadingText = document.getElementById('loadingText');
+        let bgLoaded = false;
 
-            function showVideo() {
-                if (shown) return;
-                shown = true;
-                wrapper.classList.add('loaded');
-                if (loadingText) {
-                    loadingText.classList.add('hidden');
-                    setTimeout(() => { loadingText.style.display = 'none'; }, 800);
+        function showBgVideo() {
+            if (bgLoaded) return;
+            bgLoaded = true;
+            bgWrapper.classList.add('loaded');
+            if (loadingText) {
+                loadingText.classList.add('hidden');
+                setTimeout(() => { loadingText.style.display = 'none'; }, 800);
+            }
+        }
+
+        // 监听 iframe 加载
+        bgIframe.addEventListener('load', showBgVideo);
+        // 超时兜底
+        setTimeout(showBgVideo, 3000);
+        // 用户点击任意位置也触发（帮助显示）
+        document.addEventListener('click', showBgVideo, { once: true });
+        window.addEventListener('load', () => setTimeout(showBgVideo, 200));
+
+        /**
+         * 切换背景视频
+         */
+        function switchBackground(videoId) {
+            const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`;
+            bgIframe.src = newSrc;
+            // 重新触发加载完成检测
+            bgLoaded = false;
+            bgWrapper.classList.remove('loaded');
+            if (loadingText) {
+                loadingText.style.display = 'block';
+                loadingText.classList.remove('hidden');
+            }
+            // 监听新加载
+            bgIframe.addEventListener('load', showBgVideo);
+            setTimeout(showBgVideo, 3000);
+        }
+
+        // ================================================================
+        //  🎵 音乐播放器（多场景支持）
+        // ================================================================
+        let musicPlayer = null;          // 隐藏的 iframe 引用
+        let currentMusicId = '';
+        let isPlaying = false;
+        let autoPlayUsed = false;
+
+        const playBtn = document.getElementById('playBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const musicTitleEl = document.getElementById('musicTitle');
+        const musicSubEl = document.getElementById('musicSub');
+        const sceneBadge = document.getElementById('sceneBadge');
+
+        function createMusicPlayer() {
+            const container = document.createElement('div');
+            container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
+            container.innerHTML = `<iframe id="youtubeMusicPlayer" src="" width="1" height="1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            document.body.appendChild(container);
+            musicPlayer = document.getElementById('youtubeMusicPlayer');
+        }
+
+        function updateMusicInfo(scene) {
+            const lang = localStorage.getItem('lang') || 'zh';
+            if (lang === 'zh') {
+                musicTitleEl.textContent = scene.musicTitleZh || scene.nameZh;
+                musicSubEl.textContent = scene.musicSubZh || '蒙堂木下';
+                sceneBadge.textContent = '🎵 ' + scene.nameZh;
+            } else {
+                musicTitleEl.textContent = scene.musicTitleEn || scene.nameEn;
+                musicSubEl.textContent = scene.musicSubEn || 'Montainment';
+                sceneBadge.textContent = '🎵 ' + scene.nameEn;
+            }
+        }
+
+        function switchMusic(videoId, scene) {
+            if (!musicPlayer) createMusicPlayer();
+            currentMusicId = videoId;
+            const src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
+            musicPlayer.src = src;
+            // 更新界面信息
+            updateMusicInfo(scene);
+            // 标记为播放状态（但实际是否播放受浏览器策略影响）
+            isPlaying = true;
+            playBtn.textContent = '⏸';
+            playBtn.classList.add('playing');
+        }
+
+        function togglePlay() {
+            if (!musicPlayer) return;
+            if (isPlaying) {
+                // 暂停：清空 src 或使用 pause 方法（实际无法直接控制，只能 reload）
+                // 简单做法：将 src 置空，然后重新设置为不带 autoplay 的链接
+                const src = musicPlayer.src;
+                if (src.includes('autoplay=1')) {
+                    const newSrc = src.replace('autoplay=1', 'autoplay=0');
+                    musicPlayer.src = newSrc;
+                } else {
+                    // 如果已经暂停，则尝试恢复播放
+                    const newSrc = src.replace('autoplay=0', 'autoplay=1');
+                    musicPlayer.src = newSrc;
                 }
+                isPlaying = !isPlaying;
+            } else {
+                // 播放
+                const src = musicPlayer.src;
+                if (src.includes('autoplay=0')) {
+                    musicPlayer.src = src.replace('autoplay=0', 'autoplay=1');
+                } else {
+                    // 如果 src 为空或没有参数，重新构建
+                    if (!src || src === 'about:blank') {
+                        if (currentMusicId) {
+                            musicPlayer.src =
+                                `https://www.youtube.com/embed/${currentMusicId}?autoplay=1&loop=1&playlist=${currentMusicId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
+                        }
+                    } else {
+                        musicPlayer.src = src + '&autoplay=1';
+                    }
+                }
+                isPlaying = true;
             }
+            playBtn.textContent = isPlaying ? '⏸' : '▶';
+            playBtn.classList.toggle('playing', isPlaying);
+        }
 
-            if (iframe) {
-                iframe.addEventListener('load', showVideo);
-            }
+        // 音量控制（仅 UI，实际无法控制 YouTube iframe 音量，但保留视觉反馈）
+        volumeSlider.addEventListener('input', function() {
+            // 无实际功能，仅做展示
+        });
 
-            setTimeout(showVideo, 3000);
+        // 播放按钮事件
+        playBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            togglePlay();
+        });
 
-            document.addEventListener('click', function() {
-                showVideo();
-            }, { once: true });
+        // 点击音乐播放器区域（非按钮/滑块）也可切换
+        document.querySelector('.music-player').addEventListener('click', function(e) {
+            if (e.target.closest('button') || e.target.closest('input')) return;
+            togglePlay();
+        });
 
-            window.addEventListener('load', function() {
-                setTimeout(showVideo, 200);
+        // 全局点击尝试自动播放音乐（第一次用户交互）
+        document.addEventListener('click', function autoPlayMusic(e) {
+            if (autoPlayUsed || isPlaying) return;
+            if (e.target.closest('.reader-overlay')) return;
+            if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
+            if (!musicPlayer || !currentMusicId) return;
+            // 尝试播放
+            musicPlayer.src =
+                `https://www.youtube.com/embed/${currentMusicId}?autoplay=1&loop=1&playlist=${currentMusicId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
+            isPlaying = true;
+            playBtn.textContent = '⏸';
+            playBtn.classList.add('playing');
+            autoPlayUsed = true;
+            document.removeEventListener('click', autoPlayMusic);
+        });
+
+        // ================================================================
+        //  🔄 场景切换核心函数
+        // ================================================================
+        let currentSceneId = SCENES[0]?.id || '';
+
+        function switchScene(sceneId) {
+            const scene = SCENES.find(s => s.id === sceneId);
+            if (!scene) return;
+            currentSceneId = sceneId;
+
+            // 1. 切换背景视频
+            switchBackground(scene.bgVideoId);
+
+            // 2. 切换音乐
+            switchMusic(scene.musicVideoId, scene);
+
+            // 3. 更新按钮状态
+            document.querySelectorAll('.scene-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.scene === sceneId);
             });
 
-        })();
-
+            // 4. 更新音乐播放器界面（已由 switchMusic 完成）
+        }
 
         // ================================================================
-        //  🎵 音乐播放器（纯音乐 5g_vB_qs3to，用户控制）
+        //  🖌️ 渲染场景按钮
         // ================================================================
-        (function() {
-            const YOUTUBE_VIDEO_ID = '5g_vB_qs3to';
-            const YOUTUBE_URL =
-                `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&modestbranding=1&rel=0&showinfo=0`;
+        function renderSceneButtons() {
+            const container = document.getElementById('sceneSelector');
+            const lang = localStorage.getItem('lang') || 'zh';
+            let html = '';
+            SCENES.forEach(scene => {
+                const label = lang === 'zh' ? scene.nameZh : scene.nameEn;
+                html += `
+                    <button class="scene-btn" data-scene="${scene.id}">
+                        ${label}
+                    </button>
+                `;
+            });
+            container.innerHTML = html;
 
-            let isPlaying = false;
-            let autoPlayUsed = false;
-            const playBtn = document.getElementById('playBtn');
-            const volumeSlider = document.getElementById('volumeSlider');
-
-            function updateButton(state) {
-                isPlaying = state;
-                playBtn.textContent = state ? '⏸' : '▶';
-                playBtn.classList.toggle('playing', state);
-            }
-
-            function playMusic() {
-                const iframe = document.getElementById('youtubePlayer');
-                if (!iframe || isPlaying) return;
-                iframe.src = iframe.src.replace('autoplay=0', 'autoplay=1');
-                updateButton(true);
-            }
-
-            function pauseMusic() {
-                const iframe = document.getElementById('youtubePlayer');
-                if (!iframe || !isPlaying) return;
-                const src = iframe.src;
-                iframe.src = '';
-                setTimeout(() => { iframe.src = src.replace('autoplay=1', 'autoplay=0'); }, 50);
-                updateButton(false);
-            }
-
-            function toggleMusic() {
-                isPlaying ? pauseMusic() : playMusic();
-            }
-
-            function createPlayer() {
-                const container = document.createElement('div');
-                container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
-                container.innerHTML =
-                    `<iframe id="youtubePlayer" src="${YOUTUBE_URL}" width="1" height="1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-                document.body.appendChild(container);
-
-                playBtn.addEventListener('click', (e) => { e.stopPropagation();
-                    toggleMusic(); });
-                document.querySelector('.music-player').addEventListener('click', function(e) {
-                    if (e.target.closest('button') || e.target.closest('input')) return;
-                    toggleMusic();
+            // 绑定点击事件
+            container.querySelectorAll('.scene-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.dataset.scene;
+                    switchScene(id);
                 });
+            });
 
-                document.addEventListener('click', function autoPlay(e) {
-                    if (autoPlayUsed || isPlaying) return;
-                    if (e.target.closest('.reader-overlay')) return;
-                    if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
-                    playMusic();
-                    autoPlayUsed = true;
-                    document.removeEventListener('click', autoPlay);
-                });
-
-                volumeSlider.addEventListener('input', function() {});
-
-                setTimeout(() => {
-                    const iframe = document.getElementById('youtubePlayer');
-                    if (iframe) iframe.src = iframe.src.replace('autoplay=0', 'autoplay=0');
-                }, 1000);
-
-                updateButton(false);
+            // 默认激活第一个场景
+            if (SCENES.length > 0) {
+                const first = SCENES[0];
+                // 默认激活按钮样式
+                const firstBtn = container.querySelector(`[data-scene="${first.id}"]`);
+                if (firstBtn) firstBtn.classList.add('active');
+                // 加载第一个场景
+                switchScene(first.id);
             }
-
-            createPlayer();
-            window.musicPlayer = { play: playMusic, pause: pauseMusic, toggle: toggleMusic };
-        })();
-
+        }
 
         // ================================================================
-        //  📚 读物数据（从 data/immersive.json 加载）
+        //  📚 读物数据加载（与之前相同，但增加 i18n 支持）
         // ================================================================
-
         let READ_DATA = [];
         let currentIndex = 0;
-
         const grid = document.getElementById('readGrid');
         const overlay = document.getElementById('readerOverlay');
         const closeBtn = document.getElementById('closeReader');
@@ -701,7 +811,6 @@
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
 
-        // ===== 新增：获取 i18n 翻译的辅助函数 =====
         function getTypeLabel(type) {
             if (type === 'video') return i18n.t('immersive.type_video');
             if (type === 'music') return i18n.t('immersive.type_music');
@@ -719,13 +828,11 @@
                 applyI18n();
                 return;
             }
-
             let html = '';
             READ_DATA.forEach((item, idx) => {
                 const typeIcon = item.type === 'video' ? '🎬' : item.type === 'music' ? '🎵' : '📝';
-                const typeLabel = getTypeLabel(item.type); // 翻译后的类型名称
+                const typeLabel = getTypeLabel(item.type);
                 const preview = item.preview || (item.content ? item.content.substring(0, 60) + '...' : '');
-
                 html += `
                     <div class="read-card" data-index="${idx}">
                         <div class="media-badge">${typeIcon} ${typeLabel}</div>
@@ -738,15 +845,12 @@
                 `;
             });
             grid.innerHTML = html;
-
             grid.querySelectorAll('.read-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
                     openReader(idx);
                 });
             });
-
-            // 应用 i18n 到空状态（如果有）
             applyI18n();
         }
 
@@ -754,11 +858,9 @@
             const item = READ_DATA[idx];
             if (!item) return;
             currentIndex = idx;
-
             readerCategory.textContent = item.category || '随笔';
             readerTitle.textContent = item.title;
             readerAuthor.textContent = item.author || '蒙堂木下';
-
             if (item.type === 'text') {
                 readerBody.innerHTML = item.content || '(内容为空)';
                 const existingIframe = readerBody.querySelector('.reader-iframe-wrapper');
@@ -784,7 +886,6 @@
                 readerBody.textContent = item.content || '(内容为空)';
                 readerBody.style.display = 'block';
             }
-
             readerIndicator.textContent = `${idx + 1} / ${READ_DATA.length}`;
             readerPrev.classList.toggle('disabled', idx === 0);
             readerNext.classList.toggle('disabled', idx === READ_DATA.length - 1);
@@ -815,7 +916,6 @@
         });
         readerPrev.addEventListener('click', goToPrev);
         readerNext.addEventListener('click', goToNext);
-
         document.addEventListener('keydown', function(e) {
             if (!overlay.classList.contains('active')) return;
             if (e.key === 'Escape') { closeReader(); return; }
@@ -823,11 +923,13 @@
             if (e.key === 'ArrowRight') { if (currentIndex < READ_DATA.length - 1) openReader(currentIndex + 1); }
         });
 
-        // 监听语言变化，重新渲染列表（更新类型标签）
         document.addEventListener('languageChanged', function() {
-            if (READ_DATA.length > 0) {
-                renderList();
-            }
+            renderList();
+            // 重新渲染场景按钮（更新语言）
+            renderSceneButtons();
+            // 如果当前场景已激活，确保音乐信息更新
+            const activeScene = SCENES.find(s => s.id === currentSceneId);
+            if (activeScene) updateMusicInfo(activeScene);
         });
 
         function loadImmersiveData() {
@@ -847,8 +949,11 @@
                 });
         }
 
-        // ===== 汉堡菜单 =====
+        // ================================================================
+        //  🚀 启动
+        // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
+            // 汉堡菜单
             const toggle = document.querySelector('.nav-toggle');
             const links = document.querySelector('.nav-links');
             if (toggle && links) {
@@ -863,14 +968,13 @@
                     });
                 });
             }
-        });
 
-        // ===== 启动 =====
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadImmersiveData);
-        } else {
+            // 渲染场景按钮
+            renderSceneButtons();
+
+            // 加载读物数据
             loadImmersiveData();
-        }
+        });
     </script>
 
 </body>
