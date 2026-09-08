@@ -283,7 +283,258 @@
                   "id": 2,
                   "titleZh": "试卷 2：指示代词与数字基础",
                   "titleEn": "Paper 2: Demonstratives & Basic Numbers",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "日语数字“三（さん）”对应的发音是？",
+                        "en": "What is the Japanese pronunciation for the number \"3 (さん)\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ichi",
+                          "ni",
+                          "san",
+                          "yon"
+                        ],
+                        "en": [
+                          "ichi",
+                          "ni",
+                          "san",
+                          "yon"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "3=さん(san)",
+                        "en": "3=さん(san)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“これ”指的是距离谁较近的事物？",
+                        "en": "What does \"これ\" refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "说话者（这个）",
+                          "听话者（那个）",
+                          "远处的第三方（那个远处的）",
+                          "不确定的事物"
+                        ],
+                        "en": [
+                          "Something close to the speaker (This)",
+                          "Something close to the listener (That)",
+                          "Something far from both (That over there)",
+                          "An uncertain object"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "これ（Kore）是指示代词，表示离说话人近的东西，“这个”",
+                        "en": "これ (Kore) is a demonstrative pronoun meaning \"this\" (near the speaker)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“それは何（なん）ですか”的中文意思是？",
+                        "en": "What does \"それは何（なん）ですか\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "那个人是谁？",
+                          "那是什么？",
+                          "这个多少钱？",
+                          "你去哪里？"
+                        ],
+                        "en": [
+                          "Who is that person?",
+                          "What is that?",
+                          "How much is this?",
+                          "Where are you going?"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "それ（那个）+ は（助词）+ 何（什么）+ ですか（疑问语气）= 那是什么？",
+                        "en": "それ (that) + は (particle) + 何 (what) + ですか (question mark) = \"What is that?"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名“パン”的意思是？",
+                        "en": "What does the Katakana \"パン\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "米饭",
+                          "面包",
+                          "牛奶",
+                          "水果"
+                        ],
+                        "en": [
+                          "Rice",
+                          "Bread",
+                          "Milk",
+                          "Fruit"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "パン（Pan）源自葡萄牙语 pão，意为面包",
+                        "en": "パン (Pan) comes from the Portuguese word \"pão\", meaning \"Bread\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "数字“10”在日语里的读音是？",
+                        "en": "How do you pronounce the number \"10\" in Japanese?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "じゅう (Juu)",
+                          "はち (Hachi)",
+                          "なな (Nana)",
+                          "ろく (Roku)"
+                        ],
+                        "en": [
+                          "じゅう (Juu)",
+                          "はち (Hachi)",
+                          "なな (Nana)",
+                          "ろく (Roku)"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "10 在日语里读作 じゅう (Juu)",
+                        "en": "The number 10 is pronounced as じゅう (Juu)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示“远处的那个事物”应该用哪个词？",
+                        "en": "Which word refers to an object far from both the speaker and the listener?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "これ",
+                          "それ",
+                          "あれ",
+                          "どれ"
+                        ],
+                        "en": [
+                          "これ",
+                          "それ",
+                          "あれ",
+                          "どれ"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "あれ（Are）用于指代距离说话人和听话人都较远的事物（那个）",
+                        "en": "あれ (Are) refers to an object far from both people (\"that over there\")"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“水（みず）”的意思是？",
+                        "en": "What does \"水（みず）\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "茶",
+                          "果汁",
+                          "水",
+                          "酒"
+                        ],
+                        "en": [
+                          "Tea",
+                          "Juice",
+                          "Water",
+                          "Alcohol"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "水（みず / Mizu）即为普通饮用水",
+                        "en": "水 (みず / Mizu) means \"Water\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "问句后缀“〜か”的作用是？",
+                        "en": "What is the function of the sentence-ending particle \"〜か\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表示感叹",
+                          "表示疑问",
+                          "表示肯定",
+                          "表示否定"
+                        ],
+                        "en": [
+                          "Express exclamations",
+                          "Indicate a question",
+                          "Express affirmation",
+                          "Express negation"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "在句末加上助词“か”，相当于中文的“吗”，用于构成疑问句",
+                        "en": "Adding \"か\" at the end of a sentence turns it into a question"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“はい”在答句中表示什么意思？",
+                        "en": "What does \"はい\" mean in an answer?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "不是 / 不",
+                          "是的 / 好的",
+                          "不知道",
+                          "也许"
+                        ],
+                        "en": [
+                          "No",
+                          "Yes / Okay",
+                          "I don't know",
+                          "Maybe"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "はい（Hai）表示应答或肯定，意为“是的/好的”",
+                        "en": "はい (Hai) is used to express agreement or affirmation (\"Yes / Okay\")"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“いいえ”的中文意思是？",
+                        "en": "What does \"いいえ\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是的",
+                          "不是 / 不",
+                          "请",
+                          "谢谢"
+                        ],
+                        "en": [
+                          "Yes",
+                          "No",
+                          "Please",
+                          "Thank you"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "いいえ（Iie）用于否定回答，意为“不/不是”",
+                        "en": "いいえ (Iie) is used for negative responses (\"No\")"
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 3,
