@@ -2,6 +2,9 @@
  * quiz.js —— 数据驱动 · 从 data/papers.json 加载类别 → 科目 → 难度 → 试卷 → 题目
  * 流程：选择类别 → 选择科目 → 选择难度 → 选择试卷 → 答题
  * 界面语言可切换（中文/English）
+ * 
+ * 🆕 SEO 增强：支持 URL 参数直接跳转到指定试卷
+ * 用法：quiz.html?cat=lang&sub=JP&diff=1&paper=1
  */
 (function() {
   'use strict';
@@ -69,6 +72,69 @@
     quizScoreLabel.textContent = score;
   }
 
+  // ========== 🆕 URL 参数管理 ==========
+  function getUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      cat: params.get('cat'),
+      sub: params.get('sub'),
+      diff: params.get('diff') !== null ? parseInt(params.get('diff'), 10) : null,
+      paper: params.get('paper') !== null ? parseInt(params.get('paper'), 10) : null
+    };
+  }
+
+  function updateUrl() {
+    if (!selectedCategoryId || !selectedSubjectId || selectedDifficultyLevel === null || !currentPaperId) {
+      // 如果有选中的内容但没有 paper，也更新到当前最深层级
+      let base = '?';
+      if (selectedCategoryId) base += `cat=${selectedCategoryId}`;
+      if (selectedSubjectId) base += `&sub=${selectedSubjectId}`;
+      if (selectedDifficultyLevel !== null) base += `&diff=${selectedDifficultyLevel}`;
+      // 如果有 paper 则加上
+      if (currentPaperId) base += `&paper=${currentPaperId}`;
+      if (base === '?') {
+        // 没有任何状态，清空 URL 参数
+        window.history.replaceState({}, '', window.location.pathname);
+        return;
+      }
+      window.history.replaceState({}, '', base);
+      return;
+    }
+
+    const url = `?cat=${selectedCategoryId}&sub=${selectedSubjectId}&diff=${selectedDifficultyLevel}&paper=${currentPaperId}`;
+    window.history.replaceState({}, '', url);
+  }
+
+  // ========== 🆕 从 URL 参数直接跳转到试卷 ==========
+  function tryLoadFromUrl() {
+    const params = getUrlParams();
+    if (!params.cat || !params.sub || params.diff === null || params.paper === null) {
+      return false;
+    }
+
+    // 验证所有 ID 是否有效
+    const cat = getCategory(params.cat);
+    if (!cat) return false;
+    const subj = getSubject(params.cat, params.sub);
+    if (!subj) return false;
+    const diff = getDifficulty(params.cat, params.sub, params.diff);
+    if (!diff) return false;
+    const paper = getPaper(params.cat, params.sub, params.diff, params.paper);
+    if (!paper) return false;
+
+    // 全部有效 → 设置状态并直接跳转到答题
+    selectedCategoryId = params.cat;
+    selectedSubjectId = params.sub;
+    selectedDifficultyLevel = params.diff;
+    currentPaperId = params.paper;
+    currentIndex = 0;
+    score = 0;
+    currentQuestionSolved = false;
+    updateScoreDisplay();
+    renderQuestion();
+    return true;
+  }
+
   // ========== 反馈 ==========
   function showFeedback(text, isOk, explanation) {
     quizFeedback.textContent = text;
@@ -104,6 +170,9 @@
     nextBtn.style.display = 'none';
     quizProgressBar.style.width = '0%';
     quizIndexLabel.textContent = t('📂 选择类别', '📂 Select Category');
+
+    // 🆕 清除 URL 参数（回到根状态）
+    window.history.replaceState({}, '', window.location.pathname);
 
     if (!allData || !allData.categories || allData.categories.length === 0) {
       quizBody.innerHTML = `
@@ -143,6 +212,7 @@
       if (!hasData) return;
       card.addEventListener('click', function() {
         selectedCategoryId = catId;
+        updateUrl();
         renderSubjectSelection();
       });
       card.addEventListener('mouseenter', function() {
@@ -211,6 +281,7 @@
       if (!hasData) return;
       card.addEventListener('click', function() {
         selectedSubjectId = subjId;
+        updateUrl();
         renderDifficultySelection();
       });
       card.addEventListener('mouseenter', function() {
@@ -290,6 +361,7 @@
       if (!hasData) return;
       card.addEventListener('click', function() {
         selectedDifficultyLevel = level;
+        updateUrl();
         renderPaperSelection();
       });
       card.addEventListener('mouseenter', function() {
@@ -384,6 +456,7 @@
         score = 0;
         currentQuestionSolved = false;
         updateScoreDisplay();
+        updateUrl();
         renderQuestion();
       });
       card.addEventListener('mouseenter', function() {
@@ -408,7 +481,7 @@
     });
   }
 
-  // ========== 渲染：题目（与之前相同，但使用新数据） ==========
+  // ========== 渲染：题目 ==========
   function renderQuestion() {
     uiState = 'quiz';
     const paper = getCurrentPaper();
@@ -430,7 +503,7 @@
     renderMultipleChoice(q);
   }
 
-  // ========== 选择题渲染（与之前一致，略） ==========
+  // ========== 选择题渲染 ==========
   function renderMultipleChoice(q) {
     const letters = ['A', 'B', 'C', 'D'];
     const questionText = t(q.q.zh, q.q.en);
@@ -524,7 +597,7 @@
     });
   }
 
-  // ========== 结果页（与之前相同） ==========
+  // ========== 结果页 ==========
   function renderResult() {
     uiState = 'result';
     const paper = getCurrentPaper();
@@ -641,7 +714,14 @@
       .then(data => {
         allData = data;
         createLangToggle();
-        renderCategorySelection();
+
+        // 🆕 尝试从 URL 参数直接跳转
+        const loadedFromUrl = tryLoadFromUrl();
+
+        // 如果没有从 URL 加载成功，显示类别选择
+        if (!loadedFromUrl) {
+          renderCategorySelection();
+        }
       })
       .catch(err => {
         console.error('加载数据出错:', err);
