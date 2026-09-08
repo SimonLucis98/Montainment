@@ -5,6 +5,9 @@
  * 
  * 🆕 SEO 增强：支持 URL 参数直接跳转到指定试卷
  * 用法：quiz.html?cat=lang&sub=JP&diff=1&paper=1
+ * 
+ * 🆕 广告友好：导航步骤（类别/科目/难度/试卷）整页跳转刷新广告，
+ *   答题过程（题目切换/重做）保持无刷新，兼顾体验与收入。
  */
 (function() {
   'use strict';
@@ -83,50 +86,77 @@
     };
   }
 
+  // ========== 🆕 核心：根据 uiState 决定跳转方式 ==========
   function updateUrl() {
-    if (!selectedCategoryId || !selectedSubjectId || selectedDifficultyLevel === null || !currentPaperId) {
-      // 如果有选中的内容但没有 paper，也更新到当前最深层级
-      let base = '?';
-      if (selectedCategoryId) base += `cat=${selectedCategoryId}`;
-      if (selectedSubjectId) base += `&sub=${selectedSubjectId}`;
-      if (selectedDifficultyLevel !== null) base += `&diff=${selectedDifficultyLevel}`;
-      // 如果有 paper 则加上
-      if (currentPaperId) base += `&paper=${currentPaperId}`;
-      if (base === '?') {
-        // 没有任何状态，清空 URL 参数
-        window.history.replaceState({}, '', window.location.pathname);
-        return;
-      }
-      window.history.replaceState({}, '', base);
-      return;
-    }
+    // 构建参数字符串
+    const params = new URLSearchParams();
+    if (selectedCategoryId) params.set('cat', selectedCategoryId);
+    if (selectedSubjectId) params.set('sub', selectedSubjectId);
+    if (selectedDifficultyLevel !== null) params.set('diff', selectedDifficultyLevel);
+    if (currentPaperId) params.set('paper', currentPaperId);
 
-    const url = `?cat=${selectedCategoryId}&sub=${selectedSubjectId}&diff=${selectedDifficultyLevel}&paper=${currentPaperId}`;
-    window.history.replaceState({}, '', url);
+    const queryString = params.toString();
+    const newUrl = queryString ? `?${queryString}` : window.location.pathname;
+
+    // 导航步骤（类别/科目/难度/试卷）→ 整页跳转刷新广告
+    // 答题/结果页 → 无刷新（保持流畅）
+    if (uiState === 'category' || uiState === 'subject' || uiState === 'difficulty' || uiState === 'paper') {
+      window.location.href = newUrl;
+    } else {
+      // quiz / result 阶段，无刷新更新 URL（不触发广告刷新）
+      window.history.replaceState({}, '', newUrl);
+    }
   }
 
-  // ========== 🆕 从 URL 参数直接跳转到试卷 ==========
+  // ========== 🆕 增强：从 URL 参数恢复状态（支持部分参数） ==========
   function tryLoadFromUrl() {
     const params = getUrlParams();
-    if (!params.cat || !params.sub || params.diff === null || params.paper === null) {
-      return false;
-    }
+    if (!params.cat) return false;
 
-    // 验证所有 ID 是否有效
     const cat = getCategory(params.cat);
     if (!cat) return false;
-    const subj = getSubject(params.cat, params.sub);
-    if (!subj) return false;
-    const diff = getDifficulty(params.cat, params.sub, params.diff);
-    if (!diff) return false;
-    const paper = getPaper(params.cat, params.sub, params.diff, params.paper);
-    if (!paper) return false;
-
-    // 全部有效 → 设置状态并直接跳转到答题
     selectedCategoryId = params.cat;
+
+    if (!params.sub) {
+      // 只有类别 → 进入科目选择
+      renderSubjectSelection();
+      return true;
+    }
+
+    const subj = getSubject(params.cat, params.sub);
+    if (!subj) {
+      renderSubjectSelection();
+      return true;
+    }
     selectedSubjectId = params.sub;
+
+    if (params.diff === null) {
+      // 有类别+科目，无难度 → 进入难度选择
+      renderDifficultySelection();
+      return true;
+    }
+
+    const diff = getDifficulty(params.cat, params.sub, params.diff);
+    if (!diff) {
+      renderDifficultySelection();
+      return true;
+    }
     selectedDifficultyLevel = params.diff;
+
+    if (params.paper === null) {
+      // 有类别+科目+难度，无试卷 → 进入试卷列表
+      renderPaperSelection();
+      return true;
+    }
+
+    const paper = getPaper(params.cat, params.sub, params.diff, params.paper);
+    if (!paper) {
+      renderPaperSelection();
+      return true;
+    }
     currentPaperId = params.paper;
+
+    // 全部齐全 → 直接进入答题
     currentIndex = 0;
     score = 0;
     currentQuestionSolved = false;
@@ -171,8 +201,10 @@
     quizProgressBar.style.width = '0%';
     quizIndexLabel.textContent = t('📂 选择类别', '📂 Select Category');
 
-    // 🆕 清除 URL 参数（回到根状态）
-    window.history.replaceState({}, '', window.location.pathname);
+    // 清除 URL 参数（回到根状态）
+    if (window.location.search) {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
 
     if (!allData || !allData.categories || allData.categories.length === 0) {
       quizBody.innerHTML = `
@@ -212,8 +244,17 @@
       if (!hasData) return;
       card.addEventListener('click', function() {
         selectedCategoryId = catId;
-        updateUrl();
-        renderSubjectSelection();
+        updateUrl(); // 整页跳转（广告刷新）
+        // 注意：updateUrl 会跳转页面，所以后面的 renderSubjectSelection 不会执行
+        // 但为了避免意外，仍然保留，实际上跳转后页面会重新加载，由 tryLoadFromUrl 恢复
+        // 如果因为某些原因未跳转（比如被拦截），则手动调用
+        // 但这里的逻辑是：updateUrl 会执行 location.href，页面会刷新
+        // 所以下面的调用不会执行。为了保险，保留。
+        // 但为了逻辑清晰，我们让 updateUrl 负责跳转，然后由新页面加载时从 URL 恢复。
+        // 因此这里不再调用 renderSubjectSelection，因为页面会刷新。
+        // 实际上，由于 updateUrl 会立即跳转，后续代码不会执行。
+        // 但如果不想刷新，可以注释掉 updateUrl 的跳转部分，但那样不符合广告刷新需求。
+        // 所以我们保持现状：点击后直接刷新。
       });
       card.addEventListener('mouseenter', function() {
         if (!hasData) return;
@@ -281,8 +322,7 @@
       if (!hasData) return;
       card.addEventListener('click', function() {
         selectedSubjectId = subjId;
-        updateUrl();
-        renderDifficultySelection();
+        updateUrl(); // 整页跳转
       });
       card.addEventListener('mouseenter', function() {
         if (!hasData) return;
@@ -361,8 +401,7 @@
       if (!hasData) return;
       card.addEventListener('click', function() {
         selectedDifficultyLevel = level;
-        updateUrl();
-        renderPaperSelection();
+        updateUrl(); // 整页跳转
       });
       card.addEventListener('mouseenter', function() {
         if (!hasData) return;
@@ -456,8 +495,7 @@
         score = 0;
         currentQuestionSolved = false;
         updateScoreDisplay();
-        updateUrl();
-        renderQuestion();
+        updateUrl(); // 导航步骤，整页跳转
       });
       card.addEventListener('mouseenter', function() {
         this.style.borderColor = '#b8c9e0';
@@ -593,7 +631,10 @@
     });
 
     document.getElementById('back-to-papers-from-quiz').addEventListener('click', function() {
-      renderPaperSelection();
+      // 返回试卷列表是导航步骤，整页跳转
+      // 但 currentPaperId 已存在，此时要清掉 paper 参数
+      currentPaperId = null;
+      updateUrl(); // 整页跳转
     });
   }
 
@@ -631,15 +672,19 @@
     `;
 
     document.getElementById('retry-paper-btn').addEventListener('click', function() {
+      // 重做此卷：重置分数和题目索引，无刷新（体验流畅）
       score = 0;
       currentIndex = 0;
       currentQuestionSolved = false;
       updateScoreDisplay();
       renderQuestion();
+      // 但 URL 保持不变，不需要更新（paper 参数还在）
     });
 
     document.getElementById('back-to-papers-from-result').addEventListener('click', function() {
-      renderPaperSelection();
+      // 返回试卷列表，导航步骤，整页跳转（清掉 paper 参数）
+      currentPaperId = null;
+      updateUrl(); // 整页跳转
     });
   }
 
@@ -650,9 +695,9 @@
     if (!paper) return;
     if (currentIndex + 1 < paper.questions.length) {
       currentIndex++;
-      renderQuestion();
+      renderQuestion(); // 无刷新切换题目
     } else {
-      renderResult();
+      renderResult(); // 无刷新显示结果
     }
   });
 
@@ -692,6 +737,7 @@
       if (lang === currentLang) return;
       currentLang = lang;
       setActive(lang);
+      // 语言切换后重新渲染当前界面（无刷新）
       switch (uiState) {
         case 'category': renderCategorySelection(); break;
         case 'subject': renderSubjectSelection(); break;
@@ -715,7 +761,7 @@
         allData = data;
         createLangToggle();
 
-        // 🆕 尝试从 URL 参数直接跳转
+        // 尝试从 URL 参数恢复状态
         const loadedFromUrl = tryLoadFromUrl();
 
         // 如果没有从 URL 加载成功，显示类别选择
