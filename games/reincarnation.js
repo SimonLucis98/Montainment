@@ -28,7 +28,6 @@
       width: 100%;
       position: relative;
       border: 1px solid #2a2e3a;
-      /* 确保内容不溢出 */
       overflow: hidden;
     }
     .top-bar {
@@ -41,18 +40,7 @@
       border-bottom: 1px solid #2a2e3a;
       margin-bottom: 1rem;
     }
-    .lang-btn {
-      background: #2a2e3a;
-      border: none;
-      padding: 0.2rem 0.8rem;
-      border-radius: 1rem;
-      color: #c0d0e0;
-      cursor: pointer;
-      font-size: 0.7rem;
-      font-weight: 700;
-      transition: 0.2s;
-    }
-    .lang-btn:hover { background: #3a4a5a; }
+    /* 移除右上角语言切换按钮，所以不再定义 .lang-btn */
     .story-box {
       background: #1a1e24;
       border-radius: 1.8rem;
@@ -146,25 +134,36 @@
     }
     .start-card h2 { color: #f5c542; font-size: 2.2rem; margin: 0.2rem 0; }
     .start-card p { font-size: 0.95rem; line-height: 1.6; color: #8a9aaa; }
+    /* 开始页面的语言切换按钮 ———— 更明显 */
     .start-lang-btn {
-      background: #2a2e3a;
-      border: none;
-      padding: 0.2rem 0.8rem;
-      border-radius: 1rem;
-      color: #c0d0e0;
+      background: #5a7a9a;
+      border: 2px solid #8ab0d0;
+      padding: 0.5rem 1.5rem;
+      border-radius: 2rem;
+      color: #ffffff;
       cursor: pointer;
-      font-size: 0.7rem;
+      font-size: 1rem;
       font-weight: 700;
       transition: 0.2s;
       margin-bottom: 0.8rem;
+      box-shadow: 0 4px 0 #1a2a3a;
     }
-    .start-lang-btn:hover { background: #3a4a5a; }
+    .start-lang-btn:hover {
+      background: #6a8aaa;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #1a2a3a;
+    }
+    .start-lang-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #1a2a3a;
+    }
     @media (max-width: 480px) {
       .game-wrapper { padding: 0.8rem; border-radius: 1.5rem; }
       .story-box { padding: 1.2rem; min-height: 240px; }
       .story-text { font-size: 0.95rem; }
       .choice-btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
       .status-grid { grid-template-columns: repeat(2,1fr); }
+      .start-lang-btn { font-size: 0.9rem; padding: 0.3rem 1rem; }
     }
   </style>
 </head>
@@ -172,7 +171,7 @@
 <div class="game-wrapper" id="gameWrapper">
   <div class="top-bar">
     <span id="gameTitle">🌌 轮回·双界</span>
-    <button class="lang-btn" id="langToggle">EN</button>
+    <!-- 已移除右上角语言切换按钮 -->
   </div>
   <div id="statusArea" class="status-grid hidden"></div>
   <div class="story-box">
@@ -183,6 +182,7 @@
     <div class="start-card">
       <h2 id="overlayTitle">🌱 轮回之门</h2>
       <p id="overlayDesc">你将在两个世界间穿梭，体验不同的命运。</p>
+      <!-- 语言切换按钮（明显样式） -->
       <button class="start-lang-btn" id="startLangToggle">EN</button>
       <br>
       <button class="btn" id="overlayBtn">开始</button>
@@ -215,7 +215,6 @@
         noRebirthOption: '🕊️ 不重生（离开轮回）',
         inheritInfo: '✨ 你带着前世 %s%% 的修为重生了！',
         continueBtn: '⏩ 继续',
-        // 修仙故事
         storyFortune1: '✨ 你在深山偶遇一位隐世高人，他指点你修炼迷津，你顿悟大增！',
         storyFortune2: '🌿 你发现了一株千年灵芝，服下后修为暴涨，体质也得到改善。',
         storyFortune3: '📜 你捡到一本上古残卷，上面记载了失传的功法，你的资质得到升华。',
@@ -235,7 +234,6 @@
         breakthroughSmall: '🎉 你突破了%s%s，修为更上一层楼！',
         breakthroughBig: '🌟 你成功突破至%s初期！大道可期！',
         maxRealm: '🏆 你已达神帝大圆满，三界无敌，万古流芳！',
-        // 属性名翻译
         attrRealm: '境界',
         attrCultivation: '修为',
         attrTalent: '资质',
@@ -256,7 +254,6 @@
         attrIntelligence: '智力',
         attrVitality: '体质',
         attrLuck: '幸运',
-        // 魔法故事
         storyMagicFortune1: '✨ 你在古墓中发现了一本魔法禁书，领悟了强大的咒语！',
         storyMagicFortune2: '🌿 精灵女王赐予你祝福，你的全属性都提升了。',
         storyMagicFortune3: '💎 你找到了传说级的魔晶，力量与智力大幅增加。',
@@ -396,7 +393,6 @@
     var overlayTitle = document.getElementById('overlayTitle');
     var overlayDesc = document.getElementById('overlayDesc');
     var overlayBtn = document.getElementById('overlayBtn');
-    var langToggle = document.getElementById('langToggle');
     var startLangToggle = document.getElementById('startLangToggle');
     var gameTitle = document.getElementById('gameTitle');
 
@@ -967,21 +963,19 @@
     function switchLanguage() {
       lang = (lang === 'zh') ? 'en' : 'zh';
       var label = lang === 'zh' ? 'EN' : '中文';
-      langToggle.textContent = label;
       startLangToggle.textContent = label;
       gameTitle.textContent = t('title');
       overlayTitle.textContent = lang === 'zh' ? '🌱 轮回之门' : '🌱 Reincarnation Gate';
       overlayDesc.textContent = lang === 'zh' ? '你将在两个世界间穿梭，体验不同的命运。' : 'You will travel between two worlds, experiencing different fates.';
-      // 更新开始按钮
       overlayBtn.textContent = t('btnStart');
-      // 重新渲染当前场景
+      // 重新渲染当前场景（如果游戏已经开始，这可以更新界面文字）
       if (game.screen === 'death') showDeathScene();
       else if (game.screen === 'cultivation') renderCultivation();
       else if (game.screen === 'magic') renderMagic();
       else if (game.screen === 'ending') noRebirth();
     }
 
-    langToggle.addEventListener('click', switchLanguage);
+    // 只有开始页面的语言切换按钮
     startLangToggle.addEventListener('click', switchLanguage);
 
     overlayBtn.addEventListener('click', function() {
@@ -994,7 +988,6 @@
     overlayTitle.textContent = '🌱 轮回之门';
     overlayDesc.textContent = '你将在两个世界间穿梭，体验不同的命运。';
     overlayBtn.textContent = t('btnStart');
-    langToggle.textContent = 'EN';
     startLangToggle.textContent = 'EN';
 
     window.game = game;
@@ -1011,7 +1004,6 @@
     var frame = document.createElement('iframe');
     frame.title = '轮回 · 双界';
     frame.setAttribute('allow', 'autoplay; fullscreen');
-    // 调整 iframe 样式：高度100%，无滚动条，最小高度600px
     frame.style.cssText = 'display:block;width:100%;height:100%;min-height:620px;border:0;border-radius:16px;background:#0a0a0c;overflow:hidden;';
     frame.srcdoc = gameHTML;
     wrapper.replaceChildren(frame);
