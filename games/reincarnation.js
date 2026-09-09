@@ -198,31 +198,72 @@
         noRebirthOption: '🕊️ 不重生（离开轮回）',
         inheritInfo: '✨ 你带着前世 %d%% 的修为重生了！',
         continueBtn: '⏩ 继续',
-        // 故事事件（中英双语）
-        // 机缘事件
+        // 修仙故事
         storyFortune1: '✨ 你在深山偶遇一位隐世高人，他指点你修炼迷津，你顿悟大增！',
         storyFortune2: '🌿 你发现了一株千年灵芝，服下后修为暴涨，体质也得到改善。',
         storyFortune3: '📜 你捡到一本上古残卷，上面记载了失传的功法，你的资质得到升华。',
         storyFortune4: '🌸 你误入桃花源，得到了仙人的祝福，全属性小幅提升。',
         storyFortune5: '💎 你在一处古洞府中发现了极品灵石，吸收后修为大增。',
-        // 危机事件
         storyCrisis1: '☠️ 你被一群妖兽围攻，虽侥幸逃脱但修为倒退，还受了重伤。',
         storyCrisis2: '🌊 渡河时遭遇暗流，你损失了一些灵药，悟性有所下降。',
         storyCrisis3: '🔥 洞府闭关时走火入魔，根骨受损，气感也减弱了。',
         storyCrisis4: '🌪️ 天降雷劫，你勉强抵挡，但机缘和魅力都受到了影响。',
         storyCrisis5: '💔 遭人暗算，经脉受损，资质和潜力都降低了。',
-        // 普通历练故事
         storyTrain1: '⚔️ 你与同门切磋，虽然辛苦但修为有所提升。',
         storyTrain2: '🏹 你猎杀了一只灵兽，吸收了它的精元，修为增加。',
         storyTrain3: '📖 你诵读道经，心有所感，修为精进。',
-        // 普通悟道故事
         storyInsight1: '🧘 你静坐参悟天地之理，悟性有所提高。',
         storyInsight2: '🌅 观日出，感天地之气，悟性增加。',
         storyInsight3: '🍃 听风吹竹叶，心有所悟，悟性提升。',
-        // 突破信息
         breakthroughSmall: '🎉 你突破了%s%s，修为更上一层楼！',
         breakthroughBig: '🌟 你成功突破至%s初期！大道可期！',
-        maxRealm: '🏆 你已达神帝大圆满，三界无敌，万古流芳！'
+        maxRealm: '🏆 你已达神帝大圆满，三界无敌，万古流芳！',
+        // 属性名翻译（用于状态栏和描述）
+        attrRealm: '境界',
+        attrCultivation: '修为',
+        attrTalent: '资质',
+        attrComprehension: '悟性',
+        attrRoot: '根骨',
+        attrSense: '气感',
+        attrCharm: '魅力',
+        attrFortune: '机缘',
+        attrPotential: '潜力',
+        attrLingGen: '灵根',
+        attrLevel: '等级',
+        attrExp: '经验',
+        attrClass: '职业',
+        attrElement: '元素',
+        attrWeapon: '武器',
+        attrStrength: '力量',
+        attrAgility: '敏捷',
+        attrIntelligence: '智力',
+        attrVitality: '体质',
+        attrLuck: '幸运',
+        // 魔法故事（中）
+        storyMagicFortune1: '✨ 你在古墓中发现了一本魔法禁书，领悟了强大的咒语！',
+        storyMagicFortune2: '🌿 精灵女王赐予你祝福，你的全属性都提升了。',
+        storyMagicFortune3: '💎 你找到了传说级的魔晶，力量与智力大幅增加。',
+        storyMagicFortune4: '🌟 流星雨之夜，你吸收了星辰之力，魅力与幸运大涨。',
+        storyMagicFortune5: '⚡ 雷神遗迹中你继承了雷电之力，敏捷与体质增强。',
+        storyMagicCrisis1: '☠️ 你被暗影刺客偷袭，重伤垂死，力量和体质下降。',
+        storyMagicCrisis2: '🌊 魔法风暴摧毁了你的装备，你损失了大量经验。',
+        storyMagicCrisis3: '🔥 你误入火元素领域，被灼伤，智力和魅力受损。',
+        storyMagicCrisis4: '🌪️ 空间裂缝撕裂了你的魔法书，你失去了部分知识。',
+        storyMagicCrisis5: '💔 被同伴背叛，你的幸运和敏捷大打折扣。',
+        storyMagicAdventure1: '⚔️ 你击败了一群哥布林，获得了经验。',
+        storyMagicAdventure2: '🏹 你猎杀了一头狮鹫，经验大涨。',
+        storyMagicAdventure3: '📜 你完成了一个悬赏任务，获得了经验和名声。',
+        storyMagicStudy1: '📚 你研读魔法典籍，智力提升了。',
+        storyMagicStudy2: '🧠 你练习法术控制，敏捷和智力都增加了。',
+        storyMagicStudy3: '🔮 你尝试新咒语，经验增加但体力消耗。',
+        storyMagicExplore1: '🧭 你探索了一片未知森林，发现了遗迹。',
+        storyMagicExplore2: '🗺️ 你找到了一张藏宝图，幸运提升。',
+        storyMagicExplore3: '⚱️ 你发现了一个古老传送门，经验大增。',
+        storyMagicTrain1: '💪 你进行力量训练，力量增加了。',
+        storyMagicTrain2: '🏋️ 你锻炼体能，体质和敏捷都有提高。',
+        storyMagicTrain3: '🧘 你练习冥想，智力和魅力略微提升。',
+        levelUp: '🎉 你升级了！当前等级 %d！',
+        commonEffect: '属性变化: '
       },
       en: {
         title: '🌌 Reincarnation · Dual Worlds',
@@ -264,7 +305,51 @@
         storyInsight3: '🍃 Listened to wind through bamboo, wisdom increased.',
         breakthroughSmall: '🎉 You broke through to %s %s, your power grows!',
         breakthroughBig: '🌟 You successfully reached %s Early stage! The Dao is within reach!',
-        maxRealm: '🏆 You have reached Divine Emperor Peak, unrivaled across the three realms!'
+        maxRealm: '🏆 You have reached Divine Emperor Peak, unrivaled across the three realms!',
+        attrRealm: 'Realm',
+        attrCultivation: 'Cultivation',
+        attrTalent: 'Talent',
+        attrComprehension: 'Comprehension',
+        attrRoot: 'Root Bone',
+        attrSense: 'Sense',
+        attrCharm: 'Charm',
+        attrFortune: 'Fortune',
+        attrPotential: 'Potential',
+        attrLingGen: 'Ling Gen',
+        attrLevel: 'Level',
+        attrExp: 'Exp',
+        attrClass: 'Class',
+        attrElement: 'Element',
+        attrWeapon: 'Weapon',
+        attrStrength: 'Strength',
+        attrAgility: 'Agility',
+        attrIntelligence: 'Intelligence',
+        attrVitality: 'Vitality',
+        attrLuck: 'Luck',
+        storyMagicFortune1: '✨ You discovered a forbidden magic tome in an ancient tomb, mastering powerful spells!',
+        storyMagicFortune2: '🌿 The Elf Queen blessed you, all stats increased.',
+        storyMagicFortune3: '💎 You found a legendary magic crystal, Strength and Intelligence greatly increased.',
+        storyMagicFortune4: '🌟 During a meteor shower, you absorbed stellar power, Charm and Luck boosted.',
+        storyMagicFortune5: '⚡ In the Thunder God ruins, you inherited lightning power, Agility and Vitality enhanced.',
+        storyMagicCrisis1: '☠️ Ambushed by a shadow assassin, you were gravely wounded, Strength and Vitality decreased.',
+        storyMagicCrisis2: '🌊 A magic storm destroyed your equipment, you lost a lot of experience.',
+        storyMagicCrisis3: '🔥 You wandered into a fire elemental domain, got burned, Intelligence and Charm damaged.',
+        storyMagicCrisis4: '🌪️ A space rift tore your spellbook, you lost knowledge.',
+        storyMagicCrisis5: '💔 Betrayed by a companion, your Luck and Agility suffered.',
+        storyMagicAdventure1: '⚔️ You defeated a group of goblins, gained experience.',
+        storyMagicAdventure2: '🏹 You hunted a griffin, experience soared.',
+        storyMagicAdventure3: '📜 You completed a bounty quest, gained experience and fame.',
+        storyMagicStudy1: '📚 You studied magic texts, Intelligence increased.',
+        storyMagicStudy2: '🧠 You practiced spell control, Agility and Intelligence increased.',
+        storyMagicStudy3: '🔮 You tried new incantations, experience increased but stamina consumed.',
+        storyMagicExplore1: '🧭 You explored an unknown forest, discovered ruins.',
+        storyMagicExplore2: '🗺️ You found a treasure map, Luck increased.',
+        storyMagicExplore3: '⚱️ You discovered an ancient portal, experience greatly increased.',
+        storyMagicTrain1: '💪 You trained strength, Strength increased.',
+        storyMagicTrain2: '🏋️ You exercised, Vitality and Agility improved.',
+        storyMagicTrain3: '🧘 You meditated, Intelligence and Charm slightly increased.',
+        levelUp: '🎉 You leveled up! Current level %d!',
+        commonEffect: 'Stat changes: '
       }
     };
 
@@ -301,7 +386,7 @@
       maxTurns: 999,
       dead: false,
       inherited: 0,
-      pendingEvent: false  // 是否正在展示事件
+      pendingEvent: false
     };
 
     // ========================= 常量 =========================
@@ -356,9 +441,8 @@
       hideStatus();
     }
 
-    // ========================= 修仙世界（核心改进） =========================
+    // ========================= 修仙世界 =========================
 
-    // 故事事件池（每次行动随机抽取）
     var cultivationStories = {
       fortune: function() {
         return pick([
@@ -394,8 +478,7 @@
       }
     };
 
-    // 应用效果到角色
-    function applyEffects(char, effects) {
+    function applyCultivationEffects(char, effects) {
       if (!effects) return;
       if (effects.修为 !== undefined) char.cultivationBase = clamp(char.cultivationBase + effects.修为, 0, 100);
       if (effects.资质 !== undefined) char.talent.资质 = clamp(char.talent.资质 + effects.资质, 0, 100);
@@ -405,71 +488,57 @@
       if (effects.魅力 !== undefined) char.talent.魅力 = clamp(char.talent.魅力 + effects.魅力, 0, 100);
       if (effects.机缘 !== undefined) char.talent.机缘 = clamp(char.talent.机缘 + effects.机缘, 0, 100);
       if (effects.潜力 !== undefined) char.talent.潜力 = clamp(char.talent.潜力 + effects.潜力, 0, 100);
-      // 灵根暂时不通过常规事件改变（可留作扩展）
     }
 
-    // 显示事件并等待点击“继续”
-    function showEventStory(story, callback) {
+    function showCultivationEvent(story) {
       game.pendingEvent = true;
-      // 显示事件文本，并添加“继续”按钮
       var text = story.text;
-      // 美化显示属性变化
       var changes = [];
       for (var key in story.effects) {
         var val = story.effects[key];
-        if (val > 0) changes.push('<span class="good">+' + val + ' ' + key + '</span>');
-        else if (val < 0) changes.push('<span class="bad">' + val + ' ' + key + '</span>');
+        var attrName = key; // 直接使用中文键名（已在语言包中）
+        if (val > 0) changes.push('<span class="good">+' + val + ' ' + attrName + '</span>');
+        else if (val < 0) changes.push('<span class="bad">' + val + ' ' + attrName + '</span>');
       }
-      if (changes.length) text += '\\n\\n属性变化: ' + changes.join(' ');
+      if (changes.length) text += '\\n\\n' + t('commonEffect') + changes.join(' ');
       render(text, [
         { label: t('continueBtn'), action: function() {
             game.pendingEvent = false;
-            // 应用效果
-            applyEffects(game.character, story.effects);
-            // 检查修为归零死亡
+            applyCultivationEffects(game.character, story.effects);
             if (game.character.cultivationBase <= 0) {
               deathInCultivation();
               return;
             }
-            // 检查突破条件
-            checkBreakthrough();
-            // 回到主界面
+            checkCultivationBreakthrough();
             renderCultivation();
           } 
         }
       ]);
     }
 
-    // 检查突破
-    function checkBreakthrough() {
+    function checkCultivationBreakthrough() {
       var char = game.character;
-      // 如果修为达到100且当前是大圆满阶段
       if (char.cultivationBase >= 100) {
         if (char.stage === 3) {
-          // 大圆满突破大境界
           if (char.realm < REALMS.length - 1) {
             char.realm++;
             char.stage = 0;
             char.cultivationBase = 0;
-            // 显示突破信息
             var msg = t('breakthroughBig', REALMS[char.realm]);
             render(msg, []);
-            // 短暂延迟后自动继续
             setTimeout(function() {
               if (!game.dead) renderCultivation();
             }, 1500);
             return true;
           } else {
-            // 已达最高境界
             render(t('maxRealm'), []);
             return true;
           }
         } else {
-          // 小境界突破
           char.stage++;
           char.cultivationBase = 0;
-          var msg = t('breakthroughSmall', REALMS[char.realm], STAGES[char.stage]);
-          render(msg, []);
+          var msg2 = t('breakthroughSmall', REALMS[char.realm], STAGES[char.stage]);
+          render(msg2, []);
           setTimeout(function() {
             if (!game.dead) renderCultivation();
           }, 1500);
@@ -479,7 +548,6 @@
       return false;
     }
 
-    // 启动修仙
     function startCultivation() {
       game.world = 'cultivation';
       game.screen = 'cultivation';
@@ -503,16 +571,13 @@
         var bonus = Math.floor(game.inherited * 100);
         talent.资质 = clamp(talent.资质 + bonus, 0, 100);
         talent.悟性 = clamp(talent.悟性 + bonus, 0, 100);
-        // 继承部分修为（直接增加修为）
-        // 这里我们在生成后手动加一点修为
         var initCult = Math.floor(game.inherited * 20);
         return {
           talent: talent,
           realm: 0,
           stage: 0,
           cultivationBase: clamp(initCult, 0, 100),
-          age: 16,
-          events: []
+          age: 16
         };
       }
       return {
@@ -520,8 +585,7 @@
         realm: 0,
         stage: 0,
         cultivationBase: 0,
-        age: 16,
-        events: []
+        age: 16
       };
     }
 
@@ -544,96 +608,67 @@
       var char = game.character;
       var realmName = REALMS[char.realm] || '???';
       var stageName = STAGES[char.stage] || '';
-      var status = {
-        '境界': realmName + ' ' + stageName,
-        '修为': char.cultivationBase + '/100',
-        '资质': char.talent.资质,
-        '悟性': char.talent.悟性,
-        '根骨': char.talent.根骨,
-        '气感': char.talent.气感,
-        '魅力': char.talent.魅力,
-        '机缘': char.talent.机缘,
-        '潜力': char.talent.潜力,
-        '灵根': char.talent.灵根.map(function(l){ return l.element + l.quality; }).join(', ')
-      };
+      var status = {};
+      status[t('attrRealm')] = realmName + ' ' + stageName;
+      status[t('attrCultivation')] = char.cultivationBase + '/100';
+      status[t('attrTalent')] = char.talent.资质;
+      status[t('attrComprehension')] = char.talent.悟性;
+      status[t('attrRoot')] = char.talent.根骨;
+      status[t('attrSense')] = char.talent.气感;
+      status[t('attrCharm')] = char.talent.魅力;
+      status[t('attrFortune')] = char.talent.机缘;
+      status[t('attrPotential')] = char.talent.潜力;
+      status[t('attrLingGen')] = char.talent.灵根.map(function(l){ return l.element + l.quality; }).join(', ');
       updateStatus(status);
 
-      var text = '🧘 修仙世界 · ' + realmName + ' ' + stageName + '\\n\\n';
+      var text = '🧘 ' + t('worldCultivation') + ' · ' + realmName + ' ' + stageName + '\\n\\n';
       text += '你今年' + char.age + '岁。\\n';
-      text += '修为进度：' + char.cultivationBase + '/100\\n';
+      text += t('attrCultivation') + '：' + char.cultivationBase + '/100\\n';
 
       var choices = [
-        { label: '⚔️ 历练', action: function() { actionTrain(); } },
-        { label: '📖 悟道', action: function() { actionInsight(); } },
-        { label: '🍀 机缘', action: function() { actionFortune(); } }
+        { label: '⚔️ ' + t('attrTalent') + '（历练）', action: function() { actionTrain(); } },
+        { label: '📖 ' + t('attrComprehension') + '（悟道）', action: function() { actionInsight(); } },
+        { label: '🍀 ' + t('attrFortune') + '（机缘）', action: function() { actionFortune(); } }
       ];
-      // 只有当修为达到100且是大圆满时才显示突破按钮，但我们让系统自动突破，所以不显示额外按钮
       render(text, choices);
     }
 
-    // 行动函数：历练
     function actionTrain() {
       if (game.pendingEvent) return;
       var char = game.character;
-      // 随机选择普通训练事件（80%几率）或奇遇/危机（各10%）
       var roll = Math.random();
       var story;
-      if (roll < 0.1) {
-        // 奇遇
-        story = cultivationStories.fortune();
-      } else if (roll < 0.2) {
-        // 危机
-        story = cultivationStories.crisis();
-      } else {
-        // 普通历练
-        story = cultivationStories.train();
-      }
+      if (roll < 0.1) story = cultivationStories.fortune();
+      else if (roll < 0.2) story = cultivationStories.crisis();
+      else story = cultivationStories.train();
       char.age += rand(1,3);
-      showEventStory(story, function() {
-        // callback 在继续按钮中处理
-      });
+      showCultivationEvent(story);
     }
 
-    // 行动：悟道
     function actionInsight() {
       if (game.pendingEvent) return;
       var char = game.character;
       var roll = Math.random();
       var story;
-      if (roll < 0.1) {
-        story = cultivationStories.fortune();
-      } else if (roll < 0.2) {
-        story = cultivationStories.crisis();
-      } else {
-        story = cultivationStories.insight();
-      }
+      if (roll < 0.1) story = cultivationStories.fortune();
+      else if (roll < 0.2) story = cultivationStories.crisis();
+      else story = cultivationStories.insight();
       char.age += 1;
-      showEventStory(story, function() {});
+      showCultivationEvent(story);
     }
 
-    // 行动：机缘（原寻药）
     function actionFortune() {
       if (game.pendingEvent) return;
       var char = game.character;
-      // 机缘行动有更高概率触发奇遇，但也有可能遇到危机
       var roll = Math.random();
       var story;
-      if (roll < 0.4) {
-        story = cultivationStories.fortune();
-      } else if (roll < 0.6) {
-        story = cultivationStories.crisis();
-      } else {
-        // 普通事件（也可能是一些小收获）
-        story = { 
-          text: '🍃 你在山间漫步，心旷神怡，修为略有精进。',
-          effects: { 修为: rand(3,10) }
-        };
-      }
+      if (roll < 0.4) story = cultivationStories.fortune();
+      else if (roll < 0.6) story = cultivationStories.crisis();
+      else story = { text: '🍃 你在山间漫步，心旷神怡，修为略有精进。', effects: { 修为: rand(3,10) } };
       char.age += rand(1,2);
-      showEventStory(story, function() {});
+      showCultivationEvent(story);
     }
 
-    // ----- 修仙死亡 -----
     function deathInCultivation() {
       game.screen = 'death';
       hideStatus();
@@ -654,7 +689,130 @@
       ]);
     }
 
-    // ========================= 魔法世界（简化版，保持一致性） =========================
+    // ========================= 魔法世界（全新完整故事系统） =========================
+
+    var magicStories = {
+      fortune: function() {
+        return pick([
+          { text: t('storyMagicFortune1'), effects: { 智力: rand(3,6), 力量: rand(2,4), 魅力: rand(1,3) } },
+          { text: t('storyMagicFortune2'), effects: { 力量: rand(2,4), 敏捷: rand(2,4), 智力: rand(2,4), 体质: rand(2,4), 魅力: rand(2,4), 幸运: rand(2,4) } },
+          { text: t('storyMagicFortune3'), effects: { 力量: rand(4,8), 智力: rand(4,8), 幸运: rand(1,3) } },
+          { text: t('storyMagicFortune4'), effects: { 魅力: rand(5,9), 幸运: rand(4,7), 智力: rand(1,3) } },
+          { text: t('storyMagicFortune5'), effects: { 敏捷: rand(4,7), 体质: rand(3,6), 幸运: rand(2,4) } }
+        ]);
+      },
+      crisis: function() {
+        return pick([
+          { text: t('storyMagicCrisis1'), effects: { 力量: -rand(2,5), 体质: -rand(3,6), 魅力: -rand(1,3) } },
+          { text: t('storyMagicCrisis2'), effects: { 经验: -rand(10,30), 智力: -rand(1,2) } },
+          { text: t('storyMagicCrisis3'), effects: { 智力: -rand(2,5), 魅力: -rand(2,4), 力量: -rand(1,2) } },
+          { text: t('storyMagicCrisis4'), effects: { 智力: -rand(3,6), 幸运: -rand(2,4) } },
+          { text: t('storyMagicCrisis5'), effects: { 幸运: -rand(3,6), 敏捷: -rand(2,4), 魅力: -rand(1,2) } }
+        ]);
+      },
+      adventure: function() {
+        return pick([
+          { text: t('storyMagicAdventure1'), effects: { 经验: rand(10,25), 力量: rand(1,2) } },
+          { text: t('storyMagicAdventure2'), effects: { 经验: rand(20,40), 敏捷: rand(1,3) } },
+          { text: t('storyMagicAdventure3'), effects: { 经验: rand(15,35), 魅力: rand(1,2) } }
+        ]);
+      },
+      study: function() {
+        return pick([
+          { text: t('storyMagicStudy1'), effects: { 智力: rand(3,6), 经验: rand(5,15) } },
+          { text: t('storyMagicStudy2'), effects: { 敏捷: rand(2,4), 智力: rand(2,4), 经验: rand(5,10) } },
+          { text: t('storyMagicStudy3'), effects: { 经验: rand(15,30), 体质: -rand(1,3) } }
+        ]);
+      },
+      explore: function() {
+        return pick([
+          { text: t('storyMagicExplore1'), effects: { 经验: rand(10,25), 幸运: rand(1,3) } },
+          { text: t('storyMagicExplore2'), effects: { 幸运: rand(3,6), 经验: rand(5,15) } },
+          { text: t('storyMagicExplore3'), effects: { 经验: rand(25,50), 智力: rand(1,2) } }
+        ]);
+      },
+      train: function() {
+        return pick([
+          { text: t('storyMagicTrain1'), effects: { 力量: rand(3,6), 体质: rand(1,2) } },
+          { text: t('storyMagicTrain2'), effects: { 体质: rand(3,5), 敏捷: rand(2,4) } },
+          { text: t('storyMagicTrain3'), effects: { 智力: rand(2,4), 魅力: rand(1,3) } }
+        ]);
+      }
+    };
+
+    function applyMagicEffects(char, effects) {
+      if (!effects) return;
+      if (effects.力量 !== undefined) char.strength = clamp(char.strength + effects.力量, 0, 100);
+      if (effects.敏捷 !== undefined) char.agility = clamp(char.agility + effects.敏捷, 0, 100);
+      if (effects.智力 !== undefined) char.intelligence = clamp(char.intelligence + effects.智力, 0, 100);
+      if (effects.体质 !== undefined) char.vitality = clamp(char.vitality + effects.体质, 0, 100);
+      if (effects.魅力 !== undefined) char.charm = clamp(char.charm + effects.魅力, 0, 100);
+      if (effects.幸运 !== undefined) char.luck = clamp(char.luck + effects.幸运, 0, 100);
+      if (effects.经验 !== undefined) char.exp = Math.max(0, char.exp + effects.经验);
+      // 检查升级（在事件应用后）
+    }
+
+    function showMagicEvent(story) {
+      game.pendingEvent = true;
+      var text = story.text;
+      var changes = [];
+      for (var key in story.effects) {
+        var val = story.effects[key];
+        var attrName = '';
+        if (key === '经验') attrName = t('attrExp');
+        else if (key === '力量') attrName = t('attrStrength');
+        else if (key === '敏捷') attrName = t('attrAgility');
+        else if (key === '智力') attrName = t('attrIntelligence');
+        else if (key === '体质') attrName = t('attrVitality');
+        else if (key === '魅力') attrName = t('attrCharm');
+        else if (key === '幸运') attrName = t('attrLuck');
+        else attrName = key;
+        if (val > 0) changes.push('<span class="good">+' + val + ' ' + attrName + '</span>');
+        else if (val < 0) changes.push('<span class="bad">' + val + ' ' + attrName + '</span>');
+      }
+      if (changes.length) text += '\\n\\n' + t('commonEffect') + changes.join(' ');
+      render(text, [
+        { label: t('continueBtn'), action: function() {
+            game.pendingEvent = false;
+            // 先应用效果
+            applyMagicEffects(game.character, story.effects);
+            // 检查升级
+            var char = game.character;
+            while (char.exp >= char.level * 10) {
+              char.exp -= char.level * 10;
+              char.level++;
+              // 升级时增加随机属性（可选）
+              var attrUp = pick(['strength','agility','intelligence','vitality']);
+              char[attrUp] += rand(1,3);
+              // 显示升级消息（使用事件方式，但此时还在事件内，需要特殊处理）
+              // 我们使用一个标记，然后显示升级消息
+              showLevelUpMessage(char.level);
+              return; // 升级后返回，不再继续
+            }
+            // 检查死亡
+            if (char.exp <= 0 && char.level <= 1) {
+              deathInMagic();
+              return;
+            }
+            renderMagic();
+          } 
+        }
+      ]);
+    }
+
+    function showLevelUpMessage(newLevel) {
+      // 清空当前界面，只显示升级信息
+      game.pendingEvent = true;
+      var msg = t('levelUp', newLevel);
+      render(msg, [
+        { label: t('continueBtn'), action: function() {
+            game.pendingEvent = false;
+            renderMagic();
+          } 
+        }
+      ]);
+    }
+
     function startMagic() {
       game.world = 'magic';
       game.screen = 'magic';
@@ -699,122 +857,54 @@
     }
 
     function renderMagic() {
-      if (game.screen === 'death') return;
+      if (game.screen === 'death' || game.pendingEvent) return;
       var char = game.character;
       var clsName = char.class === 'mage' ? t('classMage') : char.class === 'warrior' ? t('classWarrior') : t('classDual');
-      var status = {
-        '职业': clsName,
-        '等级': char.level,
-        '经验': char.exp + '/' + (char.level * 10),
-        '元素': char.elements.length ? char.elements.join(', ') : '无',
-        '武器': char.weapon || '无',
-        '力量': char.strength,
-        '敏捷': char.agility,
-        '智力': char.intelligence,
-        '体质': char.vitality,
-        '魅力': char.charm,
-        '幸运': char.luck
-      };
+      var status = {};
+      status[t('attrClass')] = clsName;
+      status[t('attrLevel')] = char.level;
+      status[t('attrExp')] = char.exp + '/' + (char.level * 10);
+      status[t('attrElement')] = char.elements.length ? char.elements.join(', ') : '无';
+      status[t('attrWeapon')] = char.weapon || '无';
+      status[t('attrStrength')] = char.strength;
+      status[t('attrAgility')] = char.agility;
+      status[t('attrIntelligence')] = char.intelligence;
+      status[t('attrVitality')] = char.vitality;
+      status[t('attrCharm')] = char.charm;
+      status[t('attrLuck')] = char.luck;
       updateStatus(status);
 
-      var text = '🔮 魔法世界 · ' + clsName + '\\n\\n';
-      text += '等级 ' + char.level + '，经验 ' + char.exp + '/' + (char.level * 10) + '\\n';
-      text += '元素：' + (char.elements.length ? char.elements.join('、') : '无') + '\\n';
-      text += '武器：' + (char.weapon || '无') + '\\n';
+      var text = '🔮 ' + t('worldMagic') + ' · ' + clsName + '\\n\\n';
+      text += t('attrLevel') + ' ' + char.level + '，' + t('attrExp') + ' ' + char.exp + '/' + (char.level * 10) + '\\n';
+      text += t('attrElement') + '：' + (char.elements.length ? char.elements.join('、') : '无') + '\\n';
+      text += t('attrWeapon') + '：' + (char.weapon || '无') + '\\n';
 
       var choices = [
-        { label: '⚔️ 冒险', action: function() { magicAdventure(); } },
-        { label: '📚 学习', action: function() { magicStudy(); } },
-        { label: '🧙 探索', action: function() { magicExplore(); } },
-        { label: '💪 锻炼', action: function() { magicTrain(); } }
+        { label: '⚔️ ' + t('attrStrength') + '（冒险）', action: function() { magicAction('adventure'); } },
+        { label: '📚 ' + t('attrIntelligence') + '（学习）', action: function() { magicAction('study'); } },
+        { label: '🧙 ' + t('attrLuck') + '（探索）', action: function() { magicAction('explore'); } },
+        { label: '💪 ' + t('attrVitality') + '（锻炼）', action: function() { magicAction('train'); } }
       ];
       render(text, choices);
     }
 
-    function magicAdventure() {
+    function magicAction(type) {
       if (game.pendingEvent) return;
       var char = game.character;
-      var gain = rand(5, 15) + Math.floor(char.level/2);
-      char.exp += gain;
-      // 升级处理
-      while (char.exp >= char.level * 10) {
-        char.exp -= char.level * 10;
-        char.level++;
-        var attr = pick(['strength','agility','intelligence','vitality']);
-        char[attr] += rand(1,3);
-        render('🎉 你升级了！当前等级 ' + char.level, []);
-        setTimeout(renderMagic, 800);
-        return;
-      }
-      // 随机事件
-      if (Math.random() < 0.15) {
-        if (Math.random() < 0.5) {
-          // 奇遇
-          var gain2 = rand(10, 30);
-          char.exp += gain2;
-          render('✨ 奇遇！你发现了宝藏，经验大增！', []);
-          setTimeout(renderMagic, 800);
-        } else {
-          var loss = rand(5, 15);
-          char.exp = Math.max(0, char.exp - loss);
-          if (char.exp <= 0 && char.level <= 1) {
-            deathInMagic();
-            return;
-          }
-          render('💀 你遭遇了危险，损失了一些经验。', []);
-          setTimeout(renderMagic, 800);
-        }
-        return;
-      }
-      renderMagic();
-    }
-
-    function magicStudy() {
-      if (game.pendingEvent) return;
-      var char = game.character;
-      var allEl = t('elements');
-      if (char.elements.length < allEl.length && Math.random() < 0.3) {
-        var available = allEl.filter(function(e) { return char.elements.indexOf(e) === -1; });
-        if (available.length) {
-          var newEl = pick(available);
-          char.elements.push(newEl);
-          render('📖 你领悟了新的元素：' + newEl, []);
-          setTimeout(renderMagic, 800);
-          return;
-        }
-      }
-      char.intelligence += rand(1,3);
-      render('📖 你刻苦学习，智力提升了。', []);
-      setTimeout(renderMagic, 800);
-    }
-
-    function magicExplore() {
-      if (game.pendingEvent) return;
-      var char = game.character;
-      if (Math.random() < 0.3) {
-        var gain = rand(10, 30);
-        char.exp += gain;
-        render('✨ 你发现了古代遗迹，获得大量经验！', []);
-        setTimeout(renderMagic, 800);
+      var roll = Math.random();
+      var story;
+      if (roll < 0.1) {
+        story = magicStories.fortune();
+      } else if (roll < 0.2) {
+        story = magicStories.crisis();
       } else {
-        var loss = rand(5, 15);
-        char.exp = Math.max(0, char.exp - loss);
-        if (char.exp <= 0 && char.level <= 1) {
-          deathInMagic();
-          return;
-        }
-        render('💀 你遭遇了陷阱，损失了一些经验。', []);
-        setTimeout(renderMagic, 800);
+        if (type === 'adventure') story = magicStories.adventure();
+        else if (type === 'study') story = magicStories.study();
+        else if (type === 'explore') story = magicStories.explore();
+        else if (type === 'train') story = magicStories.train();
+        else story = magicStories.adventure();
       }
-    }
-
-    function magicTrain() {
-      if (game.pendingEvent) return;
-      var char = game.character;
-      var attr = pick(['strength','agility','vitality']);
-      char[attr] += rand(1,4);
-      render('💪 你锻炼了' + attr + '，属性提升。', []);
-      setTimeout(renderMagic, 800);
+      showMagicEvent(story);
     }
 
     function deathInMagic() {
