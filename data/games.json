@@ -64,6 +64,19 @@
       "sortOrder": 5,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788803217/wnpwkbl9b64dicnyoxfr.jpg"
+    },
+    {
+      "id": "6",
+      "icon": "",
+      "titleZh": "轮回·双界",
+      "titleEn": "Reincarnation · Dual Worlds",
+      "descriptionZh": "穿梭双界突破轮回，掌握宿命抉择，体验极致奇幻冒险！",
+      "descriptionEn": "Traverse dual worlds, break the cycle of reincarnation, and master your destiny!",
+      "type": "js",
+      "entry": "games/reincarnation.js",
+      "sortOrder": 6,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788954583/wknxsqitwry5jtynqnk7.png"
     }
   ]
 }
