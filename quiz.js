@@ -10,6 +10,8 @@
  *   答题过程（题目切换/重做）保持无刷新，兼顾体验与收入。
  * 
  * 🆕 宽屏优化：做题页选项在电脑上变为两列，填满左右空白。
+ * 
+ * 🆕 修复：返回试卷列表按钮现在正常跳转。
  */
 (function() {
   'use strict';
@@ -622,11 +624,12 @@
       });
     });
 
+    // ===== 🆕 修复：返回试卷列表按钮 =====
     document.getElementById('back-to-papers-from-quiz').addEventListener('click', function() {
-      // 返回试卷列表是导航步骤，整页跳转
-      // 但 currentPaperId 已存在，此时要清掉 paper 参数
+      // 清空 paper ID，切换 uiState 为 'paper' 以触发整页跳转
       currentPaperId = null;
-      updateUrl(); // 整页跳转
+      uiState = 'paper';   // 临时改为 paper 状态，让 updateUrl 执行整页跳转
+      updateUrl();         // 页面刷新后，tryLoadFromUrl 会检测到没有 paper 参数，自动渲染试卷列表
     });
   }
 
@@ -676,6 +679,7 @@
     document.getElementById('back-to-papers-from-result').addEventListener('click', function() {
       // 返回试卷列表，导航步骤，整页跳转（清掉 paper 参数）
       currentPaperId = null;
+      uiState = 'paper';   // 确保整页跳转
       updateUrl(); // 整页跳转
     });
   }
