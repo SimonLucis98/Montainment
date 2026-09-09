@@ -21,7 +21,7 @@
     }
     .game-wrapper {
       background: #14161a;
-      padding: 1.5rem;
+      padding: 1.2rem 1.5rem 1.5rem;
       border-radius: 2.5rem;
       box-shadow: 0 20px 50px rgba(0,0,0,0.9);
       max-width: 680px;
@@ -36,16 +36,15 @@
       align-items: center;
       color: #8a9aaa;
       font-size: 0.8rem;
-      padding: 0 0.2rem 0.8rem;
+      padding: 0 0.2rem 0.6rem;
       border-bottom: 1px solid #2a2e3a;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
-    /* 移除右上角语言切换按钮，所以不再定义 .lang-btn */
     .story-box {
       background: #1a1e24;
       border-radius: 1.8rem;
-      padding: 1.8rem;
-      min-height: 320px;
+      padding: 1.5rem;
+      min-height: 270px;
       border: 1px solid #2a2e3a;
       box-shadow: inset 0 4px 12px rgba(0,0,0,0.6);
       display: flex;
@@ -54,8 +53,8 @@
     }
     .story-text {
       color: #e0e8f0;
-      font-size: 1.05rem;
-      line-height: 1.8;
+      font-size: 1rem;
+      line-height: 1.7;
       white-space: pre-wrap;
       word-break: break-word;
     }
@@ -65,16 +64,16 @@
     .choices {
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
-      margin-top: 1.5rem;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
     }
     .choice-btn {
       background: #242a32;
       border: 1px solid #3a4250;
       border-radius: 1.2rem;
-      padding: 0.8rem 1.2rem;
+      padding: 0.7rem 1.2rem;
       color: #d0dce8;
-      font-size: 1rem;
+      font-size: 0.95rem;
       text-align: left;
       cursor: pointer;
       transition: 0.2s;
@@ -85,13 +84,13 @@
     .choice-btn:active { transform: scale(0.98); }
     .status-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
-      gap: 0.3rem;
+      grid-template-columns: repeat(auto-fill, minmax(90px,1fr));
+      gap: 0.2rem 0.4rem;
       background: #12161c;
       border-radius: 1rem;
-      padding: 0.6rem 0.8rem;
-      margin-bottom: 0.8rem;
-      font-size: 0.75rem;
+      padding: 0.4rem 0.6rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.7rem;
       color: #8a9aaa;
       border: 1px solid #2a2e3a;
     }
@@ -99,10 +98,10 @@
     .btn {
       background: #4a6a8a;
       border: none;
-      padding: 0.7rem 2rem;
+      padding: 0.6rem 1.8rem;
       border-radius: 3rem;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #0a0c10;
       cursor: pointer;
       transition: 0.2s;
@@ -134,7 +133,6 @@
     }
     .start-card h2 { color: #f5c542; font-size: 2.2rem; margin: 0.2rem 0; }
     .start-card p { font-size: 0.95rem; line-height: 1.6; color: #8a9aaa; }
-    /* 开始页面的语言切换按钮 ———— 更明显 */
     .start-lang-btn {
       background: #5a7a9a;
       border: 2px solid #8ab0d0;
@@ -159,10 +157,10 @@
     }
     @media (max-width: 480px) {
       .game-wrapper { padding: 0.8rem; border-radius: 1.5rem; }
-      .story-box { padding: 1.2rem; min-height: 240px; }
-      .story-text { font-size: 0.95rem; }
-      .choice-btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
-      .status-grid { grid-template-columns: repeat(2,1fr); }
+      .story-box { padding: 1rem; min-height: 210px; }
+      .story-text { font-size: 0.9rem; }
+      .choice-btn { padding: 0.5rem 0.8rem; font-size: 0.85rem; }
+      .status-grid { grid-template-columns: repeat(2,1fr); font-size: 0.65rem; }
       .start-lang-btn { font-size: 0.9rem; padding: 0.3rem 1rem; }
     }
   </style>
@@ -171,7 +169,6 @@
 <div class="game-wrapper" id="gameWrapper">
   <div class="top-bar">
     <span id="gameTitle">🌌 轮回·双界</span>
-    <!-- 已移除右上角语言切换按钮 -->
   </div>
   <div id="statusArea" class="status-grid hidden"></div>
   <div class="story-box">
@@ -182,7 +179,6 @@
     <div class="start-card">
       <h2 id="overlayTitle">🌱 轮回之门</h2>
       <p id="overlayDesc">你将在两个世界间穿梭，体验不同的命运。</p>
-      <!-- 语言切换按钮（明显样式） -->
       <button class="start-lang-btn" id="startLangToggle">EN</button>
       <br>
       <button class="btn" id="overlayBtn">开始</button>
@@ -968,14 +964,12 @@
       overlayTitle.textContent = lang === 'zh' ? '🌱 轮回之门' : '🌱 Reincarnation Gate';
       overlayDesc.textContent = lang === 'zh' ? '你将在两个世界间穿梭，体验不同的命运。' : 'You will travel between two worlds, experiencing different fates.';
       overlayBtn.textContent = t('btnStart');
-      // 重新渲染当前场景（如果游戏已经开始，这可以更新界面文字）
       if (game.screen === 'death') showDeathScene();
       else if (game.screen === 'cultivation') renderCultivation();
       else if (game.screen === 'magic') renderMagic();
       else if (game.screen === 'ending') noRebirth();
     }
 
-    // 只有开始页面的语言切换按钮
     startLangToggle.addEventListener('click', switchLanguage);
 
     overlayBtn.addEventListener('click', function() {
@@ -983,7 +977,6 @@
       initGame();
     });
 
-    // 初始显示overlay
     overlay.classList.remove('hidden');
     overlayTitle.textContent = '🌱 轮回之门';
     overlayDesc.textContent = '你将在两个世界间穿梭，体验不同的命运。';
@@ -1004,7 +997,8 @@
     var frame = document.createElement('iframe');
     frame.title = '轮回 · 双界';
     frame.setAttribute('allow', 'autoplay; fullscreen');
-    frame.style.cssText = 'display:block;width:100%;height:100%;min-height:620px;border:0;border-radius:16px;background:#0a0a0c;overflow:hidden;';
+    // 将高度增至 780px，确保魔法世界完整显示
+    frame.style.cssText = 'display:block;width:100%;height:780px;border:0;border-radius:16px;background:#0a0a0c;overflow:hidden;';
     frame.srcdoc = gameHTML;
     wrapper.replaceChildren(frame);
     return frame;
