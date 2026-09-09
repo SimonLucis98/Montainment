@@ -8,6 +8,8 @@
  * 
  * 🆕 广告友好：导航步骤（类别/科目/难度/试卷）整页跳转刷新广告，
  *   答题过程（题目切换/重做）保持无刷新，兼顾体验与收入。
+ * 
+ * 🆕 宽屏优化：做题页选项在电脑上变为两列，填满左右空白。
  */
 (function() {
   'use strict';
@@ -245,16 +247,6 @@
       card.addEventListener('click', function() {
         selectedCategoryId = catId;
         updateUrl(); // 整页跳转（广告刷新）
-        // 注意：updateUrl 会跳转页面，所以后面的 renderSubjectSelection 不会执行
-        // 但为了避免意外，仍然保留，实际上跳转后页面会重新加载，由 tryLoadFromUrl 恢复
-        // 如果因为某些原因未跳转（比如被拦截），则手动调用
-        // 但这里的逻辑是：updateUrl 会执行 location.href，页面会刷新
-        // 所以下面的调用不会执行。为了保险，保留。
-        // 但为了逻辑清晰，我们让 updateUrl 负责跳转，然后由新页面加载时从 URL 恢复。
-        // 因此这里不再调用 renderSubjectSelection，因为页面会刷新。
-        // 实际上，由于 updateUrl 会立即跳转，后续代码不会执行。
-        // 但如果不想刷新，可以注释掉 updateUrl 的跳转部分，但那样不符合广告刷新需求。
-        // 所以我们保持现状：点击后直接刷新。
       });
       card.addEventListener('mouseenter', function() {
         if (!hasData) return;
@@ -552,7 +544,7 @@
         ${t('选择题', 'Multiple Choice')}
       </span>
       <div style="font-size:18px; font-weight:600; color:#0b1c33; line-height:1.6; padding:4px 0 2px;">${questionText}</div>
-      <div style="display:flex; flex-direction:column; gap:10px; margin-top:2px;">
+      <div class="quiz-options-grid">
         ${options.map((opt, i) => `
           <button class="quiz-option" data-index="${i}" style="display:flex; align-items:center; gap:12px; padding:14px 18px; border:2px solid #e6ecf3; border-radius:16px; background:#fafcff; font-size:16px; font-weight:500; color:#0b1c33; cursor:pointer; transition:all 0.15s; text-align:left; font-family:inherit; line-height:1.4; width:100%;">
             <span style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:#e6ecf3; font-size:13px; font-weight:700; color:#2c3e5c; flex-shrink:0; transition:0.15s;">${letters[i]}</span>
