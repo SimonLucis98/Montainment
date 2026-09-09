@@ -9,10 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .game-hall { max-width: 900px; margin: 0 auto; }
+    .game-hall { max-width: 1400px; margin: 0 auto; padding: 0 24px; }  /* ← 从 900px → 1400px */
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));  /* 卡片大小不变 */
       gap: 24px;
       margin-top: 8px;
     }
@@ -125,7 +125,19 @@
       font-weight: 700;
       margin-left: 6px;
     }
-    @media (max-width:600px) {
+
+    /* ===== 响应式：卡片保持 260px 最小宽度，容器自动适配 ===== */
+    @media (max-width: 1480px) {
+      .game-hall { max-width: 1160px; }  /* 5列 → 4列 (260×4 + 24×3 = 1112) */
+    }
+    @media (max-width: 1200px) {
+      .game-hall { max-width: 900px; }   /* 4列 → 3列 (260×3 + 24×2 = 828) */
+    }
+    @media (max-width: 860px) {
+      .game-hall { max-width: 600px; }   /* 3列 → 2列 (260×2 + 24 = 544) */
+    }
+    @media (max-width: 600px) {
+      .game-hall { max-width: 100%; padding: 0 16px; }
       .game-grid {
         grid-template-columns: 1fr 1fr;
         gap: 14px;
@@ -143,7 +155,7 @@
         font-size: 36px;
       }
     }
-    @media (max-width:420px) {
+    @media (max-width: 420px) {
       .game-grid {
         gap: 10px;
       }
@@ -185,7 +197,7 @@
       <p data-i18n="game.desc">点击任意游戏卡片，进入独立游戏页面，享受完整游戏体验！</p>
     </div>
 
-    <div class="container game-hall">
+    <div class="game-hall">
       <div class="game-grid" id="gameGrid"></div>
     </div>
   </main>
@@ -257,10 +269,8 @@
           const linkUrl = isExternal ? game.entry : `game-play.html?game=${encodeURIComponent(game.id)}`;
           const linkTarget = isExternal ? 'target="_blank"' : '';
 
-          // ===== 🔥 关键修改：使用 i18n.t 翻译 "外部" 标签 =====
           const externalBadge = isExternal ? `<span class="external-badge">${window.i18n ? i18n.t('game.external_badge') : '🔗 外部'}</span>` : '';
 
-          // 类型标签
           let typeKey = '';
           if (game.type === 'js') {
             typeKey = 'game.type_js';
