@@ -80,11 +80,22 @@
       justify-content: center;
       font-size: 36px;
       color: rgba(255,255,255,0.3);
+      overflow: hidden;
     }
     .game-recommendations .rec-card .rec-cover img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover;  /* ← 🆕 关键：强制裁剪填充，统一大小 */
+    }
+    .game-recommendations .rec-card .rec-cover .rec-emoji {
+      font-size: 52px;
+      opacity: 0.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #3d3a35, #5a4f45);
     }
     .game-recommendations .rec-card .rec-info {
       padding: 12px 14px 14px;
@@ -172,7 +183,7 @@
 
       <!-- ===== 🆕 更多游戏推荐区域 ===== -->
       <div class="game-recommendations" id="gameRecommendations" style="display:none;">
-        <div class="rec-title">🎮 <span data-i18n="gameplay.more_games">更多游戏</span></div>
+        <div class="rec-title"><span data-i18n="gameplay.more_games">更多游戏</span></div>
         <div class="rec-grid" id="recGrid"></div>
       </div>
     </div>
@@ -225,7 +236,7 @@
           const icon = g.icon || '🎮';
           const coverHtml = g.cover && g.cover.trim() !== ''
             ? `<img src="${g.cover}" alt="${title}" />`
-            : `<span style="font-size:36px;opacity:0.4;">${icon}</span>`;
+            : `<span class="rec-emoji">${icon}</span>`;
 
           html += `
             <a href="game-play.html?game=${g.id}" class="rec-card">
