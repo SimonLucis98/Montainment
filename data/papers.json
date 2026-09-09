@@ -540,7 +540,258 @@
                   "id": 3,
                   "titleZh": "试卷 3：基础判断句与名词助词",
                   "titleEn": "Paper 3: Basic Sentences & Noun Particles",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "“わたしは学生（がくせい）です”的意思是？",
+                        "en": "What does \"わたしは学生（がくせい）です\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我是老师",
+                          "我是学生",
+                          "我是医生",
+                          "我是公司职员"
+                        ],
+                        "en": [
+                          "I am a teacher",
+                          "I am a student",
+                          "I am a doctor",
+                          "I am an office worker"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "わたし（我）+ は（提示主语）+ がくせい（学生）+ です（是）= 我是学生",
+                        "en": "わたし (I) + は (topic particle) + 学生/がくせい (student) + です (am/is/are) = \"I am a student.\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "助词“は”作为主语提示助词时，实际发音是？",
+                        "en": "How is the particle \"は\" pronounced when used as a topic marker?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ha",
+                          "wa",
+                          "ba",
+                          "ma"
+                        ],
+                        "en": [
+                          "ha",
+                          "wa",
+                          "ba",
+                          "ma"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "假名“は”作为句中助词使用时，读作“wa”",
+                        "en": "When \"は\" functions as a grammatical particle in a sentence, it is pronounced as \"wa\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "否定句“〜ではありません”表示什么意思？",
+                        "en": "What does the negative ending \"〜ではありません\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是……",
+                          "不是……",
+                          "有……",
+                          "去……"
+                        ],
+                        "en": [
+                          "Is...",
+                          "Is not...",
+                          "To have...",
+                          "To go..."
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ではありません（Dewa arimasen）是判断句 です 的礼貌否定形式，“不是……”",
+                        "en": "ではありません (Dewa arimasen) is the polite negative form of です (\"is not / am not\")"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“先生（せんせい）”在日语中通常指什么职业？",
+                        "en": "What profession does \"先生（せんせい）\" usually refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "学生",
+                          "老师/医生",
+                          "司机",
+                          "厨师"
+                        ],
+                        "en": [
+                          "Student",
+                          "Teacher / Doctor",
+                          "Driver",
+                          "Chef"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "先生（Sensei）在日语中用来尊称教师、医生、律师等专业人士",
+                        "en": "先生 (Sensei) is used as an honorific title for teachers, doctors, lawyers, and professionals"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“本（ほん）”对应的中文含义是？",
+                        "en": "What does \"本（ほん）\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "笔",
+                          "纸",
+                          "书",
+                          "包"
+                        ],
+                        "en": [
+                          "Pen",
+                          "Paper",
+                          "Book",
+                          "Bag"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "本（ほん / Hon）意为“书本”",
+                        "en": "本 (ほん / Hon) means \"Book\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "助词“の”的主要功能相当于中文的？",
+                        "en": "What English word best corresponds to the particle \"の\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "和",
+                          "在",
+                          "的",
+                          "被"
+                        ],
+                        "en": [
+                          "And",
+                          "In / At",
+                          "'s / Of (Possessive)",
+                          "By"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "助词“の”连接两个名词，表示所属或限定关系，相当于“的”（如：わたしの本 = 我的书）",
+                        "en": "The particle \"の\" connects two nouns to show possession or relationship (e.g., わたしの本 = My book)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“わたしの本”翻译成中文是？",
+                        "en": "How do you translate \"わたしの本\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他的书",
+                          "我的书",
+                          "你的书",
+                          "谁的书"
+                        ],
+                        "en": [
+                          "His book",
+                          "My book",
+                          "Your book",
+                          "Whose book"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "わたし（我）+ の（的）+ 本（书）= 我的书",
+                        "en": "わたし (I) + の (possessive) + 本 (book) = \"My book\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“日本人（にほんじん）”的意思是？",
+                        "en": "What does \"日本人（にほんじん）\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "日本语言",
+                          "日本文化",
+                          "日本人",
+                          "日本食品"
+                        ],
+                        "en": [
+                          "Japanese language",
+                          "Japanese culture",
+                          "Japanese person",
+                          "Japanese food"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "国家名 + 人/じん（jin）表示该国的人 = 日本/にほん (Ni hon) + 人/じん (jin)",
+                        "en": "Country name + 人/じん (jin) refers to a person of that nationality = 日本/にほん (Ni hon) + 人/じん (jin)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名“トイレ”指什么地方？",
+                        "en": "What place does the Katakana \"トイレ\" refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "厨房",
+                          "卧室",
+                          "洗手间/厕所",
+                          "客厅"
+                        ],
+                        "en": [
+                          "Kitchen",
+                          "Bedroom",
+                          "Restroom / Toilet",
+                          "Living room"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "トイレ（Toire）源自英语 Toilet，意为洗手间",
+                        "en": "トイレ (Toire) comes from the English word \"Toilet\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“どなた”或“だれ”用于询问什么？",
+                        "en": "What are \"どなた\" or \"だれ\" used to ask?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "什么时候",
+                          "哪里",
+                          "谁",
+                          "为什么"
+                        ],
+                        "en": [
+                          "When",
+                          "Where",
+                          "Who",
+                          "Why"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "だれ / どなた（礼貌形）表示疑问代词“谁”",
+                        "en": "だれ / どなた (polite) are question words meaning \"Who\""
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 4,
