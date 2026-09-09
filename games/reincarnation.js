@@ -28,6 +28,8 @@
       width: 100%;
       position: relative;
       border: 1px solid #2a2e3a;
+      /* 确保内容不溢出 */
+      overflow: hidden;
     }
     .top-bar {
       display: flex;
@@ -144,7 +146,6 @@
     }
     .start-card h2 { color: #f5c542; font-size: 2.2rem; margin: 0.2rem 0; }
     .start-card p { font-size: 0.95rem; line-height: 1.6; color: #8a9aaa; }
-    /* 开始卡片内的语言切换按钮 */
     .start-lang-btn {
       background: #2a2e3a;
       border: none;
@@ -182,7 +183,6 @@
     <div class="start-card">
       <h2 id="overlayTitle">🌱 轮回之门</h2>
       <p id="overlayDesc">你将在两个世界间穿梭，体验不同的命运。</p>
-      <!-- 新增语言切换按钮 -->
       <button class="start-lang-btn" id="startLangToggle">EN</button>
       <br>
       <button class="btn" id="overlayBtn">开始</button>
@@ -281,11 +281,11 @@
         storyMagicTrain3: '🧘 你练习冥想，智力和魅力略微提升。',
         levelUp: '🎉 你升级了！当前等级 %s！',
         commonEffect: '属性变化: ',
-        // 按钮标签
         btnAdventure: '冒险',
         btnStudy: '学习',
         btnExplore: '探索',
-        btnTrain: '锻炼'
+        btnTrain: '锻炼',
+        btnStart: '开始'
       },
       en: {
         title: '🌌 Reincarnation · Dual Worlds',
@@ -375,7 +375,8 @@
         btnAdventure: 'Adventure',
         btnStudy: 'Study',
         btnExplore: 'Explore',
-        btnTrain: 'Train'
+        btnTrain: 'Train',
+        btnStart: 'Start'
       }
     };
 
@@ -802,7 +803,6 @@
             game.pendingEvent = false;
             applyMagicEffects(game.character, story.effects);
             var char = game.character;
-            // 检查升级（循环升级）
             var levelUpCount = 0;
             while (char.exp >= char.level * 10) {
               char.exp -= char.level * 10;
@@ -812,11 +812,9 @@
               char[attrUp] += rand(1,3);
             }
             if (levelUpCount > 0) {
-              // 显示升级信息（只显示一次，并显示升了几级）
               showLevelUpMessage(char.level, levelUpCount);
               return;
             }
-            // 检查死亡
             if (char.exp <= 0 && char.level <= 1) {
               deathInMagic();
               return;
@@ -966,16 +964,16 @@
       showDeathScene();
     }
 
-    // 语言切换函数（供两个按钮共用）
     function switchLanguage() {
       lang = (lang === 'zh') ? 'en' : 'zh';
       var label = lang === 'zh' ? 'EN' : '中文';
       langToggle.textContent = label;
       startLangToggle.textContent = label;
       gameTitle.textContent = t('title');
-      // 更新覆盖层文字
-      overlayTitle.textContent = '🌱 ' + (lang === 'zh' ? '轮回之门' : 'Reincarnation Gate');
+      overlayTitle.textContent = lang === 'zh' ? '🌱 轮回之门' : '🌱 Reincarnation Gate';
       overlayDesc.textContent = lang === 'zh' ? '你将在两个世界间穿梭，体验不同的命运。' : 'You will travel between two worlds, experiencing different fates.';
+      // 更新开始按钮
+      overlayBtn.textContent = t('btnStart');
       // 重新渲染当前场景
       if (game.screen === 'death') showDeathScene();
       else if (game.screen === 'cultivation') renderCultivation();
@@ -991,11 +989,11 @@
       initGame();
     });
 
-    // 初始显示overlay，并设置语言按钮文字
+    // 初始显示overlay
     overlay.classList.remove('hidden');
     overlayTitle.textContent = '🌱 轮回之门';
     overlayDesc.textContent = '你将在两个世界间穿梭，体验不同的命运。';
-    // 初始语言为中文，按钮显示EN
+    overlayBtn.textContent = t('btnStart');
     langToggle.textContent = 'EN';
     startLangToggle.textContent = 'EN';
 
@@ -1013,7 +1011,8 @@
     var frame = document.createElement('iframe');
     frame.title = '轮回 · 双界';
     frame.setAttribute('allow', 'autoplay; fullscreen');
-    frame.style.cssText = 'display:block;width:100%;height:620px;border:0;border-radius:16px;background:#0a0a0c;';
+    // 调整 iframe 样式：高度100%，无滚动条，最小高度600px
+    frame.style.cssText = 'display:block;width:100%;height:100%;min-height:620px;border:0;border-radius:16px;background:#0a0a0c;overflow:hidden;';
     frame.srcdoc = gameHTML;
     wrapper.replaceChildren(frame);
     return frame;
