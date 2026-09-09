@@ -1,4 +1,4 @@
-/* Reincarnation · Dual Worlds (Cultivation & Magic) — Fixed */
+/* Reincarnation · Dual Worlds (Cultivation & Magic) — with Death & Rebirth */
 (function () {
   'use strict';
 
@@ -29,9 +29,6 @@
       position: relative;
       border: 1px solid #2a2e3a;
     }
-    .screen { display: block; }
-    .screen.hidden { display: none; }
-
     .top-bar {
       display: flex;
       justify-content: space-between;
@@ -54,7 +51,6 @@
       transition: 0.2s;
     }
     .lang-btn:hover { background: #3a4a5a; }
-
     .story-box {
       background: #1a1e24;
       border-radius: 1.8rem;
@@ -76,7 +72,6 @@
     .story-text .em { color: #f5c542; font-weight: 700; }
     .story-text .bad { color: #e07c6c; font-weight: 700; }
     .story-text .good { color: #8bcb8b; font-weight: 700; }
-
     .choices {
       display: flex;
       flex-direction: column;
@@ -98,7 +93,6 @@
     }
     .choice-btn:hover { background: #34404e; border-color: #6a8aaa; }
     .choice-btn:active { transform: scale(0.98); }
-
     .status-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
@@ -112,7 +106,6 @@
       border: 1px solid #2a2e3a;
     }
     .status-grid .val { color: #f0e8d0; font-weight: 600; }
-
     .btn {
       background: #4a6a8a;
       border: none;
@@ -128,7 +121,6 @@
     }
     .btn:hover { transform: translateY(-2px); background: #5a7a9a; }
     .btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #1a2a3a; }
-
     .overlay {
       position: absolute;
       inset: 0;
@@ -152,7 +144,6 @@
     }
     .start-card h2 { color: #f5c542; font-size: 2.2rem; margin: 0.2rem 0; }
     .start-card p { font-size: 0.95rem; line-height: 1.6; color: #8a9aaa; }
-
     @media (max-width: 480px) {
       .game-wrapper { padding: 0.8rem; border-radius: 1.5rem; }
       .story-box { padding: 1.2rem; min-height: 240px; }
@@ -168,14 +159,11 @@
     <span id="gameTitle">🌌 轮回·双界</span>
     <button class="lang-btn" id="langToggle">EN</button>
   </div>
-
   <div id="statusArea" class="status-grid hidden"></div>
-
   <div class="story-box">
     <div id="storyText" class="story-text">点击「开始」进入轮回...</div>
     <div id="choicesContainer" class="choices"></div>
   </div>
-
   <div class="overlay" id="overlay">
     <div class="start-card">
       <h2 id="overlayTitle">🌱 轮回之门</h2>
@@ -184,12 +172,9 @@
     </div>
   </div>
 </div>
-
 <script>
   (function() {
-    // ------------------------------------------------------------
-    // 1. 语言数据
-    // ------------------------------------------------------------
+    // ========================= 语言数据 =========================
     var LANG = {
       zh: {
         title: '🌌 轮回·双界',
@@ -199,13 +184,19 @@
         worldMagic: '🔮 魔法世界',
         worldNo: '🕊️ 不重生（生死有命）',
         noRebirthMsg: '你闭上双眼，眼前一片黑暗，你道别离开了。',
+        backHome: '🏠 回到首页',
         realmNames: ['炼气','筑基','金丹','元婴','化神','炼虚','合体','大乘','渡劫','真仙','天仙','金仙','神帝'],
         stageNames: ['初期','中期','后期','大圆满'],
         classMage: '魔法师',
         classWarrior: '炼体师',
         classDual: '魔武双修',
         elements: ['雷','木','水','火','土','光','暗'],
-        weapons: ['单手剑','双手剑','弓箭','短剑']
+        weapons: ['单手剑','双手剑','弓箭','短剑'],
+        deathCultivation: '💀 你修炼走火入魔，修为尽毁，身死道消……',
+        deathMagic: '💀 你冒险失败，被怪物击杀……',
+        rebirthOption: '♻️ 重生（继承部分属性）',
+        noRebirthOption: '🕊️ 不重生（离开轮回）',
+        inheritInfo: '✨ 你带着前世 %d%% 的修为重生了！'
       },
       en: {
         title: '🌌 Reincarnation · Dual Worlds',
@@ -215,22 +206,30 @@
         worldMagic: '🔮 Magic World',
         worldNo: '🕊️ Accept Death',
         noRebirthMsg: 'You close your eyes, darkness engulfs you, and you depart.',
+        backHome: '🏠 Back to Home',
         realmNames: ['Qi Condensation','Foundation','Core','Nascent Soul','Spirit','Void','Integration','Mahayana','Tribulation','True Immortal','Heavenly Immortal','Golden Immortal','Divine Emperor'],
         stageNames: ['Early','Middle','Late','Peak'],
         classMage: 'Mage',
         classWarrior: 'Warrior',
         classDual: 'Dual Cultivator',
         elements: ['Thunder','Wood','Water','Fire','Earth','Light','Dark'],
-        weapons: ['One-Handed Sword','Greatsword','Bow','Dagger']
+        weapons: ['One-Handed Sword','Greatsword','Bow','Dagger'],
+        deathCultivation: '💀 You went berserk while cultivating, your cultivation collapsed...',
+        deathMagic: '💀 You failed your adventure, slain by a monster...',
+        rebirthOption: '♻️ Rebirth (inherit part of stats)',
+        noRebirthOption: '🕊️ Accept Death (leave the cycle)',
+        inheritInfo: '✨ You reborn with %d%% of your previous cultivation!'
       }
     };
 
     var lang = 'zh';
-    function t(key) { return LANG[lang][key] || key; }
+    function t(key, param) {
+      var str = LANG[lang][key] || key;
+      if (param !== undefined) str = str.replace('%d', param);
+      return str;
+    }
 
-    // ------------------------------------------------------------
-    // 2. DOM 引用
-    // ------------------------------------------------------------
+    // ========================= DOM =========================
     var storyText = document.getElementById('storyText');
     var choicesContainer = document.getElementById('choicesContainer');
     var statusArea = document.getElementById('statusArea');
@@ -241,34 +240,27 @@
     var langToggle = document.getElementById('langToggle');
     var gameTitle = document.getElementById('gameTitle');
 
-    // ------------------------------------------------------------
-    // 3. 工具函数
-    // ------------------------------------------------------------
+    // ========================= 工具 =========================
     function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
     function pick(arr) { return arr[rand(0, arr.length-1)]; }
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
-    // ------------------------------------------------------------
-    // 4. 游戏状态
-    // ------------------------------------------------------------
+    // ========================= 游戏状态 =========================
     var game = {
       screen: 'death',        // 'death', 'worldSelect', 'cultivation', 'magic', 'ending'
       world: null,
       character: null,
       turn: 0,
       maxTurns: 999,
-      dead: false
+      dead: false,
+      inherited: 0          // 继承比例（0~1）
     };
 
-    // ------------------------------------------------------------
-    // 5. 常量
-    // ------------------------------------------------------------
+    // ========================= 常量 =========================
     var REALMS = t('realmNames');
     var STAGES = t('stageNames');
 
-    // ------------------------------------------------------------
-    // 6. 渲染引擎
-    // ------------------------------------------------------------
+    // ========================= 渲染引擎 =========================
     function render(text, choices) {
       storyText.innerHTML = text.replace(/\\n/g, '<br>');
       choicesContainer.innerHTML = '';
@@ -294,13 +286,12 @@
 
     function hideStatus() { statusArea.classList.add('hidden'); }
 
-    // ------------------------------------------------------------
-    // 7. 场景函数
-    // ------------------------------------------------------------
+    // ========================= 场景函数 =========================
 
-    // 7.1 死亡场景
+    // ----- 死亡场景（初始） -----
     function showDeathScene() {
       hideStatus();
+      game.screen = 'death';
       var msg = t('deathScene') + '\\n\\n' + t('reincarnatePrompt');
       render(msg, [
         { label: t('worldCultivation'), action: function() { startCultivation(); } },
@@ -311,11 +302,13 @@
 
     function noRebirth() {
       game.screen = 'ending';
-      render(t('noRebirthMsg'), []);
+      render(t('noRebirthMsg'), [
+        { label: t('backHome'), action: function() { showDeathScene(); } }
+      ]);
       hideStatus();
     }
 
-    // 7.2 修仙世界
+    // ----- 修仙世界 -----
     function startCultivation() {
       game.world = 'cultivation';
       game.screen = 'cultivation';
@@ -334,6 +327,13 @@
         机缘: rand(5, 25),
         潜力: rand(30, 70)
       };
+      // 如果有继承，增加属性
+      if (game.inherited > 0) {
+        var bonus = Math.floor(game.inherited * 100);
+        talent.资质 = clamp(talent.资质 + bonus, 0, 100);
+        talent.悟性 = clamp(talent.悟性 + bonus, 0, 100);
+        // 继承部分修为
+      }
       return {
         talent: talent,
         realm: 0,
@@ -359,6 +359,7 @@
     }
 
     function renderCultivation() {
+      if (game.screen === 'death') return; // 防止死亡后继续
       var char = game.character;
       var realmName = REALMS[char.realm] || '???';
       var stageName = STAGES[char.stage] || '';
@@ -396,7 +397,15 @@
       var gain = rand(5, 15) + Math.floor(char.talent.悟性/5);
       char.cultivationBase = clamp(char.cultivationBase + gain, 0, 100);
       char.age += rand(1,3);
-      if (Math.random() < 0.2) triggerCultivationEvent();
+      // 随机事件可能扣减修为，如果修为归零则死亡
+      if (Math.random() < 0.1) {
+        var loss = rand(10, 30);
+        char.cultivationBase = clamp(char.cultivationBase - loss, 0, 100);
+        if (char.cultivationBase <= 0) {
+          deathInCultivation();
+          return;
+        }
+      }
       renderCultivation();
     }
 
@@ -422,6 +431,10 @@
         var loss = rand(5, 15);
         char.cultivationBase = clamp(char.cultivationBase - loss, 0, 100);
         char.age += 2;
+        if (char.cultivationBase <= 0) {
+          deathInCultivation();
+          return;
+        }
         render('💀 你误入险地，受伤了，修为倒退。', []);
         setTimeout(renderCultivation, 1000);
       }
@@ -442,15 +455,34 @@
         setTimeout(renderCultivation, 1000);
       } else {
         render('🏆 你已经达到神帝大圆满，三界无敌！', []);
-        // 可触发结局
+        // 可触发胜利结局
       }
     }
 
-    function triggerCultivationEvent() {
-      // 可扩展更多事件
+    // ----- 修仙死亡 -----
+    function deathInCultivation() {
+      game.screen = 'death';
+      hideStatus();
+      var msg = t('deathCultivation') + '\\n\\n' + t('reincarnatePrompt');
+      // 计算继承比例（修为的20%）
+      var inheritRatio = 0.2;
+      game.inherited = inheritRatio;
+      render(msg, [
+        { label: t('rebirthOption'), action: function() {
+            // 重生到修仙世界，继承部分属性
+            game.inherited = inheritRatio;
+            startCultivation();
+          } 
+        },
+        { label: t('noRebirthOption'), action: function() {
+            game.inherited = 0;
+            noRebirth();
+          } 
+        }
+      ]);
     }
 
-    // 7.3 魔法世界
+    // ----- 魔法世界 -----
     function startMagic() {
       game.world = 'magic';
       game.screen = 'magic';
@@ -474,10 +506,15 @@
       if (classType === 'warrior' || classType === 'dual') {
         weapon = pick(t('weapons'));
       }
+      // 继承部分经验（转换为等级）
+      var baseExp = 0;
+      if (game.inherited > 0) {
+        baseExp = Math.floor(game.inherited * 50); // 继承部分经验
+      }
       return {
         class: classType,
         level: 1,
-        exp: 0,
+        exp: baseExp,
         elements: elements,
         weapon: weapon,
         strength: rand(5,20),
@@ -490,6 +527,7 @@
     }
 
     function renderMagic() {
+      if (game.screen === 'death') return;
       var char = game.character;
       var clsName = char.class === 'mage' ? t('classMage') : char.class === 'warrior' ? t('classWarrior') : t('classDual');
       var status = {
@@ -534,7 +572,15 @@
         setTimeout(renderMagic, 800);
         return;
       }
-      if (Math.random() < 0.15) triggerMagicEvent();
+      // 随机事件可能扣减经验，若经验<0则死亡
+      if (Math.random() < 0.1) {
+        var loss = rand(10, 30);
+        char.exp = Math.max(0, char.exp - loss);
+        if (char.exp <= 0 && char.level <= 1) {
+          deathInMagic();
+          return;
+        }
+      }
       renderMagic();
     }
 
@@ -566,6 +612,10 @@
       } else {
         var loss = rand(5, 15);
         char.exp = Math.max(0, char.exp - loss);
+        if (char.exp <= 0 && char.level <= 1) {
+          deathInMagic();
+          return;
+        }
         render('💀 你遭遇了陷阱，损失了一些经验。', []);
         setTimeout(renderMagic, 800);
       }
@@ -579,21 +629,33 @@
       setTimeout(renderMagic, 800);
     }
 
-    function triggerMagicEvent() {
-      // 可扩展
-    }
-
-    // 7.4 结局
-    function showEnding() {
+    // ----- 魔法死亡 -----
+    function deathInMagic() {
+      game.screen = 'death';
       hideStatus();
-      render('🌟 你的故事结束了...', []);
+      var msg = t('deathMagic') + '\\n\\n' + t('reincarnatePrompt');
+      var inheritRatio = 0.2;
+      game.inherited = inheritRatio;
+      render(msg, [
+        { label: t('rebirthOption'), action: function() {
+            game.inherited = inheritRatio;
+            startMagic();
+          } 
+        },
+        { label: t('noRebirthOption'), action: function() {
+            game.inherited = 0;
+            noRebirth();
+          } 
+        }
+      ]);
     }
 
-    // ------------------------------------------------------------
-    // 8. 界面切换与初始化
-    // ------------------------------------------------------------
+    // ----- 结局（已由noRebirth处理）-----
+
+    // ========================= 界面切换与初始化 =========================
     function initGame() {
       game.screen = 'death';
+      game.inherited = 0;
       hideStatus();
       overlay.classList.add('hidden');
       showDeathScene();
@@ -606,13 +668,14 @@
       gameTitle.textContent = t('title');
       // 重新渲染当前场景
       if (game.screen === 'death') showDeathScene();
-      else if (game.screen === 'worldSelect') showDeathScene(); // 实际只用在death
       else if (game.screen === 'cultivation') renderCultivation();
       else if (game.screen === 'magic') renderMagic();
-      else if (game.screen === 'ending') showEnding();
+      else if (game.screen === 'ending') {
+        // 如果是ending状态，重新显示noRebirth界面
+        noRebirth();
+      }
     });
 
-    // 开始按钮
     overlayBtn.addEventListener('click', function() {
       overlay.classList.add('hidden');
       initGame();
@@ -623,17 +686,13 @@
     overlayTitle.textContent = '🌱 轮回之门';
     overlayDesc.textContent = '你将在两个世界间穿梭，体验不同的命运。';
 
-    // 暴露给外部（用于调试）
-    window.game = game;
-
+    window.game = game; // 调试用
   })();
 </script>
 </body>
 </html>`;
 
-  // ------------------------------------------------------------
-  // 9. 暴露 initGame 函数
-  // ------------------------------------------------------------
+  // ========================= 暴露 initGame =========================
   window.initGame = function initGame(wrapper) {
     if (!wrapper || typeof wrapper.replaceChildren !== 'function') {
       throw new Error('initGame requires a container element.');
