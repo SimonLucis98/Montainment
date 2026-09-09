@@ -1,4 +1,4 @@
-/* Reincarnation · Dual Worlds (Cultivation & Magic) */
+/* Reincarnation · Dual Worlds (Cultivation & Magic) — Fixed */
 (function () {
   'use strict';
 
@@ -32,7 +32,6 @@
     .screen { display: block; }
     .screen.hidden { display: none; }
 
-    /* Top bar */
     .top-bar {
       display: flex;
       justify-content: space-between;
@@ -102,7 +101,7 @@
 
     .status-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+      grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
       gap: 0.3rem;
       background: #12161c;
       border-radius: 1rem;
@@ -170,16 +169,13 @@
     <button class="lang-btn" id="langToggle">EN</button>
   </div>
 
-  <!-- status area (dynamic) -->
   <div id="statusArea" class="status-grid hidden"></div>
 
-  <!-- story box -->
   <div class="story-box">
     <div id="storyText" class="story-text">点击「开始」进入轮回...</div>
     <div id="choicesContainer" class="choices"></div>
   </div>
 
-  <!-- Overlay for start / death / reincarnation -->
   <div class="overlay" id="overlay">
     <div class="start-card">
       <h2 id="overlayTitle">🌱 轮回之门</h2>
@@ -191,102 +187,94 @@
 
 <script>
   (function() {
-    // -------------------- LANGUAGE DATA --------------------
-    const LANG = {
+    // ------------------------------------------------------------
+    // 1. 语言数据
+    // ------------------------------------------------------------
+    var LANG = {
       zh: {
         title: '🌌 轮回·双界',
-        deathScene: '💀 你闭上了双眼，眼前一片漆黑，意识逐渐消散……\n你，死了。',
-        reincarnatePrompt: '⚡ 一道金光闪过，你获得了重生的机会！\n选择你的新世界：',
+        deathScene: '💀 你闭上了双眼，眼前一片漆黑，意识逐渐消散……\\n你，死了。',
+        reincarnatePrompt: '⚡ 一道金光闪过，你获得了重生的机会！\\n选择你的新世界：',
         worldCultivation: '🧘 修仙世界',
         worldMagic: '🔮 魔法世界',
         worldNo: '🕊️ 不重生（生死有命）',
         noRebirthMsg: '你闭上双眼，眼前一片黑暗，你道别离开了。',
-        // more...
-        // We'll embed most strings inside the game logic using a function.
+        realmNames: ['炼气','筑基','金丹','元婴','化神','炼虚','合体','大乘','渡劫','真仙','天仙','金仙','神帝'],
+        stageNames: ['初期','中期','后期','大圆满'],
+        classMage: '魔法师',
+        classWarrior: '炼体师',
+        classDual: '魔武双修',
+        elements: ['雷','木','水','火','土','光','暗'],
+        weapons: ['单手剑','双手剑','弓箭','短剑']
       },
       en: {
         title: '🌌 Reincarnation · Dual Worlds',
-        deathScene: '💀 You close your eyes, darkness swallows you...\nYou are dead.',
-        reincarnatePrompt: '⚡ A golden light shines — you have a chance to be reborn!\nChoose your new world:',
+        deathScene: '💀 You close your eyes, darkness swallows you...\\nYou are dead.',
+        reincarnatePrompt: '⚡ A golden light shines — you have a chance to be reborn!\\nChoose your new world:',
         worldCultivation: '🧘 Cultivation World',
         worldMagic: '🔮 Magic World',
         worldNo: '🕊️ Accept Death',
         noRebirthMsg: 'You close your eyes, darkness engulfs you, and you depart.',
+        realmNames: ['Qi Condensation','Foundation','Core','Nascent Soul','Spirit','Void','Integration','Mahayana','Tribulation','True Immortal','Heavenly Immortal','Golden Immortal','Divine Emperor'],
+        stageNames: ['Early','Middle','Late','Peak'],
+        classMage: 'Mage',
+        classWarrior: 'Warrior',
+        classDual: 'Dual Cultivator',
+        elements: ['Thunder','Wood','Water','Fire','Earth','Light','Dark'],
+        weapons: ['One-Handed Sword','Greatsword','Bow','Dagger']
       }
     };
 
-    // We'll use a global lang variable, default 'zh'
-    let lang = 'zh';
+    var lang = 'zh';
     function t(key) { return LANG[lang][key] || key; }
 
-    // -------------------- GAME STATE --------------------
-    let gameState = {
-      screen: 'death', // death, worldSelect, cultivation, magic, ending
-      world: null, // 'cultivation' or 'magic'
-      character: null,
-      turn: 0,
-      maxTurns: 999,
-      dead: false,
-      inheritedStats: null, // from previous death
-      // For cultivation
-      cultivation: {
-        realm: 0, // index into realms
-        stage: 0, // 0:初期,1:中期,2:后期,3:大圆满
-        cultivationBase: 0, // progress within stage
-        // attributes
-        talent: {}, // 资质,悟性,灵根,根骨,气感,魅力,机缘,潜力
-        // events
-      },
-      // For magic
-      magic: {
-        level: 1,
-        exp: 0,
-        class: null, // 'mage','warrior','dual'
-        element: [], // array of elements
-        weapon: null, // 'sword','greatsword','bow','dagger'
-        // attributes similar
-      }
-    };
+    // ------------------------------------------------------------
+    // 2. DOM 引用
+    // ------------------------------------------------------------
+    var storyText = document.getElementById('storyText');
+    var choicesContainer = document.getElementById('choicesContainer');
+    var statusArea = document.getElementById('statusArea');
+    var overlay = document.getElementById('overlay');
+    var overlayTitle = document.getElementById('overlayTitle');
+    var overlayDesc = document.getElementById('overlayDesc');
+    var overlayBtn = document.getElementById('overlayBtn');
+    var langToggle = document.getElementById('langToggle');
+    var gameTitle = document.getElementById('gameTitle');
 
-    // -------------------- REALMS (Cultivation) --------------------
-    const REALMS = [
-      '炼气', '筑基', '金丹', '元婴', '化神', '炼虚',
-      '合体', '大乘', '渡劫', '真仙', '天仙', '金仙', '神帝'
-    ];
-    const STAGES = ['初期', '中期', '后期', '大圆满'];
-
-    // -------------------- DOM refs --------------------
-    const storyText = document.getElementById('storyText');
-    const choicesContainer = document.getElementById('choicesContainer');
-    const statusArea = document.getElementById('statusArea');
-    const overlay = document.getElementById('overlay');
-    const overlayTitle = document.getElementById('overlayTitle');
-    const overlayDesc = document.getElementById('overlayDesc');
-    const overlayBtn = document.getElementById('overlayBtn');
-    const langToggle = document.getElementById('langToggle');
-    const gameTitle = document.getElementById('gameTitle');
-
-    // -------------------- UTILITY --------------------
+    // ------------------------------------------------------------
+    // 3. 工具函数
+    // ------------------------------------------------------------
     function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
     function pick(arr) { return arr[rand(0, arr.length-1)]; }
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
-    // -------------------- LANGUAGE SWITCH --------------------
-    langToggle.addEventListener('click', function() {
-      lang = (lang === 'zh') ? 'en' : 'zh';
-      langToggle.textContent = lang === 'zh' ? 'EN' : '中文';
-      gameTitle.textContent = t('title');
-      // re-render current screen
-      renderCurrentScreen();
-    });
+    // ------------------------------------------------------------
+    // 4. 游戏状态
+    // ------------------------------------------------------------
+    var game = {
+      screen: 'death',        // 'death', 'worldSelect', 'cultivation', 'magic', 'ending'
+      world: null,
+      character: null,
+      turn: 0,
+      maxTurns: 999,
+      dead: false
+    };
 
-    // -------------------- RENDER ENGINE --------------------
+    // ------------------------------------------------------------
+    // 5. 常量
+    // ------------------------------------------------------------
+    var REALMS = t('realmNames');
+    var STAGES = t('stageNames');
+
+    // ------------------------------------------------------------
+    // 6. 渲染引擎
+    // ------------------------------------------------------------
     function render(text, choices) {
-      storyText.innerHTML = text;
+      storyText.innerHTML = text.replace(/\\n/g, '<br>');
       choicesContainer.innerHTML = '';
-      if (choices) {
+      if (choices && choices.length) {
         choices.forEach(function(c) {
-          const btn = document.createElement('button');
+          var btn = document.createElement('button');
           btn.className = 'choice-btn';
           btn.textContent = c.label;
           btn.addEventListener('click', c.action);
@@ -296,42 +284,24 @@
     }
 
     function updateStatus(data) {
-      // data is an object of key:value
       statusArea.classList.remove('hidden');
-      let html = '';
-      for (let k in data) {
-        html += \`<div>\${k}: <span class="val">\${data[k]}</span></div>\`;
+      var html = '';
+      for (var k in data) {
+        html += '<div>' + k + ': <span class="val">' + data[k] + '</span></div>';
       }
       statusArea.innerHTML = html;
     }
 
     function hideStatus() { statusArea.classList.add('hidden'); }
 
-    // -------------------- SCENES --------------------
-    // We'll have a global function to render current screen based on gameState.screen
+    // ------------------------------------------------------------
+    // 7. 场景函数
+    // ------------------------------------------------------------
 
-    function renderCurrentScreen() {
-      const s = gameState;
-      if (s.screen === 'death') {
-        showDeathScene();
-      } else if (s.screen === 'worldSelect') {
-        showWorldSelect();
-      } else if (s.screen === 'cultivation') {
-        renderCultivation();
-      } else if (s.screen === 'magic') {
-        renderMagic();
-      } else if (s.screen === 'ending') {
-        showEnding();
-      } else {
-        // fallback
-        render('Unknown state', []);
-      }
-    }
-
-    // ----- Death Scene -----
+    // 7.1 死亡场景
     function showDeathScene() {
       hideStatus();
-      const msg = t('deathScene') + '\n\n' + t('reincarnatePrompt');
+      var msg = t('deathScene') + '\\n\\n' + t('reincarnatePrompt');
       render(msg, [
         { label: t('worldCultivation'), action: function() { startCultivation(); } },
         { label: t('worldMagic'), action: function() { startMagic(); } },
@@ -340,25 +310,21 @@
     }
 
     function noRebirth() {
-      gameState.screen = 'ending';
+      game.screen = 'ending';
       render(t('noRebirthMsg'), []);
       hideStatus();
     }
 
-    // ----- Start Cultivation -----
+    // 7.2 修仙世界
     function startCultivation() {
-      gameState.world = 'cultivation';
-      gameState.screen = 'cultivation';
-      // Generate character
-      const char = generateCultivationChar();
-      gameState.character = char;
-      // Show initial status
+      game.world = 'cultivation';
+      game.screen = 'cultivation';
+      game.character = generateCultivationChar();
       renderCultivation();
     }
 
     function generateCultivationChar() {
-      // random attributes
-      const talent = {
+      var talent = {
         资质: rand(10, 30),
         悟性: rand(10, 30),
         灵根: generateLingGen(),
@@ -368,29 +334,35 @@
         机缘: rand(5, 25),
         潜力: rand(30, 70)
       };
-      // 灵根 is an array of objects { element, quality }
-      return { talent: talent, realm: 0, stage: 0, cultivationBase: 0, age: 16, events: [] };
+      return {
+        talent: talent,
+        realm: 0,
+        stage: 0,
+        cultivationBase: 0,
+        age: 16,
+        events: []
+      };
     }
 
     function generateLingGen() {
-      const elements = ['金','木','水','火','土'];
-      const qualities = ['低级','中级','高级','极品'];
-      const count = rand(1, 5); // 1-5灵根
-      const selected = [];
-      const pool = elements.slice();
-      for (let i=0; i<count && pool.length>0; i++) {
-        const idx = rand(0, pool.length-1);
-        const el = pool.splice(idx,1)[0];
+      var elements = ['金','木','水','火','土'];
+      var qualities = ['低级','中级','高级','极品'];
+      var count = rand(1, 5);
+      var selected = [];
+      var pool = elements.slice();
+      for (var i=0; i<count && pool.length>0; i++) {
+        var idx = rand(0, pool.length-1);
+        var el = pool.splice(idx,1)[0];
         selected.push({ element: el, quality: qualities[rand(0,3)] });
       }
       return selected;
     }
 
     function renderCultivation() {
-      const char = gameState.character;
-      const realmName = REALMS[char.realm] || '???';
-      const stageName = STAGES[char.stage] || '';
-      const status = {
+      var char = game.character;
+      var realmName = REALMS[char.realm] || '???';
+      var stageName = STAGES[char.stage] || '';
+      var status = {
         '境界': realmName + ' ' + stageName,
         '修为': char.cultivationBase,
         '资质': char.talent.资质,
@@ -400,63 +372,54 @@
         '魅力': char.talent.魅力,
         '机缘': char.talent.机缘,
         '潜力': char.talent.潜力,
-        '灵根': char.talent.灵根.map(l => l.element + l.quality).join(', ')
+        '灵根': char.talent.灵根.map(function(l){ return l.element + l.quality; }).join(', ')
       };
       updateStatus(status);
 
-      // Story: show realm and options
-      let text = \`🧘 修仙世界 · \${realmName} \${stageName}\n\n`;
-      text += \`你今年\${char.age}岁，正在\${realmName}\${stageName}苦苦修炼。\n\`;
-      text += \`修为：\${char.cultivationBase}/100 (当前阶段进度)\n\`;
-      // Add random event possibilities
-      const choices = [
+      var text = '🧘 修仙世界 · ' + realmName + ' ' + stageName + '\\n\\n';
+      text += '你今年' + char.age + '岁，正在' + realmName + stageName + '苦苦修炼。\\n';
+      text += '修为：' + char.cultivationBase + '/100 (当前阶段进度)\\n';
+
+      var choices = [
         { label: '⚔️ 历练（提升修为）', action: function() { cultivationPractice(); } },
         { label: '📖 悟道（提升悟性）', action: function() { cultivationInsight(); } },
-        { label: '💊 寻药（机缘）', action: function() { cultivationSeek(); } },
-        { label: '🏔️ 闭关（突破瓶颈）', action: function() { cultivationBreakthrough(); } }
+        { label: '💊 寻药（机缘）', action: function() { cultivationSeek(); } }
       ];
-      // If at大圆满, show突破选项
       if (char.stage === 3 && char.cultivationBase >= 100) {
-        choices.push({ label: '⚡ 突破境界！', action: function() { cultivationAdvance(); } });
+        choices.push({ label: '⚡ 突破境界！', action: function() { cultivationBreakthrough(); } });
       }
       render(text, choices);
     }
 
-    // ---- Cultivation actions ----
     function cultivationPractice() {
-      const char = gameState.character;
-      const gain = rand(5, 15) + Math.floor(char.talent.悟性/5);
+      var char = game.character;
+      var gain = rand(5, 15) + Math.floor(char.talent.悟性/5);
       char.cultivationBase = clamp(char.cultivationBase + gain, 0, 100);
       char.age += rand(1,3);
-      // chance of random event
       if (Math.random() < 0.2) triggerCultivationEvent();
       renderCultivation();
     }
 
     function cultivationInsight() {
-      const char = gameState.character;
-      const gain = rand(1,5);
+      var char = game.character;
+      var gain = rand(1,5);
       char.talent.悟性 = clamp(char.talent.悟性 + gain, 0, 100);
       char.age += 1;
       renderCultivation();
     }
 
     function cultivationSeek() {
-      const char = gameState.character;
-      const chance = rand(1,100);
+      var char = game.character;
+      var chance = rand(1,100);
       if (chance <= char.talent.机缘) {
-        // 奇遇
-        const gain = rand(10, 30);
+        var gain = rand(10, 30);
         char.cultivationBase = clamp(char.cultivationBase + gain, 0, 100);
-        // also may increase attributes
-        const attr = pick(['资质','根骨','气感','魅力']);
+        var attr = pick(['资质','根骨','气感','魅力']);
         char.talent[attr] = clamp(char.talent[attr] + rand(1,5), 0, 100);
         render('✨ 奇遇！你找到了一株千年灵草，修为大增！', []);
-        // Continue after a moment
         setTimeout(renderCultivation, 1000);
       } else {
-        // 危机
-        const loss = rand(5, 15);
+        var loss = rand(5, 15);
         char.cultivationBase = clamp(char.cultivationBase - loss, 0, 100);
         char.age += 2;
         render('💀 你误入险地，受伤了，修为倒退。', []);
@@ -465,60 +428,51 @@
     }
 
     function cultivationBreakthrough() {
-      const char = gameState.character;
+      var char = game.character;
       if (char.stage < 3) {
         char.stage++;
         char.cultivationBase = 0;
         render('🎉 你突破到' + REALMS[char.realm] + STAGES[char.stage] + '！', []);
         setTimeout(renderCultivation, 1000);
       } else if (char.realm < REALMS.length-1) {
-        // 突破大境界
         char.realm++;
         char.stage = 0;
         char.cultivationBase = 0;
         render('🌟 你成功突破到' + REALMS[char.realm] + '初期！', []);
         setTimeout(renderCultivation, 1000);
       } else {
-        // 已到神帝大圆满
         render('🏆 你已经达到神帝大圆满，三界无敌！', []);
-        // maybe win condition
+        // 可触发结局
       }
     }
 
-    function cultivationAdvance() {
-      // same as breakthrough but called separately
-      cultivationBreakthrough();
-    }
-
     function triggerCultivationEvent() {
-      // more complex events can be added
+      // 可扩展更多事件
     }
 
-    // ----- Start Magic -----
+    // 7.3 魔法世界
     function startMagic() {
-      gameState.world = 'magic';
-      gameState.screen = 'magic';
-      const char = generateMagicChar();
-      gameState.character = char;
+      game.world = 'magic';
+      game.screen = 'magic';
+      game.character = generateMagicChar();
       renderMagic();
     }
 
     function generateMagicChar() {
-      const classType = pick(['mage','warrior','dual']);
-      let elements = [];
-      let weapon = null;
+      var classType = pick(['mage','warrior','dual']);
+      var elements = [];
+      var weapon = null;
       if (classType === 'mage' || classType === 'dual') {
-        const allElements = ['雷','木','水','火','土','光','暗'];
-        const count = rand(1, 4);
-        const pool = allElements.slice();
-        for (let i=0; i<count && pool.length>0; i++) {
-          const idx = rand(0, pool.length-1);
+        var allEl = t('elements');
+        var count = rand(1, Math.min(4, allEl.length));
+        var pool = allEl.slice();
+        for (var i=0; i<count && pool.length>0; i++) {
+          var idx = rand(0, pool.length-1);
           elements.push(pool.splice(idx,1)[0]);
         }
       }
       if (classType === 'warrior' || classType === 'dual') {
-        const weapons = ['单手剑','双手剑','弓箭','短剑'];
-        weapon = pick(weapons);
+        weapon = pick(t('weapons'));
       }
       return {
         class: classType,
@@ -526,7 +480,6 @@
         exp: 0,
         elements: elements,
         weapon: weapon,
-        // attributes
         strength: rand(5,20),
         agility: rand(5,20),
         intelligence: rand(5,20),
@@ -537,10 +490,10 @@
     }
 
     function renderMagic() {
-      const char = gameState.character;
-      const cls = char.class === 'mage' ? '魔法师' : char.class === 'warrior' ? '炼体师' : '魔武双修';
-      const status = {
-        '职业': cls,
+      var char = game.character;
+      var clsName = char.class === 'mage' ? t('classMage') : char.class === 'warrior' ? t('classWarrior') : t('classDual');
+      var status = {
+        '职业': clsName,
         '等级': char.level,
         '经验': char.exp + '/' + (char.level * 10),
         '元素': char.elements.length ? char.elements.join(', ') : '无',
@@ -554,12 +507,12 @@
       };
       updateStatus(status);
 
-      let text = \`🔮 魔法世界 · \${cls}\n\n`;
-      text += \`等级 \${char.level}，经验 \${char.exp}/\${char.level*10}\n\`;
-      text += \`元素：\${char.elements.length ? char.elements.join('、') : '无'}\n\`;
-      text += \`武器：\${char.weapon || '无'}\n\`;
+      var text = '🔮 魔法世界 · ' + clsName + '\\n\\n';
+      text += '等级 ' + char.level + '，经验 ' + char.exp + '/' + (char.level * 10) + '\\n';
+      text += '元素：' + (char.elements.length ? char.elements.join('、') : '无') + '\\n';
+      text += '武器：' + (char.weapon || '无') + '\\n';
 
-      const choices = [
+      var choices = [
         { label: '⚔️ 冒险（获得经验）', action: function() { magicAdventure(); } },
         { label: '📚 学习（提升技能）', action: function() { magicStudy(); } },
         { label: '🧙 探索（机缘）', action: function() { magicExplore(); } },
@@ -569,56 +522,49 @@
     }
 
     function magicAdventure() {
-      const char = gameState.character;
-      const gain = rand(5, 15) + Math.floor(char.level/2);
+      var char = game.character;
+      var gain = rand(5, 15) + Math.floor(char.level/2);
       char.exp += gain;
-      // check level up
       while (char.exp >= char.level * 10) {
         char.exp -= char.level * 10;
         char.level++;
-        // attribute gain
-        const attr = pick(['strength','agility','intelligence','vitality']);
+        var attr = pick(['strength','agility','intelligence','vitality']);
         char[attr] += rand(1,3);
         render('🎉 你升级了！当前等级 ' + char.level, []);
         setTimeout(renderMagic, 800);
         return;
       }
-      // random event
       if (Math.random() < 0.15) triggerMagicEvent();
       renderMagic();
     }
 
     function magicStudy() {
-      const char = gameState.character;
-      // 学习新元素或提升等级
-      if (char.elements.length < 7 && Math.random() < 0.3) {
-        const all = ['雷','木','水','火','土','光','暗'];
-        const available = all.filter(e => !char.elements.includes(e));
+      var char = game.character;
+      var allEl = t('elements');
+      if (char.elements.length < allEl.length && Math.random() < 0.3) {
+        var available = allEl.filter(function(e) { return char.elements.indexOf(e) === -1; });
         if (available.length) {
-          const newEl = pick(available);
+          var newEl = pick(available);
           char.elements.push(newEl);
           render('📖 你领悟了新的元素：' + newEl, []);
           setTimeout(renderMagic, 800);
           return;
         }
       }
-      // else gain intelligence
       char.intelligence += rand(1,3);
       render('📖 你刻苦学习，智力提升了。', []);
       setTimeout(renderMagic, 800);
     }
 
     function magicExplore() {
-      const char = gameState.character;
+      var char = game.character;
       if (Math.random() < 0.3) {
-        // 奇遇
-        const gain = rand(10, 30);
+        var gain = rand(10, 30);
         char.exp += gain;
         render('✨ 你发现了古代遗迹，获得大量经验！', []);
         setTimeout(renderMagic, 800);
       } else {
-        // 危机
-        const loss = rand(5, 15);
+        var loss = rand(5, 15);
         char.exp = Math.max(0, char.exp - loss);
         render('💀 你遭遇了陷阱，损失了一些经验。', []);
         setTimeout(renderMagic, 800);
@@ -626,60 +572,73 @@
     }
 
     function magicTrain() {
-      const char = gameState.character;
-      const attr = pick(['strength','agility','vitality']);
+      var char = game.character;
+      var attr = pick(['strength','agility','vitality']);
       char[attr] += rand(1,4);
       render('💪 你锻炼了' + attr + '，属性提升。', []);
       setTimeout(renderMagic, 800);
     }
 
     function triggerMagicEvent() {
-      // can be expanded
+      // 可扩展
     }
 
-    // ----- ENDING -----
+    // 7.4 结局
     function showEnding() {
       hideStatus();
-      // show a nice ending message
       render('🌟 你的故事结束了...', []);
     }
 
-    // ----- OVERLAY / INIT -----
+    // ------------------------------------------------------------
+    // 8. 界面切换与初始化
+    // ------------------------------------------------------------
     function initGame() {
-      // show death scene by default
-      gameState.screen = 'death';
+      game.screen = 'death';
       hideStatus();
       overlay.classList.add('hidden');
-      renderCurrentScreen();
+      showDeathScene();
     }
 
+    // 语言切换
+    langToggle.addEventListener('click', function() {
+      lang = (lang === 'zh') ? 'en' : 'zh';
+      langToggle.textContent = lang === 'zh' ? 'EN' : '中文';
+      gameTitle.textContent = t('title');
+      // 重新渲染当前场景
+      if (game.screen === 'death') showDeathScene();
+      else if (game.screen === 'worldSelect') showDeathScene(); // 实际只用在death
+      else if (game.screen === 'cultivation') renderCultivation();
+      else if (game.screen === 'magic') renderMagic();
+      else if (game.screen === 'ending') showEnding();
+    });
+
+    // 开始按钮
     overlayBtn.addEventListener('click', function() {
       overlay.classList.add('hidden');
       initGame();
     });
 
-    // show overlay on load
+    // 初始显示overlay
     overlay.classList.remove('hidden');
     overlayTitle.textContent = '🌱 轮回之门';
     overlayDesc.textContent = '你将在两个世界间穿梭，体验不同的命运。';
 
-    // initial language
-    langToggle.textContent = 'EN';
-    gameTitle.textContent = '🌌 轮回·双界';
-
-    // Expose to global for debugging
-    window.gameState = gameState;
+    // 暴露给外部（用于调试）
+    window.game = game;
 
   })();
 </script>
 </body>
 </html>`;
 
+  // ------------------------------------------------------------
+  // 9. 暴露 initGame 函数
+  // ------------------------------------------------------------
   window.initGame = function initGame(wrapper) {
     if (!wrapper || typeof wrapper.replaceChildren !== 'function') {
       throw new Error('initGame requires a container element.');
     }
-    const frame = document.createElement('iframe');
+    var frame = document.createElement('iframe');
     frame.title = '轮回 · 双界';
     frame.setAttribute('allow', 'autoplay; fullscreen');
     frame.style.cssText = 'display:block;width:100%;height:620px;border:0;border-radius:16px;background:#0a0a0c;';
