@@ -96,6 +96,7 @@ const i18n = {
       'gameplay.script_error': 'Game script failed to expose initGame function',
       'gameplay.script_load_error': 'Script loading failed',
       'gameplay.unsupported': 'Unsupported game type',
+      'gameplay.more_games': '🎮 More Games',
 
       // -------- 连一连游戏（matching.js） --------
       'game.matching_title': 'Number Matching · Connect',
@@ -246,6 +247,7 @@ const i18n = {
       'gameplay.script_error': '游戏脚本未正确暴露 initGame 函数',
       'gameplay.script_load_error': '脚本加载失败',
       'gameplay.unsupported': '不支持的遊戲類型',
+      'gameplay.more_games': '🎮 更多游戏',
 
       // -------- 连一连游戏（matching.js） --------
       'game.matching_title': '数字配对 · 连一连',
