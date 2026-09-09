@@ -11,14 +11,17 @@
  * 
  * 🆕 宽屏优化：做题页选项在电脑上变为两列，填满左右空白。
  * 
- * 🆕 修复：返回试卷列表按钮现在正常跳转。
+ * 🆕 语言持久化：用户选择的语言会保存在 localStorage，页面跳转后自动恢复。
  */
 (function() {
   'use strict';
 
   // ========== 状态 ==========
   let allData = null;
-  let currentLang = 'zh';
+  
+  // ===== 🆕 从 localStorage 恢复语言偏好 =====
+  let currentLang = localStorage.getItem('quiz_lang') || 'zh';
+  
   let selectedCategoryId = null;
   let selectedSubjectId = null;
   let selectedDifficultyLevel = null;
@@ -624,12 +627,10 @@
       });
     });
 
-    // ===== 🆕 修复：返回试卷列表按钮 =====
     document.getElementById('back-to-papers-from-quiz').addEventListener('click', function() {
-      // 清空 paper ID，切换 uiState 为 'paper' 以触发整页跳转
       currentPaperId = null;
-      uiState = 'paper';   // 临时改为 paper 状态，让 updateUrl 执行整页跳转
-      updateUrl();         // 页面刷新后，tryLoadFromUrl 会检测到没有 paper 参数，自动渲染试卷列表
+      uiState = 'paper';
+      updateUrl();
     });
   }
 
@@ -667,20 +668,17 @@
     `;
 
     document.getElementById('retry-paper-btn').addEventListener('click', function() {
-      // 重做此卷：重置分数和题目索引，无刷新（体验流畅）
       score = 0;
       currentIndex = 0;
       currentQuestionSolved = false;
       updateScoreDisplay();
       renderQuestion();
-      // 但 URL 保持不变，不需要更新（paper 参数还在）
     });
 
     document.getElementById('back-to-papers-from-result').addEventListener('click', function() {
-      // 返回试卷列表，导航步骤，整页跳转（清掉 paper 参数）
       currentPaperId = null;
-      uiState = 'paper';   // 确保整页跳转
-      updateUrl(); // 整页跳转
+      uiState = 'paper';
+      updateUrl();
     });
   }
 
@@ -691,13 +689,13 @@
     if (!paper) return;
     if (currentIndex + 1 < paper.questions.length) {
       currentIndex++;
-      renderQuestion(); // 无刷新切换题目
+      renderQuestion();
     } else {
-      renderResult(); // 无刷新显示结果
+      renderResult();
     }
   });
 
-  // ========== 界面语言切换 ==========
+  // ========== 🆕 界面语言切换（持久化到 localStorage） ==========
   function createLangToggle() {
     const placeholder = document.getElementById('lang-toggle-placeholder');
     if (!placeholder) return;
@@ -705,15 +703,16 @@
     toggle.className = 'lang-toggle';
     toggle.style.cssText = 'display:flex; background:#eef2f7; border-radius:40px; padding:3px; gap:2px; margin-bottom:16px;';
     toggle.innerHTML = `
-      <button class="lang-btn active" data-lang="zh" style="border:none; background:transparent; padding:6px 18px; border-radius:30px; font-size:14px; font-weight:600; color:#6b7a8f; cursor:pointer; font-family:inherit; transition:all 0.2s;">中文</button>
+      <button class="lang-btn" data-lang="zh" style="border:none; background:transparent; padding:6px 18px; border-radius:30px; font-size:14px; font-weight:600; color:#6b7a8f; cursor:pointer; font-family:inherit; transition:all 0.2s;">中文</button>
       <button class="lang-btn" data-lang="en" style="border:none; background:transparent; padding:6px 18px; border-radius:30px; font-size:14px; font-weight:600; color:#6b7a8f; cursor:pointer; font-family:inherit; transition:all 0.2s;">English</button>
     `;
     placeholder.appendChild(toggle);
 
     function setActive(lang) {
       toggle.querySelectorAll('.lang-btn').forEach(b => {
-        b.classList.toggle('active', b.dataset.lang === lang);
-        if (b.dataset.lang === lang) {
+        const isActive = b.dataset.lang === lang;
+        b.classList.toggle('active', isActive);
+        if (isActive) {
           b.style.background = '#ffffff';
           b.style.color = '#0b1c33';
           b.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
@@ -724,16 +723,22 @@
         }
       });
     }
-    setActive('zh');
+
+    // 🆕 恢复保存的语言
+    setActive(currentLang);
 
     toggle.addEventListener('click', function(e) {
       const btn = e.target.closest('.lang-btn');
       if (!btn) return;
       const lang = btn.dataset.lang;
       if (lang === currentLang) return;
+      
+      // 🆕 保存到 localStorage
       currentLang = lang;
+      localStorage.setItem('quiz_lang', lang);
       setActive(lang);
-      // 语言切换后重新渲染当前界面（无刷新）
+      
+      // 重新渲染当前界面
       switch (uiState) {
         case 'category': renderCategorySelection(); break;
         case 'subject': renderSubjectSelection(); break;
