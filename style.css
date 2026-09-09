@@ -690,3 +690,33 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .story-card-footer .chapters-count { font-size: 10px; padding: 1px 8px; }
   .story-card-footer .updated-time { font-size: 9px; }
 }
+
+
+/* ============================================================
+   🆕 做题页选项网格（宽屏两列）—— 只影响答题状态
+   ============================================================ */
+.quiz-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+/* 平板/桌面宽屏下变成两列 */
+@media (min-width: 768px) {
+  .quiz-options-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+/* 32寸大屏下稍微加大内边距，选项更饱满 */
+@media (min-width: 1400px) {
+  .quiz-options-grid {
+    gap: 16px;
+  }
+  .quiz-options-grid .quiz-option {
+    padding: 18px 24px !important;
+    font-size: 17px !important;
+  }
+}
