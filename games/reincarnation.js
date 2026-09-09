@@ -144,6 +144,20 @@
     }
     .start-card h2 { color: #f5c542; font-size: 2.2rem; margin: 0.2rem 0; }
     .start-card p { font-size: 0.95rem; line-height: 1.6; color: #8a9aaa; }
+    /* 开始卡片内的语言切换按钮 */
+    .start-lang-btn {
+      background: #2a2e3a;
+      border: none;
+      padding: 0.2rem 0.8rem;
+      border-radius: 1rem;
+      color: #c0d0e0;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 700;
+      transition: 0.2s;
+      margin-bottom: 0.8rem;
+    }
+    .start-lang-btn:hover { background: #3a4a5a; }
     @media (max-width: 480px) {
       .game-wrapper { padding: 0.8rem; border-radius: 1.5rem; }
       .story-box { padding: 1.2rem; min-height: 240px; }
@@ -168,6 +182,9 @@
     <div class="start-card">
       <h2 id="overlayTitle">🌱 轮回之门</h2>
       <p id="overlayDesc">你将在两个世界间穿梭，体验不同的命运。</p>
+      <!-- 新增语言切换按钮 -->
+      <button class="start-lang-btn" id="startLangToggle">EN</button>
+      <br>
       <button class="btn" id="overlayBtn">开始</button>
     </div>
   </div>
@@ -196,7 +213,7 @@
         deathMagic: '💀 你冒险失败，被怪物击杀……',
         rebirthOption: '♻️ 重生（继承部分属性）',
         noRebirthOption: '🕊️ 不重生（离开轮回）',
-        inheritInfo: '✨ 你带着前世 %d%% 的修为重生了！',
+        inheritInfo: '✨ 你带着前世 %s%% 的修为重生了！',
         continueBtn: '⏩ 继续',
         // 修仙故事
         storyFortune1: '✨ 你在深山偶遇一位隐世高人，他指点你修炼迷津，你顿悟大增！',
@@ -218,7 +235,7 @@
         breakthroughSmall: '🎉 你突破了%s%s，修为更上一层楼！',
         breakthroughBig: '🌟 你成功突破至%s初期！大道可期！',
         maxRealm: '🏆 你已达神帝大圆满，三界无敌，万古流芳！',
-        // 属性名翻译（用于状态栏和描述）
+        // 属性名翻译
         attrRealm: '境界',
         attrCultivation: '修为',
         attrTalent: '资质',
@@ -239,7 +256,7 @@
         attrIntelligence: '智力',
         attrVitality: '体质',
         attrLuck: '幸运',
-        // 魔法故事（中）
+        // 魔法故事
         storyMagicFortune1: '✨ 你在古墓中发现了一本魔法禁书，领悟了强大的咒语！',
         storyMagicFortune2: '🌿 精灵女王赐予你祝福，你的全属性都提升了。',
         storyMagicFortune3: '💎 你找到了传说级的魔晶，力量与智力大幅增加。',
@@ -262,8 +279,13 @@
         storyMagicTrain1: '💪 你进行力量训练，力量增加了。',
         storyMagicTrain2: '🏋️ 你锻炼体能，体质和敏捷都有提高。',
         storyMagicTrain3: '🧘 你练习冥想，智力和魅力略微提升。',
-        levelUp: '🎉 你升级了！当前等级 %d！',
-        commonEffect: '属性变化: '
+        levelUp: '🎉 你升级了！当前等级 %s！',
+        commonEffect: '属性变化: ',
+        // 按钮标签
+        btnAdventure: '冒险',
+        btnStudy: '学习',
+        btnExplore: '探索',
+        btnTrain: '锻炼'
       },
       en: {
         title: '🌌 Reincarnation · Dual Worlds',
@@ -285,7 +307,7 @@
         deathMagic: '💀 You failed your adventure, slain by a monster...',
         rebirthOption: '♻️ Rebirth (inherit part of stats)',
         noRebirthOption: '🕊️ Accept Death (leave the cycle)',
-        inheritInfo: '✨ You reborn with %d%% of your previous cultivation!',
+        inheritInfo: '✨ You reborn with %s%% of your previous cultivation!',
         continueBtn: '⏩ Continue',
         storyFortune1: '✨ You met a hermit sage who guided your cultivation, your enlightenment soared!',
         storyFortune2: '🌿 You found a millennium lingzhi, your cultivation and physique improved greatly.',
@@ -348,8 +370,12 @@
         storyMagicTrain1: '💪 You trained strength, Strength increased.',
         storyMagicTrain2: '🏋️ You exercised, Vitality and Agility improved.',
         storyMagicTrain3: '🧘 You meditated, Intelligence and Charm slightly increased.',
-        levelUp: '🎉 You leveled up! Current level %d!',
-        commonEffect: 'Stat changes: '
+        levelUp: '🎉 You leveled up! Current level %s!',
+        commonEffect: 'Stat changes: ',
+        btnAdventure: 'Adventure',
+        btnStudy: 'Study',
+        btnExplore: 'Explore',
+        btnTrain: 'Train'
       }
     };
 
@@ -370,6 +396,7 @@
     var overlayDesc = document.getElementById('overlayDesc');
     var overlayBtn = document.getElementById('overlayBtn');
     var langToggle = document.getElementById('langToggle');
+    var startLangToggle = document.getElementById('startLangToggle');
     var gameTitle = document.getElementById('gameTitle');
 
     // ========================= 工具 =========================
@@ -496,7 +523,7 @@
       var changes = [];
       for (var key in story.effects) {
         var val = story.effects[key];
-        var attrName = key; // 直接使用中文键名（已在语言包中）
+        var attrName = key;
         if (val > 0) changes.push('<span class="good">+' + val + ' ' + attrName + '</span>');
         else if (val < 0) changes.push('<span class="bad">' + val + ' ' + attrName + '</span>');
       }
@@ -689,7 +716,7 @@
       ]);
     }
 
-    // ========================= 魔法世界（全新完整故事系统） =========================
+    // ========================= 魔法世界 =========================
 
     var magicStories = {
       fortune: function() {
@@ -749,7 +776,6 @@
       if (effects.魅力 !== undefined) char.charm = clamp(char.charm + effects.魅力, 0, 100);
       if (effects.幸运 !== undefined) char.luck = clamp(char.luck + effects.幸运, 0, 100);
       if (effects.经验 !== undefined) char.exp = Math.max(0, char.exp + effects.经验);
-      // 检查升级（在事件应用后）
     }
 
     function showMagicEvent(story) {
@@ -774,20 +800,21 @@
       render(text, [
         { label: t('continueBtn'), action: function() {
             game.pendingEvent = false;
-            // 先应用效果
             applyMagicEffects(game.character, story.effects);
-            // 检查升级
             var char = game.character;
+            // 检查升级（循环升级）
+            var levelUpCount = 0;
             while (char.exp >= char.level * 10) {
               char.exp -= char.level * 10;
               char.level++;
-              // 升级时增加随机属性（可选）
+              levelUpCount++;
               var attrUp = pick(['strength','agility','intelligence','vitality']);
               char[attrUp] += rand(1,3);
-              // 显示升级消息（使用事件方式，但此时还在事件内，需要特殊处理）
-              // 我们使用一个标记，然后显示升级消息
-              showLevelUpMessage(char.level);
-              return; // 升级后返回，不再继续
+            }
+            if (levelUpCount > 0) {
+              // 显示升级信息（只显示一次，并显示升了几级）
+              showLevelUpMessage(char.level, levelUpCount);
+              return;
             }
             // 检查死亡
             if (char.exp <= 0 && char.level <= 1) {
@@ -800,10 +827,12 @@
       ]);
     }
 
-    function showLevelUpMessage(newLevel) {
-      // 清空当前界面，只显示升级信息
+    function showLevelUpMessage(newLevel, count) {
       game.pendingEvent = true;
       var msg = t('levelUp', newLevel);
+      if (count && count > 1) {
+        msg += ' (↑' + count + '级)';
+      }
       render(msg, [
         { label: t('continueBtn'), action: function() {
             game.pendingEvent = false;
@@ -880,10 +909,10 @@
       text += t('attrWeapon') + '：' + (char.weapon || '无') + '\\n';
 
       var choices = [
-        { label: '⚔️ ' + t('attrStrength') + '（冒险）', action: function() { magicAction('adventure'); } },
-        { label: '📚 ' + t('attrIntelligence') + '（学习）', action: function() { magicAction('study'); } },
-        { label: '🧙 ' + t('attrLuck') + '（探索）', action: function() { magicAction('explore'); } },
-        { label: '💪 ' + t('attrVitality') + '（锻炼）', action: function() { magicAction('train'); } }
+        { label: '⚔️ ' + t('attrStrength') + '（' + t('btnAdventure') + '）', action: function() { magicAction('adventure'); } },
+        { label: '📚 ' + t('attrIntelligence') + '（' + t('btnStudy') + '）', action: function() { magicAction('study'); } },
+        { label: '🧙 ' + t('attrLuck') + '（' + t('btnExplore') + '）', action: function() { magicAction('explore'); } },
+        { label: '💪 ' + t('attrVitality') + '（' + t('btnTrain') + '）', action: function() { magicAction('train'); } }
       ];
       render(text, choices);
     }
@@ -937,24 +966,38 @@
       showDeathScene();
     }
 
-    langToggle.addEventListener('click', function() {
+    // 语言切换函数（供两个按钮共用）
+    function switchLanguage() {
       lang = (lang === 'zh') ? 'en' : 'zh';
-      langToggle.textContent = lang === 'zh' ? 'EN' : '中文';
+      var label = lang === 'zh' ? 'EN' : '中文';
+      langToggle.textContent = label;
+      startLangToggle.textContent = label;
       gameTitle.textContent = t('title');
+      // 更新覆盖层文字
+      overlayTitle.textContent = '🌱 ' + (lang === 'zh' ? '轮回之门' : 'Reincarnation Gate');
+      overlayDesc.textContent = lang === 'zh' ? '你将在两个世界间穿梭，体验不同的命运。' : 'You will travel between two worlds, experiencing different fates.';
+      // 重新渲染当前场景
       if (game.screen === 'death') showDeathScene();
       else if (game.screen === 'cultivation') renderCultivation();
       else if (game.screen === 'magic') renderMagic();
       else if (game.screen === 'ending') noRebirth();
-    });
+    }
+
+    langToggle.addEventListener('click', switchLanguage);
+    startLangToggle.addEventListener('click', switchLanguage);
 
     overlayBtn.addEventListener('click', function() {
       overlay.classList.add('hidden');
       initGame();
     });
 
+    // 初始显示overlay，并设置语言按钮文字
     overlay.classList.remove('hidden');
     overlayTitle.textContent = '🌱 轮回之门';
     overlayDesc.textContent = '你将在两个世界间穿梭，体验不同的命运。';
+    // 初始语言为中文，按钮显示EN
+    langToggle.textContent = 'EN';
+    startLangToggle.textContent = 'EN';
 
     window.game = game;
   })();
