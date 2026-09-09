@@ -6,7 +6,7 @@
     <title>沉浸式工坊 · 蒙堂木下</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ===== 原有样式保留（略作精简，但完全保留功能） ===== */
+        /* ===== 原有样式保留 ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             background: #1a1a2e;
@@ -57,9 +57,9 @@
         .immersive-container {
             position: relative;
             z-index: 1;
-            max-width: 900px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 16px 20px 40px;
+            padding: 16px 24px 40px;
             min-height: 100vh;
         }
 
@@ -74,7 +74,7 @@
         }
         .nav-bar {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 16px; max-width: 1100px; margin:0 auto; min-height:56px;
+            padding: 12px 16px; max-width: 1280px; margin:0 auto; min-height:56px;
         }
         .brand {
             display:flex; align-items:center; gap:8px;
@@ -104,18 +104,6 @@
             color:#e8e0d8; font-size:22px; padding:4px 12px; border-radius:8px;
             cursor:pointer; flex-shrink:0;
         }
-        .lang-toggle-container {
-            display:flex; align-items:center; gap:0px; margin-left:4px;
-        }
-        .lang-btn {
-            background:transparent; border:1px solid rgba(255,255,255,0.15);
-            color:rgba(232,224,216,0.6); padding:4px 8px; cursor:pointer;
-            font-size:12px; font-weight:600; font-family:inherit; transition:0.2s;
-        }
-        .lang-btn:first-child { border-radius:30px 0 0 30px; }
-        .lang-btn:last-child { border-radius:0 30px 30px 0; border-left:none; }
-        .lang-btn:hover { background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.25); }
-        .lang-btn.active { background:rgba(201,168,124,0.15); border-color:#c9a87c; color:#e8e0d8; }
 
         /* ===== 场景选择器 ===== */
         .scene-selector {
@@ -151,11 +139,8 @@
             color: #e8e0d8;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-        .scene-btn .scene-icon {
-            margin-right: 6px;
-        }
 
-        /* ===== 音乐播放器（改良版，显示当前场景名称） ===== */
+        /* ===== 音乐播放器 ===== */
         .music-player {
             background: rgba(45,42,36,0.6);
             backdrop-filter: blur(8px);
@@ -245,18 +230,38 @@
             white-space: nowrap;
         }
 
-        /* ===== 读物列表 ===== */
+        /* ===== 🆕 两栏布局：主内容 + 侧边栏 ===== */
+        .immersive-layout {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+        }
+        .immersive-main {
+            flex: 1;
+            min-width: 0;
+        }
+        .immersive-sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ===== 读物列表（主内容） ===== */
         .read-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 16px;
             margin-top: 8px;
         }
         .read-card {
             background: rgba(45,42,36,0.4);
             backdrop-filter: blur(4px);
-            border-radius: 20px;
-            padding: 24px 20px 20px;
+            border-radius: 16px;
+            padding: 18px 16px 16px;
             border: 1px solid rgba(201,168,124,0.06);
             cursor: pointer;
             transition: 0.3s;
@@ -270,37 +275,41 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
         .read-card .category {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             color: #c9a87c;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .read-card .title {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 700;
             color: #e8e0d8;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .read-card .author {
-            font-size: 13px;
+            font-size: 12px;
             color: rgba(232,224,216,0.4);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         .read-card .preview {
-            font-size: 14px;
-            color: rgba(232,224,216,0.6);
-            line-height: 1.6;
+            font-size: 13px;
+            color: rgba(232,224,216,0.5);
+            line-height: 1.5;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
         .read-card .media-badge {
             display: inline-block;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             padding: 2px 10px;
             border-radius: 12px;
@@ -309,6 +318,115 @@
             margin-bottom: 6px;
             border: 1px solid rgba(201,168,124,0.06);
         }
+        .read-card .card-icon {
+            font-size: 32px;
+            text-align: center;
+            padding: 4px 0 8px;
+            opacity: 0.6;
+        }
+
+        /* ===== 🆕 侧边栏组件 ===== */
+        .sidebar-section {
+            background: rgba(45,42,36,0.3);
+            backdrop-filter: blur(4px);
+            border-radius: 16px;
+            padding: 18px 18px 16px;
+            border: 1px solid rgba(201,168,124,0.06);
+        }
+        .sidebar-section .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #c9a87c;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .sidebar-section .section-title .badge {
+            font-size: 10px;
+            background: rgba(201,168,124,0.1);
+            padding: 0 8px;
+            border-radius: 10px;
+            color: rgba(232,224,216,0.3);
+        }
+
+        .sidebar-item {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(201,168,124,0.04);
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+        .sidebar-item:hover {
+            padding-left: 4px;
+            opacity: 0.8;
+        }
+        .sidebar-item .s-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            width: 28px;
+            text-align: center;
+            opacity: 0.5;
+        }
+        .sidebar-item .s-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .sidebar-item .s-info .s-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e8e0d8;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .sidebar-item .s-info .s-desc {
+            font-size: 11px;
+            color: rgba(232,224,216,0.3);
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .sidebar-item .s-tag {
+            font-size: 9px;
+            font-weight: 700;
+            color: #c9a87c;
+            background: rgba(201,168,124,0.06);
+            padding: 0 8px;
+            border-radius: 10px;
+            align-self: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .sidebar-tags .tag {
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(201,168,124,0.06);
+            color: rgba(232,224,216,0.4);
+            border: 1px solid rgba(201,168,124,0.04);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .sidebar-tags .tag:hover {
+            background: rgba(201,168,124,0.12);
+            color: #e8e0d8;
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -317,7 +435,7 @@
         }
         .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
 
-        /* ===== 阅读浮层 ===== */
+        /* ===== 阅读浮层（保持不变） ===== */
         .reader-overlay {
             display: none;
             position: fixed;
@@ -396,7 +514,37 @@
         }
 
         /* ===== 响应式 ===== */
-        @media (max-width:720px) {
+        @media (max-width: 1024px) {
+            .immersive-sidebar {
+                width: 220px;
+            }
+            .read-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .immersive-layout {
+                flex-direction: column;
+            }
+            .immersive-sidebar {
+                width: 100%;
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            .immersive-sidebar .sidebar-section {
+                flex: 1;
+                min-width: 200px;
+            }
+            .read-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
             .nav-links {
                 position:absolute; top:100%; left:0; right:0;
                 background:rgba(20,20,30,0.95);
@@ -415,12 +563,19 @@
             .music-player { width:100%; justify-content:space-between; }
             .music-player .controls .volume-slider { width:40px; }
             .scene-btn { padding:8px 16px; font-size:13px; }
+            .immersive-container { padding: 12px 16px 32px; }
+            .immersive-sidebar .sidebar-section {
+                min-width: 100%;
+            }
         }
-        @media (max-width:420px) {
-            .read-grid { grid-template-columns:1fr; gap:12px; }
+
+        @media (max-width: 420px) {
+            .read-grid { grid-template-columns:1fr 1fr; gap:10px; }
             .music-player .info .sub { display:none; }
             .music-player .controls .volume-slider { width:30px; }
             .scene-btn { padding:6px 12px; font-size:12px; }
+            .read-card { padding: 14px 12px; }
+            .read-card .title { font-size: 14px; }
         }
     </style>
 </head>
@@ -464,14 +619,13 @@
                 <!-- 由 JS 动态生成 -->
             </div>
 
-            <!-- ===== 顶部信息栏 + 音乐播放器 ===== -->
+            <!-- ===== 顶部标题 + 音乐播放器 ===== -->
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:6px;">
                 <div class="page-title" data-i18n-html="immersive.title" style="font-size:22px; font-weight:700; color:#e8e0d8; letter-spacing:2px; text-shadow:0 2px 20px rgba(0,0,0,0.3);">
                     🌙 沉浸式<span style="color:#c9a87c;">工坊</span>
                 </div>
             </div>
 
-            <!-- ===== 音乐播放器（集成场景信息） ===== -->
             <div class="music-player" id="musicPlayer">
                 <span class="icon">🏮</span>
                 <div class="info">
@@ -485,9 +639,31 @@
                 </div>
             </div>
 
-            <!-- ===== 读物列表 ===== -->
-            <div class="read-grid" id="readGrid">
-                <!-- 由 JS 从 data/immersive.json 动态渲染 -->
+            <!-- ===== 🆕 两栏布局：主内容 + 侧边栏 ===== -->
+            <div class="immersive-layout">
+
+                <!-- 主内容区 -->
+                <div class="immersive-main">
+                    <div class="read-grid" id="readGrid">
+                        <!-- 由 JS 从 data/immersive.json 动态渲染 -->
+                    </div>
+                </div>
+
+                <!-- 侧边栏 -->
+                <aside class="immersive-sidebar" id="sidebar">
+                    <!-- 热门推荐 -->
+                    <div class="sidebar-section" id="hotSection">
+                        <div class="section-title">🔥 <span data-i18n="immersive.hot">热门推荐</span> <span class="badge">TOP</span></div>
+                        <div id="hotList"></div>
+                    </div>
+
+                    <!-- 分类标签 -->
+                    <div class="sidebar-section">
+                        <div class="section-title">🏷️ <span data-i18n="immersive.categories">分类</span></div>
+                        <div class="sidebar-tags" id="categoryTags"></div>
+                    </div>
+                </aside>
+
             </div>
 
         </div>
@@ -513,67 +689,6 @@
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  🎬 场景配置（你可以自由增删改）
-        // ================================================================
-        const SCENES = [
-            {
-                id: 'cafe',
-                nameZh: '☕ 咖啡馆',
-                nameEn: 'Café',
-                bgVideoId: 'o53Ow2MBLVk',      // 背景视频 ID（YouTube）
-                musicVideoId: 'cvL4wbvHNA8',   // 音乐视频 ID
-                musicTitleZh: '咖啡馆 · 轻柔钢琴',
-                musicTitleEn: 'Café Soft Piano',
-                musicSubZh: '蒙堂木下 · 慵懒午后',
-                musicSubEn: 'Montainment · Lazy Afternoon'
-            },
-            {
-                id: 'fireplace',
-                nameZh: '🔥 壁炉',
-                nameEn: 'Fireplace',
-                bgVideoId: 'jq7-Pib4UYw',      // 壁炉燃烧视频（示例）
-                musicVideoId: 'iQH-C2UTLeE',   // 轻柔钢琴曲
-                musicTitleZh: '壁炉 · 冬日暖阳',
-                musicTitleEn: 'Fireplace · Winter Sun',
-                musicSubZh: '蒙堂木下 · 温暖静谧',
-                musicSubEn: 'Montainment · Warm & Quiet'
-            },
-            {
-                id: 'forest',
-                nameZh: '🌲 森林',
-                nameEn: 'Forest',
-                bgVideoId: 'KS4zA8nGL1U',      // 森林溪流
-                musicVideoId: 'hHEFUieyXzQ',   // 自然音乐
-                musicTitleZh: '森林 · 溪水潺潺',
-                musicTitleEn: 'Forest · Stream',
-                musicSubZh: '蒙堂木下 · 自然之声',
-                musicSubEn: 'Montainment · Nature Sounds'
-            },
-            {
-                id: 'study',
-                nameZh: '📖 书斋',
-                nameEn: 'Study',
-                bgVideoId: 'z0dtCkTcOEU',      // 书斋雨景
-                musicVideoId: '5g_vB_qs3to',   // 古琴曲
-                musicTitleZh: '书斋 · 雨打芭蕉',
-                musicTitleEn: 'Study · Rain & Guqin',
-                musicSubZh: '蒙堂木下 · 静心研读',
-                musicSubEn: 'Montainment · Deep Reading'
-            },
-            {
-                id: 'rainy_night',
-                nameZh: '🌧️ 雨夜',
-                nameEn: 'Rainy Night',
-                bgVideoId: 'EeSZ6QwWZWE',      // 雨夜街景
-                musicVideoId: 'Qj1xtBAiPtI',   // 舒缓钢琴
-                musicTitleZh: '雨夜 · 城市灯光',
-                musicTitleEn: 'Rainy Night · City Lights',
-                musicSubZh: '蒙堂木下 · 孤独浪漫',
-                musicSubEn: 'Montainment · Lonely Romance'
-            }
-        ];
-
-        // ================================================================
         //  🎬 背景视频加载与切换
         // ================================================================
         const bgWrapper = document.getElementById('bgVideoWrapper');
@@ -591,36 +706,28 @@
             }
         }
 
-        // 监听 iframe 加载
         bgIframe.addEventListener('load', showBgVideo);
-        // 超时兜底
         setTimeout(showBgVideo, 3000);
-        // 用户点击任意位置也触发（帮助显示）
         document.addEventListener('click', showBgVideo, { once: true });
         window.addEventListener('load', () => setTimeout(showBgVideo, 200));
 
-        /**
-         * 切换背景视频
-         */
         function switchBackground(videoId) {
             const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`;
             bgIframe.src = newSrc;
-            // 重新触发加载完成检测
             bgLoaded = false;
             bgWrapper.classList.remove('loaded');
             if (loadingText) {
                 loadingText.style.display = 'block';
                 loadingText.classList.remove('hidden');
             }
-            // 监听新加载
             bgIframe.addEventListener('load', showBgVideo);
             setTimeout(showBgVideo, 3000);
         }
 
         // ================================================================
-        //  🎵 音乐播放器（多场景支持）
+        //  🎵 音乐播放器
         // ================================================================
-        let musicPlayer = null;          // 隐藏的 iframe 引用
+        let musicPlayer = null;
         let currentMusicId = '';
         let isPlaying = false;
         let autoPlayUsed = false;
@@ -657,9 +764,7 @@
             currentMusicId = videoId;
             const src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
             musicPlayer.src = src;
-            // 更新界面信息
             updateMusicInfo(scene);
-            // 标记为播放状态（但实际是否播放受浏览器策略影响）
             isPlaying = true;
             playBtn.textContent = '⏸';
             playBtn.classList.add('playing');
@@ -668,25 +773,20 @@
         function togglePlay() {
             if (!musicPlayer) return;
             if (isPlaying) {
-                // 暂停：清空 src 或使用 pause 方法（实际无法直接控制，只能 reload）
-                // 简单做法：将 src 置空，然后重新设置为不带 autoplay 的链接
                 const src = musicPlayer.src;
                 if (src.includes('autoplay=1')) {
                     const newSrc = src.replace('autoplay=1', 'autoplay=0');
                     musicPlayer.src = newSrc;
                 } else {
-                    // 如果已经暂停，则尝试恢复播放
                     const newSrc = src.replace('autoplay=0', 'autoplay=1');
                     musicPlayer.src = newSrc;
                 }
                 isPlaying = !isPlaying;
             } else {
-                // 播放
                 const src = musicPlayer.src;
                 if (src.includes('autoplay=0')) {
                     musicPlayer.src = src.replace('autoplay=0', 'autoplay=1');
                 } else {
-                    // 如果 src 为空或没有参数，重新构建
                     if (!src || src === 'about:blank') {
                         if (currentMusicId) {
                             musicPlayer.src =
@@ -702,30 +802,23 @@
             playBtn.classList.toggle('playing', isPlaying);
         }
 
-        // 音量控制（仅 UI，实际无法控制 YouTube iframe 音量，但保留视觉反馈）
-        volumeSlider.addEventListener('input', function() {
-            // 无实际功能，仅做展示
-        });
+        volumeSlider.addEventListener('input', function() {});
 
-        // 播放按钮事件
         playBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             togglePlay();
         });
 
-        // 点击音乐播放器区域（非按钮/滑块）也可切换
         document.querySelector('.music-player').addEventListener('click', function(e) {
             if (e.target.closest('button') || e.target.closest('input')) return;
             togglePlay();
         });
 
-        // 全局点击尝试自动播放音乐（第一次用户交互）
         document.addEventListener('click', function autoPlayMusic(e) {
             if (autoPlayUsed || isPlaying) return;
             if (e.target.closest('.reader-overlay')) return;
             if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
             if (!musicPlayer || !currentMusicId) return;
-            // 尝试播放
             musicPlayer.src =
                 `https://www.youtube.com/embed/${currentMusicId}?autoplay=1&loop=1&playlist=${currentMusicId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
             isPlaying = true;
@@ -736,32 +829,79 @@
         });
 
         // ================================================================
-        //  🔄 场景切换核心函数
+        //  🔄 场景配置与切换
         // ================================================================
+        const SCENES = [
+            {
+                id: 'cafe',
+                nameZh: '☕ 咖啡馆',
+                nameEn: 'Café',
+                bgVideoId: 'FP7QN6e05Pw',
+                musicVideoId: 'cvL4wbvHNA8',
+                musicTitleZh: '咖啡馆 · 轻柔钢琴',
+                musicTitleEn: 'Café Soft Piano',
+                musicSubZh: '蒙堂木下 · 慵懒午后',
+                musicSubEn: 'Montainment · Lazy Afternoon'
+            },
+            {
+                id: 'fireplace',
+                nameZh: '🔥 壁炉',
+                nameEn: 'Fireplace',
+                bgVideoId: '8ZfR2b_91YE',
+                musicVideoId: '9n6TQwPqHNE',
+                musicTitleZh: '壁炉 · 冬日暖阳',
+                musicTitleEn: 'Fireplace · Winter Sun',
+                musicSubZh: '蒙堂木下 · 温暖静谧',
+                musicSubEn: 'Montainment · Warm & Quiet'
+            },
+            {
+                id: 'forest',
+                nameZh: '🌲 森林',
+                nameEn: 'Forest',
+                bgVideoId: 'gK1WzB1R5yA',
+                musicVideoId: 'bP9gMh_JfR8',
+                musicTitleZh: '森林 · 溪水潺潺',
+                musicTitleEn: 'Forest · Stream',
+                musicSubZh: '蒙堂木下 · 自然之声',
+                musicSubEn: 'Montainment · Nature Sounds'
+            },
+            {
+                id: 'study',
+                nameZh: '📖 书斋',
+                nameEn: 'Study',
+                bgVideoId: 'z0dtCkTcOEU',
+                musicVideoId: '5g_vB_qs3to',
+                musicTitleZh: '书斋 · 雨打芭蕉',
+                musicTitleEn: 'Study · Rain & Guqin',
+                musicSubZh: '蒙堂木下 · 静心研读',
+                musicSubEn: 'Montainment · Deep Reading'
+            },
+            {
+                id: 'rainy_night',
+                nameZh: '🌧️ 雨夜',
+                nameEn: 'Rainy Night',
+                bgVideoId: 'Vn7Z6zL8jys',
+                musicVideoId: 'oUwD-Q6Jk5M',
+                musicTitleZh: '雨夜 · 城市灯光',
+                musicTitleEn: 'Rainy Night · City Lights',
+                musicSubZh: '蒙堂木下 · 孤独浪漫',
+                musicSubEn: 'Montainment · Lonely Romance'
+            }
+        ];
+
         let currentSceneId = SCENES[0]?.id || '';
 
         function switchScene(sceneId) {
             const scene = SCENES.find(s => s.id === sceneId);
             if (!scene) return;
             currentSceneId = sceneId;
-
-            // 1. 切换背景视频
             switchBackground(scene.bgVideoId);
-
-            // 2. 切换音乐
             switchMusic(scene.musicVideoId, scene);
-
-            // 3. 更新按钮状态
             document.querySelectorAll('.scene-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.scene === sceneId);
             });
-
-            // 4. 更新音乐播放器界面（已由 switchMusic 完成）
         }
 
-        // ================================================================
-        //  🖌️ 渲染场景按钮
-        // ================================================================
         function renderSceneButtons() {
             const container = document.getElementById('sceneSelector');
             const lang = localStorage.getItem('lang') || 'zh';
@@ -775,28 +915,22 @@
                 `;
             });
             container.innerHTML = html;
-
-            // 绑定点击事件
             container.querySelectorAll('.scene-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = this.dataset.scene;
                     switchScene(id);
                 });
             });
-
-            // 默认激活第一个场景
             if (SCENES.length > 0) {
                 const first = SCENES[0];
-                // 默认激活按钮样式
                 const firstBtn = container.querySelector(`[data-scene="${first.id}"]`);
                 if (firstBtn) firstBtn.classList.add('active');
-                // 加载第一个场景
                 switchScene(first.id);
             }
         }
 
         // ================================================================
-        //  📚 读物数据加载（与之前相同，但增加 i18n 支持）
+        //  📚 读物数据 + 侧边栏
         // ================================================================
         let READ_DATA = [];
         let currentIndex = 0;
@@ -817,6 +951,55 @@
             return i18n.t('immersive.type_text');
         }
 
+        // ===== 侧边栏：热门推荐 =====
+        function renderHot() {
+            const container = document.getElementById('hotList');
+            // 取前 4 条作为热门（或打乱后取 4 条）
+            const hotItems = READ_DATA.slice(0, 4);
+            if (hotItems.length === 0) {
+                container.innerHTML = '<div style="color:rgba(232,224,216,0.2);font-size:13px;">暂无内容</div>';
+                return;
+            }
+            let html = '';
+            hotItems.forEach(item => {
+                const icon = item.type === 'video' ? '🎬' : item.type === 'music' ? '🎵' : '📝';
+                const tag = item.type === 'video' ? '视频' : item.type === 'music' ? '音乐' : '文本';
+                html += `
+                    <div class="sidebar-item" data-idx="${READ_DATA.indexOf(item)}">
+                        <span class="s-icon">${icon}</span>
+                        <div class="s-info">
+                            <div class="s-title">${item.title}</div>
+                            <div class="s-desc">${item.author || '蒙堂木下'}</div>
+                        </div>
+                        <span class="s-tag">${tag}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            container.querySelectorAll('.sidebar-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.idx);
+                    if (!isNaN(idx)) openReader(idx);
+                });
+            });
+        }
+
+        // ===== 侧边栏：分类标签 =====
+        function renderCategories() {
+            const container = document.getElementById('categoryTags');
+            const cats = [...new Set(READ_DATA.map(item => item.category).filter(Boolean))];
+            if (cats.length === 0) {
+                container.innerHTML = '<span style="color:rgba(232,224,216,0.2);font-size:13px;">暂无分类</span>';
+                return;
+            }
+            let html = '';
+            cats.forEach(cat => {
+                html += `<span class="tag">${cat}</span>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // ===== 主列表渲染 =====
         function renderList() {
             if (!READ_DATA || READ_DATA.length === 0) {
                 grid.innerHTML = `
@@ -826,34 +1009,42 @@
                     </div>
                 `;
                 applyI18n();
+                renderHot();
+                renderCategories();
                 return;
             }
+
             let html = '';
             READ_DATA.forEach((item, idx) => {
                 const typeIcon = item.type === 'video' ? '🎬' : item.type === 'music' ? '🎵' : '📝';
                 const typeLabel = getTypeLabel(item.type);
-                const preview = item.preview || (item.content ? item.content.substring(0, 60) + '...' : '');
+                const preview = item.preview || (item.content ? item.content.substring(0, 50) + '...' : '');
                 html += `
                     <div class="read-card" data-index="${idx}">
-                        <div class="media-badge">${typeIcon} ${typeLabel}</div>
+                        <div class="card-icon">${typeIcon}</div>
+                        <div class="media-badge">${typeLabel}</div>
                         <div class="category">${item.category || '未分类'}</div>
                         <div class="title">${item.title}</div>
                         <div class="author">${item.author || '蒙堂木下'}</div>
                         <div class="preview">${preview}</div>
-                        <div class="badge-read">📖</div>
                     </div>
                 `;
             });
             grid.innerHTML = html;
+
             grid.querySelectorAll('.read-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
                     openReader(idx);
                 });
             });
+
             applyI18n();
+            renderHot();
+            renderCategories();
         }
 
+        // ===== 阅读浮层 =====
         function openReader(idx) {
             const item = READ_DATA[idx];
             if (!item) return;
@@ -916,6 +1107,7 @@
         });
         readerPrev.addEventListener('click', goToPrev);
         readerNext.addEventListener('click', goToNext);
+
         document.addEventListener('keydown', function(e) {
             if (!overlay.classList.contains('active')) return;
             if (e.key === 'Escape') { closeReader(); return; }
@@ -925,9 +1117,7 @@
 
         document.addEventListener('languageChanged', function() {
             renderList();
-            // 重新渲染场景按钮（更新语言）
             renderSceneButtons();
-            // 如果当前场景已激活，确保音乐信息更新
             const activeScene = SCENES.find(s => s.id === currentSceneId);
             if (activeScene) updateMusicInfo(activeScene);
         });
@@ -953,7 +1143,6 @@
         //  🚀 启动
         // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // 汉堡菜单
             const toggle = document.querySelector('.nav-toggle');
             const links = document.querySelector('.nav-links');
             if (toggle && links) {
@@ -968,11 +1157,7 @@
                     });
                 });
             }
-
-            // 渲染场景按钮
             renderSceneButtons();
-
-            // 加载读物数据
             loadImmersiveData();
         });
     </script>
