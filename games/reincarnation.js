@@ -1,4 +1,4 @@
-/* Reincarnation · Dual Worlds (Cultivation & Magic) — with Death & Rebirth */
+/* Reincarnation · Dual Worlds — Full Story Events & Realm Advancement */
 (function () {
   'use strict';
 
@@ -196,7 +196,33 @@
         deathMagic: '💀 你冒险失败，被怪物击杀……',
         rebirthOption: '♻️ 重生（继承部分属性）',
         noRebirthOption: '🕊️ 不重生（离开轮回）',
-        inheritInfo: '✨ 你带着前世 %d%% 的修为重生了！'
+        inheritInfo: '✨ 你带着前世 %d%% 的修为重生了！',
+        continueBtn: '⏩ 继续',
+        // 故事事件（中英双语）
+        // 机缘事件
+        storyFortune1: '✨ 你在深山偶遇一位隐世高人，他指点你修炼迷津，你顿悟大增！',
+        storyFortune2: '🌿 你发现了一株千年灵芝，服下后修为暴涨，体质也得到改善。',
+        storyFortune3: '📜 你捡到一本上古残卷，上面记载了失传的功法，你的资质得到升华。',
+        storyFortune4: '🌸 你误入桃花源，得到了仙人的祝福，全属性小幅提升。',
+        storyFortune5: '💎 你在一处古洞府中发现了极品灵石，吸收后修为大增。',
+        // 危机事件
+        storyCrisis1: '☠️ 你被一群妖兽围攻，虽侥幸逃脱但修为倒退，还受了重伤。',
+        storyCrisis2: '🌊 渡河时遭遇暗流，你损失了一些灵药，悟性有所下降。',
+        storyCrisis3: '🔥 洞府闭关时走火入魔，根骨受损，气感也减弱了。',
+        storyCrisis4: '🌪️ 天降雷劫，你勉强抵挡，但机缘和魅力都受到了影响。',
+        storyCrisis5: '💔 遭人暗算，经脉受损，资质和潜力都降低了。',
+        // 普通历练故事
+        storyTrain1: '⚔️ 你与同门切磋，虽然辛苦但修为有所提升。',
+        storyTrain2: '🏹 你猎杀了一只灵兽，吸收了它的精元，修为增加。',
+        storyTrain3: '📖 你诵读道经，心有所感，修为精进。',
+        // 普通悟道故事
+        storyInsight1: '🧘 你静坐参悟天地之理，悟性有所提高。',
+        storyInsight2: '🌅 观日出，感天地之气，悟性增加。',
+        storyInsight3: '🍃 听风吹竹叶，心有所悟，悟性提升。',
+        // 突破信息
+        breakthroughSmall: '🎉 你突破了%s%s，修为更上一层楼！',
+        breakthroughBig: '🌟 你成功突破至%s初期！大道可期！',
+        maxRealm: '🏆 你已达神帝大圆满，三界无敌，万古流芳！'
       },
       en: {
         title: '🌌 Reincarnation · Dual Worlds',
@@ -218,14 +244,35 @@
         deathMagic: '💀 You failed your adventure, slain by a monster...',
         rebirthOption: '♻️ Rebirth (inherit part of stats)',
         noRebirthOption: '🕊️ Accept Death (leave the cycle)',
-        inheritInfo: '✨ You reborn with %d%% of your previous cultivation!'
+        inheritInfo: '✨ You reborn with %d%% of your previous cultivation!',
+        continueBtn: '⏩ Continue',
+        storyFortune1: '✨ You met a hermit sage who guided your cultivation, your enlightenment soared!',
+        storyFortune2: '🌿 You found a millennium lingzhi, your cultivation and physique improved greatly.',
+        storyFortune3: '📜 You discovered an ancient scroll with a lost art, your talent ascended.',
+        storyFortune4: '🌸 You wandered into a peach blossom source, blessed by immortals, all stats slightly increased.',
+        storyFortune5: '💎 You found a supreme spirit stone in an ancient cave, cultivation skyrocketed.',
+        storyCrisis1: '☠️ Attacked by demon beasts, you barely escaped, cultivation regressed and you were injured.',
+        storyCrisis2: '🌊 Crossing a river, you lost some elixirs, wisdom decreased.',
+        storyCrisis3: '🔥 Suffered qi deviation during secluded cultivation, root bone and sense weakened.',
+        storyCrisis4: '🌪️ A heavenly thunderbolt struck, you barely survived, fortune and charm affected.',
+        storyCrisis5: '💔 Betrayed and ambushed, your meridians damaged, talent and potential reduced.',
+        storyTrain1: '⚔️ You sparred with fellow disciples, cultivation increased despite the hard work.',
+        storyTrain2: '🏹 You hunted a spirit beast and absorbed its essence, cultivation increased.',
+        storyTrain3: '📖 You recited Taoist scriptures, gaining insight, cultivation improved.',
+        storyInsight1: '🧘 You meditated on the principles of heaven and earth, wisdom increased.',
+        storyInsight2: '🌅 Watched sunrise and felt the cosmic energy, wisdom increased.',
+        storyInsight3: '🍃 Listened to wind through bamboo, wisdom increased.',
+        breakthroughSmall: '🎉 You broke through to %s %s, your power grows!',
+        breakthroughBig: '🌟 You successfully reached %s Early stage! The Dao is within reach!',
+        maxRealm: '🏆 You have reached Divine Emperor Peak, unrivaled across the three realms!'
       }
     };
 
     var lang = 'zh';
-    function t(key, param) {
+    function t(key, p1, p2) {
       var str = LANG[lang][key] || key;
-      if (param !== undefined) str = str.replace('%d', param);
+      if (p1 !== undefined) str = str.replace('%s', p1);
+      if (p2 !== undefined) str = str.replace('%s', p2);
       return str;
     }
 
@@ -247,13 +294,14 @@
 
     // ========================= 游戏状态 =========================
     var game = {
-      screen: 'death',        // 'death', 'worldSelect', 'cultivation', 'magic', 'ending'
+      screen: 'death',
       world: null,
       character: null,
       turn: 0,
       maxTurns: 999,
       dead: false,
-      inherited: 0          // 继承比例（0~1）
+      inherited: 0,
+      pendingEvent: false  // 是否正在展示事件
     };
 
     // ========================= 常量 =========================
@@ -308,11 +356,135 @@
       hideStatus();
     }
 
-    // ----- 修仙世界 -----
+    // ========================= 修仙世界（核心改进） =========================
+
+    // 故事事件池（每次行动随机抽取）
+    var cultivationStories = {
+      fortune: function() {
+        return pick([
+          { text: t('storyFortune1'), effects: { 修为: rand(15,30), 悟性: rand(2,5), 资质: rand(1,3), 根骨: rand(1,3) } },
+          { text: t('storyFortune2'), effects: { 修为: rand(20,40), 根骨: rand(2,4), 气感: rand(1,3) } },
+          { text: t('storyFortune3'), effects: { 修为: rand(10,25), 资质: rand(2,5), 悟性: rand(1,3), 潜力: rand(1,3) } },
+          { text: t('storyFortune4'), effects: { 修为: rand(10,20), 魅力: rand(2,4), 机缘: rand(1,3), 资质: rand(1,2) } },
+          { text: t('storyFortune5'), effects: { 修为: rand(30,50), 气感: rand(2,4), 根骨: rand(1,2) } }
+        ]);
+      },
+      crisis: function() {
+        return pick([
+          { text: t('storyCrisis1'), effects: { 修为: -rand(10,25), 根骨: -rand(1,3), 气感: -rand(1,2) } },
+          { text: t('storyCrisis2'), effects: { 修为: -rand(5,15), 悟性: -rand(1,3), 机缘: -rand(1,2) } },
+          { text: t('storyCrisis3'), effects: { 修为: -rand(10,20), 根骨: -rand(1,4), 气感: -rand(1,3) } },
+          { text: t('storyCrisis4'), effects: { 修为: -rand(10,20), 魅力: -rand(1,3), 机缘: -rand(1,3) } },
+          { text: t('storyCrisis5'), effects: { 修为: -rand(10,20), 资质: -rand(1,3), 潜力: -rand(1,3) } }
+        ]);
+      },
+      train: function() {
+        return pick([
+          { text: t('storyTrain1'), effects: { 修为: rand(5,15) } },
+          { text: t('storyTrain2'), effects: { 修为: rand(8,20) } },
+          { text: t('storyTrain3'), effects: { 修为: rand(6,18) } }
+        ]);
+      },
+      insight: function() {
+        return pick([
+          { text: t('storyInsight1'), effects: { 悟性: rand(2,5), 修为: rand(3,10) } },
+          { text: t('storyInsight2'), effects: { 悟性: rand(3,6), 修为: rand(2,8) } },
+          { text: t('storyInsight3'), effects: { 悟性: rand(2,4), 修为: rand(4,12) } }
+        ]);
+      }
+    };
+
+    // 应用效果到角色
+    function applyEffects(char, effects) {
+      if (!effects) return;
+      if (effects.修为 !== undefined) char.cultivationBase = clamp(char.cultivationBase + effects.修为, 0, 100);
+      if (effects.资质 !== undefined) char.talent.资质 = clamp(char.talent.资质 + effects.资质, 0, 100);
+      if (effects.悟性 !== undefined) char.talent.悟性 = clamp(char.talent.悟性 + effects.悟性, 0, 100);
+      if (effects.根骨 !== undefined) char.talent.根骨 = clamp(char.talent.根骨 + effects.根骨, 0, 100);
+      if (effects.气感 !== undefined) char.talent.气感 = clamp(char.talent.气感 + effects.气感, 0, 100);
+      if (effects.魅力 !== undefined) char.talent.魅力 = clamp(char.talent.魅力 + effects.魅力, 0, 100);
+      if (effects.机缘 !== undefined) char.talent.机缘 = clamp(char.talent.机缘 + effects.机缘, 0, 100);
+      if (effects.潜力 !== undefined) char.talent.潜力 = clamp(char.talent.潜力 + effects.潜力, 0, 100);
+      // 灵根暂时不通过常规事件改变（可留作扩展）
+    }
+
+    // 显示事件并等待点击“继续”
+    function showEventStory(story, callback) {
+      game.pendingEvent = true;
+      // 显示事件文本，并添加“继续”按钮
+      var text = story.text;
+      // 美化显示属性变化
+      var changes = [];
+      for (var key in story.effects) {
+        var val = story.effects[key];
+        if (val > 0) changes.push('<span class="good">+' + val + ' ' + key + '</span>');
+        else if (val < 0) changes.push('<span class="bad">' + val + ' ' + key + '</span>');
+      }
+      if (changes.length) text += '\\n\\n属性变化: ' + changes.join(' ');
+      render(text, [
+        { label: t('continueBtn'), action: function() {
+            game.pendingEvent = false;
+            // 应用效果
+            applyEffects(game.character, story.effects);
+            // 检查修为归零死亡
+            if (game.character.cultivationBase <= 0) {
+              deathInCultivation();
+              return;
+            }
+            // 检查突破条件
+            checkBreakthrough();
+            // 回到主界面
+            renderCultivation();
+          } 
+        }
+      ]);
+    }
+
+    // 检查突破
+    function checkBreakthrough() {
+      var char = game.character;
+      // 如果修为达到100且当前是大圆满阶段
+      if (char.cultivationBase >= 100) {
+        if (char.stage === 3) {
+          // 大圆满突破大境界
+          if (char.realm < REALMS.length - 1) {
+            char.realm++;
+            char.stage = 0;
+            char.cultivationBase = 0;
+            // 显示突破信息
+            var msg = t('breakthroughBig', REALMS[char.realm]);
+            render(msg, []);
+            // 短暂延迟后自动继续
+            setTimeout(function() {
+              if (!game.dead) renderCultivation();
+            }, 1500);
+            return true;
+          } else {
+            // 已达最高境界
+            render(t('maxRealm'), []);
+            return true;
+          }
+        } else {
+          // 小境界突破
+          char.stage++;
+          char.cultivationBase = 0;
+          var msg = t('breakthroughSmall', REALMS[char.realm], STAGES[char.stage]);
+          render(msg, []);
+          setTimeout(function() {
+            if (!game.dead) renderCultivation();
+          }, 1500);
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // 启动修仙
     function startCultivation() {
       game.world = 'cultivation';
       game.screen = 'cultivation';
       game.character = generateCultivationChar();
+      game.pendingEvent = false;
       renderCultivation();
     }
 
@@ -327,12 +499,21 @@
         机缘: rand(5, 25),
         潜力: rand(30, 70)
       };
-      // 如果有继承，增加属性
       if (game.inherited > 0) {
         var bonus = Math.floor(game.inherited * 100);
         talent.资质 = clamp(talent.资质 + bonus, 0, 100);
         talent.悟性 = clamp(talent.悟性 + bonus, 0, 100);
-        // 继承部分修为
+        // 继承部分修为（直接增加修为）
+        // 这里我们在生成后手动加一点修为
+        var initCult = Math.floor(game.inherited * 20);
+        return {
+          talent: talent,
+          realm: 0,
+          stage: 0,
+          cultivationBase: clamp(initCult, 0, 100),
+          age: 16,
+          events: []
+        };
       }
       return {
         talent: talent,
@@ -359,13 +540,13 @@
     }
 
     function renderCultivation() {
-      if (game.screen === 'death') return; // 防止死亡后继续
+      if (game.screen === 'death' || game.pendingEvent) return;
       var char = game.character;
       var realmName = REALMS[char.realm] || '???';
       var stageName = STAGES[char.stage] || '';
       var status = {
         '境界': realmName + ' ' + stageName,
-        '修为': char.cultivationBase,
+        '修为': char.cultivationBase + '/100',
         '资质': char.talent.资质,
         '悟性': char.talent.悟性,
         '根骨': char.talent.根骨,
@@ -378,85 +559,78 @@
       updateStatus(status);
 
       var text = '🧘 修仙世界 · ' + realmName + ' ' + stageName + '\\n\\n';
-      text += '你今年' + char.age + '岁，正在' + realmName + stageName + '苦苦修炼。\\n';
-      text += '修为：' + char.cultivationBase + '/100 (当前阶段进度)\\n';
+      text += '你今年' + char.age + '岁。\\n';
+      text += '修为进度：' + char.cultivationBase + '/100\\n';
 
       var choices = [
-        { label: '⚔️ 历练（提升修为）', action: function() { cultivationPractice(); } },
-        { label: '📖 悟道（提升悟性）', action: function() { cultivationInsight(); } },
-        { label: '💊 寻药（机缘）', action: function() { cultivationSeek(); } }
+        { label: '⚔️ 历练', action: function() { actionTrain(); } },
+        { label: '📖 悟道', action: function() { actionInsight(); } },
+        { label: '🍀 机缘', action: function() { actionFortune(); } }
       ];
-      if (char.stage === 3 && char.cultivationBase >= 100) {
-        choices.push({ label: '⚡ 突破境界！', action: function() { cultivationBreakthrough(); } });
-      }
+      // 只有当修为达到100且是大圆满时才显示突破按钮，但我们让系统自动突破，所以不显示额外按钮
       render(text, choices);
     }
 
-    function cultivationPractice() {
+    // 行动函数：历练
+    function actionTrain() {
+      if (game.pendingEvent) return;
       var char = game.character;
-      var gain = rand(5, 15) + Math.floor(char.talent.悟性/5);
-      char.cultivationBase = clamp(char.cultivationBase + gain, 0, 100);
+      // 随机选择普通训练事件（80%几率）或奇遇/危机（各10%）
+      var roll = Math.random();
+      var story;
+      if (roll < 0.1) {
+        // 奇遇
+        story = cultivationStories.fortune();
+      } else if (roll < 0.2) {
+        // 危机
+        story = cultivationStories.crisis();
+      } else {
+        // 普通历练
+        story = cultivationStories.train();
+      }
       char.age += rand(1,3);
-      // 随机事件可能扣减修为，如果修为归零则死亡
-      if (Math.random() < 0.1) {
-        var loss = rand(10, 30);
-        char.cultivationBase = clamp(char.cultivationBase - loss, 0, 100);
-        if (char.cultivationBase <= 0) {
-          deathInCultivation();
-          return;
-        }
-      }
-      renderCultivation();
+      showEventStory(story, function() {
+        // callback 在继续按钮中处理
+      });
     }
 
-    function cultivationInsight() {
+    // 行动：悟道
+    function actionInsight() {
+      if (game.pendingEvent) return;
       var char = game.character;
-      var gain = rand(1,5);
-      char.talent.悟性 = clamp(char.talent.悟性 + gain, 0, 100);
+      var roll = Math.random();
+      var story;
+      if (roll < 0.1) {
+        story = cultivationStories.fortune();
+      } else if (roll < 0.2) {
+        story = cultivationStories.crisis();
+      } else {
+        story = cultivationStories.insight();
+      }
       char.age += 1;
-      renderCultivation();
+      showEventStory(story, function() {});
     }
 
-    function cultivationSeek() {
+    // 行动：机缘（原寻药）
+    function actionFortune() {
+      if (game.pendingEvent) return;
       var char = game.character;
-      var chance = rand(1,100);
-      if (chance <= char.talent.机缘) {
-        var gain = rand(10, 30);
-        char.cultivationBase = clamp(char.cultivationBase + gain, 0, 100);
-        var attr = pick(['资质','根骨','气感','魅力']);
-        char.talent[attr] = clamp(char.talent[attr] + rand(1,5), 0, 100);
-        render('✨ 奇遇！你找到了一株千年灵草，修为大增！', []);
-        setTimeout(renderCultivation, 1000);
+      // 机缘行动有更高概率触发奇遇，但也有可能遇到危机
+      var roll = Math.random();
+      var story;
+      if (roll < 0.4) {
+        story = cultivationStories.fortune();
+      } else if (roll < 0.6) {
+        story = cultivationStories.crisis();
       } else {
-        var loss = rand(5, 15);
-        char.cultivationBase = clamp(char.cultivationBase - loss, 0, 100);
-        char.age += 2;
-        if (char.cultivationBase <= 0) {
-          deathInCultivation();
-          return;
-        }
-        render('💀 你误入险地，受伤了，修为倒退。', []);
-        setTimeout(renderCultivation, 1000);
+        // 普通事件（也可能是一些小收获）
+        story = { 
+          text: '🍃 你在山间漫步，心旷神怡，修为略有精进。',
+          effects: { 修为: rand(3,10) }
+        };
       }
-    }
-
-    function cultivationBreakthrough() {
-      var char = game.character;
-      if (char.stage < 3) {
-        char.stage++;
-        char.cultivationBase = 0;
-        render('🎉 你突破到' + REALMS[char.realm] + STAGES[char.stage] + '！', []);
-        setTimeout(renderCultivation, 1000);
-      } else if (char.realm < REALMS.length-1) {
-        char.realm++;
-        char.stage = 0;
-        char.cultivationBase = 0;
-        render('🌟 你成功突破到' + REALMS[char.realm] + '初期！', []);
-        setTimeout(renderCultivation, 1000);
-      } else {
-        render('🏆 你已经达到神帝大圆满，三界无敌！', []);
-        // 可触发胜利结局
-      }
+      char.age += rand(1,2);
+      showEventStory(story, function() {});
     }
 
     // ----- 修仙死亡 -----
@@ -464,12 +638,10 @@
       game.screen = 'death';
       hideStatus();
       var msg = t('deathCultivation') + '\\n\\n' + t('reincarnatePrompt');
-      // 计算继承比例（修为的20%）
       var inheritRatio = 0.2;
       game.inherited = inheritRatio;
       render(msg, [
         { label: t('rebirthOption'), action: function() {
-            // 重生到修仙世界，继承部分属性
             game.inherited = inheritRatio;
             startCultivation();
           } 
@@ -482,11 +654,12 @@
       ]);
     }
 
-    // ----- 魔法世界 -----
+    // ========================= 魔法世界（简化版，保持一致性） =========================
     function startMagic() {
       game.world = 'magic';
       game.screen = 'magic';
       game.character = generateMagicChar();
+      game.pendingEvent = false;
       renderMagic();
     }
 
@@ -506,10 +679,9 @@
       if (classType === 'warrior' || classType === 'dual') {
         weapon = pick(t('weapons'));
       }
-      // 继承部分经验（转换为等级）
       var baseExp = 0;
       if (game.inherited > 0) {
-        baseExp = Math.floor(game.inherited * 50); // 继承部分经验
+        baseExp = Math.floor(game.inherited * 50);
       }
       return {
         class: classType,
@@ -551,18 +723,20 @@
       text += '武器：' + (char.weapon || '无') + '\\n';
 
       var choices = [
-        { label: '⚔️ 冒险（获得经验）', action: function() { magicAdventure(); } },
-        { label: '📚 学习（提升技能）', action: function() { magicStudy(); } },
-        { label: '🧙 探索（机缘）', action: function() { magicExplore(); } },
-        { label: '💪 锻炼（提升属性）', action: function() { magicTrain(); } }
+        { label: '⚔️ 冒险', action: function() { magicAdventure(); } },
+        { label: '📚 学习', action: function() { magicStudy(); } },
+        { label: '🧙 探索', action: function() { magicExplore(); } },
+        { label: '💪 锻炼', action: function() { magicTrain(); } }
       ];
       render(text, choices);
     }
 
     function magicAdventure() {
+      if (game.pendingEvent) return;
       var char = game.character;
       var gain = rand(5, 15) + Math.floor(char.level/2);
       char.exp += gain;
+      // 升级处理
       while (char.exp >= char.level * 10) {
         char.exp -= char.level * 10;
         char.level++;
@@ -572,19 +746,31 @@
         setTimeout(renderMagic, 800);
         return;
       }
-      // 随机事件可能扣减经验，若经验<0则死亡
-      if (Math.random() < 0.1) {
-        var loss = rand(10, 30);
-        char.exp = Math.max(0, char.exp - loss);
-        if (char.exp <= 0 && char.level <= 1) {
-          deathInMagic();
-          return;
+      // 随机事件
+      if (Math.random() < 0.15) {
+        if (Math.random() < 0.5) {
+          // 奇遇
+          var gain2 = rand(10, 30);
+          char.exp += gain2;
+          render('✨ 奇遇！你发现了宝藏，经验大增！', []);
+          setTimeout(renderMagic, 800);
+        } else {
+          var loss = rand(5, 15);
+          char.exp = Math.max(0, char.exp - loss);
+          if (char.exp <= 0 && char.level <= 1) {
+            deathInMagic();
+            return;
+          }
+          render('💀 你遭遇了危险，损失了一些经验。', []);
+          setTimeout(renderMagic, 800);
         }
+        return;
       }
       renderMagic();
     }
 
     function magicStudy() {
+      if (game.pendingEvent) return;
       var char = game.character;
       var allEl = t('elements');
       if (char.elements.length < allEl.length && Math.random() < 0.3) {
@@ -603,6 +789,7 @@
     }
 
     function magicExplore() {
+      if (game.pendingEvent) return;
       var char = game.character;
       if (Math.random() < 0.3) {
         var gain = rand(10, 30);
@@ -622,6 +809,7 @@
     }
 
     function magicTrain() {
+      if (game.pendingEvent) return;
       var char = game.character;
       var attr = pick(['strength','agility','vitality']);
       char[attr] += rand(1,4);
@@ -629,7 +817,6 @@
       setTimeout(renderMagic, 800);
     }
 
-    // ----- 魔法死亡 -----
     function deathInMagic() {
       game.screen = 'death';
       hideStatus();
@@ -650,30 +837,24 @@
       ]);
     }
 
-    // ----- 结局（已由noRebirth处理）-----
-
     // ========================= 界面切换与初始化 =========================
     function initGame() {
       game.screen = 'death';
       game.inherited = 0;
+      game.pendingEvent = false;
       hideStatus();
       overlay.classList.add('hidden');
       showDeathScene();
     }
 
-    // 语言切换
     langToggle.addEventListener('click', function() {
       lang = (lang === 'zh') ? 'en' : 'zh';
       langToggle.textContent = lang === 'zh' ? 'EN' : '中文';
       gameTitle.textContent = t('title');
-      // 重新渲染当前场景
       if (game.screen === 'death') showDeathScene();
       else if (game.screen === 'cultivation') renderCultivation();
       else if (game.screen === 'magic') renderMagic();
-      else if (game.screen === 'ending') {
-        // 如果是ending状态，重新显示noRebirth界面
-        noRebirth();
-      }
+      else if (game.screen === 'ending') noRebirth();
     });
 
     overlayBtn.addEventListener('click', function() {
@@ -681,12 +862,11 @@
       initGame();
     });
 
-    // 初始显示overlay
     overlay.classList.remove('hidden');
     overlayTitle.textContent = '🌱 轮回之门';
     overlayDesc.textContent = '你将在两个世界间穿梭，体验不同的命运。';
 
-    window.game = game; // 调试用
+    window.game = game;
   })();
 </script>
 </body>
