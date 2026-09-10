@@ -196,7 +196,7 @@
             font-weight: 600;
         }
 
-        /* 文章正文 */
+        /* ===== 文章正文 ===== */
         .article-body {
             padding: 40px 48px 48px;
             font-size: 18px;
@@ -219,6 +219,12 @@
             margin-bottom: 0.8em;
             font-weight: 700;
         }
+        .article-body h1:first-child,
+        .article-body h2:first-child,
+        .article-body h3:first-child,
+        .article-body h4:first-child {
+            margin-top: 0;
+        }
         .article-body h1 { font-size: 28px; }
         .article-body h2 {
             font-size: 24px;
@@ -229,7 +235,19 @@
         .article-body h4 { font-size: 18px; }
 
         .article-body p {
-            margin-bottom: 1.4em;
+            margin-bottom: 1.2em;
+        }
+        .article-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-body strong {
+            color: #f0e8dd;
+            font-weight: 700;
+        }
+        .article-body em {
+            color: #d4b87a;
+            font-style: italic;
         }
 
         .article-body img {
@@ -261,6 +279,12 @@
             font-style: italic;
             color: rgba(232,224,216,0.8);
         }
+        .article-body blockquote p {
+            margin-bottom: 0.6em;
+        }
+        .article-body blockquote p:last-child {
+            margin-bottom: 0;
+        }
 
         .article-body ul,
         .article-body ol {
@@ -269,6 +293,7 @@
         }
         .article-body li {
             margin-bottom: 8px;
+            line-height: 1.8;
         }
 
         .article-body code {
@@ -450,6 +475,7 @@
                 font-size: 16px;
                 line-height: 1.9;
             }
+            .article-body h1 { font-size: 22px; }
             .article-body h2 { font-size: 20px; }
             .article-body h3 { font-size: 18px; }
             .article-footer { padding: 20px; }
@@ -519,6 +545,114 @@
 
             let currentArticle = null;
 
+            // ============================================================
+            //  📝 简易 Markdown 解析器
+            //  支持：标题 / 粗体 / 斜体 / 引用 / 列表 / 代码 / 链接 / 图片 / 分隔线
+            // ============================================================
+            function escapeHtml(str) {
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+            }
+
+            function applyInlineFormatting(text) {
+                // 图片（先处理，避免被链接规则冲突）
+                text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+                // 链接
+                text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+                // 粗体 + 斜体
+                text = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+                text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                text = text.replace(/(^|[^*])\*([^*\n]+?)\*/g, '$1<em>$2</em>');
+                text = text.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
+                text = text.replace(/__(.+?)__/g, '<strong>$1</strong>');
+                text = text.replace(/(^|[^_])_([^_\n]+?)_/g, '$1<em>$2</em>');
+                // 行内代码
+                text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+                return text;
+            }
+
+            function parseMarkdown(text) {
+                if (!text) return '';
+                let escaped = escapeHtml(text);
+
+                // 提取代码块（占位）
+                const codeBlocks = [];
+                escaped = escaped.replace(/```([\s\S]*?)```/g, function(m, code) {
+                    codeBlocks.push(code.replace(/^\n+|\n+$/g, ''));
+                    return '\u0000CODEBLOCK' + (codeBlocks.length - 1) + '\u0000';
+                });
+
+                const lines = escaped.split('\n');
+                const html = [];
+                let listState = null; // 'ul' | 'ol' | 'blockquote' | null
+
+                function closeList() {
+                    if (listState === 'ul') html.push('</ul>');
+                    else if (listState === 'ol') html.push('</ol>');
+                    else if (listState === 'blockquote') html.push('</blockquote>');
+                    listState = null;
+                }
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const trimmed = line.trim();
+
+                    // 空行
+                    if (trimmed === '') {
+                        closeList();
+                        continue;
+                    }
+
+                    // 代码块占位
+                    const codeMatch = trimmed.match(/^\u0000CODEBLOCK(\d+)\u0000$/);
+                    if (codeMatch) {
+                        closeList();
+                        html.push('<pre><code>' + codeBlocks[parseInt(codeMatch[1], 10)] + '</code></pre>');
+                        continue;
+                    }
+
+                    let m;
+
+                    // 标题
+                    if ((m = trimmed.match(/^###\s+(.+)$/))) { closeList(); html.push('<h3>' + applyInlineFormatting(m[1]) + '</h3>'); continue; }
+                    if ((m = trimmed.match(/^##\s+(.+)$/)))  { closeList(); html.push('<h2>' + applyInlineFormatting(m[1]) + '</h2>'); continue; }
+                    if ((m = trimmed.match(/^#\s+(.+)$/)))   { closeList(); html.push('<h1>' + applyInlineFormatting(m[1]) + '</h1>'); continue; }
+
+                    // 分隔线
+                    if (/^---+$/.test(trimmed)) { closeList(); html.push('<hr>'); continue; }
+
+                    // 引用
+                    if ((m = trimmed.match(/^&gt;\s?(.*)$/))) {
+                        if (listState !== 'blockquote') { closeList(); html.push('<blockquote>'); listState = 'blockquote'; }
+                        if (m[1].trim()) html.push('<p>' + applyInlineFormatting(m[1]) + '</p>');
+                        continue;
+                    }
+
+                    // 无序列表
+                    if ((m = trimmed.match(/^[-*+]\s+(.+)$/))) {
+                        if (listState !== 'ul') { closeList(); html.push('<ul>'); listState = 'ul'; }
+                        html.push('<li>' + applyInlineFormatting(m[1]) + '</li>');
+                        continue;
+                    }
+
+                    // 有序列表
+                    if ((m = trimmed.match(/^\d+\.\s+(.+)$/))) {
+                        if (listState !== 'ol') { closeList(); html.push('<ol>'); listState = 'ol'; }
+                        html.push('<li>' + applyInlineFormatting(m[1]) + '</li>');
+                        continue;
+                    }
+
+                    // 普通段落
+                    closeList();
+                    html.push('<p>' + applyInlineFormatting(trimmed) + '</p>');
+                }
+
+                closeList();
+                return html.join('\n');
+            }
+
             // ===== 获取 URL 参数 =====
             function getParam(name) {
                 const url = new URL(window.location.href);
@@ -540,49 +674,44 @@
                 container.innerHTML = `
                     <div class="error-box">
                         <div class="icon">⚠️</div>
-                        <h3>${i18n.t('articleread.error_title') || '文章加载失败'}</h3>
+                        <h3>${i18n.t('articleread.error_title')}</h3>
                         <p>${message || ''}</p>
-                        <a href="immersive.html">← ${i18n.t('articleread.back_to_immersive') || '返回沉浸式工坊'}</a>
+                        <a href="immersive.html">← ${i18n.t('articleread.back_to_immersive')}</a>
                     </div>
                 `;
-                document.title = (i18n.t('articleread.error_title') || '加载失败') + ' · Montainment';
+                document.title = i18n.t('articleread.error_title') + ' · Montainment';
             }
 
             // ===== 渲染文章 =====
             function renderArticle(item) {
                 currentArticle = item;
 
-                const lang = i18n.currentLang || 'zh';
                 const title = item.title || '';
                 const author = item.author || '蒙堂木下';
                 const category = item.category || '';
 
-                // 更新页面标题
                 document.title = title + ' · Montainment';
                 if (pageDesc) pageDesc.content = item.preview || title;
 
-                // 封面
                 const hasCover = item.cover && item.cover.trim() !== '';
                 const coverHtml = hasCover
                     ? `<img src="${item.cover}" alt="${title}" />`
                     : `<div class="cover-fallback">📄</div>`;
 
-                // 正文（保留 HTML，因为可能包含 <img> 等标签）
-                const contentHtml = item.content || '<p>（内容为空）</p>';
+                // 🆕 用 Markdown 解析器渲染正文
+                const contentHtml = parseMarkdown(item.content || '（内容为空）');
 
                 container.innerHTML = `
-                    <!-- 顶部返回栏 -->
                     <div class="article-topbar">
                         <a href="immersive.html" class="back-link">
-                            ← ${i18n.t('articleread.back_to_immersive') || '返回沉浸式工坊'}
+                            ← ${i18n.t('articleread.back_to_immersive')}
                         </a>
                         <div class="article-meta-top">
-                            <span class="meta-item">📄 ${i18n.t('immersive.type_article') || '文章'}</span>
+                            <span class="meta-item">📄 ${i18n.t('immersive.type_article')}</span>
                             <span class="meta-item">👤 ${author}</span>
                         </div>
                     </div>
 
-                    <!-- 文章卡片 -->
                     <article class="article-card">
                         <div class="article-cover">
                             ${coverHtml}
@@ -592,7 +721,7 @@
                             <h1 class="article-title">${title}</h1>
                             <div class="article-byline">
                                 <span class="author">👤 ${author}</span>
-                                <span id="readingTime">📖 ${i18n.t('articleread.reading_time_estimate') || '阅读时间约'} -- ${i18n.t('articleread.minutes') || '分钟'}</span>
+                                <span id="readingTime">📖 --</span>
                             </div>
                         </div>
                         <div class="article-body" id="articleBody">
@@ -601,16 +730,13 @@
                         <div class="article-footer">
                             <span class="footer-hint">✦ Montainment · 蒙堂木下</span>
                             <a href="immersive.html" class="back-btn">
-                                ← ${i18n.t('articleread.back_to_immersive') || '返回沉浸式工坊'}
+                                ← ${i18n.t('articleread.back_to_immersive')}
                             </a>
                         </div>
                     </article>
                 `;
 
-                // 计算阅读时间
                 calculateReadingTime();
-
-                // 滚动到顶部
                 window.scrollTo({ top: 0, behavior: 'instant' });
             }
 
@@ -619,25 +745,23 @@
                 const body = document.getElementById('articleBody');
                 const el = document.getElementById('readingTime');
                 if (!body || !el) return;
-                // 取纯文本
                 const text = body.textContent || '';
                 const charCount = text.length;
-                // 中文约 400 字/分钟，英文约 200 词/分钟，混合按字符数估算
                 const minutes = Math.max(1, Math.round(charCount / 350));
-                el.textContent = `📖 ${i18n.t('articleread.reading_time_estimate') || '阅读时间约'} ${minutes} ${i18n.t('articleread.minutes') || '分钟'}`;
+                el.textContent = `📖 ${i18n.t('articleread.reading_time_estimate')} ${minutes} ${i18n.t('articleread.minutes')}`;
             }
 
             // ===== 加载数据并渲染 =====
             function loadArticle() {
                 const articleIdx = getParam('article');
                 if (articleIdx === null || articleIdx === '') {
-                    renderError(i18n.t('articleread.no_param') || '缺少文章参数，请从沉浸式工坊进入。');
+                    renderError(i18n.t('articleread.no_param'));
                     return;
                 }
 
                 const idx = parseInt(articleIdx, 10);
                 if (isNaN(idx)) {
-                    renderError(i18n.t('articleread.invalid_param') || '文章参数无效。');
+                    renderError(i18n.t('articleread.invalid_param'));
                     return;
                 }
 
@@ -650,18 +774,18 @@
                         const items = data.items || [];
                         const item = items[idx];
                         if (!item) {
-                            renderError(i18n.t('articleread.not_found') || '找不到该文章。');
+                            renderError(i18n.t('articleread.not_found'));
                             return;
                         }
                         if (item.type !== 'article') {
-                            renderError(i18n.t('articleread.not_article') || '该内容不是文章类型。');
+                            renderError(i18n.t('articleread.not_article'));
                             return;
                         }
                         renderArticle(item);
                     })
                     .catch(err => {
                         console.error('加载文章失败:', err);
-                        renderError(err.message || i18n.t('articleread.loading_failed') || '加载失败');
+                        renderError(err.message || i18n.t('articleread.loading_failed'));
                     });
             }
 
@@ -672,7 +796,6 @@
                 const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
                 progressBar.style.width = percent + '%';
 
-                // 回到顶部按钮显示
                 if (scrollTop > 400) {
                     backToTopBtn.classList.add('visible');
                 } else {
@@ -682,19 +805,14 @@
 
             window.addEventListener('scroll', updateProgress, { passive: true });
 
-            // ===== 回到顶部 =====
             backToTopBtn.addEventListener('click', function() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // ===== 语言切换时重新渲染 =====
             document.addEventListener('languageChanged', function() {
-                if (currentArticle) {
-                    renderArticle(currentArticle);
-                }
+                if (currentArticle) renderArticle(currentArticle);
             });
 
-            // ===== 汉堡菜单 =====
             document.addEventListener('DOMContentLoaded', function() {
                 const toggle = document.querySelector('.nav-toggle');
                 const links = document.querySelector('.nav-links');
@@ -712,7 +830,6 @@
                 }
             });
 
-            // ===== 启动 =====
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', loadArticle);
             } else {
