@@ -797,7 +797,258 @@
                   "id": 4,
                   "titleZh": "试卷 4：场所、时间与简单动词",
                   "titleEn": "Paper 4: Locations, Time & Simple Verbs",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "“ここ”表示什么位置？",
+                        "en": "What location does \"ここ\" refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "这里",
+                          "那里",
+                          "哪里",
+                          "上面"
+                        ],
+                        "en": [
+                          "Here",
+                          "There",
+                          "Where",
+                          "Above"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ここ（Koko）表示距离说话人近的地点，“这里”",
+                        "en": "ここ (Koko) refers to the location near the speaker (\"Here\")"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“どこですか”是在询问什么？",
+                        "en": "What does \"どこですか\" ask?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是什么？",
+                          "是哪位？",
+                          "在哪里？",
+                          "多少钱？"
+                        ],
+                        "en": [
+                          "What is it?",
+                          "Who is it?",
+                          "Where is it?",
+                          "How much is it?"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "どこ（哪里）+ ですか（疑问）= 在哪里？",
+                        "en": "どこ (Where) + ですか (question mark) = \"Where is it?"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“今（いま）”的意思是？",
+                        "en": "What does \"今（いま）\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "昨天",
+                          "现在",
+                          "明天",
+                          "上午"
+                        ],
+                        "en": [
+                          "Yesterday",
+                          "Now",
+                          "Tomorrow",
+                          "Morning"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "今（いま / Ima）意为“现在”",
+                        "en": "今 (いま / Ima) means \"Now\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表达“几点”的日语疑问词是？",
+                        "en": "Which question word means \"What time\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "何時（なんじ）",
+                          "何日（なんにち）",
+                          "何人（なにじん）",
+                          "何歳（なんさい）"
+                        ],
+                        "en": [
+                          "何時（なんじ）",
+                          "何日（なんにち）",
+                          "何人（なにじん）",
+                          "何歳（なんさい）"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "何時（なんじ / Nan-ji）表示“几点钟”",
+                        "en": "何時 (なんじ / Nan-ji) means \"What time\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词“行（い）きます”的意思是？",
+                        "en": "What does the verb \"行（い）きます\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "来",
+                          "去",
+                          "吃",
+                          "看"
+                        ],
+                        "en": [
+                          "To come",
+                          "To go",
+                          "To eat",
+                          "To see"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "行きます（Ikimasu）意为“去”",
+                        "en": "行きます (Ikimasu) means \"To go\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词“来（き）ます”的意思是？",
+                        "en": "What does the verb \"来（き）ます\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "去",
+                          "返回",
+                          "来",
+                          "走"
+                        ],
+                        "en": [
+                          "To go",
+                          "To return",
+                          "To come",
+                          "To walk"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "来ます（Kimasu）意为“来”",
+                        "en": "来ます (Kimasu) means \"To come\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“今日（きょう）”表示什么时间？",
+                        "en": "What time frame does \"今日（きょう）\" refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "明天",
+                          "今天",
+                          "昨天",
+                          "每天"
+                        ],
+                        "en": [
+                          "Tomorrow",
+                          "Today",
+                          "Yesterday",
+                          "Every day"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "今日（きょう / Kyou）意为“今天”",
+                        "en": "今日 (きょう / Kyou) means \"Today\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“明日（あした）”的意思是？",
+                        "en": "What does \"明日（あした）\" mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "明天",
+                          "昨天",
+                          "后天",
+                          "大后天"
+                        ],
+                        "en": [
+                          "Tomorrow",
+                          "Yesterday",
+                          "Day after tomorrow",
+                          "Two days after tomorrow"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "明日（あした / Ashita）意为“明天”",
+                        "en": "明日 (あした / Ashita) means \"Tomorrow\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名“レストラン”是指什么场所？",
+                        "en": "What place does the Katakana \"レストラン\" refer to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "银行",
+                          "邮局",
+                          "餐厅",
+                          "医院"
+                        ],
+                        "en": [
+                          "Bank",
+                          "Post office",
+                          "Restaurant",
+                          "Hospital"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "レストラン（Resutoran）源自 Restaurant，意为餐厅",
+                        "en": "レストラン (Resutoran) comes from the English word \"Restaurant\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "“いくらですか”用于询问什么？",
+                        "en": "What is \"いくらですか\" used to ask?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "时间",
+                          "年龄",
+                          "价格（多少钱）",
+                          "数量"
+                        ],
+                        "en": [
+                          "Time",
+                          "Age",
+                          "Price (How much)",
+                          "Quantity"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "いくら（Ikura）用于询问商品或服务的价格，意为“多少钱？”",
+                        "en": "いくら (Ikura) is used to ask for the price of an item (\"How much is it?\")"
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 5,
