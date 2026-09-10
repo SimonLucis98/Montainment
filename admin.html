@@ -391,6 +391,7 @@
       color: #6b7a8f;
     }
     .type-badge.text { background: #e6f7ee; color: #1f8b4c; }
+    .type-badge.article { background: #e6f0ff; color: #2a6df4; }
     .type-badge.video { background: #ffe3e3; color: #d14c4c; }
     .type-badge.music { background: #fff4d6; color: #a06a00; }
 
@@ -724,6 +725,7 @@
                 <label>类型</label>
                 <select id="immersiveType">
                   <option value="text">📝 文本读物</option>
+                  <option value="article">📄 长篇文章</option>
                   <option value="video">🎬 视频 (iframe)</option>
                   <option value="music">🎵 音乐 (iframe)</option>
                 </select>
@@ -749,7 +751,7 @@
             </div>
 
             <div class="admin-form-group" id="immersiveCoverGroup">
-              <label>🖼️ 封面图片（仅文本读物）</label>
+              <label>🖼️ 封面图片（文本/文章）</label>
               <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
                 <input type="text" id="immersiveCover" placeholder="图片URL（上传后自动填入）" style="flex:1;" />
                 <button type="button" class="btn-admin btn-admin-outline" id="uploadImmersiveCoverBtn">📤 上传图片</button>
@@ -2130,7 +2132,7 @@
         const contentGroup = document.getElementById('immersiveContentGroup');
         const urlGroup = document.getElementById('immersiveUrlGroup');
         const coverGroup = document.getElementById('immersiveCoverGroup');
-        if (type === 'text') {
+        if (type === 'text' || type === 'article') {
           contentGroup.style.display = 'block';
           urlGroup.style.display = 'none';
           coverGroup.style.display = 'block';
@@ -2150,8 +2152,12 @@
         }
         let html = '';
         immersiveData.items.forEach((item, i) => {
-          const typeLabel = item.type === 'text' ? '📝 文本' : item.type === 'video' ? '🎬 视频' : '🎵 音乐';
-          const typeClass = item.type === 'text' ? 'text' : item.type === 'video' ? 'video' : 'music';
+          const typeLabel = item.type === 'text' ? '📝 文本' :
+                            item.type === 'article' ? '📄 文章' :
+                            item.type === 'video' ? '🎬 视频' : '🎵 音乐';
+          const typeClass = item.type === 'text' ? 'text' :
+                            item.type === 'article' ? 'article' :
+                            item.type === 'video' ? 'video' : 'music';
           const coverHtml = item.cover && item.cover.trim() ? `<img src="${item.cover}" alt="封面" class="cover-thumb" />` : '';
           html += `
             <div class="admin-list-item" style="cursor:pointer;" data-item-index="${i}">
@@ -2228,7 +2234,7 @@
         const editIdx = parseInt(document.getElementById('immersiveEditIndex').value);
 
         if (!title) { showToast('请填写标题', 'error'); return; }
-        if (type === 'text' && !content) { showToast('请填写正文内容', 'error'); return; }
+        if ((type === 'text' || type === 'article') && !content) { showToast('请填写正文内容', 'error'); return; }
         if ((type === 'video' || type === 'music') && !url) { showToast('请填写嵌入 URL', 'error'); return; }
 
         const newItem = {
