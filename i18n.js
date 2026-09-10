@@ -152,9 +152,15 @@ const i18n = {
       'immersive.type_text': '📝 Text',
       'immersive.type_video': '🎬 Video',
       'immersive.type_music': '🎵 Music',
+      'immersive.type_article': '📄 Article',
       'immersive.empty': 'No immersive content yet, please add in admin',
       'immersive.hot': 'Hot',
       'immersive.categories': 'Categories',
+      'immersive.short_text': 'Text',
+      'immersive.short_video': 'Video',
+      'immersive.short_music': 'Music',
+      'immersive.short_article': 'Article',
+      'immersive.read_more': 'Read More',
 
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · A static website that makes learning more fun',
@@ -305,9 +311,15 @@ const i18n = {
       'immersive.type_text': '📝 文本',
       'immersive.type_video': '🎬 视频',
       'immersive.type_music': '🎵 音乐',
+      'immersive.type_article': '📄 文章',
       'immersive.empty': '暂无沉浸式内容，请在后台添加',
       'immersive.hot': '热门推荐',
       'immersive.categories': '分类',
+      'immersive.short_text': '文本',
+      'immersive.short_video': '视频',
+      'immersive.short_music': '音乐',
+      'immersive.short_article': '文章',
+      'immersive.read_more': '阅读全文',
 
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站',
