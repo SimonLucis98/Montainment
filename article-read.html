@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle">文章 · 蒙堂木下</title>
+    <meta name="description" id="pageDesc" content="沉浸式工坊 · 长篇文章阅读" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background: #1a1a2e;
+            font-family: 'Nunito', system-ui, sans-serif;
+            min-height: 100vh;
+            color: #e8e0d8;
+            overflow-x: hidden;
+        }
+
+        /* ===== 顶部进度条 ===== */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #c9a87c, #8a9b7a);
+            z-index: 300;
+            transition: width 0.1s ease;
+        }
+
+        /* ===== 导航栏 ===== */
+        .site-header {
+            position: sticky; top:0; z-index:100;
+            background: rgba(20,20,30,0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201,168,124,0.08);
+        }
+        .nav-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; max-width: 1400px; margin:0 auto; min-height:56px;
+        }
+        .brand {
+            display:flex; align-items:center; gap:8px;
+            font-family:"Fredoka","Nunito",sans-serif; font-size:20px; font-weight:600;
+            color:#e8e0d8; text-decoration:none; flex-shrink:0; white-space:nowrap;
+        }
+        .brand-mark {
+            width:32px; height:32px; border-radius:10px;
+            background:linear-gradient(135deg,#8a9b7a,#c97a6b);
+            display:flex; align-items:center; justify-content:center;
+            color:#fff; font-size:16px;
+        }
+        .nav-links {
+            display:flex; align-items:center; gap:2px; flex-wrap:wrap;
+            list-style:none; margin:0; padding:0;
+        }
+        .nav-links a {
+            padding:6px 10px; border-radius:999px; font-weight:600;
+            color:rgba(232,224,216,0.6); text-decoration:none; transition:0.2s;
+            font-size:14px; white-space:nowrap;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background:rgba(201,168,124,0.12); color:#e8e0d8;
+        }
+        .nav-toggle {
+            display:none; background:transparent; border:1px solid rgba(255,255,255,0.1);
+            color:#e8e0d8; font-size:22px; padding:4px 12px; border-radius:8px;
+            cursor:pointer; flex-shrink:0;
+        }
+
+        /* ===== 主容器 ===== */
+        .article-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 顶部返回栏 ===== */
+        .article-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1px solid rgba(201,168,124,0.15);
+            background: rgba(45,42,36,0.4);
+            backdrop-filter: blur(4px);
+            color: rgba(232,224,216,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .back-link:hover {
+            background: rgba(201,168,124,0.12);
+            border-color: rgba(201,168,124,0.3);
+            color: #e8e0d8;
+        }
+
+        .article-meta-top {
+            font-size: 13px;
+            color: rgba(232,224,216,0.35);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .article-meta-top .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ===== 文章主体卡片 ===== */
+        .article-card {
+            background: rgba(30,28,24,0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            border: 1px solid rgba(201,168,124,0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        /* 文章封面 */
+        .article-cover {
+            width: 100%;
+            aspect-ratio: 16/7;
+            background: linear-gradient(145deg, #3d3a35, #5a4f45);
+            overflow: hidden;
+            position: relative;
+        }
+        .article-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .article-cover .cover-fallback {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            opacity: 0.35;
+        }
+
+        /* 文章头部信息 */
+        .article-header {
+            padding: 36px 48px 24px;
+            border-bottom: 1px solid rgba(201,168,124,0.06);
+        }
+        .article-category {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #c9a87c;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: rgba(201,168,124,0.1);
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(201,168,124,0.08);
+        }
+        .article-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #e8e0d8;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+        .article-byline {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: rgba(232,224,216,0.4);
+        }
+        .article-byline .author {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(232,224,216,0.7);
+            font-weight: 600;
+        }
+
+        /* 文章正文 */
+        .article-body {
+            padding: 40px 48px 48px;
+            font-size: 18px;
+            line-height: 2;
+            color: rgba(232,224,216,0.88);
+            font-family: 'Georgia', 'Noto Serif SC', 'Songti SC', 'Times New Roman', serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* 正文内元素样式 */
+        .article-body h1,
+        .article-body h2,
+        .article-body h3,
+        .article-body h4 {
+            font-family: 'Nunito', system-ui, sans-serif;
+            color: #e8e0d8;
+            line-height: 1.4;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            font-weight: 700;
+        }
+        .article-body h1 { font-size: 28px; }
+        .article-body h2 {
+            font-size: 24px;
+            padding-left: 16px;
+            border-left: 4px solid #c9a87c;
+        }
+        .article-body h3 { font-size: 20px; }
+        .article-body h4 { font-size: 18px; }
+
+        .article-body p {
+            margin-bottom: 1.4em;
+        }
+
+        .article-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 24px auto;
+            display: block;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .article-body a {
+            color: #c9a87c;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(201,168,124,0.4);
+            transition: 0.2s;
+        }
+        .article-body a:hover {
+            color: #e8e0d8;
+            border-bottom-color: #e8e0d8;
+        }
+
+        .article-body blockquote {
+            margin: 24px 0;
+            padding: 16px 24px;
+            border-left: 4px solid #c9a87c;
+            background: rgba(201,168,124,0.06);
+            border-radius: 8px;
+            font-style: italic;
+            color: rgba(232,224,216,0.8);
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 16px 0 24px 28px;
+            padding-left: 8px;
+        }
+        .article-body li {
+            margin-bottom: 8px;
+        }
+
+        .article-body code {
+            background: rgba(255,255,255,0.06);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #c9a87c;
+        }
+        .article-body pre {
+            background: rgba(0,0,0,0.3);
+            padding: 20px 24px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 24px 0;
+            border: 1px solid rgba(201,168,124,0.08);
+        }
+        .article-body pre code {
+            background: none;
+            padding: 0;
+            color: #e8e0d8;
+        }
+
+        .article-body hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,168,124,0.3), transparent);
+            margin: 40px 0;
+        }
+
+        .article-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 16px;
+        }
+        .article-body th,
+        .article-body td {
+            padding: 10px 16px;
+            border: 1px solid rgba(201,168,124,0.1);
+            text-align: left;
+        }
+        .article-body th {
+            background: rgba(201,168,124,0.08);
+            color: #c9a87c;
+            font-weight: 700;
+        }
+
+        /* ===== 文章底部 ===== */
+        .article-footer {
+            padding: 28px 48px 40px;
+            border-top: 1px solid rgba(201,168,124,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .article-footer .footer-hint {
+            font-size: 13px;
+            color: rgba(232,224,216,0.3);
+        }
+        .article-footer .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            background: rgba(201,168,124,0.12);
+            border: 1px solid rgba(201,168,124,0.2);
+            color: #c9a87c;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .article-footer .back-btn:hover {
+            background: rgba(201,168,124,0.25);
+            color: #e8e0d8;
+        }
+
+        /* ===== 加载 / 错误状态 ===== */
+        .loading-box,
+        .error-box {
+            text-align: center;
+            padding: 80px 20px;
+            color: rgba(232,224,216,0.5);
+        }
+        .loading-box .spinner {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            border: 4px solid rgba(201,168,124,0.15);
+            border-top-color: #c9a87c;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .error-box .icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        .error-box h3 {
+            font-size: 22px;
+            color: #e8e0d8;
+            margin-bottom: 8px;
+        }
+        .error-box p {
+            font-size: 15px;
+            color: rgba(232,224,216,0.4);
+            margin-bottom: 24px;
+        }
+        .error-box a {
+            display: inline-block;
+            padding: 10px 28px;
+            border-radius: 30px;
+            background: rgba(201,168,124,0.15);
+            border: 1px solid rgba(201,168,124,0.25);
+            color: #c9a87c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .error-box a:hover {
+            background: rgba(201,168,124,0.25);
+            color: #e8e0d8;
+        }
+
+        /* ===== 回到顶部按钮 ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(201,168,124,0.15);
+            border: 1px solid rgba(201,168,124,0.25);
+            color: #c9a87c;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            z-index: 90;
+            backdrop-filter: blur(8px);
+        }
+        .back-to-top:hover {
+            background: rgba(201,168,124,0.3);
+            color: #e8e0d8;
+            transform: translateY(-2px);
+        }
+        .back-to-top.visible { display: flex; }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 720px) {
+            .nav-links {
+                position:absolute; top:100%; left:0; right:0;
+                background:rgba(20,20,30,0.95);
+                flex-direction:column; align-items:stretch;
+                padding:12px 24px 20px;
+                border-bottom:1px solid rgba(201,168,124,0.06);
+                display:none; box-shadow:0 8px 24px rgba(0,0,0,0.3);
+            }
+            .nav-links.open { display:flex; }
+            .nav-links a { text-align:center; padding:12px 16px; }
+            .nav-toggle { display:block; }
+
+            .article-container { padding: 20px 12px 60px; }
+            .article-header { padding: 24px 20px 18px; }
+            .article-title { font-size: 24px; }
+            .article-body {
+                padding: 24px 20px 32px;
+                font-size: 16px;
+                line-height: 1.9;
+            }
+            .article-body h2 { font-size: 20px; }
+            .article-body h3 { font-size: 18px; }
+            .article-footer { padding: 20px; }
+            .article-cover { aspect-ratio: 16/9; }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .article-title { font-size: 21px; }
+            .article-body { font-size: 15px; }
+            .article-meta-top { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 阅读进度条 ===== -->
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- ===== 导航栏 ===== -->
+    <header class="site-header">
+        <nav class="nav-bar">
+            <a href="index.html" class="brand">
+                <span class="brand-mark">✦</span>
+                Montainment · 蒙堂木下
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+                <li><a href="quiz.html" data-i18n="nav.quiz">语言测验</a></li>
+                <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
+                <li><a href="story.html" data-i18n="nav.story">故事工坊</a></li>
+                <li><a href="immersive.html" class="active" data-i18n="nav.immersive">🌙 沉浸式工坊</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="article-container" id="articleContainer">
+            <!-- 由 JS 动态渲染 -->
+            <div class="loading-box">
+                <div class="spinner"></div>
+                <div>⏳ 加载中...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== 回到顶部 ===== -->
+    <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+    <script src="i18n.js"></script>
+    <script src="common.js"></script>
+    <script>
+        (function() {
+            const container = document.getElementById('articleContainer');
+            const pageTitle = document.getElementById('pageTitle');
+            const pageDesc = document.getElementById('pageDesc');
+            const progressBar = document.getElementById('readingProgress');
+            const backToTopBtn = document.getElementById('backToTop');
+
+            let currentArticle = null;
+
+            // ===== 获取 URL 参数 =====
+            function getParam(name) {
+                const url = new URL(window.location.href);
+                return url.searchParams.get(name);
+            }
+
+            // ===== 渲染加载中 =====
+            function renderLoading() {
+                container.innerHTML = `
+                    <div class="loading-box">
+                        <div class="spinner"></div>
+                        <div>⏳ 加载中...</div>
+                    </div>
+                `;
+            }
+
+            // ===== 渲染错误 =====
+            function renderError(message) {
+                container.innerHTML = `
+                    <div class="error-box">
+                        <div class="icon">⚠️</div>
+                        <h3>${i18n.t('articleread.error_title') || '文章加载失败'}</h3>
+                        <p>${message || ''}</p>
+                        <a href="immersive.html">← ${i18n.t('articleread.back_to_immersive') || '返回沉浸式工坊'}</a>
+                    </div>
+                `;
+                document.title = (i18n.t('articleread.error_title') || '加载失败') + ' · Montainment';
+            }
+
+            // ===== 渲染文章 =====
+            function renderArticle(item) {
+                currentArticle = item;
+
+                const lang = i18n.currentLang || 'zh';
+                const title = item.title || '';
+                const author = item.author || '蒙堂木下';
+                const category = item.category || '';
+
+                // 更新页面标题
+                document.title = title + ' · Montainment';
+                if (pageDesc) pageDesc.content = item.preview || title;
+
+                // 封面
+                const hasCover = item.cover && item.cover.trim() !== '';
+                const coverHtml = hasCover
+                    ? `<img src="${item.cover}" alt="${title}" />`
+                    : `<div class="cover-fallback">📄</div>`;
+
+                // 正文（保留 HTML，因为可能包含 <img> 等标签）
+                const contentHtml = item.content || '<p>（内容为空）</p>';
+
+                container.innerHTML = `
+                    <!-- 顶部返回栏 -->
+                    <div class="article-topbar">
+                        <a href="immersive.html" class="back-link">
+                            ← ${i18n.t('articleread.back_to_immersive') || '返回沉浸式工坊'}
+                        </a>
+                        <div class="article-meta-top">
+                            <span class="meta-item">📄 ${i18n.t('immersive.type_article') || '文章'}</span>
+                            <span class="meta-item">👤 ${author}</span>
+                        </div>
+                    </div>
+
+                    <!-- 文章卡片 -->
+                    <article class="article-card">
+                        <div class="article-cover">
+                            ${coverHtml}
+                        </div>
+                        <div class="article-header">
+                            ${category ? `<span class="article-category">${category}</span>` : ''}
+                            <h1 class="article-title">${title}</h1>
+                            <div class="article-byline">
+                                <span class="author">👤 ${author}</span>
+                                <span id="readingTime">📖 ${i18n.t('articleread.reading_time_estimate') || '阅读时间约'} -- ${i18n.t('articleread.minutes') || '分钟'}</span>
+                            </div>
+                        </div>
+                        <div class="article-body" id="articleBody">
+                            ${contentHtml}
+                        </div>
+                        <div class="article-footer">
+                            <span class="footer-hint">✦ Montainment · 蒙堂木下</span>
+                            <a href="immersive.html" class="back-btn">
+                                ← ${i18n.t('articleread.back_to_immersive') || '返回沉浸式工坊'}
+                            </a>
+                        </div>
+                    </article>
+                `;
+
+                // 计算阅读时间
+                calculateReadingTime();
+
+                // 滚动到顶部
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
+
+            // ===== 计算阅读时间 =====
+            function calculateReadingTime() {
+                const body = document.getElementById('articleBody');
+                const el = document.getElementById('readingTime');
+                if (!body || !el) return;
+                // 取纯文本
+                const text = body.textContent || '';
+                const charCount = text.length;
+                // 中文约 400 字/分钟，英文约 200 词/分钟，混合按字符数估算
+                const minutes = Math.max(1, Math.round(charCount / 350));
+                el.textContent = `📖 ${i18n.t('articleread.reading_time_estimate') || '阅读时间约'} ${minutes} ${i18n.t('articleread.minutes') || '分钟'}`;
+            }
+
+            // ===== 加载数据并渲染 =====
+            function loadArticle() {
+                const articleIdx = getParam('article');
+                if (articleIdx === null || articleIdx === '') {
+                    renderError(i18n.t('articleread.no_param') || '缺少文章参数，请从沉浸式工坊进入。');
+                    return;
+                }
+
+                const idx = parseInt(articleIdx, 10);
+                if (isNaN(idx)) {
+                    renderError(i18n.t('articleread.invalid_param') || '文章参数无效。');
+                    return;
+                }
+
+                fetch('data/immersive.json')
+                    .then(res => {
+                        if (!res.ok) throw new Error('immersive.json 不存在');
+                        return res.json();
+                    })
+                    .then(data => {
+                        const items = data.items || [];
+                        const item = items[idx];
+                        if (!item) {
+                            renderError(i18n.t('articleread.not_found') || '找不到该文章。');
+                            return;
+                        }
+                        if (item.type !== 'article') {
+                            renderError(i18n.t('articleread.not_article') || '该内容不是文章类型。');
+                            return;
+                        }
+                        renderArticle(item);
+                    })
+                    .catch(err => {
+                        console.error('加载文章失败:', err);
+                        renderError(err.message || i18n.t('articleread.loading_failed') || '加载失败');
+                    });
+            }
+
+            // ===== 阅读进度 =====
+            function updateProgress() {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                progressBar.style.width = percent + '%';
+
+                // 回到顶部按钮显示
+                if (scrollTop > 400) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            }
+
+            window.addEventListener('scroll', updateProgress, { passive: true });
+
+            // ===== 回到顶部 =====
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ===== 语言切换时重新渲染 =====
+            document.addEventListener('languageChanged', function() {
+                if (currentArticle) {
+                    renderArticle(currentArticle);
+                }
+            });
+
+            // ===== 汉堡菜单 =====
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggle = document.querySelector('.nav-toggle');
+                const links = document.querySelector('.nav-links');
+                if (toggle && links) {
+                    toggle.addEventListener('click', function() {
+                        links.classList.toggle('open');
+                        toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
+                    });
+                    links.querySelectorAll('a').forEach(function(link) {
+                        link.addEventListener('click', function() {
+                            links.classList.remove('open');
+                            toggle.textContent = '☰';
+                        });
+                    });
+                }
+            });
+
+            // ===== 启动 =====
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', loadArticle);
+            } else {
+                loadArticle();
+            }
+
+        })();
+    </script>
+
+</body>
+</html>
