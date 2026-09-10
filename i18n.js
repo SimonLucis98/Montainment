@@ -162,6 +162,17 @@ const i18n = {
       'immersive.short_article': 'Article',
       'immersive.read_more': 'Read More',
 
+      // -------- 文章阅读页（article-read.html） --------
+      'articleread.back_to_immersive': 'Back to Immersive Studio',
+      'articleread.reading_time_estimate': 'Reading time:',
+      'articleread.minutes': 'min',
+      'articleread.error_title': 'Failed to load article',
+      'articleread.not_found': 'Article not found.',
+      'articleread.loading_failed': 'Loading failed',
+      'articleread.no_param': 'Missing article parameter. Please enter from Immersive Studio.',
+      'articleread.invalid_param': 'Invalid article parameter.',
+      'articleread.not_article': 'This content is not an article.',
+
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · A static website that makes learning more fun',
       'common.lang_switch': 'EN',
@@ -320,6 +331,17 @@ const i18n = {
       'immersive.short_music': '音乐',
       'immersive.short_article': '文章',
       'immersive.read_more': '阅读全文',
+
+      // -------- 文章阅读页（article-read.html） --------
+      'articleread.back_to_immersive': '返回沉浸式工坊',
+      'articleread.reading_time_estimate': '阅读时间约',
+      'articleread.minutes': '分钟',
+      'articleread.error_title': '文章加载失败',
+      'articleread.not_found': '找不到该文章。',
+      'articleread.loading_failed': '加载失败',
+      'articleread.no_param': '缺少文章参数，请从沉浸式工坊进入。',
+      'articleread.invalid_param': '文章参数无效。',
+      'articleread.not_article': '该内容不是文章类型。',
 
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站',
