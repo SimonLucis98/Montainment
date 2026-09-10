@@ -57,13 +57,13 @@
         .immersive-container {
             position: relative;
             z-index: 1;
-            max-width: 1400px;  /* ← 从 1280px 改为 1400px */
+            max-width: 1400px;
             margin: 0 auto;
             padding: 16px 24px 40px;
             min-height: 100vh;
         }
 
-        /* ===== 导航栏（无变化） ===== */
+        /* ===== 导航栏 ===== */
         .site-header {
             position: sticky; top:0; z-index:100;
             background: rgba(20,20,30,0.6);
@@ -250,10 +250,10 @@
             gap: 20px;
         }
 
-        /* ===== 🆕 读物列表（主内容）—— 一行6个，卡片稍大 ===== */
+        /* ===== 读物列表（主内容） ===== */
         .read-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);  /* 固定6列 */
+            grid-template-columns: repeat(6, 1fr);
             gap: 16px;
             margin-top: 8px;
         }
@@ -261,7 +261,7 @@
             background: rgba(45,42,36,0.4);
             backdrop-filter: blur(4px);
             border-radius: 16px;
-            padding: 20px 18px 18px;   /* 内边距增大 */
+            padding: 20px 18px 18px;
             border: 1px solid rgba(201,168,124,0.06);
             cursor: pointer;
             transition: 0.3s;
@@ -285,7 +285,7 @@
             margin-bottom: 6px;
         }
         .read-card .title {
-            font-size: 16px;        /* 字号加大 */
+            font-size: 16px;
             font-weight: 700;
             color: #e8e0d8;
             margin-bottom: 2px;
@@ -323,13 +323,40 @@
             align-self: flex-start;
         }
         .read-card .card-icon {
-            font-size: 36px;        /* 图标加大 */
+            font-size: 36px;
             text-align: center;
             padding: 4px 0 8px;
             opacity: 0.6;
         }
+        /* 🆕 文章类型的“阅读全文”按钮 */
+        .read-card .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 10px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(201,168,124,0.12);
+            border: 1px solid rgba(201,168,124,0.2);
+            color: #c9a87c;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            align-self: flex-start;
+            transition: 0.2s;
+        }
+        .read-card:hover .read-more-btn {
+            background: rgba(201,168,124,0.25);
+            color: #e8e0d8;
+        }
+        /* 文章类型卡片的蓝色徽章 */
+        .read-card .media-badge.article {
+            background: rgba(42,109,244,0.12);
+            color: #6ea8ff;
+            border-color: rgba(42,109,244,0.15);
+        }
 
-        /* ===== 侧边栏（不变） ===== */
+        /* ===== 侧边栏 ===== */
         .sidebar-section {
             background: rgba(45,42,36,0.3);
             backdrop-filter: blur(4px);
@@ -439,7 +466,7 @@
         }
         .empty-state .icon { font-size: 56px; margin-bottom: 12px; }
 
-        /* ===== 阅读浮层（不变） ===== */
+        /* ===== 阅读浮层 ===== */
         .reader-overlay {
             display: none;
             position: fixed;
@@ -520,7 +547,7 @@
         /* ===== 响应式 ===== */
         @media (max-width: 1200px) {
             .read-grid {
-                grid-template-columns: repeat(5, 1fr); /* 中等屏幕变5列 */
+                grid-template-columns: repeat(5, 1fr);
             }
         }
         @media (max-width: 992px) {
@@ -656,13 +683,11 @@
 
                 <!-- 侧边栏 -->
                 <aside class="immersive-sidebar" id="sidebar">
-                    <!-- 热门推荐 -->
                     <div class="sidebar-section" id="hotSection">
                         <div class="section-title">🔥 <span data-i18n="immersive.hot">热门推荐</span> <span class="badge">TOP</span></div>
                         <div id="hotList"></div>
                     </div>
 
-                    <!-- 分类标签 -->
                     <div class="sidebar-section">
                         <div class="section-title">🏷️ <span data-i18n="immersive.categories">分类</span></div>
                         <div class="sidebar-tags" id="categoryTags"></div>
@@ -950,10 +975,28 @@
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
 
+        // 🆕 统一的类型标签获取（包含 article）
         function getTypeLabel(type) {
             if (type === 'video') return i18n.t('immersive.type_video');
             if (type === 'music') return i18n.t('immersive.type_music');
+            if (type === 'article') return i18n.t('immersive.type_article');
             return i18n.t('immersive.type_text');
+        }
+
+        // 🆕 统一的类型图标
+        function getTypeIcon(type) {
+            if (type === 'video') return '🎬';
+            if (type === 'music') return '🎵';
+            if (type === 'article') return '📄';
+            return '📝';
+        }
+
+        // 🆕 侧边栏短标签（用于 s-tag）
+        function getShortTypeLabel(type) {
+            if (type === 'video') return i18n.t('immersive.short_video');
+            if (type === 'music') return i18n.t('immersive.short_music');
+            if (type === 'article') return i18n.t('immersive.short_article');
+            return i18n.t('immersive.short_text');
         }
 
         // ===== 侧边栏：热门推荐 =====
@@ -966,8 +1009,8 @@
             }
             let html = '';
             hotItems.forEach(item => {
-                const icon = item.type === 'video' ? '🎬' : item.type === 'music' ? '🎵' : '📝';
-                const tag = item.type === 'video' ? '视频' : item.type === 'music' ? '音乐' : '文本';
+                const icon = getTypeIcon(item.type);
+                const tag = getShortTypeLabel(item.type);
                 html += `
                     <div class="sidebar-item" data-idx="${READ_DATA.indexOf(item)}">
                         <span class="s-icon">${icon}</span>
@@ -983,7 +1026,13 @@
             container.querySelectorAll('.sidebar-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.idx);
-                    if (!isNaN(idx)) openReader(idx);
+                    if (isNaN(idx)) return;
+                    const item = READ_DATA[idx];
+                    if (item && item.type === 'article') {
+                        window.location.href = `article-read.html?article=${idx}`;
+                    } else {
+                        openReader(idx);
+                    }
                 });
             });
         }
@@ -1020,26 +1069,40 @@
 
             let html = '';
             READ_DATA.forEach((item, idx) => {
-                const typeIcon = item.type === 'video' ? '🎬' : item.type === 'music' ? '🎵' : '📝';
+                const typeIcon = getTypeIcon(item.type);
                 const typeLabel = getTypeLabel(item.type);
                 const preview = item.preview || (item.content ? item.content.substring(0, 50) + '...' : '');
+                // 🆕 文章类型：蓝色徽章 + 阅读全文按钮
+                const isArticle = item.type === 'article';
+                const badgeClass = isArticle ? 'media-badge article' : 'media-badge';
+                const readMoreBtn = isArticle
+                    ? `<div class="read-more-btn">📖 ${i18n.t('immersive.read_more')} →</div>`
+                    : '';
                 html += `
-                    <div class="read-card" data-index="${idx}">
+                    <div class="read-card" data-index="${idx}" data-type="${item.type}">
                         <div class="card-icon">${typeIcon}</div>
-                        <div class="media-badge">${typeLabel}</div>
+                        <div class="${badgeClass}">${typeLabel}</div>
                         <div class="category">${item.category || '未分类'}</div>
                         <div class="title">${item.title}</div>
                         <div class="author">${item.author || '蒙堂木下'}</div>
                         <div class="preview">${preview}</div>
+                        ${readMoreBtn}
                     </div>
                 `;
             });
             grid.innerHTML = html;
 
+            // 🆕 卡片点击：文章类型跳转，其他类型打开弹窗
             grid.querySelectorAll('.read-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
-                    openReader(idx);
+                    const item = READ_DATA[idx];
+                    if (!item) return;
+                    if (item.type === 'article') {
+                        window.location.href = `article-read.html?article=${idx}`;
+                    } else {
+                        openReader(idx);
+                    }
                 });
             });
 
@@ -1048,10 +1111,15 @@
             renderCategories();
         }
 
-        // ===== 阅读浮层 =====
+        // ===== 阅读浮层（仅 text/video/music） =====
         function openReader(idx) {
             const item = READ_DATA[idx];
             if (!item) return;
+            // 安全兜底：如果误点到 article，跳转独立页
+            if (item.type === 'article') {
+                window.location.href = `article-read.html?article=${idx}`;
+                return;
+            }
             currentIndex = idx;
             readerCategory.textContent = item.category || '随笔';
             readerTitle.textContent = item.title;
