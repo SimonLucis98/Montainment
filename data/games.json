@@ -87,9 +87,9 @@
       "descriptionEn": "Collect the carrots for the fest",
       "type": "js",
       "entry": "games/crazycarrot.js",
-      "sortOrder": 1,
+      "sortOrder": 7,
       "enabled": true,
-      "cover": ""
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789154306/juhf2ekl7gwhpxvnnkz9.png"
     }
   ]
 }
