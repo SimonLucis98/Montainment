@@ -77,6 +77,19 @@
       "sortOrder": 6,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788954583/wknxsqitwry5jtynqnk7.png"
+    },
+    {
+      "id": "7",
+      "icon": "",
+      "titleZh": "疯狂萝卜",
+      "titleEn": "Crazy Carrot",
+      "descriptionZh": "为派对收集萝卜",
+      "descriptionEn": "Collect the carrots for the fest",
+      "type": "js",
+      "entry": "games/crazycarrot.js",
+      "sortOrder": 1,
+      "enabled": true,
+      "cover": ""
     }
   ]
 }
