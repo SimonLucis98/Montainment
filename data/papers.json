@@ -15,7 +15,26 @@
               "level": 0,
               "labelZh": "零基础",
               "labelEn": "Zero Foundation",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：平仮名/ひらがな（Hiragana）学习",
+                  "titleEn": "Paper 1: Hiragana (ひらがな) Learning",
+                  "questions": []
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：片仮名/カタカナ（Katakana）学习",
+                  "titleEn": "Paper 2: Katakana (カタカナ) Learning",
+                  "questions": []
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：漢字/かんじ（Kanji）学习",
+                  "titleEn": "Paper 3: Kanji (かんじ) Learning",
+                  "questions": []
+                }
+              ]
             },
             {
               "level": 1,
@@ -1347,7 +1366,44 @@
           "emoji": "KR",
           "labelZh": "韩文",
           "labelEn": "Korean",
-          "difficulties": []
+          "difficulties": [
+            {
+              "level": 0,
+              "labelZh": "零基础",
+              "labelEn": "Zero Foundation",
+              "papers": []
+            },
+            {
+              "level": 1,
+              "labelZh": "初学者",
+              "labelEn": "Beginner",
+              "papers": []
+            },
+            {
+              "level": 2,
+              "labelZh": "高级初学者",
+              "labelEn": "Advanced Beginner",
+              "papers": []
+            },
+            {
+              "level": 3,
+              "labelZh": "中级",
+              "labelEn": "Intermediate",
+              "papers": []
+            },
+            {
+              "level": 4,
+              "labelZh": "高级",
+              "labelEn": "Advanced",
+              "papers": []
+            },
+            {
+              "level": 5,
+              "labelZh": "大师",
+              "labelEn": "Expert",
+              "papers": []
+            }
+          ]
         },
         {
           "id": "EN",
