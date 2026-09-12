@@ -1,4 +1,4 @@
-/* Kids Cognition World · 宝宝认知乐园 — JS Wrapper v4 */
+/* Kids Cognition World · 宝宝认知乐园 — JS Wrapper v5 */
 (function () {
   'use strict';
 
@@ -84,6 +84,8 @@
     white-space:nowrap;
   }
   .mode-toggle button.active{ background:var(--coral); color:#fff; }
+  /* 泰文模式下只显示一个按钮，让它居中 */
+  .mode-toggle.single-mode{ justify-content:center; }
 
   .stage-card{
     background:var(--card); border-radius:32px; box-shadow:var(--shadow);
@@ -152,14 +154,12 @@
   }
   .toast.show{ transform:translateX(-50%) translateY(0); }
 
-  /* ===== 遮罩层：通用 ===== */
   .modal-overlay{
     position:fixed; inset:0; background:rgba(58,51,82,0.55);
     display:none; align-items:center; justify-content:center; padding:20px;
   }
   .modal-overlay.show{ display:flex; }
 
-  /* ===== 层级：欢迎页 < 语言/设置页 ===== */
   #welcomeOverlay{ z-index: 80; }
   #settingsOverlay{ z-index: 100; }
   #langOverlay{ z-index: 100; }
@@ -194,13 +194,12 @@
   .lang-flag{ font-size:26px; width:36px; text-align:center; }
   .lang-name{ font-weight:700; font-size:16px; }
   .lang-name small{ display:block; font-weight:600; color:#9a92b3; font-size:12px; }
-  .lang-warn{ font-size:11px; color:#e8836b; margin-left:4px; }
+  .lang-warn{ font-size:11px; color:#e8836b; margin-left:4px; font-weight:600; }
 
   #langOverlay .modal{ text-align:center; }
   #langOverlay h2{ text-align:center; }
   .lang-title-sub{ color:#9a92b3; font-weight:600; font-size:13px; margin:-6px 0 14px; }
 
-  /* ===== 欢迎首页 ===== */
   #welcomeOverlay{
     background:linear-gradient(180deg, rgba(127,208,255,0.92), rgba(232,248,255,0.92) 60%, rgba(126,217,87,0.92));
     backdrop-filter: blur(3px);
@@ -279,7 +278,6 @@
 
   <div class="toast" id="toast"></div>
 
-  <!-- 首页 -->
   <div class="modal-overlay" id="welcomeOverlay">
     <div class="welcome-card">
       <div class="welcome-emoji">🌟</div>
@@ -329,10 +327,16 @@ const LANG_INFO = {
   th:{flag:'🇹🇭', name:'ไทย', speech:'th-TH'},
   fr:{flag:'🇫🇷', name:'Français', speech:'fr-FR'}
 };
-// ★ 修复：state.lang 未设置时默认返回 0（中文），避免 t() 返回 undefined
+
+// ★ 泰文没有可靠 TTS 支持，只允许 see 模式
+const NO_SPEECH_LANGS = ['th'];
+
 function li(){
   const idx = LANGS.indexOf(state.lang);
   return idx >= 0 ? idx : 0;
+}
+function currentLangHasSpeech(){
+  return NO_SPEECH_LANGS.indexOf(state.lang) === -1;
 }
 
 const UI = {
@@ -353,7 +357,7 @@ const UI = {
   startBtn:  ['▶ 开始游戏','▶ Start Game','▶ スタート','▶ 시작하기','▶ Empezar','▶ เริ่มเล่น','▶ Commencer'],
   chooseLang:['选择语言 · Choose Language','Choose Language','言語を選ぶ','언어 선택','Elige idioma','เลือกภาษา','Choisir la langue'],
   welcomeHint:['听一听 · 看一看 · 学一学','Listen · Look · Learn','聞いて・見て・学ぼう','듣고 · 보고 · 배우기','Escucha · Mira · Aprende','ฟัง · ดู · เรียน','Écoute · Regarde · Apprends'],
-  voiceMissing:['⚠️ 此设备没有安装泰文语音，请到系统设置中安装','⚠️ Thai voice is not installed on this device'],
+  voiceMissing:['⚠️ 此设备没有安装泰文语音，只能使用「看图选字」模式','⚠️ Thai voice is not installed on this device; only See & Choose mode is available'],
   voiceMissingShort:['无语音','No voice']
 };
 const PRAISES = [
@@ -502,7 +506,7 @@ const CATS = [
 function nm(item){ return item[1][li()]; }
 function catLabel(cat){ return cat.label[li()]; }
 
-const STORAGE_KEY = 'baby-cognition-progress-v3';
+const STORAGE_KEY = 'baby-cognition-progress-v4';
 let state = {
   lang: null,
   stars: 0,
@@ -541,6 +545,10 @@ async function loadState(){
       state = Object.assign(state, parsed);
     }
   }catch(e){}
+  // 若上次保存的是泰文+hear模式，强制回到see
+  if(state.lang && NO_SPEECH_LANGS.indexOf(state.lang) !== -1 && state.mode === 'hear'){
+    state.mode = 'see';
+  }
   CATS.forEach(c=>{ if(!(c.id in state.enabled)) state.enabled[c.id] = true; });
 }
 let saveTimer=null;
@@ -589,14 +597,10 @@ function findVoiceForLang(speechCode, langCode){
   return v || null;
 }
 
-function hasVoiceForLang(langCode){
-  if(!('speechSynthesis' in window)) return false;
-  if(!voices.length) return true;
-  return !!findVoiceForLang(LANG_INFO[langCode].speech, langCode);
-}
-
 function speak(text){
   if(!('speechSynthesis' in window) || !text) return;
+  // 泰文或没有语音支持的语言直接跳过
+  if(!currentLangHasSpeech()) return;
   try{
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
@@ -692,12 +696,47 @@ function pickRound(){
   round = { cat, item:target, options:opts };
 }
 
+// ★ 更新模式切换按钮的显示状态（根据语言是否支持语音）
+function updateModeToggle(){
+  const toggle = document.getElementById('modeToggle');
+  const seeBtn = toggle.querySelector('button[data-mode="see"]');
+  const hearBtn = toggle.querySelector('button[data-mode="hear"]');
+  const hasSpeech = currentLangHasSpeech();
+
+  if(hasSpeech){
+    // 显示两个按钮
+    seeBtn.style.display = '';
+    hearBtn.style.display = '';
+    toggle.classList.remove('single-mode');
+  } else {
+    // 泰文：只显示 see 按钮
+    seeBtn.style.display = '';
+    hearBtn.style.display = 'none';
+    toggle.classList.add('single-mode');
+    // 强制切到 see 模式
+    if(state.mode !== 'see'){
+      state.mode = 'see';
+      saveState();
+    }
+  }
+
+  // 更新 active 状态
+  toggle.querySelectorAll('button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.mode === state.mode);
+  });
+}
+
 function renderRound(){
   lockInput = false;
   const stage = document.getElementById('stageCard');
   const optWrap = document.getElementById('optionsWrap');
   const replayRow = document.getElementById('replayRow');
   optWrap.innerHTML='';
+
+  // 泰文强制 see 模式
+  if(!currentLangHasSpeech() && state.mode !== 'see'){
+    state.mode = 'see';
+  }
 
   if(state.mode==='see'){
     renderStageVisual(round.cat, round.item, stage);
@@ -824,6 +863,7 @@ function updateWelcomeTexts(){
 
 function startGame(){
   hideWelcome();
+  updateModeToggle();
   pickRound();
   renderRound();
 }
@@ -836,21 +876,28 @@ function renderLangList(){
     const row = document.createElement('div');
     row.className = 'lang-row' + (state.lang===code ? ' selected':'');
     let warn = '';
-    if(code === 'th' && voices.length > 0 && !hasVoiceForLang('th')){
+    // 泰文永久标记"无语音"
+    if(code === 'th'){
       warn = ' <span class="lang-warn">('+UI.voiceMissingShort[0]+')</span>';
     }
     row.innerHTML = '<span class="lang-flag">'+info.flag+'</span><span class="lang-name">'+info.name+warn+'</span>';
     row.addEventListener('click', ()=>{
       state.lang = code;
+      // 切换到泰文时强制 see 模式
+      if(NO_SPEECH_LANGS.indexOf(code) !== -1){
+        state.mode = 'see';
+      }
       saveState();
       document.getElementById('langOverlay').classList.remove('show');
       applyLanguageTexts();
       renderSettings();
       updateWelcomeTexts();
+      updateModeToggle();
       if(!document.getElementById('welcomeOverlay').classList.contains('show')){
         nextRound();
       }
-      if(code === 'th' && voices.length > 0 && !hasVoiceForLang('th')){
+      // 泰文提示
+      if(code === 'th'){
         setTimeout(()=>{
           const toast = document.getElementById('toast');
           toast.textContent = UI.voiceMissing[0];
@@ -896,11 +943,17 @@ function renderSettings(){
       saveState();
     });
   });
+  // 泰文下隐藏自动朗读开关（因为无语音）
+  const autoSpeakRow = document.getElementById('autoSpeakSwitch').parentElement;
+  if(!currentLangHasSpeech()){
+    autoSpeakRow.style.display = 'none';
+  } else {
+    autoSpeakRow.style.display = '';
+  }
   document.getElementById('autoSpeakSwitch').classList.toggle('on', state.autoSpeak);
 }
 
 function bindEvents(){
-  // 首页开始按钮
   document.getElementById('startBtn').addEventListener('click', ()=>{
     ctx();
     if(!state.lang){
@@ -911,13 +964,11 @@ function bindEvents(){
     startGame();
   });
 
-  // 首页语言按钮
   document.getElementById('welcomeLangBtn').addEventListener('click', ()=>{
     renderLangList();
     document.getElementById('langOverlay').classList.add('show');
   });
 
-  // 顶部主页按钮
   document.getElementById('homeBtn').addEventListener('click', ()=>{
     updateWelcomeTexts();
     showWelcome();
@@ -926,6 +977,8 @@ function bindEvents(){
   document.getElementById('modeToggle').addEventListener('click', (e)=>{
     const btn = e.target.closest('button[data-mode]');
     if(!btn) return;
+    // 泰文禁止切到 hear
+    if(btn.dataset.mode === 'hear' && !currentLangHasSpeech()) return;
     document.querySelectorAll('#modeToggle button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     state.mode = btn.dataset.mode;
@@ -977,19 +1030,13 @@ function bindEvents(){
   bindEvents();
   updateHeader();
 
-  document.querySelectorAll('#modeToggle button').forEach(b=>{
-    b.classList.toggle('active', b.dataset.mode===state.mode);
-  });
-
   if(state.lang){
     applyLanguageTexts();
   }
   updateWelcomeTexts();
+  updateModeToggle();
 
-  // 总是显示首页
   showWelcome();
-
-  // 预加载一轮，方便点击开始立即玩
   pickRound();
 })();
 
