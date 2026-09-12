@@ -7,7 +7,7 @@
      只需要填一个 ID（11 位字符）
      例如 https://www.youtube.com/watch?v=jfKfPfyJRdk → 'jfKfPfyJRdk'
   ================================================================ */
-  const BGM_VIDEO_ID = 'jfKfPfyJRdk';   // ← 换成你的音乐 ID
+  const BGM_VIDEO_ID = 'YcgwPBwF7Dw';   // ← 换成你的音乐 ID
   const BGM_VOLUME = 55;                 // 0 - 100
   const BGM_AUTOPLAY = true;             // 进入游戏时自动播放
 
