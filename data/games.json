@@ -90,6 +90,19 @@
       "sortOrder": 7,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789154306/juhf2ekl7gwhpxvnnkz9.png"
+    },
+    {
+      "id": "8",
+      "icon": "",
+      "titleZh": "宝宝乐园",
+      "titleEn": "Kids World",
+      "descriptionZh": "探索奇妙乐园，轻松启蒙认知，让宝宝在快乐游戏中智慧成长！",
+      "descriptionEn": "Explore a wonderful world, spark early cognition, and help your baby learn through fun gameplay!",
+      "type": "js",
+      "entry": "games/kidsworld.js",
+      "sortOrder": 8,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789202390/wdwm1srp0jkojy8gllyq.png"
     }
   ]
 }
