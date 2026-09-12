@@ -1,4 +1,4 @@
-/* Zip & Pip: Carrot Quest v4 — Logic-Fixed */
+/* Zip & Pip: Carrot Quest v5 — Fixed Spikes & Checkpoint Respawn */
 (function () {
   'use strict';
 
@@ -114,7 +114,6 @@
   };
 
   // ========== LEVEL BUILDER ==========
-  // 尖刺验证: 必须放在实心地上 (groundMask[x] === true)
   function buildLevel(cfg) {
     var W_T = cfg.width, H_T = cfg.height || 15, groundY = cfg.groundY || 14;
     var tiles = [];
@@ -135,14 +134,19 @@
         }
     });
 
-    // 尖刺: 只接受放在实心地面上
+    // 尖刺: 从地面向上突出 18px
     var spikes = [];
     (cfg.spikes || []).forEach(function(s) {
       var tileX = s[0];
-      if (!groundMask[tileX]) return; // 拒绝放在坑里的尖刺
+      if (!groundMask[tileX]) return;
       for (var i = 0; i < s[1]; i++) {
         if (!groundMask[tileX + i]) break;
-        spikes.push({ x: (tileX + i) * TILE + 4, y: groundY * TILE + 14, w: TILE - 8, h: 18 });
+        spikes.push({
+          x: (tileX + i) * TILE + 4,
+          y: groundY * TILE - 18,
+          w: TILE - 8,
+          h: 18
+        });
       }
     });
 
@@ -155,10 +159,9 @@
     });
     var goalTile = (cfg.goal !== undefined ? cfg.goal : W_T - 6);
     (cfg.carrots || []).forEach(function(c) {
-      if (c[0] >= goalTile - 2) return; // 强制在旗帜前
+      if (c[0] >= goalTile - 2) return;
       carrots.push({ x: c[0] * TILE + 6, y: c[1] * TILE + 6, taken: false });
     });
-    // 箱子: 只接受平地
     (cfg.boxes || []).forEach(function(b) {
       if (!groundMask[b[0]]) return;
       boxes.push({ x: b[0]*TILE+2, y: b[1]*TILE+2, w: 28, h: 28, vx: 0, vy: 0, onGround: false });
@@ -166,11 +169,9 @@
     var checkpoints = [];
     (cfg.checkpoints || []).forEach(function(cx) {
       if (cx >= goalTile - 2) return;
-      // 检查点放在实心地面上
       checkpoints.push({ x: cx*TILE, y: (groundY-1)*TILE - 12, w: 32, h: 48,
         active: false, used: false, flash: 0 });
     });
-    // 风区: 开阔地
     var wind = [];
     (cfg.wind || []).forEach(function(w) {
       var zone = { x: w.x * TILE, y: (w.y||groundY-3) * TILE,
@@ -180,11 +181,9 @@
           vx: zone.force * -3 - Math.random()*2, life: Math.random()*80 });
       wind.push(zone);
     });
-    // 水域
     (cfg.water || []).forEach(function(w) {
       water.push({ x: w[0]*TILE, y: groundY*TILE, w: w[1]*TILE, h: TILE*1.5 });
     });
-    // 移动平台
     (cfg.movers || []).forEach(function(m) {
       movers.push({ x: m.x*TILE, y: m.y*TILE, w: m.w*TILE, h: 16,
         axis: m.axis || 'x', originX: m.x*TILE, originY: m.y*TILE,
@@ -204,7 +203,6 @@
 
   // ========== LEVELS ==========
   var LEVEL_CFGS = [
-    // ===== 1-2 GRASS =====
     {
       name: 'Meadow Stroll', theme: 'grass', width: 200, groundY: 14,
       ground: [[0,32],[36,22],[62,28],[94,26],[124,28],[156,44]],
@@ -212,7 +210,6 @@
         {x:18,y:10,w:4},{x:40,y:9,w:4},{x:54,y:11,w:3},{x:74,y:8,w:5},
         {x:86,y:10,w:4},{x:104,y:9,w:5},{x:140,y:9,w:4},{x:170,y:9,w:5}
       ],
-      // 尖刺放在实心地面上(0-31, 36-57, 62-89, 94-119, 124-151, 156-199)
       spikes: [[12,1],[48,2],[72,1],[104,2],[136,1],[168,2]],
       enemies: [{x:16,t:'walker'},{x:42,t:'walker'},{x:70,t:'hopper'},
                 {x:98,t:'walker'},{x:126,t:'hopper'},{x:156,t:'walker'}],
@@ -244,21 +241,17 @@
       checkpoints: [55, 120, 175],
       goal: 200
     },
-    // ===== 3-4 DESERT with WIND + BOXES =====
     {
       name: 'Windswept Dunes', theme: 'desert', width: 210, groundY: 14,
-      // 大段连贯地面
       ground: [[0,200]],
       platforms: [
         {x:60,y:10,w:5},{x:100,y:10,w:5},{x:150,y:10,w:5}
       ],
-      // 风区: 在开阔地面上，玩家必须推箱子过
       wind: [
         {x:40, y:11, w:20, h:4, f:0.55},
         {x:80, y:11, w:20, h:4, f:0.55},
         {x:130, y:11, w:20, h:4, f:0.55}
       ],
-      // 箱子放在风区前的平地上
       boxes: [[36,13],[76,13],[126,13]],
       spikes: [[20,1],[66,1],[116,1],[170,1]],
       enemies: [{x:14,t:'walker'},{x:56,t:'walker'},{x:96,t:'hopper'},
@@ -296,7 +289,6 @@
       checkpoints: [105, 190],
       goal: 212
     },
-    // ===== 5-6 RIVER (water) =====
     {
       name: 'Riverside Hop', theme: 'river', width: 220, groundY: 14,
       ground: [[0,20],[52,10],[110,12],[160,10],[208,12]],
@@ -341,7 +333,6 @@
       checkpoints: [46, 100, 158, 216],
       goal: 234
     },
-    // ===== 7-8 CAVE =====
     {
       name: 'Glowing Depths', theme: 'cave', width: 200, groundY: 14,
       ground: [[0,28],[32,22],[58,26],[88,22],[114,26],[144,26],[174,26]],
@@ -379,7 +370,6 @@
       checkpoints: [50, 110, 165],
       goal: 204
     },
-    // ===== 9-10 TOWER =====
     {
       name: 'Tower Climb', theme: 'tower', width: 200, groundY: 14,
       ground: [[0,200]],
@@ -430,7 +420,6 @@
       checkpoints: [48, 100, 152, 204],
       goal: 214
     },
-    // ===== 11-12 SKY (glide) =====
     {
       name: 'Floating Isles', theme: 'sky', width: 220, groundY: 14,
       ground: [[0,14],[22,8],[38,10],[54,8],[68,10],[86,8],[100,10],[118,8],[132,10],[150,8],[164,10],[182,8],[196,10],[214,6]],
@@ -537,6 +526,20 @@
     if (lives <= 0) { state = 'gameOver'; audio.stop(); }
     else { state = 'death'; stateTimer = 50; }
   }
+  // 检查点重生：保留关卡状态（胡萝卜、检查点），仅重置玩家物理状态
+  function respawnAtCheckpoint() {
+    player.x = level.spawn.x;
+    player.y = level.spawn.y;
+    player.vx = 0; player.vy = 0;
+    player.onGround = false;
+    player.canDouble = true;
+    player.coyote = 0;
+    player.jumpBuffer = 0;
+    player.jumpHeld = false;
+    player.invuln = 90;
+    particles = [];
+    camera.x = Math.max(0, Math.min(level.width - W, player.x - W / 2));
+  }
 
   // ========== COLLISION ==========
   function solidAt(tx, ty) {
@@ -559,7 +562,15 @@
   function update() {
     if (camera.shake > 0) camera.shake *= 0.88;
     if (toastTimer > 0) toastTimer--;
-    if (state === 'death') { stateTimer--; if (stateTimer <= 0) { loadLevel(levelIndex); state = 'playing'; } return; }
+
+    if (state === 'death') {
+      stateTimer--;
+      if (stateTimer <= 0) {
+        respawnAtCheckpoint();
+        state = 'playing';
+      }
+      return;
+    }
     if (state === 'levelComplete') { stateTimer--; if (stateTimer <= 0) nextLevel(); return; }
     if (state !== 'playing') return;
 
@@ -577,29 +588,26 @@
     if (right) { player.vx =  MOVE; player.facing =  1; }
     if (left || right) player.animT += 0.25; else player.animT *= 0.9;
 
-    // ====== 风: 检查玩家右侧是否有箱子遮挡 ======
+    // 风区
     var inWindZone = null;
     for (var wi = 0; wi < level.wind.length; wi++) {
       if (aabb(player, level.wind[wi])) { inWindZone = level.wind[wi]; break; }
     }
     if (inWindZone) {
-      // 检查玩家右侧是否有箱子
       var shielded = false;
       for (var bi2 = 0; bi2 < level.boxes.length; bi2++) {
         var bx2 = level.boxes[bi2];
-        // 箱子在玩家右侧 40px 内，且 y 有重叠
         if (bx2.x > player.x + player.w - 4 && bx2.x < player.x + player.w + 30 &&
             bx2.y < player.y + player.h && bx2.y + bx2.h > player.y) {
           shielded = true; break;
         }
       }
       if (!shielded) {
-        player.vx += inWindZone.force * -4;  // 风力向左推
+        player.vx += inWindZone.force * -4;
         showToast('🌪️ 风力太强！躲到箱子后面！');
       } else {
         showToast('🛡️ 躲在箱子后，风被挡住了');
       }
-      // 更新风粒
       inWindZone.particles.forEach(function(p) {
         p.x += p.vx; p.life--;
         if (p.x < -20 || p.life <= 0) { p.x = inWindZone.w + 10; p.life = 40 + Math.random()*40; }
@@ -627,7 +635,7 @@
     if (!tileCollides(nx, player.y, player.w, player.h)) player.x = nx;
     else if (!tileCollides(nx, player.y - 6, player.w, player.h)) { player.y -= 6; player.x = nx; }
 
-    // 推箱子 (箱子也受地面碰撞限制)
+    // 推箱子
     for (var bi = 0; bi < level.boxes.length; bi++) {
       var bx = level.boxes[bi];
       if (aabb(player, bx)) {
@@ -687,7 +695,10 @@
     // 尖刺
     if (player.invuln <= 0) {
       for (var si = 0; si < level.spikes.length; si++) {
-        if (aabb(player, level.spikes[si]) && player.y + player.h > level.spikes[si].y + 6) { die(); return; }
+        var sp = level.spikes[si];
+        if (aabb(player, sp)) {
+          if (player.y + player.h > sp.y + 4) { die(); return; }
+        }
       }
     }
     // 水域
@@ -875,12 +886,10 @@
       if (w.x + w.w < camera.x || w.x > camera.x + W) continue;
       ctx.fillStyle = 'rgba(255,220,120,0.12)';
       ctx.fillRect(w.x, w.y, w.w, w.h);
-      // 风粒
       w.particles.forEach(function(p) {
         ctx.fillStyle = 'rgba(255,240,180,' + (0.3 + p.life / 120) + ')';
         ctx.fillRect(w.x + p.x, w.y + p.y, 8, 2);
       });
-      // 方向箭头
       ctx.strokeStyle = 'rgba(255,240,180,0.5)';
       ctx.lineWidth = 2;
       for (var k = 0; k < 4; k++) {
@@ -898,19 +907,32 @@
     for (var i = 0; i < level.spikes.length; i++) {
       var s = level.spikes[i];
       if (s.x + s.w < camera.x || s.x > camera.x + W) continue;
-      // 底座
-      ctx.fillStyle = '#5a6068';
-      ctx.fillRect(s.x, s.y + s.h - 4, s.w, 4);
+      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+      ctx.fillRect(s.x, s.y + s.h - 3, s.w, 3);
       ctx.fillStyle = '#c0c8d0';
       ctx.beginPath();
       for (var k = 0; k < 3; k++) {
         var sx = s.x + k * 10;
-        ctx.moveTo(sx, s.y + s.h); ctx.lineTo(sx + 5, s.y); ctx.lineTo(sx + 10, s.y + s.h);
+        ctx.moveTo(sx, s.y + s.h);
+        ctx.lineTo(sx + 5, s.y);
+        ctx.lineTo(sx + 10, s.y + s.h);
       }
       ctx.fill();
+      ctx.fillStyle = '#e8eef5';
+      for (var k2 = 0; k2 < 3; k2++) {
+        var sx2 = s.x + k2 * 10 + 4;
+        ctx.beginPath();
+        ctx.moveTo(sx2, s.y + s.h);
+        ctx.lineTo(sx2 + 1, s.y + 4);
+        ctx.lineTo(sx2 + 2, s.y + s.h);
+        ctx.closePath();
+        ctx.fill();
+      }
       ctx.fillStyle = '#8892a0';
-      for (var k2 = 0; k2 < 3; k2++)
-        ctx.fillRect(s.x + k2 * 10 + 6, s.y + 6, 1, s.h - 6);
+      for (var k3 = 0; k3 < 3; k3++) {
+        var sx3 = s.x + k3 * 10 + 6;
+        ctx.fillRect(sx3, s.y + 6, 1, s.h - 6);
+      }
     }
   }
   function drawCarrot(x, y, t) {
@@ -1021,21 +1043,17 @@
     ctx.textAlign = 'center'; ctx.fillText('★', f.x + 40, f.y + 38);
     ctx.textAlign = 'left';
   }
-  // 检查点: 明显的旗杆 + 旗子 + 光晕
   function drawCheckpoints() {
     if (!level) return;
     for (var i = 0; i < level.checkpoints.length; i++) {
       var cp = level.checkpoints[i];
       if (cp.x + cp.w < camera.x - 30 || cp.x > camera.x + W + 30) continue;
-      // 光晕
       if (cp.active) {
         ctx.fillStyle = 'rgba(120,255,180,' + (0.15 + Math.sin(Date.now()/300) * 0.08) + ')';
         ctx.beginPath(); ctx.arc(cp.x + 15, cp.y + 24, 32, 0, Math.PI*2); ctx.fill();
       }
-      // 旗杆
       ctx.fillStyle = cp.active ? '#44ff88' : '#6688aa';
       ctx.fillRect(cp.x + 12, cp.y, 4, cp.h);
-      // 旗帜
       var flagColor = cp.active ? '#44ff88' : '#aaccdd';
       ctx.fillStyle = flagColor;
       var wave = cp.flash > 0 ? Math.sin(Date.now()/50) * 6 : 0;
@@ -1044,7 +1062,6 @@
       ctx.lineTo(cp.x + 34 + wave, cp.y + 14);
       ctx.lineTo(cp.x + 16, cp.y + 24);
       ctx.closePath(); ctx.fill();
-      // 星
       ctx.fillStyle = cp.active ? '#ffffff' : '#8899aa';
       ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
       ctx.fillText(cp.active ? '✓' : '·', cp.x + 22, cp.y + 18);
@@ -1202,7 +1219,7 @@
     ctx.fillStyle = '#88ddff'; ctx.font = 'bold 40px "Trebuchet MS", sans-serif';
     ctx.fillText('CARROT QUEST', W/2, 190);
     ctx.fillStyle = '#ffbb66'; ctx.font = 'bold 18px "Trebuchet MS", sans-serif';
-    ctx.fillText('v4 · Themed Mechanics', W/2, 220);
+    ctx.fillText('A 12-Level Platform Adventure', W/2, 220);
     drawTitleChar(W/2 - 140, 305, 'zip');
     drawTitleChar(W/2 + 140, 305, 'pip');
     ctx.fillStyle = '#c8dae8'; ctx.font = 'bold 18px "Courier New", monospace';
