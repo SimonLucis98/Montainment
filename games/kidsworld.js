@@ -219,7 +219,7 @@
       <button data-mode="hear"></button>
     </div>
 
-    <div class="replay-row">
+    <div class="replay-row" id="replayRow">
       <button class="replay-btn" id="replayBtn">🔊 <span id="replayLabel"></span></button>
     </div>
 
@@ -595,9 +595,11 @@ function renderRound(){
   lockInput = false;
   const stage = document.getElementById('stageCard');
   const optWrap = document.getElementById('optionsWrap');
+  const replayRow = document.getElementById('replayRow');
   optWrap.innerHTML='';
 
   if(state.mode==='see'){
+    // ===== See & Choose: 纯视觉，无语音 =====
     renderStageVisual(round.cat, round.item, stage);
     optWrap.className = 'options ' + (round.options.length<=4?'cols-2':'cols-3');
     round.options.forEach(opt=>{
@@ -607,8 +609,10 @@ function renderRound(){
       btn.addEventListener('click', ()=>handleAnswer(opt, btn));
       optWrap.appendChild(btn);
     });
-    if(state.autoSpeak){ setTimeout(()=>speak(nm(round.item)), 250); }
+    // 隐藏「再听一次」按钮，避免泄露答案
+    replayRow.style.display = 'none';
   } else {
+    // ===== Listen & Choose: 有语音 =====
     stage.innerHTML = '<div class="speak-stage"><button class="big-speaker" id="bigSpeakerBtn">🔊</button><div class="speak-hint">'+t('speakHint')+'</div></div>';
     document.getElementById('bigSpeakerBtn').addEventListener('click', ()=>speak(nm(round.item)));
     optWrap.className = 'options ' + (round.options.length<=4?'cols-2':'cols-3');
@@ -619,6 +623,8 @@ function renderRound(){
       btn.addEventListener('click', ()=>handleAnswer(opt, btn));
       optWrap.appendChild(btn);
     });
+    // 显示「再听一次」按钮
+    replayRow.style.display = 'flex';
     setTimeout(()=>speak(nm(round.item)), 300);
   }
 }
