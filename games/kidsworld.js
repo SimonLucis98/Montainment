@@ -1,4 +1,4 @@
-/* Kids Cognition World · 宝宝认知乐园 — JS Wrapper v5 */
+/* Kids Cognition World · 宝宝认知乐园 — JS Wrapper v6 */
 (function () {
   'use strict';
 
@@ -84,7 +84,6 @@
     white-space:nowrap;
   }
   .mode-toggle button.active{ background:var(--coral); color:#fff; }
-  /* 泰文模式下只显示一个按钮，让它居中 */
   .mode-toggle.single-mode{ justify-content:center; }
 
   .stage-card{
@@ -357,8 +356,9 @@ const UI = {
   startBtn:  ['▶ 开始游戏','▶ Start Game','▶ スタート','▶ 시작하기','▶ Empezar','▶ เริ่มเล่น','▶ Commencer'],
   chooseLang:['选择语言 · Choose Language','Choose Language','言語を選ぶ','언어 선택','Elige idioma','เลือกภาษา','Choisir la langue'],
   welcomeHint:['听一听 · 看一看 · 学一学','Listen · Look · Learn','聞いて・見て・学ぼう','듣고 · 보고 · 배우기','Escucha · Mira · Aprende','ฟัง · ดู · เรียน','Écoute · Regarde · Apprends'],
-  voiceMissing:['⚠️ 此设备没有安装泰文语音，只能使用「看图选字」模式','⚠️ Thai voice is not installed on this device; only See & Choose mode is available'],
-  voiceMissingShort:['无语音','No voice']
+  // ★ 泰文语音提示（固定英文，与当前语言无关）
+  voiceMissing:'⚠️ Thai voice is not installed on this device. Only "See & Choose" mode is available.',
+  voiceMissingShort:'No voice'
 };
 const PRAISES = [
   ['太棒了','真厉害','答对啦','你真聪明','好棒呀','答对了'],
@@ -545,7 +545,6 @@ async function loadState(){
       state = Object.assign(state, parsed);
     }
   }catch(e){}
-  // 若上次保存的是泰文+hear模式，强制回到see
   if(state.lang && NO_SPEECH_LANGS.indexOf(state.lang) !== -1 && state.mode === 'hear'){
     state.mode = 'see';
   }
@@ -599,7 +598,6 @@ function findVoiceForLang(speechCode, langCode){
 
 function speak(text){
   if(!('speechSynthesis' in window) || !text) return;
-  // 泰文或没有语音支持的语言直接跳过
   if(!currentLangHasSpeech()) return;
   try{
     speechSynthesis.cancel();
@@ -696,7 +694,6 @@ function pickRound(){
   round = { cat, item:target, options:opts };
 }
 
-// ★ 更新模式切换按钮的显示状态（根据语言是否支持语音）
 function updateModeToggle(){
   const toggle = document.getElementById('modeToggle');
   const seeBtn = toggle.querySelector('button[data-mode="see"]');
@@ -704,23 +701,19 @@ function updateModeToggle(){
   const hasSpeech = currentLangHasSpeech();
 
   if(hasSpeech){
-    // 显示两个按钮
     seeBtn.style.display = '';
     hearBtn.style.display = '';
     toggle.classList.remove('single-mode');
   } else {
-    // 泰文：只显示 see 按钮
     seeBtn.style.display = '';
     hearBtn.style.display = 'none';
     toggle.classList.add('single-mode');
-    // 强制切到 see 模式
     if(state.mode !== 'see'){
       state.mode = 'see';
       saveState();
     }
   }
 
-  // 更新 active 状态
   toggle.querySelectorAll('button').forEach(b=>{
     b.classList.toggle('active', b.dataset.mode === state.mode);
   });
@@ -733,7 +726,6 @@ function renderRound(){
   const replayRow = document.getElementById('replayRow');
   optWrap.innerHTML='';
 
-  // 泰文强制 see 模式
   if(!currentLangHasSpeech() && state.mode !== 'see'){
     state.mode = 'see';
   }
@@ -876,14 +868,13 @@ function renderLangList(){
     const row = document.createElement('div');
     row.className = 'lang-row' + (state.lang===code ? ' selected':'');
     let warn = '';
-    // 泰文永久标记"无语音"
+    // ★ 泰文永久标记 "No voice"（英文）
     if(code === 'th'){
-      warn = ' <span class="lang-warn">('+UI.voiceMissingShort[0]+')</span>';
+      warn = ' <span class="lang-warn">('+UI.voiceMissingShort+')</span>';
     }
     row.innerHTML = '<span class="lang-flag">'+info.flag+'</span><span class="lang-name">'+info.name+warn+'</span>';
     row.addEventListener('click', ()=>{
       state.lang = code;
-      // 切换到泰文时强制 see 模式
       if(NO_SPEECH_LANGS.indexOf(code) !== -1){
         state.mode = 'see';
       }
@@ -896,11 +887,11 @@ function renderLangList(){
       if(!document.getElementById('welcomeOverlay').classList.contains('show')){
         nextRound();
       }
-      // 泰文提示
+      // ★ 泰文提示（固定英文）
       if(code === 'th'){
         setTimeout(()=>{
           const toast = document.getElementById('toast');
-          toast.textContent = UI.voiceMissing[0];
+          toast.textContent = UI.voiceMissing;
           toast.classList.add('show');
           setTimeout(()=> toast.classList.remove('show'), 3500);
         }, 300);
@@ -943,7 +934,6 @@ function renderSettings(){
       saveState();
     });
   });
-  // 泰文下隐藏自动朗读开关（因为无语音）
   const autoSpeakRow = document.getElementById('autoSpeakSwitch').parentElement;
   if(!currentLangHasSpeech()){
     autoSpeakRow.style.display = 'none';
@@ -977,7 +967,6 @@ function bindEvents(){
   document.getElementById('modeToggle').addEventListener('click', (e)=>{
     const btn = e.target.closest('button[data-mode]');
     if(!btn) return;
-    // 泰文禁止切到 hear
     if(btn.dataset.mode === 'hear' && !currentLangHasSpeech()) return;
     document.querySelectorAll('#modeToggle button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
