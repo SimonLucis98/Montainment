@@ -20,7 +20,258 @@
                   "id": 1,
                   "titleZh": "试卷 1：平仮名/ひらがな（Hiragana）学习",
                   "titleEn": "Paper 1: Hiragana (ひらがな) Learning",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "平假名“あ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"あ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "a",
+                          "i",
+                          "u",
+                          "e"
+                        ],
+                        "en": [
+                          "a",
+                          "i",
+                          "u",
+                          "e"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "あ (a) 是五十音图的第一个假名",
+                        "en": "\"あ\" (a) is the first hiragana character in the 50-sound chart"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“い”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"い\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "a",
+                          "i",
+                          "u",
+                          "o"
+                        ],
+                        "en": [
+                          "a",
+                          "i",
+                          "u",
+                          "o"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "い (i) 发音类似于英语 \"see\" 中的 \"ee\"",
+                        "en": "\"い\" (i) is pronounced like \"ee\" in \"see\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“う”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"う\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "o",
+                          "e",
+                          "u",
+                          "a"
+                        ],
+                        "en": [
+                          "o",
+                          "e",
+                          "u",
+                          "a"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "う (u) 发音时嘴唇扁平，不向前突出",
+                        "en": "\"う\" (u) is pronounced with unrounded lips."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“え”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"え\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "i",
+                          "e",
+                          "o",
+                          "u"
+                        ],
+                        "en": [
+                          "i",
+                          "e",
+                          "o",
+                          "u"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "え (e) 发音类似于英文中的 \"e\" (bed)",
+                        "en": "\"え\" (e) is pronounced like \"e\" in \"bed\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“お”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"お\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "o",
+                          "a",
+                          "u",
+                          "e"
+                        ],
+                        "en": [
+                          "o",
+                          "a",
+                          "u",
+                          "e"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "お (o) 发音嘴唇圆拢",
+                        "en": "\"お\" (o) is pronounced like \"o\" in \"go\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“か”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"か\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ka",
+                          "ki",
+                          "ku",
+                          "ke"
+                        ],
+                        "en": [
+                          "ka",
+                          "ki",
+                          "ku",
+                          "ke"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "か (ka) 由辅音 k 与元音 a 拼读",
+                        "en": "\"か\" (ka) is the combination of consonant 'k' and vowel 'a'"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“き”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"き\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ka",
+                          "ku",
+                          "ko",
+                          "ki"
+                        ],
+                        "en": [
+                          "ka",
+                          "ku",
+                          "ko",
+                          "ki"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "き (ki) 读作 ki",
+                        "en": "\"き\" (ki) is pronounced like \"key\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“く”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"く\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ke",
+                          "ko",
+                          "ku",
+                          "ka"
+                        ],
+                        "en": [
+                          "ke",
+                          "ko",
+                          "ku",
+                          "ka"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "く (ku) 字形像一个小于号“<”",
+                        "en": "\"く\" (ku) looks like a \"less than\" sign (<)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“け”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"け\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ke",
+                          "ki",
+                          "ka",
+                          "ku"
+                        ],
+                        "en": [
+                          "ke",
+                          "ki",
+                          "ka",
+                          "ku"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "け (ke) 读作 \"k\" + \"e\"",
+                        "en": "\"け\" (ke) is pronounced like \"k\" + \"e\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“こ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"こ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ka",
+                          "ku",
+                          "ko",
+                          "ke"
+                        ],
+                        "en": [
+                          "ka",
+                          "ku",
+                          "ko",
+                          "ke"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "こ (ko) 读作 \"coat\" 里的 \"co\"",
+                        "en": "\"こ\" (ko) is pronounced like \"co\" in \"coat\""
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 2,
