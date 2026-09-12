@@ -187,10 +187,52 @@
   .lang-flag{ font-size:26px; width:36px; text-align:center; }
   .lang-name{ font-weight:700; font-size:16px; }
   .lang-name small{ display:block; font-weight:600; color:#9a92b3; font-size:12px; }
+  .lang-warn{ font-size:11px; color:#e8836b; margin-left:4px; }
 
   #langOverlay .modal{ text-align:center; }
   #langOverlay h2{ text-align:center; }
   .lang-title-sub{ color:#9a92b3; font-weight:600; font-size:13px; margin:-6px 0 14px; }
+
+  /* ===== 首页 ===== */
+  #welcomeOverlay{
+    background:linear-gradient(180deg, rgba(127,208,255,0.95), rgba(232,248,255,0.95) 60%, rgba(126,217,87,0.95));
+    backdrop-filter: blur(2px);
+    z-index:80;
+  }
+  #welcomeOverlay .welcome-card{
+    background:#fff; border-radius:36px; padding:30px 28px 26px;
+    width:min(400px, 92vw); text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.15);
+    position:relative;
+  }
+  .welcome-emoji{
+    font-size:72px; line-height:1; margin-bottom:8px;
+    animation: welcomeBounce 2s ease-in-out infinite;
+  }
+  @keyframes welcomeBounce{
+    0%,100%{ transform:translateY(0) rotate(-3deg); }
+    50%{ transform:translateY(-10px) rotate(3deg); }
+  }
+  .welcome-title{ font-size:30px; font-weight:800; color:var(--berry); margin:4px 0 2px; letter-spacing:1px; }
+  .welcome-sub{ font-size:14px; color:#9a92b3; font-weight:600; margin-bottom:22px; letter-spacing:0.5px; }
+
+  .big-start-btn{
+    width:100%; border:none; border-radius:22px; padding:18px;
+    background:linear-gradient(180deg,#ff9a8b,var(--coral));
+    color:#fff; font-family:inherit; font-weight:800; font-size:22px;
+    box-shadow:0 8px 0 var(--coral-dark); cursor:pointer; letter-spacing:1px;
+    margin-bottom:14px;
+  }
+  .big-start-btn:active{ transform:translateY(5px); box-shadow:0 3px 0 var(--coral-dark); }
+
+  .welcome-lang-btn{
+    width:100%; border:none; border-radius:18px; padding:12px;
+    background:#f1eef8; color:var(--berry); font-family:inherit; font-weight:700; font-size:15px;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+    box-shadow:0 4px 0 #ddd6f0;
+  }
+  .welcome-lang-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #ddd6f0; }
+
+  .welcome-hint{ color:#9a92b3; font-size:12px; font-weight:600; margin-top:16px; line-height:1.6; }
 
   .confetti-piece{ position:fixed; top:-20px; font-size:22px; z-index:70; pointer-events:none; animation: fall linear forwards; }
   @keyframes fall{ to{ transform:translateY(110vh) rotate(360deg); opacity:0.9; } }
@@ -208,6 +250,7 @@
     <div class="stat-pill"><span class="star-icon">⭐</span><span id="starCount">0</span></div>
     <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
     <div class="top-actions">
+      <button class="icon-btn" id="homeBtn" title="Home">🏠</button>
       <button class="icon-btn" id="langBtn" title="Language">🌐</button>
       <button class="icon-btn" id="settingsBtn" title="Settings">⚙️</button>
     </div>
@@ -229,6 +272,20 @@
   </div>
 
   <div class="toast" id="toast"></div>
+
+  <!-- 首页 -->
+  <div class="modal-overlay" id="welcomeOverlay">
+    <div class="welcome-card">
+      <div class="welcome-emoji">🌟</div>
+      <div class="welcome-title" id="welcomeTitle">宝宝认知乐园</div>
+      <div class="welcome-sub" id="welcomeSub">Kids Cognition World</div>
+      <button class="big-start-btn" id="startBtn">▶ 开始游戏</button>
+      <button class="welcome-lang-btn" id="welcomeLangBtn">
+        <span>🌐</span><span id="welcomeLangLabel">选择语言 · Choose Language</span>
+      </button>
+      <div class="welcome-hint" id="welcomeHint">听一听 · 看一看 · 学一学</div>
+    </div>
+  </div>
 
   <div class="modal-overlay" id="settingsOverlay">
     <div class="modal">
@@ -281,7 +338,14 @@ const UI = {
   unlockPre: ['🎉 解锁新主题：','🎉 New topic unlocked: ','🎉 新しいテーマ解放：','🎉 새 주제 열림: ','🎉 ¡Nuevo tema: ','🎉 ปลดล็อกหัวข้อใหม่: ','🎉 Nouveau thème : '],
   unlockSuf: ['！','!','！','!','!','!','\\u00A0!'],
   resetConfirm:['确定要清空所有星星和进度，重新开始吗？','Clear all stars and progress and start over?','スターと進み具合を全部消してやり直しますか？','별과 진행 상황을 모두 지우고 다시 시작할까요?','¿Borrar todas las estrellas y el progreso para empezar de nuevo?','ต้องการล้างดาวและความคืบหน้าทั้งหมดแล้วเริ่มใหม่หรือไม่?','Effacer toutes les étoiles et recommencer ?'],
-  wrongSpeech:['再试一次','Try again','もう一回','다시 해봐','Inténtalo otra vez','ลองอีกครั้ง','Réessaie']
+  wrongSpeech:['再试一次','Try again','もう一回','다시 해봐','Inténtalo otra vez','ลองอีกครั้ง','Réessaie'],
+  // 首页
+  welcomeTitle:['宝宝认知乐园','Kids Cognition World','キッズ認知ワールド','키즈 인지 월드','Mundo Cognitivo','โลกการเรียนรู้ของเด็ก','Monde Cognitif'],
+  startBtn:  ['▶ 开始游戏','▶ Start Game','▶ スタート','▶ 시작하기','▶ Empezar','▶ เริ่มเล่น','▶ Commencer'],
+  chooseLang:['选择语言 · Choose Language','Choose Language','言語を選ぶ','언어 선택','Elige idioma','เลือกภาษา','Choisir la langue'],
+  welcomeHint:['听一听 · 看一看 · 学一学','Listen · Look · Learn','聞いて・見て・学ぼう','듣고 · 보고 · 배우기','Escucha · Mira · Aprende','ฟัง · ดู · เรียน','Écoute · Regarde · Apprends'],
+  voiceMissing:['⚠️ 此设备没有安装泰文语音，请到系统设置中安装','⚠️ Thai voice is not installed on this device'],
+  voiceMissingShort:['无语音','No voice']
 };
 const PRAISES = [
   ['太棒了','真厉害','答对啦','你真聪明','好棒呀','答对了'],
@@ -429,7 +493,7 @@ const CATS = [
 function nm(item){ return item[1][li()]; }
 function catLabel(cat){ return cat.label[li()]; }
 
-const STORAGE_KEY = 'baby-cognition-progress-v2';
+const STORAGE_KEY = 'baby-cognition-progress-v3';
 let state = {
   lang: null,
   stars: 0,
@@ -486,12 +550,53 @@ function availableCats(){
   return CATS.slice(0,n).filter(c=>state.enabled[c.id]!==false);
 }
 
+// ===== 语音 =====
 let voices = [];
-function loadVoices(){ voices = speechSynthesis.getVoices ? speechSynthesis.getVoices() : []; }
+function loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  voices = speechSynthesis.getVoices() || [];
+}
 if('speechSynthesis' in window){
   loadVoices();
   speechSynthesis.onvoiceschanged = loadVoices;
+  // 有些浏览器需要延迟加载语音列表
+  setTimeout(loadVoices, 300);
+  setTimeout(loadVoices, 1000);
 }
+
+// 改进的语音匹配：处理 th-TH vs th_TH vs th 等格式
+function findVoiceForLang(speechCode, langCode){
+  if(!voices.length) return null;
+  const target = speechCode.toLowerCase().replace('_','-');
+  const prefix = langCode.toLowerCase();
+  // 1. 精确匹配 th-TH
+  let v = voices.find(x => x.lang && x.lang.toLowerCase().replace('_','-') === target);
+  if(v) return v;
+  // 2. 纯前缀 th
+  v = voices.find(x => x.lang && x.lang.toLowerCase().replace('_','-') === prefix);
+  if(v) return v;
+  // 3. 前缀匹配 th-TH, th_TH
+  v = voices.find(x => {
+    if(!x.lang) return false;
+    return x.lang.toLowerCase().replace('_','-').startsWith(prefix + '-');
+  });
+  if(v) return v;
+  // 4. 分割匹配
+  v = voices.find(x => {
+    if(!x.lang) return false;
+    const parts = x.lang.toLowerCase().replace('_','-').split('-');
+    return parts[0] === prefix;
+  });
+  return v || null;
+}
+
+// 检测当前语言是否有可用语音
+function hasVoiceForLang(langCode){
+  if(!('speechSynthesis' in window)) return false;
+  if(!voices.length) return true; // 尚未加载，先假设可用
+  return !!findVoiceForLang(LANG_INFO[langCode].speech, langCode);
+}
+
 function speak(text){
   if(!('speechSynthesis' in window) || !text) return;
   try{
@@ -500,14 +605,15 @@ function speak(text){
     const info = LANG_INFO[state.lang] || LANG_INFO.en;
     u.lang = info.speech;
     u.rate = 0.85; u.pitch = 1.1;
-    let match = voices.find(v=>v.lang && v.lang.toLowerCase() === info.speech.toLowerCase());
-    if(!match) match = voices.find(v=>v.lang && v.lang.toLowerCase().startsWith(state.lang));
-    if(!match) match = voices.find(v=>v.lang && v.lang.toLowerCase().split('-')[0] === state.lang);
+    // 用改进的匹配逻辑
+    const match = findVoiceForLang(info.speech, state.lang);
     if(match) u.voice = match;
+    // 若找不到匹配语音，仍设置 u.lang，让浏览器决定是否用默认语音
     speechSynthesis.speak(u);
   }catch(e){}
 }
 
+// ===== 音效 =====
 let actx = null;
 function ctx(){
   if(!actx){ const AC = window.AudioContext || window.webkitAudioContext; actx = new AC(); }
@@ -599,7 +705,7 @@ function renderRound(){
   optWrap.innerHTML='';
 
   if(state.mode==='see'){
-    // ===== See & Choose: 纯视觉，无语音 =====
+    // 看图选字：无语音
     renderStageVisual(round.cat, round.item, stage);
     optWrap.className = 'options ' + (round.options.length<=4?'cols-2':'cols-3');
     round.options.forEach(opt=>{
@@ -609,10 +715,9 @@ function renderRound(){
       btn.addEventListener('click', ()=>handleAnswer(opt, btn));
       optWrap.appendChild(btn);
     });
-    // 隐藏「再听一次」按钮，避免泄露答案
     replayRow.style.display = 'none';
   } else {
-    // ===== Listen & Choose: 有语音 =====
+    // 听音选图：有语音
     stage.innerHTML = '<div class="speak-stage"><button class="big-speaker" id="bigSpeakerBtn">🔊</button><div class="speak-hint">'+t('speakHint')+'</div></div>';
     document.getElementById('bigSpeakerBtn').addEventListener('click', ()=>speak(nm(round.item)));
     optWrap.className = 'options ' + (round.options.length<=4?'cols-2':'cols-3');
@@ -623,7 +728,6 @@ function renderRound(){
       btn.addEventListener('click', ()=>handleAnswer(opt, btn));
       optWrap.appendChild(btn);
     });
-    // 显示「再听一次」按钮
     replayRow.style.display = 'flex';
     setTimeout(()=>speak(nm(round.item)), 300);
   }
@@ -711,6 +815,28 @@ function makeClouds(){
   });
 }
 
+// ===== 首页 =====
+function showWelcome(){
+  document.getElementById('welcomeOverlay').classList.add('show');
+}
+function hideWelcome(){
+  document.getElementById('welcomeOverlay').classList.remove('show');
+}
+function updateWelcomeTexts(){
+  document.getElementById('welcomeTitle').textContent = state.lang ? t('welcomeTitle') : '宝宝认知乐园';
+  document.getElementById('welcomeSub').textContent = 'Kids Cognition World';
+  document.getElementById('startBtn').textContent = t('startBtn');
+  document.getElementById('welcomeLangLabel').textContent = t('chooseLang');
+  document.getElementById('welcomeHint').textContent = t('welcomeHint');
+}
+
+function startGame(){
+  hideWelcome();
+  pickRound();
+  renderRound();
+}
+
+// ===== 语言列表 =====
 function renderLangList(){
   const list = document.getElementById('langList');
   list.innerHTML='';
@@ -718,14 +844,32 @@ function renderLangList(){
     const info = LANG_INFO[code];
     const row = document.createElement('div');
     row.className = 'lang-row' + (state.lang===code ? ' selected':'');
-    row.innerHTML = '<span class="lang-flag">'+info.flag+'</span><span class="lang-name">'+info.name+'</span>';
+    // 检测语音可用性
+    let warn = '';
+    if(code === 'th' && voices.length > 0 && !hasVoiceForLang('th')){
+      warn = ' <span class="lang-warn">('+UI.voiceMissingShort[0]+')</span>';
+    }
+    row.innerHTML = '<span class="lang-flag">'+info.flag+'</span><span class="lang-name">'+info.name+warn+'</span>';
     row.addEventListener('click', ()=>{
       state.lang = code;
       saveState();
       document.getElementById('langOverlay').classList.remove('show');
       applyLanguageTexts();
       renderSettings();
-      nextRound();
+      updateWelcomeTexts();
+      // 如果当前在游戏中，则刷新题目文字
+      if(!document.getElementById('welcomeOverlay').classList.contains('show')){
+        nextRound();
+      }
+      // 泰国语音缺失提示
+      if(code === 'th' && voices.length > 0 && !hasVoiceForLang('th')){
+        setTimeout(()=>{
+          const toast = document.getElementById('toast');
+          toast.textContent = UI.voiceMissing[0];
+          toast.classList.add('show');
+          setTimeout(()=> toast.classList.remove('show'), 3500);
+        }, 300);
+      }
     });
     list.appendChild(row);
   });
@@ -739,6 +883,7 @@ function applyLanguageTexts(){
   document.getElementById('autoSpeakLabel').textContent = t('autoSpeak');
   document.getElementById('resetBtn').textContent = t('reset');
   document.getElementById('closeSettings').textContent = t('done');
+  updateWelcomeTexts();
 }
 
 function renderSettings(){
@@ -767,6 +912,31 @@ function renderSettings(){
 }
 
 function bindEvents(){
+  // 首页开始按钮
+  document.getElementById('startBtn').addEventListener('click', ()=>{
+    ctx(); // 用户手势启用音频
+    if(!state.lang){
+      // 未选语言，先弹出语言选择
+      renderLangList();
+      document.getElementById('langOverlay').classList.add('show');
+      return;
+    }
+    startGame();
+  });
+
+  // 首页语言按钮
+  document.getElementById('welcomeLangBtn').addEventListener('click', ()=>{
+    renderLangList();
+    document.getElementById('langOverlay').classList.add('show');
+  });
+
+  // 顶部主页按钮
+  document.getElementById('homeBtn').addEventListener('click', ()=>{
+    showWelcome();
+    updateWelcomeTexts();
+  });
+
+  // 模式切换
   document.getElementById('modeToggle').addEventListener('click', (e)=>{
     const btn = e.target.closest('button[data-mode]');
     if(!btn) return;
@@ -777,11 +947,13 @@ function bindEvents(){
     nextRound();
   });
 
+  // 再听一次
   document.getElementById('replayBtn').addEventListener('click', ()=>{
     ctx();
     if(round.item) speak(nm(round.item));
   });
 
+  // 设置
   document.getElementById('settingsBtn').addEventListener('click', ()=>{
     renderSettings();
     document.getElementById('settingsOverlay').classList.add('show');
@@ -807,11 +979,13 @@ function bindEvents(){
     }
   });
 
+  // 语言
   document.getElementById('langBtn').addEventListener('click', ()=>{
     renderLangList();
     document.getElementById('langOverlay').classList.add('show');
   });
 
+  // 用户首次点击，启用音频
   document.body.addEventListener('click', ()=>{ try{ ctx(); }catch(e){} }, { once:true });
 }
 
@@ -821,18 +995,22 @@ function bindEvents(){
   bindEvents();
   updateHeader();
 
-  if(!state.lang){
-    renderLangList();
-    document.getElementById('langOverlay').classList.add('show');
-    pickRound();
-  } else {
-    document.querySelectorAll('#modeToggle button').forEach(b=>{
-      b.classList.toggle('active', b.dataset.mode===state.mode);
-    });
+  // 恢复上次的模式
+  document.querySelectorAll('#modeToggle button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.mode===state.mode);
+  });
+
+  // 应用文字（如果已选语言）
+  if(state.lang){
     applyLanguageTexts();
-    pickRound();
-    renderRound();
   }
+  updateWelcomeTexts();
+
+  // 总是先显示首页
+  showWelcome();
+
+  // 预加载题目（不影响首页显示）
+  pickRound();
 })();
 
 })();
