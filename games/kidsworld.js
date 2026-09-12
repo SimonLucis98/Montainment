@@ -1,4 +1,4 @@
-/* Kids Cognition World · 宝宝认知乐园 — JS Wrapper */
+/* Kids Cognition World · 宝宝认知乐园 — JS Wrapper v4 */
 (function () {
   'use strict';
 
@@ -147,16 +147,23 @@
   .toast{
     position:fixed; top:14px; left:50%; transform:translateX(-50%) translateY(-140%);
     background:var(--berry); color:#fff; padding:12px 22px; border-radius:999px;
-    font-weight:700; font-size:14px; z-index:50; box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    font-weight:700; font-size:14px; z-index:200; box-shadow:0 8px 20px rgba(0,0,0,0.2);
     transition:transform .4s cubic-bezier(.34,1.56,.64,1); max-width:90vw; text-align:center;
   }
   .toast.show{ transform:translateX(-50%) translateY(0); }
 
+  /* ===== 遮罩层：通用 ===== */
   .modal-overlay{
-    position:fixed; inset:0; background:rgba(58,51,82,0.55); z-index:60;
+    position:fixed; inset:0; background:rgba(58,51,82,0.55);
     display:none; align-items:center; justify-content:center; padding:20px;
   }
   .modal-overlay.show{ display:flex; }
+
+  /* ===== 层级：欢迎页 < 语言/设置页 ===== */
+  #welcomeOverlay{ z-index: 80; }
+  #settingsOverlay{ z-index: 100; }
+  #langOverlay{ z-index: 100; }
+
   .modal{
     background:#fff; border-radius:28px; padding:22px; width:min(420px,94vw);
     max-height:82vh; overflow-y:auto;
@@ -193,13 +200,12 @@
   #langOverlay h2{ text-align:center; }
   .lang-title-sub{ color:#9a92b3; font-weight:600; font-size:13px; margin:-6px 0 14px; }
 
-  /* ===== 首页 ===== */
+  /* ===== 欢迎首页 ===== */
   #welcomeOverlay{
-    background:linear-gradient(180deg, rgba(127,208,255,0.95), rgba(232,248,255,0.95) 60%, rgba(126,217,87,0.95));
-    backdrop-filter: blur(2px);
-    z-index:80;
+    background:linear-gradient(180deg, rgba(127,208,255,0.92), rgba(232,248,255,0.92) 60%, rgba(126,217,87,0.92));
+    backdrop-filter: blur(3px);
   }
-  #welcomeOverlay .welcome-card{
+  .welcome-card{
     background:#fff; border-radius:36px; padding:30px 28px 26px;
     width:min(400px, 92vw); text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.15);
     position:relative;
@@ -234,10 +240,10 @@
 
   .welcome-hint{ color:#9a92b3; font-size:12px; font-weight:600; margin-top:16px; line-height:1.6; }
 
-  .confetti-piece{ position:fixed; top:-20px; font-size:22px; z-index:70; pointer-events:none; animation: fall linear forwards; }
+  .confetti-piece{ position:fixed; top:-20px; font-size:22px; z-index:150; pointer-events:none; animation: fall linear forwards; }
   @keyframes fall{ to{ transform:translateY(110vh) rotate(360deg); opacity:0.9; } }
 
-  .float-star{ position:fixed; z-index:70; font-size:26px; pointer-events:none; animation: floatUp 0.9s ease-out forwards; }
+  .float-star{ position:fixed; z-index:150; font-size:26px; pointer-events:none; animation: floatUp 0.9s ease-out forwards; }
   @keyframes floatUp{ 0%{ transform:translateY(0) scale(1); opacity:1; } 100%{ transform:translateY(-70px) scale(1.4); opacity:0; } }
 </style>
 </head>
@@ -323,7 +329,11 @@ const LANG_INFO = {
   th:{flag:'🇹🇭', name:'ไทย', speech:'th-TH'},
   fr:{flag:'🇫🇷', name:'Français', speech:'fr-FR'}
 };
-function li(){ return LANGS.indexOf(state.lang); }
+// ★ 修复：state.lang 未设置时默认返回 0（中文），避免 t() 返回 undefined
+function li(){
+  const idx = LANGS.indexOf(state.lang);
+  return idx >= 0 ? idx : 0;
+}
 
 const UI = {
   modeSee:   ['看图选字','See & Choose','見て選ぶ','보고 고르기','Ver y elegir','ดูแล้วเลือก','Voir et choisir'],
@@ -339,7 +349,6 @@ const UI = {
   unlockSuf: ['！','!','！','!','!','!','\\u00A0!'],
   resetConfirm:['确定要清空所有星星和进度，重新开始吗？','Clear all stars and progress and start over?','スターと進み具合を全部消してやり直しますか？','별과 진행 상황을 모두 지우고 다시 시작할까요?','¿Borrar todas las estrellas y el progreso para empezar de nuevo?','ต้องการล้างดาวและความคืบหน้าทั้งหมดแล้วเริ่มใหม่หรือไม่?','Effacer toutes les étoiles et recommencer ?'],
   wrongSpeech:['再试一次','Try again','もう一回','다시 해봐','Inténtalo otra vez','ลองอีกครั้ง','Réessaie'],
-  // 首页
   welcomeTitle:['宝宝认知乐园','Kids Cognition World','キッズ認知ワールド','키즈 인지 월드','Mundo Cognitivo','โลกการเรียนรู้ของเด็ก','Monde Cognitif'],
   startBtn:  ['▶ 开始游戏','▶ Start Game','▶ スタート','▶ 시작하기','▶ Empezar','▶ เริ่มเล่น','▶ Commencer'],
   chooseLang:['选择语言 · Choose Language','Choose Language','言語を選ぶ','언어 선택','Elige idioma','เลือกภาษา','Choisir la langue'],
@@ -550,7 +559,6 @@ function availableCats(){
   return CATS.slice(0,n).filter(c=>state.enabled[c.id]!==false);
 }
 
-// ===== 语音 =====
 let voices = [];
 function loadVoices(){
   if(!('speechSynthesis' in window)) return;
@@ -559,29 +567,20 @@ function loadVoices(){
 if('speechSynthesis' in window){
   loadVoices();
   speechSynthesis.onvoiceschanged = loadVoices;
-  // 有些浏览器需要延迟加载语音列表
   setTimeout(loadVoices, 300);
   setTimeout(loadVoices, 1000);
 }
 
-// 改进的语音匹配：处理 th-TH vs th_TH vs th 等格式
 function findVoiceForLang(speechCode, langCode){
   if(!voices.length) return null;
   const target = speechCode.toLowerCase().replace('_','-');
   const prefix = langCode.toLowerCase();
-  // 1. 精确匹配 th-TH
   let v = voices.find(x => x.lang && x.lang.toLowerCase().replace('_','-') === target);
   if(v) return v;
-  // 2. 纯前缀 th
   v = voices.find(x => x.lang && x.lang.toLowerCase().replace('_','-') === prefix);
   if(v) return v;
-  // 3. 前缀匹配 th-TH, th_TH
-  v = voices.find(x => {
-    if(!x.lang) return false;
-    return x.lang.toLowerCase().replace('_','-').startsWith(prefix + '-');
-  });
+  v = voices.find(x => x.lang && x.lang.toLowerCase().replace('_','-').startsWith(prefix + '-'));
   if(v) return v;
-  // 4. 分割匹配
   v = voices.find(x => {
     if(!x.lang) return false;
     const parts = x.lang.toLowerCase().replace('_','-').split('-');
@@ -590,10 +589,9 @@ function findVoiceForLang(speechCode, langCode){
   return v || null;
 }
 
-// 检测当前语言是否有可用语音
 function hasVoiceForLang(langCode){
   if(!('speechSynthesis' in window)) return false;
-  if(!voices.length) return true; // 尚未加载，先假设可用
+  if(!voices.length) return true;
   return !!findVoiceForLang(LANG_INFO[langCode].speech, langCode);
 }
 
@@ -605,15 +603,12 @@ function speak(text){
     const info = LANG_INFO[state.lang] || LANG_INFO.en;
     u.lang = info.speech;
     u.rate = 0.85; u.pitch = 1.1;
-    // 用改进的匹配逻辑
     const match = findVoiceForLang(info.speech, state.lang);
     if(match) u.voice = match;
-    // 若找不到匹配语音，仍设置 u.lang，让浏览器决定是否用默认语音
     speechSynthesis.speak(u);
   }catch(e){}
 }
 
-// ===== 音效 =====
 let actx = null;
 function ctx(){
   if(!actx){ const AC = window.AudioContext || window.webkitAudioContext; actx = new AC(); }
@@ -705,7 +700,6 @@ function renderRound(){
   optWrap.innerHTML='';
 
   if(state.mode==='see'){
-    // 看图选字：无语音
     renderStageVisual(round.cat, round.item, stage);
     optWrap.className = 'options ' + (round.options.length<=4?'cols-2':'cols-3');
     round.options.forEach(opt=>{
@@ -717,7 +711,6 @@ function renderRound(){
     });
     replayRow.style.display = 'none';
   } else {
-    // 听音选图：有语音
     stage.innerHTML = '<div class="speak-stage"><button class="big-speaker" id="bigSpeakerBtn">🔊</button><div class="speak-hint">'+t('speakHint')+'</div></div>';
     document.getElementById('bigSpeakerBtn').addEventListener('click', ()=>speak(nm(round.item)));
     optWrap.className = 'options ' + (round.options.length<=4?'cols-2':'cols-3');
@@ -815,7 +808,6 @@ function makeClouds(){
   });
 }
 
-// ===== 首页 =====
 function showWelcome(){
   document.getElementById('welcomeOverlay').classList.add('show');
 }
@@ -823,7 +815,7 @@ function hideWelcome(){
   document.getElementById('welcomeOverlay').classList.remove('show');
 }
 function updateWelcomeTexts(){
-  document.getElementById('welcomeTitle').textContent = state.lang ? t('welcomeTitle') : '宝宝认知乐园';
+  document.getElementById('welcomeTitle').textContent = t('welcomeTitle');
   document.getElementById('welcomeSub').textContent = 'Kids Cognition World';
   document.getElementById('startBtn').textContent = t('startBtn');
   document.getElementById('welcomeLangLabel').textContent = t('chooseLang');
@@ -836,7 +828,6 @@ function startGame(){
   renderRound();
 }
 
-// ===== 语言列表 =====
 function renderLangList(){
   const list = document.getElementById('langList');
   list.innerHTML='';
@@ -844,7 +835,6 @@ function renderLangList(){
     const info = LANG_INFO[code];
     const row = document.createElement('div');
     row.className = 'lang-row' + (state.lang===code ? ' selected':'');
-    // 检测语音可用性
     let warn = '';
     if(code === 'th' && voices.length > 0 && !hasVoiceForLang('th')){
       warn = ' <span class="lang-warn">('+UI.voiceMissingShort[0]+')</span>';
@@ -857,11 +847,9 @@ function renderLangList(){
       applyLanguageTexts();
       renderSettings();
       updateWelcomeTexts();
-      // 如果当前在游戏中，则刷新题目文字
       if(!document.getElementById('welcomeOverlay').classList.contains('show')){
         nextRound();
       }
-      // 泰国语音缺失提示
       if(code === 'th' && voices.length > 0 && !hasVoiceForLang('th')){
         setTimeout(()=>{
           const toast = document.getElementById('toast');
@@ -914,9 +902,8 @@ function renderSettings(){
 function bindEvents(){
   // 首页开始按钮
   document.getElementById('startBtn').addEventListener('click', ()=>{
-    ctx(); // 用户手势启用音频
+    ctx();
     if(!state.lang){
-      // 未选语言，先弹出语言选择
       renderLangList();
       document.getElementById('langOverlay').classList.add('show');
       return;
@@ -932,11 +919,10 @@ function bindEvents(){
 
   // 顶部主页按钮
   document.getElementById('homeBtn').addEventListener('click', ()=>{
-    showWelcome();
     updateWelcomeTexts();
+    showWelcome();
   });
 
-  // 模式切换
   document.getElementById('modeToggle').addEventListener('click', (e)=>{
     const btn = e.target.closest('button[data-mode]');
     if(!btn) return;
@@ -947,13 +933,11 @@ function bindEvents(){
     nextRound();
   });
 
-  // 再听一次
   document.getElementById('replayBtn').addEventListener('click', ()=>{
     ctx();
     if(round.item) speak(nm(round.item));
   });
 
-  // 设置
   document.getElementById('settingsBtn').addEventListener('click', ()=>{
     renderSettings();
     document.getElementById('settingsOverlay').classList.add('show');
@@ -979,13 +963,11 @@ function bindEvents(){
     }
   });
 
-  // 语言
   document.getElementById('langBtn').addEventListener('click', ()=>{
     renderLangList();
     document.getElementById('langOverlay').classList.add('show');
   });
 
-  // 用户首次点击，启用音频
   document.body.addEventListener('click', ()=>{ try{ ctx(); }catch(e){} }, { once:true });
 }
 
@@ -995,21 +977,19 @@ function bindEvents(){
   bindEvents();
   updateHeader();
 
-  // 恢复上次的模式
   document.querySelectorAll('#modeToggle button').forEach(b=>{
     b.classList.toggle('active', b.dataset.mode===state.mode);
   });
 
-  // 应用文字（如果已选语言）
   if(state.lang){
     applyLanguageTexts();
   }
   updateWelcomeTexts();
 
-  // 总是先显示首页
+  // 总是显示首页
   showWelcome();
 
-  // 预加载题目（不影响首页显示）
+  // 预加载一轮，方便点击开始立即玩
   pickRound();
 })();
 
