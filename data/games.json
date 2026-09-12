@@ -116,6 +116,19 @@
       "sortOrder": 9,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789209425/rwhhtsngapdnl0dqgdfe.jpg"
+    },
+    {
+      "id": "10",
+      "icon": "",
+      "titleZh": "打字特训营",
+      "titleEn": "Typing Trainer",
+      "descriptionZh": "提升打字速度，掌握盲打技巧",
+      "descriptionEn": "Boost your typing speed and master touch typing",
+      "type": "js",
+      "entry": "games/typingtrainer.js",
+      "sortOrder": 10,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789241619/zcsqq9xqezbpeoq7n9ev.jpg"
     }
   ]
 }
