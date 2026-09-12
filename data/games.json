@@ -103,6 +103,19 @@
       "sortOrder": 8,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789202390/wdwm1srp0jkojy8gllyq.png"
+    },
+    {
+      "id": "9",
+      "icon": "",
+      "titleZh": "五线谱",
+      "titleEn": "NoteVerse",
+      "descriptionZh": "看懂五线谱，玩转音符，开启你的音乐之旅",
+      "descriptionEn": "Master the staff, play with notes, and begin your musical journey",
+      "type": "js",
+      "entry": "games/noteverse.js",
+      "sortOrder": 9,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789209425/rwhhtsngapdnl0dqgdfe.jpg"
     }
   ]
 }
