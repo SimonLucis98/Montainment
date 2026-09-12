@@ -1,871 +1,1665 @@
-/* Music Staff Master — NoteVerse (JS Wrapper) */
+/* NoteVerse · Music Staff Master v2 — JS Wrapper */
 (function () {
   'use strict';
 
   const gameHTML = `<!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Music Staff Master</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoteVerse · Music Staff Master</title>
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#10131a; --panel:#181d27; --panel2:#202634;
-  --text:#f4f6fa; --muted:#9ba5b5;
-  --accent:#7c5cff; --accent2:#00d4ff;
-  --green:#35d07f; --red:#ff5573; --gold:#ffc857;
-  --border:#303747;
+  --bg:#0d1117; --panel:#161b24; --panel2:#1c2230; --line:#2a3242;
+  --text:#f0f3f9; --muted:#8894a8; --accent:#7c5cff; --accent2:#00d4ff;
+  --green:#35d07f; --red:#ff5573; --gold:#ffc857; --blue:#4aa3ff; --purple:#b46cff;
 }
 body{
-  margin:0;
   background:
-    radial-gradient(circle at 20% 10%,rgba(124,92,255,.15),transparent 30%),
-    radial-gradient(circle at 80% 20%,rgba(0,212,255,.08),transparent 30%),
+    radial-gradient(circle at 15% 10%,rgba(124,92,255,.12),transparent 32%),
+    radial-gradient(circle at 85% 15%,rgba(0,212,255,.08),transparent 32%),
     var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  min-height:100vh;
+  color:var(--text); font-family:'Segoe UI',Arial,sans-serif;
+  min-height:100vh; overflow-x:hidden;
 }
-button{border:0;cursor:pointer;color:white;font-weight:bold;}
-.app{display:flex;min-height:100vh;}
+button{border:0;cursor:pointer;color:white;font-weight:600;font-family:inherit}
+button:disabled{opacity:.4;cursor:not-allowed}
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
 .sidebar{
-  width:260px;background:rgba(20,24,33,.96);
-  border-right:1px solid var(--border);
-  padding:22px 16px;position:fixed;left:0;top:0;bottom:0;overflow-y:auto;
+  width:250px; background:rgba(18,22,30,.97);
+  border-right:1px solid var(--line);
+  padding:20px 14px; position:fixed; left:0; top:0; bottom:0; overflow-y:auto;
 }
-.logo{font-size:24px;font-weight:900;margin-bottom:4px;}
-.logo span{color:var(--accent);}
-.subtitle{font-size:12px;color:var(--muted);margin-bottom:24px;}
+.logo{font-size:22px;font-weight:900;margin-bottom:2px;letter-spacing:.5px}
+.logo span{color:var(--accent)}
+.subtitle{font-size:11px;color:var(--muted);margin-bottom:20px;letter-spacing:.5px}
 .player-card{
-  background:linear-gradient(135deg,#252b3a,#181d27);
-  padding:15px;border-radius:14px;margin-bottom:20px;
+  background:linear-gradient(135deg,#232c3d,#161b24);
+  padding:14px;border-radius:12px;margin-bottom:18px;
+  border:1px solid rgba(124,92,255,.15);
 }
-.player-row{display:flex;justify-content:space-between;align-items:center;}
-.rank{color:var(--gold);font-size:13px;font-weight:bold;}
-.xpbar{height:7px;background:#343b4b;border-radius:10px;margin-top:10px;overflow:hidden;}
-.xpfill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));}
-.nav-title{font-size:11px;color:#687386;text-transform:uppercase;letter-spacing:1px;margin:18px 10px 8px;}
-.nav button{width:100%;text-align:left;background:transparent;padding:12px 12px;border-radius:10px;margin-bottom:3px;color:#c5ccda;}
-.nav button:hover,.nav button.active{background:#272d3b;color:white;}
-.nav button.active{box-shadow:inset 3px 0 var(--accent);}
-.main{margin-left:260px;width:calc(100% - 260px);padding:28px;}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;}
-.page-title{font-size:30px;font-weight:900;}
-.page-description{color:var(--muted);margin-top:5px;}
-.lang{display:flex;gap:5px;background:#191e28;padding:4px;border-radius:10px;}
-.lang button{padding:7px 11px;border-radius:7px;background:transparent;color:#aeb6c5;}
-.lang button.active{background:var(--accent);color:white;}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.card{background:rgba(25,30,41,.94);border:1px solid var(--border);border-radius:16px;padding:20px;}
-.stat{font-size:30px;font-weight:900;margin-top:5px;}
-.stat-label{color:var(--muted);font-size:13px;}
-.section{margin-top:25px;}
-.section-title{font-size:20px;font-weight:800;margin-bottom:14px;}
-.lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+.player-row{display:flex;justify-content:space-between;align-items:center}
+.player-row strong{font-size:14px}
+.rank{color:var(--gold);font-size:12px;font-weight:700}
+.level-line{font-size:11px;color:var(--muted);margin-top:6px}
+.xpbar{height:6px;background:#2a3242;border-radius:10px;margin-top:9px;overflow:hidden}
+.xpfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
+.nav-title{font-size:10px;color:#566073;text-transform:uppercase;letter-spacing:1.2px;margin:16px 8px 6px;font-weight:700}
+.nav button{
+  width:100%;text-align:left;background:transparent;
+  padding:10px 12px;border-radius:9px;margin-bottom:2px;
+  color:#b8c2d1;font-size:13px;font-weight:500;transition:.15s;
+}
+.nav button:hover{background:#1e2431;color:white}
+.nav button.active{background:#232b3d;color:white;box-shadow:inset 3px 0 var(--accent)}
+
+/* MAIN */
+.main{margin-left:250px;width:calc(100% - 250px);padding:26px 32px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;flex-wrap:wrap;gap:14px}
+.page-title{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.page-desc{color:var(--muted);margin-top:4px;font-size:14px}
+.lang-switch{display:flex;gap:4px;background:#181d27;padding:3px;border-radius:10px;border:1px solid var(--line)}
+.lang-switch button{padding:6px 12px;border-radius:7px;background:transparent;color:#aeb6c5;font-size:12px}
+.lang-switch button.active{background:var(--accent);color:white}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.card{
+  background:rgba(22,27,36,.92);border:1px solid var(--line);
+  border-radius:14px;padding:18px;
+}
+.stat-num{font-size:28px;font-weight:900;margin-top:4px;letter-spacing:-1px}
+.stat-label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.section{margin-top:26px}
+.section-title{font-size:17px;font-weight:800;margin-bottom:12px;letter-spacing:-.3px}
+
+/* LESSON CARDS */
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
 .lesson{
-  background:linear-gradient(145deg,#202634,#171c25);
-  border:1px solid var(--border);padding:18px;border-radius:15px;transition:.2s;
+  background:linear-gradient(145deg,#1c2230,#141a23);
+  border:1px solid var(--line);padding:16px;border-radius:14px;
+  transition:.2s;position:relative;
 }
-.lesson:hover{transform:translateY(-3px);border-color:#59647a;}
-.lesson.locked{opacity:.45;}
-.lesson-icon{font-size:35px;margin-bottom:12px;}
-.lesson h3{margin:0 0 7px;}
-.lesson p{color:var(--muted);font-size:13px;min-height:36px;}
-.lesson button{background:var(--accent);padding:9px 13px;border-radius:8px;}
-.lesson button.secondary{background:#303746;}
-.progress{height:9px;background:#303747;border-radius:20px;overflow:hidden;}
-.progress div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));}
-.game-container{max-width:1000px;margin:auto;}
-.game-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
-.game-score{color:var(--gold);font-weight:bold;}
-.staff-card{
-  background:#f7f4eb;color:#111;border-radius:18px;padding:40px 30px;
-  min-height:330px;display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
+.lesson:hover{transform:translateY(-2px);border-color:#3d4a60}
+.lesson.locked{opacity:.45}
+.lesson-icon{font-size:30px;margin-bottom:8px}
+.lesson h3{font-size:15px;margin-bottom:5px;font-weight:700}
+.lesson p{color:var(--muted);font-size:12px;line-height:1.5;min-height:34px;margin-bottom:10px}
+.lesson-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);margin-bottom:9px}
+.lesson button.primary{
+  background:linear-gradient(135deg,var(--accent),#6242dd);
+  padding:8px 14px;border-radius:8px;font-size:12px;
+  width:100%;transition:.15s;
 }
-.staff{width:80%;position:relative;height:150px;}
-.staff-lines{position:absolute;left:0;right:0;top:40px;}
-.staff-line{height:2px;background:#222;margin:20px 0;}
-.clef{position:absolute;left:20px;top:20px;font-family:"Times New Roman",serif;font-size:110px;line-height:1;}
-.note{position:absolute;width:25px;height:18px;background:#111;border-radius:50%;transform:rotate(-15deg);}
-.note-stem{position:absolute;width:3px;height:70px;background:#111;top:-57px;left:21px;}
-.note.flag{display:none;}
-.question{text-align:center;margin:25px 0;font-size:23px;font-weight:bold;}
-.answers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-.answer{background:#242b38;border:1px solid #394153;padding:15px;border-radius:10px;font-size:17px;}
-.answer:hover{border-color:var(--accent);background:#2b3242;}
-.answer.correct{background:#174c36;border-color:var(--green);}
-.answer.wrong{background:#541f2b;border-color:var(--red);}
-.piano{display:flex;justify-content:center;height:180px;margin-top:30px;}
+.lesson button.primary:hover{filter:brightness(1.15)}
+
+/* 五线谱 CANVAS */
+.staff-wrap{
+  background:#fbf8f0;
+  border-radius:14px;
+  padding:16px;
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+canvas.staff-canvas{
+  display:block;
+  max-width:100%;
+  height:auto;
+  background:transparent;
+}
+
+/* PRACTICE/GAME */
+.game-wrap{max-width:820px;margin:0 auto}
+.game-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:18px;flex-wrap:wrap;gap:12px;
+}
+.timer-box{
+  background:#1c2230;border:1px solid var(--line);border-radius:10px;
+  padding:8px 16px;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;
+}
+.timer-box.warn{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.6}}
+.score-box{
+  background:#1c2230;border:1px solid var(--line);border-radius:10px;
+  padding:8px 16px;font-weight:700;color:var(--gold);font-size:16px;
+}
+.question{
+  text-align:center;font-size:19px;font-weight:600;
+  margin:20px 0;color:#e2e8f2;
+}
+.answers{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.answer{
+  background:#242b3a;border:2px solid #394153;
+  padding:14px 10px;border-radius:11px;font-size:16px;font-weight:700;
+  transition:.15s;position:relative;
+}
+.answer:hover:not(:disabled){border-color:var(--accent);background:#2b3242}
+.answer.correct{background:#16442f;border-color:var(--green);color:#a8ffd0}
+.answer.wrong{background:#4a1c28;border-color:var(--red);color:#ffc4d0}
+
+/* RANGE BADGE */
+.range-badge{
+  display:inline-block;padding:5px 14px;border-radius:20px;
+  font-size:13px;font-weight:700;margin:4px;
+}
+.range-low{background:#2a4a6a;color:#a8d4ff}
+.range-mid{background:#3a2a6a;color:#d4b8ff}
+.range-high{background:#6a2a4a;color:#ffb8d4}
+
+/* RANGE VISUALIZER */
+.range-viz{
+  background:#141a23;border:1px solid var(--line);
+  border-radius:14px;padding:20px;margin-bottom:16px;
+}
+.range-bar{
+  height:38px;background:#1c2230;border-radius:19px;
+  position:relative;overflow:hidden;margin:10px 0;
+}
+.range-seg{
+  position:absolute;top:0;bottom:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:rgba(255,255,255,.85);
+}
+.range-marker{
+  position:absolute;top:-4px;bottom:-4px;
+  width:4px;background:var(--gold);border-radius:2px;
+  box-shadow:0 0 12px var(--gold);
+  transition:left .4s cubic-bezier(.34,1.4,.64,1);
+}
+
+/* PIANO KEYBOARD */
+.piano{
+  display:flex;justify-content:center;
+  margin:20px 0;position:relative;height:140px;
+}
 .white-key{
-  width:70px;height:180px;background:#f4f4f4;border:1px solid #999;color:#111;
-  display:flex;align-items:flex-end;justify-content:center;padding-bottom:15px;
-  border-radius:0 0 7px 7px;position:relative;
+  width:44px;height:140px;background:#f8f6f0;
+  border:1px solid #999;color:#333;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:10px;font-size:11px;font-weight:600;
+  border-radius:0 0 6px 6px;position:relative;
+  transition:.1s;
 }
-.black-key{position:absolute;top:0;right:-17px;width:34px;height:110px;background:#111;z-index:2;color:white;border-radius:0 0 5px 5px;}
-.rhythm-box{display:flex;justify-content:center;gap:25px;font-size:50px;margin:50px 0;}
-table{width:100%;border-collapse:collapse;}
-th,td{text-align:left;padding:13px;border-bottom:1px solid var(--border);}
-th{color:var(--muted);font-size:12px;}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:100;}
-.modal.open{display:flex;}
-.modal-content{width:min(850px,92%);max-height:90vh;overflow:auto;background:#191e28;border:1px solid var(--border);border-radius:18px;padding:25px;}
-.close{float:right;background:#303746;width:35px;height:35px;border-radius:50%;}
-@media(max-width:900px){
-  .sidebar{width:210px;}
-  .main{margin-left:210px;width:calc(100% - 210px);}
-  .grid{grid-template-columns:repeat(2,1fr);}
-  .lesson-grid{grid-template-columns:repeat(2,1fr);}
+.white-key:hover{background:#efece2}
+.white-key.hit{background:var(--gold)}
+.white-key:active{transform:translateY(2px)}
+.black-key{
+  position:absolute;top:0;right:-14px;
+  width:28px;height:88px;background:#1a1a1a;
+  border-radius:0 0 5px 5px;z-index:2;
+  color:white;font-size:9px;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:6px;
 }
-@media(max-width:650px){
-  .sidebar{position:relative;width:100%;min-height:auto;}
-  .app{display:block;}
-  .main{margin-left:0;width:100%;padding:18px;}
-  .grid,.lesson-grid{grid-template-columns:1fr;}
-  .answers{grid-template-columns:repeat(2,1fr);}
+.black-key:hover{background:#2a2a2a}
+.black-key.hit{background:var(--accent)}
+
+/* MODAL */
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.78);
+  display:none;align-items:center;justify-content:center;z-index:100;
+  padding:20px;
+}
+.modal.open{display:flex}
+.modal-content{
+  width:min(760px,100%);max-height:88vh;overflow-y:auto;
+  background:#161b24;border:1px solid var(--line);
+  border-radius:18px;padding:26px;position:relative;
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:#2a3242;width:32px;height:32px;border-radius:50%;
+  font-size:18px;line-height:1;
+}
+.modal h2{font-size:22px;margin-bottom:16px}
+.modal h3{font-size:16px;margin:16px 0 8px;color:var(--accent2)}
+.modal p{line-height:1.7;color:#c8d2e0;margin-bottom:10px;font-size:14px}
+.modal ul{margin:8px 0 16px 20px;color:#c8d2e0;line-height:1.8;font-size:14px}
+.modal .note-example{
+  background:#1c2230;padding:10px 14px;border-radius:8px;
+  font-family:monospace;font-size:14px;color:var(--gold);
+  margin:8px 0;
+}
+
+/* TEST RESULT */
+.result-screen{text-align:center;padding:40px 20px}
+.result-icon{font-size:80px;margin-bottom:16px}
+.result-title{font-size:32px;font-weight:900;margin-bottom:10px}
+.result-score{font-size:60px;font-weight:900;margin:20px 0;letter-spacing:-2px}
+.result-score.pass{color:var(--green)}
+.result-score.fail{color:var(--red)}
+.result-meta{color:var(--muted);margin:12px 0 26px;font-size:15px}
+.result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.result-actions button{padding:12px 26px;border-radius:10px;font-size:14px}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#6242dd)}
+.btn-secondary{background:#2a3242}
+
+/* PROGRESS BAR */
+.progress{height:8px;background:#2a3242;border-radius:20px;overflow:hidden}
+.progress div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
+
+/* NOTIFY */
+.notify{
+  position:fixed;top:20px;right:20px;z-index:200;
+  background:#232b3d;color:white;padding:12px 20px;
+  border-radius:12px;font-weight:600;font-size:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  animation:slideIn .3s ease;border-left:3px solid var(--accent);
+}
+@keyframes slideIn{from{transform:translateX(120%)}to{transform:translateX(0)}}
+
+/* MODE PICKER */
+.mode-picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.mode-card{
+  background:linear-gradient(145deg,#1c2230,#141a23);
+  border:1px solid var(--line);padding:22px 18px;border-radius:14px;
+  cursor:pointer;transition:.2s;text-align:center;
+}
+.mode-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.mode-card .icon{font-size:42px;margin-bottom:10px}
+.mode-card .title{font-size:15px;font-weight:700;margin-bottom:6px}
+.mode-card .desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* MOBILE */
+@media(max-width:820px){
+  .sidebar{position:relative;width:100%;height:auto;padding:14px}
+  .app{display:block}
+  .main{margin-left:0;width:100%;padding:18px}
+  .player-card{display:none}
 }
 </style>
 </head>
 <body>
+
 <div class="app">
 <aside class="sidebar">
   <div class="logo">Note<span>Verse</span></div>
-  <div class="subtitle">Music Staff Master</div>
+  <div class="subtitle">Music Staff Master v2</div>
+
   <div class="player-card">
     <div class="player-row">
       <strong id="playerName">Music Student</strong>
       <span class="rank" id="playerRank">Beginner</span>
     </div>
-    <div style="font-size:12px;color:#8e98a8;margin-top:7px">
-      Level <span id="level">1</span> · <span id="xp">0</span> XP
+    <div class="level-line">
+      Lv <span id="level">1</span> · <span id="xp">0</span> XP
     </div>
     <div class="xpbar"><div class="xpfill" id="xpFill"></div></div>
   </div>
+
   <div class="nav">
     <div class="nav-title">Main</div>
-    <button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
-    <button onclick="showPage('academy',this)">📚 Academy</button>
-    <button onclick="showPage('practice',this)">🎯 Practice</button>
-    <button onclick="showPage('homework',this)">📝 Homework</button>
-    <button onclick="showPage('exam',this)">🎓 Exams</button>
-    <div class="nav-title">Practical</div>
-    <button onclick="showPage('piano',this)">🎹 Piano</button>
-    <button onclick="showPage('guitar',this)">🎸 Guitar</button>
-    <button onclick="showPage('drums',this)">🥁 Drums</button>
-    <button onclick="showPage('ear',this)">👂 Ear Training</button>
-    <div class="nav-title">Master</div>
-    <button onclick="showPage('dictionary',this)">📖 Music Dictionary</button>
-    <button onclick="showPage('stats',this)">📊 My Progress</button>
+    <button class="active" data-page="dashboard">🏠 Dashboard</button>
+    <button data-page="academy">📚 Academy</button>
+    <button data-page="practice">✏️ Practice</button>
+    <button data-page="test">🎯 Test</button>
+    <div class="nav-title">Tools</div>
+    <button data-page="piano">🎹 Piano</button>
+    <button data-page="progress">📊 Progress</button>
   </div>
 </aside>
-<main class="main"><div id="appContent"></div></main>
+
+<main class="main">
+  <div id="appContent"></div>
+</main>
 </div>
+
 <div class="modal" id="modal">
   <div class="modal-content">
-    <button class="close" onclick="closeModal()">×</button>
+    <button class="modal-close" onclick="closeModal()">×</button>
     <div id="modalContent"></div>
   </div>
 </div>
+
 <script>
-let language = localStorage.getItem("nv_language") || "en";
-const TEXT = {
-  en:{dashboard:"Dashboard",academy:"Academy",practice:"Practice",homework:"Homework",exams:"Exams",piano:"Piano",guitar:"Guitar",drums:"Drums",ear:"Ear Training",dictionary:"Music Dictionary",progress:"My Progress"},
-  zh:{dashboard:"控制台",academy:"音乐学院",practice:"练习",homework:"作业",exams:"考试",piano:"钢琴",guitar:"吉他",drums:"鼓",ear:"听力训练",dictionary:"音乐词典",progress:"学习进度"}
+/* ============================================================
+   NoteVerse · Music Staff Master v2
+   Complete rewrite with accurate staff rendering and range system
+============================================================ */
+
+/* ---------- I18N ---------- */
+let language = localStorage.getItem('nv_language') || 'zh';
+
+const I18N = {
+  zh: {
+    dashTitle: '音乐大师学院',
+    dashDesc: '学习、练习、测试五线谱与音域，成为真正的音乐大师',
+    xp: '经验',
+    level: '等级',
+    accuracy: '正确率',
+    streak: '连胜',
+    academy: '音乐学院',
+    academyDesc: '从零开始，逐步掌握五线谱和音域知识',
+    practice: '练习中心',
+    practiceDesc: '自由练习，不计时，不计分',
+    test: '测试中心',
+    testDesc: '限时测试，检验你的真实掌握程度',
+    piano: '钢琴工具',
+    pianoDesc: '点击琴键听音，学习音高',
+    progress: '学习进度',
+    progressDesc: '查看你的掌握情况',
+    startLearn: '学习',
+    startPractice: '开始练习',
+    startTest: '开始测试',
+    locked: '🔒 未解锁',
+    lessons: '课程',
+    practiceModes: '练习模式',
+    testModes: '测试模式',
+    staffPractice: '五线谱练习',
+    rangePractice: '音域练习',
+    earPractice: '听音练习',
+    staffTest: '五线谱测试',
+    rangeTest: '音域测试',
+    comprehensiveTest: '综合测试',
+    readStaff: '看谱选音名',
+    identifyRange: '判断音域',
+    listenNote: '听音辨位',
+    timeLimit: '限时',
+    questions: '题',
+    passScore: '通过分',
+    startNow: '开始',
+    score: '得分',
+    time: '时间',
+    question: '第',
+    whatNote: '这是什么音？',
+    whatRange: '这个音属于哪个音域？',
+    low: '低音域',
+    mid: '中音域',
+    high: '高音域',
+    correct: '答对了！',
+    wrong: '答错了，正确答案是',
+    testComplete: '测试完成',
+    passed: '通过！',
+    failed: '未通过',
+    tryAgain: '再试一次',
+    backToTests: '返回测试中心',
+    totalQuestions: '总题数',
+    correctCount: '答对',
+    wrongCount: '答错',
+    finalScore: '最终得分',
+    playNote: '▶ 播放音符',
+    playAgain: '🔁 再听一次',
+    yourAnswer: '你的答案',
+    correctAnswer: '正确答案',
+    replay: '再听一遍',
+    dashboard: '控制台',
+    reset: '重置进度',
+    confirmReset: '确定要重置所有进度吗？',
+    noteReading: '五线谱阅读',
+    rangeRecognition: '音域识别',
+    earTraining: '听音能力',
+    mastery: '掌握度',
+    beginner: '初学者',
+    novice: '新手',
+    apprentice: '学徒',
+    student: '学员',
+    performer: '演奏者',
+    composer: '作曲家',
+    expert: '专家',
+    master: '大师',
+    grandmaster: '宗师',
+    treble: '高音谱号',
+    bass: '低音谱号',
+    selectClef: '选择谱号',
+    practiceInProgress: '练习中',
+    exit: '退出'
+  },
+  en: {
+    dashTitle: 'Music Master Academy',
+    dashDesc: 'Learn, practice and test music staff & range. Become a true master.',
+    xp: 'XP',
+    level: 'Level',
+    accuracy: 'Accuracy',
+    streak: 'Streak',
+    academy: 'Academy',
+    academyDesc: 'From zero to music notation mastery.',
+    practice: 'Practice',
+    practiceDesc: 'Free practice. No timer. No pressure.',
+    test: 'Test Center',
+    testDesc: 'Timed exams. Test your true mastery.',
+    piano: 'Piano Tool',
+    pianoDesc: 'Click keys to hear pitches.',
+    progress: 'Progress',
+    progressDesc: 'Track your mastery.',
+    startLearn: 'Learn',
+    startPractice: 'Start Practice',
+    startTest: 'Start Test',
+    locked: '🔒 Locked',
+    lessons: 'Lessons',
+    practiceModes: 'Practice Modes',
+    testModes: 'Test Modes',
+    staffPractice: 'Staff Practice',
+    rangePractice: 'Range Practice',
+    earPractice: 'Ear Training',
+    staffTest: 'Staff Test',
+    rangeTest: 'Range Test',
+    comprehensiveTest: 'Comprehensive Test',
+    readStaff: 'Read the note',
+    identifyRange: 'Identify the range',
+    listenNote: 'Listen and identify',
+    timeLimit: 'Time',
+    questions: 'questions',
+    passScore: 'Pass',
+    startNow: 'Start',
+    score: 'Score',
+    time: 'Time',
+    question: 'Q',
+    whatNote: 'What note is this?',
+    whatRange: 'Which range does this note belong to?',
+    low: 'Low',
+    mid: 'Middle',
+    high: 'High',
+    correct: 'Correct!',
+    wrong: 'Wrong. Answer: ',
+    testComplete: 'Test Complete',
+    passed: 'Passed!',
+    failed: 'Not Passed',
+    tryAgain: 'Try Again',
+    backToTests: 'Back to Tests',
+    totalQuestions: 'Total',
+    correctCount: 'Correct',
+    wrongCount: 'Wrong',
+    finalScore: 'Final Score',
+    playNote: '▶ Play Note',
+    playAgain: '🔁 Play Again',
+    yourAnswer: 'Your answer',
+    correctAnswer: 'Correct answer',
+    replay: 'Replay',
+    dashboard: 'Dashboard',
+    reset: 'Reset Progress',
+    confirmReset: 'Reset all progress?',
+    noteReading: 'Note Reading',
+    rangeRecognition: 'Range Recognition',
+    earTraining: 'Ear Training',
+    mastery: 'Mastery',
+    beginner: 'Beginner',
+    novice: 'Novice',
+    apprentice: 'Apprentice',
+    student: 'Student',
+    performer: 'Performer',
+    composer: 'Composer',
+    expert: 'Expert',
+    master: 'Master',
+    grandmaster: 'Grandmaster',
+    treble: 'Treble Clef',
+    bass: 'Bass Clef',
+    selectClef: 'Select Clef',
+    practiceInProgress: 'Practice',
+    exit: 'Exit'
+  }
 };
-const defaultPlayer = {name:"Music Student",xp:0,level:1,streak:0,correct:0,wrong:0,totalQuestions:0,lessonsCompleted:[],skills:{},mistakes:{},homework:{},achievements:[]};
-let player = JSON.parse(localStorage.getItem("nv_player")) || defaultPlayer;
+
+function t(key){ return I18N[language][key] || key; }
+
+/* ---------- STAFF NOTE DATA ---------- */
+/*
+   Position system: position 0 = bottom line of the staff.
+   Each +1 position = one step up (line→space→line...)
+   Treble: pos 0 = E4, pos 8 = F5 (top line)
+   Bass:   pos 0 = G2, pos 8 = A3 (top line)
+*/
+const TREBLE_NOTES = [
+  { midi:60, name:'C4', pos:-2, hz:261.63, range:'mid' },   // ledger below
+  { midi:62, name:'D4', pos:-1, hz:293.66, range:'mid' },
+  { midi:64, name:'E4', pos: 0, hz:329.63, range:'mid' },   // line 1
+  { midi:65, name:'F4', pos: 1, hz:349.23, range:'mid' },
+  { midi:67, name:'G4', pos: 2, hz:392.00, range:'mid' },   // line 2
+  { midi:69, name:'A4', pos: 3, hz:440.00, range:'mid' },
+  { midi:71, name:'B4', pos: 4, hz:493.88, range:'mid' },   // line 3
+  { midi:72, name:'C5', pos: 5, hz:523.25, range:'high' },
+  { midi:74, name:'D5', pos: 6, hz:587.33, range:'high' },  // line 4
+  { midi:76, name:'E5', pos: 7, hz:659.25, range:'high' },
+  { midi:77, name:'F5', pos: 8, hz:698.46, range:'high' },  // line 5
+  { midi:79, name:'G5', pos: 9, hz:783.99, range:'high' },  // ledger above
+  { midi:81, name:'A5', pos:10, hz:880.00, range:'high' }
+];
+
+const BASS_NOTES = [
+  { midi:36, name:'C2', pos:-4, hz:65.41,  range:'low' },   // ledger below
+  { midi:38, name:'D2', pos:-3, hz:73.42,  range:'low' },
+  { midi:40, name:'E2', pos:-2, hz:82.41,  range:'low' },
+  { midi:41, name:'F2', pos:-1, hz:87.31,  range:'low' },
+  { midi:43, name:'G2', pos: 0, hz:98.00,  range:'low' },   // line 1
+  { midi:45, name:'A2', pos: 1, hz:110.00, range:'low' },
+  { midi:47, name:'B2', pos: 2, hz:123.47, range:'low' },   // line 2
+  { midi:48, name:'C3', pos: 3, hz:130.81, range:'low' },
+  { midi:50, name:'D3', pos: 4, hz:146.83, range:'low' },   // line 3
+  { midi:52, name:'E3', pos: 5, hz:164.81, range:'low' },
+  { midi:53, name:'F3', pos: 6, hz:174.61, range:'low' },   // line 4
+  { midi:55, name:'G3', pos: 7, hz:196.00, range:'low' },
+  { midi:57, name:'A3', pos: 8, hz:220.00, range:'low' },   // line 5
+  { midi:59, name:'B3', pos: 9, hz:246.94, range:'low' },   // ledger above
+  { midi:60, name:'C4', pos:10, hz:261.63, range:'mid' }
+];
+
+/* ---------- PLAYER ---------- */
+const DEFAULT_PLAYER = {
+  xp: 0, level: 1, streak: 0,
+  correct: 0, wrong: 0, totalQuestions: 0,
+  lessonsCompleted: [],
+  skills: { noteReading: {c:0,w:0}, rangeRecognition: {c:0,w:0}, earTraining: {c:0,w:0} },
+  testHistory: [],
+  bestScores: {}
+};
+
+let player = JSON.parse(localStorage.getItem('nv_player_v2') || 'null') || JSON.parse(JSON.stringify(DEFAULT_PLAYER));
+
 function save(){
-  localStorage.setItem("nv_player", JSON.stringify(player));
-  localStorage.setItem("nv_language", language);
+  localStorage.setItem('nv_player_v2', JSON.stringify(player));
+  localStorage.setItem('nv_language', language);
   updatePlayerUI();
 }
+
 function updatePlayerUI(){
-  document.getElementById("xp").textContent = player.xp;
-  document.getElementById("level").textContent = player.level;
-  document.getElementById("playerName").textContent = player.name;
-  const ranks = ["Beginner","Novice","Apprentice","Student","Performer","Composer","Expert","Master","Grandmaster"];
-  document.getElementById("playerRank").textContent = ranks[Math.min(player.level-1,ranks.length-1)];
-  const currentXP = player.xp % 100;
-  document.getElementById("xpFill").style.width = currentXP + "%";
+  document.getElementById('xp').textContent = player.xp;
+  document.getElementById('level').textContent = player.level;
+  const ranks = ['beginner','novice','apprentice','student','performer','composer','expert','master','grandmaster'];
+  document.getElementById('playerRank').textContent = t(ranks[Math.min(player.level-1, ranks.length-1)]);
+  document.getElementById('xpFill').style.width = (player.xp % 100) + '%';
 }
+
 function addXP(amount){
   player.xp += amount;
-  const newLevel = Math.floor(player.xp / 100) + 1;
-  if(newLevel > player.level){
-    player.level = newLevel;
-    notify(language==="zh" ? "🎉 升级了！" : "🎉 LEVEL UP!");
-  }
+  const nl = Math.floor(player.xp / 100) + 1;
+  if(nl > player.level){ player.level = nl; notify('🎉 Level Up! ' + t('level') + ' ' + nl); }
   save();
 }
-function notify(message){
-  const div = document.createElement("div");
-  div.textContent = message;
-  div.style.position="fixed";
-  div.style.top="25px";
-  div.style.right="25px";
-  div.style.background="#272d3b";
-  div.style.padding="15px 20px";
-  div.style.borderRadius="12px";
-  div.style.zIndex="999";
-  div.style.boxShadow="0 10px 30px rgba(0,0,0,.4)";
-  document.body.appendChild(div);
-  setTimeout(()=>{div.remove();},2200);
+
+function recordSkill(skill, correct){
+  if(!player.skills[skill]) player.skills[skill] = {c:0, w:0};
+  if(correct) player.skills[skill].c++; else player.skills[skill].w++;
+  player.totalQuestions++;
+  if(correct){ player.correct++; player.streak++; }
+  else { player.wrong++; player.streak = 0; }
+  save();
 }
-function showPage(page,button){
-  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
-  if(button) button.classList.add("active");
-  switch(page){
-    case "dashboard": renderDashboard(); break;
-    case "academy": renderAcademy(); break;
-    case "practice": startPractice(); break;
-    case "homework": renderHomework(); break;
-    case "exam": renderExam(); break;
-    case "piano": renderPiano(); break;
-    case "guitar": renderGuitar(); break;
-    case "drums": renderDrums(); break;
-    case "ear": renderEarTraining(); break;
-    case "dictionary": renderDictionary(); break;
-    case "stats": renderStats(); break;
+
+function skillPct(skill){
+  const s = player.skills[skill];
+  if(!s) return 0;
+  const tot = s.c + s.w;
+  return tot ? Math.round(s.c / tot * 100) : 0;
+}
+
+/* ---------- NOTIFY ---------- */
+function notify(msg){
+  const d = document.createElement('div');
+  d.className = 'notify';
+  d.textContent = msg;
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 2400);
+}
+
+/* ---------- AUDIO ---------- */
+let actx = null;
+function getAudio(){
+  if(!actx){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    actx = new AC();
+  }
+  if(actx.state === 'suspended') actx.resume();
+  return actx;
+}
+
+function playNote(hz, dur){
+  try{
+    const c = getAudio();
+    const osc = c.createOscillator();
+    const g = c.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = hz;
+    osc.connect(g); g.connect(c.destination);
+    const t0 = c.currentTime;
+    const d = dur || 0.9;
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(0.25, t0 + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, t0 + d);
+    osc.start(t0); osc.stop(t0 + d + 0.05);
+  }catch(e){}
+}
+
+function sfxCorrect(){
+  try{
+    const c = getAudio();
+    [523.25, 659.25, 783.99].forEach((f, i) => {
+      const o = c.createOscillator(), g = c.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      o.connect(g); g.connect(c.destination);
+      const t0 = c.currentTime + i * 0.08;
+      g.gain.setValueAtTime(0, t0);
+      g.gain.linearRampToValueAtTime(0.15, t0 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.2);
+      o.start(t0); o.stop(t0 + 0.25);
+    });
+  }catch(e){}
+}
+
+function sfxWrong(){
+  try{
+    const c = getAudio();
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = 'sawtooth'; o.frequency.value = 180;
+    o.connect(g); g.connect(c.destination);
+    const t0 = c.currentTime;
+    g.gain.setValueAtTime(0.15, t0);
+    g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.25);
+    o.start(t0); o.stop(t0 + 0.3);
+  }catch(e){}
+}
+
+/* ---------- STAFF RENDERING (Canvas) ---------- */
+function drawStaff(canvas, opts){
+  /*
+    opts = {
+      clef: 'treble' | 'bass',
+      notePos: number (position on staff, 0 = bottom line),
+      color: '#111' (note color),
+      showLabels: false,
+      highlight: false
+    }
+  */
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.clientWidth || 500;
+  const H = canvas.clientHeight || 220;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const lineGap = 18;                 // distance between staff lines
+  const step = lineGap / 2;           // half-step (one position)
+  const staffH = lineGap * 4;         // total height of 5 lines = 4 gaps
+  const staffTop = (H - staffH) / 2;
+  const staffBottom = staffTop + staffH;
+  const lineXStart = W * 0.16;
+  const lineXEnd = W * 0.92;
+
+  // --- 5 staff lines ---
+  ctx.strokeStyle = '#1a1a1a';
+  ctx.lineWidth = 1.2;
+  for(let i = 0; i < 5; i++){
+    const y = staffTop + i * lineGap;
+    ctx.beginPath();
+    ctx.moveTo(lineXStart, y);
+    ctx.lineTo(lineXEnd, y);
+    ctx.stroke();
+  }
+
+  // --- Draw clef ---
+  ctx.fillStyle = '#1a1a1a';
+  ctx.font = (lineGap * 4.6) + 'px "Times New Roman", serif';
+  ctx.textBaseline = 'middle';
+  if(opts.clef === 'treble'){
+    ctx.fillText('𝄞', lineXStart - lineGap * 2.4, staffTop + lineGap * 1.9);
+  } else {
+    ctx.font = (lineGap * 3.4) + 'px "Times New Roman", serif';
+    ctx.fillText('𝄢', lineXStart - lineGap * 2, staffTop + lineGap * 1);
+  }
+
+  // --- Ledger lines ---
+  if(typeof opts.notePos === 'number'){
+    const noteX = W * 0.62;
+    const noteY = staffBottom - opts.notePos * step;
+    // ledger lines below (pos <= -2 even)
+    if(opts.notePos <= -2){
+      for(let p = -2; p >= opts.notePos; p -= 2){
+        const ly = staffBottom - p * step;
+        ctx.beginPath();
+        ctx.moveTo(noteX - 18, ly);
+        ctx.lineTo(noteX + 18, ly);
+        ctx.stroke();
+      }
+    }
+    // ledger above (pos >= 10 even)
+    if(opts.notePos >= 10){
+      for(let p = 10; p <= opts.notePos; p += 2){
+        const ly = staffBottom - p * step;
+        ctx.beginPath();
+        ctx.moveTo(noteX - 18, ly);
+        ctx.lineTo(noteX + 18, ly);
+        ctx.stroke();
+      }
+    }
+
+    // --- Note head ---
+    ctx.save();
+    ctx.translate(noteX, noteY);
+    ctx.rotate(-0.35);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 9, 6.5, 0, 0, Math.PI * 2);
+    ctx.fillStyle = opts.color || '#1a1a1a';
+    ctx.fill();
+    ctx.restore();
+
+    // --- Stem ---
+    const stemUp = opts.notePos <= 4;
+    ctx.beginPath();
+    ctx.strokeStyle = opts.color || '#1a1a1a';
+    ctx.lineWidth = 1.8;
+    if(stemUp){
+      ctx.moveTo(noteX + 8, noteY);
+      ctx.lineTo(noteX + 8, noteY - lineGap * 3.2);
+    } else {
+      ctx.moveTo(noteX - 8, noteY);
+      ctx.lineTo(noteX - 8, noteY + lineGap * 3.2);
+    }
+    ctx.stroke();
   }
 }
+
+/* ---------- PAGE NAV ---------- */
+let currentPage = 'dashboard';
+
+document.querySelectorAll('.nav button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    navigateTo(btn.dataset.page);
+  });
+});
+
+function navigateTo(page){
+  currentPage = page;
+  stopAllTimers();
+  switch(page){
+    case 'dashboard': renderDashboard(); break;
+    case 'academy': renderAcademy(); break;
+    case 'practice': renderPracticePicker(); break;
+    case 'test': renderTestPicker(); break;
+    case 'piano': renderPiano(); break;
+    case 'progress': renderProgress(); break;
+  }
+}
+
+/* ---------- DASHBOARD ---------- */
 function renderDashboard(){
-  document.getElementById("appContent").innerHTML = \`
+  const acc = player.totalQuestions ? Math.round(player.correct / player.totalQuestions * 100) : 0;
+  const coursePct = Math.min(100, Math.round(player.lessonsCompleted.length / LESSONS.length * 100));
+
+  document.getElementById('appContent').innerHTML = \`
     <div class="topbar">
       <div>
-        <div class="page-title">\${language==="zh" ? "音乐大师学院" : "Music Master Academy"}</div>
-        <div class="page-description">\${language==="zh" ? "学习、阅读、演奏、写作，最终成为五线谱大师。" : "Learn. Read. Play. Write. Master music notation."}</div>
+        <div class="page-title">\${t('dashTitle')}</div>
+        <div class="page-desc">\${t('dashDesc')}</div>
       </div>
-      <div class="lang">
-        <button class="\${language==="en"?"active":""}" onclick="setLanguage('en')">EN</button>
-        <button class="\${language==="zh"?"active":""}" onclick="setLanguage('zh')">中文</button>
+      <div class="lang-switch">
+        <button class="\${language==='en'?'active':''}" onclick="setLanguage('en')">EN</button>
+        <button class="\${language==='zh'?'active':''}" onclick="setLanguage('zh')">中文</button>
       </div>
     </div>
+
     <div class="grid">
-      <div class="card"><div class="stat-label">XP</div><div class="stat">\${player.xp}</div></div>
-      <div class="card"><div class="stat-label">Level</div><div class="stat">\${player.level}</div></div>
-      <div class="card"><div class="stat-label">Accuracy</div><div class="stat">\${getAccuracy()}%</div></div>
-      <div class="card"><div class="stat-label">Streak</div><div class="stat">🔥 \${player.streak}</div></div>
-    </div>
-    <div class="section">
-      <div class="section-title">\${language==="zh" ? "今日训练" : "Today's Training"}</div>
-      <div class="lesson-grid">
-        \${dashboardCard("🎼","Note Reading","辨认五线谱上的音符","Train your note recognition.")}
-        \${dashboardCard("🥁","Rhythm","学习节奏与拍号","Master rhythm and time signatures.")}
-        \${dashboardCard("🎹","Piano Practical","把五线谱连接到钢琴","Connect notation to piano.")}
-      </div>
-    </div>
-    <div class="section">
-      <div class="section-title">\${language==="zh" ? "你的学习路线" : "Your Learning Path"}</div>
       <div class="card">
-        <div style="display:flex;justify-content:space-between"><span>Foundation</span><strong>\${getCourseProgress()}%</strong></div>
-        <div class="progress" style="margin-top:10px"><div style="width:\${getCourseProgress()}%"></div></div>
-        <div style="color:var(--muted);margin-top:10px">\${language==="zh" ? "继续完成课程以解锁更高等级。" : "Complete lessons to unlock advanced music skills."}</div>
+        <div class="stat-label">\${t('xp')}</div>
+        <div class="stat-num">\${player.xp}</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">\${t('level')}</div>
+        <div class="stat-num">\${player.level}</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">\${t('accuracy')}</div>
+        <div class="stat-num">\${acc}%</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">\${t('streak')}</div>
+        <div class="stat-num">🔥 \${player.streak}</div>
       </div>
     </div>
-  \`;
-}
-function dashboardCard(icon,title,zh,en){
-  return \`
-    <div class="lesson">
-      <div class="lesson-icon">\${icon}</div>
-      <h3>\${title}</h3>
-      <p>\${language==="zh" ? zh : en}</p>
-      <button onclick="showPage('practice')">\${language==="zh"?"开始":"Start"}</button>
-    </div>
-  \`;
-}
-const lessons = [
-  {id:"staff",icon:"🎼",title:"The Staff",zh:"认识五线谱、线与间",en:"Learn the five lines and four spaces.",level:1},
-  {id:"treble",icon:"𝄞",title:"Treble Clef",zh:"学习高音谱号",en:"Learn the Treble Clef.",level:1},
-  {id:"bass",icon:"𝄢",title:"Bass Clef",zh:"学习低音谱号",en:"Learn the Bass Clef.",level:1},
-  {id:"notes",icon:"♩",title:"Notes",zh:"认识不同音符",en:"Learn note values.",level:1},
-  {id:"rests",icon:"𝄽",title:"Rests",zh:"学习休止符",en:"Learn musical rests.",level:1},
-  {id:"rhythm",icon:"🥁",title:"Rhythm",zh:"节奏与拍号",en:"Rhythm and time signatures.",level:2},
-  {id:"accidentals",icon:"♯",title:"Accidentals",zh:"升降号与还原号",en:"Sharps, flats and naturals.",level:2},
-  {id:"key",icon:"🔑",title:"Key Signatures",zh:"调号",en:"Major and minor key signatures.",level:3},
-  {id:"scales",icon:"🎵",title:"Scales",zh:"音阶",en:"Major, minor and other scales.",level:3},
-  {id:"intervals",icon:"↔️",title:"Intervals",zh:"音程",en:"Learn musical intervals.",level:4},
-  {id:"dynamics",icon:"🔊",title:"Dynamics",zh:"力度",en:"Learn dynamic markings.",level:4},
-  {id:"articulation",icon:"✨",title:"Articulation",zh:"演奏法",en:"Learn articulation symbols.",level:4},
-  {id:"tempo",icon:"⏱️",title:"Tempo",zh:"速度",en:"Tempo and BPM.",level:4},
-  {id:"chords",icon:"🎹",title:"Chords",zh:"和弦",en:"Learn chord construction.",level:5},
-  {id:"sight",icon:"👁️",title:"Sight Reading",zh:"视谱",en:"Read music at sight.",level:5},
-  {id:"writing",icon:"✍️",title:"Writing Music",zh:"写谱",en:"Write notes and rhythms.",level:5},
-  {id:"composition",icon:"📝",title:"Composition",zh:"作曲",en:"Create your own music.",level:6},
-  {id:"master",icon:"👑",title:"Grandmaster",zh:"大师综合训练",en:"Ultimate notation challenge.",level:8}
-];
-function renderAcademy(){
-  let html = \`
-    <div class="topbar">
-      <div>
-        <div class="page-title">\${language==="zh"?"音乐学院":"Academy"}</div>
-        <div class="page-description">\${language==="zh"?"从完全不会五线谱一路学习到大师。":"Progress from absolute beginner to Grandmaster."}</div>
+
+    <div class="section">
+      <div class="section-title">\${t('lessons')}</div>
+      <div class="lesson-grid">
+        \${LESSONS.slice(0,3).map(l => lessonCard(l)).join('')}
       </div>
     </div>
-    <div class="lesson-grid">
-  \`;
-  lessons.forEach(lesson=>{
-    const unlocked = player.level >= lesson.level;
-    const completed = player.lessonsCompleted.includes(lesson.id);
-    html += \`
-      <div class="lesson \${!unlocked?"locked":""}">
-        <div class="lesson-icon">\${lesson.icon}</div>
-        <h3>\${lesson.title} \${completed?"✅":""}</h3>
-        <p>\${language==="zh"?lesson.zh:lesson.en}</p>
-        <small style="color:var(--muted)">Level \${lesson.level}</small>
-        <br><br>
-        <button \${!unlocked?"disabled":""} onclick="openLesson('\${lesson.id}')">
-          \${unlocked ? (language==="zh"?"学习":"Learn") : "🔒 Locked"}
+
+    <div class="section">
+      <div class="section-title">\${t('mastery')}</div>
+      <div class="card">
+        \${skillBar(t('noteReading'), skillPct('noteReading'))}
+        \${skillBar(t('rangeRecognition'), skillPct('rangeRecognition'))}
+        \${skillBar(t('earTraining'), skillPct('earTraining'))}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card" style="text-align:center">
+        <button class="btn-secondary" style="padding:10px 20px;border-radius:10px;font-size:13px" onclick="resetProgress()">
+          🔄 \${t('reset')}
         </button>
       </div>
-    \`;
-  });
-  html += \`</div>\`;
-  document.getElementById("appContent").innerHTML = html;
-}
-const lessonContent = {
-  staff:{title:"The Staff",body:"<h2>五线谱 / The Staff</h2><p>五线谱由五条线和四个间组成。<br>The staff consists of five lines and four spaces.</p><div class='staff-card'><div class='staff'><div class='staff-lines'><div class='staff-line'></div><div class='staff-line'></div><div class='staff-line'></div><div class='staff-line'></div><div class='staff-line'></div></div></div></div><h3>Line / Space</h3><p>音符可以位于线上，也可以位于两个线之间的间上。</p>"},
-  treble:{title:"Treble Clef",body:"<h2>𝄞 Treble Clef 高音谱号</h2><p>Treble Clef 常用于较高音域的乐器。</p><h3>Lines</h3><p>E – G – B – D – F</p><h3>Spaces</h3><p>F – A – C – E</p><p>Remember: FACE for the spaces.</p>"},
-  bass:{title:"Bass Clef",body:"<h2>𝄢 Bass Clef 低音谱号</h2><p>Bass Clef 用于较低音域。</p><h3>Lines</h3><p>G – B – D – F – A</p><h3>Spaces</h3><p>A – C – E – G</p>"},
-  notes:{title:"Notes",body:"<h2>Note Values 音符时值</h2><p>Whole Note 全音符 = 4 beats</p><p>Half Note 二分音符 = 2 beats</p><p>Quarter Note 四分音符 = 1 beat</p><p>Eighth Note 八分音符 = 1/2 beat</p><p>Sixteenth Note 十六分音符 = 1/4 beat</p>"},
-  rests:{title:"Rests",body:"<h2>Rests 休止符</h2><p>音乐中的“没有声音”同样拥有时间价值。</p><p>Whole Rest = 4 beats</p><p>Half Rest = 2 beats</p><p>Quarter Rest = 1 beat</p><p>Eighth Rest = 1/2 beat</p>"},
-  rhythm:{title:"Rhythm",body:"<h2>Rhythm & Time Signature</h2><p>4/4 means four quarter-note beats per measure.</p><p>3/4 is commonly associated with waltz rhythm.</p><p>6/8 contains six eighth-note beats.</p>"},
-  accidentals:{title:"Accidentals",body:"<h2>♯ ♭ ♮ Accidentals</h2><p>Sharp ♯ raises a note by one semitone.</p><p>Flat ♭ lowers a note by one semitone.</p><p>Natural ♮ cancels a previous sharp or flat.</p>"},
-  key:{title:"Key Signatures",body:"<h2>Key Signatures 调号</h2><p>A key signature tells you which notes are consistently sharp or flat.</p><p>C Major: no sharps, no flats.</p><p>G Major: F♯.</p><p>F Major: B♭.</p>"},
-  scales:{title:"Scales",body:"<h2>Scales 音阶</h2><p>Major scale pattern:</p><p>Whole – Whole – Half – Whole – Whole – Whole – Half</p><p>C Major: C D E F G A B C</p>"},
-  intervals:{title:"Intervals",body:"<h2>Intervals 音程</h2><p>An interval is the distance between two pitches.</p><p>Unison, 2nd, 3rd, 4th, 5th, 6th, 7th, Octave.</p>"},
-  dynamics:{title:"Dynamics",body:"<h2>Dynamics 力度</h2><p>pp — very soft</p><p>p — soft</p><p>mp — moderately soft</p><p>mf — moderately loud</p><p>f — loud</p><p>ff — very loud</p><p>Crescendo means gradually louder.</p>"},
-  articulation:{title:"Articulation",body:"<h2>Articulation 演奏法</h2><p>Staccato — short and separated.</p><p>Legato — smooth and connected.</p><p>Accent — emphasize the note.</p>"},
-  tempo:{title:"Tempo",body:"<h2>Tempo 速度</h2><p>Largo — very slow</p><p>Adagio — slow</p><p>Andante — walking pace</p><p>Moderato — moderate</p><p>Allegro — fast</p><p>Presto — very fast</p>"},
-  chords:{title:"Chords",body:"<h2>Chords 和弦</h2><p>C Major = C E G</p><p>C Minor = C Eb G</p><p>C7 = C E G Bb</p><p>CMaj7 = C E G B</p>"},
-  sight:{title:"Sight Reading",body:"<h2>Sight Reading 视谱</h2><p>Sight reading means performing music you have not previously practiced.</p><p>Start by identifying:</p><ol><li>Clef</li><li>Key signature</li><li>Time signature</li><li>Tempo</li><li>Dynamics</li></ol>"},
-  writing:{title:"Writing Music",body:"<h2>Music Writing 写谱</h2><p>Writing music requires you to understand pitch, rhythm, measure structure and notation symbols.</p><button onclick='startWritingPractice()'>Start Writing Practice</button>"},
-  composition:{title:"Composition",body:"<h2>Composition 作曲</h2><p>Create a melody using notes, rhythm and structure.</p><button onclick='startComposition()'>Compose</button>"},
-  master:{title:"Grandmaster",body:"<h2>👑 Grandmaster Challenge</h2><p>This challenge combines clefs, pitch, rhythm, key signatures, dynamics, articulation and reading.</p><button onclick='startMasterChallenge()'>Begin Challenge</button>"}
-};
-function openLesson(id){
-  const lesson = lessonContent[id];
-  if(!lesson){ notify("Lesson coming soon."); return; }
-  document.getElementById("modalContent").innerHTML = \`
-    <h1>\${lesson.title}</h1>
-    \${lesson.body}
-    <br>
-    <button style="background:var(--accent);padding:12px 18px;border-radius:9px" onclick="completeLesson('\${id}')">
-      \${language==="zh"?"完成课程 + XP":"Complete Lesson + XP"}
-    </button>
-  \`;
-  document.getElementById("modal").classList.add("open");
-}
-function closeModal(){ document.getElementById("modal").classList.remove("open"); }
-function completeLesson(id){
-  if(!player.lessonsCompleted.includes(id)){
-    player.lessonsCompleted.push(id);
-    addXP(25);
-    notify(language==="zh" ? "课程完成！+25 XP" : "Lesson completed! +25 XP");
-  }
-  closeModal();
-  renderAcademy();
-}
-const trebleNotes = [
-  {note:"C4",pos:5},{note:"D4",pos:4},{note:"E4",pos:3},{note:"F4",pos:2},
-  {note:"G4",pos:1},{note:"A4",pos:0},{note:"B4",pos:-1},{note:"C5",pos:-2},
-  {note:"D5",pos:-3},{note:"E5",pos:-4},{note:"F5",pos:-5},{note:"G5",pos:-6},{note:"A5",pos:-7}
-];
-const bassNotes = [
-  {note:"C2",pos:5},{note:"D2",pos:4},{note:"E2",pos:3},{note:"F2",pos:2},
-  {note:"G2",pos:1},{note:"A2",pos:0},{note:"B2",pos:-1},{note:"C3",pos:-2},
-  {note:"D3",pos:-3},{note:"E3",pos:-4},{note:"F3",pos:-5},{note:"G3",pos:-6},{note:"A3",pos:-7}
-];
-let currentQuestion = null;
-let practiceMode = "treble";
-function startPractice(mode){
-  if(mode) practiceMode = mode;
-  renderPractice();
-  nextPracticeQuestion();
-}
-function renderPractice(){
-  document.getElementById("appContent").innerHTML = \`
-    <div class="game-container">
-      <div class="topbar">
-        <div>
-          <div class="page-title">\${language==="zh"?"五线谱训练":"Note Reading Practice"}</div>
-          <div class="page-description">\${language==="zh"?"训练你真正快速辨认音符的能力。":"Train your real-time note recognition."}</div>
-        </div>
-        <div class="game-score">Score: <span id="practiceScore">0</span></div>
-      </div>
-      <div class="staff-card">
-        <div class="staff">
-          <div class="staff-lines">
-            <div class="staff-line"></div><div class="staff-line"></div>
-            <div class="staff-line"></div><div class="staff-line"></div><div class="staff-line"></div>
-          </div>
-          <div class="clef" id="clefSymbol">𝄞</div>
-          <div class="note" id="practiceNote"><div class="note-stem"></div></div>
-        </div>
-      </div>
-      <div class="question" id="practiceQuestion">What note is this?</div>
-      <div class="answers" id="practiceAnswers"></div>
     </div>
   \`;
 }
-function nextPracticeQuestion(){
-  const notes = practiceMode==="bass" ? bassNotes : trebleNotes;
-  currentQuestion = notes[Math.floor(Math.random()*notes.length)];
-  const noteElement = document.getElementById("practiceNote");
-  if(!noteElement) return;
-  const clef = document.getElementById("clefSymbol");
-  clef.textContent = practiceMode==="bass" ? "𝄢" : "𝄞";
-  noteElement.style.left = (practiceMode==="bass" ? 350 : 360) + "px";
-  noteElement.style.top = (50 + currentQuestion.pos*10) + "px";
-  const answerContainer = document.getElementById("practiceAnswers");
-  const pool = notes.map(n=>n.note).sort(()=>Math.random()-.5).slice(0,4);
-  if(!pool.includes(currentQuestion.note)){
-    pool[Math.floor(Math.random()*pool.length)] = currentQuestion.note;
-  }
-  answerContainer.innerHTML = pool.map(note=>\`
-    <button class="answer" onclick="answerPractice('\${note}',this)">\${note}</button>
-  \`).join("");
-}
-let practiceScore = 0;
-function answerPractice(answer,button){
-  const correct = answer===currentQuestion.note;
-  player.totalQuestions++;
-  if(correct){
-    player.correct++;
-    player.streak++;
-    practiceScore += 10;
-    button.classList.add("correct");
-    addXP(10);
-    recordSkill(practiceMode==="bass"?"bassClef":"trebleClef", true);
-    setTimeout(nextPracticeQuestion, 450);
-  } else {
-    player.wrong++;
-    player.streak=0;
-    button.classList.add("wrong");
-    recordSkill(practiceMode==="bass"?"bassClef":"trebleClef", false);
-    document.querySelectorAll(".answer").forEach(b=>{
-      if(b.textContent.trim()===currentQuestion.note) b.classList.add("correct");
-    });
-    setTimeout(nextPracticeQuestion, 1000);
-  }
-  const score = document.getElementById("practiceScore");
-  if(score) score.textContent=practiceScore;
-  save();
-}
-function recordSkill(skill,correct){
-  if(!player.skills[skill]) player.skills[skill]={correct:0,wrong:0};
-  if(correct) player.skills[skill].correct++;
-  else player.skills[skill].wrong++;
-  if(!correct) player.mistakes[skill]=(player.mistakes[skill]||0)+1;
-}
-function skillAccuracy(skill){
-  const s=player.skills[skill];
-  if(!s) return 0;
-  const total = s.correct+s.wrong;
-  if(!total) return 0;
-  return Math.round(s.correct/total*100);
-}
-function renderHomework(){
-  const homework = [
-    {title:"Note Recognition",desc:"Identify 20 notes.",xp:30},
-    {title:"Rhythm Builder",desc:"Complete five 4/4 measures.",xp:40},
-    {title:"Key Signature",desc:"Identify five major keys.",xp:50},
-    {title:"Piano Practical",desc:"Find 10 notes on the piano.",xp:50}
-  ];
-  document.getElementById("appContent").innerHTML = \`
-    <div class="topbar">
-      <div>
-        <div class="page-title">📝 \${language==="zh"?"今日作业":"Homework"}</div>
-        <div class="page-description">\${language==="zh"?"完成作业来巩固知识。":"Strengthen your knowledge through practical assignments."}</div>
-      </div>
-    </div>
-    <div class="lesson-grid">
-      \${homework.map((h,i)=>\`
-        <div class="lesson">
-          <div class="lesson-icon">📝</div>
-          <h3>\${h.title}</h3>
-          <p>\${h.desc}</p>
-          <strong style="color:var(--gold)">+\${h.xp} XP</strong>
-          <br><br>
-          <button onclick="doHomework(\${i})">\${language==="zh"?"开始作业":"Start"}</button>
-        </div>
-      \`).join("")}
-    </div>
-  \`;
-}
-function doHomework(index){
-  addXP(30);
-  notify(language==="zh" ? "作业完成！继续保持！" : "Homework completed!");
-}
-function renderExam(){
-  document.getElementById("appContent").innerHTML = \`
-    <div class="topbar">
-      <div>
-        <div class="page-title">🎓 \${language==="zh"?"音乐考试":"Music Exams"}</div>
-        <div class="page-description">\${language==="zh"?"测试真正掌握程度，而不是记忆答案。":"Test mastery, not memorized answers."}</div>
-      </div>
-    </div>
-    <div class="lesson-grid">
-      \${examCard("🌱","Beginner Exam",1,80)}
-      \${examCard("🟢","Intermediate Exam",3,85)}
-      \${examCard("🟣","Advanced Exam",5,90)}
-      \${examCard("👑","Grandmaster Exam",8,95)}
-    </div>
-  \`;
-}
-function examCard(icon,title,level,pass){
-  const unlocked = player.level>=level;
+
+function skillBar(name, pct){
   return \`
-    <div class="lesson \${!unlocked?"locked":""}">
-      <div class="lesson-icon">\${icon}</div>
-      <h3>\${title}</h3>
-      <p>Pass requirement: \${pass}%</p>
-      <button \${!unlocked?"disabled":""} onclick="startExam('\${title}',\${pass})">
-        \${unlocked?"Start Exam":"🔒 Locked"}
+    <div style="margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px">
+        <span>\${name}</span><strong style="color:var(--accent2)">\${pct}%</strong>
+      </div>
+      <div class="progress"><div style="width:\${pct}%"></div></div>
+    </div>
+  \`;
+}
+
+/* ---------- LESSONS ---------- */
+const LESSONS = [
+  { id:'staff',   icon:'🎼', level:1, zh:'五线谱基础', en:'The Staff',      zhD:'认识五线谱的线与间', enD:'Learn the 5 lines and 4 spaces' },
+  { id:'treble',  icon:'𝄞', level:1, zh:'高音谱号',   en:'Treble Clef',    zhD:'高音谱号及其音高',   enD:'Learn the treble clef notes' },
+  { id:'bass',    icon:'𝄢', level:1, zh:'低音谱号',   en:'Bass Clef',      zhD:'低音谱号及其音高',   enD:'Learn the bass clef notes' },
+  { id:'ledger',  icon:'📏', level:2, zh:'加线',       en:'Ledger Lines',   zhD:'认识五线谱外的加线',  enD:'Notes outside the staff' },
+  { id:'range',   icon:'🎯', level:2, zh:'音域简介',   en:'Note Range',     zhD:'低音域、中音域、高音域', enD:'Low, Middle and High ranges' },
+  { id:'values',  icon:'♩', level:3, zh:'音符时值',   en:'Note Values',    zhD:'全音符、二分、四分等', enD:'Whole, half, quarter notes' },
+  { id:'rests',   icon:'𝄽', level:3, zh:'休止符',     en:'Rests',          zhD:'各种休止符',        enD:'Musical rests' },
+  { id:'accid',   icon:'♯', level:4, zh:'升降号',     en:'Accidentals',    zhD:'♯ ♭ ♮',             enD:'Sharps, flats, naturals' },
+  { id:'key',     icon:'🔑', level:5, zh:'调号',       en:'Key Signatures', zhD:'大调、小调',         enD:'Major and minor keys' },
+  { id:'scales',  icon:'🎵', level:5, zh:'音阶',       en:'Scales',         zhD:'大调、小调音阶',     enD:'Major and minor scales' }
+];
+
+function lessonCard(l){
+  const unlocked = player.level >= l.level;
+  const done = player.lessonsCompleted.includes(l.id);
+  return \`
+    <div class="lesson \${!unlocked?'locked':''}">
+      <div class="lesson-icon">\${l.icon}</div>
+      <h3>\${language==='zh'?l.zh:l.en} \${done?'✅':''}</h3>
+      <p>\${language==='zh'?l.zhD:l.enD}</p>
+      <div class="lesson-meta">
+        <span>Lv \${l.level}</span>
+      </div>
+      <button class="primary" \${!unlocked?'disabled':''} onclick="openLesson('\${l.id}')">
+        \${unlocked ? t('startLearn') : t('locked')}
       </button>
     </div>
   \`;
 }
-function startExam(title,pass){
-  startPractice();
-  notify(\`\${title} — Pass \${pass}%\`);
-}
-const pianoNotes=["C","D","E","F","G","A","B","C","D","E","F","G","A","B"];
-function renderPiano(){
-  document.getElementById("appContent").innerHTML = \`
+
+function renderAcademy(){
+  document.getElementById('appContent').innerHTML = \`
     <div class="topbar">
       <div>
-        <div class="page-title">🎹 Piano Practical</div>
-        <div class="page-description">\${language==="zh"?"把五线谱上的音符连接到真实琴键。":"Connect sheet music to piano keys."}</div>
+        <div class="page-title">📚 \${t('academy')}</div>
+        <div class="page-desc">\${t('academyDesc')}</div>
       </div>
     </div>
-    <div class="card">
-      <h2>\${language==="zh"?"找到目标音符":"Find the target note"}</h2>
-      <div id="pianoTarget" style="font-size:45px;text-align:center;color:var(--gold);font-weight:bold"></div>
-      <div class="piano">
-        \${pianoNotes.map((n,i)=>\`
-          <button class="white-key" onclick="pianoPress('\${n}\${Math.floor(i/7)+4}',this)">
-            \${n}\${Math.floor(i/7)+4}
-          </button>
-        \`).join("")}
+    <div class="lesson-grid">
+      \${LESSONS.map(l => lessonCard(l)).join('')}
+    </div>
+  \`;
+}
+
+/* ---------- LESSON CONTENT ---------- */
+function openLesson(id){
+  const l = LESSONS.find(x => x.id === id);
+  if(!l) return;
+  const title = language === 'zh' ? l.zh : l.en;
+  let body = '';
+
+  switch(id){
+    case 'staff':
+      body = \`
+        <h2>\${title}</h2>
+        <p>\${language==='zh'
+          ? '五线谱由 5 条平行的线和 4 个间组成。音符的位置决定了音高：越往上越高，越往下越低。'
+          : 'The staff has 5 parallel lines and 4 spaces. Higher position = higher pitch.'}</p>
+        <div class="staff-wrap" style="margin:16px 0">
+          <canvas class="staff-canvas" id="lessonCanvas" style="width:100%;height:220px"></canvas>
+        </div>
+        <h3>\${language==='zh'?'线与间':'Lines & Spaces'}</h3>
+        <p>\${language==='zh'
+          ? '音符既可以写在线上，也可以写在两线之间的间上。'
+          : 'Notes can be placed either on a line or in a space between lines.'}</p>
+      \`;
+      break;
+
+    case 'treble':
+      body = \`
+        <h2>𝄞 \${title}</h2>
+        <p>\${language==='zh'
+          ? '高音谱号用于中高音区。常用于钢琴右手、小提琴、长笛等。'
+          : 'Treble clef is used for higher pitches — right hand of piano, violin, flute.'}</p>
+        <div class="staff-wrap" style="margin:16px 0">
+          <canvas class="staff-canvas" id="lessonCanvas" style="width:100%;height:220px"></canvas>
+        </div>
+        <h3>\${language==='zh'?'五条线的音':'Notes on lines'}</h3>
+        <div class="note-example">E4 — G4 — B4 — D5 — F5</div>
+        <h3>\${language==='zh'?'四个间的音':'Notes in spaces'}</h3>
+        <div class="note-example">F4 — A4 — C5 — E5  (FACE)</div>
+      \`;
+      break;
+
+    case 'bass':
+      body = \`
+        <h2>𝄢 \${title}</h2>
+        <p>\${language==='zh'
+          ? '低音谱号用于低音区。常用于钢琴左手、大提琴、低音提琴等。'
+          : 'Bass clef is used for lower pitches — left hand of piano, cello, bass.'}</p>
+        <div class="staff-wrap" style="margin:16px 0">
+          <canvas class="staff-canvas" id="lessonCanvas" style="width:100%;height:220px"></canvas>
+        </div>
+        <h3>\${language==='zh'?'五条线的音':'Notes on lines'}</h3>
+        <div class="note-example">G2 — B2 — D3 — F3 — A3</div>
+        <h3>\${language==='zh'?'四个间的音':'Notes in spaces'}</h3>
+        <div class="note-example">A2 — C3 — E3 — G3</div>
+      \`;
+      break;
+
+    case 'ledger':
+      body = \`
+        <h2>📏 \${title}</h2>
+        <p>\${language==='zh'
+          ? '当音符超出五线谱范围时，需要画加线（Ledger Lines）。中央 C（C4）就在高音谱表下方，需要一条下加一线。'
+          : 'Ledger lines extend the staff. Middle C (C4) sits one ledger line below the treble staff.'}</p>
+        <div class="staff-wrap" style="margin:16px 0">
+          <canvas class="staff-canvas" id="lessonCanvas" style="width:100%;height:220px"></canvas>
+        </div>
+        <h3>\${language==='zh'?'中央 C':'Middle C'}</h3>
+        <p>\${language==='zh'
+          ? 'C4 是连接高音谱表和低音谱表的桥：它在高音谱表下加一线，也是低音谱表的上加一线。'
+          : 'C4 sits on one ledger line below the treble staff and one ledger line above the bass staff.'}</p>
+      \`;
+      break;
+
+    case 'range':
+      body = \`
+        <h2>🎯 \${title}</h2>
+        <p>\${language==='zh'
+          ? '根据音高，音符可以被归类为三个主要音域。'
+          : 'Notes are grouped into three main ranges based on pitch.'}</p>
+
+        <div class="range-viz">
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px">
+            <span>C2</span><span>C4</span><span>C6</span>
+          </div>
+          <div class="range-bar">
+            <div class="range-seg range-low"  style="left:0%;  width:33%;">\${t('low')}</div>
+            <div class="range-seg range-mid"  style="left:33%; width:34%;">\${t('mid')}</div>
+            <div class="range-seg range-high" style="left:67%; width:33%;">\${t('high')}</div>
+          </div>
+        </div>
+
+        <h3>\${t('low')} — C2 至 B3</h3>
+        <p>\${language==='zh'?'低音域：大提琴、低音提琴、钢琴左手、男低音。':'Low: cello, bass, piano LH, bass vocal.'}</p>
+
+        <h3>\${t('mid')} — C4 至 B4</h3>
+        <p>\${language==='zh'?'中音域：人声、中提琴、长笛中音区。':'Middle: voice, viola, middle register of flute.'}</p>
+
+        <h3>\${t('high')} — C5 以上</h3>
+        <p>\${language==='zh'?'高音域：小提琴高音、女高音、短笛。':'High: high violin, soprano, piccolo.'}</p>
+      \`;
+      break;
+
+    case 'values':
+      body = \`
+        <h2>♩ \${title}</h2>
+        <p>\${language==='zh'?'音符的时值决定了它持续多久。':'Note value = duration.'}</p>
+        <div class="note-example">𝅝 Whole Note = 4 beats</div>
+        <div class="note-example">𝅗𝅥 Half Note = 2 beats</div>
+        <div class="note-example">♩ Quarter Note = 1 beat</div>
+        <div class="note-example">♪ Eighth Note = 1/2 beat</div>
+        <div class="note-example">𝅘𝅥𝅯 Sixteenth = 1/4 beat</div>
+      \`;
+      break;
+
+    case 'rests':
+      body = \`
+        <h2>𝄽 \${title}</h2>
+        <p>\${language==='zh'?'休止符表示静默，但同样占用时间。':'A rest means silence — but it still occupies time.'}</p>
+        <div class="note-example">𝄻 Whole Rest = 4 beats</div>
+        <div class="note-example">𝄼 Half Rest = 2 beats</div>
+        <div class="note-example">𝄽 Quarter Rest = 1 beat</div>
+        <div class="note-example">𝄾 Eighth Rest = 1/2 beat</div>
+      \`;
+      break;
+
+    case 'accid':
+      body = \`
+        <h2>♯ \${title}</h2>
+        <div class="note-example">♯ Sharp — raises a pitch by 1 semitone</div>
+        <div class="note-example">♭ Flat — lowers a pitch by 1 semitone</div>
+        <div class="note-example">♮ Natural — cancels a previous sharp or flat</div>
+      \`;
+      break;
+
+    case 'key':
+      body = \`
+        <h2>🔑 \${title}</h2>
+        <p>\${language==='zh'?'调号告诉你在整首曲子里哪些音要升或降。':'A key signature indicates which notes are consistently sharp or flat.'}</p>
+        <div class="note-example">C Major — no sharps, no flats</div>
+        <div class="note-example">G Major — F♯</div>
+        <div class="note-example">D Major — F♯ C♯</div>
+        <div class="note-example">F Major — B♭</div>
+      \`;
+      break;
+
+    case 'scales':
+      body = \`
+        <h2>🎵 \${title}</h2>
+        <p>\${language==='zh'?'大调音阶的音程模式：':'Major scale interval pattern:'}</p>
+        <div class="note-example">W — W — H — W — W — W — H</div>
+        <div class="note-example">C Major: C D E F G A B C</div>
+        <div class="note-example">G Major: G A B C D E F♯ G</div>
+      \`;
+      break;
+  }
+
+  document.getElementById('modalContent').innerHTML = \`
+    \${body}
+    <div style="margin-top:24px;text-align:right">
+      <button class="btn-primary" style="padding:12px 22px;border-radius:10px" onclick="completeLesson('\${id}')">
+        \${language==='zh'?'完成课程 +25 XP':'Complete +25 XP'}
+      </button>
+    </div>
+  \`;
+  document.getElementById('modal').classList.add('open');
+
+  // Draw a sample staff depending on lesson
+  setTimeout(() => {
+    const cvs = document.getElementById('lessonCanvas');
+    if(!cvs) return;
+    if(id === 'staff'){
+      drawStaff(cvs, { clef: 'treble', notePos: null });
+    } else if(id === 'treble'){
+      drawStaff(cvs, { clef: 'treble', notePos: 2 });
+    } else if(id === 'bass'){
+      drawStaff(cvs, { clef: 'bass', notePos: 4 });
+    } else if(id === 'ledger'){
+      drawStaff(cvs, { clef: 'treble', notePos: -2 });
+    }
+  }, 30);
+}
+
+function completeLesson(id){
+  if(!player.lessonsCompleted.includes(id)){
+    player.lessonsCompleted.push(id);
+    addXP(25);
+    notify('✅ +25 XP');
+  }
+  closeModal();
+  if(currentPage === 'academy') renderAcademy();
+  else renderDashboard();
+}
+
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+
+/* ---------- PRACTICE PICKER ---------- */
+function renderPracticePicker(){
+  document.getElementById('appContent').innerHTML = \`
+    <div class="topbar">
+      <div>
+        <div class="page-title">✏️ \${t('practice')}</div>
+        <div class="page-desc">\${t('practiceDesc')}</div>
+      </div>
+    </div>
+    <div class="mode-picker">
+      <div class="mode-card" onclick="startPracticeMode('staff')">
+        <div class="icon">🎼</div>
+        <div class="title">\${t('staffPractice')}</div>
+        <div class="desc">\${t('readStaff')}</div>
+      </div>
+      <div class="mode-card" onclick="startPracticeMode('range')">
+        <div class="icon">🎯</div>
+        <div class="title">\${t('rangePractice')}</div>
+        <div class="desc">\${t('identifyRange')}</div>
+      </div>
+      <div class="mode-card" onclick="startPracticeMode('ear')">
+        <div class="icon">👂</div>
+        <div class="title">\${t('earPractice')}</div>
+        <div class="desc">\${t('listenNote')}</div>
       </div>
     </div>
   \`;
-  nextPianoQuestion();
 }
-let pianoTarget;
-function nextPianoQuestion(){
-  pianoTarget = pianoNotes[Math.floor(Math.random()*pianoNotes.length)];
-  const octave = Math.floor(Math.random()*2)+4;
-  pianoTarget = pianoTarget+octave;
-  const el = document.getElementById("pianoTarget");
-  if(el) el.textContent=pianoTarget;
+
+/* ---------- PRACTICE SESSION ---------- */
+let session = {
+  mode: 'practice',   // 'practice' | 'test'
+  type: 'staff',      // 'staff' | 'range' | 'ear'
+  score: 0,
+  qIndex: 0,
+  qTotal: 5,          // practice default, test overrides
+  startTime: 0,
+  timeLimit: 0,       // seconds, 0 = no limit
+  timerId: null,
+  timeLeft: 0,
+  current: null,
+  correctCount: 0,
+  wrongCount: 0
+};
+
+function startPracticeMode(type){
+  session.mode = 'practice';
+  session.type = type;
+  session.qTotal = 5;
+  session.timeLimit = 0;
+  session.score = 0;
+  session.qIndex = 0;
+  session.correctCount = 0;
+  session.wrongCount = 0;
+  session.startTime = Date.now();
+  renderSessionFrame();
+  nextQuestion();
 }
-function pianoPress(note,button){
-  if(note===pianoTarget){
-    button.style.background="#35d07f";
-    addXP(10);
-    setTimeout(()=>{button.style.background="#f4f4f4";nextPianoQuestion();},400);
-  } else {
-    button.style.background="#ff5573";
-    setTimeout(()=>{button.style.background="#f4f4f4";},400);
+
+function stopAllTimers(){
+  if(session.timerId){ clearInterval(session.timerId); session.timerId = null; }
+}
+
+function renderSessionFrame(){
+  document.getElementById('appContent').innerHTML = \`
+    <div class="game-wrap">
+      <div class="game-header">
+        <div>
+          <div class="page-title">\${typeTitle(session.type)}</div>
+          <div class="page-desc">\${t('question')} <span id="qCounter">1/\${session.qTotal}</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="score-box">\${t('score')}: <span id="scoreVal">0</span></div>
+          <div class="timer-box" id="timerBox" style="display:none">\${t('time')}: <span id="timerVal">--</span></div>
+        </div>
+      </div>
+      <div id="questionArea"></div>
+    </div>
+  \`;
+
+  if(session.mode === 'test' && session.timeLimit > 0){
+    session.timeLeft = session.timeLimit;
+    document.getElementById('timerBox').style.display = '';
+    document.getElementById('timerVal').textContent = session.timeLeft + 's';
+    session.timerId = setInterval(() => {
+      session.timeLeft--;
+      const el = document.getElementById('timerVal');
+      const box = document.getElementById('timerBox');
+      if(el) el.textContent = session.timeLeft + 's';
+      if(box && session.timeLeft <= 10) box.classList.add('warn');
+      if(session.timeLeft <= 0){
+        stopAllTimers();
+        finishSession();
+      }
+    }, 1000);
   }
 }
-function renderGuitar(){
-  document.getElementById("appContent").innerHTML = \`
-    <div class="topbar">
-      <div>
-        <div class="page-title">🎸 Guitar Practical</div>
-        <div class="page-description">Learn staff notation and guitar fretboard positions.</div>
-      </div>
+
+function typeTitle(type){
+  if(type === 'staff') return t('staffPractice');
+  if(type === 'range') return t('rangePractice');
+  if(type === 'ear') return t('earPractice');
+  return '';
+}
+
+function pickRandomNote(clef){
+  const pool = clef === 'bass' ? BASS_NOTES : TREBLE_NOTES;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function nextQuestion(){
+  if(session.qIndex >= session.qTotal){ finishSession(); return; }
+
+  const counter = document.getElementById('qCounter');
+  if(counter) counter.textContent = (session.qIndex + 1) + '/' + session.qTotal;
+
+  if(session.type === 'staff'){
+    renderStaffQuestion();
+  } else if(session.type === 'range'){
+    renderRangeQuestion();
+  } else if(session.type === 'ear'){
+    renderEarQuestion();
+  }
+}
+
+/* --- Staff question --- */
+function renderStaffQuestion(){
+  const clef = Math.random() < 0.5 ? 'treble' : 'bass';
+  const note = pickRandomNote(clef);
+  session.current = { note, clef };
+  const pool = clef === 'bass' ? BASS_NOTES : TREBLE_NOTES;
+
+  // Build 4 unique options including the correct one
+  const others = pool.filter(n => n.name !== note.name)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+  const opts = [note, ...others].sort(() => Math.random() - 0.5);
+
+  document.getElementById('questionArea').innerHTML = \`
+    <div class="staff-wrap" style="margin-bottom:16px">
+      <canvas id="qCanvas" style="width:100%;height:200px"></canvas>
     </div>
-    <div class="card">
-      <h2>Guitar Fretboard</h2>
-      <p>Match the note to a string and fret.</p>
-      <div id="guitarTarget" style="text-align:center;font-size:40px;color:var(--gold);font-weight:bold;margin:25px"></div>
-      <div id="fretboard"></div>
+    <div class="question">\${t('whatNote')} <span style="color:var(--accent2);font-size:14px">(\${clef==='treble'?t('treble'):t('bass')})</span></div>
+    <div class="answers" id="answers">
+      \${opts.map(o => \`<button class="answer" data-note="\${o.name}">\${o.name}</button>\`).join('')}
     </div>
   \`;
-  renderFretboard();
+
+  setTimeout(() => {
+    const cvs = document.getElementById('qCanvas');
+    if(cvs) drawStaff(cvs, { clef, notePos: note.pos });
+  }, 20);
+
+  document.querySelectorAll('#answers .answer').forEach(b => {
+    b.addEventListener('click', () => {
+      if(session.locked) return;
+      session.locked = true;
+      const correct = b.dataset.note === note.name;
+      if(correct){
+        b.classList.add('correct'); sfxCorrect();
+        session.score += 10; session.correctCount++;
+        recordSkill('noteReading', true);
+      } else {
+        b.classList.add('wrong'); sfxWrong();
+        session.wrongCount++;
+        recordSkill('noteReading', false);
+        document.querySelectorAll('#answers .answer').forEach(x => {
+          if(x.dataset.note === note.name) x.classList.add('correct');
+        });
+      }
+      const sv = document.getElementById('scoreVal');
+      if(sv) sv.textContent = session.score;
+      session.qIndex++;
+      setTimeout(() => { session.locked = false; nextQuestion(); }, correct ? 550 : 1100);
+    });
+  });
 }
-function renderFretboard(){
-  const strings=["E","A","D","G","B","E"];
-  let html="";
-  strings.forEach(s=>{
-    html += \`
-      <div style="display:flex;margin-bottom:8px;align-items:center">
-        <strong style="width:35px">\${s}</strong>
-        \${Array.from({length:13},(_,fret)=>\`
-          <button onclick="guitarPress('\${s}',\${fret},this)" style="width:55px;height:40px;background:#292f3d;margin-right:3px;border-radius:5px">\${fret}</button>
-        \`).join("")}
+
+/* --- Range question --- */
+function renderRangeQuestion(){
+  const clef = Math.random() < 0.5 ? 'treble' : 'bass';
+  const pool = clef === 'bass' ? BASS_NOTES : TREBLE_NOTES;
+  const note = pool[Math.floor(Math.random() * pool.length)];
+  session.current = { note, clef };
+
+  const ranges = [
+    { key: 'low',  label: t('low') },
+    { key: 'mid',  label: t('mid') },
+    { key: 'high', label: t('high') }
+  ];
+
+  document.getElementById('questionArea').innerHTML = \`
+    <div class="staff-wrap" style="margin-bottom:16px">
+      <canvas id="qCanvas" style="width:100%;height:200px"></canvas>
+    </div>
+    <div class="question">\${t('whatRange')}</div>
+    <div class="answers" id="answers" style="grid-template-columns:repeat(3,1fr)">
+      \${ranges.map(r => \`<button class="answer range-\${r.key}" data-range="\${r.key}" style="background:transparent;border:2px solid \${r.key==='low'?'#4aa3ff':r.key==='mid'?'#b46cff':'#ff6ca8'}">\${r.label}</button>\`).join('')}
+    </div>
+  \`;
+
+  setTimeout(() => {
+    const cvs = document.getElementById('qCanvas');
+    if(cvs) drawStaff(cvs, { clef, notePos: note.pos });
+  }, 20);
+
+  document.querySelectorAll('#answers .answer').forEach(b => {
+    b.addEventListener('click', () => {
+      if(session.locked) return;
+      session.locked = true;
+      const correct = b.dataset.range === note.range;
+      if(correct){
+        b.classList.add('correct'); sfxCorrect();
+        session.score += 10; session.correctCount++;
+        recordSkill('rangeRecognition', true);
+      } else {
+        b.classList.add('wrong'); sfxWrong();
+        session.wrongCount++;
+        recordSkill('rangeRecognition', false);
+        document.querySelectorAll('#answers .answer').forEach(x => {
+          if(x.dataset.range === note.range) x.classList.add('correct');
+        });
+      }
+      const sv = document.getElementById('scoreVal');
+      if(sv) sv.textContent = session.score;
+      session.qIndex++;
+      setTimeout(() => { session.locked = false; nextQuestion(); }, correct ? 550 : 1100);
+    });
+  });
+}
+
+/* --- Ear question --- */
+function renderEarQuestion(){
+  const pool = TREBLE_NOTES.slice(2, 9); // C5-ish, safer range
+  const note = pool[Math.floor(Math.random() * pool.length)];
+  session.current = { note };
+
+  const others = pool.filter(n => n.name !== note.name)
+    .sort(() => Math.random() - 0.5).slice(0, 3);
+  const opts = [note, ...others].sort(() => Math.random() - 0.5);
+
+  document.getElementById('questionArea').innerHTML = \`
+    <div class="card" style="text-align:center;padding:32px">
+      <div style="font-size:64px;margin-bottom:14px">🎵</div>
+      <button class="btn-primary" style="padding:14px 28px;border-radius:10px;font-size:16px" id="playBtn">
+        \${t('playNote')}
+      </button>
+      <button class="btn-secondary" style="padding:14px 20px;border-radius:10px;font-size:14px;margin-left:8px" id="replayBtn">
+        \${t('playAgain')}
+      </button>
+    </div>
+    <div class="question">\${t('listenNote')}</div>
+    <div class="answers" id="answers">
+      \${opts.map(o => \`<button class="answer" data-note="\${o.name}">\${o.name}</button>\`).join('')}
+    </div>
+  \`;
+
+  const play = () => playNote(note.hz, 1.0);
+  document.getElementById('playBtn').addEventListener('click', play);
+  document.getElementById('replayBtn').addEventListener('click', play);
+  setTimeout(play, 400);
+
+  document.querySelectorAll('#answers .answer').forEach(b => {
+    b.addEventListener('click', () => {
+      if(session.locked) return;
+      session.locked = true;
+      const correct = b.dataset.note === note.name;
+      if(correct){
+        b.classList.add('correct'); sfxCorrect();
+        session.score += 10; session.correctCount++;
+        recordSkill('earTraining', true);
+      } else {
+        b.classList.add('wrong'); sfxWrong();
+        session.wrongCount++;
+        recordSkill('earTraining', false);
+        document.querySelectorAll('#answers .answer').forEach(x => {
+          if(x.dataset.note === note.name) x.classList.add('correct');
+        });
+      }
+      const sv = document.getElementById('scoreVal');
+      if(sv) sv.textContent = session.score;
+      session.qIndex++;
+      setTimeout(() => { session.locked = false; nextQuestion(); }, correct ? 550 : 1100);
+    });
+  });
+}
+
+/* ---------- TEST PICKER ---------- */
+function renderTestPicker(){
+  const tests = [
+    { key:'staff', icon:'🎼', title:t('staffTest'), q:10, time:60, pass:80 },
+    { key:'range', icon:'🎯', title:t('rangeTest'), q:10, time:60, pass:80 },
+    { key:'ear',   icon:'👂', title:t('earPractice') + ' ' + t('test'), q:10, time:90, pass:75 }
+  ];
+
+  document.getElementById('appContent').innerHTML = \`
+    <div class="topbar">
+      <div>
+        <div class="page-title">🎯 \${t('test')}</div>
+        <div class="page-desc">\${t('testDesc')}</div>
+      </div>
+    </div>
+    <div class="mode-picker">
+      \${tests.map(tt => {
+        const key = tt.key;
+        const best = player.bestScores[key] || 0;
+        return \`
+          <div class="mode-card" onclick="startTestMode('\${key}', \${tt.q}, \${tt.time}, \${tt.pass})">
+            <div class="icon">\${tt.icon}</div>
+            <div class="title">\${tt.title}</div>
+            <div class="desc">\${tt.q} \${t('questions')} · \${tt.time}s · \${t('passScore')} \${tt.pass}%</div>
+            \${best ? \`<div style="margin-top:8px;font-size:12px;color:var(--gold)">Best: \${best}%</div>\` : ''}
+          </div>
+        \`;
+      }).join('')}
+    </div>
+  \`;
+}
+
+function startTestMode(type, qTotal, timeLimit, passScore){
+  session.mode = 'test';
+  session.type = type;
+  session.qTotal = qTotal;
+  session.timeLimit = timeLimit;
+  session.passScore = passScore;
+  session.score = 0;
+  session.qIndex = 0;
+  session.correctCount = 0;
+  session.wrongCount = 0;
+  session.startTime = Date.now();
+  renderSessionFrame();
+  nextQuestion();
+}
+
+/* ---------- SESSION FINISH ---------- */
+function finishSession(){
+  stopAllTimers();
+  const maxScore = session.qTotal * 10;
+  const pct = maxScore ? Math.round(session.score / maxScore * 100) : 0;
+
+  if(session.mode === 'test'){
+    const passed = pct >= (session.passScore || 80);
+    const key = session.type;
+    if(pct > (player.bestScores[key] || 0)) player.bestScores[key] = pct;
+    player.testHistory.push({ type: key, pct, time: Date.now() });
+    if(player.testHistory.length > 30) player.testHistory.shift();
+    save();
+
+    const dur = Math.round((Date.now() - session.startTime) / 1000);
+    if(passed) addXP(60); else addXP(20);
+
+    document.getElementById('appContent').innerHTML = \`
+      <div class="result-screen">
+        <div class="result-icon">\${passed ? '🏆' : '💪'}</div>
+        <div class="result-title">\${passed ? t('passed') : t('failed')}</div>
+        <div class="result-score \${passed ? 'pass' : 'fail'}">\${pct}%</div>
+        <div class="result-meta">
+          \${t('correctCount')}: \${session.correctCount} / \${session.qTotal} · \${t('time')}: \${dur}s<br>
+          \${passed ? '+60 XP' : '+20 XP'}
+        </div>
+        <div class="result-actions">
+          <button class="btn-secondary" onclick="renderTestPicker()">\${t('backToTests')}</button>
+          <button class="btn-primary" onclick="startTestMode('\${session.type}', \${session.qTotal}, \${session.timeLimit}, \${session.passScore})">\${t('tryAgain')}</button>
+        </div>
       </div>
     \`;
-  });
-  document.getElementById("fretboard").innerHTML=html;
-  nextGuitarQuestion();
-}
-let guitarTarget;
-function nextGuitarQuestion(){
-  const notes=["E","F","G","A","B","C","D"];
-  guitarTarget = notes[Math.floor(Math.random()*notes.length)];
-  document.getElementById("guitarTarget").textContent = "Find: "+guitarTarget;
-}
-function guitarPress(string,fret,button){
-  const noteNames=["E","F","F#","G","G#","A","A#","B","C","C#","D","D#"];
-  const openIndex={E:0,A:5,D:10,G:3,B:8};
-  const note = noteNames[(openIndex[string]+fret)%12];
-  if(note===guitarTarget){
-    button.style.background="#35d07f";
-    addXP(10);
-    setTimeout(()=>{button.style.background="#292f3d";nextGuitarQuestion();},500);
   } else {
-    button.style.background="#ff5573";
-    setTimeout(()=>{button.style.background="#292f3d";},400);
+    // Practice finished
+    document.getElementById('appContent').innerHTML = \`
+      <div class="result-screen">
+        <div class="result-icon">✅</div>
+        <div class="result-title">\${t('testComplete')}</div>
+        <div class="result-score pass">\${pct}%</div>
+        <div class="result-meta">
+          \${t('correctCount')}: \${session.correctCount} / \${session.qTotal}
+        </div>
+        <div class="result-actions">
+          <button class="btn-secondary" onclick="renderPracticePicker()">\${t('exit')}</button>
+          <button class="btn-primary" onclick="startPracticeMode('\${session.type}')">\${t('tryAgain')}</button>
+        </div>
+      </div>
+    \`;
   }
 }
-function renderDrums(){
-  document.getElementById("appContent").innerHTML = \`
+
+/* ---------- PIANO ---------- */
+function renderPiano(){
+  const notes = [
+    { n:'C4', hz:261.63, black:false },
+    { n:'C#4', hz:277.18, black:true },
+    { n:'D4', hz:293.66, black:false },
+    { n:'D#4', hz:311.13, black:true },
+    { n:'E4', hz:329.63, black:false },
+    { n:'F4', hz:349.23, black:false },
+    { n:'F#4', hz:369.99, black:true },
+    { n:'G4', hz:392.00, black:false },
+    { n:'G#4', hz:415.30, black:true },
+    { n:'A4', hz:440.00, black:false },
+    { n:'A#4', hz:466.16, black:true },
+    { n:'B4', hz:493.88, black:false },
+    { n:'C5', hz:523.25, black:false },
+    { n:'C#5', hz:554.37, black:true },
+    { n:'D5', hz:587.33, black:false },
+    { n:'D#5', hz:622.25, black:true },
+    { n:'E5', hz:659.25, black:false }
+  ];
+
+  document.getElementById('appContent').innerHTML = \`
     <div class="topbar">
       <div>
-        <div class="page-title">🥁 Drum Notation</div>
-        <div class="page-description">\${language==="zh"?"阅读鼓谱并训练节奏。":"Read drum notation and train rhythm."}</div>
-      </div>
-    </div>
-    <div class="card">
-      <h2>Rhythm Challenge</h2>
-      <div class="rhythm-box">♩ ♪ ♪ ♩</div>
-      <div class="answers">
-        <button class="answer" onclick="drumAnswer(this,true)">TAP — TAP-TAP — TAP</button>
-        <button class="answer" onclick="drumAnswer(this,false)">TAP-TAP — TAP — TAP</button>
-        <button class="answer" onclick="drumAnswer(this,false)">TAP — TAP — TAP-TAP</button>
-        <button class="answer" onclick="drumAnswer(this,false)">TAP-TAP-TAP-TAP</button>
-      </div>
-    </div>
-  \`;
-}
-function drumAnswer(button,correct){
-  if(correct){ button.classList.add("correct"); addXP(15); }
-  else { button.classList.add("wrong"); }
-}
-function renderEarTraining(){
-  document.getElementById("appContent").innerHTML = \`
-    <div class="topbar">
-      <div>
-        <div class="page-title">👂 Ear Training</div>
-        <div class="page-description">Train pitch recognition with your ears.</div>
+        <div class="page-title">🎹 \${t('piano')}</div>
+        <div class="page-desc">\${t('pianoDesc')}</div>
       </div>
     </div>
     <div class="card" style="text-align:center">
-      <div style="font-size:80px">🎵</div>
-      <button style="background:var(--accent);padding:15px 30px;border-radius:10px" onclick="playTone()">▶ Play Note</button>
-      <div class="answers" style="margin-top:30px">
-        \${["C","D","E","F"].map(n=>\`
-          <button class="answer" onclick="earAnswer('\${n}',this)">\${n}</button>
-        \`).join("")}
-      </div>
+      <h3 style="margin-bottom:18px">\${language==='zh'?'点击琴键听音':'Click keys to hear pitches'}</h3>
+      <div class="piano" id="pianoRow"></div>
     </div>
   \`;
-  generateEarQuestion();
+
+  const row = document.getElementById('pianoRow');
+  notes.forEach(n => {
+    if(n.black){
+      const last = row.lastChild;
+      if(last){
+        const bk = document.createElement('button');
+        bk.className = 'black-key';
+        bk.textContent = n.n.replace('4','').replace('5','');
+        bk.dataset.hz = n.hz;
+        bk.addEventListener('click', () => {
+          playNote(n.hz, 0.8);
+          bk.classList.add('hit');
+          setTimeout(() => bk.classList.remove('hit'), 180);
+        });
+        last.appendChild(bk);
+      }
+    } else {
+      const wk = document.createElement('button');
+      wk.className = 'white-key';
+      wk.textContent = n.n;
+      wk.dataset.hz = n.hz;
+      wk.addEventListener('click', () => {
+        playNote(n.hz, 0.8);
+        wk.classList.add('hit');
+        setTimeout(() => wk.classList.remove('hit'), 180);
+      });
+      row.appendChild(wk);
+    }
+  });
 }
-let earTarget;
-function generateEarQuestion(){
-  const notes=[["C",261.63],["D",293.66],["E",329.63],["F",349.23]];
-  earTarget = notes[Math.floor(Math.random()*notes.length)];
+
+/* ---------- PROGRESS ---------- */
+function renderProgress(){
+  const acc = player.totalQuestions ? Math.round(player.correct / player.totalQuestions * 100) : 0;
+
+  document.getElementById('appContent').innerHTML = \`
+    <div class="topbar">
+      <div>
+        <div class="page-title">📊 \${t('progress')}</div>
+        <div class="page-desc">\${t('progressDesc')}</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="stat-label">\${t('totalQuestions')}</div>
+        <div class="stat-num">\${player.totalQuestions}</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">\${t('correctCount')}</div>
+        <div class="stat-num" style="color:var(--green)">\${player.correct}</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">\${t('wrongCount')}</div>
+        <div class="stat-num" style="color:var(--red)">\${player.wrong}</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">\${t('accuracy')}</div>
+        <div class="stat-num">\${acc}%</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">\${t('mastery')}</div>
+      <div class="card">
+        \${skillBar(t('noteReading'), skillPct('noteReading'))}
+        \${skillBar(t('rangeRecognition'), skillPct('rangeRecognition'))}
+        \${skillBar(t('earTraining'), skillPct('earTraining'))}
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">\${t('lessons')}</div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+          <span>\${player.lessonsCompleted.length} / \${LESSONS.length}</span>
+          <strong>\${Math.round(player.lessonsCompleted.length / LESSONS.length * 100)}%</strong>
+        </div>
+        <div class="progress">
+          <div style="width:\${player.lessonsCompleted.length / LESSONS.length * 100}%"></div>
+        </div>
+      </div>
+    </div>
+
+    \${player.testHistory.length ? \`
+      <div class="section">
+        <div class="section-title">\${language==='zh'?'最近测试':'Recent Tests'}</div>
+        <div class="card">
+          \${player.testHistory.slice(-8).reverse().map(h => \`
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px">
+              <span>\${typeTitle(h.type)}</span>
+              <strong style="color:\${h.pct >= 80 ? 'var(--green)' : h.pct >= 60 ? 'var(--gold)' : 'var(--red)'}">\${h.pct}%</strong>
+            </div>
+          \`).join('')}
+        </div>
+      </div>
+    \` : ''}
+  \`;
 }
-function playTone(){
-  if(!earTarget) generateEarQuestion();
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  const ctx = new AudioContext();
-  const oscillator = ctx.createOscillator();
-  const gain = ctx.createGain();
-  oscillator.frequency.value = earTarget[1];
-  oscillator.connect(gain);
-  gain.connect(ctx.destination);
-  oscillator.start();
-  gain.gain.setValueAtTime(.2, ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(.001, ctx.currentTime+1);
-  oscillator.stop(ctx.currentTime+1);
+
+/* ---------- LANGUAGE ---------- */
+function setLanguage(lang){
+  language = lang;
+  save();
+  // Re-render current page
+  navigateTo(currentPage);
 }
-function earAnswer(answer,button){
-  if(answer===earTarget[0]){
-    button.classList.add("correct");
-    addXP(15);
-    setTimeout(()=>{
-      generateEarQuestion();
-      document.querySelectorAll(".answer").forEach(b=>{b.classList.remove("correct");});
-    },600);
-  } else {
-    button.classList.add("wrong");
+
+/* ---------- RESET ---------- */
+function resetProgress(){
+  if(confirm(t('confirmReset'))){
+    localStorage.removeItem('nv_player_v2');
+    player = JSON.parse(JSON.stringify(DEFAULT_PLAYER));
+    save();
+    navigateTo('dashboard');
+    notify('🔄 ' + (language === 'zh' ? '已重置' : 'Reset'));
   }
 }
-const dictionary=[
-  ["Staff","五线谱","Five lines and four spaces."],
-  ["Treble Clef","高音谱号","Clef commonly used for higher pitches."],
-  ["Bass Clef","低音谱号","Clef used for lower pitches."],
-  ["Pitch","音高","How high or low a sound is."],
-  ["Rhythm","节奏","The organization of sound in time."],
-  ["Tempo","速度","The speed of music."],
-  ["Dynamics","力度","How loud or soft music is."],
-  ["Staccato","断奏","Short and separated."],
-  ["Legato","连奏","Smooth and connected."],
-  ["Sharp","升号","Raises a pitch by a semitone."],
-  ["Flat","降号","Lowers a pitch by a semitone."],
-  ["Natural","还原号","Cancels a sharp or flat."],
-  ["Interval","音程","Distance between two pitches."],
-  ["Chord","和弦","Multiple pitches sounded together."],
-  ["Scale","音阶","A sequence of pitches."],
-  ["Measure","小节","A section of music divided by bar lines."],
-  ["Beat","拍","A basic unit of musical time."],
-  ["Rest","休止符","A symbol indicating silence."]
-];
-function renderDictionary(){
-  document.getElementById("appContent").innerHTML = \`
-    <div class="topbar">
-      <div>
-        <div class="page-title">📖 Music Dictionary</div>
-        <div class="page-description">\${language==="zh"?"音乐术语中英文词典":"Music terminology in English and Chinese"}</div>
-      </div>
-    </div>
-    <div class="card">
-      <table>
-        <thead><tr><th>English</th><th>中文</th><th>Meaning</th></tr></thead>
-        <tbody>
-          \${dictionary.map(d=>\`
-            <tr><td><strong>\${d[0]}</strong></td><td>\${d[1]}</td><td style="color:var(--muted)">\${d[2]}</td></tr>
-          \`).join("")}
-        </tbody>
-      </table>
-    </div>
-  \`;
-}
-function renderStats(){
-  document.getElementById("appContent").innerHTML = \`
-    <div class="topbar">
-      <div>
-        <div class="page-title">📊 My Progress</div>
-        <div class="page-description">Track your music mastery.</div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="card"><div class="stat-label">Total Questions</div><div class="stat">\${player.totalQuestions}</div></div>
-      <div class="card"><div class="stat-label">Correct</div><div class="stat">\${player.correct}</div></div>
-      <div class="card"><div class="stat-label">Wrong</div><div class="stat">\${player.wrong}</div></div>
-      <div class="card"><div class="stat-label">Accuracy</div><div class="stat">\${getAccuracy()}%</div></div>
-    </div>
-    <div class="section">
-      <div class="section-title">Skill Mastery</div>
-      <div class="card">
-        \${skillRow("Treble Clef",skillAccuracy("trebleClef"))}
-        \${skillRow("Bass Clef",skillAccuracy("bassClef"))}
-        \${skillRow("Rhythm",skillAccuracy("rhythm"))}
-        \${skillRow("Pitch",skillAccuracy("pitch"))}
-      </div>
-    </div>
-  \`;
-}
-function skillRow(name,value){
-  return \`
-    <div style="margin-bottom:18px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:7px">
-        <span>\${name}</span><strong>\${value}%</strong>
-      </div>
-      <div class="progress"><div style="width:\${value}%"></div></div>
-    </div>
-  \`;
-}
-function startWritingPractice(){
-  closeModal();
-  document.getElementById("appContent").innerHTML = \`
-    <div class="game-container">
-      <div class="page-title">✍️ Writing Practice</div>
-      <div class="page-description">Write a C Major scale.</div>
-      <div class="staff-card" style="margin-top:25px">
-        <div class="staff">
-          <div class="staff-lines">
-            <div class="staff-line"></div><div class="staff-line"></div>
-            <div class="staff-line"></div><div class="staff-line"></div><div class="staff-line"></div>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:25px">
-        <button style="background:var(--accent);padding:14px 25px;border-radius:10px" onclick="finishWriting()">Submit</button>
-      </div>
-    </div>
-  \`;
-}
-function finishWriting(){
-  addXP(40);
-  notify(language==="zh" ? "写谱练习完成！" : "Writing practice completed!");
-}
-function startComposition(){
-  closeModal();
-  document.getElementById("appContent").innerHTML = \`
-    <div class="game-container">
-      <div class="page-title">📝 Composer</div>
-      <div class="page-description">Create your own four-bar melody.</div>
-      <div class="card" style="margin-top:25px">
-        <div class="answers">
-          \${["C","D","E","F","G","A","B"].map(n=>\`
-            <button class="answer" onclick="addCompositionNote('\${n}')">\${n}</button>
-          \`).join("")}
-        </div>
-        <div id="composition" style="font-size:40px;text-align:center;margin:40px"></div>
-        <button style="background:var(--accent);padding:12px 20px;border-radius:9px" onclick="finishComposition()">Finish Composition</button>
-      </div>
-    </div>
-  \`;
-  window.compositionNotes=[];
-}
-function addCompositionNote(note){
-  if(window.compositionNotes.length>=16) return;
-  window.compositionNotes.push(note);
-  document.getElementById("composition").textContent = window.compositionNotes.join(" ");
-}
-function finishComposition(){
-  addXP(75);
-  notify(language==="zh" ? "作品完成！+75 XP" : "Composition completed! +75 XP");
-}
-function startMasterChallenge(){
-  closeModal();
-  document.getElementById("appContent").innerHTML = \`
-    <div class="game-container">
-      <div class="topbar">
-        <div>
-          <div class="page-title">👑 Grandmaster Challenge</div>
-          <div class="page-description">Ultimate music notation test.</div>
-        </div>
-      </div>
-      <div class="card">
-        <h2>Mission</h2>
-        <p>Identify the clef, key signature, time signature and pitch.</p>
-        <button style="background:var(--accent);padding:14px 25px;border-radius:10px" onclick="startPractice()">Begin</button>
-      </div>
-    </div>
-  \`;
-}
-function setLanguage(lang){
-  language=lang;
-  save();
-  renderDashboard();
-}
-function getAccuracy(){
-  const total = player.correct+player.wrong;
-  if(total===0) return 0;
-  return Math.round(player.correct/total*100);
-}
-function getCourseProgress(){
-  return Math.min(100, Math.round(player.lessonsCompleted.length / lessons.length * 100));
-}
-document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeModal(); });
+
+/* ---------- KEYBOARD ---------- */
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeModal();
+});
+
+/* ---------- RESIZE ---------- */
+window.addEventListener('resize', () => {
+  // Re-draw any visible staff canvases
+  const cvs = document.querySelectorAll('.staff-canvas, #qCanvas, #lessonCanvas');
+  cvs.forEach(c => {
+    if(c.id === 'qCanvas' && session.current){
+      drawStaff(c, { clef: session.current.clef, notePos: session.current.note.pos });
+    }
+  });
+});
+
+/* ---------- INIT ---------- */
+window.openLesson = openLesson;
+window.completeLesson = completeLesson;
+window.closeModal = closeModal;
+window.setLanguage = setLanguage;
+window.startPracticeMode = startPracticeMode;
+window.startTestMode = startTestMode;
+window.renderPracticePicker = renderPracticePicker;
+window.renderTestPicker = renderTestPicker;
+window.resetProgress = resetProgress;
+
 updatePlayerUI();
 renderDashboard();
-window.resetGame=function(){
-  if(confirm("Reset all Music Staff Master progress?")){
-    localStorage.removeItem("nv_player");
-    location.reload();
-  }
-};
+
 <\/script>
 </body>
 </html>`;
@@ -875,9 +1669,9 @@ window.resetGame=function(){
       throw new Error('initGame requires a container element.');
     }
     var frame = document.createElement('iframe');
-    frame.title = 'Music Staff Master';
+    frame.title = 'NoteVerse · Music Staff Master';
     frame.setAttribute('allow', 'autoplay; fullscreen');
-    frame.style.cssText = 'display:block;width:100%;height:100%;min-height:750px;border:0;border-radius:16px;background:#10131a;overflow:hidden;';
+    frame.style.cssText = 'display:block;width:100%;height:100%;min-height:780px;border:0;border-radius:16px;background:#0d1117;overflow:hidden;';
     frame.srcdoc = gameHTML;
     wrapper.replaceChildren(frame);
     return frame;
