@@ -270,6 +270,906 @@
                         "zh": "こ (ko) 读作 \"coat\" 里的 \"co\"",
                         "en": "\"こ\" (ko) is pronounced like \"co\" in \"coat\""
                       }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“さ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"さ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "se"
+                        ],
+                        "en": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "se"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "さ 读作 sa",
+                        "en": "\"さ\" (sa) is pronounced like \"sa\" in \"salad\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“し”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"し\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "so"
+                        ],
+                        "en": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "so"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "し 为特例发音，读作 shi，发音类似英语的 \"she\"",
+                        "en": "\"し\" (shi) is an exception in the Sa-row, pronounced like \"she\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“す”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"す\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "se",
+                          "so",
+                          "sa",
+                          "su"
+                        ],
+                        "en": [
+                          "se",
+                          "so",
+                          "sa",
+                          "su"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "す 读作 su",
+                        "en": "\"す\" (su) is pronounced like \"s\" + \"u\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“せ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"せ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "se",
+                          "shi",
+                          "sa",
+                          "su"
+                        ],
+                        "en": [
+                          "se",
+                          "shi",
+                          "sa",
+                          "su"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "せ 读作 se ，发音类似英语的 \"say\"",
+                        "en": "\"せ\" (se) is pronounced like \"say\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“そ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"そ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "sa",
+                          "su",
+                          "so",
+                          "se"
+                        ],
+                        "en": [
+                          "sa",
+                          "su",
+                          "so",
+                          "se"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "そ 读作 so，读法类似英语的 “so”",
+                        "en": "\"そ\" (so) is pronounced like \"so\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“た”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"た\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ta",
+                          "chi",
+                          "tsu",
+                          "te"
+                        ],
+                        "en": [
+                          "ta",
+                          "chi",
+                          "tsu",
+                          "te"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "た 读作 ta，读法类似英语 “target” 的 “ta”",
+                        "en": "\"た\" (ta) is pronounced like \"ta\" in \"target\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ち”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ち\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ta",
+                          "chi",
+                          "tsu",
+                          "to"
+                        ],
+                        "en": [
+                          "ta",
+                          "chi",
+                          "tsu",
+                          "to"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ち 为特例发音，读作 chi",
+                        "en": "\"ち\" (chi) is an exception in the Ta-row, pronounced like \"cheese\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“つ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"つ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "te",
+                          "to",
+                          "tsu",
+                          "ta"
+                        ],
+                        "en": [
+                          "te",
+                          "to",
+                          "tsu",
+                          "ta"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "つ 发音类似英语 \"tsunami\" 中的 \"tsu\"",
+                        "en": "\"つ\" (tsu) is pronounced like \"ts\" in \"tsunami\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“て”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"て\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ta",
+                          "chi",
+                          "tsu",
+                          "te"
+                        ],
+                        "en": [
+                          "ta",
+                          "chi",
+                          "tsu",
+                          "te"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "て 读作 te",
+                        "en": "\"て\" (te) is pronounced like \"tell\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“と”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"と\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ta",
+                          "tsu",
+                          "to",
+                          "te"
+                        ],
+                        "en": [
+                          "ta",
+                          "tsu",
+                          "to",
+                          "te"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "と 读作 to，发音类似英语的 “toe”",
+                        "en": "\"と\" (to) is pronounced like \"toe\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“な”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"な\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "na",
+                          "ni",
+                          "nu",
+                          "ne"
+                        ],
+                        "en": [
+                          "na",
+                          "ni",
+                          "nu",
+                          "ne"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "な 读作 na",
+                        "en": "\"な\" (na) is pronounced like \"na\" in \"napa\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“に”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"に\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "na",
+                          "ni",
+                          "nu",
+                          "no"
+                        ],
+                        "en": [
+                          "na",
+                          "ni",
+                          "nu",
+                          "no"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "に 读作 ni，发音类似英语的 “knee”",
+                        "en": "\"に\" (ni) is pronounced like \"knee\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ぬ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ぬ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ne",
+                          "nu",
+                          "no",
+                          "na"
+                        ],
+                        "en": [
+                          "ne",
+                          "nu",
+                          "no",
+                          "na"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ぬ 读作 nu",
+                        "en": "\"ぬ\" (nu) is pronounced like \"noodle\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ね”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ね\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ni",
+                          "ne",
+                          "na",
+                          "nu"
+                        ],
+                        "en": [
+                          "ni",
+                          "ne",
+                          "na",
+                          "nu"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ね 读作 ne",
+                        "en": "\"ね\" (ne) is pronounced like \"net\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“の”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"の\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "na",
+                          "nu",
+                          "no",
+                          "ne"
+                        ],
+                        "en": [
+                          "na",
+                          "nu",
+                          "no",
+                          "ne"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "の 读作 no，发音类似英语的 “no”",
+                        "en": "\"の\" (no) is pronounced like \"no\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“は”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"は\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ha",
+                          "hi",
+                          "fu",
+                          "he"
+                        ],
+                        "en": [
+                          "ha",
+                          "hi",
+                          "fu",
+                          "he"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "は 独立使用时读作 ha",
+                        "en": "\"は\" (ha) is pronounced like \"ha\" in \"ha-ha\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ひ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ひ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ha",
+                          "fu",
+                          "ho",
+                          "hi"
+                        ],
+                        "en": [
+                          "ha",
+                          "fu",
+                          "ho",
+                          "hi"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ひ 读作 hi，发音类似英语的 “he”",
+                        "en": "\"ひ\" (hi) is pronounced like \"he\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ふ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ふ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "he",
+                          "ho",
+                          "ha",
+                          "fu"
+                        ],
+                        "en": [
+                          "he",
+                          "ho",
+                          "ha",
+                          "fu"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ふ 发音介于 hu 与 fu 之间",
+                        "en": "\"ふ\" (fu) is a soft sound between \"hu\" and \"fu\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“へ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"へ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "he",
+                          "hi",
+                          "ha",
+                          "fu"
+                        ],
+                        "en": [
+                          "he",
+                          "hi",
+                          "ha",
+                          "fu"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "へ 读作 he， 发音类似英语 “help” 的 “he”",
+                        "en": "\"へ\" (he) is pronounced like \"help\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ほ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ほ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ha",
+                          "fu",
+                          "ho",
+                          "he"
+                        ],
+                        "en": [
+                          "ha",
+                          "fu",
+                          "ho",
+                          "he"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ほ 读作 ho，发音类似英语 “home” 的 “ho”",
+                        "en": "\"ほ\" (ho) is pronounced like \"home\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ま”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ま\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ma",
+                          "mi",
+                          "mu",
+                          "me"
+                        ],
+                        "en": [
+                          "ma",
+                          "mi",
+                          "mu",
+                          "me"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ま 读作 ma",
+                        "en": "\"ま\" (ma) is pronounced like \"mama\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“み”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"み\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ma",
+                          "mi",
+                          "mu",
+                          "mo"
+                        ],
+                        "en": [
+                          "ma",
+                          "mi",
+                          "mu",
+                          "mo"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "み 读作 mi，发音类似英语的 “me”",
+                        "en": "\"み\" (mi) is pronounced like \"me\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“む”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"む\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "me",
+                          "mu",
+                          "mo",
+                          "ma"
+                        ],
+                        "en": [
+                          "me",
+                          "mu",
+                          "mo",
+                          "ma"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "む 读作 mu，发音类似英语 “moon” 的 “mo”",
+                        "en": "\"む\" (mu) is pronounced like \"moon\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“め”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"め\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ma",
+                          "mi",
+                          "me",
+                          "mu"
+                        ],
+                        "en": [
+                          "ma",
+                          "mi",
+                          "me",
+                          "mu"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "め 读作 me，发音类似英语 “met” 的 “me”",
+                        "en": "\"め\" (me) is pronounced like \"met\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“も”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"も\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ma",
+                          "mu",
+                          "mo",
+                          "me"
+                        ],
+                        "en": [
+                          "ma",
+                          "mu",
+                          "mo",
+                          "me"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "も 读作 mo，发音类似英语 “more” 的 “mo”",
+                        "en": "\"も\" (mo) is pronounced like \"more\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“や”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"や\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yu",
+                          "yo",
+                          "wa",
+                          "ya"
+                        ],
+                        "en": [
+                          "yu",
+                          "yo",
+                          "wa",
+                          "ya"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "や  读作 ya，发音类似英语 “yard” 的 “ya”",
+                        "en": "\"や\" (ya) is pronounced like \"yard\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ゆ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ゆ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yu",
+                          "ya",
+                          "yo",
+                          "wo"
+                        ],
+                        "en": [
+                          "yu",
+                          "ya",
+                          "yo",
+                          "wo"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ゆ 读作 yu，发音类似英语的 “you”",
+                        "en": "\"ゆ\" (yu) is pronounced like \"you\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“よ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"よ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ya",
+                          "yu",
+                          "n",
+                          "yo"
+                        ],
+                        "en": [
+                          "ya",
+                          "yu",
+                          "n",
+                          "yo"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "よ 读作 yo，发音类似英语 “yoga” 的 “yo”",
+                        "en": "\"よ\" (yo) is pronounced like \"yoga\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ら”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ら\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ra",
+                          "ri",
+                          "ru",
+                          "re"
+                        ],
+                        "en": [
+                          "ra",
+                          "ri",
+                          "ru",
+                          "re"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ら 读作ra，日语中的 r 音发音接近轻微的 l 音",
+                        "en": "\"ら\" is pronounced ra, the Japanese 'r' sound is close to a soft 'l' sound"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“り”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"り\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ra",
+                          "ri",
+                          "ru",
+                          "ro"
+                        ],
+                        "en": [
+                          "ra",
+                          "ri",
+                          "ru",
+                          "ro"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "り 读作 ri",
+                        "en": "\"り\" (ri) is pronounced like \"ree\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“る”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"る\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "re",
+                          "ro",
+                          "ru",
+                          "ra"
+                        ],
+                        "en": [
+                          "re",
+                          "ro",
+                          "ru",
+                          "ra"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "る 读作 ru",
+                        "en": "\"る\" (ru) is pronounced like \"roo\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“れ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"れ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ri",
+                          "ra",
+                          "ru",
+                          "re"
+                        ],
+                        "en": [
+                          "ri",
+                          "ra",
+                          "ru",
+                          "re"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "れ 读作 re，发音类似英语 “red” 的 “re”",
+                        "en": "\"れ\" (re) is pronounced like \"red\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ろ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ろ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ra",
+                          "ru",
+                          "ro",
+                          "re"
+                        ],
+                        "en": [
+                          "ra",
+                          "ru",
+                          "ro",
+                          "re"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ろ 读作 ro，发音类似英语 “row” 的 “ro”",
+                        "en": "\"ろ\" (ro) is pronounced like \"row\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“わ”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"わ\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "wo",
+                          "n",
+                          "ya"
+                        ],
+                        "en": [
+                          "wa",
+                          "wo",
+                          "n",
+                          "ya"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "わ 读作 wa",
+                        "en": "\"わ\" (wa) is pronounced like \"water\""
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“を”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"を\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "o / wo",
+                          "n",
+                          "yo"
+                        ],
+                        "en": [
+                          "wa",
+                          "o / wo",
+                          "n",
+                          "yo"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "を (o/wo) 主要用作宾语助词，现代发音通常与“お”相同读作 o",
+                        "en": "\"を\" (o/wo) is used as an object particle and is usually pronounced the same as \"お\" (o)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "平假名“ん”的正确读音是？",
+                        "en": "What is the correct pronunciation of the Hiragana \"ん\"?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "n",
+                          "a",
+                          "mo"
+                        ],
+                        "en": [
+                          "wa",
+                          "n",
+                          "a",
+                          "mo"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ん (n) 是五十音图中唯一的独立拨音（鼻音）",
+                        "en": "\"ん\" (n) is the only standalone nasal consonant in Japanese"
+                      }
                     }
                   ]
                 },
