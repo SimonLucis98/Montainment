@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>故事工坊 - Montainment</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#f5f2ed; font-family:'Nunito', system-ui, sans-serif; min-height:100vh; }
 
-        .story-container { max-width: 1400px; margin:0 auto; padding:24px 24px 40px; min-height:70vh; }  /* ← 从 900px → 1400px */
+        .story-container { max-width: 1400px; margin:0 auto; padding:24px 24px 40px; min-height:70vh; }
 
         /* ===== 古风音乐播放器 ===== */
         .music-player {
@@ -115,7 +116,7 @@
         /* ===== 小说网格 ===== */
         .story-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));  /* 卡片大小不变 */
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 24px;
             margin-top: 8px;
         }
@@ -168,7 +169,7 @@
         .empty-state .icon { font-size:56px; margin-bottom:12px; }
         .empty-state h3 { font-size:20px; color:#666; margin-bottom:4px; }
 
-        /* ===== 响应式：容器宽度逐步缩小，卡片始终保持 260px 最小宽度 ===== */
+        /* ===== 响应式 ===== */
         @media (max-width: 1480px) {
             .story-container { max-width: 1160px; padding: 24px 20px 40px; }
         }
@@ -282,16 +283,45 @@
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  🎵 古风音乐播放器（YouTube 嵌入）
+        //  🎵 古风音乐播放器（YouTube IFrame Player API — 手机可靠播放）
         // ================================================================
         (function() {
             const YOUTUBE_VIDEO_ID = '9_KdMxi2dEc';
-            const YOUTUBE_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&modestbranding=1&rel=0&showinfo=0`;
-
+            let ytPlayer = null;
             let isPlaying = false;
             let autoPlayUsed = false;
+            let userInteracted = false;
             const playBtn = document.getElementById('playBtn');
             const volumeSlider = document.getElementById('volumeSlider');
+
+            // 创建隐藏容器
+            const container = document.createElement('div');
+            container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
+            container.innerHTML = '<div id="youtubePlayer"></div>';
+            document.body.appendChild(container);
+
+            window.onYouTubeIframeAPIReady = function() {
+                ytPlayer = new YT.Player('youtubePlayer', {
+                    height: '1',
+                    width: '1',
+                    videoId: YOUTUBE_VIDEO_ID,
+                    playerVars: {
+                        autoplay: 0,
+                        controls: 0,
+                        loop: 1,
+                        playlist: YOUTUBE_VIDEO_ID,
+                        modestbranding: 1,
+                        rel: 0,
+                        showinfo: 0,
+                        playsinline: 1
+                    }
+                });
+            };
+
+            // 如果 API 已经加载（罕见情况）
+            if (window.YT && window.YT.Player) {
+                window.onYouTubeIframeAPIReady();
+            }
 
             function updateButton(state) {
                 isPlaying = state;
@@ -305,83 +335,51 @@
             }
 
             function playMusic() {
-                const iframe = document.getElementById('youtubePlayer');
-                if (!iframe) return;
-                if (isPlaying) return;
-                const currentSrc = iframe.src;
-                iframe.src = currentSrc.replace('autoplay=0', 'autoplay=1');
+                userInteracted = true;
+                if (!ytPlayer || !ytPlayer.playVideo) return;
+                try {
+                    ytPlayer.playVideo();
+                    if (ytPlayer.setVolume) ytPlayer.setVolume(parseInt(volumeSlider.value, 10));
+                } catch (e) { console.warn(e); }
                 updateButton(true);
             }
 
             function pauseMusic() {
-                const iframe = document.getElementById('youtubePlayer');
-                if (!iframe) return;
-                if (!isPlaying) return;
-                const currentSrc = iframe.src;
-                iframe.src = '';
-                setTimeout(() => {
-                    iframe.src = currentSrc.replace('autoplay=1', 'autoplay=0');
-                }, 50);
+                if (!ytPlayer || !ytPlayer.pauseVideo) return;
+                try { ytPlayer.pauseVideo(); } catch (e) {}
                 updateButton(false);
             }
 
             function toggleMusic() {
-                if (isPlaying) {
-                    pauseMusic();
-                } else {
-                    playMusic();
+                if (isPlaying) pauseMusic(); else playMusic();
+            }
+
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMusic();
+            });
+
+            document.querySelector('.music-player').addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('input')) return;
+                toggleMusic();
+            });
+
+            document.addEventListener('click', function autoPlay(e) {
+                if (autoPlayUsed || isPlaying) return;
+                if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
+                if (e.target.closest('.immersive-entry')) return;
+                playMusic();
+                autoPlayUsed = true;
+                document.removeEventListener('click', autoPlay);
+            });
+
+            volumeSlider.addEventListener('input', function() {
+                if (ytPlayer && ytPlayer.setVolume) {
+                    try { ytPlayer.setVolume(parseInt(this.value, 10)); } catch (e) {}
                 }
-            }
+            });
 
-            function createPlayer() {
-                const container = document.createElement('div');
-                container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
-                container.innerHTML = `
-                    <iframe
-                        id="youtubePlayer"
-                        src="${YOUTUBE_URL}"
-                        width="1"
-                        height="1"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                    ></iframe>
-                `;
-                document.body.appendChild(container);
-
-                playBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    toggleMusic();
-                });
-
-                document.querySelector('.music-player').addEventListener('click', function(e) {
-                    if (e.target.closest('button') || e.target.closest('input')) return;
-                    toggleMusic();
-                });
-
-                document.addEventListener('click', function autoPlay(e) {
-                    if (autoPlayUsed || isPlaying) return;
-                    if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
-                    if (e.target.closest('.immersive-entry')) return;
-                    playMusic();
-                    autoPlayUsed = true;
-                    document.removeEventListener('click', autoPlay);
-                });
-
-                volumeSlider.addEventListener('input', function() {});
-
-                setTimeout(() => {
-                    const iframe = document.getElementById('youtubePlayer');
-                    if (iframe) {
-                        const src = iframe.src;
-                        iframe.src = src.replace('autoplay=0', 'autoplay=0');
-                    }
-                }, 1000);
-
-                updateButton(false);
-            }
-
-            createPlayer();
+            updateButton(false);
 
             window.musicPlayer = {
                 play: playMusic,
@@ -389,7 +387,6 @@
                 toggle: toggleMusic,
                 setVolume: function(val) { volumeSlider.value = val; }
             };
-
         })();
 
         // ================================================================
