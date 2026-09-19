@@ -116,7 +116,7 @@
             flex-wrap: wrap;
         }
 
-        /* ===== 🆕 文章卡片：暖白"纸感"背景 ===== */
+        /* ===== 文章卡片：暖白"纸感"背景 ===== */
         .article-card {
             background: #faf8f4;
             border-radius: 24px;
@@ -191,7 +191,7 @@
             font-weight: 600;
         }
 
-        /* ===== 🆕 文章正文：深色文字 + 暖白背景 ===== */
+        /* 文章正文 */
         .article-body {
             padding: 36px 56px 48px;
             font-size: 17.5px;
@@ -203,7 +203,6 @@
             letter-spacing: 0.2px;
         }
 
-        /* 标题 */
         .article-body h1,
         .article-body h2,
         .article-body h3,
@@ -230,7 +229,6 @@
         .article-body h3 { font-size: 20px; color: #8a6b3a; }
         .article-body h4 { font-size: 18px; }
 
-        /* 段落 */
         .article-body p {
             margin-bottom: 1.1em;
         }
@@ -238,7 +236,6 @@
             margin-bottom: 0;
         }
 
-        /* 🆕 加粗：深珊瑚色（在浅底上非常醒目） */
         .article-body strong {
             color: #c97a6b;
             font-weight: 700;
@@ -268,7 +265,6 @@
             border-bottom-color: #1a4fd4;
         }
 
-        /* 🆕 引用块：米黄色背景 */
         .article-body blockquote {
             margin: 22px 0;
             padding: 16px 24px;
@@ -429,6 +425,69 @@
             color: #fff;
         }
 
+        /* 🆕 语言缺失提示（暖白卡片风格，配合文章卡片） */
+        .no-lang-box {
+            background: #faf8f4;
+            border-radius: 24px;
+            border: 1px solid rgba(201,168,124,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            padding: 60px 40px;
+            text-align: center;
+            color: #4a4540;
+        }
+        .no-lang-box .icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        .no-lang-box h3 {
+            font-size: 22px;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .no-lang-box p {
+            font-size: 15px;
+            color: #6b7a8f;
+            margin-bottom: 24px;
+        }
+        .no-lang-box .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .no-lang-box .btn {
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .no-lang-box .btn-primary {
+            background: #c97a6b;
+            color: #fff;
+        }
+        .no-lang-box .btn-primary:hover {
+            background: #b86a5b;
+            transform: translateY(-2px);
+        }
+        .no-lang-box .btn-outline {
+            background: transparent;
+            border: 2px solid #dce4ef;
+            color: #3d3a35;
+        }
+        .no-lang-box .btn-outline:hover {
+            background: #f2f6fd;
+        }
+
         /* ===== 回到顶部 ===== */
         .back-to-top {
             position: fixed;
@@ -497,6 +556,8 @@
                 height: 42px;
                 font-size: 18px;
             }
+
+            .no-lang-box { padding: 40px 24px; }
         }
 
         @media (max-width: 420px) {
@@ -550,7 +611,7 @@
             let currentArticle = null;
 
             // ============================================================
-            //  📝 Markdown 解析器（保持不变）
+            //  📝 Markdown 解析器
             // ============================================================
             function escapeHtml(str) {
                 return String(str)
@@ -645,6 +706,36 @@
                 return url.searchParams.get(name);
             }
 
+            // ============================================================
+            //  🆕 双语支持
+            // ============================================================
+            function getLocalizedArticle(item) {
+                const lang = i18n.currentLang || 'zh';
+                if (lang === 'zh') {
+                    return {
+                        title: item.title || '',
+                        category: item.category || '',
+                        preview: item.preview || '',
+                        content: item.content || ''
+                    };
+                } else {
+                    return {
+                        title: item.titleEn || '',
+                        category: item.categoryEn || '',
+                        preview: item.previewEn || '',
+                        content: item.contentEn || ''
+                    };
+                }
+            }
+
+            function hasArticleLang(item) {
+                const loc = getLocalizedArticle(item);
+                return !!(loc.title && loc.content);
+            }
+
+            // ============================================================
+            //  📄 渲染
+            // ============================================================
             function renderError(message) {
                 container.innerHTML = `
                     <div class="error-box">
@@ -657,22 +748,64 @@
                 document.title = i18n.t('articleread.error_title') + ' · Montainment';
             }
 
+            // 🆕 语言缺失提示
+            function renderNoLang(item) {
+                const lang = i18n.currentLang || 'zh';
+                const loc = getLocalizedArticle(item);
+                const fallbackLoc = lang === 'zh'
+                    ? { title: item.titleEn || '', content: item.contentEn || '' }
+                    : { title: item.title || '', content: item.content || '' };
+
+                const titleText = lang === 'zh' ? '暂无中文版本' : 'No English version available';
+                const descText = lang === 'zh'
+                    ? '这篇文章只有英文版本。'
+                    : 'This article is only available in Chinese.';
+                const switchBtnText = lang === 'zh' ? '🇬🇧 查看英文版' : '🇨🇳 查看中文版';
+                const backText = i18n.t('articleread.back_to_immersive');
+                const switchLang = lang === 'zh' ? 'en' : 'zh';
+
+                container.innerHTML = `
+                    <div class="article-topbar">
+                        <a href="immersive.html" class="back-link">← ${backText}</a>
+                    </div>
+                    <div class="no-lang-box">
+                        <div class="icon">🌐</div>
+                        <h3>${titleText}</h3>
+                        <p>${descText}</p>
+                        <div class="actions">
+                            <button class="btn btn-primary" id="switchLangBtn">${switchBtnText}</button>
+                            <a href="immersive.html" class="btn btn-outline">${backText}</a>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('switchLangBtn').addEventListener('click', function() {
+                    i18n.setLang(switchLang);
+                });
+
+                document.title = titleText + ' · Montainment';
+            }
+
             function renderArticle(item) {
+                // 🆕 检查当前语言是否有内容
+                if (!hasArticleLang(item)) {
+                    renderNoLang(item);
+                    return;
+                }
+
                 currentArticle = item;
-
-                const title = item.title || '';
+                const loc = getLocalizedArticle(item);
                 const author = item.author || '蒙堂木下';
-                const category = item.category || '';
 
-                document.title = title + ' · Montainment';
-                if (pageDesc) pageDesc.content = item.preview || title;
+                document.title = loc.title + ' · Montainment';
+                if (pageDesc) pageDesc.content = loc.preview || loc.title;
 
                 const hasCover = item.cover && item.cover.trim() !== '';
                 const coverHtml = hasCover
-                    ? `<img src="${item.cover}" alt="${title}" />`
+                    ? `<img src="${item.cover}" alt="${loc.title}" />`
                     : `<div class="cover-fallback">📄</div>`;
 
-                const contentHtml = parseMarkdown(item.content || '（内容为空）');
+                const contentHtml = parseMarkdown(loc.content);
 
                 container.innerHTML = `
                     <div class="article-topbar">
@@ -690,8 +823,8 @@
                             ${coverHtml}
                         </div>
                         <div class="article-header">
-                            ${category ? `<span class="article-category">${category}</span>` : ''}
-                            <h1 class="article-title">${title}</h1>
+                            ${loc.category ? `<span class="article-category">${loc.category}</span>` : ''}
+                            <h1 class="article-title">${loc.title}</h1>
                             <div class="article-byline">
                                 <span class="author">👤 ${author}</span>
                                 <span id="readingTime">📖 --</span>
