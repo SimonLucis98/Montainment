@@ -8,120 +8,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ========== 后台样式 ========== */
-    .admin-container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .admin-panel {
-      background: #fff;
-      border-radius: 24px;
-      padding: 28px 32px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-      margin-bottom: 24px;
-    }
-    .admin-panel h2 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #0b1c33;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .admin-panel h2 .badge-count {
-      font-size: 14px;
-      font-weight: 600;
-      background: #eef2f7;
-      padding: 2px 14px;
-      border-radius: 20px;
-      color: #6b7a8f;
-    }
-    .admin-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
-      margin-top: 12px;
-    }
-    .stat-card {
-      background: #f6f8fc;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      border: 1px solid #eef2f7;
-    }
-    .stat-card .number {
-      font-size: 32px;
-      font-weight: 800;
-      color: #2a6df4;
-    }
-    .stat-card .label {
-      font-size: 14px;
-      color: #6b7a8f;
-      margin-top: 4px;
-    }
-
-    /* ========== 表单 ========== */
-    .admin-form-group {
-      margin-bottom: 16px;
-    }
-    .admin-form-group label {
-      display: block;
-      font-weight: 600;
-      color: #0b1c33;
-      margin-bottom: 4px;
-      font-size: 14px;
-    }
+    .admin-container { max-width: 960px; margin: 0 auto; padding: 20px; }
+    .admin-panel { background: #fff; border-radius: 24px; padding: 28px 32px; box-shadow: 0 8px 32px rgba(0,0,0,0.06); margin-bottom: 24px; }
+    .admin-panel h2 { font-size: 20px; font-weight: 700; color: #0b1c33; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .admin-panel h2 .badge-count { font-size: 14px; font-weight: 600; background: #eef2f7; padding: 2px 14px; border-radius: 20px; color: #6b7a8f; }
+    .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 12px; }
+    .stat-card { background: #f6f8fc; border-radius: 16px; padding: 20px; text-align: center; border: 1px solid #eef2f7; }
+    .stat-card .number { font-size: 32px; font-weight: 800; color: #2a6df4; }
+    .stat-card .label { font-size: 14px; color: #6b7a8f; margin-top: 4px; }
+    .admin-form-group { margin-bottom: 16px; }
+    .admin-form-group label { display: block; font-weight: 600; color: #0b1c33; margin-bottom: 4px; font-size: 14px; }
     .admin-form-group input,
     .admin-form-group select,
-    .admin-form-group textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border: 2px solid #e6ecf3;
-      border-radius: 12px;
-      font-size: 14px;
-      font-family: inherit;
-      transition: 0.2s;
-      background: #fafcff;
-    }
+    .admin-form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid #e6ecf3; border-radius: 12px; font-size: 14px; font-family: inherit; transition: 0.2s; background: #fafcff; }
     .admin-form-group input:focus,
     .admin-form-group select:focus,
-    .admin-form-group textarea:focus {
-      outline: none;
-      border-color: #2a6df4;
-      box-shadow: 0 0 0 4px rgba(42,109,244,0.08);
-    }
-    .admin-form-group textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-    .admin-form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 600px) {
-      .admin-form-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* ========== 按钮 ========== */
-    .btn-admin {
-      padding: 10px 28px;
-      border: none;
-      border-radius: 40px;
-      font-size: 15px;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .admin-form-group textarea:focus { outline: none; border-color: #2a6df4; box-shadow: 0 0 0 4px rgba(42,109,244,0.08); }
+    .admin-form-group textarea { resize: vertical; min-height: 80px; }
+    .admin-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .admin-form-row { grid-template-columns: 1fr; } }
+    .btn-admin { padding: 10px 28px; border: none; border-radius: 40px; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
     .btn-admin-primary { background: #0b1c33; color: #fff; }
     .btn-admin-primary:hover { background: #1a3050; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(11,28,51,0.15); }
     .btn-admin-success { background: #1f8b4c; color: #fff; }
@@ -130,51 +36,12 @@
     .btn-admin-danger:hover { background: #b83a3a; }
     .btn-admin-outline { background: transparent; border: 2px solid #dce4ef; color: #0b1c33; }
     .btn-admin-outline:hover { background: #f2f6fd; }
-
-    /* ========== 列表 ========== */
-    .admin-list {
-      margin-top: 12px;
-    }
-    .admin-list-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      background: #fafcff;
-      border: 1px solid #eef2f7;
-      border-radius: 12px;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .admin-list-item .info {
-      font-weight: 500;
-      color: #0b1c33;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .admin-list-item .info small {
-      font-weight: 400;
-      color: #6b7a8f;
-      margin-left: 4px;
-    }
-    .admin-list-item .actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .admin-list-item .actions button {
-      padding: 4px 14px;
-      border: none;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.15s;
-    }
+    .admin-list { margin-top: 12px; }
+    .admin-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #fafcff; border: 1px solid #eef2f7; border-radius: 12px; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+    .admin-list-item .info { font-weight: 500; color: #0b1c33; flex: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .admin-list-item .info small { font-weight: 400; color: #6b7a8f; margin-left: 4px; }
+    .admin-list-item .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .admin-list-item .actions button { padding: 4px 14px; border: none; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.15s; }
     .btn-edit { background: #eef2f7; color: #0b1c33; }
     .btn-edit:hover { background: #dce4ef; }
     .btn-delete { background: #fdeeec; color: #d14c4c; }
@@ -182,235 +49,78 @@
     .btn-toggle { background: #e6f7ee; color: #1f8b4c; }
     .btn-toggle.off { background: #fdeeec; color: #d14c4c; }
     .btn-toggle:hover { opacity: 0.8; }
-
-    /* ========== Tabs ========== */
-    .tabs {
-      display: flex;
-      gap: 4px;
-      background: #eef2f7;
-      border-radius: 12px;
-      padding: 4px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      padding: 8px 20px;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      background: transparent;
-      color: #6b7a8f;
-      transition: 0.2s;
-      font-family: inherit;
-    }
-    .tab-btn.active {
-      background: #fff;
-      color: #0b1c33;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
+    .tabs { display: flex; gap: 4px; background: #eef2f7; border-radius: 12px; padding: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { padding: 8px 20px; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; background: transparent; color: #6b7a8f; transition: 0.2s; font-family: inherit; }
+    .tab-btn.active { background: #fff; color: #0b1c33; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .tab-btn:hover:not(.active) { color: #0b1c33; }
     .tab-content.hidden { display: none !important; }
-
-    /* ========== JSON 编辑器 ========== */
-    #jsonEditor {
-      width: 100%;
-      min-height: 300px;
-      padding: 16px;
-      border: 2px solid #e6ecf3;
-      border-radius: 16px;
-      font-family: 'Courier New', monospace;
-      font-size: 13px;
-      background: #fafcff;
-      resize: vertical;
-      tab-size: 2;
-    }
-    .admin-actions-bar {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid #eef2f7;
-    }
-
-    /* ========== Toast 提示 ========== */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      padding: 16px 28px;
-      border-radius: 16px;
-      font-weight: 600;
-      color: #fff;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-      z-index: 999;
-      animation: slideIn 0.3s ease;
-    }
+    #jsonEditor { width: 100%; min-height: 300px; padding: 16px; border: 2px solid #e6ecf3; border-radius: 16px; font-family: 'Courier New', monospace; font-size: 13px; background: #fafcff; resize: vertical; tab-size: 2; }
+    .admin-actions-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; padding-top: 16px; border-top: 1px solid #eef2f7; }
+    .toast { position: fixed; bottom: 30px; right: 30px; padding: 16px 28px; border-radius: 16px; font-weight: 600; color: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.15); z-index: 999; animation: slideIn 0.3s ease; }
     .toast-success { background: #1f8b4c; }
     .toast-error { background: #d14c4c; }
     .toast-info { background: #2a6df4; }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ========== 登录覆盖层 ========== */
-    .login-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(11, 28, 51, 0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(6px);
-    }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 28, 51, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(6px); }
     .login-overlay.hidden { display: none; }
-    .login-box {
-      background: #fff;
-      padding: 40px 48px;
-      border-radius: 32px;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.3);
-      text-align: center;
-    }
-    .login-box h2 {
-      font-size: 24px;
-      color: #0b1c33;
-      margin-bottom: 8px;
-    }
-    .login-box p {
-      color: #6b7a8f;
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
-    .login-box .admin-form-group {
-      margin-bottom: 16px;
-    }
-    .login-box .admin-form-group input {
-      text-align: center;
-      font-size: 18px;
-      letter-spacing: 4px;
-      padding: 12px;
-    }
-    .login-box .btn-admin {
-      width: 100%;
-      justify-content: center;
-    }
-    .login-error {
-      color: #d14c4c;
-      font-size: 14px;
-      margin-top: 12px;
-      min-height: 24px;
-    }
-
-    /* ========== 章节嵌套样式 ========== */
-    .chapter-item {
-      margin-left: 20px;
-      border-left: 3px solid #e6ecf3;
-      padding-left: 16px;
-      margin-top: 8px;
-    }
-    .chapter-item .admin-list-item {
-      background: #f8faff;
-    }
-    .chapter-item .info small {
-      display: block;
-      font-size: 12px;
-      color: #6b7a8f;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 300px;
-    }
-    .sub-label {
-      font-size: 13px;
-      color: #6b7a8f;
-      font-weight: 600;
-      margin-top: 12px;
-      padding: 4px 0;
-    }
-
-    /* ========== 上传状态 ========== */
-    .upload-status {
-      font-size: 13px;
-      color: #888;
-      margin-top: 4px;
-      min-height: 20px;
-    }
+    .login-box { background: #fff; padding: 40px 48px; border-radius: 32px; max-width: 400px; width: 90%; box-shadow: 0 24px 64px rgba(0,0,0,0.3); text-align: center; }
+    .login-box h2 { font-size: 24px; color: #0b1c33; margin-bottom: 8px; }
+    .login-box p { color: #6b7a8f; font-size: 14px; margin-bottom: 24px; }
+    .login-box .admin-form-group { margin-bottom: 16px; }
+    .login-box .admin-form-group input { text-align: center; font-size: 18px; letter-spacing: 4px; padding: 12px; }
+    .login-box .btn-admin { width: 100%; justify-content: center; }
+    .login-error { color: #d14c4c; font-size: 14px; margin-top: 12px; min-height: 24px; }
+    .chapter-item { margin-left: 20px; border-left: 3px solid #e6ecf3; padding-left: 16px; margin-top: 8px; }
+    .chapter-item .admin-list-item { background: #f8faff; }
+    .chapter-item .info small { display: block; font-size: 12px; color: #6b7a8f; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px; }
+    .sub-label { font-size: 13px; color: #6b7a8f; font-weight: 600; margin-top: 12px; padding: 4px 0; }
+    .upload-status { font-size: 13px; color: #888; margin-top: 4px; min-height: 20px; }
     .upload-status.success { color: #1f8b4c; }
     .upload-status.error { color: #d14c4c; }
     .upload-status.loading { color: #2a6df4; }
-
-    .cover-preview {
-      margin-top: 8px;
-      max-width: 120px;
-      border-radius: 8px;
-      border: 2px solid #eef2f7;
-      overflow: hidden;
-    }
-    .cover-preview img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .cover-preview .no-cover {
-      padding: 20px;
-      text-align: center;
-      color: #ccc;
-      font-size: 12px;
-      background: #fafcff;
-    }
-
-    /* ========== 开关样式 ========== */
-    .toggle-badge {
-      display: inline-block;
-      padding: 2px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
+    .cover-preview { margin-top: 8px; max-width: 120px; border-radius: 8px; border: 2px solid #eef2f7; overflow: hidden; }
+    .cover-preview img { width: 100%; height: auto; display: block; }
+    .cover-preview .no-cover { padding: 20px; text-align: center; color: #ccc; font-size: 12px; background: #fafcff; }
+    .toggle-badge { display: inline-block; padding: 2px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
     .toggle-badge.on { background: #e6f7ee; color: #1f8b4c; }
     .toggle-badge.off { background: #fdeeec; color: #d14c4c; }
-
-    /* ========== 沉浸式类型标签 ========== */
-    .type-badge {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      background: #eef2f7;
-      color: #6b7a8f;
-    }
+    .type-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; background: #eef2f7; color: #6b7a8f; }
     .type-badge.text { background: #e6f7ee; color: #1f8b4c; }
     .type-badge.article { background: #e6f0ff; color: #2a6df4; }
     .type-badge.video { background: #ffe3e3; color: #d14c4c; }
     .type-badge.music { background: #fff4d6; color: #a06a00; }
-
-    /* 封面缩略图通用 */
-    .cover-thumb {
-      width: 40px;
-      height: 40px;
-      border-radius: 6px;
-      object-fit: cover;
-      border: 1px solid #eef2f7;
-      flex-shrink: 0;
+    .cover-thumb { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; border: 1px solid #eef2f7; flex-shrink: 0; }
+    /* 🆕 语言分区标题 */
+    .lang-section-title {
+      font-size: 13px;
+      color: #2a6df4;
+      font-weight: 700;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding: 6px 14px;
+      background: #eef4ff;
+      border-radius: 10px;
+      display: inline-block;
+      letter-spacing: 0.3px;
+    }
+    .lang-section-title.en {
+      color: #1f8b4c;
+      background: #e6f7ee;
+    }
+    /* EN 小徽章 */
+    .en-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: #2a6df4;
+      background: #eef4ff;
+      padding: 1px 8px;
+      border-radius: 8px;
+      margin-left: 2px;
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================ -->
-  <!-- 登录覆盖层 -->
-  <!-- ============================================================ -->
   <div class="login-overlay" id="loginOverlay">
     <div class="login-box">
       <h2>🔐 管理后台</h2>
@@ -423,9 +133,6 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- 主界面（登录后显示） -->
-  <!-- ============================================================ -->
   <div id="adminMain" style="display:none;">
 
     <header class="site-header">
@@ -446,7 +153,6 @@
     <main>
       <div class="admin-container">
 
-        <!-- 页面标题 + 退出按钮 -->
         <div class="page-header" style="padding: 16px 0 8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
           <div>
             <span class="page-badge badge-primary">🔧 后台管理</span>
@@ -456,7 +162,6 @@
           <button class="btn-admin btn-admin-danger" id="logoutBtn">🚪 退出</button>
         </div>
 
-        <!-- Dashboard -->
         <div class="admin-panel">
           <h2>📊 Dashboard</h2>
           <div class="admin-grid" id="statsGrid">
@@ -472,7 +177,6 @@
           </div>
         </div>
 
-        <!-- Tabs（类别放在第一位） -->
         <div class="tabs">
           <button class="tab-btn active" data-tab="categories">📂 类别</button>
           <button class="tab-btn" data-tab="subjects">📚 科目</button>
@@ -485,7 +189,7 @@
           <button class="tab-btn" data-tab="json">📝 JSON 编辑器</button>
         </div>
 
-        <!-- ========== 🆕 Tab: 类别管理 ========== -->
+        <!-- 类别 -->
         <div class="admin-panel tab-content" id="tab-categories">
           <h2>📂 类别管理 <span class="badge-count" id="catBadge">0</span></h2>
           <form id="catForm" class="admin-form">
@@ -503,7 +207,7 @@
           <div class="admin-list" id="catList"></div>
         </div>
 
-        <!-- ========== Tab: 科目（原语言） ========== -->
+        <!-- 科目 -->
         <div class="admin-panel tab-content hidden" id="tab-subjects">
           <h2>📚 科目管理 <span class="badge-count" id="langBadge">0</span></h2>
           <div class="admin-form-group"><label>所属类别</label><select id="subjectCatSelect"><option value="">-- 请选择 --</option></select></div>
@@ -526,7 +230,7 @@
           <div class="admin-list" id="subjectList"></div>
         </div>
 
-        <!-- ========== Tab: 难度 ========== -->
+        <!-- 难度 -->
         <div class="admin-panel tab-content hidden" id="tab-difficulties">
           <h2>📊 难度管理 <span class="badge-count" id="diffBadge">0</span></h2>
           <div class="admin-form-row">
@@ -549,7 +253,7 @@
           <div class="admin-list" id="diffList"></div>
         </div>
 
-        <!-- ========== Tab: 试卷 ========== -->
+        <!-- 试卷 -->
         <div class="admin-panel tab-content hidden" id="tab-papers">
           <h2>📄 试卷管理 <span class="badge-count" id="paperBadge">0</span></h2>
           <div class="admin-form-row">
@@ -575,7 +279,7 @@
           <div class="admin-list" id="paperList"></div>
         </div>
 
-        <!-- ========== Tab: 题目 ========== -->
+        <!-- 题目 -->
         <div class="admin-panel tab-content hidden" id="tab-questions">
           <h2>❓ 题目管理 <span class="badge-count" id="questionBadge">0</span></h2>
           <div class="admin-form-row">
@@ -622,7 +326,7 @@
           <div class="admin-list" id="qList"></div>
         </div>
 
-        <!-- ========== Tab: 小说管理 ========== -->
+        <!-- 小说 -->
         <div class="admin-panel tab-content hidden" id="tab-stories">
           <h2>📚 小说管理 <span class="badge-count" id="storyBadge">0</span></h2>
           <form id="storyForm" class="admin-form">
@@ -664,7 +368,7 @@
           </div>
         </div>
 
-        <!-- ========== 🆕 Tab: 游戏管理（已增加 external 类型） ========== -->
+        <!-- 游戏 -->
         <div class="admin-panel tab-content hidden" id="tab-games">
           <h2>🎮 游戏管理 <span class="badge-count" id="gameBadge">0</span></h2>
           <form id="gameForm" class="admin-form">
@@ -715,7 +419,7 @@
           <div class="admin-list" id="gameList"></div>
         </div>
 
-        <!-- ========== Tab: 沉浸式管理 ========== -->
+        <!-- ===================== 沉浸式（双语，非强制） ===================== -->
         <div class="admin-panel tab-content hidden" id="tab-immersive">
           <h2>🍃 沉浸式管理 <span class="badge-count" id="immersiveBadge">0</span></h2>
 
@@ -731,25 +435,60 @@
                 </select>
               </div>
               <div class="admin-form-group">
-                <label>分类</label>
-                <input type="text" id="immersiveCategory" placeholder="哲思短句 / 生活随笔" />
-              </div>
-            </div>
-            <div class="admin-form-row">
-              <div class="admin-form-group">
-                <label>标题</label>
-                <input type="text" id="immersiveTitle" placeholder="静心集 · 第一篇" required />
-              </div>
-              <div class="admin-form-group">
                 <label>作者</label>
                 <input type="text" id="immersiveAuthor" placeholder="蒙堂木下" />
               </div>
             </div>
+
+            <!-- 中文内容 -->
+            <div class="lang-section-title">🇨🇳 中文内容（可留空）</div>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label>中文标题</label>
+                <input type="text" id="immersiveTitle" placeholder="静心集 · 第一篇" />
+              </div>
+              <div class="admin-form-group">
+                <label>中文分类</label>
+                <input type="text" id="immersiveCategory" placeholder="哲思短句 / 日语学习" />
+              </div>
+            </div>
+
             <div class="admin-form-group">
-              <label>预览摘要</label>
+              <label>中文预览摘要</label>
               <input type="text" id="immersivePreview" placeholder="简短预览文字..." />
             </div>
 
+            <div class="admin-form-group" id="immersiveContentGroup">
+              <label>中文正文内容</label>
+              <textarea id="immersiveContent" rows="6" placeholder="输入完整正文内容..."></textarea>
+            </div>
+
+            <!-- 英文内容 -->
+            <div class="lang-section-title en">🇬🇧 English Content（可留空）</div>
+
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label>English Title</label>
+                <input type="text" id="immersiveTitleEn" placeholder="English title (optional)" />
+              </div>
+              <div class="admin-form-group">
+                <label>English Category</label>
+                <input type="text" id="immersiveCategoryEn" placeholder="Japanese Learning" />
+              </div>
+            </div>
+
+            <div class="admin-form-group">
+              <label>English Preview</label>
+              <input type="text" id="immersivePreviewEn" placeholder="Short preview (optional)" />
+            </div>
+
+            <div class="admin-form-group">
+              <label>English Content</label>
+              <textarea id="immersiveContentEn" rows="6" placeholder="Full English content..."></textarea>
+            </div>
+
+            <!-- 封面 -->
             <div class="admin-form-group" id="immersiveCoverGroup">
               <label>🖼️ 封面图片（文本/文章）</label>
               <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -761,15 +500,13 @@
               <div class="cover-preview" id="immersiveCoverPreview"><div class="no-cover">暂无封面</div></div>
             </div>
 
-            <div class="admin-form-group" id="immersiveContentGroup">
-              <label>正文内容</label>
-              <textarea id="immersiveContent" rows="6" placeholder="输入完整正文内容..."></textarea>
-            </div>
+            <!-- URL（视频/音乐） -->
             <div class="admin-form-group" id="immersiveUrlGroup" style="display:none;">
               <label>iframe 嵌入 URL</label>
               <input type="text" id="immersiveUrl" placeholder="https://www.youtube.com/embed/xxx 或 https://player.vimeo.com/video/xxx" />
               <div style="font-size:12px; color:#6b7a8f; margin-top:4px;">💡 支持 YouTube、Vimeo、SoundCloud 等平台的嵌入链接</div>
             </div>
+
             <input type="hidden" id="immersiveEditIndex" value="-1" />
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
               <button type="submit" class="btn-admin btn-admin-primary" id="immersiveSubmitBtn">➕ 添加条目</button>
@@ -780,7 +517,7 @@
           <div class="admin-list" id="immersiveList"></div>
         </div>
 
-        <!-- ========== Tab: JSON 编辑器 ========== -->
+        <!-- JSON -->
         <div class="admin-panel tab-content hidden" id="tab-json">
           <h2>📝 JSON 数据编辑器</h2>
           <p style="color:#6b7a8f; margin-bottom:12px;">编辑完整数据（测验 + 小说 + 游戏 + 沉浸式），复制到对应 JSON 文件并提交 GitHub。</p>
@@ -805,29 +542,17 @@
 
   </div>
 
-  <!-- ============================================================ -->
-  <!-- JavaScript -->
-  <!-- ============================================================ -->
   <script>
-    // ================================================================
-    //  ADMIN.JS — 完整后台逻辑（类别 + 科目 + 难度 + 试卷 + 题目 + 小说 + 游戏 + 沉浸式）
-    // ================================================================
     (function() {
-
-      // ---------- 密码 ----------
       const ADMIN_PASSWORD = 'Montainment@98';
-
-      // ---------- Cloudinary 配置 ----------
       const CLOUDINARY_CLOUD_NAME = 'mv0w5fs5';
       const CLOUDINARY_UPLOAD_PRESET = 'story_covers';
 
-      // ---------- 数据 ----------
-      let data = { categories: [] };   // 新结构：categories -> subjects -> difficulties -> papers -> questions
+      let data = { categories: [] };
       let storiesData = { stories: [] };
       let gamesData = { games: [] };
       let immersiveData = { items: [] };
 
-      // ---------- 登录 ----------
       function checkLogin() {
         if (sessionStorage.getItem('adminLoggedIn') === 'true') {
           document.getElementById('loginOverlay').classList.add('hidden');
@@ -863,14 +588,10 @@
       });
 
       if (checkLogin()) {
-        if (document.readyState === 'complete') {
-          initAdmin();
-        } else {
-          document.addEventListener('DOMContentLoaded', initAdmin);
-        }
+        if (document.readyState === 'complete') initAdmin();
+        else document.addEventListener('DOMContentLoaded', initAdmin);
       }
 
-      // ---------- DOM 引用 ----------
       const tabs = document.querySelectorAll('.tab-btn');
       const tabContents = {
         categories: document.getElementById('tab-categories'),
@@ -884,7 +605,6 @@
         json: document.getElementById('tab-json')
       };
 
-      // ---------- 工具函数 ----------
       function getCategory(id) { return data.categories.find(c => c.id === id); }
       function getSubject(catId, subjectId) {
         const cat = getCategory(catId);
@@ -950,7 +670,6 @@
         document.getElementById('immersiveBadge').textContent = immersiveCount;
       }
 
-      // ---------- Tab 切换 ----------
       function switchTab(tabId) {
         tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabId));
         Object.keys(tabContents).forEach(key => {
@@ -971,33 +690,20 @@
         tab.addEventListener('click', function() { switchTab(this.dataset.tab); });
       });
 
-      // ================================================================
-      //  📂 类别 CRUD
-      // ================================================================
+      // ========== 类别 ==========
       function renderCategories() {
         const container = document.getElementById('catList');
         if (data.categories.length === 0) { container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无类别。</p>'; return; }
         let html = '';
         data.categories.forEach((cat, i) => {
-          html += `
-            <div class="admin-list-item">
-              <div class="info">📂 ${cat.nameZh} (${cat.id}) <small>${cat.subjects ? cat.subjects.length : 0} 个科目</small></div>
-              <div class="actions">
-                <button class="btn-edit" data-cat-index="${i}">编辑</button>
-                <button class="btn-delete" data-cat-index="${i}">删除</button>
-              </div>
-            </div>
-          `;
+          html += `<div class="admin-list-item"><div class="info">📂 ${cat.nameZh} (${cat.id}) <small>${cat.subjects ? cat.subjects.length : 0} 个科目</small></div><div class="actions"><button class="btn-edit" data-cat-index="${i}">编辑</button><button class="btn-delete" data-cat-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editCategory(parseInt(this.dataset.catIndex)); }));
         container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', function() {
           if (confirm('删除此类别及其下所有内容？')) {
             data.categories.splice(parseInt(this.dataset.catIndex), 1);
-            renderCategories();
-            populateSelects();
-            updateStats();
-            updateJsonEditor();
+            renderCategories(); populateSelects(); updateStats(); updateJsonEditor();
             showToast('已删除', 'success');
           }
         }));
@@ -1011,7 +717,6 @@
         document.getElementById('catEditIndex').value = idx;
         document.getElementById('catSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('catCancelBtn').style.display = 'inline-flex';
-        showToast('编辑: ' + cat.nameZh, 'info');
       }
 
       document.getElementById('catForm').addEventListener('submit', function(e) {
@@ -1024,24 +729,18 @@
         if (editIdx === -1) {
           if (data.categories.find(c => c.id === id)) { showToast('类别ID已存在', 'error'); return; }
           data.categories.push({ id, nameZh, nameEn, subjects: [] });
-          showToast('已添加类别: ' + nameZh, 'success');
+          showToast('已添加: ' + nameZh, 'success');
         } else {
           const cat = data.categories[editIdx];
           if (id !== cat.id && data.categories.find(c => c.id === id)) { showToast('ID已被使用', 'error'); return; }
           cat.id = id; cat.nameZh = nameZh; cat.nameEn = nameEn;
-          showToast('已更新: ' + nameZh, 'success');
-          document.getElementById('catEditIndex').value = -1;
-          document.getElementById('catSubmitBtn').textContent = '➕ 添加类别';
-          document.getElementById('catCancelBtn').style.display = 'none';
+          showToast('已更新', 'success');
         }
         this.reset();
         document.getElementById('catEditIndex').value = -1;
         document.getElementById('catSubmitBtn').textContent = '➕ 添加类别';
         document.getElementById('catCancelBtn').style.display = 'none';
-        renderCategories();
-        populateSelects();
-        updateStats();
-        updateJsonEditor();
+        renderCategories(); populateSelects(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('catCancelBtn').addEventListener('click', function() {
@@ -1049,30 +748,19 @@
         document.getElementById('catEditIndex').value = -1;
         document.getElementById('catSubmitBtn').textContent = '➕ 添加类别';
         this.style.display = 'none';
-        showToast('已取消', 'info');
       });
 
-      // ================================================================
-      //  📚 科目 CRUD（原语言）
-      // ================================================================
+      // ========== 科目 ==========
       function renderSubjects() {
         const catId = document.getElementById('subjectCatSelect').value;
         const container = document.getElementById('subjectList');
         if (!catId) { container.innerHTML = '<p style="color:#6b7a8f;">请选择类别</p>'; return; }
         const cat = getCategory(catId);
-        if (!cat || !cat.subjects) { container.innerHTML = '<p style="color:#d14c4c;">类别不存在</p>'; return; }
+        if (!cat) { container.innerHTML = '<p style="color:#d14c4c;">类别不存在</p>'; return; }
         if (cat.subjects.length === 0) { container.innerHTML = '<p style="color:#6b7a8f;">暂无科目。</p>'; return; }
         let html = '';
         cat.subjects.forEach((subj, i) => {
-          html += `
-            <div class="admin-list-item">
-              <div class="info">${subj.emoji || '📚'} ${subj.labelZh} (${subj.id}) <small>${subj.difficulties ? subj.difficulties.length : 0} 个难度</small></div>
-              <div class="actions">
-                <button class="btn-edit" data-cat="${catId}" data-subj-index="${i}">编辑</button>
-                <button class="btn-delete" data-cat="${catId}" data-subj-index="${i}">删除</button>
-              </div>
-            </div>
-          `;
+          html += `<div class="admin-list-item"><div class="info">${subj.emoji || '📚'} ${subj.labelZh} (${subj.id}) <small>${subj.difficulties ? subj.difficulties.length : 0} 个难度</small></div><div class="actions"><button class="btn-edit" data-cat="${catId}" data-subj-index="${i}">编辑</button><button class="btn-delete" data-cat="${catId}" data-subj-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editSubject(this.dataset.cat, parseInt(this.dataset.subjIndex)); }));
@@ -1080,10 +768,7 @@
           if (confirm('删除此科目？')) {
             const cat = getCategory(this.dataset.cat);
             if (cat) { cat.subjects.splice(parseInt(this.dataset.subjIndex), 1);
-              renderSubjects();
-              populateSelects();
-              updateStats();
-              updateJsonEditor();
+              renderSubjects(); populateSelects(); updateStats(); updateJsonEditor();
               showToast('已删除', 'success'); }
           }
         }));
@@ -1102,7 +787,6 @@
         document.getElementById('subjectCatRef').value = catId;
         document.getElementById('subjectSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('subjectCancelBtn').style.display = 'inline-flex';
-        showToast('编辑: ' + subj.labelZh, 'info');
       }
 
       document.getElementById('subjectForm').addEventListener('submit', function(e) {
@@ -1113,7 +797,6 @@
         const labelZh = document.getElementById('subjectLabelZh').value.trim();
         const labelEn = document.getElementById('subjectLabelEn').value.trim();
         const editIdx = parseInt(document.getElementById('subjectEditIndex').value);
-        const catRef = document.getElementById('subjectCatRef').value;
         if (!catId || !id || !labelZh || !labelEn) { showToast('请填写完整', 'error'); return; }
         const cat = getCategory(catId);
         if (!cat) { showToast('类别不存在', 'error'); return; }
@@ -1121,15 +804,11 @@
         if (exists) { showToast('科目代码已存在', 'error'); return; }
         if (editIdx === -1) {
           cat.subjects.push({ id, emoji, labelZh, labelEn, difficulties: [] });
-          showToast('已添加科目: ' + labelZh, 'success');
+          showToast('已添加: ' + labelZh, 'success');
         } else {
           const subj = cat.subjects[editIdx];
           subj.id = id; subj.emoji = emoji; subj.labelZh = labelZh; subj.labelEn = labelEn;
-          showToast('已更新: ' + labelZh, 'success');
-          document.getElementById('subjectEditIndex').value = -1;
-          document.getElementById('subjectCatRef').value = '';
-          document.getElementById('subjectSubmitBtn').textContent = '➕ 添加科目';
-          document.getElementById('subjectCancelBtn').style.display = 'none';
+          showToast('已更新', 'success');
         }
         this.reset();
         document.getElementById('subjectEditIndex').value = -1;
@@ -1137,10 +816,7 @@
         document.getElementById('subjectSubmitBtn').textContent = '➕ 添加科目';
         document.getElementById('subjectCancelBtn').style.display = 'none';
         document.getElementById('subjectCatSelect').value = catId;
-        renderSubjects();
-        populateSelects();
-        updateStats();
-        updateJsonEditor();
+        renderSubjects(); populateSelects(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('subjectCancelBtn').addEventListener('click', function() {
@@ -1149,12 +825,9 @@
         document.getElementById('subjectCatRef').value = '';
         document.getElementById('subjectSubmitBtn').textContent = '➕ 添加科目';
         this.style.display = 'none';
-        showToast('已取消', 'info');
       });
 
-      // ================================================================
-      //  📊 难度 CRUD
-      // ================================================================
+      // ========== 难度 ==========
       function renderDifficulties() {
         const catId = document.getElementById('diffCatSelect').value;
         const subjectId = document.getElementById('diffSubjectSelect').value;
@@ -1165,15 +838,7 @@
         if (subj.difficulties.length === 0) { container.innerHTML = '<p style="color:#6b7a8f;">暂无难度。</p>'; return; }
         let html = '';
         subj.difficulties.forEach((d, i) => {
-          html += `
-            <div class="admin-list-item">
-              <div class="info">Level ${d.level}: ${d.labelZh} <small>${d.papers ? d.papers.length : 0} 份试卷</small></div>
-              <div class="actions">
-                <button class="btn-edit" data-cat="${catId}" data-subj="${subjectId}" data-diff-index="${i}">编辑</button>
-                <button class="btn-delete" data-cat="${catId}" data-subj="${subjectId}" data-diff-index="${i}">删除</button>
-              </div>
-            </div>
-          `;
+          html += `<div class="admin-list-item"><div class="info">Level ${d.level}: ${d.labelZh} <small>${d.papers ? d.papers.length : 0} 份试卷</small></div><div class="actions"><button class="btn-edit" data-cat="${catId}" data-subj="${subjectId}" data-diff-index="${i}">编辑</button><button class="btn-delete" data-cat="${catId}" data-subj="${subjectId}" data-diff-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editDiff(this.dataset.cat, this.dataset.subj, parseInt(this.dataset.diffIndex)); }));
@@ -1181,10 +846,7 @@
           if (confirm('删除此难度？')) {
             const subj = getSubject(this.dataset.cat, this.dataset.subj);
             if (subj) { subj.difficulties.splice(parseInt(this.dataset.diffIndex), 1);
-              renderDifficulties();
-              populateSelects();
-              updateStats();
-              updateJsonEditor();
+              renderDifficulties(); populateSelects(); updateStats(); updateJsonEditor();
               showToast('已删除', 'success'); }
           }
         }));
@@ -1204,7 +866,6 @@
         document.getElementById('diffSubjectRef').value = subjectId;
         document.getElementById('diffSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('diffCancelBtn').style.display = 'inline-flex';
-        showToast('编辑: ' + d.labelZh, 'info');
       }
 
       document.getElementById('diffForm').addEventListener('submit', function(e) {
@@ -1215,7 +876,6 @@
         const labelZh = document.getElementById('diffLabelZh').value.trim();
         const labelEn = document.getElementById('diffLabelEn').value.trim();
         const editIdx = parseInt(document.getElementById('diffEditIndex').value);
-        const subjRef = document.getElementById('diffSubjectRef').value;
         if (!catId || !subjectId || isNaN(level) || level < 0 || level > 5 || !labelZh || !labelEn) {
           showToast('请完整填写', 'error'); return;
         }
@@ -1230,10 +890,6 @@
           const d = subj.difficulties[editIdx];
           d.level = level; d.labelZh = labelZh; d.labelEn = labelEn;
           showToast('已更新', 'success');
-          document.getElementById('diffEditIndex').value = -1;
-          document.getElementById('diffSubjectRef').value = '';
-          document.getElementById('diffSubmitBtn').textContent = '➕ 添加难度';
-          document.getElementById('diffCancelBtn').style.display = 'none';
         }
         this.reset();
         document.getElementById('diffEditIndex').value = -1;
@@ -1243,10 +899,7 @@
         document.getElementById('diffCatSelect').value = catId;
         populateDiffSubjectSelect(catId);
         document.getElementById('diffSubjectSelect').value = subjectId;
-        renderDifficulties();
-        populateSelects();
-        updateStats();
-        updateJsonEditor();
+        renderDifficulties(); populateSelects(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('diffCancelBtn').addEventListener('click', function() {
@@ -1255,12 +908,9 @@
         document.getElementById('diffSubjectRef').value = '';
         document.getElementById('diffSubmitBtn').textContent = '➕ 添加难度';
         this.style.display = 'none';
-        showToast('已取消', 'info');
       });
 
-      // ================================================================
-      //  📄 试卷 CRUD
-      // ================================================================
+      // ========== 试卷 ==========
       function renderPapers() {
         const catId = document.getElementById('paperCatSelect').value;
         const subjectId = document.getElementById('paperSubjectSelect').value;
@@ -1272,15 +922,7 @@
         if (diff.papers.length === 0) { container.innerHTML = '<p style="color:#6b7a8f;">暂无试卷。</p>'; return; }
         let html = '';
         diff.papers.forEach((p, i) => {
-          html += `
-            <div class="admin-list-item">
-              <div class="info">📄 ${p.titleZh} (ID:${p.id}) <small>${p.questions ? p.questions.length : 0} 题</small></div>
-              <div class="actions">
-                <button class="btn-edit" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper-index="${i}">编辑</button>
-                <button class="btn-delete" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper-index="${i}">删除</button>
-              </div>
-            </div>
-          `;
+          html += `<div class="admin-list-item"><div class="info">📄 ${p.titleZh} (ID:${p.id}) <small>${p.questions ? p.questions.length : 0} 题</small></div><div class="actions"><button class="btn-edit" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper-index="${i}">编辑</button><button class="btn-delete" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editPaper(this.dataset.cat, this.dataset.subj, parseInt(this.dataset.level), parseInt(this.dataset.paperIndex)); }));
@@ -1288,10 +930,7 @@
           if (confirm('删除此试卷？')) {
             const diff = getDifficulty(this.dataset.cat, this.dataset.subj, parseInt(this.dataset.level));
             if (diff) { diff.papers.splice(parseInt(this.dataset.paperIndex), 1);
-              renderPapers();
-              populateSelects();
-              updateStats();
-              updateJsonEditor();
+              renderPapers(); populateSelects(); updateStats(); updateJsonEditor();
               showToast('已删除', 'success'); }
           }
         }));
@@ -1313,7 +952,6 @@
         document.getElementById('paperDiffRef').value = level;
         document.getElementById('paperSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('paperCancelBtn').style.display = 'inline-flex';
-        showToast('编辑: ' + p.titleZh, 'info');
       }
 
       document.getElementById('paperForm').addEventListener('submit', function(e) {
@@ -1325,7 +963,6 @@
         const titleZh = document.getElementById('paperTitleZh').value.trim();
         const titleEn = document.getElementById('paperTitleEn').value.trim();
         const editIdx = parseInt(document.getElementById('paperEditIndex').value);
-        const diffRef = parseInt(document.getElementById('paperDiffRef').value);
         if (!catId || !subjectId || isNaN(level) || isNaN(id) || id < 1 || !titleZh || !titleEn) {
           showToast('请完整填写', 'error'); return;
         }
@@ -1340,10 +977,6 @@
           const p = diff.papers[editIdx];
           p.id = id; p.titleZh = titleZh; p.titleEn = titleEn;
           showToast('已更新', 'success');
-          document.getElementById('paperEditIndex').value = -1;
-          document.getElementById('paperDiffRef').value = '';
-          document.getElementById('paperSubmitBtn').textContent = '➕ 添加试卷';
-          document.getElementById('paperCancelBtn').style.display = 'none';
         }
         this.reset();
         document.getElementById('paperEditIndex').value = -1;
@@ -1355,10 +988,7 @@
         document.getElementById('paperSubjectSelect').value = subjectId;
         populatePaperDiffSelect(catId, subjectId);
         document.getElementById('paperDiffSelect').value = level;
-        renderPapers();
-        populateSelects();
-        updateStats();
-        updateJsonEditor();
+        renderPapers(); populateSelects(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('paperCancelBtn').addEventListener('click', function() {
@@ -1367,12 +997,9 @@
         document.getElementById('paperDiffRef').value = '';
         document.getElementById('paperSubmitBtn').textContent = '➕ 添加试卷';
         this.style.display = 'none';
-        showToast('已取消', 'info');
       });
 
-      // ================================================================
-      //  ❓ 题目 CRUD
-      // ================================================================
+      // ========== 题目 ==========
       function renderQuestions() {
         const catId = document.getElementById('qCatSelect').value;
         const subjectId = document.getElementById('qSubjectSelect').value;
@@ -1389,15 +1016,7 @@
         }
         let html = '';
         paper.questions.forEach((q, i) => {
-          html += `
-            <div class="admin-list-item">
-              <div class="info">❓ ${q.q.zh} <small>答案: ${q.ans}</small></div>
-              <div class="actions">
-                <button class="btn-edit" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper="${paperId}" data-q-index="${i}">编辑</button>
-                <button class="btn-delete" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper="${paperId}" data-q-index="${i}">删除</button>
-              </div>
-            </div>
-          `;
+          html += `<div class="admin-list-item"><div class="info">❓ ${q.q.zh} <small>答案: ${q.ans}</small></div><div class="actions"><button class="btn-edit" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper="${paperId}" data-q-index="${i}">编辑</button><button class="btn-delete" data-cat="${catId}" data-subj="${subjectId}" data-level="${level}" data-paper="${paperId}" data-q-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editQuestion(this.dataset.cat, this.dataset.subj, parseInt(this.dataset.level), parseInt(this.dataset.paper), parseInt(this.dataset.qIndex)); }));
@@ -1405,10 +1024,7 @@
           if (confirm('删除此题？')) {
             const paper = getPaper(this.dataset.cat, this.dataset.subj, parseInt(this.dataset.level), parseInt(this.dataset.paper));
             if (paper && paper.questions) { paper.questions.splice(parseInt(this.dataset.qIndex), 1);
-              renderQuestions();
-              populateSelects();
-              updateStats();
-              updateJsonEditor();
+              renderQuestions(); populateSelects(); updateStats(); updateJsonEditor();
               showToast('已删除', 'success'); }
           }
         }));
@@ -1442,7 +1058,6 @@
         document.getElementById('qPaperRef').value = paperId;
         document.getElementById('qSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('qCancelBtn').style.display = 'inline-flex';
-        showToast('编辑题目', 'info');
       }
 
       document.getElementById('questionForm').addEventListener('submit', function(e) {
@@ -1465,7 +1080,6 @@
         const expZh = document.getElementById('qExpZh').value.trim();
         const expEn = document.getElementById('qExpEn').value.trim();
         const editIdx = parseInt(document.getElementById('qEditIndex').value);
-        const paperRef = parseInt(document.getElementById('qPaperRef').value);
         if (!catId || !subjectId || isNaN(level) || isNaN(paperId) || !qZh || !qEn || !optAzh || !optAen || !optBzh || !optBen || !optCzh || !optCen || !optDzh || !optDen || isNaN(ans) || ans < 0 || ans > 3 || !expZh || !expEn) {
           showToast('请完整填写所有字段', 'error'); return;
         }
@@ -1479,10 +1093,6 @@
         } else {
           paper.questions[editIdx] = newQ;
           showToast('已更新', 'success');
-          document.getElementById('qEditIndex').value = -1;
-          document.getElementById('qPaperRef').value = '';
-          document.getElementById('qSubmitBtn').textContent = '➕ 添加题目';
-          document.getElementById('qCancelBtn').style.display = 'none';
         }
         this.reset();
         document.getElementById('qEditIndex').value = -1;
@@ -1496,10 +1106,7 @@
         document.getElementById('qDiffSelect').value = level;
         populateQPaperSelect(catId, subjectId, level);
         document.getElementById('qPaperSelect').value = paperId;
-        renderQuestions();
-        populateSelects();
-        updateStats();
-        updateJsonEditor();
+        renderQuestions(); populateSelects(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('qCancelBtn').addEventListener('click', function() {
@@ -1508,143 +1115,77 @@
         document.getElementById('qPaperRef').value = '';
         document.getElementById('qSubmitBtn').textContent = '➕ 添加题目';
         this.style.display = 'none';
-        showToast('已取消', 'info');
       });
 
-      // ================================================================
-      //  📚 小说管理
-      // ================================================================
+      // ========== 小说 ==========
       let currentStoryIndex = -1;
-
       function updateCoverPreview(url) {
         const preview = document.getElementById('coverPreview');
-        if (url && url.trim()) {
-          preview.innerHTML = `<img src="${url.trim()}" alt="封面预览" />`;
-        } else {
-          preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
-        }
+        if (url && url.trim()) preview.innerHTML = `<img src="${url.trim()}" alt="封面预览" />`;
+        else preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
       }
-
-      document.getElementById('uploadCoverBtn').addEventListener('click', function() {
-        document.getElementById('coverFileInput').click();
-      });
-
+      document.getElementById('uploadCoverBtn').addEventListener('click', function() { document.getElementById('coverFileInput').click(); });
       document.getElementById('coverFileInput').addEventListener('change', function() {
         const file = this.files[0];
         if (!file) return;
-        if (!file.type.startsWith('image/')) {
-          showToast('❌ 请选择图片文件', 'error');
-          this.value = '';
-          return;
-        }
-        if (file.size > 5 * 1024 * 1024) {
-          showToast('❌ 图片大小不能超过 5MB', 'error');
-          this.value = '';
-          return;
-        }
+        if (!file.type.startsWith('image/')) { showToast('❌ 请选择图片文件', 'error'); this.value = ''; return; }
+        if (file.size > 5 * 1024 * 1024) { showToast('❌ 图片大小不能超过 5MB', 'error'); this.value = ''; return; }
         const status = document.getElementById('uploadStatus');
         const btn = document.getElementById('uploadCoverBtn');
         const origText = btn.textContent;
-        btn.textContent = '⏳ 上传中...';
-        btn.disabled = true;
-        status.textContent = '⏳ 正在上传到 Cloudinary...';
-        status.className = 'upload-status loading';
+        btn.textContent = '⏳ 上传中...'; btn.disabled = true;
+        status.textContent = '⏳ 正在上传到 Cloudinary...'; status.className = 'upload-status loading';
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-            method: 'POST',
-            body: formData
-          })
-          .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, { method: 'POST', body: formData })
+          .then(res => { if (!res.ok) throw new Error('上传失败'); return res.json(); })
           .then(data => {
             if (data.secure_url) {
               document.getElementById('storyCover').value = data.secure_url;
               updateCoverPreview(data.secure_url);
-              status.textContent = '✅ 上传成功！';
-              status.className = 'upload-status success';
+              status.textContent = '✅ 上传成功！'; status.className = 'upload-status success';
               showToast('✅ 封面上传成功！', 'success');
-            } else {
-              throw new Error(data.error?.message || '未知错误');
-            }
+            } else throw new Error(data.error?.message || '未知错误');
           })
-          .catch(err => {
-            status.textContent = '❌ 上传失败：' + err.message;
-            status.className = 'upload-status error';
-            showToast('❌ 上传失败：' + err.message, 'error');
-          })
-          .finally(() => {
-            btn.textContent = origText;
-            btn.disabled = false;
-            document.getElementById('coverFileInput').value = '';
-          });
+          .catch(err => { status.textContent = '❌ 上传失败：' + err.message; status.className = 'upload-status error'; showToast('❌ 上传失败', 'error'); })
+          .finally(() => { btn.textContent = origText; btn.disabled = false; document.getElementById('coverFileInput').value = ''; });
       });
-
-      document.getElementById('storyCover').addEventListener('input', function() {
-        updateCoverPreview(this.value);
-      });
+      document.getElementById('storyCover').addEventListener('input', function() { updateCoverPreview(this.value); });
 
       function renderStories() {
         const container = document.getElementById('storyList');
-        if (storiesData.stories.length === 0) {
-          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无小说，添加一本吧！</p>';
-          document.getElementById('chapterManager').style.display = 'none';
-          return;
-        }
+        if (storiesData.stories.length === 0) { container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无小说，添加一本吧！</p>'; document.getElementById('chapterManager').style.display = 'none'; return; }
         let html = '';
         storiesData.stories.forEach((s, i) => {
           const chCount = s.chapters ? s.chapters.length : 0;
           const hasCover = s.cover && s.cover.trim() !== '';
-          const updated = s.updatedAt ? new Date(s.updatedAt).toLocaleString('zh-CN', { hour12: false }) :
-            '未知';
-          html +=
-            `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章 · 更新: ${updated}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
+          const updated = s.updatedAt ? new Date(s.updatedAt).toLocaleString('zh-CN', { hour12: false }) : '未知';
+          html += `<div class="admin-list-item" style="cursor:pointer;" data-story-index="${i}"><div class="info">${hasCover ? '🖼️' : '📚'} ${s.title} <small>作者: ${s.author} · ${chCount} 章 · 更新: ${updated}</small></div><div class="actions"><button class="btn-edit" data-story-index="${i}">编辑</button><button class="btn-delete" data-story-index="${i}">删除</button><button class="btn-edit" data-story-index="${i}" data-select="true" style="background:#2a6df4;color:#fff;">选择</button></div></div>`;
         });
         container.innerHTML = html;
-        container.querySelectorAll('.btn-edit').forEach(b => {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.storyIndex);
-            if (this.dataset.select === 'true') {
-              selectStory(idx);
-            } else {
-              editStory(idx);
-            }
-          });
-        });
-        container.querySelectorAll('.btn-delete').forEach(b => {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.storyIndex);
-            if (confirm('删除小说 "' + storiesData.stories[idx].title + '" 及其所有章节？')) {
-              storiesData.stories.splice(idx, 1);
-              if (currentStoryIndex === idx) { currentStoryIndex = -1;
-                document.getElementById('chapterManager').style.display = 'none'; }
-              if (currentStoryIndex > idx) currentStoryIndex--;
-              renderStories();
-              renderChapters();
-              updateStats();
-              updateJsonEditor();
-              showToast('已删除', 'success');
-            }
-          });
-        });
-        container.querySelectorAll('.admin-list-item').forEach(el => {
-          el.addEventListener('click', function() {
-            const idx = parseInt(this.dataset.storyIndex);
-            selectStory(idx);
-          });
-        });
+        container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const idx = parseInt(this.dataset.storyIndex);
+          if (this.dataset.select === 'true') selectStory(idx); else editStory(idx);
+        }));
+        container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const idx = parseInt(this.dataset.storyIndex);
+          if (confirm('删除小说 "' + storiesData.stories[idx].title + '" 及其所有章节？')) {
+            storiesData.stories.splice(idx, 1);
+            if (currentStoryIndex === idx) { currentStoryIndex = -1; document.getElementById('chapterManager').style.display = 'none'; }
+            if (currentStoryIndex > idx) currentStoryIndex--;
+            renderStories(); renderChapters(); updateStats(); updateJsonEditor();
+            showToast('已删除', 'success');
+          }
+        }));
+        container.querySelectorAll('.admin-list-item').forEach(el => el.addEventListener('click', function() { selectStory(parseInt(this.dataset.storyIndex)); }));
         if (currentStoryIndex >= 0 && currentStoryIndex < storiesData.stories.length) {
           const items = container.querySelectorAll('.admin-list-item');
           items.forEach((el, i) => {
-            if (i === currentStoryIndex) {
-              el.style.borderColor = '#2a6df4';
-              el.style.background = '#f0f5ff';
-            } else {
-              el.style.borderColor = '#eef2f7';
-              el.style.background = '#fafcff';
-            }
+            if (i === currentStoryIndex) { el.style.borderColor = '#2a6df4'; el.style.background = '#f0f5ff'; }
+            else { el.style.borderColor = '#eef2f7'; el.style.background = '#fafcff'; }
           });
         }
       }
@@ -1656,8 +1197,7 @@
         document.getElementById('chapterManager').style.display = 'block';
         document.getElementById('chapterManagerTitle').textContent = s.title;
         document.getElementById('chapterStoryRef').value = idx;
-        renderChapters();
-        renderStories();
+        renderChapters(); renderStories();
         document.getElementById('chapterManager').scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
@@ -1671,7 +1211,6 @@
         document.getElementById('storyEditIndex').value = idx;
         document.getElementById('storySubmitBtn').textContent = '💾 保存修改';
         document.getElementById('storyCancelBtn').style.display = 'inline-flex';
-        showToast('编辑: ' + s.title, 'info');
       }
 
       document.getElementById('storyForm').addEventListener('submit', function(e) {
@@ -1684,20 +1223,12 @@
         const now = new Date().toISOString();
         if (!title || !author) { showToast('请填写完整', 'error'); return; }
         if (editIdx === -1) {
-          storiesData.stories.push({ id: Date.now(), title, author, description: description, cover: cover,
-            likes: 0, updatedAt: now, chapters: [] });
+          storiesData.stories.push({ id: Date.now(), title, author, description, cover, likes: 0, updatedAt: now, chapters: [] });
           showToast('已添加小说: ' + title, 'success');
         } else {
           const s = storiesData.stories[editIdx];
-          s.title = title;
-          s.author = author;
-          s.description = description;
-          s.cover = cover;
-          s.updatedAt = now;
+          s.title = title; s.author = author; s.description = description; s.cover = cover; s.updatedAt = now;
           showToast('已更新: ' + title, 'success');
-          document.getElementById('storyEditIndex').value = -1;
-          document.getElementById('storySubmitBtn').textContent = '➕ 添加小说';
-          document.getElementById('storyCancelBtn').style.display = 'none';
         }
         this.reset();
         document.getElementById('storyEditIndex').value = -1;
@@ -1707,12 +1238,7 @@
         updateCoverPreview('');
         document.getElementById('uploadStatus').textContent = '';
         document.getElementById('uploadStatus').className = 'upload-status';
-        renderStories();
-        updateStats();
-        updateJsonEditor();
-        if (editIdx === currentStoryIndex) {
-          document.getElementById('chapterManagerTitle').textContent = title;
-        }
+        renderStories(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('storyCancelBtn').addEventListener('click', function() {
@@ -1724,39 +1250,24 @@
         updateCoverPreview('');
         document.getElementById('uploadStatus').textContent = '';
         document.getElementById('uploadStatus').className = 'upload-status';
-        showToast('已取消', 'info');
       });
 
       function renderChapters() {
         const container = document.getElementById('chapterList');
         const storyIdx = parseInt(document.getElementById('chapterStoryRef').value);
-        if (isNaN(storyIdx) || storyIdx < 0 || storyIdx >= storiesData.stories.length) {
-          container.innerHTML = '<p style="color:#6b7a8f;">请先选择一本小说</p>';
-          return;
-        }
+        if (isNaN(storyIdx) || storyIdx < 0 || storyIdx >= storiesData.stories.length) { container.innerHTML = '<p style="color:#6b7a8f;">请先选择一本小说</p>'; return; }
         const s = storiesData.stories[storyIdx];
-        if (!s.chapters || s.chapters.length === 0) {
-          container.innerHTML = '<p style="color:#6b7a8f;">暂无章节，添加一章吧！</p>';
-          return;
-        }
+        if (!s.chapters || s.chapters.length === 0) { container.innerHTML = '<p style="color:#6b7a8f;">暂无章节，添加一章吧！</p>'; return; }
         let html = '';
         s.chapters.forEach((ch, i) => {
-          const preview = ch.content ? ch.content.substring(0, 80) + (ch.content.length > 80 ? '...' :
-            '') : '';
-          html +=
-            `<div class="admin-list-item"><div class="info">📖 ${ch.title} <small>${preview}</small></div><div class="actions"><button class="btn-edit" data-chapter-index="${i}">编辑</button><button class="btn-delete" data-chapter-index="${i}">删除</button></div></div>`;
+          const preview = ch.content ? ch.content.substring(0, 80) + (ch.content.length > 80 ? '...' : '') : '';
+          html += `<div class="admin-list-item"><div class="info">📖 ${ch.title} <small>${preview}</small></div><div class="actions"><button class="btn-edit" data-chapter-index="${i}">编辑</button><button class="btn-delete" data-chapter-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
-        container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editChapter(
-            parseInt(this.dataset.chapterIndex)); }));
+        container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function() { editChapter(parseInt(this.dataset.chapterIndex)); }));
         container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', function() {
           const idx = parseInt(this.dataset.chapterIndex);
-          if (confirm('删除此章节？')) { const s2 = storiesData.stories[storyIdx]; if (s2 && s2.chapters) { s2
-              .chapters.splice(idx, 1);
-              renderChapters();
-              updateStats();
-              updateJsonEditor();
-              showToast('已删除', 'success'); } }
+          if (confirm('删除此章节？')) { const s2 = storiesData.stories[storyIdx]; if (s2 && s2.chapters) { s2.chapters.splice(idx, 1); renderChapters(); updateStats(); updateJsonEditor(); showToast('已删除', 'success'); } }
         }));
       }
 
@@ -1770,16 +1281,12 @@
         document.getElementById('chapterEditIndex').value = idx;
         document.getElementById('chapterSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('chapterCancelBtn').style.display = 'inline-flex';
-        showToast('编辑章节: ' + ch.title, 'info');
       }
 
       document.getElementById('chapterForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const storyIdx = parseInt(document.getElementById('chapterStoryRef').value);
-        if (isNaN(storyIdx) || storyIdx < 0 || storyIdx >= storiesData.stories.length) {
-          showToast('请先选择小说', 'error');
-          return;
-        }
+        if (isNaN(storyIdx) || storyIdx < 0 || storyIdx >= storiesData.stories.length) { showToast('请先选择小说', 'error'); return; }
         const s = storiesData.stories[storyIdx];
         const title = document.getElementById('chapterTitleInput').value.trim();
         const content = document.getElementById('chapterContentInput').value.trim();
@@ -1791,23 +1298,16 @@
           s.updatedAt = new Date().toISOString();
           showToast('已添加章节: ' + title, 'success');
         } else {
-          if (editIdx >= s.chapters.length) { showToast('章节不存在', 'error'); return; }
           s.chapters[editIdx] = { title, content };
           s.updatedAt = new Date().toISOString();
           showToast('已更新: ' + title, 'success');
-          document.getElementById('chapterEditIndex').value = -1;
-          document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
-          document.getElementById('chapterCancelBtn').style.display = 'none';
         }
         this.reset();
         document.getElementById('chapterEditIndex').value = -1;
         document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
         document.getElementById('chapterCancelBtn').style.display = 'none';
         document.getElementById('chapterStoryRef').value = storyIdx;
-        renderChapters();
-        renderStories();
-        updateStats();
-        updateJsonEditor();
+        renderChapters(); renderStories(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('chapterCancelBtn').addEventListener('click', function() {
@@ -1815,152 +1315,74 @@
         document.getElementById('chapterEditIndex').value = -1;
         document.getElementById('chapterSubmitBtn').textContent = '➕ 添加章节';
         document.getElementById('chapterCancelBtn').style.display = 'none';
-        showToast('已取消', 'info');
       });
 
-      // ================================================================
-      //  🎮 游戏管理
-      // ================================================================
-
+      // ========== 游戏 ==========
       function updateGameCoverPreview(url) {
         const preview = document.getElementById('gameCoverPreview');
-        if (url && url.trim()) {
-          preview.innerHTML = `<img src="${url.trim()}" alt="游戏封面预览" />`;
-        } else {
-          preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
-        }
+        if (url && url.trim()) preview.innerHTML = `<img src="${url.trim()}" alt="游戏封面预览" />`;
+        else preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
       }
-
-      document.getElementById('uploadGameCoverBtn').addEventListener('click', function() {
-        document.getElementById('gameCoverFileInput').click();
-      });
-
+      document.getElementById('uploadGameCoverBtn').addEventListener('click', function() { document.getElementById('gameCoverFileInput').click(); });
       document.getElementById('gameCoverFileInput').addEventListener('change', function() {
         const file = this.files[0];
         if (!file) return;
-        if (!file.type.startsWith('image/')) {
-          showToast('❌ 请选择图片文件', 'error');
-          this.value = '';
-          return;
-        }
-        if (file.size > 5 * 1024 * 1024) {
-          showToast('❌ 图片大小不能超过 5MB', 'error');
-          this.value = '';
-          return;
-        }
+        if (!file.type.startsWith('image/')) { showToast('❌ 请选择图片文件', 'error'); this.value = ''; return; }
+        if (file.size > 5 * 1024 * 1024) { showToast('❌ 图片大小不能超过 5MB', 'error'); this.value = ''; return; }
         const status = document.getElementById('gameUploadStatus');
         const btn = document.getElementById('uploadGameCoverBtn');
         const origText = btn.textContent;
-        btn.textContent = '⏳ 上传中...';
-        btn.disabled = true;
-        status.textContent = '⏳ 正在上传到 Cloudinary...';
-        status.className = 'upload-status loading';
+        btn.textContent = '⏳ 上传中...'; btn.disabled = true;
+        status.textContent = '⏳ 正在上传到 Cloudinary...'; status.className = 'upload-status loading';
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-            method: 'POST',
-            body: formData
-          })
-          .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, { method: 'POST', body: formData })
+          .then(res => { if (!res.ok) throw new Error('上传失败'); return res.json(); })
           .then(data => {
             if (data.secure_url) {
               document.getElementById('gameCover').value = data.secure_url;
               updateGameCoverPreview(data.secure_url);
-              status.textContent = '✅ 上传成功！';
-              status.className = 'upload-status success';
+              status.textContent = '✅ 上传成功！'; status.className = 'upload-status success';
               showToast('✅ 游戏封面上传成功！', 'success');
-            } else {
-              throw new Error(data.error?.message || '未知错误');
-            }
+            } else throw new Error(data.error?.message || '未知错误');
           })
-          .catch(err => {
-            status.textContent = '❌ 上传失败：' + err.message;
-            status.className = 'upload-status error';
-            showToast('❌ 上传失败：' + err.message, 'error');
-          })
-          .finally(() => {
-            btn.textContent = origText;
-            btn.disabled = false;
-            document.getElementById('gameCoverFileInput').value = '';
-          });
+          .catch(err => { status.textContent = '❌ 上传失败：' + err.message; status.className = 'upload-status error'; })
+          .finally(() => { btn.textContent = origText; btn.disabled = false; document.getElementById('gameCoverFileInput').value = ''; });
       });
-
-      document.getElementById('gameCover').addEventListener('input', function() {
-        updateGameCoverPreview(this.value);
-      });
+      document.getElementById('gameCover').addEventListener('input', function() { updateGameCoverPreview(this.value); });
 
       let currentGameIndex = -1;
-
       function renderGames() {
         const container = document.getElementById('gameList');
-        if (gamesData.games.length === 0) {
-          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无游戏，添加一个吧！</p>';
-          return;
-        }
+        if (gamesData.games.length === 0) { container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无游戏，添加一个吧！</p>'; return; }
         const sorted = [...gamesData.games].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
         let html = '';
-        sorted.forEach((g, idx) => {
+        sorted.forEach((g) => {
           const realIdx = gamesData.games.indexOf(g);
           const statusClass = g.enabled !== false ? 'on' : 'off';
           const statusText = g.enabled !== false ? '✅ 已启用' : '⛔ 已禁用';
           const coverHtml = g.cover && g.cover.trim() ? `<img src="${g.cover}" alt="封面" class="cover-thumb" />` : '';
-          html += `
-            <div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}">
-              <div class="info">
-                ${coverHtml}
-                ${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})
-                <small>${g.type} · ${g.entry}</small>
-                <span class="toggle-badge ${statusClass}">${statusText}</span>
-              </div>
-              <div class="actions">
-                <button class="btn-toggle ${statusClass}" data-game-index="${realIdx}">${g.enabled !== false ? '🔛 关闭' : '🔓 开启'}</button>
-                <button class="btn-edit" data-game-index="${realIdx}">编辑</button>
-                <button class="btn-delete" data-game-index="${realIdx}">删除</button>
-              </div>
-            </div>
-          `;
+          html += `<div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}"><div class="info">${coverHtml}${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})<small>${g.type} · ${g.entry}</small><span class="toggle-badge ${statusClass}">${statusText}</span></div><div class="actions"><button class="btn-toggle ${statusClass}" data-game-index="${realIdx}">${g.enabled !== false ? '🔛 关闭' : '🔓 开启'}</button><button class="btn-edit" data-game-index="${realIdx}">编辑</button><button class="btn-delete" data-game-index="${realIdx}">删除</button></div></div>`;
         });
         container.innerHTML = html;
-
-        container.querySelectorAll('.btn-toggle').forEach(b => {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.gameIndex);
-            const g = gamesData.games[idx];
-            if (g) {
-              g.enabled = g.enabled === false ? true : false;
-              renderGames();
-              updateStats();
-              updateJsonEditor();
-              showToast(`已${g.enabled !== false ? '启用' : '禁用'}: ${g.titleZh}`, 'success');
-            }
-          });
-        });
-
-        container.querySelectorAll('.btn-edit').forEach(b => {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.gameIndex);
-            editGame(idx);
-          });
-        });
-
-        container.querySelectorAll('.btn-delete').forEach(b => {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.gameIndex);
-            if (confirm('删除游戏 "' + gamesData.games[idx].titleZh + '" ？')) {
-              gamesData.games.splice(idx, 1);
-              if (currentGameIndex === idx) currentGameIndex = -1;
-              if (currentGameIndex > idx) currentGameIndex--;
-              renderGames();
-              updateStats();
-              updateJsonEditor();
-              showToast('已删除', 'success');
-            }
-          });
-        });
+        container.querySelectorAll('.btn-toggle').forEach(b => b.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const idx = parseInt(this.dataset.gameIndex);
+          const g = gamesData.games[idx];
+          if (g) { g.enabled = g.enabled === false ? true : false; renderGames(); updateStats(); updateJsonEditor(); showToast(`已${g.enabled !== false ? '启用' : '禁用'}: ${g.titleZh}`, 'success'); }
+        }));
+        container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function(e) { e.stopPropagation(); editGame(parseInt(this.dataset.gameIndex)); }));
+        container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const idx = parseInt(this.dataset.gameIndex);
+          if (confirm('删除游戏 "' + gamesData.games[idx].titleZh + '" ？')) {
+            gamesData.games.splice(idx, 1);
+            if (currentGameIndex === idx) currentGameIndex = -1;
+            if (currentGameIndex > idx) currentGameIndex--;
+            renderGames(); updateStats(); updateJsonEditor(); showToast('已删除', 'success');
+          }
+        }));
       }
 
       function editGame(idx) {
@@ -1980,7 +1402,6 @@
         document.getElementById('gameEditIndex').value = idx;
         document.getElementById('gameSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('gameCancelBtn').style.display = 'inline-flex';
-        showToast('编辑: ' + g.titleZh, 'info');
       }
 
       document.getElementById('gameForm').addEventListener('submit', function(e) {
@@ -1997,29 +1418,12 @@
         const enabled = document.getElementById('gameEnabled').value === 'true';
         const cover = document.getElementById('gameCover').value.trim();
         const editIdx = parseInt(document.getElementById('gameEditIndex').value);
-
-        if (!id || !titleZh || !titleEn || !entry) {
-          showToast('请填写完整（ID、标题、入口文件）', 'error');
-          return;
-        }
-
+        if (!id || !titleZh || !titleEn || !entry) { showToast('请填写完整', 'error'); return; }
         const exists = gamesData.games.find((g, i) => g.id === id && i !== editIdx);
-        if (exists) { showToast('游戏 ID 已存在，请换一个', 'error'); return; }
-
-        const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder,
-          enabled, cover };
-
-        if (editIdx === -1) {
-          gamesData.games.push(gameData);
-          showToast('已添加游戏: ' + titleZh, 'success');
-        } else {
-          gamesData.games[editIdx] = gameData;
-          showToast('已更新: ' + titleZh, 'success');
-          document.getElementById('gameEditIndex').value = -1;
-          document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
-          document.getElementById('gameCancelBtn').style.display = 'none';
-        }
-
+        if (exists) { showToast('游戏 ID 已存在', 'error'); return; }
+        const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder, enabled, cover };
+        if (editIdx === -1) { gamesData.games.push(gameData); showToast('已添加游戏: ' + titleZh, 'success'); }
+        else { gamesData.games[editIdx] = gameData; showToast('已更新: ' + titleZh, 'success'); }
         this.reset();
         document.getElementById('gameEditIndex').value = -1;
         document.getElementById('gameSubmitBtn').textContent = '➕ 添加游戏';
@@ -2031,10 +1435,7 @@
         updateGameCoverPreview('');
         document.getElementById('gameUploadStatus').textContent = '';
         document.getElementById('gameUploadStatus').className = 'upload-status';
-
-        renderGames();
-        updateStats();
-        updateJsonEditor();
+        renderGames(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('gameCancelBtn').addEventListener('click', function() {
@@ -2049,84 +1450,45 @@
         updateGameCoverPreview('');
         document.getElementById('gameUploadStatus').textContent = '';
         document.getElementById('gameUploadStatus').className = 'upload-status';
-        showToast('已取消', 'info');
       });
 
       // ================================================================
-      //  🍃 沉浸式管理（含封面上传）
+      //  🍃 沉浸式管理（双语，非强制）
       // ================================================================
-      let currentImmersiveIndex = -1;
-
-      // ---------- 沉浸式封面上传（与小说/游戏一致） ----------
       function updateImmersiveCoverPreview(url) {
         const preview = document.getElementById('immersiveCoverPreview');
-        if (url && url.trim()) {
-          preview.innerHTML = `<img src="${url.trim()}" alt="封面预览" />`;
-        } else {
-          preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
-        }
+        if (url && url.trim()) preview.innerHTML = `<img src="${url.trim()}" alt="封面预览" />`;
+        else preview.innerHTML = `<div class="no-cover">暂无封面</div>`;
       }
-
-      document.getElementById('uploadImmersiveCoverBtn').addEventListener('click', function() {
-        document.getElementById('immersiveCoverFileInput').click();
-      });
-
+      document.getElementById('uploadImmersiveCoverBtn').addEventListener('click', function() { document.getElementById('immersiveCoverFileInput').click(); });
       document.getElementById('immersiveCoverFileInput').addEventListener('change', function() {
         const file = this.files[0];
         if (!file) return;
-        if (!file.type.startsWith('image/')) {
-          showToast('❌ 请选择图片文件', 'error');
-          this.value = '';
-          return;
-        }
-        if (file.size > 5 * 1024 * 1024) {
-          showToast('❌ 图片大小不能超过 5MB', 'error');
-          this.value = '';
-          return;
-        }
+        if (!file.type.startsWith('image/')) { showToast('❌ 请选择图片文件', 'error'); this.value = ''; return; }
+        if (file.size > 5 * 1024 * 1024) { showToast('❌ 图片大小不能超过 5MB', 'error'); this.value = ''; return; }
         const status = document.getElementById('immersiveUploadStatus');
         const btn = document.getElementById('uploadImmersiveCoverBtn');
         const origText = btn.textContent;
-        btn.textContent = '⏳ 上传中...';
-        btn.disabled = true;
-        status.textContent = '⏳ 正在上传到 Cloudinary...';
-        status.className = 'upload-status loading';
+        btn.textContent = '⏳ 上传中...'; btn.disabled = true;
+        status.textContent = '⏳ 正在上传到 Cloudinary...'; status.className = 'upload-status loading';
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-            method: 'POST',
-            body: formData
-          })
-          .then(res => { if (!res.ok) throw new Error('上传失败 (HTTP ' + res.status + ')'); return res.json(); })
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, { method: 'POST', body: formData })
+          .then(res => { if (!res.ok) throw new Error('上传失败'); return res.json(); })
           .then(data => {
             if (data.secure_url) {
               document.getElementById('immersiveCover').value = data.secure_url;
               updateImmersiveCoverPreview(data.secure_url);
-              status.textContent = '✅ 上传成功！';
-              status.className = 'upload-status success';
+              status.textContent = '✅ 上传成功！'; status.className = 'upload-status success';
               showToast('✅ 封面上传成功！', 'success');
-            } else {
-              throw new Error(data.error?.message || '未知错误');
-            }
+            } else throw new Error(data.error?.message || '未知错误');
           })
-          .catch(err => {
-            status.textContent = '❌ 上传失败：' + err.message;
-            status.className = 'upload-status error';
-            showToast('❌ 上传失败：' + err.message, 'error');
-          })
-          .finally(() => {
-            btn.textContent = origText;
-            btn.disabled = false;
-            document.getElementById('immersiveCoverFileInput').value = '';
-          });
+          .catch(err => { status.textContent = '❌ 上传失败：' + err.message; status.className = 'upload-status error'; })
+          .finally(() => { btn.textContent = origText; btn.disabled = false; document.getElementById('immersiveCoverFileInput').value = ''; });
       });
+      document.getElementById('immersiveCover').addEventListener('input', function() { updateImmersiveCoverPreview(this.value); });
 
-      document.getElementById('immersiveCover').addEventListener('input', function() {
-        updateImmersiveCoverPreview(this.value);
-      });
-
-      // ---------- 类型切换：控制封面、内容、URL 区域 ----------
       document.getElementById('immersiveType').addEventListener('change', function() {
         const type = this.value;
         const contentGroup = document.getElementById('immersiveContentGroup');
@@ -2143,13 +1505,9 @@
         }
       });
 
-      // ---------- 渲染列表 ----------
       function renderImmersive() {
         const container = document.getElementById('immersiveList');
-        if (immersiveData.items.length === 0) {
-          container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无沉浸式内容，添加一条吧！</p>';
-          return;
-        }
+        if (immersiveData.items.length === 0) { container.innerHTML = '<p style="color:#6b7a8f; padding:12px 0;">暂无沉浸式内容，添加一条吧！</p>'; return; }
         let html = '';
         immersiveData.items.forEach((item, i) => {
           const typeLabel = item.type === 'text' ? '📝 文本' :
@@ -2159,105 +1517,108 @@
                             item.type === 'article' ? 'article' :
                             item.type === 'video' ? 'video' : 'music';
           const coverHtml = item.cover && item.cover.trim() ? `<img src="${item.cover}" alt="封面" class="cover-thumb" />` : '';
-          html += `
-            <div class="admin-list-item" style="cursor:pointer;" data-item-index="${i}">
-              <div class="info">
-                ${coverHtml}
-                <span class="type-badge ${typeClass}">${typeLabel}</span>
-                <strong>${item.title || '无标题'}</strong>
-                <small>${item.category || '未分类'} · ${item.author || '未知作者'}</small>
-              </div>
-              <div class="actions">
-                <button class="btn-edit" data-item-index="${i}">编辑</button>
-                <button class="btn-delete" data-item-index="${i}">删除</button>
-              </div>
-            </div>
-          `;
+          const enBadge = item.titleEn ? '<span class="en-badge">EN</span>' : '';
+          const zhBadge = item.title ? '' : '<span class="en-badge" style="background:#fdeeec;color:#d14c4c;">无中文</span>';
+          const displayTitle = item.title || item.titleEn || '无标题';
+          html += `<div class="admin-list-item" style="cursor:pointer;" data-item-index="${i}"><div class="info">${coverHtml}<span class="type-badge ${typeClass}">${typeLabel}</span><strong>${displayTitle}</strong>${enBadge}${zhBadge}<small>${item.category || item.categoryEn || '未分类'} · ${item.author || '未知作者'}</small></div><div class="actions"><button class="btn-edit" data-item-index="${i}">编辑</button><button class="btn-delete" data-item-index="${i}">删除</button></div></div>`;
         });
         container.innerHTML = html;
-
-        container.querySelectorAll('.btn-edit').forEach(b => {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.itemIndex);
-            editImmersive(idx);
-          });
-        });
-
-        container.querySelectorAll('.btn-delete').forEach(b => {
-          b.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.itemIndex);
-            if (confirm('删除此条目？')) {
-              immersiveData.items.splice(idx, 1);
-              if (currentImmersiveIndex === idx) currentImmersiveIndex = -1;
-              if (currentImmersiveIndex > idx) currentImmersiveIndex--;
-              renderImmersive();
-              updateStats();
-              updateJsonEditor();
-              showToast('已删除', 'success');
-            }
-          });
-        });
+        container.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', function(e) { e.stopPropagation(); editImmersive(parseInt(this.dataset.itemIndex)); }));
+        container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const idx = parseInt(this.dataset.itemIndex);
+          if (confirm('删除此条目？')) {
+            immersiveData.items.splice(idx, 1);
+            renderImmersive(); updateStats(); updateJsonEditor(); showToast('已删除', 'success');
+          }
+        }));
       }
 
-      // ---------- 编辑 ----------
       function editImmersive(idx) {
         const item = immersiveData.items[idx];
         document.getElementById('immersiveType').value = item.type || 'text';
-        document.getElementById('immersiveCategory').value = item.category || '';
-        document.getElementById('immersiveTitle').value = item.title || '';
         document.getElementById('immersiveAuthor').value = item.author || '';
+        // 中文
+        document.getElementById('immersiveTitle').value = item.title || '';
+        document.getElementById('immersiveCategory').value = item.category || '';
         document.getElementById('immersivePreview').value = item.preview || '';
         document.getElementById('immersiveContent').value = item.content || '';
-        document.getElementById('immersiveUrl').value = item.url || '';
+        // 英文
+        document.getElementById('immersiveTitleEn').value = item.titleEn || '';
+        document.getElementById('immersiveCategoryEn').value = item.categoryEn || '';
+        document.getElementById('immersivePreviewEn').value = item.previewEn || '';
+        document.getElementById('immersiveContentEn').value = item.contentEn || '';
+        // 封面 & URL
         document.getElementById('immersiveCover').value = item.cover || '';
         updateImmersiveCoverPreview(item.cover || '');
+        document.getElementById('immersiveUrl').value = item.url || '';
         document.getElementById('immersiveEditIndex').value = idx;
         document.getElementById('immersiveSubmitBtn').textContent = '💾 保存修改';
         document.getElementById('immersiveCancelBtn').style.display = 'inline-flex';
         document.getElementById('immersiveType').dispatchEvent(new Event('change'));
-        showToast('编辑: ' + item.title, 'info');
+        showToast('编辑: ' + (item.title || item.titleEn), 'info');
       }
 
-      // ---------- 提交 ----------
       document.getElementById('immersiveForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const type = document.getElementById('immersiveType').value;
-        const category = document.getElementById('immersiveCategory').value.trim();
-        const title = document.getElementById('immersiveTitle').value.trim();
         const author = document.getElementById('immersiveAuthor').value.trim();
+        // 中文
+        const title = document.getElementById('immersiveTitle').value.trim();
+        const category = document.getElementById('immersiveCategory').value.trim();
         const preview = document.getElementById('immersivePreview').value.trim();
         const content = document.getElementById('immersiveContent').value.trim();
-        const url = document.getElementById('immersiveUrl').value.trim();
+        // 英文
+        const titleEn = document.getElementById('immersiveTitleEn').value.trim();
+        const categoryEn = document.getElementById('immersiveCategoryEn').value.trim();
+        const previewEn = document.getElementById('immersivePreviewEn').value.trim();
+        const contentEn = document.getElementById('immersiveContentEn').value.trim();
+        // 封面 & URL
         const cover = document.getElementById('immersiveCover').value.trim();
+        const url = document.getElementById('immersiveUrl').value.trim();
         const editIdx = parseInt(document.getElementById('immersiveEditIndex').value);
 
-        if (!title) { showToast('请填写标题', 'error'); return; }
-        if ((type === 'text' || type === 'article') && !content) { showToast('请填写正文内容', 'error'); return; }
-        if ((type === 'video' || type === 'music') && !url) { showToast('请填写嵌入 URL', 'error'); return; }
+        // ✅ 至少需要一种语言的标题
+        if (!title && !titleEn) {
+          showToast('请至少填写一种语言的标题', 'error');
+          return;
+        }
+        // ✅ 文本/文章类型：至少一种语言有正文
+        if ((type === 'text' || type === 'article') && !content && !contentEn) {
+          showToast('请至少填写一种语言的正文', 'error');
+          return;
+        }
+        // ✅ 视频/音乐：必须有 URL
+        if ((type === 'video' || type === 'music') && !url) {
+          showToast('请填写嵌入 URL', 'error');
+          return;
+        }
 
         const newItem = {
           id: Date.now() + Math.floor(Math.random() * 1000),
           type: type,
-          category: category,
-          title: title,
-          author: author || '蒙堂木下',
-          preview: preview || (content ? content.substring(0, 60) + '...' : ''),
-          content: content,
-          url: url,
-          cover: cover
+          author: author || '蒙堂木下'
         };
+        // 仅在有值时保存（避免空字段污染 JSON）
+        if (title) newItem.title = title;
+        if (category) newItem.category = category;
+        if (preview) newItem.preview = preview;
+        else if (content) newItem.preview = content.substring(0, 60) + '...';
+        if (content) newItem.content = content;
+        if (titleEn) newItem.titleEn = titleEn;
+        if (categoryEn) newItem.categoryEn = categoryEn;
+        if (previewEn) newItem.previewEn = previewEn;
+        else if (contentEn) newItem.previewEn = contentEn.substring(0, 60) + '...';
+        if (contentEn) newItem.contentEn = contentEn;
+        if (cover) newItem.cover = cover;
+        if (url) newItem.url = url;
 
         if (editIdx === -1) {
           immersiveData.items.push(newItem);
-          showToast('已添加: ' + title, 'success');
+          showToast('已添加: ' + (title || titleEn), 'success');
         } else {
           immersiveData.items[editIdx] = newItem;
-          showToast('已更新: ' + title, 'success');
-          document.getElementById('immersiveEditIndex').value = -1;
-          document.getElementById('immersiveSubmitBtn').textContent = '➕ 添加条目';
-          document.getElementById('immersiveCancelBtn').style.display = 'none';
+          showToast('已更新: ' + (title || titleEn), 'success');
         }
 
         this.reset();
@@ -2273,9 +1634,7 @@
         document.getElementById('immersiveUrlGroup').style.display = 'none';
         document.getElementById('immersiveCoverGroup').style.display = 'block';
 
-        renderImmersive();
-        updateStats();
-        updateJsonEditor();
+        renderImmersive(); updateStats(); updateJsonEditor();
       });
 
       document.getElementById('immersiveCancelBtn').addEventListener('click', function() {
@@ -2291,98 +1650,61 @@
         document.getElementById('immersiveContentGroup').style.display = 'block';
         document.getElementById('immersiveUrlGroup').style.display = 'none';
         document.getElementById('immersiveCoverGroup').style.display = 'block';
-        showToast('已取消', 'info');
       });
 
-      // ================================================================
-      //  📝 JSON 编辑器
-      // ================================================================
+      // ========== JSON 编辑器 ==========
       function updateJsonEditor() {
-        const fullData = {
-          categories: data.categories,
-          stories: storiesData.stories,
-          games: gamesData.games,
-          immersive: immersiveData.items
-        };
+        const fullData = { categories: data.categories, stories: storiesData.stories, games: gamesData.games, immersive: immersiveData.items };
         document.getElementById('jsonEditor').value = JSON.stringify(fullData, null, 2);
       }
-
       document.getElementById('jsonApplyBtn').addEventListener('click', function() {
         try {
-          const raw = document.getElementById('jsonEditor').value;
-          const parsed = JSON.parse(raw);
+          const parsed = JSON.parse(document.getElementById('jsonEditor').value);
           if (parsed.categories) data.categories = parsed.categories;
           if (parsed.stories) storiesData.stories = parsed.stories;
           if (parsed.games) gamesData.games = parsed.games;
           if (parsed.immersive) immersiveData.items = parsed.immersive;
-          renderAll();
-          showToast('已应用 JSON 数据', 'success');
+          renderAll(); showToast('已应用 JSON 数据', 'success');
         } catch (e) { showToast('JSON 格式错误: ' + e.message, 'error'); }
       });
-
       document.getElementById('jsonFormatBtn').addEventListener('click', function() {
         try {
-          const raw = document.getElementById('jsonEditor').value;
-          const parsed = JSON.parse(raw);
+          const parsed = JSON.parse(document.getElementById('jsonEditor').value);
           document.getElementById('jsonEditor').value = JSON.stringify(parsed, null, 2);
           showToast('已格式化', 'success');
         } catch (e) { showToast('JSON 格式错误: ' + e.message, 'error'); }
       });
-
       document.getElementById('jsonCopyBtn').addEventListener('click', function() {
         const text = document.getElementById('jsonEditor').value;
-        navigator.clipboard.writeText(text).then(() => {
-          showToast('已复制到剪贴板！请粘贴到对应 JSON 文件并提交 GitHub', 'success');
-        }).catch(() => {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          ta.remove();
-          showToast('已复制', 'success');
-        });
+        navigator.clipboard.writeText(text).then(() => showToast('已复制到剪贴板！', 'success'))
+          .catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+            showToast('已复制', 'success');
+          });
       });
-
-      // ---------- 导出按钮 ----------
       document.getElementById('jsonExportPapersBtn').addEventListener('click', function() {
-        const papersData = { categories: data.categories };
-        document.getElementById('jsonEditor').value = JSON.stringify(papersData, null, 2);
-        showToast('已导出测验数据到 JSON 编辑器', 'success');
+        document.getElementById('jsonEditor').value = JSON.stringify({ categories: data.categories }, null, 2);
+        showToast('已导出测验数据', 'success');
       });
-
       document.getElementById('jsonExportStoriesBtn').addEventListener('click', function() {
-        const storiesDataOnly = { stories: storiesData.stories };
-        document.getElementById('jsonEditor').value = JSON.stringify(storiesDataOnly, null, 2);
-        showToast('已导出小说数据到 JSON 编辑器', 'success');
+        document.getElementById('jsonEditor').value = JSON.stringify({ stories: storiesData.stories }, null, 2);
+        showToast('已导出小说数据', 'success');
       });
-
       document.getElementById('jsonExportGamesBtn').addEventListener('click', function() {
-        const gamesDataOnly = { games: gamesData.games };
-        document.getElementById('jsonEditor').value = JSON.stringify(gamesDataOnly, null, 2);
-        showToast('已导出游戏数据到 JSON 编辑器', 'success');
+        document.getElementById('jsonEditor').value = JSON.stringify({ games: gamesData.games }, null, 2);
+        showToast('已导出游戏数据', 'success');
       });
-
       document.getElementById('jsonExportImmersiveBtn').addEventListener('click', function() {
-        const immersiveOnly = { items: immersiveData.items };
-        document.getElementById('jsonEditor').value = JSON.stringify(immersiveOnly, null, 2);
-        showToast('已导出沉浸式数据到 JSON 编辑器', 'success');
+        document.getElementById('jsonEditor').value = JSON.stringify({ items: immersiveData.items }, null, 2);
+        showToast('已导出沉浸式数据', 'success');
       });
 
-      // ================================================================
-      //  加载数据
-      // ================================================================
+      // ========== 数据加载 ==========
       function loadAllData() {
         fetch('data/papers.json')
           .then(res => { if (!res.ok) throw new Error('papers.json 不存在'); return res.json(); })
-          .then(d => {
-            if (d.categories) {
-              data.categories = d.categories;
-            } else {
-              data.categories = [];
-              showToast('papers.json 中未找到 categories 字段，请检查结构', 'error');
-            }
-          })
+          .then(d => { if (d.categories) data.categories = d.categories; else data.categories = []; })
           .catch(() => { data.categories = []; })
           .finally(() => {
             fetch('data/stories.json')
@@ -2399,9 +1721,7 @@
                       .then(res => { if (!res.ok) throw new Error('immersive.json 不存在'); return res.json(); })
                       .then(d => { if (d.items) immersiveData.items = d.items; })
                       .catch(() => { immersiveData.items = []; })
-                      .finally(() => {
-                        renderAll();
-                      });
+                      .finally(() => { renderAll(); });
                   });
               });
           });
@@ -2422,8 +1742,7 @@
         populateSelects();
         if (currentStoryIndex >= 0 && currentStoryIndex < storiesData.stories.length) {
           document.getElementById('chapterManager').style.display = 'block';
-          document.getElementById('chapterManagerTitle').textContent = storiesData.stories[currentStoryIndex]
-            .title;
+          document.getElementById('chapterManagerTitle').textContent = storiesData.stories[currentStoryIndex].title;
           document.getElementById('chapterStoryRef').value = currentStoryIndex;
           renderChapters();
         } else {
@@ -2431,11 +1750,7 @@
         }
       }
 
-      // ================================================================
-      //  🔽 下拉框同步函数（已修复：自动填充科目/难度/试卷）
-      // ================================================================
       function populateSelects() {
-        // 类别选择器（多个）
         const catSelects = ['subjectCatSelect', 'diffCatSelect', 'paperCatSelect', 'qCatSelect'];
         catSelects.forEach(id => {
           const sel = document.getElementById(id);
@@ -2444,151 +1759,84 @@
           sel.innerHTML = '<option value="">-- 请选择 --</option>';
           data.categories.forEach(c => {
             const opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = c.nameZh + ' (' + c.id + ')';
+            opt.value = c.id; opt.textContent = c.nameZh + ' (' + c.id + ')';
             sel.appendChild(opt);
           });
           if (current && data.categories.find(c => c.id === current)) sel.value = current;
         });
 
-        // 绑定事件监听
         document.getElementById('subjectCatSelect').addEventListener('change', function() { renderSubjects(); });
         document.getElementById('diffCatSelect').addEventListener('change', function() { populateDiffSubjectSelect(this.value); });
         document.getElementById('paperCatSelect').addEventListener('change', function() { populatePaperSubjectSelect(this.value); });
         document.getElementById('qCatSelect').addEventListener('change', function() { populateQSubjectSelect(this.value); });
-
         document.getElementById('diffSubjectSelect').addEventListener('change', function() { renderDifficulties(); });
         document.getElementById('paperSubjectSelect').addEventListener('change', function() { populatePaperDiffSelect(document.getElementById('paperCatSelect').value, this.value); });
         document.getElementById('qSubjectSelect').addEventListener('change', function() { populateQDiffSelect(document.getElementById('qCatSelect').value, this.value); });
-
         document.getElementById('paperDiffSelect').addEventListener('change', function() { renderPapers(); });
         document.getElementById('qDiffSelect').addEventListener('change', function() { populateQPaperSelect(document.getElementById('qCatSelect').value, document.getElementById('qSubjectSelect').value, parseInt(this.value)); });
         document.getElementById('qPaperSelect').addEventListener('change', function() { renderQuestions(); });
 
-        // ===== 🆕 关键修复：手动触发一次填充，让下拉框立即显示数据 =====
         const diffCat = document.getElementById('diffCatSelect');
-        if (diffCat.value) {
-          populateDiffSubjectSelect(diffCat.value);
-        }
-
+        if (diffCat.value) populateDiffSubjectSelect(diffCat.value);
         const paperCat = document.getElementById('paperCatSelect');
         if (paperCat.value) {
           populatePaperSubjectSelect(paperCat.value);
-          const paperSubj = document.getElementById('paperSubjectSelect');
-          if (paperSubj.value) {
-            populatePaperDiffSelect(paperCat.value, paperSubj.value);
-          }
+          const ps = document.getElementById('paperSubjectSelect');
+          if (ps.value) populatePaperDiffSelect(paperCat.value, ps.value);
         }
-
         const qCat = document.getElementById('qCatSelect');
         if (qCat.value) {
           populateQSubjectSelect(qCat.value);
-          const qSubj = document.getElementById('qSubjectSelect');
-          if (qSubj.value) {
-            populateQDiffSelect(qCat.value, qSubj.value);
-            const qDiff = document.getElementById('qDiffSelect');
-            if (qDiff.value) {
-              populateQPaperSelect(qCat.value, qSubj.value, parseInt(qDiff.value));
-            }
+          const qs = document.getElementById('qSubjectSelect');
+          if (qs.value) {
+            populateQDiffSelect(qCat.value, qs.value);
+            const qd = document.getElementById('qDiffSelect');
+            if (qd.value) populateQPaperSelect(qCat.value, qs.value, parseInt(qd.value));
           }
-        }
-
-        // 刷新当前 Tab 的列表
-        const activeTab = document.querySelector('.tab-btn.active');
-        if (activeTab) {
-          const tabId = activeTab.dataset.tab;
-          if (tabId === 'subjects') renderSubjects();
-          else if (tabId === 'difficulties') renderDifficulties();
-          else if (tabId === 'papers') renderPapers();
-          else if (tabId === 'questions') renderQuestions();
         }
       }
 
-      // ================================================================
-      //  科目填充函数
-      // ================================================================
       function populateDiffSubjectSelect(catId) {
         const sel = document.getElementById('diffSubjectSelect');
         sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
         if (!catId) return;
-        const cat = getCategory(catId);
-        if (!cat) return;
-        cat.subjects.forEach(s => {
-          const opt = document.createElement('option');
-          opt.value = s.id;
-          opt.textContent = s.labelZh + ' (' + s.id + ')';
-          sel.appendChild(opt);
-        });
+        const cat = getCategory(catId); if (!cat) return;
+        cat.subjects.forEach(s => { const o = document.createElement('option'); o.value = s.id; o.textContent = s.labelZh + ' (' + s.id + ')'; sel.appendChild(o); });
       }
-
       function populatePaperSubjectSelect(catId) {
         const sel = document.getElementById('paperSubjectSelect');
         sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
         if (!catId) return;
-        const cat = getCategory(catId);
-        if (!cat) return;
-        cat.subjects.forEach(s => {
-          const opt = document.createElement('option');
-          opt.value = s.id;
-          opt.textContent = s.labelZh + ' (' + s.id + ')';
-          sel.appendChild(opt);
-        });
+        const cat = getCategory(catId); if (!cat) return;
+        cat.subjects.forEach(s => { const o = document.createElement('option'); o.value = s.id; o.textContent = s.labelZh + ' (' + s.id + ')'; sel.appendChild(o); });
       }
-
       function populatePaperDiffSelect(catId, subjectId) {
         const sel = document.getElementById('paperDiffSelect');
         sel.innerHTML = '<option value="">-- 请先选科目 --</option>';
         if (!catId || !subjectId) return;
-        const subj = getSubject(catId, subjectId);
-        if (!subj) return;
-        subj.difficulties.forEach(d => {
-          const opt = document.createElement('option');
-          opt.value = d.level;
-          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
-          sel.appendChild(opt);
-        });
+        const subj = getSubject(catId, subjectId); if (!subj) return;
+        subj.difficulties.forEach(d => { const o = document.createElement('option'); o.value = d.level; o.textContent = d.labelZh + ' (Level ' + d.level + ')'; sel.appendChild(o); });
       }
-
       function populateQSubjectSelect(catId) {
         const sel = document.getElementById('qSubjectSelect');
         sel.innerHTML = '<option value="">-- 请先选类别 --</option>';
         if (!catId) return;
-        const cat = getCategory(catId);
-        if (!cat) return;
-        cat.subjects.forEach(s => {
-          const opt = document.createElement('option');
-          opt.value = s.id;
-          opt.textContent = s.labelZh + ' (' + s.id + ')';
-          sel.appendChild(opt);
-        });
+        const cat = getCategory(catId); if (!cat) return;
+        cat.subjects.forEach(s => { const o = document.createElement('option'); o.value = s.id; o.textContent = s.labelZh + ' (' + s.id + ')'; sel.appendChild(o); });
       }
-
       function populateQDiffSelect(catId, subjectId) {
         const sel = document.getElementById('qDiffSelect');
         sel.innerHTML = '<option value="">-- 请先选科目 --</option>';
         if (!catId || !subjectId) return;
-        const subj = getSubject(catId, subjectId);
-        if (!subj) return;
-        subj.difficulties.forEach(d => {
-          const opt = document.createElement('option');
-          opt.value = d.level;
-          opt.textContent = d.labelZh + ' (Level ' + d.level + ')';
-          sel.appendChild(opt);
-        });
+        const subj = getSubject(catId, subjectId); if (!subj) return;
+        subj.difficulties.forEach(d => { const o = document.createElement('option'); o.value = d.level; o.textContent = d.labelZh + ' (Level ' + d.level + ')'; sel.appendChild(o); });
       }
-
       function populateQPaperSelect(catId, subjectId, level) {
         const sel = document.getElementById('qPaperSelect');
         sel.innerHTML = '<option value="">-- 请先选难度 --</option>';
         if (!catId || !subjectId || isNaN(level)) return;
-        const diff = getDifficulty(catId, subjectId, level);
-        if (!diff) return;
-        diff.papers.forEach(p => {
-          const opt = document.createElement('option');
-          opt.value = p.id;
-          opt.textContent = p.titleZh + ' (ID: ' + p.id + ')';
-          sel.appendChild(opt);
-        });
+        const diff = getDifficulty(catId, subjectId, level); if (!diff) return;
+        diff.papers.forEach(p => { const o = document.createElement('option'); o.value = p.id; o.textContent = p.titleZh + ' (ID: ' + p.id + ')'; sel.appendChild(o); });
       }
 
       function initAdmin() {
@@ -2597,7 +1845,6 @@
       }
 
       window.initAdmin = initAdmin;
-
     })();
   </script>
 
