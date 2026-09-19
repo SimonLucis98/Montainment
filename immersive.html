@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>沉浸式工坊 · 蒙堂木下</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         /* ===== 原有样式保留 ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -328,7 +329,6 @@
             padding: 4px 0 8px;
             opacity: 0.6;
         }
-        /* 🆕 文章类型的“阅读全文”按钮 */
         .read-card .read-more-btn {
             display: inline-flex;
             align-items: center;
@@ -349,7 +349,6 @@
             background: rgba(201,168,124,0.25);
             color: #e8e0d8;
         }
-        /* 文章类型卡片的蓝色徽章 */
         .read-card .media-badge.article {
             background: rgba(42,109,244,0.12);
             color: #6ea8ff;
@@ -755,12 +754,15 @@
         }
 
         // ================================================================
-        //  🎵 音乐播放器
+        //  🎵 音乐播放器（YouTube IFrame Player API — 手机可靠播放）
         // ================================================================
-        let musicPlayer = null;
+        let ytPlayer = null;
+        let ytApiReady = false;
         let currentMusicId = '';
         let isPlaying = false;
         let autoPlayUsed = false;
+        let userInteracted = false;
+        let pendingPlay = false;
 
         const playBtn = document.getElementById('playBtn');
         const volumeSlider = document.getElementById('volumeSlider');
@@ -768,12 +770,53 @@
         const musicSubEl = document.getElementById('musicSub');
         const sceneBadge = document.getElementById('sceneBadge');
 
-        function createMusicPlayer() {
+        // 创建隐藏容器供 YT.Player 使用
+        (function createPlayerContainer() {
             const container = document.createElement('div');
             container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
-            container.innerHTML = `<iframe id="youtubeMusicPlayer" src="" width="1" height="1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            container.innerHTML = '<div id="youtubePlayer"></div>';
             document.body.appendChild(container);
-            musicPlayer = document.getElementById('youtubeMusicPlayer');
+        })();
+
+        // YouTube IFrame API 加载完成后自动调用
+        window.onYouTubeIframeAPIReady = function() {
+            ytApiReady = true;
+            ytPlayer = new YT.Player('youtubePlayer', {
+                height: '1',
+                width: '1',
+                videoId: '',
+                playerVars: {
+                    autoplay: 0,
+                    controls: 0,
+                    modestbranding: 1,
+                    rel: 0,
+                    showinfo: 0,
+                    playsinline: 1,
+                    loop: 1
+                },
+                events: {
+                    'onReady': function() {
+                        // 恢复待播放的视频
+                        if (currentMusicId && ytPlayer.loadVideoById) {
+                            try { ytPlayer.loadVideoById(currentMusicId); } catch (e) {}
+                        }
+                        if (pendingPlay && userInteracted) {
+                            try {
+                                ytPlayer.playVideo();
+                                isPlaying = true;
+                                playBtn.textContent = '⏸';
+                                playBtn.classList.add('playing');
+                            } catch (e) {}
+                            pendingPlay = false;
+                        }
+                    }
+                }
+            });
+        };
+
+        // 如果 API 已经加载（罕见情况）
+        if (window.YT && window.YT.Player) {
+            window.onYouTubeIframeAPIReady();
         }
 
         function updateMusicInfo(scene) {
@@ -790,49 +833,75 @@
         }
 
         function switchMusic(videoId, scene) {
-            if (!musicPlayer) createMusicPlayer();
             currentMusicId = videoId;
-            const src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
-            musicPlayer.src = src;
             updateMusicInfo(scene);
+            if (ytPlayer && ytPlayer.loadVideoById) {
+                try {
+                    ytPlayer.loadVideoById(videoId);
+                    if (userInteracted) {
+                        ytPlayer.playVideo();
+                        isPlaying = true;
+                        playBtn.textContent = '⏸';
+                        playBtn.classList.add('playing');
+                    } else {
+                        isPlaying = false;
+                        playBtn.textContent = '▶';
+                        playBtn.classList.remove('playing');
+                    }
+                } catch (e) {}
+            } else {
+                // YT 还没准备好
+                isPlaying = false;
+                playBtn.textContent = '▶';
+                playBtn.classList.remove('playing');
+            }
+        }
+
+        function playMusic() {
+            userInteracted = true;
+            if (!ytPlayer || !ytPlayer.playVideo) {
+                pendingPlay = true;
+                return;
+            }
+            try {
+                // 确保视频加载正确
+                if (currentMusicId && ytPlayer.loadVideoById) {
+                    let currentVideoId = '';
+                    try {
+                        const data = ytPlayer.getVideoData && ytPlayer.getVideoData();
+                        if (data) currentVideoId = data.video_id || '';
+                    } catch (e) {}
+                    if (currentVideoId !== currentMusicId) {
+                        ytPlayer.loadVideoById(currentMusicId);
+                    }
+                }
+                ytPlayer.playVideo();
+                if (ytPlayer.setVolume) {
+                    ytPlayer.setVolume(parseInt(volumeSlider.value, 10));
+                }
+            } catch (e) { console.warn(e); }
             isPlaying = true;
             playBtn.textContent = '⏸';
             playBtn.classList.add('playing');
         }
 
-        function togglePlay() {
-            if (!musicPlayer) return;
-            if (isPlaying) {
-                const src = musicPlayer.src;
-                if (src.includes('autoplay=1')) {
-                    const newSrc = src.replace('autoplay=1', 'autoplay=0');
-                    musicPlayer.src = newSrc;
-                } else {
-                    const newSrc = src.replace('autoplay=0', 'autoplay=1');
-                    musicPlayer.src = newSrc;
-                }
-                isPlaying = !isPlaying;
-            } else {
-                const src = musicPlayer.src;
-                if (src.includes('autoplay=0')) {
-                    musicPlayer.src = src.replace('autoplay=0', 'autoplay=1');
-                } else {
-                    if (!src || src === 'about:blank') {
-                        if (currentMusicId) {
-                            musicPlayer.src =
-                                `https://www.youtube.com/embed/${currentMusicId}?autoplay=1&loop=1&playlist=${currentMusicId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
-                        }
-                    } else {
-                        musicPlayer.src = src + '&autoplay=1';
-                    }
-                }
-                isPlaying = true;
-            }
-            playBtn.textContent = isPlaying ? '⏸' : '▶';
-            playBtn.classList.toggle('playing', isPlaying);
+        function pauseMusic() {
+            if (!ytPlayer || !ytPlayer.pauseVideo) return;
+            try { ytPlayer.pauseVideo(); } catch (e) {}
+            isPlaying = false;
+            playBtn.textContent = '▶';
+            playBtn.classList.remove('playing');
         }
 
-        volumeSlider.addEventListener('input', function() {});
+        function togglePlay() {
+            if (isPlaying) pauseMusic(); else playMusic();
+        }
+
+        volumeSlider.addEventListener('input', function() {
+            if (ytPlayer && ytPlayer.setVolume) {
+                try { ytPlayer.setVolume(parseInt(this.value, 10)); } catch (e) {}
+            }
+        });
 
         playBtn.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -844,16 +913,13 @@
             togglePlay();
         });
 
+        // 首次点击页面自动尝试播放（帮助手机解锁音频）
         document.addEventListener('click', function autoPlayMusic(e) {
             if (autoPlayUsed || isPlaying) return;
             if (e.target.closest('.reader-overlay')) return;
             if (e.target.closest('#playBtn') || e.target.closest('.music-player')) return;
-            if (!musicPlayer || !currentMusicId) return;
-            musicPlayer.src =
-                `https://www.youtube.com/embed/${currentMusicId}?autoplay=1&loop=1&playlist=${currentMusicId}&controls=0&modestbranding=1&rel=0&showinfo=0`;
-            isPlaying = true;
-            playBtn.textContent = '⏸';
-            playBtn.classList.add('playing');
+            if (!currentMusicId) return;
+            playMusic();
             autoPlayUsed = true;
             document.removeEventListener('click', autoPlayMusic);
         });
@@ -975,7 +1041,6 @@
         const readerNext = document.getElementById('readerNext');
         const readerIndicator = document.getElementById('readerIndicator');
 
-        // 🆕 统一的类型标签获取（包含 article）
         function getTypeLabel(type) {
             if (type === 'video') return i18n.t('immersive.type_video');
             if (type === 'music') return i18n.t('immersive.type_music');
@@ -983,7 +1048,6 @@
             return i18n.t('immersive.type_text');
         }
 
-        // 🆕 统一的类型图标
         function getTypeIcon(type) {
             if (type === 'video') return '🎬';
             if (type === 'music') return '🎵';
@@ -991,7 +1055,6 @@
             return '📝';
         }
 
-        // 🆕 侧边栏短标签（用于 s-tag）
         function getShortTypeLabel(type) {
             if (type === 'video') return i18n.t('immersive.short_video');
             if (type === 'music') return i18n.t('immersive.short_music');
@@ -999,7 +1062,6 @@
             return i18n.t('immersive.short_text');
         }
 
-        // ===== 侧边栏：热门推荐 =====
         function renderHot() {
             const container = document.getElementById('hotList');
             const hotItems = READ_DATA.slice(0, 4);
@@ -1037,7 +1099,6 @@
             });
         }
 
-        // ===== 侧边栏：分类标签 =====
         function renderCategories() {
             const container = document.getElementById('categoryTags');
             const cats = [...new Set(READ_DATA.map(item => item.category).filter(Boolean))];
@@ -1052,7 +1113,6 @@
             container.innerHTML = html;
         }
 
-        // ===== 主列表渲染 =====
         function renderList() {
             if (!READ_DATA || READ_DATA.length === 0) {
                 grid.innerHTML = `
@@ -1072,7 +1132,6 @@
                 const typeIcon = getTypeIcon(item.type);
                 const typeLabel = getTypeLabel(item.type);
                 const preview = item.preview || (item.content ? item.content.substring(0, 50) + '...' : '');
-                // 🆕 文章类型：蓝色徽章 + 阅读全文按钮
                 const isArticle = item.type === 'article';
                 const badgeClass = isArticle ? 'media-badge article' : 'media-badge';
                 const readMoreBtn = isArticle
@@ -1092,7 +1151,6 @@
             });
             grid.innerHTML = html;
 
-            // 🆕 卡片点击：文章类型跳转，其他类型打开弹窗
             grid.querySelectorAll('.read-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -1111,11 +1169,9 @@
             renderCategories();
         }
 
-        // ===== 阅读浮层（仅 text/video/music） =====
         function openReader(idx) {
             const item = READ_DATA[idx];
             if (!item) return;
-            // 安全兜底：如果误点到 article，跳转独立页
             if (item.type === 'article') {
                 window.location.href = `article-read.html?article=${idx}`;
                 return;
@@ -1212,23 +1268,9 @@
         }
 
         // ================================================================
-        //  🚀 启动
+        //  🚀 启动（汉堡菜单由 common.js 统一处理，此处不再重复绑定）
         // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.querySelector('.nav-toggle');
-            const links = document.querySelector('.nav-links');
-            if (toggle && links) {
-                toggle.addEventListener('click', function() {
-                    links.classList.toggle('open');
-                    toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
-                });
-                links.querySelectorAll('a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        links.classList.remove('open');
-                        toggle.textContent = '☰';
-                    });
-                });
-            }
             renderSceneButtons();
             loadImmersiveData();
         });
