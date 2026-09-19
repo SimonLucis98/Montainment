@@ -425,7 +425,7 @@
             color: #fff;
         }
 
-        /* 🆕 语言缺失提示（暖白卡片风格，配合文章卡片） */
+        /* 语言缺失提示（暖白卡片风格，配合文章卡片） */
         .no-lang-box {
             background: #faf8f4;
             border-radius: 24px;
@@ -707,7 +707,7 @@
             }
 
             // ============================================================
-            //  🆕 双语支持
+            //  双语支持
             // ============================================================
             function getLocalizedArticle(item) {
                 const lang = i18n.currentLang || 'zh';
@@ -734,7 +734,7 @@
             }
 
             // ============================================================
-            //  📄 渲染
+            //  渲染
             // ============================================================
             function renderError(message) {
                 container.innerHTML = `
@@ -748,13 +748,9 @@
                 document.title = i18n.t('articleread.error_title') + ' · Montainment';
             }
 
-            // 🆕 语言缺失提示
+            // 语言缺失提示
             function renderNoLang(item) {
                 const lang = i18n.currentLang || 'zh';
-                const loc = getLocalizedArticle(item);
-                const fallbackLoc = lang === 'zh'
-                    ? { title: item.titleEn || '', content: item.contentEn || '' }
-                    : { title: item.title || '', content: item.content || '' };
 
                 const titleText = lang === 'zh' ? '暂无中文版本' : 'No English version available';
                 const descText = lang === 'zh'
@@ -787,7 +783,6 @@
             }
 
             function renderArticle(item) {
-                // 🆕 检查当前语言是否有内容
                 if (!hasArticleLang(item)) {
                     renderNoLang(item);
                     return;
@@ -903,23 +898,8 @@
                 if (currentArticle) renderArticle(currentArticle);
             });
 
-            document.addEventListener('DOMContentLoaded', function() {
-                const toggle = document.querySelector('.nav-toggle');
-                const links = document.querySelector('.nav-links');
-                if (toggle && links) {
-                    toggle.addEventListener('click', function() {
-                        links.classList.toggle('open');
-                        toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
-                    });
-                    links.querySelectorAll('a').forEach(function(link) {
-                        link.addEventListener('click', function() {
-                            links.classList.remove('open');
-                            toggle.textContent = '☰';
-                        });
-                    });
-                }
-            });
-
+            // 🆕 汉堡菜单由 common.js 统一处理，此处不再重复绑定
+            // 🆕 启动
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', loadArticle);
             } else {
