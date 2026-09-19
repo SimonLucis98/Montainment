@@ -26,91 +26,81 @@
             backdrop-filter: blur(4px);
             flex-wrap: wrap;
         }
-        .music-player .icon {
-            font-size: 18px;
-            opacity: 0.6;
-            color: #c9a87c;
+        .music-player .icon { font-size: 18px; opacity: 0.6; color: #c9a87c; }
+        .music-player .info { display: flex; flex-direction: column; gap: 0px; }
+        .music-player .info .title { font-size: 13px; font-weight: 600; color: #e8e0d8; letter-spacing: 0.5px; white-space: nowrap; }
+        .music-player .info .sub { font-size: 11px; color: rgba(232,224,216,0.4); letter-spacing: 0.3px; }
+        .music-player .controls { display: flex; align-items: center; gap: 6px; }
+        .music-player .controls button {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 1px solid rgba(201, 168, 124, 0.2);
+            background: rgba(255,255,255,0.04); color: #e8e0d8;
+            font-size: 14px; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            font-family: inherit;
         }
-        .music-player .info {
+        .music-player .controls button:hover { background: rgba(201, 168, 124, 0.12); border-color: rgba(201, 168, 124, 0.3); }
+        .music-player .controls button.playing { background: rgba(201, 168, 124, 0.15); border-color: #c9a87c; }
+        .music-player .controls .volume-slider {
+            width: 60px; height: 3px; -webkit-appearance: none;
+            background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; cursor: pointer;
+        }
+        .music-player .controls .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%;
+            background: #c9a87c; cursor: pointer;
+        }
+        .music-player .controls .volume-slider::-moz-range-thumb {
+            width: 10px; height: 10px; border-radius: 50%; background: #c9a87c; cursor: pointer; border: none;
+        }
+        .music-player .badge {
+            font-size: 10px; font-weight: 700; color: #c9a87c;
+            background: rgba(201, 168, 124, 0.08); padding: 2px 10px;
+            border-radius: 20px; border: 1px solid rgba(201, 168, 124, 0.06); letter-spacing: 0.5px;
+        }
+
+        /* ===== 语言过滤栏 ===== */
+        .story-filter {
             display: flex;
-            flex-direction: column;
-            gap: 0px;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
         }
-        .music-player .info .title {
-            font-size: 13px;
+        .filter-btn {
+            padding: 8px 22px;
+            border-radius: 30px;
+            border: 1px solid rgba(138, 155, 122, 0.25);
+            background: #faf8f5;
+            color: #5a544b;
+            font-size: 14px;
             font-weight: 600;
-            color: #e8e0d8;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-        .music-player .info .sub {
-            font-size: 11px;
-            color: rgba(232,224,216,0.4);
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
             letter-spacing: 0.3px;
-        }
-        .music-player .controls {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
         }
-        .music-player .controls button {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1px solid rgba(201, 168, 124, 0.2);
-            background: rgba(255,255,255,0.04);
-            color: #e8e0d8;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: inherit;
+        .filter-btn:hover {
+            background: #f0ede8;
+            border-color: rgba(138, 155, 122, 0.4);
+            transform: translateY(-1px);
         }
-        .music-player .controls button:hover {
-            background: rgba(201, 168, 124, 0.12);
-            border-color: rgba(201, 168, 124, 0.3);
+        .filter-btn.active {
+            background: linear-gradient(135deg, #8a9b7a, #7a8b6a);
+            color: #fff;
+            border-color: #7a8b6a;
+            box-shadow: 0 4px 12px rgba(138, 155, 122, 0.3);
         }
-        .music-player .controls button.playing {
-            background: rgba(201, 168, 124, 0.15);
-            border-color: #c9a87c;
-        }
-        .music-player .controls .volume-slider {
-            width: 60px;
-            height: 3px;
-            -webkit-appearance: none;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            outline: none;
-            cursor: pointer;
-        }
-        .music-player .controls .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #c9a87c;
-            cursor: pointer;
-        }
-        .music-player .controls .volume-slider::-moz-range-thumb {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #c9a87c;
-            cursor: pointer;
-            border: none;
-        }
-
-        .music-player .badge {
-            font-size: 10px;
+        .filter-btn .count {
+            font-size: 11px;
+            background: rgba(0,0,0,0.08);
+            padding: 1px 8px;
+            border-radius: 10px;
             font-weight: 700;
-            color: #c9a87c;
-            background: rgba(201, 168, 124, 0.08);
-            padding: 2px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(201, 168, 124, 0.06);
-            letter-spacing: 0.5px;
+        }
+        .filter-btn.active .count {
+            background: rgba(255,255,255,0.2);
         }
 
         /* ===== 小说网格 ===== */
@@ -155,6 +145,27 @@
             position: absolute; bottom: 12px; right: 16px;
             font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 400; letter-spacing: 2px;
         }
+        /* 语言徽章 */
+        .story-cover .lang-badge {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+        }
+        .story-cover .lang-badge.zh {
+            background: rgba(201, 122, 107, 0.85);
+        }
+        .story-cover .lang-badge.en {
+            background: rgba(42, 109, 244, 0.85);
+        }
+
         .story-card-body { padding: 16px 18px 18px; flex:1; display:flex; flex-direction:column; }
         .story-card-body .title { font-size:17px; font-weight:700; color:#3d3a35; line-height:1.3; margin-bottom:2px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
         .story-card-body .author { font-size:14px; color:rgba(61,58,53,0.7); margin-bottom:8px; }
@@ -180,10 +191,7 @@
             .story-container { max-width: 600px; padding: 16px 16px 32px; }
         }
         @media (max-width: 720px) {
-            .story-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-            }
+            .story-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
             .story-card-body .title { font-size:15px; }
             .story-card-body .desc { font-size:13px; -webkit-line-clamp:1; }
             .story-card-footer { flex-wrap:wrap; gap:4px; }
@@ -192,10 +200,7 @@
         }
         @media (max-width: 600px) {
             .story-container { max-width: 100%; padding: 16px 12px 32px; }
-            .story-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
+            .story-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
             .story-card-body { padding:12px; }
             .story-card-body .title { font-size:14px; }
             .story-card-body .author { font-size:12px; }
@@ -212,6 +217,8 @@
             .music-player .info .title { font-size: 12px; }
             .music-player .controls .volume-slider { width: 40px; }
             .music-player .badge { font-size: 9px; padding: 1px 8px; }
+            .filter-btn { padding: 6px 16px; font-size: 13px; }
+            .filter-btn .count { font-size: 10px; padding: 1px 6px; }
         }
         @media (max-width: 420px) {
             .story-grid { grid-template-columns:1fr 1fr; gap:10px; }
@@ -220,6 +227,7 @@
             .story-card-footer .updated-time { font-size:9px; }
             .music-player .info .sub { display: none; }
             .music-player .controls .volume-slider { width: 30px; }
+            .filter-btn { padding: 5px 12px; font-size: 12px; }
         }
     </style>
 </head>
@@ -269,6 +277,22 @@
                     <a href="immersive.html" class="immersive-entry" style="display:inline-flex;align-items:center;gap:4px;color:#c9a87c;font-size:12px;font-weight:600;text-decoration:none;padding:4px 12px;border:1px solid rgba(201,168,124,0.15);border-radius:20px;transition:0.2s;letter-spacing:0.3px;">🎧 沉浸式</a>
                 </div>
 
+                <!-- ===== 语言过滤栏 ===== -->
+                <div class="story-filter" id="storyFilter">
+                    <button class="filter-btn active" data-filter="all">
+                        <span data-i18n="story.filter_all">全部</span>
+                        <span class="count" id="countAll">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="zh">
+                        🇨🇳 <span data-i18n="story.filter_zh">中文</span>
+                        <span class="count" id="countZh">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="en">
+                        🇬🇧 <span data-i18n="story.filter_en">English</span>
+                        <span class="count" id="countEn">0</span>
+                    </button>
+                </div>
+
                 <!-- ===== 小说列表 ===== -->
                 <div class="story-grid" id="storyGrid"></div>
             </div>
@@ -283,7 +307,7 @@
     <script src="common.js"></script>
     <script>
         // ================================================================
-        //  🎵 古风音乐播放器（YouTube IFrame Player API — 手机可靠播放）
+        //  🎵 音乐播放器
         // ================================================================
         (function() {
             const YOUTUBE_VIDEO_ID = '9_KdMxi2dEc';
@@ -294,7 +318,6 @@
             const playBtn = document.getElementById('playBtn');
             const volumeSlider = document.getElementById('volumeSlider');
 
-            // 创建隐藏容器
             const container = document.createElement('div');
             container.style.cssText = 'position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;';
             container.innerHTML = '<div id="youtubePlayer"></div>';
@@ -318,7 +341,6 @@
                 });
             };
 
-            // 如果 API 已经加载（罕见情况）
             if (window.YT && window.YT.Player) {
                 window.onYouTubeIframeAPIReady();
             }
@@ -390,10 +412,37 @@
         })();
 
         // ================================================================
-        //  小说列表逻辑
+        //  🌐 语言自动检测
+        // ================================================================
+        /**
+         * 通过字符判断文本语言
+         * 中文字符占比 > 30% → 中文
+         * 否则 → 英文
+         */
+        function detectLang(text) {
+            if (!text || typeof text !== 'string') return 'unknown';
+            // 移除空白和标点
+            const clean = text.replace(/[\s\p{P}]/gu, '');
+            if (clean.length === 0) return 'unknown';
+
+            // 统计中文字符数（CJK 统一汉字 + 扩展区）
+            const chineseMatches = clean.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g);
+            const chineseCount = chineseMatches ? chineseMatches.length : 0;
+
+            // 中文字符占比
+            const ratio = chineseCount / clean.length;
+            return ratio > 0.3 ? 'zh' : 'en';
+        }
+
+        // ================================================================
+        //  小说列表
         // ================================================================
 
         const storyGrid = document.getElementById('storyGrid');
+        const filterContainer = document.getElementById('storyFilter');
+
+        let allStories = [];
+        let currentFilter = 'all'; // 'all' | 'zh' | 'en'
 
         function getLikes(storyId) {
             const key = 'story_likes_' + storyId;
@@ -436,18 +485,40 @@
         }
 
         function formatTime(iso) {
-            if (!iso) return '未知';
+            if (!iso) return i18n.t('story.unknown_time') || '未知';
             const d = new Date(iso);
             return d.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-');
         }
 
-        function renderList(stories) {
-            if (!stories || stories.length === 0) {
+        function updateFilterCounts() {
+            const countAll = document.getElementById('countAll');
+            const countZh = document.getElementById('countZh');
+            const countEn = document.getElementById('countEn');
+            if (countAll) countAll.textContent = allStories.length;
+            if (countZh) countZh.textContent = allStories.filter(s => detectLang(s.title) === 'zh').length;
+            if (countEn) countEn.textContent = allStories.filter(s => detectLang(s.title) === 'en').length;
+        }
+
+        function renderList() {
+            let filtered = allStories;
+            if (currentFilter === 'zh') {
+                filtered = allStories.filter(s => detectLang(s.title) === 'zh');
+            } else if (currentFilter === 'en') {
+                filtered = allStories.filter(s => detectLang(s.title) === 'en');
+            }
+
+            if (!filtered || filtered.length === 0) {
+                let emptyMsg = i18n.t('story.empty_title');
+                if (currentFilter === 'zh') {
+                    emptyMsg = i18n.currentLang === 'en' ? 'No Chinese novels' : '暂无中文小说';
+                } else if (currentFilter === 'en') {
+                    emptyMsg = i18n.currentLang === 'en' ? 'No English novels' : '暂无英文小说';
+                }
                 storyGrid.innerHTML = `
                     <div style="grid-column:1/-1;">
                         <div class="empty-state">
                             <div class="icon">📚</div>
-                            <h3 data-i18n="story.empty_title">暂无小说</h3>
+                            <h3>${emptyMsg}</h3>
                             <p data-i18n="story.empty_desc">请在后台添加小说内容 🚧</p>
                         </div>
                     </div>
@@ -457,25 +528,32 @@
             }
 
             let html = '';
-            stories.forEach((story) => {
+            filtered.forEach((story) => {
                 let likes = getLikes(story.id);
                 if (likes === null) {
                     likes = story.likes || 0;
                     setLikes(story.id, likes);
                 }
 
+                // 🆕 自动检测语言
+                const lang = detectLang(story.title);
                 const coverEmoji = getCoverEmoji(story.title);
                 const coverColor = getCoverColor(story.title);
-                const desc = story.description || '📝 ' + (window.i18n ? i18n.t('story.no_desc') : '暂无简介');
+                const desc = story.description || ('📝 ' + (window.i18n ? i18n.t('story.no_desc') : '暂无简介'));
                 const chCount = story.chapters ? story.chapters.length : 0;
                 const updated = formatTime(story.updatedAt);
                 const hasCover = story.cover && story.cover.trim() !== '';
                 const coverHtml = hasCover ? `<img src="${story.cover}" alt="${story.title}" />` : `<span class="cover-emoji">${coverEmoji}</span>`;
 
+                // 🆕 语言徽章
+                const langLabel = lang === 'zh' ? 'CN' : (lang === 'en' ? 'EN' : '');
+                const langBadge = langLabel ? `<span class="lang-badge ${lang}">${langLabel}</span>` : '';
+
                 html += `
                     <a href="story-read.html?story=${story.id}" class="story-card">
                         <div class="story-cover" style="background:${hasCover ? '#1a1a2e' : coverColor};">
                             ${coverHtml}
+                            ${langBadge}
                             <span class="cover-title">${story.title.substring(0,4)}</span>
                         </div>
                         <div class="story-card-body">
@@ -496,6 +574,26 @@
             applyI18n();
         }
 
+        function setFilter(filter) {
+            currentFilter = filter;
+            filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            renderList();
+        }
+
+        filterContainer.addEventListener('click', function(e) {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            setFilter(btn.dataset.filter);
+        });
+
+        // 语言切换时仅重渲染（不影响过滤逻辑，过滤基于字符判断）
+        document.addEventListener('languageChanged', function() {
+            renderList();
+            applyI18n();
+        });
+
         function loadStories() {
             fetch('data/stories.json')
                 .then(res => {
@@ -503,17 +601,20 @@
                     return res.json();
                 })
                 .then(data => {
-                    const stories = data.stories || [];
-                    stories.forEach(s => {
+                    allStories = data.stories || [];
+                    allStories.forEach(s => {
                         if (getLikes(s.id) === null) {
                             setLikes(s.id, s.likes || 0);
                         }
                     });
-                    renderList(stories);
+                    updateFilterCounts();
+                    renderList();
                 })
                 .catch(err => {
                     console.warn('加载小说数据失败:', err);
-                    renderList([]);
+                    allStories = [];
+                    updateFilterCounts();
+                    renderList();
                 });
         }
 
