@@ -125,6 +125,11 @@ const i18n = {
       'story.updated': '🕒',
       'story.unknown_time': 'Unknown',
 
+      // -------- 故事列表过滤 --------
+      'story.filter_all': 'All Stories',
+      'story.filter_zh': 'CN Stories',
+      'story.filter_en': 'EN Stories',
+
       // -------- 小说阅读页 --------
       'storyread.back_to_list': '← Back to Novel List',
       'storyread.back_to_catalog': '← Back to Catalog',
@@ -294,6 +299,11 @@ const i18n = {
       'story.chapters': '章',
       'story.updated': '🕒',
       'story.unknown_time': '未知',
+
+      // -------- 故事列表过滤 --------
+      'story.filter_all': '全部小说',
+      'story.filter_zh': '中文小说',
+      'story.filter_en': '英文小说',
 
       // -------- 小说阅读页 --------
       'storyread.back_to_list': '← 返回小说列表',
