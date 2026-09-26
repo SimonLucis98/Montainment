@@ -142,6 +142,19 @@
       "sortOrder": 11,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1790396114/ymcumun6nkxspf0d6mmo.png"
+    },
+    {
+      "id": "12",
+      "icon": "",
+      "titleZh": "日文世界",
+      "titleEn": "Japanese World",
+      "descriptionZh": "探索日文世界，轻松掌握假名与词汇，开启你的日文之旅！",
+      "descriptionEn": "Explore the world of Japanese, master Kana and words, and start your Japanese journey!",
+      "type": "js",
+      "entry": "games/japaneselearning.js",
+      "sortOrder": 12,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1790421245/flmeicm0s5pwp8dzue7j.png"
     }
   ]
 }
