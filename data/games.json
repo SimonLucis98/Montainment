@@ -129,6 +129,19 @@
       "sortOrder": 10,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789241619/zcsqq9xqezbpeoq7n9ev.jpg"
+    },
+    {
+      "id": "11",
+      "icon": "",
+      "titleZh": "韩语世界",
+      "titleEn": "Korean World",
+      "descriptionZh": "探索韩语世界，轻松掌握字母与词汇，开启你的韩语之旅！",
+      "descriptionEn": "Explore the world of Korean, master letters and words, and start your Korean journey!",
+      "type": "js",
+      "entry": "games/koreanlearning.js",
+      "sortOrder": 1,
+      "enabled": true,
+      "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1790396114/ymcumun6nkxspf0d6mmo.png"
     }
   ]
 }
