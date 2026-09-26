@@ -1,4 +1,4 @@
-/* Learn Korean · 6-Level Korean Learning Game v2 */
+/* Learn Korean · 6-Level Korean Learning Game v3 — Full Bilingual */
 (function () {
   'use strict';
 
@@ -32,8 +32,6 @@ button:disabled{opacity:.4;cursor:not-allowed}
   max-width:1200px;margin:0 auto;
   padding:16px 20px;position:relative;
 }
-
-/* TOPBAR */
 .topbar{
   display:flex;justify-content:space-between;align-items:center;
   padding:8px 0 16px;flex-shrink:0;
@@ -52,14 +50,11 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .stat-chip .num{color:var(--gold);font-weight:900}
 .stat-chip.lvl .num{color:var(--cyan)}
 
-/* SCREENS */
 .screen{flex:1;display:none;flex-direction:column;min-height:0}
 .screen.on{display:flex}
 
 /* HOME */
-.home-scroll{
-  flex:1;overflow-y:auto;padding-right:4px;
-}
+.home-scroll{flex:1;overflow-y:auto;padding-right:4px}
 .home-scroll::-webkit-scrollbar{width:6px}
 .home-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
 .hero{text-align:center;padding:20px 10px 26px}
@@ -72,10 +67,10 @@ button:disabled{opacity:.4;cursor:not-allowed}
   letter-spacing:4px;margin-bottom:8px;
   text-shadow:0 0 20px rgba(255,155,106,.4);
 }
-.hero p{color:var(--dim);font-size:14px;line-height:1.6;max-width:600px;margin:0 auto}
+.hero p{color:var(--dim);font-size:14px;line-height:1.7;max-width:720px;margin:0 auto}
 
 .level-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
   gap:14px;padding-bottom:20px;
 }
 .level-card{
@@ -105,14 +100,17 @@ button:disabled{opacity:.4;cursor:not-allowed}
   padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.06);
 }
 .lv-icon{font-size:36px;line-height:1;margin-bottom:6px}
-.lv-title{font-size:19px;font-weight:900;margin-bottom:4px;letter-spacing:-.3px}
+.lv-title{
+  font-size:19px;font-weight:900;margin-bottom:4px;letter-spacing:-.3px;
+  line-height:1.35;
+}
 .lv-title .kr{
   display:block;font-size:12px;color:var(--korean);
   font-weight:700;letter-spacing:1px;margin-top:4px;opacity:.9;
 }
 .lv-desc{
-  color:var(--dim);font-size:13px;line-height:1.55;
-  margin-bottom:14px;min-height:44px;
+  color:var(--dim);font-size:13px;line-height:1.6;
+  margin-bottom:14px;min-height:60px;
 }
 .lv-meta{
   display:flex;justify-content:space-between;align-items:center;
@@ -136,15 +134,18 @@ button:disabled{opacity:.4;cursor:not-allowed}
   transition:.15s;
 }
 .back-btn:hover{border-color:var(--accent);color:var(--accent)}
-.mode-head h2{font-size:26px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px}
+.mode-head h2{
+  font-size:24px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px;
+  line-height:1.35;
+}
 .mode-head h2 .kr{
   color:var(--korean);font-size:.75em;font-weight:700;
   margin-left:10px;letter-spacing:1px;
 }
-.mode-head p{color:var(--dim);font-size:13px}
+.mode-head p{color:var(--dim);font-size:13px;line-height:1.7}
 
 .mode-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:14px;
 }
 .mode-card{
@@ -157,12 +158,12 @@ button:disabled{opacity:.4;cursor:not-allowed}
   box-shadow:0 10px 30px rgba(91,158,255,.15);
 }
 .mode-icon{font-size:44px;line-height:1;margin-bottom:12px}
-.mode-name{font-size:16px;font-weight:800;margin-bottom:6px}
+.mode-name{font-size:15px;font-weight:800;margin-bottom:6px;line-height:1.4}
 .mode-name .kr{
   display:block;font-size:11px;color:var(--korean);
   font-weight:600;margin-top:4px;letter-spacing:.5px;
 }
-.mode-desc{font-size:12px;color:var(--dim);line-height:1.5}
+.mode-desc{font-size:12px;color:var(--dim);line-height:1.6}
 
 /* QUIZ */
 .quiz-wrap{flex:1;display:flex;flex-direction:column;min-height:0;gap:14px}
@@ -178,8 +179,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
   width:38px;height:38px;border-radius:10px;
   display:flex;align-items:center;justify-content:center;
   font-size:18px;font-weight:900;
-  transition:.15s;
-  flex-shrink:0;
+  transition:.15s;flex-shrink:0;
 }
 .quit-btn:hover{background:rgba(255,85,112,.25);border-color:var(--red)}
 .quiz-progress{
@@ -231,10 +231,10 @@ button:disabled{opacity:.4;cursor:not-allowed}
   from{opacity:0;transform:translateY(10px) scale(.98)}
   to{opacity:1;transform:translateY(0) scale(1)}
 }
-
 .q-prompt{
   font-size:11px;color:var(--dim);
   letter-spacing:2px;text-transform:uppercase;font-weight:800;
+  line-height:1.6;
 }
 .q-image{
   font-size:clamp(80px,15vw,140px);line-height:1;
@@ -262,14 +262,11 @@ button:disabled{opacity:.4;cursor:not-allowed}
   0%,100%{box-shadow:0 10px 40px rgba(91,158,255,.4)}
   50%{box-shadow:0 10px 60px rgba(91,158,255,.9)}
 }
-.q-speaker-hint{font-size:13px;color:var(--dim);margin-top:8px}
+.q-speaker-hint{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.6}
 
-/* ANSWERS — centered */
 .answers{
   display:grid;gap:10px;width:100%;max-width:700px;
-  flex-shrink:0;
-  margin:0 auto;                /* ← 居中 */
-  align-self:center;            /* ← 保险 */
+  flex-shrink:0;margin:0 auto;align-self:center;
 }
 .answers.cols-2{grid-template-columns:repeat(2,1fr)}
 .answers.cols-3{grid-template-columns:repeat(3,1fr)}
@@ -278,12 +275,12 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .ans-btn{
   background:linear-gradient(145deg,var(--panel2),var(--panel));
   border:2px solid var(--line);border-radius:14px;
-  padding:16px 14px;font-size:16px;font-weight:700;
+  padding:16px 14px;font-size:15px;font-weight:700;
   cursor:pointer;transition:.15s;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   gap:4px;min-height:66px;
-  line-height:1.35;text-align:center;
+  line-height:1.4;text-align:center;
   width:100%;
 }
 .ans-btn:hover:not(:disabled){
@@ -296,14 +293,14 @@ button:disabled{opacity:.4;cursor:not-allowed}
 }
 .ans-btn .sub{
   font-size:12px;color:var(--dim);font-weight:600;
-  display:block;
+  display:block;margin-top:2px;
 }
 .ans-btn .ans-text{
-  display:block;font-size:15px;font-weight:700;
-  color:var(--text);line-height:1.4;
+  display:block;font-size:14px;font-weight:700;
+  color:var(--text);line-height:1.5;
 }
 .ans-btn .ans-text .zh{color:var(--text)}
-.ans-btn .ans-text .sep{color:var(--dim);margin:0 4px}
+.ans-btn .ans-text .sep{color:var(--dim);margin:0 6px;font-weight:400}
 .ans-btn .ans-text .en{color:var(--cyan);font-weight:600}
 
 .ans-btn.correct{
@@ -341,13 +338,13 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .ans-btn.reveal .ans-text{color:var(--green)}
 .ans-btn:disabled{cursor:default}
 
-/* FEEDBACK */
 .feedback{
   position:absolute;top:20px;left:50%;
   transform:translateX(-50%);
   padding:8px 20px;border-radius:20px;
-  font-size:14px;font-weight:800;letter-spacing:1px;
+  font-size:14px;font-weight:800;letter-spacing:.5px;
   animation:fbIn .5s;pointer-events:none;z-index:10;
+  white-space:nowrap;
 }
 .feedback.good{
   background:rgba(63,224,138,.2);
@@ -379,11 +376,14 @@ button:disabled{opacity:.4;cursor:not-allowed}
   60%{transform:scale(1.2) rotate(10deg)}
   100%{transform:scale(1) rotate(0)}
 }
-.result-title{font-size:32px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px}
-.result-sub{color:var(--dim);font-size:13px;margin-bottom:32px}
+.result-title{
+  font-size:30px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px;
+  line-height:1.35;
+}
+.result-sub{color:var(--dim);font-size:13px;margin-bottom:32px;line-height:1.6}
 .result-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:12px;max-width:520px;width:100%;margin-bottom:32px;
+  gap:12px;max-width:560px;width:100%;margin-bottom:32px;
 }
 .res-box{
   background:var(--panel2);border:1.5px solid var(--line);
@@ -391,7 +391,8 @@ button:disabled{opacity:.4;cursor:not-allowed}
 }
 .res-label{
   font-size:10px;color:var(--dim);font-weight:800;
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;
+  letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px;
+  line-height:1.4;
 }
 .res-value{font-size:24px;font-weight:900;line-height:1}
 .res-value.gold{color:var(--gold)}
@@ -400,7 +401,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .res-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .res-btn{
   padding:14px 32px;border-radius:12px;
-  font-size:14px;font-weight:800;letter-spacing:1px;
+  font-size:14px;font-weight:800;letter-spacing:.5px;
   cursor:pointer;transition:.15s;
   background:linear-gradient(135deg,var(--accent),var(--accent2));
   color:white;border:0;
@@ -413,12 +414,12 @@ button:disabled{opacity:.4;cursor:not-allowed}
 }
 .res-btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
 
-/* AUDIO HINT */
 .audio-hint{
   font-size:11px;color:var(--red);
   margin-top:8px;padding:4px 10px;
   background:rgba(255,85,112,.1);
   border-radius:8px;display:none;
+  line-height:1.5;
 }
 .audio-hint.on{display:block}
 
@@ -432,6 +433,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
   .q-speaker{width:100px;height:100px;font-size:44px}
   .result-grid{grid-template-columns:1fr 1fr}
   .res-btn{padding:12px 22px;font-size:13px}
+  .feedback{font-size:12px;padding:6px 14px}
 }
 </style>
 </head>
@@ -501,46 +503,39 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
 <script>
 /* ============================================================
-   UI LANGUAGE
+   ALL UI TEXT IS BILINGUAL (Chinese · English)
    ============================================================ */
-let lang = localStorage.getItem('km_lang') || 'zh';
 const UI = {
-  zh: {
-    heroDesc: '选择你的等级。每个等级都有自己的词汇、短句和对话，每次进入都会随机出题。',
-    back: '返回',
-    modeImage: '看图选韩语',
-    modeImageDesc: '看图片，选择正确的韩语单词',
-    modeText: '看韩语选意思',
-    modeTextDesc: '看韩语字词，选择正确的意思（中英对照）',
-    modeListen: '听音选字',
-    modeListenDesc: '听韩语发音，选出正确的韩语',
-    modeMix: '混合挑战',
-    modeMixDesc: '三种题型随机出现，检验真实水平',
-    correct: '✓ 正确',
-    wrong: '✗ 错误',
-    againBtn: '再来一轮',
-    backBtn: '返回选单',
-    noAudio: '⚠️ 此设备没有韩语语音，请检查系统设置'
-  },
-  en: {
-    heroDesc: 'Choose your level. Each level has its own vocabulary, phrases and dialogue. Questions are randomized every time you enter.',
-    back: 'Back',
-    modeImage: 'Image → Korean',
-    modeImageDesc: 'Look at the image, pick the correct Korean word',
-    modeText: 'Korean → Meaning',
-    modeTextDesc: 'Read the Korean, pick the correct meaning (CN / EN)',
-    modeListen: 'Listen & Pick',
-    modeListenDesc: 'Listen to the Korean, pick the correct word',
-    modeMix: 'Mixed Challenge',
-    modeMixDesc: 'All three modes mixed randomly',
-    correct: '✓ Correct',
-    wrong: '✗ Wrong',
-    againBtn: 'Play Again',
-    backBtn: 'Back to Levels',
-    noAudio: '⚠️ Korean voice not available on this device'
-  }
+  heroDesc: '选择你的等级 · 每个等级都有自己的词汇、短句和对话，每次进入都会随机出题。<br>Choose your level · Each level has its own vocabulary, phrases and dialogue. Questions are randomized every time.',
+  back: '返回 · Back',
+  modeImage: '看图选字 · Image → Korean',
+  modeImageDesc: '看图片选正确的韩语 · Look at the image, pick the correct Korean',
+  modeText: '看韩语选意思 · Korean → Meaning',
+  modeTextDesc: '看韩语字词选正确的中英意思 · Read the Korean, pick the correct meaning',
+  modeListen: '听音选字 · Listen & Pick',
+  modeListenDesc: '听韩语发音选正确的韩语 · Listen to the Korean, pick the correct word',
+  modeMix: '混合挑战 · Mixed Challenge',
+  modeMixDesc: '三种题型随机出现 · All three modes mixed randomly',
+  correct: '✓ 正确 · Correct',
+  wrong: '✗ 错误 · Wrong',
+  againBtn: '再来一轮 · Play Again',
+  backBtn: '返回选单 · Back to Levels',
+  noAudio: '⚠️ 此设备没有韩语语音 · Korean voice not available on this device',
+  score: '得分 · Score',
+  accuracy: '正确率 · Accuracy',
+  maxCombo: '最大连击 · Max Combo',
+  played: '已玩 · Played',
+  quitConfirm: '确定要退出本轮测试吗？\\n\\nQuit this round?',
+  perfectTitle: '完美！ · Perfect!',
+  perfectSub: '你已经完全掌握这个等级了 · You have mastered this level',
+  greatTitle: '很棒！ · Great!',
+  greatSub: '再练几次就能满分 · A few more rounds to perfection',
+  goodTitle: '还不错 · Good Effort',
+  goodSub: '继续努力 · Keep practicing',
+  keepTitle: '继续加油 · Keep Trying',
+  keepSub: '反复练习很重要 · Repetition is the key'
 };
-function t(k){ return UI[lang][k]; }
+function t(k){ return UI[k] || k; }
 
 /* ============================================================
    DATA
@@ -903,38 +898,44 @@ const L6 = [
 ];
 
 /* ============================================================
-   LEVEL META
+   LEVEL META — BILINGUAL NAMES & DESCRIPTIONS
    ============================================================ */
 const LEVEL_META = {
   1: {
     icon:'🔤',
-    zh:{ name:'初学者', desc:'韩文字母：辅音、元音、基础音节组合。建立发音基础。' },
-    en:{ name:'Beginner', desc:'Hangul: consonants, vowels, basic syllable combinations.' }
+    kr:'입문',
+    name:'初学者 · Beginner',
+    desc:'韩文字母：辅音、元音、基础音节组合。建立发音基础。<br>Hangul: consonants, vowels and basic syllables. Build your pronunciation foundation.'
   },
   2: {
     icon:'📚',
-    zh:{ name:'基础词汇', desc:'动物、数字、天气、颜色、人物、食物、身体、日常物品。' },
-    en:{ name:'Basic Vocabulary', desc:'Animals, numbers, weather, colors, people, food, body, objects.' }
+    kr:'기초',
+    name:'基础词汇 · Basic Vocabulary',
+    desc:'动物、数字、天气、颜色、人物、食物、身体、日常物品。<br>Animals, numbers, weather, colors, people, food, body and daily objects.'
   },
   3: {
     icon:'💬',
-    zh:{ name:'日常短句', desc:'问候、感谢、道歉、请求等日常交流短语。' },
-    en:{ name:'Daily Phrases', desc:'Greetings, thanks, apologies, requests for daily conversation.' }
+    kr:'일상',
+    name:'日常短句 · Daily Phrases',
+    desc:'问候、感谢、道歉、请求等日常交流短语，可以简短回复。<br>Greetings, thanks, apologies and requests — enough to reply briefly.'
   },
   4: {
     icon:'🗣️',
-    zh:{ name:'简短对话', desc:'点餐、购物、问路、时间等实用对话表达。' },
-    en:{ name:'Short Dialogue', desc:'Ordering, shopping, directions, time — practical conversation.' }
+    kr:'대화',
+    name:'简短对话 · Short Dialogue',
+    desc:'点餐、购物、问路、时间等实用对话表达。<br>Ordering, shopping, directions and time — practical conversation.'
   },
   5: {
     icon:'🎯',
-    zh:{ name:'高级会话', desc:'表达意见、约定、情绪、建议。舒适进行日常交流。' },
-    en:{ name:'Advanced Conversation', desc:'Opinions, appointments, emotions, suggestions. Comfortable daily talk.' }
+    kr:'고급',
+    name:'高级会话 · Advanced Conversation',
+    desc:'表达意见、约定、情绪、建议。可以进行较好的日常交流。<br>Opinions, appointments, emotions and suggestions. Comfortable daily talk.'
   },
   6: {
     icon:'👑',
-    zh:{ name:'流利交流', desc:'复杂表达、抽象讨论、人生哲理。达到流利沟通的水平。' },
-    en:{ name:'Fluent Communication', desc:'Complex expression, abstract discussion. Fluent level.' }
+    kr:'유창',
+    name:'流利交流 · Fluent Communication',
+    desc:'复杂表达、抽象讨论、人生哲理。达到流利沟通的水平。<br>Complex expression, abstract discussion and life topics. Fluent level.'
   }
 };
 
@@ -962,9 +963,6 @@ function saveProgress(){
   localStorage.setItem('km_progress', JSON.stringify(state.progress));
 }
 
-/* ============================================================
-   POOL
-   ============================================================ */
 function getPool(level){
   if(level === 1){
     return [
@@ -981,15 +979,11 @@ function getPool(level){
   return [];
 }
 
-/* 该等级可用的模式 */
 function getModesForLevel(level){
   if(level === 1) return ['image', 'text', 'listen', 'mix'];
   return ['text', 'listen', 'mix'];
 }
 
-/* ============================================================
-   RANDOM
-   ============================================================ */
 function shuffle(arr){
   const a = arr.slice();
   for(let i = a.length - 1; i > 0; i--){
@@ -1003,38 +997,24 @@ function pickN(arr, n, exclude){
   return shuffle(pool).slice(0, n);
 }
 
-/* ============================================================
-   QUESTIONS
-   ============================================================ */
 function buildQuestions(level, mode, count){
   const pool = getPool(level);
   if(pool.length === 0) return [];
-
-  const questions = [];
   const availableModes = getModesForLevel(level);
-  const modes = mode === 'mix'
-    ? availableModes.filter(m => m !== 'mix')
-    : [mode];
-
+  const modes = mode === 'mix' ? availableModes.filter(m => m !== 'mix') : [mode];
   const usedKr = new Set();
   const shuffledPool = shuffle(pool);
+  const questions = [];
   let attempt = 0;
-
   while(questions.length < count && attempt < pool.length * 3){
     const q = shuffledPool[attempt % shuffledPool.length];
     attempt++;
     if(usedKr.has(q.kr)) continue;
     usedKr.add(q.kr);
-
     const m = modes[Math.floor(Math.random() * modes.length)];
     const wrongs = pickN(pool, 3, q);
     if(wrongs.length < 3) continue;
-
-    questions.push({
-      mode: m,
-      answer: q,
-      options: shuffle([q, ...wrongs])
-    });
+    questions.push({ mode: m, answer: q, options: shuffle([q, ...wrongs]) });
   }
   return questions;
 }
@@ -1050,28 +1030,25 @@ function renderLevelGrid(){
   for(let lv = 1; lv <= 6; lv++){
     const meta = LEVEL_META[lv];
     const p = state.progress[lv] || { plays:0, best:0 };
-    const name = meta[lang].name;
-    const desc = meta[lang].desc;
-    const krName = ['입문','기초','일상','대화','고급','유창'][lv-1];
     html += \`
       <div class="level-card" data-level="\${lv}" onclick="selectLevel(\${lv})">
         <div class="lv-head">
           <div>
             <div class="lv-icon">\${meta.icon}</div>
             <div class="lv-title">
-              \${name}
-              <span class="kr">\${krName}</span>
+              \${meta.name}
+              <span class="kr">LV \${lv} · \${meta.kr}</span>
             </div>
           </div>
           <div class="lv-num">LV \${lv}</div>
         </div>
-        <div class="lv-desc">\${desc}</div>
+        <div class="lv-desc">\${meta.desc}</div>
         <div class="lv-meta">
           <div class="progress">
             <div class="bar"><div class="bar-fill" style="width:\${p.best}%"></div></div>
             <span class="pct">\${p.best}%</span>
           </div>
-          <span>Played \${p.plays}</span>
+          <span>\${t('played')} \${p.plays}</span>
         </div>
       </div>
     \`;
@@ -1081,14 +1058,13 @@ function renderLevelGrid(){
 
 function renderModeSelect(){
   const meta = LEVEL_META[state.level];
-  $('modeTitle').innerHTML = \`\${meta.icon} \${meta[lang].name} <span class="kr">LV \${state.level}</span>\`;
-  $('modeDesc').textContent = meta[lang].desc;
+  $('modeTitle').innerHTML = \`\${meta.icon} \${meta.name}<span class="kr">LV \${state.level} · \${meta.kr}</span>\`;
+  $('modeDesc').innerHTML = meta.desc;
 
   const grid = $('modeGrid');
   const modes = getModesForLevel(state.level);
   let html = '';
 
-  /* 只有第 1 级有看图模式 */
   if(modes.indexOf('image') >= 0){
     html += \`
       <div class="mode-card" onclick="startQuiz('image')">
@@ -1143,7 +1119,7 @@ window.goHome = function(){
 };
 
 window.quitQuiz = function(){
-  if(confirm(lang === 'zh' ? '确定要退出本轮测试吗？' : 'Quit this round?')){
+  if(confirm(t('quitConfirm'))){
     goHome();
   }
 };
@@ -1195,70 +1171,51 @@ function renderQuestion(){
   const answers = $('answers');
 
   if(q.mode === 'image'){
-    /* === Image mode — Level 1 only === */
-    if(state.level === 1){
-      /* Show Hangul letter big, choose the romanization */
-      content.innerHTML = \`
-        <div class="q-prompt">Look at the letter · choose the sound</div>
-        <div class="q-text-big">\${q.answer.kr}</div>
-      \`;
-      answers.className = 'answers cols-2';
-      answers.innerHTML = q.options.map((opt, i) => \`
-        <button class="ans-btn" data-idx="\${i}">
-          <span class="kr">\${opt.sub || opt.roman}</span>
-        </button>
-      \`).join('');
-    } else {
-      /* Show image, choose Korean (fallback for future use) */
-      content.innerHTML = \`
-        <div class="q-prompt">Look and choose the Korean</div>
-        <div class="q-image">\${q.answer.img || '🔤'}</div>
-      \`;
-      answers.className = 'answers cols-2';
-      answers.innerHTML = q.options.map((opt, i) => \`
-        <button class="ans-btn" data-idx="\${i}">
-          <span class="kr">\${opt.kr}</span>
-          \${opt.roman ? '<span class="sub">' + opt.roman + '</span>' : ''}
-        </button>
-      \`).join('');
-    }
+    /* Image mode — Level 1 */
+    content.innerHTML = \`
+      <div class="q-prompt">Look and choose the sound<br>看图选发音</div>
+      <div class="q-text-big">\${q.answer.kr}</div>
+    \`;
+    answers.className = 'answers cols-2';
+    answers.innerHTML = q.options.map((opt, i) => \`
+      <button class="ans-btn" data-idx="\${i}">
+        <span class="kr">\${opt.sub || opt.roman}</span>
+      </button>
+    \`).join('');
   }
   else if(q.mode === 'text'){
-    /* === Text mode: show Korean, pick meaning (CN + EN) === */
+    /* Text mode: Korean → meaning (bilingual) */
     content.innerHTML = \`
-      <div class="q-prompt">What does this mean?</div>
+      <div class="q-prompt">What does this mean? · 这是什么意思？</div>
       <div class="q-text-big \${q.answer.kr.length > 8 ? 'small' : ''}">\${q.answer.kr}</div>
       \${q.answer.roman ? '<div class="q-sub">' + q.answer.roman + '</div>' : ''}
     \`;
     answers.className = 'answers cols-2';
     answers.innerHTML = q.options.map((opt, i) => {
-      /* Build CN + EN meaning */
-      let innerHTML = '';
+      let inner = '';
       if(opt.zh && opt.en){
-        innerHTML = \`<span class="ans-text"><span class="zh">\${opt.zh}</span><span class="sep">/</span><span class="en">\${opt.en}</span></span>\`;
+        inner = \`<span class="ans-text"><span class="zh">\${opt.zh}</span><span class="sep">/</span><span class="en">\${opt.en}</span></span>\`;
       } else if(opt.zh){
-        innerHTML = \`<span class="ans-text">\${opt.zh}</span>\`;
+        inner = \`<span class="ans-text">\${opt.zh}</span>\`;
       } else if(opt.en){
-        innerHTML = \`<span class="ans-text"><span class="en">\${opt.en}</span></span>\`;
+        inner = \`<span class="ans-text"><span class="en">\${opt.en}</span></span>\`;
       } else {
-        /* L1 fallback — show roman */
-        innerHTML = \`<span class="kr">\${opt.sub || opt.roman || opt.kr}</span>\`;
+        inner = \`<span class="kr">\${opt.sub || opt.roman || opt.kr}</span>\`;
       }
-      return \`<button class="ans-btn" data-idx="\${i}">\${innerHTML}</button>\`;
+      return \`<button class="ans-btn" data-idx="\${i}">\${inner}</button>\`;
     }).join('');
   }
   else if(q.mode === 'listen'){
-    /* === Listen mode === */
+    /* Listen mode */
     content.innerHTML = \`
-      <div class="q-prompt">Listen and choose</div>
+      <div class="q-prompt">Listen and choose · 听音选字</div>
       <button class="q-speaker" id="speakerBtn">🔊</button>
-      <div class="q-speaker-hint">Tap to replay</div>
+      <div class="q-speaker-hint">Tap to replay · 点击重播</div>
       <div class="audio-hint" id="audioHint">\${t('noAudio')}</div>
     \`;
     setTimeout(() => speakKorean(q.answer.kr, true), 300);
     const sp = $('speakerBtn');
     if(sp) sp.addEventListener('click', () => speakKorean(q.answer.kr, false));
-
     answers.className = 'answers cols-2';
     answers.innerHTML = q.options.map((opt, i) => \`
       <button class="ans-btn" data-idx="\${i}">
@@ -1267,7 +1224,6 @@ function renderQuestion(){
     \`).join('');
   }
 
-  /* Bind clicks */
   answers.querySelectorAll('.ans-btn').forEach(btn => {
     btn.addEventListener('click', () => onAnswer(parseInt(btn.dataset.idx, 10), btn));
   });
@@ -1299,20 +1255,15 @@ function onAnswer(idx, btn){
     }
     showFeedback(t('correct'), 'good');
     sfxCorrect();
-
     if(q.mode !== 'listen') speakKorean(q.answer.kr, false);
   } else {
     btn.classList.add('wrong');
     state.wrong++;
     state.combo = 0;
-
     document.querySelectorAll('.ans-btn').forEach(b => {
       const i = parseInt(b.dataset.idx, 10);
-      if(q.options[i].kr === q.answer.kr){
-        b.classList.add('reveal');
-      }
+      if(q.options[i].kr === q.answer.kr) b.classList.add('reveal');
     });
-
     showFeedback(t('wrong'), 'bad');
     sfxWrong();
     speakKorean(q.answer.kr, false);
@@ -1337,9 +1288,6 @@ function showFeedback(text, type){
   $('feedbackBox').innerHTML = \`<div class="feedback \${type}">\${text}</div>\`;
 }
 
-/* ============================================================
-   RESULT
-   ============================================================ */
 function showResult(){
   const pct = state.totalQ ? Math.round(state.correct / state.totalQ * 100) : 0;
 
@@ -1350,10 +1298,23 @@ function showResult(){
   saveProgress();
 
   let icon = '🎉', title, sub;
-  if(pct >= 90){ icon = '🏆'; title = lang === 'zh' ? '完美！' : 'Perfect!'; sub = lang === 'zh' ? '你已经完全掌握这个等级了' : 'You have mastered this level'; }
-  else if(pct >= 70){ icon = '🌟'; title = lang === 'zh' ? '很棒！' : 'Great!'; sub = lang === 'zh' ? '再练几次就能满分' : 'A few more rounds to perfection'; }
-  else if(pct >= 50){ icon = '💪'; title = lang === 'zh' ? '还不错' : 'Good Effort'; sub = lang === 'zh' ? '继续努力' : 'Keep practicing'; }
-  else { icon = '📚'; title = lang === 'zh' ? '继续加油' : 'Keep Trying'; sub = lang === 'zh' ? '反复练习很重要' : 'Repetition is the key'; }
+  if(pct >= 90){
+    icon = '🏆';
+    title = t('perfectTitle');
+    sub = t('perfectSub');
+  } else if(pct >= 70){
+    icon = '🌟';
+    title = t('greatTitle');
+    sub = t('greatSub');
+  } else if(pct >= 50){
+    icon = '💪';
+    title = t('goodTitle');
+    sub = t('goodSub');
+  } else {
+    icon = '📚';
+    title = t('keepTitle');
+    sub = t('keepSub');
+  }
 
   $('resultWrap').innerHTML = \`
     <div class="result-icon">\${icon}</div>
@@ -1361,15 +1322,15 @@ function showResult(){
     <div class="result-sub">\${sub}</div>
     <div class="result-grid">
       <div class="res-box">
-        <div class="res-label">Score</div>
+        <div class="res-label">\${t('score')}</div>
         <div class="res-value gold">\${state.score}</div>
       </div>
       <div class="res-box">
-        <div class="res-label">Accuracy</div>
+        <div class="res-label">\${t('accuracy')}</div>
         <div class="res-value green">\${pct}%</div>
       </div>
       <div class="res-box">
-        <div class="res-label">Max Combo</div>
+        <div class="res-label">\${t('maxCombo')}</div>
         <div class="res-value cyan">×\${state.maxCombo}</div>
       </div>
     </div>
@@ -1408,7 +1369,6 @@ function speakKorean(text, isAuto){
     u.pitch = 1.0;
     if(koVoice) u.voice = koVoice;
     speechSynthesis.speak(u);
-
     const hint = $('audioHint');
     if(hint){
       if(!koVoice && voices.length > 0) hint.classList.add('on');
@@ -1457,7 +1417,7 @@ function sfxWrong(){
 /* ============================================================
    INIT
    ============================================================ */
-$('heroDesc').textContent = t('heroDesc');
+$('heroDesc').innerHTML = t('heroDesc');
 $('backLabel').textContent = t('back');
 
 renderLevelGrid();
