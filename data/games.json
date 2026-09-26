@@ -139,7 +139,7 @@
       "descriptionEn": "Explore the world of Korean, master letters and words, and start your Korean journey!",
       "type": "js",
       "entry": "games/koreanlearning.js",
-      "sortOrder": 1,
+      "sortOrder": 11,
       "enabled": true,
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1790396114/ymcumun6nkxspf0d6mmo.png"
     }
