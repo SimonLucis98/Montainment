@@ -74,7 +74,7 @@ const i18n = {
       // -------- 游戏大厅 --------
       'game.badge': '🎮 Game Hall',
       'game.title': 'Select Game · Start Challenge',
-      'game.desc': 'Click on any game card to enter the standalone game page and enjoy the full ad experience!',
+      'game.desc': 'Click on any game card to enter the standalone game page and enjoy the full gaming experience!',
       'game.empty_title': 'No Games Available',
       'game.empty_desc': 'Please add games in the admin panel 🚧',
       'game.play_hint': 'Start Game →',
@@ -249,7 +249,7 @@ const i18n = {
       // -------- 游戏大厅 --------
       'game.badge': '🎮 游戏大厅',
       'game.title': '选择游戏 · 开始挑战',
-      'game.desc': '点击任意游戏卡片，进入独立游戏页面，享受完整广告体验！',
+      'game.desc': '点击任意游戏卡片，进入独立游戏页面，享受完整游戏体验！',
       'game.empty_title': '暂无游戏',
       'game.empty_desc': '请在后台添加游戏内容 🚧',
       'game.play_hint': '开始游戏 →',
