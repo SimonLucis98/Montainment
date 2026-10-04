@@ -90,6 +90,19 @@
     .type-badge.video { background: #ffe3e3; color: #d14c4c; }
     .type-badge.music { background: #fff4d6; color: #a06a00; }
     .cover-thumb { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; border: 1px solid #eef2f7; flex-shrink: 0; }
+    /* 🆕 平台徽章 */
+    .platform-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #eef2f7;
+      color: #6b7a8f;
+    }
+    .platform-badge.all { background: #e6f7ee; color: #1f8b4c; }
+    .platform-badge.desktop { background: #e6f0ff; color: #2a6df4; }
+    .platform-badge.landscape { background: #fff4d6; color: #a06a00; }
     /* 🆕 语言分区标题 */
     .lang-section-title {
       font-size: 13px;
@@ -107,7 +120,6 @@
       color: #1f8b4c;
       background: #e6f7ee;
     }
-    /* EN 小徽章 */
     .en-badge {
       font-size: 10px;
       font-weight: 700;
@@ -400,6 +412,15 @@
               <div class="admin-form-group"><label>排序</label><input type="number" id="gameSortOrder" value="1" /></div>
               <div class="admin-form-group"><label>状态</label><select id="gameEnabled"><option value="true">✅ 启用</option><option value="false">⛔ 禁用</option></select></div>
             </div>
+            <!-- 🆕 平台类型 -->
+            <div class="admin-form-group">
+              <label>🎮 平台类型（提示用户能否在手机/电脑玩）</label>
+              <select id="gamePlatform">
+                <option value="all">🎮 双端可玩（电脑 + 手机都可以）</option>
+                <option value="desktop">💻 仅电脑（需要键盘/大屏）</option>
+                <option value="landscape">📱 横屏更佳（手机需横屏）</option>
+              </select>
+            </div>
             <div class="admin-form-group">
               <label>🖼️ 游戏封面图片</label>
               <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -419,7 +440,7 @@
           <div class="admin-list" id="gameList"></div>
         </div>
 
-        <!-- ===================== 沉浸式（双语，非强制） ===================== -->
+        <!-- 沉浸式 -->
         <div class="admin-panel tab-content hidden" id="tab-immersive">
           <h2>🍃 沉浸式管理 <span class="badge-count" id="immersiveBadge">0</span></h2>
 
@@ -440,7 +461,6 @@
               </div>
             </div>
 
-            <!-- 中文内容 -->
             <div class="lang-section-title">🇨🇳 中文内容（可留空）</div>
 
             <div class="admin-form-row">
@@ -464,7 +484,6 @@
               <textarea id="immersiveContent" rows="6" placeholder="输入完整正文内容..."></textarea>
             </div>
 
-            <!-- 英文内容 -->
             <div class="lang-section-title en">🇬🇧 English Content（可留空）</div>
 
             <div class="admin-form-row">
@@ -488,7 +507,6 @@
               <textarea id="immersiveContentEn" rows="6" placeholder="Full English content..."></textarea>
             </div>
 
-            <!-- 封面 -->
             <div class="admin-form-group" id="immersiveCoverGroup">
               <label>🖼️ 封面图片（文本/文章）</label>
               <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -500,7 +518,6 @@
               <div class="cover-preview" id="immersiveCoverPreview"><div class="no-cover">暂无封面</div></div>
             </div>
 
-            <!-- URL（视频/音乐） -->
             <div class="admin-form-group" id="immersiveUrlGroup" style="display:none;">
               <label>iframe 嵌入 URL</label>
               <input type="text" id="immersiveUrl" placeholder="https://www.youtube.com/embed/xxx 或 https://player.vimeo.com/video/xxx" />
@@ -1363,7 +1380,12 @@
           const statusClass = g.enabled !== false ? 'on' : 'off';
           const statusText = g.enabled !== false ? '✅ 已启用' : '⛔ 已禁用';
           const coverHtml = g.cover && g.cover.trim() ? `<img src="${g.cover}" alt="封面" class="cover-thumb" />` : '';
-          html += `<div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}"><div class="info">${coverHtml}${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})<small>${g.type} · ${g.entry}</small><span class="toggle-badge ${statusClass}">${statusText}</span></div><div class="actions"><button class="btn-toggle ${statusClass}" data-game-index="${realIdx}">${g.enabled !== false ? '🔛 关闭' : '🔓 开启'}</button><button class="btn-edit" data-game-index="${realIdx}">编辑</button><button class="btn-delete" data-game-index="${realIdx}">删除</button></div></div>`;
+          // 🆕 平台徽章
+          const platform = g.platform || 'all';
+          const platformText = platform === 'desktop' ? '💻 仅电脑' :
+                               platform === 'landscape' ? '📱 横屏' : '🎮 双端';
+          const platformHtml = `<span class="platform-badge ${platform}">${platformText}</span>`;
+          html += `<div class="admin-list-item" style="cursor:pointer;" data-game-index="${realIdx}"><div class="info">${coverHtml}${g.icon || '🎮'} <strong>${g.titleZh}</strong> (${g.id})${platformHtml}<small>${g.type} · ${g.entry}</small><span class="toggle-badge ${statusClass}">${statusText}</span></div><div class="actions"><button class="btn-toggle ${statusClass}" data-game-index="${realIdx}">${g.enabled !== false ? '🔛 关闭' : '🔓 开启'}</button><button class="btn-edit" data-game-index="${realIdx}">编辑</button><button class="btn-delete" data-game-index="${realIdx}">删除</button></div></div>`;
         });
         container.innerHTML = html;
         container.querySelectorAll('.btn-toggle').forEach(b => b.addEventListener('click', function(e) {
@@ -1397,6 +1419,7 @@
         document.getElementById('gameEntry').value = g.entry || '';
         document.getElementById('gameSortOrder').value = g.sortOrder || 1;
         document.getElementById('gameEnabled').value = g.enabled !== false ? 'true' : 'false';
+        document.getElementById('gamePlatform').value = g.platform || 'all'; // 🆕
         document.getElementById('gameCover').value = g.cover || '';
         updateGameCoverPreview(g.cover || '');
         document.getElementById('gameEditIndex').value = idx;
@@ -1416,12 +1439,13 @@
         const entry = document.getElementById('gameEntry').value.trim();
         const sortOrder = parseInt(document.getElementById('gameSortOrder').value) || 1;
         const enabled = document.getElementById('gameEnabled').value === 'true';
+        const platform = document.getElementById('gamePlatform').value || 'all'; // 🆕
         const cover = document.getElementById('gameCover').value.trim();
         const editIdx = parseInt(document.getElementById('gameEditIndex').value);
         if (!id || !titleZh || !titleEn || !entry) { showToast('请填写完整', 'error'); return; }
         const exists = gamesData.games.find((g, i) => g.id === id && i !== editIdx);
         if (exists) { showToast('游戏 ID 已存在', 'error'); return; }
-        const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder, enabled, cover };
+        const gameData = { id, icon, titleZh, titleEn, descriptionZh, descriptionEn, type, entry, sortOrder, enabled, platform, cover }; // 🆕 加了 platform
         if (editIdx === -1) { gamesData.games.push(gameData); showToast('已添加游戏: ' + titleZh, 'success'); }
         else { gamesData.games[editIdx] = gameData; showToast('已更新: ' + titleZh, 'success'); }
         this.reset();
@@ -1431,6 +1455,7 @@
         document.getElementById('gameType').value = 'js';
         document.getElementById('gameEnabled').value = 'true';
         document.getElementById('gameSortOrder').value = '1';
+        document.getElementById('gamePlatform').value = 'all'; // 🆕
         document.getElementById('gameCover').value = '';
         updateGameCoverPreview('');
         document.getElementById('gameUploadStatus').textContent = '';
@@ -1446,6 +1471,7 @@
         document.getElementById('gameType').value = 'js';
         document.getElementById('gameEnabled').value = 'true';
         document.getElementById('gameSortOrder').value = '1';
+        document.getElementById('gamePlatform').value = 'all'; // 🆕
         document.getElementById('gameCover').value = '';
         updateGameCoverPreview('');
         document.getElementById('gameUploadStatus').textContent = '';
@@ -1538,17 +1564,14 @@
         const item = immersiveData.items[idx];
         document.getElementById('immersiveType').value = item.type || 'text';
         document.getElementById('immersiveAuthor').value = item.author || '';
-        // 中文
         document.getElementById('immersiveTitle').value = item.title || '';
         document.getElementById('immersiveCategory').value = item.category || '';
         document.getElementById('immersivePreview').value = item.preview || '';
         document.getElementById('immersiveContent').value = item.content || '';
-        // 英文
         document.getElementById('immersiveTitleEn').value = item.titleEn || '';
         document.getElementById('immersiveCategoryEn').value = item.categoryEn || '';
         document.getElementById('immersivePreviewEn').value = item.previewEn || '';
         document.getElementById('immersiveContentEn').value = item.contentEn || '';
-        // 封面 & URL
         document.getElementById('immersiveCover').value = item.cover || '';
         updateImmersiveCoverPreview(item.cover || '');
         document.getElementById('immersiveUrl').value = item.url || '';
@@ -1563,32 +1586,26 @@
         e.preventDefault();
         const type = document.getElementById('immersiveType').value;
         const author = document.getElementById('immersiveAuthor').value.trim();
-        // 中文
         const title = document.getElementById('immersiveTitle').value.trim();
         const category = document.getElementById('immersiveCategory').value.trim();
         const preview = document.getElementById('immersivePreview').value.trim();
         const content = document.getElementById('immersiveContent').value.trim();
-        // 英文
         const titleEn = document.getElementById('immersiveTitleEn').value.trim();
         const categoryEn = document.getElementById('immersiveCategoryEn').value.trim();
         const previewEn = document.getElementById('immersivePreviewEn').value.trim();
         const contentEn = document.getElementById('immersiveContentEn').value.trim();
-        // 封面 & URL
         const cover = document.getElementById('immersiveCover').value.trim();
         const url = document.getElementById('immersiveUrl').value.trim();
         const editIdx = parseInt(document.getElementById('immersiveEditIndex').value);
 
-        // ✅ 至少需要一种语言的标题
         if (!title && !titleEn) {
           showToast('请至少填写一种语言的标题', 'error');
           return;
         }
-        // ✅ 文本/文章类型：至少一种语言有正文
         if ((type === 'text' || type === 'article') && !content && !contentEn) {
           showToast('请至少填写一种语言的正文', 'error');
           return;
         }
-        // ✅ 视频/音乐：必须有 URL
         if ((type === 'video' || type === 'music') && !url) {
           showToast('请填写嵌入 URL', 'error');
           return;
@@ -1599,7 +1616,6 @@
           type: type,
           author: author || '蒙堂木下'
         };
-        // 仅在有值时保存（避免空字段污染 JSON）
         if (title) newItem.title = title;
         if (category) newItem.category = category;
         if (preview) newItem.preview = preview;
