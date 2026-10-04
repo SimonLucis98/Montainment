@@ -84,6 +84,17 @@ const i18n = {
       'game.type_unknown': 'Unknown',
       'game.external_badge': '🔗 External',
 
+      // 🆕 平台徽章
+      'game.platform_all': '🎮 All devices',
+      'game.platform_desktop': '💻 Desktop only',
+      'game.platform_landscape': '📱 Landscape better',
+
+      // 🆕 平台提示弹窗
+      'game.warning_title': 'This game is best on desktop',
+      'game.warning_desc': '"{game}" requires a keyboard or larger screen. On mobile it may not work properly. You can open it on a desktop, or continue anyway.',
+      'game.warning_back': 'Back to Hall',
+      'game.warning_continue': 'Continue Anyway',
+
       // -------- 游戏独立页 --------
       'gameplay.back': '← Back to Game Hall',
       'gameplay.loading': '⏳ Loading game...',
@@ -258,6 +269,17 @@ const i18n = {
       'game.type_external': '外部链接',
       'game.type_unknown': '未知类型',
       'game.external_badge': '🔗 外部',
+
+      // 🆕 平台徽章
+      'game.platform_all': '🎮 双端可玩',
+      'game.platform_desktop': '💻 仅电脑',
+      'game.platform_landscape': '📱 建议横屏',
+
+      // 🆕 平台提示弹窗
+      'game.warning_title': '此游戏建议在电脑上玩',
+      'game.warning_desc': '《{game}》需要键盘或大屏幕操作，手机上可能无法正常游玩。你可以用电脑打开，或仍要继续尝试。',
+      'game.warning_back': '返回大厅',
+      'game.warning_continue': '仍要继续',
 
       // -------- 游戏独立页 --------
       'gameplay.back': '← 返回游戏大厅',
