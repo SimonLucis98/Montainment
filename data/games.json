@@ -37,6 +37,7 @@
       "entry": "games/snake.js",
       "sortOrder": 3,
       "enabled": true,
+      "platform": "desktop",
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788799210/fphvfdbgmmhgkrffoceu.jpg"
     },
     {
@@ -50,6 +51,7 @@
       "entry": "games/space.js",
       "sortOrder": 4,
       "enabled": true,
+      "platform": "desktop",
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1788801416/gg26pk5tlyzfmdhjdgmz.jpg"
     },
     {
@@ -89,6 +91,7 @@
       "entry": "games/crazycarrot.js",
       "sortOrder": 7,
       "enabled": true,
+      "platform": "desktop",
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789154306/juhf2ekl7gwhpxvnnkz9.png"
     },
     {
@@ -128,6 +131,7 @@
       "entry": "games/typingtrainer.js",
       "sortOrder": 10,
       "enabled": true,
+      "platform": "desktop",
       "cover": "https://res.cloudinary.com/mv0w5fs5/image/upload/v1789241619/zcsqq9xqezbpeoq7n9ev.jpg"
     },
     {
