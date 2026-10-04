@@ -90,6 +90,14 @@
       align-items: center;
       border-top: 1px solid #f0ede8;
       padding-top: 12px;
+      gap: 8px;
+    }
+    .game-card-footer .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      min-width: 0;
     }
     .game-card-footer .status {
       font-size: 13px;
@@ -102,6 +110,7 @@
       font-size: 13px;
       color: #2a6df4;
       font-weight: 600;
+      white-space: nowrap;
     }
     .empty-state {
       text-align: center;
@@ -124,6 +133,95 @@
       border-radius: 20px;
       font-weight: 700;
       margin-left: 6px;
+    }
+
+    /* 🆕 平台徽章 */
+    .platform-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #eef2f7;
+      color: #6b7a8f;
+      white-space: nowrap;
+    }
+    .platform-badge.all { background: #e6f7ee; color: #1f8b4c; }
+    .platform-badge.desktop { background: #e6f0ff; color: #2a6df4; }
+    .platform-badge.landscape { background: #fff4d6; color: #a06a00; }
+
+    /* 🆕 平台提示弹窗 */
+    .platform-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 28, 51, 0.55);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .platform-modal-overlay.active { display: flex; }
+    .platform-modal-box {
+      background: #fff;
+      border-radius: 24px;
+      padding: 32px 28px 24px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+      animation: platformModalPop 0.28s ease;
+    }
+    @keyframes platformModalPop {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .platform-modal-icon {
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .platform-modal-box h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+    }
+    .platform-modal-box p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .platform-modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .platform-modal-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    .platform-modal-btn.secondary {
+      background: #f0ede8;
+      color: #666;
+    }
+    .platform-modal-btn.secondary:hover { background: #e6e2db; }
+    .platform-modal-btn.primary {
+      background: #1a1a2e;
+      color: #fff;
+    }
+    .platform-modal-btn.primary:hover {
+      background: #2d2d44;
+      transform: translateY(-1px);
     }
 
     /* ===== 响应式：卡片保持 260px 最小宽度，容器自动适配 ===== */
@@ -206,6 +304,19 @@
     <div class="container" data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
   </footer>
 
+  <!-- 🆕 平台提示弹窗 -->
+  <div class="platform-modal-overlay" id="platformModal">
+    <div class="platform-modal-box">
+      <div class="platform-modal-icon" id="platformModalIcon">💻</div>
+      <h3 id="platformModalTitle">此游戏建议在电脑上玩</h3>
+      <p id="platformModalDesc">该游戏需要键盘或大屏幕操作。</p>
+      <div class="platform-modal-actions">
+        <button type="button" class="platform-modal-btn secondary" id="platformModalBack">返回大厅</button>
+        <button type="button" class="platform-modal-btn primary" id="platformModalContinue">仍要继续</button>
+      </div>
+    </div>
+  </div>
+
   <script src="i18n.js"></script>
   <script src="common.js"></script>
   <script>
@@ -215,6 +326,31 @@
 
       function getLang() {
         return window.i18n ? i18n.currentLang : 'en';
+      }
+
+      // 🆕 是否手机/平板等触屏设备
+      function isMobileDevice() {
+        const ua = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+        const narrow = window.innerWidth < 900;
+        return ua || (coarse && narrow);
+      }
+
+      // 🆕 平台信息（徽章文字 + 颜色 key）
+      function getPlatformInfo(game) {
+        const platform = game.platform || 'all';
+        const lang = getLang();
+        const map = {
+          all:       { icon: '🎮', zh: '双端可玩', en: 'All devices' },
+          desktop:   { icon: '💻', zh: '仅电脑',   en: 'Desktop only' },
+          landscape: { icon: '📱', zh: '建议横屏', en: 'Landscape better' }
+        };
+        const info = map[platform] || map.all;
+        return {
+          key: platform,
+          icon: info.icon,
+          label: lang === 'zh' ? info.zh : info.en
+        };
       }
 
       function getCoverDisplay(game) {
@@ -287,8 +423,12 @@
             (lang === 'zh' ? '前往游玩 →' : 'Play Now →') : 
             (lang === 'zh' ? '开始游戏 →' : 'Start Game →');
 
+          // 🆕 平台徽章
+          const platformInfo = getPlatformInfo(game);
+          const platformBadge = `<span class="platform-badge ${platformInfo.key}">${platformInfo.icon} ${platformInfo.label}</span>`;
+
           html += `
-            <a href="${linkUrl}" ${linkTarget} class="game-card">
+            <a href="${linkUrl}" ${linkTarget} class="game-card" data-platform="${platformInfo.key}" data-game-id="${game.id}">
               <div class="game-cover" style="background:${coverColor};">
                 ${coverHtml}
                 <span class="cover-badge">${typeLabel}</span>
@@ -297,7 +437,10 @@
                 <div class="title">${title} ${externalBadge}</div>
                 <div class="desc">${desc}</div>
                 <div class="game-card-footer">
-                  <span class="status">${typeLabel}</span>
+                  <div class="footer-left">
+                    <span class="status">${typeLabel}</span>
+                    ${platformBadge}
+                  </div>
                   <span class="play-hint">${playHint}</span>
                 </div>
               </div>
@@ -308,6 +451,75 @@
         gameGrid.innerHTML = html;
         if (typeof applyI18n === 'function') applyI18n();
       }
+
+      // 🆕 手机点桌面游戏 → 弹提示
+      function showPlatformModal(game) {
+        const lang = getLang();
+        const modal = document.getElementById('platformModal');
+        const titleEl = document.getElementById('platformModalTitle');
+        const descEl = document.getElementById('platformModalDesc');
+        const backBtn = document.getElementById('platformModalBack');
+        const continueBtn = document.getElementById('platformModalContinue');
+        const iconEl = document.getElementById('platformModalIcon');
+
+        const gameTitle = lang === 'zh'
+          ? (game.titleZh || game.titleEn || '')
+          : (game.titleEn || game.titleZh || '');
+
+        iconEl.textContent = '💻';
+        if (lang === 'zh') {
+          titleEl.textContent = '此游戏建议在电脑上玩';
+          descEl.textContent = `《${gameTitle}》需要键盘或大屏幕操作，手机上可能无法正常游玩。你可以用电脑打开，或仍要继续尝试。`;
+          backBtn.textContent = '返回大厅';
+          continueBtn.textContent = '仍要继续';
+        } else {
+          titleEl.textContent = 'This game is best on desktop';
+          descEl.textContent = `"${gameTitle}" requires a keyboard or larger screen. You can open it on a desktop, or continue anyway.`;
+          backBtn.textContent = 'Back';
+          continueBtn.textContent = 'Continue anyway';
+        }
+
+        modal._gameId = game.id;
+        modal.classList.add('active');
+      }
+
+      function hidePlatformModal() {
+        document.getElementById('platformModal').classList.remove('active');
+      }
+
+      // 🆕 卡片点击拦截（捕获阶段）
+      gameGrid.addEventListener('click', function(e) {
+        const card = e.target.closest('a.game-card');
+        if (!card) return;
+        if (!isMobileDevice()) return;
+        if (card.dataset.platform !== 'desktop') return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const gameId = card.dataset.gameId;
+        const game = allGames.find(g => String(g.id) === String(gameId));
+        if (game) showPlatformModal(game);
+      }, true);
+
+      // 🆕 弹窗按钮
+      document.getElementById('platformModalBack').addEventListener('click', function() {
+        hidePlatformModal();
+      });
+      document.getElementById('platformModalContinue').addEventListener('click', function() {
+        const modal = document.getElementById('platformModal');
+        const gameId = modal._gameId;
+        hidePlatformModal();
+        if (gameId != null) {
+          window.location.href = `game-play.html?game=${encodeURIComponent(gameId)}`;
+        }
+      });
+      document.getElementById('platformModal').addEventListener('click', function(e) {
+        if (e.target === this) hidePlatformModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') hidePlatformModal();
+      });
 
       function loadGames() {
         fetch('data/games.json')
