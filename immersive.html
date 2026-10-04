@@ -254,7 +254,7 @@
             background: rgba(45,42,36,0.4);
             backdrop-filter: blur(4px);
             border-radius: 16px;
-            padding: 20px 18px 18px;
+            padding: 12px 14px 14px;
             border: 1px solid rgba(201,168,124,0.06);
             cursor: pointer;
             transition: 0.3s;
@@ -269,6 +269,37 @@
             background: rgba(45,42,36,0.6);
             box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
+
+        /* 🆕 卡片封面区域（16:9） */
+        .read-card .card-cover {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #2a2820, #3d3a30);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .read-card .card-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+        .read-card:hover .card-cover img {
+            transform: scale(1.06);
+        }
+        .read-card .card-cover .cover-emoji-fallback {
+            font-size: 40px;
+            opacity: 0.5;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        }
+
         .read-card .category {
             font-size: 10px;
             font-weight: 700;
@@ -314,12 +345,6 @@
             margin-bottom: 6px;
             border: 1px solid rgba(201,168,124,0.06);
             align-self: flex-start;
-        }
-        .read-card .card-icon {
-            font-size: 36px;
-            text-align: center;
-            padding: 4px 0 8px;
-            opacity: 0.6;
         }
         .read-card .read-more-btn {
             display: inline-flex;
@@ -381,13 +406,14 @@
             transition: 0.2s;
             text-decoration: none;
             color: inherit;
+            align-items: center;
         }
         .sidebar-item:last-child {
             border-bottom: none;
         }
         .sidebar-item:hover {
             padding-left: 4px;
-            opacity: 0.8;
+            opacity: 0.85;
         }
         .sidebar-item .s-icon {
             font-size: 20px;
@@ -395,6 +421,16 @@
             width: 28px;
             text-align: center;
             opacity: 0.5;
+        }
+        /* 🆕 侧边栏缩略图 */
+        .sidebar-item .s-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid rgba(201,168,124,0.1);
+            display: block;
         }
         .sidebar-item .s-info {
             flex: 1;
@@ -579,8 +615,10 @@
             .music-player .info .sub { display:none; }
             .music-player .controls .volume-slider { width:30px; }
             .scene-btn { padding:6px 12px; font-size:12px; }
-            .read-card { padding: 14px 12px; }
+            .read-card { padding: 10px 10px 12px; }
             .read-card .title { font-size: 14px; }
+            .read-card .card-cover { border-radius: 10px; margin-bottom: 8px; }
+            .read-card .card-cover .cover-emoji-fallback { font-size: 32px; }
         }
     </style>
 </head>
@@ -766,20 +804,15 @@
                             pendingPlay = false;
                         }
                     },
-                    // 🆕 监听播放状态，处理循环播放 + 按钮同步
                     'onStateChange': function(event) {
-                        // event.data: -1 未开始, 0 结束, 1 播放中, 2 暂停, 3 缓冲, 5 视频cue
                         if (event.data === 0) {
-                            // 播放结束 → 重新播放
                             try {
                                 ytPlayer.seekTo(0);
                                 ytPlayer.playVideo();
                             } catch (e) {}
                         } else if (event.data === 1) {
-                            // 正在播放 → 同步按钮状态
                             setPlayingUI(true);
                         } else if (event.data === 2) {
-                            // 已暂停 → 同步按钮状态
                             setPlayingUI(false);
                         }
                     }
@@ -791,7 +824,6 @@
             window.onYouTubeIframeAPIReady();
         }
 
-        // 🆕 统一的 UI 状态设置
         function setPlayingUI(playing) {
             isPlaying = playing;
             playBtn.textContent = playing ? '⏸' : '▶';
@@ -831,7 +863,6 @@
 
         function playMusic() {
             userInteracted = true;
-            // 🆕 无论 YT 是否 ready，先同步 UI（乐观更新）
             setPlayingUI(true);
             if (!ytPlayer || !ytPlayer.playVideo) {
                 pendingPlay = true;
@@ -1030,7 +1061,6 @@
             return i18n.t('immersive.short_text');
         }
 
-        // 🆕 简单的本地化文本
         function noContentText() {
             return i18n.currentLang === 'en' ? 'No content yet' : '暂无内容';
         }
@@ -1041,7 +1071,16 @@
             return i18n.currentLang === 'en' ? 'Uncategorized' : '未分类';
         }
 
-        // ===== 侧边栏：热门推荐（按语言过滤） =====
+        // 🆕 生成封面 HTML（有图用图，无图用 emoji）
+        function getCoverHtml(item, typeIcon, title) {
+            const hasCover = item.cover && item.cover.trim() !== '';
+            if (hasCover) {
+                return `<div class="card-cover"><img src="${item.cover}" alt="${title}" loading="lazy" /></div>`;
+            }
+            return `<div class="card-cover"><span class="cover-emoji-fallback">${typeIcon}</span></div>`;
+        }
+
+        // ===== 侧边栏：热门推荐（按语言过滤 + 缩略图） =====
         function renderHot() {
             const container = document.getElementById('hotList');
             const hotItems = [];
@@ -1059,9 +1098,14 @@
                 const loc = getLocalized(item);
                 const icon = getTypeIcon(item.type);
                 const tag = getShortTypeLabel(item.type);
+                const hasCover = item.cover && item.cover.trim() !== '';
+                // 🆕 有封面用小缩略图，无封面用 emoji
+                const leftHtml = hasCover
+                    ? `<img src="${item.cover}" alt="" class="s-thumb" loading="lazy" />`
+                    : `<span class="s-icon">${icon}</span>`;
                 html += `
                     <div class="sidebar-item" data-idx="${idx}">
-                        <span class="s-icon">${icon}</span>
+                        ${leftHtml}
                         <div class="s-info">
                             <div class="s-title">${loc.title}</div>
                             <div class="s-desc">${item.author || '蒙堂木下'}</div>
@@ -1140,9 +1184,11 @@
                 const readMoreBtn = isArticle
                     ? `<div class="read-more-btn">📖 ${i18n.t('immersive.read_more')} →</div>`
                     : '';
+                // 🆕 封面区
+                const coverHtml = getCoverHtml(item, typeIcon, loc.title);
                 html += `
                     <div class="read-card" data-index="${idx}" data-type="${item.type}">
-                        <div class="card-icon">${typeIcon}</div>
+                        ${coverHtml}
                         <div class="${badgeClass}">${typeLabel}</div>
                         <div class="category">${loc.category || uncategorizedText()}</div>
                         <div class="title">${loc.title}</div>
