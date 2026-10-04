@@ -85,7 +85,7 @@
     .game-recommendations .rec-card .rec-cover img {
       width: 100%;
       height: 100%;
-      object-fit: cover;  /* ← 🆕 关键：强制裁剪填充，统一大小 */
+      object-fit: cover;
     }
     .game-recommendations .rec-card .rec-cover .rec-emoji {
       font-size: 52px;
@@ -124,6 +124,80 @@
       text-align: center;
       padding: 20px 0;
       grid-column: 1 / -1;
+    }
+
+    /* 🆕 平台提示弹窗（与 game.html 保持一致） */
+    .platform-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 28, 51, 0.55);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .platform-modal-overlay.active { display: flex; }
+    .platform-modal-box {
+      background: #fff;
+      border-radius: 24px;
+      padding: 32px 28px 24px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+      animation: platformModalPop 0.28s ease;
+    }
+    @keyframes platformModalPop {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .platform-modal-icon {
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .platform-modal-box h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+    }
+    .platform-modal-box p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .platform-modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .platform-modal-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    .platform-modal-btn.secondary {
+      background: #f0ede8;
+      color: #666;
+    }
+    .platform-modal-btn.secondary:hover { background: #e6e2db; }
+    .platform-modal-btn.primary {
+      background: #1a1a2e;
+      color: #fff;
+    }
+    .platform-modal-btn.primary:hover {
+      background: #2d2d44;
+      transform: translateY(-1px);
     }
 
     /* ===== 手机端适配 ===== */
@@ -193,6 +267,19 @@
     <div class="container" data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
   </footer>
 
+  <!-- 🆕 平台提示弹窗 -->
+  <div class="platform-modal-overlay" id="platformModal">
+    <div class="platform-modal-box">
+      <div class="platform-modal-icon" id="platformModalIcon">💻</div>
+      <h3 id="platformModalTitle">此游戏建议在电脑上玩</h3>
+      <p id="platformModalDesc">该游戏需要键盘或大屏幕操作。</p>
+      <div class="platform-modal-actions">
+        <button type="button" class="platform-modal-btn secondary" id="platformModalBack">返回大厅</button>
+        <button type="button" class="platform-modal-btn primary" id="platformModalContinue">仍要继续</button>
+      </div>
+    </div>
+  </div>
+
   <script src="i18n.js"></script>
   <script src="common.js"></script>
   <script>
@@ -206,6 +293,7 @@
 
       const params = new URLSearchParams(window.location.search);
       const gameId = params.get('game');
+      const forcePlay = params.get('force') === '1';  // 🆕 用户已在大厅确认过
 
       // ===== 保存所有游戏数据供推荐使用 =====
       let allGames = [];
@@ -214,6 +302,73 @@
       function getLang() {
         return window.i18n ? i18n.currentLang : 'en';
       }
+
+      // 🆕 是否手机/平板等触屏设备
+      function isMobileDevice() {
+        const ua = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+        const narrow = window.innerWidth < 900;
+        return ua || (coarse && narrow);
+      }
+
+      // 🆕 显示平台提示弹窗
+      function showPlatformModal(game, onContinue) {
+        const lang = getLang();
+        const modal = document.getElementById('platformModal');
+        const titleEl = document.getElementById('platformModalTitle');
+        const descEl = document.getElementById('platformModalDesc');
+        const backBtn = document.getElementById('platformModalBack');
+        const continueBtn = document.getElementById('platformModalContinue');
+        const iconEl = document.getElementById('platformModalIcon');
+
+        const gameTitle = lang === 'zh'
+          ? (game.titleZh || game.titleEn || '')
+          : (game.titleEn || game.titleZh || '');
+
+        iconEl.textContent = '💻';
+        if (lang === 'zh') {
+          titleEl.textContent = '此游戏建议在电脑上玩';
+          descEl.textContent = `《${gameTitle}》需要键盘或大屏幕操作，手机上可能无法正常游玩。你可以用电脑打开，或仍要继续尝试。`;
+          backBtn.textContent = '返回大厅';
+          continueBtn.textContent = '仍要继续';
+        } else {
+          titleEl.textContent = 'This game is best on desktop';
+          descEl.textContent = `"${gameTitle}" requires a keyboard or larger screen. You can open it on a desktop, or continue anyway.`;
+          backBtn.textContent = 'Back';
+          continueBtn.textContent = 'Continue anyway';
+        }
+
+        modal._onContinue = onContinue;
+        modal.classList.add('active');
+      }
+
+      function hidePlatformModal() {
+        document.getElementById('platformModal').classList.remove('active');
+      }
+
+      // 🆕 弹窗按钮（只绑一次）
+      document.getElementById('platformModalBack').addEventListener('click', function() {
+        window.location.href = 'game.html';
+      });
+      document.getElementById('platformModalContinue').addEventListener('click', function() {
+        const modal = document.getElementById('platformModal');
+        const cb = modal._onContinue;
+        hidePlatformModal();
+        if (typeof cb === 'function') cb();
+      });
+      document.getElementById('platformModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          // 点遮罩 = 返回大厅（比"什么都没发生"更符合直觉）
+          window.location.href = 'game.html';
+        }
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (document.getElementById('platformModal').classList.contains('active')) {
+            window.location.href = 'game.html';
+          }
+        }
+      });
 
       // ===== 🆕 渲染推荐游戏 =====
       function renderRecommendations(currentGameId) {
@@ -314,7 +469,18 @@
           document.title = displayTitle + ' · Montainment';
           pageDesc.content = desc;
 
-          loadGame(game);
+          // 🆕 平台拦截：手机 + desktop 平台 + 用户没确认过 force=1
+          const isExternal = game.type === 'external' || game.type === 'redirect';
+          const platform = game.platform || 'all';
+          const needWarn = isMobileDevice() && !isExternal && platform === 'desktop' && !forcePlay;
+
+          if (needWarn) {
+            showPlatformModal(game, function() {
+              loadGame(game);
+            });
+          } else {
+            loadGame(game);
+          }
         })
         .catch(err => {
           console.error('加载游戏失败:', err);
