@@ -34,6 +34,9 @@ const i18n = {
       'index.feature_quiz_link': 'Go to Quiz →',
       'index.feature_game_link': 'Start Game →',
       'index.feature_story_link': 'Start Searching →',
+      'index.feature_immersive_title': '🌙 Immersive Studio',
+      'index.feature_immersive_desc': 'Bamboo · Stream · Breeze · Quiet reading. Slow down in music and nature.',
+      'index.feature_immersive_link': 'Enter Immersive →',
 
       // -------- 测验页（学堂） --------
       'quiz.badge': 'Academy',
@@ -220,6 +223,9 @@ const i18n = {
       'index.feature_quiz_link': '去测验 →',
       'index.feature_game_link': '开始游戏 →',
       'index.feature_story_link': '开始搜索 →',
+      'index.feature_immersive_title': '🌙 沉浸式工坊',
+      'index.feature_immersive_desc': '竹林 · 流水 · 微风 · 宁静读物。在音乐和自然中，慢下来。',
+      'index.feature_immersive_link': '进入沉浸 →',
 
       // -------- 测验页（学堂） --------
       'quiz.badge': '学堂',
