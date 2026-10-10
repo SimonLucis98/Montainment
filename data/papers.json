@@ -9518,7 +9518,3286 @@
               "level": 0,
               "labelZh": "零基础",
               "labelEn": "Zero Foundation",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：基本母音与辅音 / 모음과 자음",
+                  "titleEn": "Paper 1: Basic Vowels & Consonants (모음과 자음)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅏ」的发音是？",
+                        "en": "How is the Korean letter 「ㅏ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ya",
+                          "eo",
+                          "a",
+                          "i"
+                        ],
+                        "en": [
+                          "ya",
+                          "eo",
+                          "a",
+                          "i"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅏ 是韩语基本元音，读作 a，类似中文「啊」。",
+                        "en": "ㅏ is a basic Korean vowel, pronounced 'a', like 'a' in 'father'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅑ」的发音是？",
+                        "en": "How is the Korean letter 「ㅑ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ya",
+                          "yeo",
+                          "o",
+                          "a"
+                        ],
+                        "en": [
+                          "ya",
+                          "yeo",
+                          "o",
+                          "a"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅑ 读作 ya，是 ㅏ 加上 y 音。",
+                        "en": "ㅑ is pronounced 'ya', the ㅏ sound with a y-glide."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅓ」的发音是？",
+                        "en": "How is the Korean letter 「ㅓ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "o",
+                          "u",
+                          "eu",
+                          "eo"
+                        ],
+                        "en": [
+                          "o",
+                          "u",
+                          "eu",
+                          "eo"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅓ 读作 eo，类似英语 'uh'。",
+                        "en": "ㅓ is pronounced 'eo', similar to 'uh' in English."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅕ」的发音是？",
+                        "en": "How is the Korean letter 「ㅕ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ya",
+                          "yeo",
+                          "yo",
+                          "yu"
+                        ],
+                        "en": [
+                          "ya",
+                          "yeo",
+                          "yo",
+                          "yu"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅕ 读作 yeo，是 ㅓ 加上 y 音。",
+                        "en": "ㅕ is pronounced 'yeo', the ㅓ sound with a y-glide."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅗ」的发音是？",
+                        "en": "How is the Korean letter 「ㅗ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "o",
+                          "u",
+                          "eo",
+                          "yo"
+                        ],
+                        "en": [
+                          "o",
+                          "u",
+                          "eo",
+                          "yo"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅗ 读作 o，类似英语 'o' in 'go'。",
+                        "en": "ㅗ is pronounced 'o', like 'o' in 'go'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅛ」的发音是？",
+                        "en": "How is the Korean letter 「ㅛ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yu",
+                          "o",
+                          "ya",
+                          "yo"
+                        ],
+                        "en": [
+                          "yu",
+                          "o",
+                          "ya",
+                          "yo"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅛ 读作 yo，是 ㅗ 加上 y 音。",
+                        "en": "ㅛ is pronounced 'yo', the ㅗ sound with a y-glide."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅜ」的发音是？",
+                        "en": "How is the Korean letter 「ㅜ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "o",
+                          "u",
+                          "eu",
+                          "yo"
+                        ],
+                        "en": [
+                          "o",
+                          "u",
+                          "eu",
+                          "yo"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅜ 读作 u，类似英语 'oo' in 'food'。",
+                        "en": "ㅜ is pronounced 'u', like 'oo' in 'food'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅠ」的发音是？",
+                        "en": "How is the Korean letter 「ㅠ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yo",
+                          "yeo",
+                          "yu",
+                          "ya"
+                        ],
+                        "en": [
+                          "yo",
+                          "yeo",
+                          "yu",
+                          "ya"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅠ 读作 yu，是 ㅜ 加上 y 音。",
+                        "en": "ㅠ is pronounced 'yu', the ㅜ sound with a y-glide."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅡ」的发音是？",
+                        "en": "How is the Korean letter 「ㅡ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "i",
+                          "u",
+                          "eo",
+                          "eu"
+                        ],
+                        "en": [
+                          "i",
+                          "u",
+                          "eo",
+                          "eu"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅡ 读作 eu，类似中文「思」的韵母，嘴唇扁平。",
+                        "en": "ㅡ is pronounced 'eu', with flat, unrounded lips."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅣ」的发音是？",
+                        "en": "How is the Korean letter 「ㅣ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "i",
+                          "eu",
+                          "u",
+                          "eo"
+                        ],
+                        "en": [
+                          "i",
+                          "eu",
+                          "u",
+                          "eo"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅣ 读作 i，类似英语 'ee' in 'see'。",
+                        "en": "ㅣ is pronounced 'i', like 'ee' in 'see'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个元音的发音是「ya」？",
+                        "en": "Which vowel is pronounced 'ya'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅏ",
+                          "ㅓ",
+                          "ㅑ",
+                          "ㅗ"
+                        ],
+                        "en": [
+                          "ㅏ",
+                          "ㅓ",
+                          "ㅑ",
+                          "ㅗ"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅑ 读作 ya。",
+                        "en": "ㅑ is pronounced 'ya'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个元音的发音是「yeo」？",
+                        "en": "Which vowel is pronounced 'yeo'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅑ",
+                          "ㅕ",
+                          "ㅛ",
+                          "ㅠ"
+                        ],
+                        "en": [
+                          "ㅑ",
+                          "ㅕ",
+                          "ㅛ",
+                          "ㅠ"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅕ 读作 yeo。",
+                        "en": "ㅕ is pronounced 'yeo'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅏ」和「ㅓ」的主要区别是？",
+                        "en": "What is the main difference between 「ㅏ」 and 「ㅓ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "嘴的张开方向（ㅏ 偏前，ㅓ 偏后）",
+                          "长短不同",
+                          "是否送气",
+                          "是否紧音"
+                        ],
+                        "en": [
+                          "Tongue position (ㅏ front, ㅓ back)",
+                          "Length",
+                          "Aspiration",
+                          "Tenseness"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅏ 是前元音，ㅓ 是后元音，发音时舌头位置不同。",
+                        "en": "ㅏ is a front vowel; ㅓ is a back vowel. The tongue position differs."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅗ」和「ㅜ」的主要区别是？",
+                        "en": "What is the main difference between 「ㅗ」 and 「ㅜ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是否送气",
+                          "长短不同",
+                          "是否鼻音",
+                          "嘴唇形状（ㅗ 圆唇向前，ㅜ 圆唇内收）"
+                        ],
+                        "en": [
+                          "Aspiration",
+                          "Length",
+                          "Nasality",
+                          "Lip shape (ㅗ lips rounded outward, ㅜ inward)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅗ 嘴形向前突出，ㅜ 嘴唇圆而内收。",
+                        "en": "ㅗ pushes the lips outward; ㅜ rounds them inward."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅑ」是怎么从「ㅏ」变化来的？",
+                        "en": "How is 「ㅑ」 derived from 「ㅏ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "加一个辅音",
+                          "多加一笔表示 y 音",
+                          "长短变化",
+                          "紧音化"
+                        ],
+                        "en": [
+                          "Adding a consonant",
+                          "Adding a stroke to indicate y-glide",
+                          "Length change",
+                          "Tensification"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "韩语中 y 元音由基本元音「多加一笔」构成：ㅏ→ㅑ、ㅓ→ㅕ、ㅗ→ㅛ、ㅜ→ㅠ。",
+                        "en": "Korean y-vowels add an extra stroke: ㅏ→ㅑ, ㅓ→ㅕ, ㅗ→ㅛ, ㅜ→ㅠ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅛ」是怎么从「ㅗ」变化来的？",
+                        "en": "How is 「ㅛ」 derived from 「ㅗ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "加辅音",
+                          "长短变化",
+                          "多加一笔表示 y 音",
+                          "送气化"
+                        ],
+                        "en": [
+                          "Adding a consonant",
+                          "Length change",
+                          "Adding a stroke to indicate y-glide",
+                          "Aspiration"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅗ 多一竖即为 ㅛ，表示 y 音。",
+                        "en": "ㅗ with an extra vertical stroke becomes ㅛ, indicating a y-glide."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个元音发音时嘴唇最扁平？",
+                        "en": "Which vowel is pronounced with the flattest lips?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅗ",
+                          "ㅜ",
+                          "ㅏ",
+                          "ㅡ"
+                        ],
+                        "en": [
+                          "ㅗ",
+                          "ㅜ",
+                          "ㅏ",
+                          "ㅡ"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅡ 发音时嘴唇扁平，不圆唇。",
+                        "en": "ㅡ is pronounced with flat, unrounded lips."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㄱ」的发音是？",
+                        "en": "How is the Korean letter 「ㄱ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "g/k",
+                          "n",
+                          "d/t",
+                          "m"
+                        ],
+                        "en": [
+                          "g/k",
+                          "n",
+                          "d/t",
+                          "m"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㄱ 在词首发 k，在词中/词尾发 g 的浊化音。",
+                        "en": "ㄱ is 'k' at the start of a word and 'g' between/after vowels."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㄴ」的发音是？",
+                        "en": "How is the Korean letter 「ㄴ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "m",
+                          "n",
+                          "ng",
+                          "r/l"
+                        ],
+                        "en": [
+                          "m",
+                          "n",
+                          "ng",
+                          "r/l"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㄴ 读作 n，类似英语 'n'。",
+                        "en": "ㄴ is pronounced 'n', like 'n' in English."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㄷ」的发音是？",
+                        "en": "How is the Korean letter 「ㄷ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "b/p",
+                          "g/k",
+                          "d/t",
+                          "j"
+                        ],
+                        "en": [
+                          "b/p",
+                          "g/k",
+                          "d/t",
+                          "j"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㄷ 在词首发 t，在词中/词尾发 d。",
+                        "en": "ㄷ is 't' at the start of a word and 'd' between/after vowels."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㄹ」的发音是？",
+                        "en": "How is the Korean letter 「ㄹ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "r/l",
+                          "n",
+                          "m",
+                          "h"
+                        ],
+                        "en": [
+                          "r/l",
+                          "n",
+                          "m",
+                          "h"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㄹ 是弹舌音，介于 r 和 l 之间；词首接近 r，词尾接近 l。",
+                        "en": "ㄹ is a flap, between r and l. It sounds like r at the start and l at the end."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅁ」的发音是？",
+                        "en": "How is the Korean letter 「ㅁ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "n",
+                          "b/p",
+                          "ng",
+                          "m"
+                        ],
+                        "en": [
+                          "n",
+                          "b/p",
+                          "ng",
+                          "m"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅁ 读作 m，是鼻音。",
+                        "en": "ㅁ is pronounced 'm', a nasal sound."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅂ」的发音是？",
+                        "en": "How is the Korean letter 「ㅂ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "m",
+                          "p（送气）",
+                          "b/p",
+                          "h"
+                        ],
+                        "en": [
+                          "m",
+                          "p (aspirated)",
+                          "b/p",
+                          "h"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅂ 在词首发 p，在词中/词尾发 b。",
+                        "en": "ㅂ is 'p' at the start of a word and 'b' between/after vowels."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅅ」的发音是？",
+                        "en": "How is the Korean letter 「ㅅ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "j",
+                          "s",
+                          "ch",
+                          "h"
+                        ],
+                        "en": [
+                          "j",
+                          "s",
+                          "ch",
+                          "h"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅅ 读作 s，但在 ㅣ 前读 sh。",
+                        "en": "ㅅ is pronounced 's', but becomes 'sh' before ㅣ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅇ」在音节开头时的作用？",
+                        "en": "What is the role of 「ㅇ」 at the start of a syllable?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "不发音（作为占位符）",
+                          "发 ng 音",
+                          "发 m 音",
+                          "发 n 音"
+                        ],
+                        "en": [
+                          "Silent (placeholder)",
+                          "Pronounced 'ng'",
+                          "Pronounced 'm'",
+                          "Pronounced 'n'"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅇ 在音节开头不发音，只作为占位符；在音节末尾发 ng。",
+                        "en": "ㅇ is silent at the start of a syllable (a placeholder) and 'ng' at the end."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅈ」的发音是？",
+                        "en": "How is the Korean letter 「ㅈ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "s",
+                          "ch",
+                          "j",
+                          "z"
+                        ],
+                        "en": [
+                          "s",
+                          "ch",
+                          "j",
+                          "z"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅈ 读作 j，类似英语 'j' in 'jump'，但更轻。",
+                        "en": "ㅈ is pronounced 'j', like 'j' in 'jump', but softer."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅊ」的发音是？",
+                        "en": "How is the Korean letter 「ㅊ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "j",
+                          "s",
+                          "t",
+                          "ch"
+                        ],
+                        "en": [
+                          "j",
+                          "s",
+                          "t",
+                          "ch"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅊ 是ㅈ 的送气音，读作 ch。",
+                        "en": "ㅊ is the aspirated version of ㅈ, pronounced 'ch'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅋ」的发音是？",
+                        "en": "How is the Korean letter 「ㅋ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "g",
+                          "k（送气）",
+                          "n",
+                          "t"
+                        ],
+                        "en": [
+                          "g",
+                          "k (aspirated)",
+                          "n",
+                          "t"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅋ 是ㄱ 的送气音，读作 k。",
+                        "en": "ㅋ is the aspirated version of ㄱ, pronounced 'k'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅌ」的发音是？",
+                        "en": "How is the Korean letter 「ㅌ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "t（送气）",
+                          "d",
+                          "p",
+                          "ch"
+                        ],
+                        "en": [
+                          "t (aspirated)",
+                          "d",
+                          "p",
+                          "ch"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅌ 是ㄷ 的送气音，读作 t。",
+                        "en": "ㅌ is the aspirated version of ㄷ, pronounced 't'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅍ」的发音是？",
+                        "en": "How is the Korean letter 「ㅍ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "b",
+                          "m",
+                          "p（送气）",
+                          "f"
+                        ],
+                        "en": [
+                          "b",
+                          "m",
+                          "p (aspirated)",
+                          "f"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅍ 是ㅂ 的送气音，读作 p。",
+                        "en": "ㅍ is the aspirated version of ㅂ, pronounced 'p'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅎ」的发音是？",
+                        "en": "How is the Korean letter 「ㅎ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "s",
+                          "h",
+                          "ng",
+                          "w"
+                        ],
+                        "en": [
+                          "s",
+                          "h",
+                          "ng",
+                          "w"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅎ 读作 h，类似英语 'h'。",
+                        "en": "ㅎ is pronounced 'h', like 'h' in English."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㄱ」和「ㅋ」的主要区别是？",
+                        "en": "What is the main difference between 「ㄱ」 and 「ㅋ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是否鼻音",
+                          "是否紧音",
+                          "长短不同",
+                          "是否送气（ㅋ 送气）"
+                        ],
+                        "en": [
+                          "Nasality",
+                          "Tenseness",
+                          "Length",
+                          "Aspiration (ㅋ is aspirated)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅋ 是ㄱ 的送气音。",
+                        "en": "ㅋ is the aspirated counterpart of ㄱ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㄷ」和「ㅌ」的主要区别是？",
+                        "en": "What is the main difference between 「ㄷ」 and 「ㅌ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是否鼻音",
+                          "是否紧音",
+                          "是否送气（ㅌ 送气）",
+                          "长短不同"
+                        ],
+                        "en": [
+                          "Nasality",
+                          "Tenseness",
+                          "Aspiration (ㅌ is aspirated)",
+                          "Length"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅌ 是ㄷ 的送气音。",
+                        "en": "ㅌ is the aspirated counterpart of ㄷ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅂ」和「ㅍ」的主要区别是？",
+                        "en": "What is the main difference between 「ㅂ」 and 「ㅍ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是否送气（ㅍ 送气）",
+                          "是否鼻音",
+                          "是否紧音",
+                          "长短不同"
+                        ],
+                        "en": [
+                          "Aspiration (ㅍ is aspirated)",
+                          "Nasality",
+                          "Tenseness",
+                          "Length"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅍ 是ㅂ 的送气音。",
+                        "en": "ㅍ is the aspirated counterpart of ㅂ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅈ」和「ㅊ」的主要区别是？",
+                        "en": "What is the main difference between 「ㅈ」 and 「ㅊ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "是否鼻音",
+                          "是否紧音",
+                          "长短不同",
+                          "是否送气（ㅊ 送气）"
+                        ],
+                        "en": [
+                          "Nasality",
+                          "Tenseness",
+                          "Length",
+                          "Aspiration (ㅊ is aspirated)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅊ 是ㅈ 的送气音。",
+                        "en": "ㅊ is the aspirated counterpart of ㅈ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个辅音是鼻音？",
+                        "en": "Which of the following consonants is a nasal sound?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㄷ",
+                          "ㅅ"
+                        ],
+                        "en": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㄷ",
+                          "ㅅ"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㄴ 是鼻音，与 ㅁ、ㅇ 同为韩语鼻音。",
+                        "en": "ㄴ is a nasal, along with ㅁ and ㅇ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个辅音在音节开头不发音？",
+                        "en": "Which consonant is silent at the start of a syllable?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅇ",
+                          "ㄱ",
+                          "ㄴ",
+                          "ㅁ"
+                        ],
+                        "en": [
+                          "ㅇ",
+                          "ㄱ",
+                          "ㄴ",
+                          "ㅁ"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅇ 在音节开头是占位符，不发音。",
+                        "en": "ㅇ is a placeholder at the start of a syllable and is not pronounced."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㄹ」的发音特点是？",
+                        "en": "What is the pronunciation characteristic of 「ㄹ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "总是发 r 音",
+                          "总是发 l 音",
+                          "根据位置发 r 或 l 音",
+                          "不发音"
+                        ],
+                        "en": [
+                          "Always 'r'",
+                          "Always 'l'",
+                          "Varies between 'r' and 'l' depending on position",
+                          "Silent"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㄹ 在元音间偏 r，在词尾或辅音前偏 l。",
+                        "en": "ㄹ sounds more like 'r' between vowels and 'l' at the end or before consonants."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个辅音发音类似英语「ng」？",
+                        "en": "Which consonant is pronounced like English 'ng'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄴ",
+                          "ㅇ",
+                          "ㅁ",
+                          "ㄹ"
+                        ],
+                        "en": [
+                          "ㄴ",
+                          "ㅇ",
+                          "ㅁ",
+                          "ㄹ"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅇ 在音节末尾发 ng 音。",
+                        "en": "ㅇ is pronounced 'ng' at the end of a syllable."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语一共有多少个基本元音？",
+                        "en": "How many basic vowels does Korean have?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "8",
+                          "12",
+                          "14",
+                          "10"
+                        ],
+                        "en": [
+                          "8",
+                          "12",
+                          "14",
+                          "10"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "韩语基本元音共 10 个：ㅏ ㅑ ㅓ ㅕ ㅗ ㅛ ㅜ ㅠ ㅡ ㅣ。",
+                        "en": "Korean has 10 basic vowels: ㅏ ㅑ ㅓ ㅕ ㅗ ㅛ ㅜ ㅠ ㅡ ㅣ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语一共有多少个基本辅音？",
+                        "en": "How many basic consonants does Korean have?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "14",
+                          "10",
+                          "12",
+                          "16"
+                        ],
+                        "en": [
+                          "14",
+                          "10",
+                          "12",
+                          "16"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "韩语基本辅音共 14 个：ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ。",
+                        "en": "Korean has 14 basic consonants: ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅏ」属于元音还是辅音？",
+                        "en": "Is 「ㅏ」 a vowel or a consonant?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "辅音",
+                          "收音",
+                          "元音",
+                          "紧音"
+                        ],
+                        "en": [
+                          "Consonant",
+                          "Final consonant",
+                          "Vowel",
+                          "Tense consonant"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅏ 是元音。",
+                        "en": "ㅏ is a vowel."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㄱ」属于元音还是辅音？",
+                        "en": "Is 「ㄱ」 a vowel or a consonant?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "元音",
+                          "辅音",
+                          "收音",
+                          "紧音"
+                        ],
+                        "en": [
+                          "Vowel",
+                          "Consonant",
+                          "Final consonant",
+                          "Tense consonant"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㄱ 是辅音。",
+                        "en": "ㄱ is a consonant."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个是元音？",
+                        "en": "Which of the following is a vowel?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㅁ",
+                          "ㅏ"
+                        ],
+                        "en": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㅁ",
+                          "ㅏ"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅏ 是元音，其余为辅音。",
+                        "en": "ㅏ is a vowel; the others are consonants."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个是辅音？",
+                        "en": "Which of the following is a consonant?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅏ",
+                          "ㅓ",
+                          "ㄱ",
+                          "ㅗ"
+                        ],
+                        "en": [
+                          "ㅏ",
+                          "ㅓ",
+                          "ㄱ",
+                          "ㅗ"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㄱ 是辅音，其余为元音。",
+                        "en": "ㄱ is a consonant; the others are vowels."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母系统的名称是？",
+                        "en": "What is the name of the Korean writing system?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "谚文（한글）",
+                          "汉字",
+                          "假名",
+                          "罗马字"
+                        ],
+                        "en": [
+                          "Hangul (한글)",
+                          "Hanja",
+                          "Kana",
+                          "Romanization"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "韩语字母系统称为「谚文」或「한글」（Hangul）。",
+                        "en": "The Korean alphabet is called Hangul (한글)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母（한글）的创造者是？",
+                        "en": "Who created the Korean alphabet (한글)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "이순신",
+                          "정약용",
+                          "허준",
+                          "세종대왕"
+                        ],
+                        "en": [
+                          "이순신",
+                          "정약용",
+                          "허준",
+                          "세종대왕"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "한글 由朝鲜王朝第四代国王世宗大王（세종대왕）主持创制。",
+                        "en": "Hangul was created under King Sejong the Great (세종대왕) of the Joseon Dynasty."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母（한글）创造于哪一年？",
+                        "en": "In what year was the Korean alphabet (한글) created?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "1392年",
+                          "1443年",
+                          "1592年",
+                          "1894年"
+                        ],
+                        "en": [
+                          "1392",
+                          "1443",
+                          "1592",
+                          "1894"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "한글 创制于 1443 年，1446 年正式颁布。",
+                        "en": "Hangul was created in 1443 and promulgated in 1446."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅇ」在音节开头时的作用？",
+                        "en": "What is the role of 「ㅇ」 at the start of a syllable?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "占位符（不发音）",
+                          "表示鼻音",
+                          "表示紧音",
+                          "表示送气"
+                        ],
+                        "en": [
+                          "Placeholder (silent)",
+                          "Nasal sound",
+                          "Tense sound",
+                          "Aspirated sound"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "韩语音节必须以辅音开头，ㅇ 作为占位符用于元音开头的音节。",
+                        "en": "Every Korean syllable must begin with a consonant; ㅇ serves as a silent placeholder for vowel-initial syllables."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个是韩语中的紧音？",
+                        "en": "Which of the following is a tense consonant in Korean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ",
+                          "ㅋ",
+                          "ㄲ",
+                          "ㅎ"
+                        ],
+                        "en": [
+                          "ㄱ",
+                          "ㅋ",
+                          "ㄲ",
+                          "ㅎ"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㄲ 是ㄱ 的紧音，发音时喉部紧张、不送气。",
+                        "en": "ㄲ is the tense version of ㄱ, pronounced with a tightened throat and no aspiration."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：复合母音、双辅音与紧音 / 복합 모음·쌍자음·경음",
+                  "titleEn": "Paper 2: Compound Vowels, Double & Tense Consonants",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅐ」的发音是？",
+                        "en": "How is the Korean letter 「ㅐ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ae",
+                          "e",
+                          "ya",
+                          "ye"
+                        ],
+                        "en": [
+                          "ae",
+                          "e",
+                          "ya",
+                          "ye"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅐ 是复合元音，读作 ae，类似英语 'e' in 'bed'，但嘴张得更大。",
+                        "en": "ㅐ is a compound vowel, pronounced 'ae', like 'e' in 'bed' but with a wider mouth."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅔ」的发音是？",
+                        "en": "How is the Korean letter 「ㅔ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ae",
+                          "ye",
+                          "e",
+                          "ya"
+                        ],
+                        "en": [
+                          "ae",
+                          "ye",
+                          "e",
+                          "ya"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅔ 读作 e，类似英语 'e' in 'bed'。",
+                        "en": "ㅔ is pronounced 'e', like 'e' in 'bed'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅐ」和「ㅔ」在现代韩语中的区别是？",
+                        "en": "What is the difference between 「ㅐ」 and 「ㅔ」 in modern Korean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅐ 更开口，ㅔ 更闭口",
+                          "现代韩语几乎不区分",
+                          "ㅐ 是长音",
+                          "ㅔ 是辅音"
+                        ],
+                        "en": [
+                          "ㅐ is more open, ㅔ is more closed",
+                          "Modern Korean barely distinguishes them",
+                          "ㅐ is a long sound",
+                          "ㅔ is a consonant"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "现代韩语中 ㅐ 和 ㅔ 的发音已几乎合并，但书写仍不同。",
+                        "en": "In modern Korean, ㅐ and ㅔ are almost merged in pronunciation, though they are still written differently."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅒ」的发音是？",
+                        "en": "How is the Korean letter 「ㅒ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ye",
+                          "ae",
+                          "yae",
+                          "e"
+                        ],
+                        "en": [
+                          "ye",
+                          "ae",
+                          "yae",
+                          "e"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅒ 读作 yae，是 ㅐ 加上 y 音。",
+                        "en": "ㅒ is pronounced 'yae', the ㅐ sound with a y-glide."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅖ」的发音是？",
+                        "en": "How is the Korean letter 「ㅖ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yae",
+                          "ye",
+                          "ae",
+                          "e"
+                        ],
+                        "en": [
+                          "yae",
+                          "ye",
+                          "ae",
+                          "e"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅖ 读作 ye，是 ㅔ 加上 y 音。",
+                        "en": "ㅖ is pronounced 'ye', the ㅔ sound with a y-glide."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅘ」的发音是？",
+                        "en": "How is the Korean letter 「ㅘ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wo",
+                          "wae",
+                          "we",
+                          "wa"
+                        ],
+                        "en": [
+                          "wo",
+                          "wae",
+                          "we",
+                          "wa"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅘ 由 ㅗ + ㅏ 组合而成，读作 wa。",
+                        "en": "ㅘ is a combination of ㅗ + ㅏ, pronounced 'wa'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅙ」的发音是？",
+                        "en": "How is the Korean letter 「ㅙ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "we",
+                          "wae",
+                          "oe"
+                        ],
+                        "en": [
+                          "wa",
+                          "we",
+                          "wae",
+                          "oe"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅙ 由 ㅗ + ㅐ 组合而成，读作 wae。",
+                        "en": "ㅙ is a combination of ㅗ + ㅐ, pronounced 'wae'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅚ」的发音是？",
+                        "en": "How is the Korean letter 「ㅚ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "oe/we",
+                          "wi",
+                          "ui",
+                          "wo"
+                        ],
+                        "en": [
+                          "oe/we",
+                          "wi",
+                          "ui",
+                          "wo"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅚ 读作 oe 或 we，现代韩语多读 we。",
+                        "en": "ㅚ is pronounced 'oe' or 'we'; in modern Korean, 'we' is common."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅝ」的发音是？",
+                        "en": "How is the Korean letter 「ㅝ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "we",
+                          "wae",
+                          "wo"
+                        ],
+                        "en": [
+                          "wa",
+                          "we",
+                          "wae",
+                          "wo"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅝ 由 ㅜ + ㅓ 组合而成，读作 wo。",
+                        "en": "ㅝ is a combination of ㅜ + ㅓ, pronounced 'wo'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅞ」的发音是？",
+                        "en": "How is the Korean letter 「ㅞ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "wae",
+                          "wo",
+                          "we"
+                        ],
+                        "en": [
+                          "wa",
+                          "wae",
+                          "wo",
+                          "we"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅞ 由 ㅜ + ㅔ 组合而成，读作 we。",
+                        "en": "ㅞ is a combination of ㅜ + ㅔ, pronounced 'we'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅟ」的发音是？",
+                        "en": "How is the Korean letter 「ㅟ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ui",
+                          "oe",
+                          "wi",
+                          "wo"
+                        ],
+                        "en": [
+                          "ui",
+                          "oe",
+                          "wi",
+                          "wo"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅟ 读作 wi，是 ㅜ + ㅣ 的组合。",
+                        "en": "ㅟ is pronounced 'wi', a combination of ㅜ + ㅣ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅢ」的发音是？",
+                        "en": "How is the Korean letter 「ㅢ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ui",
+                          "wi",
+                          "oe",
+                          "we"
+                        ],
+                        "en": [
+                          "ui",
+                          "wi",
+                          "oe",
+                          "we"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅢ 读作 ui，是 ㅡ + ㅣ 的组合。",
+                        "en": "ㅢ is pronounced 'ui', a combination of ㅡ + ㅣ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个元音的发音是「yae」？",
+                        "en": "Which vowel is pronounced 'yae'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅐ",
+                          "ㅔ",
+                          "ㅖ",
+                          "ㅒ"
+                        ],
+                        "en": [
+                          "ㅐ",
+                          "ㅔ",
+                          "ㅖ",
+                          "ㅒ"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅒ 读作 yae。",
+                        "en": "ㅒ is pronounced 'yae'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个元音的发音是「wi」？",
+                        "en": "Which vowel is pronounced 'wi'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅟ",
+                          "ㅢ",
+                          "ㅞ",
+                          "ㅚ"
+                        ],
+                        "en": [
+                          "ㅟ",
+                          "ㅢ",
+                          "ㅞ",
+                          "ㅚ"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅟ 读作 wi。",
+                        "en": "ㅟ is pronounced 'wi'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅘ」是由哪两个元音组合而成？",
+                        "en": "Which two vowels combine to form 「ㅘ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅗ + ㅏ",
+                          "ㅜ + ㅓ",
+                          "ㅗ + ㅐ",
+                          "ㅜ + ㅣ"
+                        ],
+                        "en": [
+                          "ㅗ + ㅏ",
+                          "ㅜ + ㅓ",
+                          "ㅗ + ㅐ",
+                          "ㅜ + ㅣ"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅘ = ㅗ + ㅏ。",
+                        "en": "ㅘ = ㅗ + ㅏ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㄲ」的发音是？",
+                        "en": "How is the Korean letter 「ㄲ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "kk",
+                          "k",
+                          "kh",
+                          "g"
+                        ],
+                        "en": [
+                          "kk",
+                          "k",
+                          "kh",
+                          "g"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㄲ 是ㄱ 的紧音，读作 kk，发音时喉部紧张、不送气。",
+                        "en": "ㄲ is the tense version of ㄱ, pronounced 'kk' with a tightened throat and no aspiration."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㄸ」的发音是？",
+                        "en": "How is the Korean letter 「ㄸ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "d",
+                          "tt",
+                          "t",
+                          "th"
+                        ],
+                        "en": [
+                          "d",
+                          "tt",
+                          "t",
+                          "th"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㄸ 是ㄷ 的紧音，读作 tt，发音时喉部紧张、不送气。",
+                        "en": "ㄸ is the tense version of ㄷ, pronounced 'tt' with a tightened throat and no aspiration."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅃ」的发音是？",
+                        "en": "How is the Korean letter 「ㅃ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "b",
+                          "ph",
+                          "p",
+                          "pp"
+                        ],
+                        "en": [
+                          "b",
+                          "ph",
+                          "p",
+                          "pp"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅃ 是ㅂ 的紧音，读作 pp，发音时喉部紧张、不送气。",
+                        "en": "ㅃ is the tense version of ㅂ, pronounced 'pp' with a tightened throat and no aspiration."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅆ」的发音是？",
+                        "en": "How is the Korean letter 「ㅆ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "s",
+                          "ss",
+                          "sh",
+                          "j"
+                        ],
+                        "en": [
+                          "s",
+                          "ss",
+                          "sh",
+                          "j"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅆ 是ㅅ 的紧音，读作 ss，发音时更用力、更紧。",
+                        "en": "ㅆ is the tense version of ㅅ, pronounced 'ss' with more force and tension."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语字母「ㅉ」的发音是？",
+                        "en": "How is the Korean letter 「ㅉ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "j",
+                          "ch",
+                          "jj",
+                          "z"
+                        ],
+                        "en": [
+                          "j",
+                          "ch",
+                          "jj",
+                          "z"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅉ 是ㅈ 的紧音，读作 jj，发音时喉部紧张、不送气。",
+                        "en": "ㅉ is the tense version of ㅈ, pronounced 'jj' with a tightened throat and no aspiration."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个是韩语的紧音？",
+                        "en": "Which of the following is a tense consonant in Korean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㄲ",
+                          "ㅁ"
+                        ],
+                        "en": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㄲ",
+                          "ㅁ"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㄲ 是ㄱ 的紧音。紧音的特点是发音时喉部紧张、不送气。",
+                        "en": "ㄲ is the tense version of ㄱ. Tense consonants are pronounced with a tightened throat and no aspiration."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个是韩语的紧音？",
+                        "en": "Which of the following is a tense consonant in Korean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄷ",
+                          "ㅌ",
+                          "ㅂ",
+                          "ㅃ"
+                        ],
+                        "en": [
+                          "ㄷ",
+                          "ㅌ",
+                          "ㅂ",
+                          "ㅃ"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅃ 是ㅂ 的紧音。",
+                        "en": "ㅃ is the tense version of ㅂ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语一共有多少个紧音（双辅音）？",
+                        "en": "How many tense (double) consonants does Korean have?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "3个",
+                          "5个",
+                          "7个",
+                          "10个"
+                        ],
+                        "en": [
+                          "3",
+                          "5",
+                          "7",
+                          "10"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "韩语紧音共 5 个：ㄲ ㄸ ㅃ ㅆ ㅉ。",
+                        "en": "Korean has 5 tense consonants: ㄲ ㄸ ㅃ ㅆ ㅉ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㄱ / ㅋ / ㄲ」这三者的关系是？",
+                        "en": "What is the relationship among 「ㄱ / ㅋ / ㄲ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "平音 / 送气音 / 紧音",
+                          "都是平音",
+                          "都是紧音",
+                          "平音 / 紧音 / 送气音"
+                        ],
+                        "en": [
+                          "Plain / Aspirated / Tense",
+                          "All plain",
+                          "All tense",
+                          "Plain / Tense / Aspirated"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㄱ 是平音，ㅋ 是送气音，ㄲ 是紧音。",
+                        "en": "ㄱ is plain (lenis), ㅋ is aspirated, ㄲ is tense (fortis)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㄷ / ㅌ / ㄸ」这三者的关系是？",
+                        "en": "What is the relationship among 「ㄷ / ㅌ / ㄸ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "都是送气音",
+                          "平音 / 送气音 / 紧音",
+                          "平音 / 紧音 / 送气音",
+                          "都是紧音"
+                        ],
+                        "en": [
+                          "All aspirated",
+                          "Plain / Aspirated / Tense",
+                          "Plain / Tense / Aspirated",
+                          "All tense"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㄷ 是平音，ㅌ 是送气音，ㄸ 是紧音。",
+                        "en": "ㄷ is plain, ㅌ is aspirated, ㄸ is tense."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅂ / ㅍ / ㅃ」这三者的关系是？",
+                        "en": "What is the relationship among 「ㅂ / ㅍ / ㅃ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "平音 / 紧音 / 送气音",
+                          "都是平音",
+                          "都是送气音",
+                          "平音 / 送气音 / 紧音"
+                        ],
+                        "en": [
+                          "Plain / Tense / Aspirated",
+                          "All plain",
+                          "All aspirated",
+                          "Plain / Aspirated / Tense"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅂ 是平音，ㅍ 是送气音，ㅃ 是紧音。",
+                        "en": "ㅂ is plain, ㅍ is aspirated, ㅃ is tense."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅈ / ㅊ / ㅉ」这三者的关系是？",
+                        "en": "What is the relationship among 「ㅈ / ㅊ / ㅉ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "都是平音",
+                          "平音 / 送气音 / 紧音",
+                          "都是紧音",
+                          "都是送气音"
+                        ],
+                        "en": [
+                          "All plain",
+                          "Plain / Aspirated / Tense",
+                          "All tense",
+                          "All aspirated"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅈ 是平音，ㅊ 是送气音，ㅉ 是紧音。",
+                        "en": "ㅈ is plain, ㅊ is aspirated, ㅉ is tense."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「ㅅ」和「ㅆ」的主要区别是？",
+                        "en": "What is the main difference between 「ㅅ」 and 「ㅆ」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "平音 / 紧音",
+                          "都是平音",
+                          "都是紧音",
+                          "平音 / 送气音"
+                        ],
+                        "en": [
+                          "Plain / Tense",
+                          "All plain",
+                          "All tense",
+                          "Plain / Aspirated"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅅ 是平音，ㅆ 是紧音。ㅆ 发音时更用力。",
+                        "en": "ㅅ is plain; ㅆ is tense. ㅆ is pronounced with more force."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪一组按「平音 / 送气音 / 紧音」排列？",
+                        "en": "Which group is ordered as 'Plain / Aspirated / Tense'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ / ㄲ / ㅋ",
+                          "ㄲ / ㅋ / ㄱ",
+                          "ㅋ / ㄱ / ㄲ",
+                          "ㄱ / ㅋ / ㄲ"
+                        ],
+                        "en": [
+                          "ㄱ / ㄲ / ㅋ",
+                          "ㄲ / ㅋ / ㄱ",
+                          "ㅋ / ㄱ / ㄲ",
+                          "ㄱ / ㅋ / ㄲ"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㄱ（平音）/ ㅋ（送气音）/ ㄲ（紧音）。",
+                        "en": "ㄱ (plain) / ㅋ (aspirated) / ㄲ (tense)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪种音发音时喉部最紧张、最用力？",
+                        "en": "Which type of sound is pronounced with the most tightened throat and force?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "平音",
+                          "送气音",
+                          "紧音",
+                          "鼻音"
+                        ],
+                        "en": [
+                          "Plain (lenis)",
+                          "Aspirated",
+                          "Tense (fortis)",
+                          "Nasal"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "紧音（ㄲ ㄸ ㅃ ㅆ ㅉ）发音时喉部最紧张、最用力，不送气。",
+                        "en": "Tense consonants (ㄲ ㄸ ㅃ ㅆ ㅉ) are pronounced with the most throat tension, no aspiration."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：收音（终声）/ 받침",
+                  "titleEn": "Paper 3: Final Consonants (받침)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "韩语收音（받침）一共有几个代表音？",
+                        "en": "How many representative final consonant sounds (받침) does Korean have?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "5个",
+                          "6个",
+                          "8个",
+                          "7个"
+                        ],
+                        "en": [
+                          "5",
+                          "6",
+                          "8",
+                          "7"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "韩语收音共有 7 个代表音：ㄱ、ㄴ、ㄷ、ㄹ、ㅁ、ㅂ、ㅇ。所有收音在实际发音中都归入这 7 种之一。",
+                        "en": "Korean has 7 representative final consonant sounds: ㄱ, ㄴ, ㄷ, ㄹ, ㅁ, ㅂ, ㅇ. All final consonants reduce to one of these 7."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语收音的 7 个代表音是？",
+                        "en": "What are the 7 representative final consonant sounds in Korean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ",
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ",
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅎ",
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅈ"
+                        ],
+                        "en": [
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ",
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ",
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅎ",
+                          "ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅈ"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "7 个代表收音是 ㄱ、ㄴ、ㄷ、ㄹ、ㅁ、ㅂ、ㅇ。",
+                        "en": "The 7 representative finals are ㄱ, ㄴ, ㄷ, ㄹ, ㅁ, ㅂ, ㅇ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㄱ」的发音是？",
+                        "en": "How is the final consonant 「ㄱ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "k",
+                          "n",
+                          "t",
+                          "m"
+                        ],
+                        "en": [
+                          "k",
+                          "n",
+                          "t",
+                          "m"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "收音 ㄱ 读作 k，类似英语 'k' in 'book'，但短促不收尾。",
+                        "en": "Final ㄱ is pronounced 'k', like 'k' in 'book' but with no release."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㄴ」的发音是？",
+                        "en": "How is the final consonant 「ㄴ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "m",
+                          "n",
+                          "ng",
+                          "l"
+                        ],
+                        "en": [
+                          "m",
+                          "n",
+                          "ng",
+                          "l"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "收音 ㄴ 读作 n，类似英语 'n' in 'sun'。",
+                        "en": "Final ㄴ is pronounced 'n', like 'n' in 'sun'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㄷ」的发音是？",
+                        "en": "How is the final consonant 「ㄷ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "d",
+                          "k",
+                          "t",
+                          "p"
+                        ],
+                        "en": [
+                          "d",
+                          "k",
+                          "t",
+                          "p"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "收音 ㄷ 读作 t，短促不收尾。",
+                        "en": "Final ㄷ is pronounced 't', with no release."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㄹ」的发音是？",
+                        "en": "How is the final consonant 「ㄹ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "r",
+                          "n",
+                          "m",
+                          "l"
+                        ],
+                        "en": [
+                          "r",
+                          "n",
+                          "m",
+                          "l"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "收音 ㄹ 读作 l，类似英语 'l' in 'call'，但舌头要弹一下。",
+                        "en": "Final ㄹ is pronounced 'l', like 'l' in 'call'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅁ」的发音是？",
+                        "en": "How is the final consonant 「ㅁ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "m",
+                          "n",
+                          "b",
+                          "ng"
+                        ],
+                        "en": [
+                          "m",
+                          "n",
+                          "b",
+                          "ng"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "收音 ㅁ 读作 m，类似英语 'm' in 'time'。",
+                        "en": "Final ㅁ is pronounced 'm', like 'm' in 'time'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅂ」的发音是？",
+                        "en": "How is the final consonant 「ㅂ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "m",
+                          "p",
+                          "b",
+                          "h"
+                        ],
+                        "en": [
+                          "m",
+                          "p",
+                          "b",
+                          "h"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "收音 ㅂ 读作 p，短促不收尾。",
+                        "en": "Final ㅂ is pronounced 'p', with no release."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅇ」的发音是？",
+                        "en": "How is the final consonant 「ㅇ」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "n",
+                          "m",
+                          "ng",
+                          "不发音"
+                        ],
+                        "en": [
+                          "n",
+                          "m",
+                          "ng",
+                          "Silent"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅇ 在音节末尾时读作 ng，类似英语 'ng' in 'sing'。",
+                        "en": "Final ㅇ is pronounced 'ng', like 'ng' in 'sing'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅅ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅅ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄴ]",
+                          "[ㄷ]",
+                          "[ㅂ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄴ]",
+                          "[ㄷ]",
+                          "[ㅂ]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "收音 ㅅ 实际发音为 [ㄷ]，即 t。类似的还有 ㅆ、ㅈ、ㅊ、ㅌ、ㅎ。",
+                        "en": "Final ㅅ is actually pronounced [ㄷ] (t). Same for ㅆ, ㅈ, ㅊ, ㅌ, ㅎ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅈ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅈ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄷ]",
+                          "[ㄱ]",
+                          "[ㅂ]",
+                          "[ㄴ]"
+                        ],
+                        "en": [
+                          "[ㄷ]",
+                          "[ㄱ]",
+                          "[ㅂ]",
+                          "[ㄴ]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "收音 ㅈ 实际发音为 [ㄷ]。",
+                        "en": "Final ㅈ is actually pronounced [ㄷ] (t)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅊ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅊ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㅂ]",
+                          "[ㄴ]",
+                          "[ㄷ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㅂ]",
+                          "[ㄴ]",
+                          "[ㄷ]"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "收音 ㅊ 实际发音为 [ㄷ]。",
+                        "en": "Final ㅊ is actually pronounced [ㄷ] (t)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅋ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅋ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㅂ]",
+                          "[ㄴ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㅂ]",
+                          "[ㄴ]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "收音 ㅋ 实际发音为 [ㄱ]。",
+                        "en": "Final ㅋ is actually pronounced [ㄱ] (k)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅌ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅌ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄴ]",
+                          "[ㄷ]",
+                          "[ㅂ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄴ]",
+                          "[ㄷ]",
+                          "[ㅂ]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "收音 ㅌ 实际发音为 [ㄷ]。",
+                        "en": "Final ㅌ is actually pronounced [ㄷ] (t)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅍ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅍ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㅂ]",
+                          "[ㄷ]",
+                          "[ㄱ]",
+                          "[ㄴ]"
+                        ],
+                        "en": [
+                          "[ㅂ]",
+                          "[ㄷ]",
+                          "[ㄱ]",
+                          "[ㄴ]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "收音 ㅍ 实际发音为 [ㅂ]。",
+                        "en": "Final ㅍ is actually pronounced [ㅂ] (p)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅎ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅎ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㅂ]",
+                          "不发音"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㅂ]",
+                          "Silent"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "收音 ㅎ 实际发音为 [ㄷ]，但在某些情况下会与后一个音节合并或脱落。",
+                        "en": "Final ㅎ is usually [ㄷ] (t), though in some cases it combines with the following syllable or drops."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "收音「ㅆ」实际归入哪个代表音？",
+                        "en": "Which representative final does 「ㅆ」 reduce to?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄴ]",
+                          "[ㅂ]",
+                          "[ㄷ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄴ]",
+                          "[ㅂ]",
+                          "[ㄷ]"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "收音 ㅆ 实际发音为 [ㄷ]。",
+                        "en": "Final ㅆ is actually pronounced [ㄷ] (t)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "双收音「ㄳ」实际发哪个音？",
+                        "en": "Which sound does the double final 「ㄳ」 actually produce?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㅁ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㅁ]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "双收音 ㄳ 通常只发前一个音 [ㄱ]。",
+                        "en": "Double final ㄳ usually only pronounces the first component [ㄱ]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "双收音「ㄵ」实际发哪个音？",
+                        "en": "Which sound does the double final 「ㄵ」 actually produce?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㅁ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㅁ]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "双收音 ㄵ 通常只发前一个音 [ㄴ]。",
+                        "en": "Double final ㄵ usually only pronounces the first component [ㄴ]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "双收音「ㄺ」实际发哪个音？",
+                        "en": "Which sound does the double final 「ㄺ」 actually produce?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㄹ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㄹ]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "双收音 ㄺ 通常发 [ㄱ]，但在某些语法结构中（如动词词干后接辅音）会发 [ㄹ]。",
+                        "en": "Double final ㄺ usually produces [ㄱ], but in some grammatical contexts (e.g. verb stems before consonants) it produces [ㄹ]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "双收音「ㄻ」实际发哪个音？",
+                        "en": "Which sound does the double final 「ㄻ」 actually produce?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㅁ]"
+                        ],
+                        "en": [
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]",
+                          "[ㅁ]"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "双收音 ㄻ 通常只发后一个音 [ㅁ]。",
+                        "en": "Double final ㄻ usually only pronounces the second component [ㅁ]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "双收音「ㅄ」实际发哪个音？",
+                        "en": "Which sound does the double final 「ㅄ」 actually produce?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[ㅂ]",
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]"
+                        ],
+                        "en": [
+                          "[ㅂ]",
+                          "[ㄱ]",
+                          "[ㄷ]",
+                          "[ㄴ]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "双收音 ㅄ 通常只发前一个音 [ㅂ]。",
+                        "en": "Double final ㅄ usually only pronounces the first component [ㅂ]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个不是韩语的代表收音？",
+                        "en": "Which of the following is NOT a representative final consonant sound?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㅅ",
+                          "ㅇ"
+                        ],
+                        "en": [
+                          "ㄱ",
+                          "ㄴ",
+                          "ㅅ",
+                          "ㅇ"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅅ 不是代表收音。代表收音只有 7 个：ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ。",
+                        "en": "ㅅ is not a representative final. There are only 7: ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「받침」在中文里通常翻译为？",
+                        "en": "What is 「받침」 usually translated as in English?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "元音",
+                          "收音（终声）",
+                          "辅音",
+                          "双辅音"
+                        ],
+                        "en": [
+                          "Vowel",
+                          "Final consonant",
+                          "Consonant",
+                          "Double consonant"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "받침 中文译为「收音」或「终声」，指音节末尾的辅音。",
+                        "en": "받침 means 'final consonant' — the consonant at the end of a syllable."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语收音在音节中的作用是？",
+                        "en": "What is the role of the final consonant (받침) in a Korean syllable?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "作为音节的起始辅音",
+                          "作为音节的元音",
+                          "作为音节的收尾辅音",
+                          "作为音节的紧音"
+                        ],
+                        "en": [
+                          "Initial consonant of the syllable",
+                          "Vowel of the syllable",
+                          "Closing consonant of the syllable",
+                          "Tense consonant of the syllable"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "韩语音节结构为「辅音 + 元音 + 可选收音」。收音是音节末尾的辅音。",
+                        "en": "A Korean syllable is 'consonant + vowel + optional final consonant'. The 받침 is the closing consonant."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：基础拼读与音变 / 연음과 음변",
+                  "titleEn": "Paper 4: Linking & Sound Changes (연음과 음변)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "韩语「连音化（연음화）」的规则是？",
+                        "en": "What is the rule of Korean linking (연음화)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "收音后接元音时，收音移到下一音节做初声",
+                          "收音脱落",
+                          "初声变成紧音",
+                          "初声变成鼻音"
+                        ],
+                        "en": [
+                          "A final consonant moves to the next syllable's initial position before a vowel",
+                          "The final consonant is dropped",
+                          "The initial consonant becomes tense",
+                          "The initial consonant becomes nasal"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "连音化：收音后接以元音开头的音节时，收音移到下一音节作初声。例：한국어 [한구거]。",
+                        "en": "Linking: when a final consonant meets a vowel-initial syllable, it moves to become the next syllable's initial. E.g. 한국어 [한구거]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「한국어」按连音化应该读作？",
+                        "en": "How is 「한국어」 pronounced with linking?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[한구거]",
+                          "[한궁어]",
+                          "[한꾹어]",
+                          "[하국어]"
+                        ],
+                        "en": [
+                          "[한구거]",
+                          "[한궁어]",
+                          "[한꾹어]",
+                          "[하국어]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㄱ 收音后接 어（元音开头），移到下一音节：한국어 [한구거]。",
+                        "en": "Final ㄱ before 어 (vowel-initial) moves to the next syllable: 한국어 [한구거]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「음악」按连音化应该读作？",
+                        "en": "How is 「음악」 pronounced with linking?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[음악]",
+                          "[으막]",
+                          "[은낙]",
+                          "[으망]"
+                        ],
+                        "en": [
+                          "[음악]",
+                          "[으막]",
+                          "[은낙]",
+                          "[으망]"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅁ 收音后接 아，移到下一音节：음악 [으막]。",
+                        "en": "Final ㅁ before 아 moves to the next syllable: 음악 [으막]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语「鼻音化（비음화）」的规则是？",
+                        "en": "What is the rule of Korean nasalization (비음화)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "收音脱落",
+                          "元音变长",
+                          "初声送气化",
+                          "收音 ㄱㄷㅂ 后接 ㄴㅁ 时，变成 ㅇㄴㅁ"
+                        ],
+                        "en": [
+                          "The final is dropped",
+                          "The vowel lengthens",
+                          "The initial becomes aspirated",
+                          "Finals ㄱ/ㄷ/ㅂ become ㅇ/ㄴ/ㅁ before ㄴ/ㅁ"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "鼻音化：ㄱ→ㅇ、ㄷ→ㄴ、ㅂ→ㅁ，当前面收音遇 ㄴ/ㅁ 时。",
+                        "en": "Nasalization: ㄱ→ㅇ, ㄷ→ㄴ, ㅂ→ㅁ before ㄴ or ㅁ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「한국말」按鼻音化应该读作？",
+                        "en": "How is 「한국말」 pronounced with nasalization?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[한궁말]",
+                          "[한국말]",
+                          "[한군말]",
+                          "[하궁말]"
+                        ],
+                        "en": [
+                          "[한궁말]",
+                          "[한국말]",
+                          "[한군말]",
+                          "[하궁말]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "收音 ㄱ 遇 ㅁ，鼻音化为 ㅇ：한국말 [한궁말]。",
+                        "en": "Final ㄱ before ㅁ nasalizes to ㅇ: 한국말 [한궁말]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「국물」按鼻音化应该读作？",
+                        "en": "How is 「국물」 pronounced with nasalization?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[궁물]",
+                          "[국물]",
+                          "[궁불]",
+                          "[꾹물]"
+                        ],
+                        "en": [
+                          "[궁물]",
+                          "[국물]",
+                          "[궁불]",
+                          "[꾹물]"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "收音 ㄱ 遇 ㅁ，鼻音化为 ㅇ：국물 [궁물]。",
+                        "en": "Final ㄱ before ㅁ nasalizes to ㅇ: 국물 [궁물]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「십만」按鼻音化应该读作？",
+                        "en": "How is 「십만」 pronounced with nasalization?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[십만]",
+                          "[심반]",
+                          "[심만]",
+                          "[십빤]"
+                        ],
+                        "en": [
+                          "[십만]",
+                          "[심반]",
+                          "[심만]",
+                          "[십빤]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "收音 ㅂ 遇 ㅁ，鼻音化为 ㅁ：십만 [심만]。",
+                        "en": "Final ㅂ before ㅁ nasalizes to ㅁ: 십만 [심만]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语「流音化（유음화）」的规则是？",
+                        "en": "What is the rule of Korean lateralization (유음화)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄴ + ㄹ → ㄴㄴ",
+                          "ㄹ + ㄹ → ㄴㄴ",
+                          "ㄴ + ㄹ 或 ㄹ + ㄴ → ㄹㄹ",
+                          "都变成鼻音"
+                        ],
+                        "en": [
+                          "ㄴ + ㄹ → ㄴㄴ",
+                          "ㄹ + ㄹ → ㄴㄴ",
+                          "ㄴ + ㄹ or ㄹ + ㄴ → ㄹㄹ",
+                          "All become nasal"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "流音化：ㄴ 和 ㄹ 相遇时，都变成 ㄹ。",
+                        "en": "Lateralization: when ㄴ and ㄹ meet, both become ㄹ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「신라」按流音化应该读作？",
+                        "en": "How is 「신라」 pronounced with lateralization?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[신라]",
+                          "[실라]",
+                          "[신나]",
+                          "[실나]"
+                        ],
+                        "en": [
+                          "[신라]",
+                          "[실라]",
+                          "[신나]",
+                          "[실나]"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㄴ + ㄹ → ㄹㄹ：신라 [실라]。",
+                        "en": "ㄴ + ㄹ → ㄹㄹ: 신라 [실라]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「천리」按流音化应该读作？",
+                        "en": "How is 「천리」 pronounced with lateralization?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[천리]",
+                          "[천니]",
+                          "[철니]",
+                          "[철리]"
+                        ],
+                        "en": [
+                          "[천리]",
+                          "[천니]",
+                          "[철니]",
+                          "[철리]"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㄴ + ㄹ → ㄹㄹ：천리 [철리]。",
+                        "en": "ㄴ + ㄹ → ㄹㄹ: 천리 [철리]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语「激音化（격음화）」的规则是？",
+                        "en": "What is the rule of Korean aspiration (격음화)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱㄷㅂ + ㄴ → ㅇㄴㅁ",
+                          "ㄱㄷㅂㅈ + ㅎ → ㅋㅌㅍㅊ",
+                          "收音后接元音时移动",
+                          "ㄴ + ㄹ → ㄹㄹ"
+                        ],
+                        "en": [
+                          "ㄱ/ㄷ/ㅂ + ㄴ → ㅇ/ㄴ/ㅁ",
+                          "ㄱ/ㄷ/ㅂ/ㅈ + ㅎ → ㅋ/ㅌ/ㅍ/ㅊ",
+                          "Final moves before vowels",
+                          "ㄴ + ㄹ → ㄹㄹ"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "激音化：平音 + ㅎ 合并为送气音。例：축하 [추카]。",
+                        "en": "Aspiration: plain consonants + ㅎ merge into aspirated sounds. E.g. 축하 [추카]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「축하」按激音化应该读作？",
+                        "en": "How is 「축하」 pronounced with aspiration?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[추하]",
+                          "[축하]",
+                          "[추카]",
+                          "[추가]"
+                        ],
+                        "en": [
+                          "[추하]",
+                          "[축하]",
+                          "[추카]",
+                          "[추가]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㄱ + ㅎ → ㅋ：축하 [추카]。",
+                        "en": "ㄱ + ㅎ → ㅋ: 축하 [추카]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「좋다」按激音化应该读作？",
+                        "en": "How is 「좋다」 pronounced with aspiration?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[좋다]",
+                          "[조타]",
+                          "[조따]",
+                          "[졷다]"
+                        ],
+                        "en": [
+                          "[좋다]",
+                          "[조타]",
+                          "[조따]",
+                          "[졷다]"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅎ + ㄷ → ㅌ：좋다 [조타]。",
+                        "en": "ㅎ + ㄷ → ㅌ: 좋다 [조타]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「잡히다」按激音化应该读作？",
+                        "en": "How is 「잡히다」 pronounced with aspiration?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[잡히다]",
+                          "[자비다]",
+                          "[자삐다]",
+                          "[자피다]"
+                        ],
+                        "en": [
+                          "[잡히다]",
+                          "[자비다]",
+                          "[자삐다]",
+                          "[자피다]"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㅂ + ㅎ → ㅍ：잡히다 [자피다]。",
+                        "en": "ㅂ + ㅎ → ㅍ: 잡히다 [자피다]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语「紧音化（경음화）」的规则是？",
+                        "en": "What is the rule of Korean tensification (경음화)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "收音脱落",
+                          "元音变短",
+                          "ㅎ 加入后送气",
+                          "收音 ㄱㄷㅂ 后接 ㄱㄷㅂㅅㅈ，后者变紧音"
+                        ],
+                        "en": [
+                          "The final is dropped",
+                          "The vowel shortens",
+                          "ㅎ joins to aspirate",
+                          "After finals ㄱ/ㄷ/ㅂ, the following ㄱ/ㄷ/ㅂ/ㅅ/ㅈ become tense"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "紧音化：收音 ㄱㄷㅂ 后接 ㄱㄷㅂㅅㅈ 时，后者变紧音。例：학교 [학꾜]。",
+                        "en": "Tensification: after finals ㄱ/ㄷ/ㅂ, a following ㄱ/ㄷ/ㅂ/ㅅ/ㅈ becomes tense. E.g. 학교 [학꾜]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「학교」按紧音化应该读作？",
+                        "en": "How is 「학교」 pronounced with tensification?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[학교]",
+                          "[하꾜]",
+                          "[학쿄]",
+                          "[학꾜]"
+                        ],
+                        "en": [
+                          "[학교]",
+                          "[하꾜]",
+                          "[학쿄]",
+                          "[학꾜]"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "收音 ㄱ 后接 ㄱ，后一个 ㄱ 变紧音：학교 [학꾜]。",
+                        "en": "After final ㄱ, the following ㄱ becomes tense: 학교 [학꾜]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「잡다」按紧音化应该读作？",
+                        "en": "How is 「잡다」 pronounced with tensification?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[잡다]",
+                          "[자따]",
+                          "[잡따]",
+                          "[잠다]"
+                        ],
+                        "en": [
+                          "[잡다]",
+                          "[자따]",
+                          "[잡따]",
+                          "[잠다]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "收音 ㅂ 后接 ㄷ，ㄷ 变紧音：잡다 [잡따]。",
+                        "en": "After final ㅂ, the following ㄷ becomes tense: 잡다 [잡따]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「식당」按紧音化应该读作？",
+                        "en": "How is 「식당」 pronounced with tensification?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[식당]",
+                          "[시땅]",
+                          "[식땅]",
+                          "[싱당]"
+                        ],
+                        "en": [
+                          "[식당]",
+                          "[시땅]",
+                          "[식땅]",
+                          "[싱당]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "收音 ㄱ 后接 ㄷ，ㄷ 变紧音：식당 [식땅]。",
+                        "en": "After final ㄱ, the following ㄷ becomes tense: 식당 [식땅]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语「口盖音化（구개음화）」的规则是？",
+                        "en": "What is the rule of Korean palatalization (구개음화)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㄱ + ㅎ → ㅋ",
+                          "ㄷ/ㅌ + 이 → ㅈ/ㅊ",
+                          "ㄴ + ㄹ → ㄹㄹ",
+                          "收音后接元音时移动"
+                        ],
+                        "en": [
+                          "ㄱ + ㅎ → ㅋ",
+                          "ㄷ/ㅌ + 이 → ㅈ/ㅊ",
+                          "ㄴ + ㄹ → ㄹㄹ",
+                          "Final moves before vowels"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "口盖音化：ㄷ、ㅌ 后接 이 时，变成 ㅈ、ㅊ。例：같이 [가치]。",
+                        "en": "Palatalization: ㄷ/ㅌ before 이 become ㅈ/ㅊ. E.g. 같이 [가치]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「같이」按口盖音化应该读作？",
+                        "en": "How is 「같이」 pronounced with palatalization?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[같이]",
+                          "[가티]",
+                          "[가치]",
+                          "[가지]"
+                        ],
+                        "en": [
+                          "[같이]",
+                          "[가티]",
+                          "[가치]",
+                          "[가지]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅌ + 이 → 치：같이 [가치]。",
+                        "en": "ㅌ + 이 → 치: 같이 [가치]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「굳이」按口盖音化应该读作？",
+                        "en": "How is 「굳이」 pronounced with palatalization?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[굳이]",
+                          "[구지]",
+                          "[구디]",
+                          "[구치]"
+                        ],
+                        "en": [
+                          "[굳이]",
+                          "[구지]",
+                          "[구디]",
+                          "[구치]"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㄷ + 이 → 지：굳이 [구지]。",
+                        "en": "ㄷ + 이 → 지: 굳이 [구지]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「좋아요」中的 ㅎ 会怎样发音？",
+                        "en": "How is the ㅎ in 「좋아요」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ㅎ 变成紧音",
+                          "ㅎ 变成送气",
+                          "ㅎ 脱落：[조아요]",
+                          "ㅎ 变成鼻音"
+                        ],
+                        "en": [
+                          "ㅎ becomes tense",
+                          "ㅎ becomes aspirated",
+                          "ㅎ is dropped: [조아요]",
+                          "ㅎ becomes nasal"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅎ 在元音之间会脱落：좋아요 [조아요]。",
+                        "en": "ㅎ between vowels is dropped: 좋아요 [조아요]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「놓아」应该读作？",
+                        "en": "How is 「놓아」 pronounced?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[노하]",
+                          "[녹아]",
+                          "[노아]",
+                          "[놓아]"
+                        ],
+                        "en": [
+                          "[노하]",
+                          "[녹아]",
+                          "[노아]",
+                          "[놓아]"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅎ 在元音之间脱落：놓아 [노아]。",
+                        "en": "ㅎ between vowels is dropped: 놓아 [노아]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「옷이」按连音化应该读作？",
+                        "en": "How is 「옷이」 pronounced with linking?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "[옷이]",
+                          "[오시]",
+                          "[오디]",
+                          "[오치]"
+                        ],
+                        "en": [
+                          "[옷이]",
+                          "[오시]",
+                          "[오디]",
+                          "[오치]"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "收音 ㅅ 后接 이，ㅅ 移到下一音节作初声，读作 [시]：옷이 [오시]。",
+                        "en": "Final ㅅ before 이 moves to the next syllable as [시]: 옷이 [오시]."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "韩语音变规则中，下列哪一项使「收音移到下一音节」？",
+                        "en": "Which Korean sound change moves a final consonant to the next syllable?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "连音化（연음화）",
+                          "鼻音化（비음화）",
+                          "紧音化（경음화）",
+                          "流音化（유음화）"
+                        ],
+                        "en": [
+                          "Linking (연음화)",
+                          "Nasalization (비음화)",
+                          "Tensification (경음화)",
+                          "Lateralization (유음화)"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "连音化：收音后接元音时，收音移到下一音节。",
+                        "en": "Linking: a final consonant moves to the next syllable before a vowel."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "level": 1,
