@@ -4385,25 +4385,149 @@
               "level": 2,
               "labelZh": "高级初学者",
               "labelEn": "Advanced Beginner",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：动词变形 — て形与た形",
+                  "titleEn": "Paper 1: Verb Conjugation — Te-form & Ta-form",
+                  "questions": []
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：形容词 — い形容词与な形容词",
+                  "titleEn": "Paper 2: Adjectives — i-Adjectives & na-Adjectives",
+                  "questions": []
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：存在句 — あります与います",
+                  "titleEn": "Paper 3: Existence — Arimasu & Imasu",
+                  "questions": []
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：日常会话 — 邀请、拒绝、请求",
+                  "titleEn": "Paper 4: Daily Conversation — Inviting, Declining, Requesting",
+                  "questions": []
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：时间表达 — 年月日与频率",
+                  "titleEn": "Paper 5: Time Expressions — Dates & Frequency",
+                  "questions": []
+                }
+              ]
             },
             {
               "level": 3,
               "labelZh": "中级",
               "labelEn": "Intermediate",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：动词可能形与意愿形",
+                  "titleEn": "Paper 1: Potential & Volitional Forms",
+                  "questions": []
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：条件句 — と、ば、たら、なら",
+                  "titleEn": "Paper 2: Conditionals — To, Ba, Tara, Nara",
+                  "questions": []
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：授受动词 — あげる、もらう、くれる",
+                  "titleEn": "Paper 3: Giving & Receiving Verbs",
+                  "questions": []
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：被动句与使役句",
+                  "titleEn": "Paper 4: Passive & Causative",
+                  "questions": []
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：敬语入门 — 尊敬语与谦让语",
+                  "titleEn": "Paper 5: Keigo Basics — Sonkeigo & Kenjougo",
+                  "questions": []
+                }
+              ]
             },
             {
               "level": 4,
               "labelZh": "高级",
               "labelEn": "Advanced",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：复合助词与接续",
+                  "titleEn": "Paper 1: Compound Particles & Conjunctions",
+                  "questions": []
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：敬语进阶 — 商务场景应用",
+                  "titleEn": "Paper 2: Advanced Keigo — Business Settings",
+                  "questions": []
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：惯用句与四字熟语",
+                  "titleEn": "Paper 3: Idioms & Four-Character Compounds",
+                  "questions": []
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：书面语与口语差异",
+                  "titleEn": "Paper 4: Written vs. Spoken Japanese",
+                  "questions": []
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：新闻阅读理解",
+                  "titleEn": "Paper 5: News Reading Comprehension",
+                  "questions": []
+                }
+              ]
             },
             {
               "level": 5,
               "labelZh": "大师",
               "labelEn": "Expert",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：古典日语基础（文语）",
+                  "titleEn": "Paper 1: Classical Japanese Basics (Bungo)",
+                  "questions": []
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：拟声词与拟态词",
+                  "titleEn": "Paper 2: Onomatopoeia & Mimetic Words",
+                  "questions": []
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：谚语与成语",
+                  "titleEn": "Paper 3: Proverbs & Set Phrases",
+                  "questions": []
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：文学作品选读",
+                  "titleEn": "Paper 4: Literary Reading",
+                  "questions": []
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：敬语最高级 — 商务与正式文书",
+                  "titleEn": "Paper 5: Master Keigo — Business & Formal Writing",
+                  "questions": []
+                }
+              ]
             }
           ]
         },
