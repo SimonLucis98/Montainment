@@ -145,6 +145,56 @@
     </div>
   </div>
 
+  <!-- 📥 批量导入题目 弹窗（放在 script 之前，确保脚本能找到按钮） -->
+  <div class="login-overlay hidden" id="bulkImportOverlay" style="z-index:1001;">
+    <div class="login-box" style="max-width:760px; width:95%; text-align:left;">
+      <h2 style="margin-bottom:6px;">📥 批量导入题目</h2>
+      <p style="color:#6b7a8f; font-size:13px; margin-bottom:16px;">粘贴 JSON 数组，或上传 .json 文件。将导入到当前选中的试卷。</p>
+
+      <div class="admin-form-group">
+        <label>🎯 目标试卷</label>
+        <div id="bulkTargetInfo" style="padding:10px 14px; background:#f6f8fc; border-radius:10px; font-size:13px; color:#0b1c33; line-height:1.5;">
+          请先在「题目管理」页选择 类别 → 科目 → 难度 → 试卷
+        </div>
+      </div>
+
+      <div class="admin-form-group">
+        <label>导入模式</label>
+        <select id="bulkImportMode">
+          <option value="append">➕ 追加到现有题目</option>
+          <option value="replace">🔄 替换所有题目（清空后导入）</option>
+        </select>
+      </div>
+
+      <div class="admin-form-group">
+        <label>JSON 内容（数组格式）</label>
+        <textarea id="bulkImportText" rows="12" style="font-family:'Courier New',monospace; font-size:12px;" placeholder='[
+  {
+    "q": { "zh": "题目中文", "en": "Question EN" },
+    "opts": {
+      "zh": ["A选项", "B选项", "C选项", "D选项"],
+      "en": ["Option A", "Option B", "Option C", "Option D"]
+    },
+    "ans": 0,
+    "exp": { "zh": "中文解析", "en": "English explanation" }
+  }
+]'></textarea>
+      </div>
+
+      <div class="admin-form-group">
+        <label>或上传 JSON 文件</label>
+        <input type="file" id="bulkImportFile" accept=".json,application/json" style="padding:8px; border:2px dashed #e6ecf3; border-radius:12px; background:#fafcff;" />
+      </div>
+
+      <div class="upload-status" id="bulkImportStatus"></div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+        <button type="button" class="btn-admin btn-admin-success" id="bulkImportConfirmBtn">✅ 确认导入</button>
+        <button type="button" class="btn-admin btn-admin-outline" id="bulkImportCancelBtn">取消</button>
+      </div>
+    </div>
+  </div>
+
   <div id="adminMain" style="display:none;">
 
     <header class="site-header">
@@ -1994,56 +2044,6 @@
       window.initAdmin = initAdmin;
     })();
   </script>
-
-  <!-- 📥 批量导入题目 弹窗 -->
-  <div class="login-overlay hidden" id="bulkImportOverlay" style="z-index:1001;">
-    <div class="login-box" style="max-width:760px; width:95%; text-align:left;">
-      <h2 style="margin-bottom:6px;">📥 批量导入题目</h2>
-      <p style="color:#6b7a8f; font-size:13px; margin-bottom:16px;">粘贴 JSON 数组，或上传 .json 文件。将导入到当前选中的试卷。</p>
-
-      <div class="admin-form-group">
-        <label>🎯 目标试卷</label>
-        <div id="bulkTargetInfo" style="padding:10px 14px; background:#f6f8fc; border-radius:10px; font-size:13px; color:#0b1c33; line-height:1.5;">
-          请先在「题目管理」页选择 类别 → 科目 → 难度 → 试卷
-        </div>
-      </div>
-
-      <div class="admin-form-group">
-        <label>导入模式</label>
-        <select id="bulkImportMode">
-          <option value="append">➕ 追加到现有题目</option>
-          <option value="replace">🔄 替换所有题目（清空后导入）</option>
-        </select>
-      </div>
-
-      <div class="admin-form-group">
-        <label>JSON 内容（数组格式）</label>
-        <textarea id="bulkImportText" rows="12" style="font-family:'Courier New',monospace; font-size:12px;" placeholder='[
-  {
-    "q": { "zh": "题目中文", "en": "Question EN" },
-    "opts": {
-      "zh": ["A选项", "B选项", "C选项", "D选项"],
-      "en": ["Option A", "Option B", "Option C", "Option D"]
-    },
-    "ans": 0,
-    "exp": { "zh": "中文解析", "en": "English explanation" }
-  }
-]'></textarea>
-      </div>
-
-      <div class="admin-form-group">
-        <label>或上传 JSON 文件</label>
-        <input type="file" id="bulkImportFile" accept=".json,application/json" style="padding:8px; border:2px dashed #e6ecf3; border-radius:12px; background:#fafcff;" />
-      </div>
-
-      <div class="upload-status" id="bulkImportStatus"></div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
-        <button type="button" class="btn-admin btn-admin-success" id="bulkImportConfirmBtn">✅ 确认导入</button>
-        <button type="button" class="btn-admin btn-admin-outline" id="bulkImportCancelBtn">取消</button>
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>
