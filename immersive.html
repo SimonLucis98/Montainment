@@ -270,7 +270,6 @@
             box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
 
-        /* 🆕 卡片封面区域（16:9） */
         .read-card .card-cover {
             width: 100%;
             aspect-ratio: 16/9;
@@ -422,7 +421,6 @@
             text-align: center;
             opacity: 0.5;
         }
-        /* 🆕 侧边栏缩略图 */
         .sidebar-item .s-thumb {
             width: 40px;
             height: 40px;
@@ -482,6 +480,12 @@
         .sidebar-tags .tag:hover {
             background: rgba(201,168,124,0.12);
             color: #e8e0d8;
+        }
+        /* 🆕 分类选中状态 */
+        .sidebar-tags .tag.active {
+            background: rgba(201,168,124,0.2);
+            color: #e8e0d8;
+            border-color: #c9a87c;
         }
 
         .empty-state {
@@ -1001,6 +1005,7 @@
         // ================================================================
         let READ_DATA = [];
         let currentIndex = 0;
+        let activeCategory = null;   // 🆕 当前选中的分类（null = 全部）
         const grid = document.getElementById('readGrid');
         const overlay = document.getElementById('readerOverlay');
         const closeBtn = document.getElementById('closeReader');
@@ -1070,8 +1075,10 @@
         function uncategorizedText() {
             return i18n.currentLang === 'en' ? 'Uncategorized' : '未分类';
         }
+        function noMatchText() {
+            return i18n.currentLang === 'en' ? 'No items in this category' : '该分类下暂无内容';
+        }
 
-        // 🆕 生成封面 HTML（有图用图，无图用 emoji）
         function getCoverHtml(item, typeIcon, title) {
             const hasCover = item.cover && item.cover.trim() !== '';
             if (hasCover) {
@@ -1080,15 +1087,17 @@
             return `<div class="card-cover"><span class="cover-emoji-fallback">${typeIcon}</span></div>`;
         }
 
-        // ===== 侧边栏：热门推荐（按语言过滤 + 缩略图） =====
+        // ===== 侧边栏：热门推荐（🆕 反向取最新的 4 篇） =====
         function renderHot() {
             const container = document.getElementById('hotList');
-            const hotItems = [];
+            // 先过滤出有当前语言的项
+            const candidates = [];
             READ_DATA.forEach((item, idx) => {
-                if (hasCurrentLang(item) && hotItems.length < 4) {
-                    hotItems.push({ item, idx });
-                }
+                if (hasCurrentLang(item)) candidates.push({ item, idx });
             });
+            // 🆕 反向排序：越靠后（越晚添加）越"新"，越优先展示
+            const hotItems = candidates.slice(-4).reverse();
+
             if (hotItems.length === 0) {
                 container.innerHTML = `<div style="color:rgba(232,224,216,0.2);font-size:13px;">${noContentText()}</div>`;
                 return;
@@ -1099,7 +1108,6 @@
                 const icon = getTypeIcon(item.type);
                 const tag = getShortTypeLabel(item.type);
                 const hasCover = item.cover && item.cover.trim() !== '';
-                // 🆕 有封面用小缩略图，无封面用 emoji
                 const leftHtml = hasCover
                     ? `<img src="${item.cover}" alt="" class="s-thumb" loading="lazy" />`
                     : `<span class="s-icon">${icon}</span>`;
@@ -1129,7 +1137,7 @@
             });
         }
 
-        // ===== 侧边栏：分类（按语言过滤） =====
+        // ===== 侧边栏：分类（🆕 支持点击过滤） =====
         function renderCategories() {
             const container = document.getElementById('categoryTags');
             const cats = [];
@@ -1146,26 +1154,48 @@
             }
             let html = '';
             cats.forEach(cat => {
-                html += `<span class="tag">${cat}</span>`;
+                const activeClass = (activeCategory === cat) ? ' active' : '';
+                html += `<span class="tag${activeClass}" data-cat="${cat}">${cat}</span>`;
             });
+            // 🆕 加一个"全部"标签
+            if (activeCategory !== null) {
+                html = `<span class="tag" data-cat="__ALL__">${i18n.currentLang === 'en' ? 'All' : '全部'}</span>` + html;
+            }
             container.innerHTML = html;
+            // 🆕 绑定点击
+            container.querySelectorAll('.tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const cat = this.dataset.cat;
+                    if (cat === '__ALL__') {
+                        activeCategory = null;
+                    } else {
+                        // 再次点击同一个分类 → 取消筛选
+                        activeCategory = (activeCategory === cat) ? null : cat;
+                    }
+                    renderList();
+                });
+            });
         }
 
-        // ===== 主列表渲染（按语言过滤） =====
+        // ===== 主列表渲染（🆕 支持分类过滤） =====
         function renderList() {
             const lang = i18n.currentLang || 'zh';
             const visibleItems = [];
             READ_DATA.forEach((item, idx) => {
-                if (hasCurrentLang(item)) {
-                    visibleItems.push({ item, idx });
+                if (!hasCurrentLang(item)) return;
+                // 🆕 分类过滤
+                if (activeCategory !== null) {
+                    const loc = getLocalized(item);
+                    if (loc.category !== activeCategory) return;
                 }
+                visibleItems.push({ item, idx });
             });
 
             if (visibleItems.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state">
                         <div class="icon">🍃</div>
-                        <p data-i18n="immersive.empty">暂无沉浸式内容，请在后台添加</p>
+                        <p>${activeCategory !== null ? noMatchText() : (i18n.currentLang === 'en' ? 'No immersive content yet' : '暂无沉浸式内容，请在后台添加')}</p>
                     </div>
                 `;
                 applyI18n();
@@ -1184,7 +1214,6 @@
                 const readMoreBtn = isArticle
                     ? `<div class="read-more-btn">📖 ${i18n.t('immersive.read_more')} →</div>`
                     : '';
-                // 🆕 封面区
                 const coverHtml = getCoverHtml(item, typeIcon, loc.title);
                 html += `
                     <div class="read-card" data-index="${idx}" data-type="${item.type}">
@@ -1256,8 +1285,16 @@
                 readerBody.textContent = loc.content || '(内容为空)';
                 readerBody.style.display = 'block';
             }
+            // 上一篇/下一篇 只走"当前过滤后的可见列表"
             const visibleList = [];
-            READ_DATA.forEach((it, i) => { if (hasCurrentLang(it)) visibleList.push(i); });
+            READ_DATA.forEach((it, i) => {
+                if (!hasCurrentLang(it)) return;
+                if (activeCategory !== null) {
+                    const loc2 = getLocalized(it);
+                    if (loc2.category !== activeCategory) return;
+                }
+                visibleList.push(i);
+            });
             const pos = visibleList.indexOf(idx);
             readerIndicator.textContent = `${pos + 1} / ${visibleList.length}`;
             const prevIdx = pos > 0 ? visibleList[pos - 1] : null;
