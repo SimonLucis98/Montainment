@@ -1177,7 +1177,1158 @@
                   "id": 2,
                   "titleZh": "试卷 2：片仮名/カタカナ（Katakana）学习",
                   "titleEn": "Paper 2: Katakana (カタカナ) Learning",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "片假名「ア」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ア?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "e",
+                          "a",
+                          "i",
+                          "u"
+                        ],
+                        "en": [
+                          "e",
+                          "a",
+                          "i",
+                          "u"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ア (a) 是五十音图的第一个片假名。",
+                        "en": "ア (a) is the first Katakana character in the 50-sound chart."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「イ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana イ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "i",
+                          "a",
+                          "o",
+                          "u"
+                        ],
+                        "en": [
+                          "i",
+                          "a",
+                          "o",
+                          "u"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "イ (i) 发音类似于英语 see 中的 ee。",
+                        "en": "イ (i) is pronounced like 'ee' in 'see'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ウ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ウ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "o",
+                          "e",
+                          "a",
+                          "u"
+                        ],
+                        "en": [
+                          "o",
+                          "e",
+                          "a",
+                          "u"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ウ (u) 发音时嘴唇扁平，不向前突出。",
+                        "en": "ウ (u) is pronounced with unrounded lips."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「エ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana エ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "i",
+                          "u",
+                          "e",
+                          "o"
+                        ],
+                        "en": [
+                          "i",
+                          "u",
+                          "e",
+                          "o"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "エ (e) 发音类似于英文中的 e (bed)。",
+                        "en": "エ (e) is pronounced like 'e' in 'bed'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「オ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana オ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "o",
+                          "a",
+                          "u",
+                          "e"
+                        ],
+                        "en": [
+                          "o",
+                          "a",
+                          "u",
+                          "e"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "オ (o) 发音嘴唇圆拢。",
+                        "en": "オ (o) is pronounced like 'o' in 'go'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「カ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana カ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ki",
+                          "ku",
+                          "ka",
+                          "ke"
+                        ],
+                        "en": [
+                          "ki",
+                          "ku",
+                          "ka",
+                          "ke"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "カ (ka) 源自汉字「加」的左半部分。",
+                        "en": "カ (ka) is derived from the Chinese character 加."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「キ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana キ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ka",
+                          "ki",
+                          "ko",
+                          "ku"
+                        ],
+                        "en": [
+                          "ka",
+                          "ki",
+                          "ko",
+                          "ku"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "キ (ki) 读作 ki。",
+                        "en": "キ (ki) is pronounced like 'key'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ク」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ク?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ku",
+                          "ke",
+                          "ko",
+                          "ka"
+                        ],
+                        "en": [
+                          "ku",
+                          "ke",
+                          "ko",
+                          "ka"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ク (ku) 源自汉字「久」的左上角。",
+                        "en": "ク (ku) is derived from the Chinese character 久."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ケ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ケ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ki",
+                          "ka",
+                          "ku",
+                          "ke"
+                        ],
+                        "en": [
+                          "ki",
+                          "ka",
+                          "ku",
+                          "ke"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ケ (ke) 读作 ke。",
+                        "en": "ケ (ke) is pronounced like 'k' + 'e'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「コ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana コ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ka",
+                          "ko",
+                          "ku",
+                          "ke"
+                        ],
+                        "en": [
+                          "ka",
+                          "ko",
+                          "ku",
+                          "ke"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "コ (ko) 读作 ko。",
+                        "en": "コ (ko) is pronounced like 'co' in 'coat'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「サ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana サ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "se"
+                        ],
+                        "en": [
+                          "sa",
+                          "shi",
+                          "su",
+                          "se"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "サ (sa) 读作 sa。",
+                        "en": "サ (sa) is pronounced like 'sa' in 'salad'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「シ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana シ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "sa",
+                          "su",
+                          "shi",
+                          "so"
+                        ],
+                        "en": [
+                          "sa",
+                          "su",
+                          "shi",
+                          "so"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "シ (shi) 读作 shi，注意笔画方向由下往上，不要与「ツ」搞混。",
+                        "en": "シ (shi) is an exception in the Sa-row, pronounced like 'she'. Pay attention not to confuse it with ツ (tsu)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ス」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ス?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "se",
+                          "su",
+                          "so",
+                          "sa"
+                        ],
+                        "en": [
+                          "se",
+                          "su",
+                          "so",
+                          "sa"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ス (su) 读作 su。",
+                        "en": "ス (su) is pronounced like 's' + 'u'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「セ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana セ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "shi",
+                          "sa",
+                          "su",
+                          "se"
+                        ],
+                        "en": [
+                          "shi",
+                          "sa",
+                          "su",
+                          "se"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "セ (se) 读作 se。",
+                        "en": "セ (se) is pronounced like 'say'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ソ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ソ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "sa",
+                          "so",
+                          "su",
+                          "se"
+                        ],
+                        "en": [
+                          "sa",
+                          "so",
+                          "su",
+                          "se"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ソ (so) 读作 so。",
+                        "en": "ソ (so) is pronounced like 'so'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「タ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana タ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "chi",
+                          "tsu",
+                          "ta",
+                          "te"
+                        ],
+                        "en": [
+                          "chi",
+                          "tsu",
+                          "ta",
+                          "te"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "タ (ta) 读作 ta。",
+                        "en": "タ (ta) is pronounced like 'ta' in 'target'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「チ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana チ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "chi",
+                          "ta",
+                          "tsu",
+                          "to"
+                        ],
+                        "en": [
+                          "chi",
+                          "ta",
+                          "tsu",
+                          "to"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "チ (chi) 读作 chi。",
+                        "en": "チ (chi) is an exception in the Ta-row, pronounced like 'cheese'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ツ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ツ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "te",
+                          "tsu",
+                          "to",
+                          "ta"
+                        ],
+                        "en": [
+                          "te",
+                          "tsu",
+                          "to",
+                          "ta"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ツ (tsu) 笔画方向由上往下，读作 tsu。",
+                        "en": "ツ (tsu) stroke goes from top to bottom, pronounced 'tsu'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「テ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana テ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "chi",
+                          "tsu",
+                          "ta",
+                          "te"
+                        ],
+                        "en": [
+                          "chi",
+                          "tsu",
+                          "ta",
+                          "te"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "テ (te) 读作 te。",
+                        "en": "テ (te) is pronounced like 'tell'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ト」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ト?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "to",
+                          "ta",
+                          "tsu",
+                          "te"
+                        ],
+                        "en": [
+                          "to",
+                          "ta",
+                          "tsu",
+                          "te"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ト (to) 读作 to。",
+                        "en": "ト (to) looks like a tree branch and is pronounced like 'toe'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ナ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ナ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ni",
+                          "na",
+                          "nu",
+                          "ne"
+                        ],
+                        "en": [
+                          "ni",
+                          "na",
+                          "nu",
+                          "ne"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ナ (na) 读作 na。",
+                        "en": "ナ (na) is pronounced like 'na' in 'napa'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ニ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ニ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "na",
+                          "nu",
+                          "ni",
+                          "no"
+                        ],
+                        "en": [
+                          "na",
+                          "nu",
+                          "ni",
+                          "no"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ニ (ni) 字形像中文数字「二」，读作 ni。",
+                        "en": "ニ (ni) looks like the Chinese number two 二, pronounced 'ni'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ヌ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ヌ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "nu",
+                          "ne",
+                          "no",
+                          "na"
+                        ],
+                        "en": [
+                          "nu",
+                          "ne",
+                          "no",
+                          "na"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ヌ (nu) 读作 nu。",
+                        "en": "ヌ (nu) is derived from the Chinese character 奴."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ネ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ネ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ni",
+                          "na",
+                          "ne",
+                          "nu"
+                        ],
+                        "en": [
+                          "ni",
+                          "na",
+                          "ne",
+                          "nu"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ネ (ne) 读作 ne。",
+                        "en": "ネ (ne) is pronounced like 'net'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ノ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ノ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "na",
+                          "nu",
+                          "ne",
+                          "no"
+                        ],
+                        "en": [
+                          "na",
+                          "nu",
+                          "ne",
+                          "no"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ノ (no) 为一条单斜线，读作 no。",
+                        "en": "ノ (no) is a single diagonal slash, pronounced 'no'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ハ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ハ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ha",
+                          "hi",
+                          "fu",
+                          "he"
+                        ],
+                        "en": [
+                          "ha",
+                          "hi",
+                          "fu",
+                          "he"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ハ (ha) 字形像中文「八」，读作 ha。",
+                        "en": "ハ (ha) looks like the Chinese character 八, pronounced 'ha'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ヒ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ヒ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ha",
+                          "fu",
+                          "hi",
+                          "ho"
+                        ],
+                        "en": [
+                          "ha",
+                          "fu",
+                          "hi",
+                          "ho"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ヒ (hi) 读作 hi。",
+                        "en": "ヒ (hi) is pronounced like 'he'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「フ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana フ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "he",
+                          "fu",
+                          "ho",
+                          "ha"
+                        ],
+                        "en": [
+                          "he",
+                          "fu",
+                          "ho",
+                          "ha"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "フ (fu) 发音介于 hu 与 fu 之间。",
+                        "en": "フ (fu) is a soft sound between 'hu' and 'fu'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ヘ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ヘ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "he",
+                          "hi",
+                          "ha",
+                          "fu"
+                        ],
+                        "en": [
+                          "he",
+                          "hi",
+                          "ha",
+                          "fu"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ヘ (he) 与平假名「へ」外形几乎一致，读作 he。",
+                        "en": "ヘ (he) is written identical to its Hiragana counterpart へ, pronounced 'he'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ホ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ホ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ha",
+                          "fu",
+                          "he",
+                          "ho"
+                        ],
+                        "en": [
+                          "ha",
+                          "fu",
+                          "he",
+                          "ho"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ホ (ho) 读作 ho。",
+                        "en": "ホ (ho) is pronounced like 'home'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「マ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana マ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "mi",
+                          "ma",
+                          "mu",
+                          "me"
+                        ],
+                        "en": [
+                          "mi",
+                          "ma",
+                          "mu",
+                          "me"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "マ (ma) 读作 ma。",
+                        "en": "マ (ma) is pronounced like 'mama'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ミ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ミ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ma",
+                          "mu",
+                          "mi",
+                          "mo"
+                        ],
+                        "en": [
+                          "ma",
+                          "mu",
+                          "mi",
+                          "mo"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ミ (mi) 由三条斜线组成，读作 mi。",
+                        "en": "ミ (mi) consists of three parallel lines, pronounced 'mi'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ム」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ム?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "mu",
+                          "me",
+                          "mo",
+                          "ma"
+                        ],
+                        "en": [
+                          "mu",
+                          "me",
+                          "mo",
+                          "ma"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ム (mu) 读作 mu。",
+                        "en": "ム (mu) is pronounced like 'moon'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「メ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana メ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "mi",
+                          "ma",
+                          "me",
+                          "mu"
+                        ],
+                        "en": [
+                          "mi",
+                          "ma",
+                          "me",
+                          "mu"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "メ (me) 读作 me。",
+                        "en": "メ (me) is pronounced like 'met'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「モ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana モ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ma",
+                          "mo",
+                          "mu",
+                          "me"
+                        ],
+                        "en": [
+                          "ma",
+                          "mo",
+                          "mu",
+                          "me"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "モ (mo) 读作 mo。",
+                        "en": "モ (mo) is pronounced like 'more'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ヤ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ヤ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yu",
+                          "yo",
+                          "wa",
+                          "ya"
+                        ],
+                        "en": [
+                          "yu",
+                          "yo",
+                          "wa",
+                          "ya"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ヤ (ya) 读作 ya。",
+                        "en": "ヤ (ya) is pronounced like 'yard'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ユ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ユ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yu",
+                          "ya",
+                          "yo",
+                          "wo"
+                        ],
+                        "en": [
+                          "yu",
+                          "ya",
+                          "yo",
+                          "wo"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ユ (yu) 读作 yu。",
+                        "en": "ユ (yu) is pronounced like 'you'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ヨ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ヨ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ya",
+                          "yo",
+                          "yu",
+                          "n"
+                        ],
+                        "en": [
+                          "ya",
+                          "yo",
+                          "yu",
+                          "n"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ヨ (yo) 形状类似反向的字母 E，读作 yo。",
+                        "en": "ヨ (yo) looks like a reversed 'E', pronounced 'yo'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ラ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ラ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ri",
+                          "ru",
+                          "ra",
+                          "re"
+                        ],
+                        "en": [
+                          "ri",
+                          "ru",
+                          "ra",
+                          "re"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ラ (ra) 读作 ra。",
+                        "en": "ラ (ra) is pronounced like a soft 'la'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「リ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana リ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ra",
+                          "ri",
+                          "ru",
+                          "ro"
+                        ],
+                        "en": [
+                          "ra",
+                          "ri",
+                          "ru",
+                          "ro"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "リ (ri) 读作 ri。",
+                        "en": "リ (ri) is pronounced like 'ree'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ル」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ル?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "re",
+                          "ro",
+                          "ra",
+                          "ru"
+                        ],
+                        "en": [
+                          "re",
+                          "ro",
+                          "ra",
+                          "ru"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ル (ru) 读作 ru。",
+                        "en": "ル (ru) is pronounced like 'roo'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「レ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana レ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "re",
+                          "ri",
+                          "ra",
+                          "ru"
+                        ],
+                        "en": [
+                          "re",
+                          "ri",
+                          "ra",
+                          "ru"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "レ (re) 读作 re。",
+                        "en": "レ (re) is pronounced like 'red'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ロ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ロ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ra",
+                          "ro",
+                          "ru",
+                          "re"
+                        ],
+                        "en": [
+                          "ra",
+                          "ro",
+                          "ru",
+                          "re"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ロ (ro) 形状像一个方框，读作 ro。",
+                        "en": "ロ (ro) looks like a square box, pronounced 'ro'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ワ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ワ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wo",
+                          "wa",
+                          "n",
+                          "ya"
+                        ],
+                        "en": [
+                          "wo",
+                          "wa",
+                          "n",
+                          "ya"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ワ (wa) 读作 wa。",
+                        "en": "ワ (wa) is pronounced like 'water'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ヲ」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ヲ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "n",
+                          "o / wo",
+                          "yo"
+                        ],
+                        "en": [
+                          "wa",
+                          "n",
+                          "o / wo",
+                          "yo"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ヲ 主要用作宾语助词，现代发音通常与「オ」相同读作 o。",
+                        "en": "ヲ (o/wo) is used as an object particle and is usually pronounced the same as オ (o)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "片假名「ン」的正确读音是？",
+                        "en": "What is the correct pronunciation of the Katakana ン?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "wa",
+                          "a",
+                          "mo",
+                          "n"
+                        ],
+                        "en": [
+                          "wa",
+                          "a",
+                          "mo",
+                          "n"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ン (n) 是拨音（鼻音），笔画从左下往右上画，读作 n。",
+                        "en": "ン (n) is the nasal consonant. Stroke direction goes from bottom-left to top-right, pronounced 'n'."
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 3,
