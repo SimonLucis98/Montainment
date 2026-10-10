@@ -2334,7 +2334,758 @@
                   "id": 3,
                   "titleZh": "试卷 3：漢字/かんじ（Kanji）学习",
                   "titleEn": "Paper 3: Kanji (かんじ) Learning",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "汉字「一」的读音是？",
+                        "en": "What is the reading of the Kanji 一?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ni",
+                          "ichi",
+                          "san",
+                          "shi"
+                        ],
+                        "en": [
+                          "ni",
+                          "ichi",
+                          "san",
+                          "shi"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「一」读作 ichi，表示数字 1。",
+                        "en": "一 is read as ichi, meaning the number 1."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「二」的读音是？",
+                        "en": "What is the reading of the Kanji 二?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "ichi",
+                          "san",
+                          "ni",
+                          "go"
+                        ],
+                        "en": [
+                          "ichi",
+                          "san",
+                          "ni",
+                          "go"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「二」读作 ni，表示数字 2。",
+                        "en": "二 is read as ni, meaning the number 2."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「三」的读音是？",
+                        "en": "What is the reading of the Kanji 三?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "san",
+                          "shi",
+                          "go",
+                          "roku"
+                        ],
+                        "en": [
+                          "san",
+                          "shi",
+                          "go",
+                          "roku"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「三」读作 san，表示数字 3。",
+                        "en": "三 is read as san, meaning the number 3."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「四」的读音是？",
+                        "en": "What is the reading of the Kanji 四?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "go",
+                          "roku",
+                          "shichi",
+                          "yon"
+                        ],
+                        "en": [
+                          "go",
+                          "roku",
+                          "shichi",
+                          "yon"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「四」读作 yon 或 shi，两者都可，但 yon 更常用于日常。",
+                        "en": "四 is read as yon or shi; yon is more common in daily speech."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「五」的读音是？",
+                        "en": "What is the reading of the Kanji 五?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "shi",
+                          "go",
+                          "hachi",
+                          "kyuu"
+                        ],
+                        "en": [
+                          "shi",
+                          "go",
+                          "hachi",
+                          "kyuu"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「五」读作 go，表示数字 5。",
+                        "en": "五 is read as go, meaning the number 5."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「六」的读音是？",
+                        "en": "What is the reading of the Kanji 六?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "roku",
+                          "shichi",
+                          "hachi",
+                          "juu"
+                        ],
+                        "en": [
+                          "roku",
+                          "shichi",
+                          "hachi",
+                          "juu"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「六」读作 roku，表示数字 6。",
+                        "en": "六 is read as roku, meaning the number 6."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「七」的读音是？",
+                        "en": "What is the reading of the Kanji 七?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "hachi",
+                          "nana",
+                          "kyuu",
+                          "juu"
+                        ],
+                        "en": [
+                          "hachi",
+                          "nana",
+                          "kyuu",
+                          "juu"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「七」读作 nana 或 shichi，nana 更常用于避免与「一」混淆。",
+                        "en": "七 is read as nana or shichi; nana is often used to avoid confusion with ichi."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「八」的读音是？",
+                        "en": "What is the reading of the Kanji 八?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "shichi",
+                          "kyuu",
+                          "hachi",
+                          "juu"
+                        ],
+                        "en": [
+                          "shichi",
+                          "kyuu",
+                          "hachi",
+                          "juu"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「八」读作 hachi，表示数字 8。",
+                        "en": "八 is read as hachi, meaning the number 8."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「九」的读音是？",
+                        "en": "What is the reading of the Kanji 九?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "hachi",
+                          "juu",
+                          "roku",
+                          "kyuu"
+                        ],
+                        "en": [
+                          "hachi",
+                          "juu",
+                          "roku",
+                          "kyuu"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「九」读作 kyuu 或 ku，kyuu 更常用。",
+                        "en": "九 is read as kyuu or ku; kyuu is more common."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「十」的读音是？",
+                        "en": "What is the reading of the Kanji 十?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "juu",
+                          "kyuu",
+                          "hachi",
+                          "nana"
+                        ],
+                        "en": [
+                          "juu",
+                          "kyuu",
+                          "hachi",
+                          "nana"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「十」读作 juu，表示数字 10。",
+                        "en": "十 is read as juu, meaning the number 10."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「日」的意思是？",
+                        "en": "What does the Kanji 日 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "月亮 / 月份",
+                          "火",
+                          "太阳 / 日子",
+                          "水"
+                        ],
+                        "en": [
+                          "Moon / Month",
+                          "Fire",
+                          "Sun / Day",
+                          "Water"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「日」表示太阳或日子，如「日曜日」意为星期日。",
+                        "en": "日 means sun or day, as in 日曜日 (Sunday)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「月」的意思是？",
+                        "en": "What does the Kanji 月 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "太阳 / 日子",
+                          "月亮 / 月份",
+                          "星星",
+                          "云"
+                        ],
+                        "en": [
+                          "Sun / Day",
+                          "Moon / Month",
+                          "Star",
+                          "Cloud"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「月」表示月亮或月份，如「月曜日」意为星期一。",
+                        "en": "月 means moon or month, as in 月曜日 (Monday)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「火」的意思是？",
+                        "en": "What does the Kanji 火 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "水",
+                          "火",
+                          "土",
+                          "风"
+                        ],
+                        "en": [
+                          "Water",
+                          "Fire",
+                          "Earth",
+                          "Wind"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「火」表示火，如「火曜日」意为星期二。",
+                        "en": "火 means fire, as in 火曜日 (Tuesday)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「水」的意思是？",
+                        "en": "What does the Kanji 水 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "火",
+                          "木",
+                          "水",
+                          "金"
+                        ],
+                        "en": [
+                          "Fire",
+                          "Wood",
+                          "Water",
+                          "Gold"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「水」表示水，如「水曜日」意为星期三。",
+                        "en": "水 means water, as in 水曜日 (Wednesday)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「木」的意思是？",
+                        "en": "What does the Kanji 木 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "树 / 木头",
+                          "石头",
+                          "草",
+                          "花"
+                        ],
+                        "en": [
+                          "Tree / Wood",
+                          "Stone",
+                          "Grass",
+                          "Flower"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「木」表示树或木头，如「木曜日」意为星期四。",
+                        "en": "木 means tree or wood, as in 木曜日 (Thursday)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「金」的意思是？",
+                        "en": "What does the Kanji 金 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "银",
+                          "铜",
+                          "金 / 钱",
+                          "铁"
+                        ],
+                        "en": [
+                          "Silver",
+                          "Copper",
+                          "Gold / Money",
+                          "Iron"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「金」表示金或钱，如「金曜日」意为星期五。",
+                        "en": "金 means gold or money, as in 金曜日 (Friday)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「土」的意思是？",
+                        "en": "What does the Kanji 土 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "沙",
+                          "土 / 土地",
+                          "岩",
+                          "石"
+                        ],
+                        "en": [
+                          "Sand",
+                          "Earth / Soil",
+                          "Rock",
+                          "Stone"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「土」表示土或土地，如「土曜日」意为星期六。",
+                        "en": "土 means earth or soil, as in 土曜日 (Saturday)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「上」的意思是？",
+                        "en": "What does the Kanji 上 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "下面",
+                          "里面",
+                          "外面",
+                          "上面"
+                        ],
+                        "en": [
+                          "Down",
+                          "Inside",
+                          "Outside",
+                          "Up / Above"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「上」表示上方、上面，如「机の上」意为桌子上。",
+                        "en": "上 means up or above, as in 机の上 (on the desk)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「下」的意思是？",
+                        "en": "What does the Kanji 下 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "上面",
+                          "下面",
+                          "中间",
+                          "旁边"
+                        ],
+                        "en": [
+                          "Up",
+                          "Down / Below",
+                          "Middle",
+                          "Beside"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「下」表示下方、下面，如「木の下」意为树下。",
+                        "en": "下 means down or below, as in 木の下 (under the tree)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「左」的意思是？",
+                        "en": "What does the Kanji 左 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "右",
+                          "前",
+                          "左",
+                          "后"
+                        ],
+                        "en": [
+                          "Right",
+                          "Front",
+                          "Left",
+                          "Back"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「左」表示左边，如「左手」意为左手。",
+                        "en": "左 means left, as in 左手 (left hand)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「右」的意思是？",
+                        "en": "What does the Kanji 右 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "左",
+                          "右",
+                          "上",
+                          "下"
+                        ],
+                        "en": [
+                          "Left",
+                          "Right",
+                          "Up",
+                          "Down"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「右」表示右边，如「右手」意为右手。",
+                        "en": "右 means right, as in 右手 (right hand)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「中」的意思是？",
+                        "en": "What does the Kanji 中 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "外面",
+                          "旁边",
+                          "中间",
+                          "下面"
+                        ],
+                        "en": [
+                          "Outside",
+                          "Beside",
+                          "Middle / Center",
+                          "Below"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「中」表示中间、中央，如「中国」意为中国。",
+                        "en": "中 means middle or center, as in 中国 (China)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「大」的意思是？",
+                        "en": "What does the Kanji 大 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "小",
+                          "大",
+                          "多",
+                          "少"
+                        ],
+                        "en": [
+                          "Small",
+                          "Big",
+                          "Many",
+                          "Few"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「大」表示大，如「大学」意为大学。",
+                        "en": "大 means big, as in 大学 (university)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「小」的意思是？",
+                        "en": "What does the Kanji 小 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "大",
+                          "长",
+                          "小",
+                          "短"
+                        ],
+                        "en": [
+                          "Big",
+                          "Long",
+                          "Small",
+                          "Short"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「小」表示小，如「小学校」意为小学。",
+                        "en": "小 means small, as in 小学校 (elementary school)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「人」的读音是？",
+                        "en": "What is the reading of the Kanji 人?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "yama",
+                          "hito",
+                          "kawa",
+                          "ta"
+                        ],
+                        "en": [
+                          "yama",
+                          "hito",
+                          "kawa",
+                          "ta"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「人」读作 hito（训读）或 jin/nin（音读），表示人。",
+                        "en": "人 is read as hito (kun-yomi) or jin/nin (on-yomi), meaning person."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「口」的意思是？",
+                        "en": "What does the Kanji 口 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "眼睛",
+                          "鼻子",
+                          "嘴巴",
+                          "耳朵"
+                        ],
+                        "en": [
+                          "Eye",
+                          "Nose",
+                          "Mouth",
+                          "Ear"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「口」表示嘴巴，如「入口」意为入口。",
+                        "en": "口 means mouth, as in 入口 (entrance)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「目」的意思是？",
+                        "en": "What does the Kanji 目 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "耳",
+                          "眼睛",
+                          "口",
+                          "手"
+                        ],
+                        "en": [
+                          "Ear",
+                          "Eye",
+                          "Mouth",
+                          "Hand"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「目」表示眼睛，如「目的」原意为目标。",
+                        "en": "目 means eye, as in 目的 (purpose / target)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「耳」的意思是？",
+                        "en": "What does the Kanji 耳 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "目",
+                          "口",
+                          "鼻",
+                          "耳"
+                        ],
+                        "en": [
+                          "Eye",
+                          "Mouth",
+                          "Nose",
+                          "Ear"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「耳」表示耳朵，如「耳鼻科」意为耳鼻喉科。",
+                        "en": "耳 means ear, as in 耳鼻科 (ENT clinic)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「手」的意思是？",
+                        "en": "What does the Kanji 手 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "脚",
+                          "手",
+                          "头",
+                          "背"
+                        ],
+                        "en": [
+                          "Foot",
+                          "Hand",
+                          "Head",
+                          "Back"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「手」表示手，如「手紙」意为信件。",
+                        "en": "手 means hand, as in 手紙 (letter)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字「足」的意思是？",
+                        "en": "What does the Kanji 足 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "手",
+                          "指",
+                          "足 / 脚",
+                          "头"
+                        ],
+                        "en": [
+                          "Hand",
+                          "Finger",
+                          "Foot / Leg",
+                          "Head"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「足」表示脚、腿，如「足りる」意为足够。",
+                        "en": "足 means foot or leg, as in 足りる (to be enough)."
+                      }
+                    }
+                  ]
                 }
               ]
             },
