@@ -4390,7 +4390,258 @@
                   "id": 1,
                   "titleZh": "试卷 1：动词变形 — て形与た形",
                   "titleEn": "Paper 1: Verb Conjugation — Te-form & Ta-form",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "动词「食べる」的て形是？",
+                        "en": "What is the te-form of the verb 食べる?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "食べて",
+                          "食べた",
+                          "食べるて",
+                          "食べんで"
+                        ],
+                        "en": [
+                          "tabete",
+                          "tabeta",
+                          "taberute",
+                          "tabende"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "食べる是二类动词（る动词），て形直接去る加て。",
+                        "en": "食べる is a ru-verb; drop る and add て."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「飲む」的て形是？",
+                        "en": "What is the te-form of the verb 飲む?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "飲んで",
+                          "飲みて",
+                          "飲むて",
+                          "飲った"
+                        ],
+                        "en": [
+                          "nonde",
+                          "nomite",
+                          "nomute",
+                          "notta"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "む/ぶ/ぬ结尾的动词，て形变为んで。飲む→飲んで。",
+                        "en": "Verbs ending in む/ぶ/ぬ change to んで in te-form."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「書く」的て形是？",
+                        "en": "What is the te-form of the verb 書く?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "書いて",
+                          "書きて",
+                          "書くて",
+                          "書って"
+                        ],
+                        "en": [
+                          "kaite",
+                          "kakite",
+                          "kakute",
+                          "katte"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "く结尾的动词，て形变为いて。書く→書いて。（例外：行く→行って）",
+                        "en": "Verbs ending in く become いて. (Exception: 行く → 行って)"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「話す」的て形是？",
+                        "en": "What is the te-form of the verb 話す?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "話して",
+                          "話しで",
+                          "話すて",
+                          "話って"
+                        ],
+                        "en": [
+                          "hanashite",
+                          "hanashide",
+                          "hanasute",
+                          "hanatte"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "す结尾的动词，て形变为して。話す→話して。",
+                        "en": "Verbs ending in す become して in te-form."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「待つ」的て形是？",
+                        "en": "What is the te-form of the verb 待つ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "待って",
+                          "待ちて",
+                          "待つて",
+                          "待いて"
+                        ],
+                        "en": [
+                          "matte",
+                          "machite",
+                          "matsute",
+                          "maite"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "つ/る结尾的动词，て形变为って（促音便）。待つ→待って。",
+                        "en": "Verbs ending in つ/る become って in te-form."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「遊ぶ」的て形是？",
+                        "en": "What is the te-form of the verb 遊ぶ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "遊んで",
+                          "遊びて",
+                          "遊ぶて",
+                          "遊って"
+                        ],
+                        "en": [
+                          "asonde",
+                          "asobite",
+                          "asobute",
+                          "asotte"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ぶ结尾的动词，て形变为んで。遊ぶ→遊んで。",
+                        "en": "Verbs ending in ぶ become んで in te-form."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「死ぬ」的て形是？",
+                        "en": "What is the te-form of the verb 死ぬ?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "死んで",
+                          "死にて",
+                          "死ぬて",
+                          "死って"
+                        ],
+                        "en": [
+                          "shinde",
+                          "shinite",
+                          "shinute",
+                          "shitte"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ぬ结尾的动词，て形变为んで。死ぬ→死んで。",
+                        "en": "Verbs ending in ぬ become んで in te-form."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「読む」的た形是？",
+                        "en": "What is the ta-form of the verb 読む?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "読んだ",
+                          "読みた",
+                          "読むた",
+                          "読った"
+                        ],
+                        "en": [
+                          "yonda",
+                          "yomita",
+                          "yomuta",
+                          "yotta"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "た形的变化规则与て形相同，只是把て/で换成た/だ。読む→読んだ。",
+                        "en": "The ta-form follows the same pattern as te-form, replacing て/で with た/だ."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「行く」的て形是？（注意例外）",
+                        "en": "What is the te-form of the verb 行く? (Watch the exception)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "行って",
+                          "行いて",
+                          "行くて",
+                          "行んで"
+                        ],
+                        "en": [
+                          "itte",
+                          "iite",
+                          "ikute",
+                          "inde"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "行く虽然以く结尾，但属于特殊例外，て形是行って。",
+                        "en": "行く ends in く but is an exception: its te-form is 行って."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词「する」的て形是？",
+                        "en": "What is the te-form of the verb する?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "して",
+                          "すて",
+                          "するて",
+                          "しって"
+                        ],
+                        "en": [
+                          "shite",
+                          "sute",
+                          "surute",
+                          "shitte"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "する是不规则动词，て形是して。",
+                        "en": "する is an irregular verb; its te-form is して."
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 2,
