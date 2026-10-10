@@ -8220,20 +8220,20 @@
                     {
                       "q": {
                         "zh": "古典日语助动词「けり」主要表示什么？",
-                        "en": "What does the classical Japanese auxiliary keri mainly express?"
+                        "en": "What does the classical Japanese auxiliary 「けり」 mainly express?"
                       },
                       "opts": {
                         "zh": [
                           "完了",
-                          "过去（回想）",
+                          "過去（回想）",
                           "推量",
                           "打消"
                         ],
                         "en": [
-                          "Completion (perfective)",
-                          "Past (recollection)",
-                          "Conjecture",
-                          "Negation"
+                          "完了",
+                          "過去（回想）",
+                          "推量",
+                          "打消"
                         ]
                       },
                       "ans": 1,
@@ -8245,12 +8245,12 @@
                     {
                       "q": {
                         "zh": "古典日语「〜べし」的意思是？",
-                        "en": "What does the classical Japanese 〜beshi mean?"
+                        "en": "What does the classical Japanese 「〜べし」 mean?"
                       },
                       "opts": {
                         "zh": [
                           "禁止",
-                          "过去",
+                          "過去",
                           "应当／必须",
                           "否定"
                         ],
@@ -8270,20 +8270,20 @@
                     {
                       "q": {
                         "zh": "古典日语「〜む（ん）」主要表示？",
-                        "en": "What does the classical Japanese 〜mu (n) mainly express?"
+                        "en": "What does the classical Japanese 「〜む（ん）」 mainly express?"
                       },
                       "opts": {
                         "zh": [
                           "推量／意志",
-                          "过去",
+                          "過去",
                           "否定",
                           "完了"
                         ],
                         "en": [
-                          "Conjecture / Volition",
-                          "Past",
-                          "Negation",
-                          "Completion"
+                          "推量／意志",
+                          "過去",
+                          "否定",
+                          "完了"
                         ]
                       },
                       "ans": 0,
@@ -8295,20 +8295,20 @@
                     {
                       "q": {
                         "zh": "「風吹けば」中的「吹け」是什么活用形？",
-                        "en": "In Kaze fukeba, what conjugation form is fuke?"
+                        "en": "In 「風吹けば」, what conjugation form is 「吹け」?"
                       },
                       "opts": {
                         "zh": [
                           "未然形",
-                          "连用形",
+                          "連用形",
                           "已然形",
                           "命令形"
                         ],
                         "en": [
-                          "Mizenkei (irrealis)",
-                          "Renyokei (continuative)",
-                          "Izenkei (realis)",
-                          "Meireikei (imperative)"
+                          "未然形",
+                          "連用形",
+                          "已然形",
+                          "命令形"
                         ]
                       },
                       "ans": 2,
@@ -8320,11 +8320,11 @@
                     {
                       "q": {
                         "zh": "古典日语「〜ず」的意思是？",
-                        "en": "What does the classical Japanese 〜zu mean?"
+                        "en": "What does the classical Japanese 「〜ず」 mean?"
                       },
                       "opts": {
                         "zh": [
-                          "过去",
+                          "過去",
                           "完了",
                           "否定",
                           "推量"
@@ -8345,7 +8345,7 @@
                     {
                       "q": {
                         "zh": "古典日语「ありがたし」的现代日语对应是？",
-                        "en": "What is the modern Japanese equivalent of the classical arigatashi?"
+                        "en": "What is the modern Japanese equivalent of the classical 「ありがたし」?"
                       },
                       "opts": {
                         "zh": [
@@ -8355,10 +8355,10 @@
                           "うれしい"
                         ],
                         "en": [
-                          "arigatou",
-                          "mezurashii",
-                          "arigatai",
-                          "ureshii"
+                          "ありがとう",
+                          "めずらしい",
+                          "ありがたい",
+                          "うれしい"
                         ]
                       },
                       "ans": 2,
@@ -8370,7 +8370,7 @@
                     {
                       "q": {
                         "zh": "古典日语「をかし」的意思是？",
-                        "en": "What does the classical Japanese wokashi mean?"
+                        "en": "What does the classical Japanese 「をかし」 mean?"
                       },
                       "opts": {
                         "zh": [
@@ -8395,11 +8395,11 @@
                     {
                       "q": {
                         "zh": "古典日语「いと」的意思是？",
-                        "en": "What does the classical Japanese ito mean?"
+                        "en": "What does the classical Japanese 「いと」 mean?"
                       },
                       "opts": {
                         "zh": [
-                          "糸（丝线）",
+                          "丝线",
                           "非常",
                           "一起",
                           "总是"
@@ -8420,14 +8420,14 @@
                     {
                       "q": {
                         "zh": "古典日语「〜けむ」表示什么？",
-                        "en": "What does the classical Japanese 〜kemu express?"
+                        "en": "What does the classical Japanese 「〜けむ」 express?"
                       },
                       "opts": {
                         "zh": [
                           "禁止",
                           "命令",
                           "完了",
-                          "过去推量"
+                          "過去推量"
                         ],
                         "en": [
                           "Prohibition",
@@ -8445,20 +8445,20 @@
                     {
                       "q": {
                         "zh": "古典日语断定助动词「なり」的接续方式是？",
-                        "en": "How does the classical copula nari attach?"
+                        "en": "How does the classical copula 「なり」 attach?"
                       },
                       "opts": {
                         "zh": [
-                          "接未然形",
-                          "接连体形或名词",
-                          "接命令形",
-                          "接终止形"
+                          "未然形",
+                          "連体形或名词",
+                          "命令形",
+                          "終止形"
                         ],
                         "en": [
-                          "Attaches to mizenkei (irrealis)",
-                          "Attaches to rentaikei or nouns",
-                          "Attaches to meireikei (imperative)",
-                          "Attaches to shuushikei (conclusive)"
+                          "未然形",
+                          "連体形或名词",
+                          "命令形",
+                          "終止形"
                         ]
                       },
                       "ans": 1,
@@ -8477,7 +8477,7 @@
                     {
                       "q": {
                         "zh": "「ドキドキ」表示什么？",
-                        "en": "What does doki-doki express?"
+                        "en": "What does 「ドキドキ」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8502,7 +8502,7 @@
                     {
                       "q": {
                         "zh": "「ワクワク」表示什么？",
-                        "en": "What does waku-waku express?"
+                        "en": "What does 「ワクワク」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8527,7 +8527,7 @@
                     {
                       "q": {
                         "zh": "「キラキラ」表示什么？",
-                        "en": "What does kira-kira express?"
+                        "en": "What does 「キラキラ」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8552,7 +8552,7 @@
                     {
                       "q": {
                         "zh": "「ペラペラ」形容什么？",
-                        "en": "What does pera-pera describe?"
+                        "en": "What does 「ペラペラ」 describe?"
                       },
                       "opts": {
                         "zh": [
@@ -8577,7 +8577,7 @@
                     {
                       "q": {
                         "zh": "「ぐるぐる」表示什么？",
-                        "en": "What does guru-guru express?"
+                        "en": "What does 「ぐるぐる」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8602,7 +8602,7 @@
                     {
                       "q": {
                         "zh": "「のろのろ」形容什么？",
-                        "en": "What does noro-noro describe?"
+                        "en": "What does 「のろのろ」 describe?"
                       },
                       "opts": {
                         "zh": [
@@ -8627,7 +8627,7 @@
                     {
                       "q": {
                         "zh": "「しっかり」表示什么？",
-                        "en": "What does shikkari express?"
+                        "en": "What does 「しっかり」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8652,7 +8652,7 @@
                     {
                       "q": {
                         "zh": "「そっと」表示什么？",
-                        "en": "What does sotto express?"
+                        "en": "What does 「そっと」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8677,7 +8677,7 @@
                     {
                       "q": {
                         "zh": "「ぺこぺこ」除了表示肚子饿，还表示？",
-                        "en": "Besides 'hungry', what else does peko-peko express?"
+                        "en": "Besides 'hungry', what else does 「ぺこぺこ」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8702,7 +8702,7 @@
                     {
                       "q": {
                         "zh": "「うっかり」表示什么？",
-                        "en": "What does ukkari express?"
+                        "en": "What does 「うっかり」 express?"
                       },
                       "opts": {
                         "zh": [
@@ -8991,7 +8991,7 @@
                     {
                       "q": {
                         "zh": "「吾輩は猫である」的作者是？",
-                        "en": "Who wrote Wagahai wa Neko de Aru?"
+                        "en": "Who wrote 「吾輩は猫である」?"
                       },
                       "opts": {
                         "zh": [
@@ -9001,10 +9001,10 @@
                           "夏目漱石"
                         ],
                         "en": [
-                          "Osamu Dazai",
-                          "Ryunosuke Akutagawa",
-                          "Yasunari Kawabata",
-                          "Natsume Soseki"
+                          "太宰治",
+                          "芥川龍之介",
+                          "川端康成",
+                          "夏目漱石"
                         ]
                       },
                       "ans": 3,
@@ -9016,7 +9016,7 @@
                     {
                       "q": {
                         "zh": "「国境の長いトンネルを抜けると雪国であった」出自哪部作品？",
-                        "en": "Which work opens with 'Kokkyou no nagai tonneru wo nukeru to yukiguni de atta'?"
+                        "en": "Which work opens with 「国境の長いトンネルを抜けると雪国であった」?"
                       },
                       "opts": {
                         "zh": [
@@ -9026,10 +9026,10 @@
                           "「古都」"
                         ],
                         "en": [
-                          "Izu no Odoriko",
-                          "Yukiguni (Snow Country)",
-                          "Senbazuru (Thousand Cranes)",
-                          "Koto (The Old Capital)"
+                          "「伊豆の踊子」",
+                          "「雪国」",
+                          "「千羽鶴」",
+                          "「古都」"
                         ]
                       },
                       "ans": 1,
@@ -9041,7 +9041,7 @@
                     {
                       "q": {
                         "zh": "「メロスは激怒した」出自哪部作品？",
-                        "en": "Which work begins with 'Merosu wa gekido shita'?"
+                        "en": "Which work begins with 「メロスは激怒した」?"
                       },
                       "opts": {
                         "zh": [
@@ -9051,10 +9051,10 @@
                           "「坊っちゃん」"
                         ],
                         "en": [
-                          "Ningen Shikkaku (No Longer Human)",
-                          "Shayou (The Setting Sun)",
-                          "Hashire Merosu (Run, Melos!)",
-                          "Botchan"
+                          "「人間失格」",
+                          "「斜陽」",
+                          "「走れメロス」",
+                          "「坊っちゃん」"
                         ]
                       },
                       "ans": 2,
@@ -9066,7 +9066,7 @@
                     {
                       "q": {
                         "zh": "《羅生門》的作者是？",
-                        "en": "Who wrote Rashoumon?"
+                        "en": "Who wrote 「羅生門」?"
                       },
                       "opts": {
                         "zh": [
@@ -9076,10 +9076,10 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "Ryunosuke Akutagawa",
-                          "Natsume Soseki",
-                          "Osamu Dazai",
-                          "Kenji Miyazawa"
+                          "芥川龍之介",
+                          "夏目漱石",
+                          "太宰治",
+                          "宮沢賢治"
                         ]
                       },
                       "ans": 0,
@@ -9091,7 +9091,7 @@
                     {
                       "q": {
                         "zh": "「雨ニモマケズ」的作者是？",
-                        "en": "Who wrote Ame ni mo Makezu?"
+                        "en": "Who wrote 「雨ニモマケズ」?"
                       },
                       "opts": {
                         "zh": [
@@ -9101,10 +9101,10 @@
                           "太宰治"
                         ],
                         "en": [
-                          "Yasunari Kawabata",
-                          "Natsume Soseki",
-                          "Kenji Miyazawa",
-                          "Osamu Dazai"
+                          "川端康成",
+                          "夏目漱石",
+                          "宮沢賢治",
+                          "太宰治"
                         ]
                       },
                       "ans": 2,
@@ -9116,7 +9116,7 @@
                     {
                       "q": {
                         "zh": "《坊っちゃん》的作者是？",
-                        "en": "Who wrote Botchan?"
+                        "en": "Who wrote 「坊っちゃん」?"
                       },
                       "opts": {
                         "zh": [
@@ -9126,10 +9126,10 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "Osamu Dazai",
-                          "Natsume Soseki",
-                          "Ryunosuke Akutagawa",
-                          "Kenji Miyazawa"
+                          "太宰治",
+                          "夏目漱石",
+                          "芥川龍之介",
+                          "宮沢賢治"
                         ]
                       },
                       "ans": 1,
@@ -9141,7 +9141,7 @@
                     {
                       "q": {
                         "zh": "《人間失格》的作者是？",
-                        "en": "Who wrote Ningen Shikkaku?"
+                        "en": "Who wrote 「人間失格」?"
                       },
                       "opts": {
                         "zh": [
@@ -9151,10 +9151,10 @@
                           "芥川龍之介"
                         ],
                         "en": [
-                          "Osamu Dazai",
-                          "Natsume Soseki",
-                          "Yasunari Kawabata",
-                          "Ryunosuke Akutagawa"
+                          "太宰治",
+                          "夏目漱石",
+                          "川端康成",
+                          "芥川龍之介"
                         ]
                       },
                       "ans": 0,
@@ -9166,7 +9166,7 @@
                     {
                       "q": {
                         "zh": "《銀河鉄道の夜》的作者是？",
-                        "en": "Who wrote Ginga Tetsudou no Yoru?"
+                        "en": "Who wrote 「銀河鉄道の夜」?"
                       },
                       "opts": {
                         "zh": [
@@ -9176,10 +9176,10 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "Natsume Soseki",
-                          "Osamu Dazai",
-                          "Yasunari Kawabata",
-                          "Kenji Miyazawa"
+                          "夏目漱石",
+                          "太宰治",
+                          "川端康成",
+                          "宮沢賢治"
                         ]
                       },
                       "ans": 3,
@@ -9191,7 +9191,7 @@
                     {
                       "q": {
                         "zh": "《伊豆の踊子》的作者是？",
-                        "en": "Who wrote Izu no Odoriko?"
+                        "en": "Who wrote 「伊豆の踊子」?"
                       },
                       "opts": {
                         "zh": [
@@ -9201,10 +9201,10 @@
                           "夏目漱石"
                         ],
                         "en": [
-                          "Osamu Dazai",
-                          "Ryunosuke Akutagawa",
-                          "Yasunari Kawabata",
-                          "Natsume Soseki"
+                          "太宰治",
+                          "芥川龍之介",
+                          "川端康成",
+                          "夏目漱石"
                         ]
                       },
                       "ans": 2,
@@ -9216,7 +9216,7 @@
                     {
                       "q": {
                         "zh": "《蜘蛛の糸》的作者是？",
-                        "en": "Who wrote Kumo no Ito?"
+                        "en": "Who wrote 「蜘蛛の糸」?"
                       },
                       "opts": {
                         "zh": [
@@ -9226,10 +9226,10 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "Natsume Soseki",
-                          "Ryunosuke Akutagawa",
-                          "Osamu Dazai",
-                          "Kenji Miyazawa"
+                          "夏目漱石",
+                          "芥川龍之介",
+                          "太宰治",
+                          "宮沢賢治"
                         ]
                       },
                       "ans": 1,
@@ -9248,7 +9248,7 @@
                     {
                       "q": {
                         "zh": "正式商务邮件开头「拝啓」之后，结尾应该用？",
-                        "en": "In a formal business letter, which closing pairs with the opening Haikei?"
+                        "en": "In a formal business letter, which closing pairs with the opening 「拝啓」?"
                       },
                       "opts": {
                         "zh": [
@@ -9258,10 +9258,10 @@
                           "かしこ"
                         ],
                         "en": [
-                          "Ijou",
-                          "Keigu",
-                          "Sousou",
-                          "Kashiko"
+                          "以上",
+                          "敬具",
+                          "草々",
+                          "かしこ"
                         ]
                       },
                       "ans": 1,
@@ -9333,10 +9333,10 @@
                           "確認して"
                         ],
                         "en": [
-                          "Kakunin shite kudasai",
-                          "Kakunin shite kure",
-                          "Go-kakunin no hodo onegai moushiagemasu",
-                          "Kakunin shite"
+                          "確認してください",
+                          "確認してくれ",
+                          "ご確認のほどお願い申し上げます",
+                          "確認して"
                         ]
                       },
                       "ans": 2,
@@ -9408,10 +9408,10 @@
                           "了解"
                         ],
                         "en": [
-                          "Wakatta",
-                          "Wakarimashita",
-                          "Kashikomarimashita",
-                          "Ryoukai"
+                          "わかった",
+                          "わかりました",
+                          "かしこまりました",
+                          "了解"
                         ]
                       },
                       "ans": 2,
@@ -9473,7 +9473,7 @@
                     {
                       "q": {
                         "zh": "正式文书开头「謹啓」的意思是？",
-                        "en": "What does the formal opening Kinkei mean?"
+                        "en": "What does the formal opening 「謹啓」 mean?"
                       },
                       "opts": {
                         "zh": [
