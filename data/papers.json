@@ -4404,16 +4404,16 @@
                           "食べんで"
                         ],
                         "en": [
-                          "tabete",
-                          "tabeta",
-                          "taberute",
-                          "tabende"
+                          "食べて",
+                          "食べた",
+                          "食べるて",
+                          "食べんで"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "食べる是二类动词（る动词），て形直接去る加て。",
-                        "en": "食べる is a ru-verb; drop る and add て."
+                        "zh": "食べる是二类动词（る动词），て形直接去る加て，读作 tabete。",
+                        "en": "食べる is a ru-verb: drop る and add て, read as tabete."
                       }
                     },
                     {
@@ -4429,16 +4429,16 @@
                           "飲った"
                         ],
                         "en": [
-                          "nonde",
-                          "nomite",
-                          "nomute",
-                          "notta"
+                          "飲んで",
+                          "飲みて",
+                          "飲むて",
+                          "飲った"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "む/ぶ/ぬ结尾的动词，て形变为んで。飲む→飲んで。",
-                        "en": "Verbs ending in む/ぶ/ぬ change to んで in te-form."
+                        "zh": "む/ぶ/ぬ结尾的动词，て形变为んで，读作 nonde。",
+                        "en": "Verbs ending in む/ぶ/ぬ change to んで, read as nonde."
                       }
                     },
                     {
@@ -4454,16 +4454,16 @@
                           "書って"
                         ],
                         "en": [
-                          "kaite",
-                          "kakite",
-                          "kakute",
-                          "katte"
+                          "書いて",
+                          "書きて",
+                          "書くて",
+                          "書って"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "く结尾的动词，て形变为いて。書く→書いて。（例外：行く→行って）",
-                        "en": "Verbs ending in く become いて. (Exception: 行く → 行って)"
+                        "zh": "く结尾的动词，て形变为いて，读作 kaite。例外：行く→行って。",
+                        "en": "Verbs ending in く become いて, read as kaite. Exception: 行く → 行って."
                       }
                     },
                     {
@@ -4479,16 +4479,16 @@
                           "話って"
                         ],
                         "en": [
-                          "hanashite",
-                          "hanashide",
-                          "hanasute",
-                          "hanatte"
+                          "話して",
+                          "話しで",
+                          "話すて",
+                          "話って"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "す结尾的动词，て形变为して。話す→話して。",
-                        "en": "Verbs ending in す become して in te-form."
+                        "zh": "す结尾的动词，て形变为して，读作 hanashite。",
+                        "en": "Verbs ending in す become して, read as hanashite."
                       }
                     },
                     {
@@ -4504,16 +4504,16 @@
                           "待いて"
                         ],
                         "en": [
-                          "matte",
-                          "machite",
-                          "matsute",
-                          "maite"
+                          "待って",
+                          "待ちて",
+                          "待つて",
+                          "待いて"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "つ/る结尾的动词，て形变为って（促音便）。待つ→待って。",
-                        "en": "Verbs ending in つ/る become って in te-form."
+                        "zh": "つ/る结尾的动词，て形变为って（促音便），读作 matte。",
+                        "en": "Verbs ending in つ/る become って, read as matte."
                       }
                     },
                     {
@@ -4529,16 +4529,16 @@
                           "遊って"
                         ],
                         "en": [
-                          "asonde",
-                          "asobite",
-                          "asobute",
-                          "asotte"
+                          "遊んで",
+                          "遊びて",
+                          "遊ぶて",
+                          "遊って"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "ぶ结尾的动词，て形变为んで。遊ぶ→遊んで。",
-                        "en": "Verbs ending in ぶ become んで in te-form."
+                        "zh": "ぶ结尾的动词，て形变为んで，读作 asonde。",
+                        "en": "Verbs ending in ぶ become んで, read as asonde."
                       }
                     },
                     {
@@ -4554,16 +4554,16 @@
                           "死って"
                         ],
                         "en": [
-                          "shinde",
-                          "shinite",
-                          "shinute",
-                          "shitte"
+                          "死んで",
+                          "死にて",
+                          "死ぬて",
+                          "死って"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "ぬ结尾的动词，て形变为んで。死ぬ→死んで。",
-                        "en": "Verbs ending in ぬ become んで in te-form."
+                        "zh": "ぬ结尾的动词，て形变为んで，读作 shinde。",
+                        "en": "Verbs ending in ぬ become んで, read as shinde."
                       }
                     },
                     {
@@ -4579,16 +4579,16 @@
                           "読った"
                         ],
                         "en": [
-                          "yonda",
-                          "yomita",
-                          "yomuta",
-                          "yotta"
+                          "読んだ",
+                          "読みた",
+                          "読むた",
+                          "読った"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "た形的变化规则与て形相同，只是把て/で换成た/だ。読む→読んだ。",
-                        "en": "The ta-form follows the same pattern as te-form, replacing て/で with た/だ."
+                        "zh": "た形变化规则与て形相同，て/で换成た/だ，读作 yonda。",
+                        "en": "The ta-form follows the te-form pattern, replacing て/で with た/だ, read as yonda."
                       }
                     },
                     {
@@ -4604,16 +4604,16 @@
                           "行んで"
                         ],
                         "en": [
-                          "itte",
-                          "iite",
-                          "ikute",
-                          "inde"
+                          "行って",
+                          "行いて",
+                          "行くて",
+                          "行んで"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "行く虽然以く结尾，但属于特殊例外，て形是行って。",
-                        "en": "行く ends in く but is an exception: its te-form is 行って."
+                        "zh": "行く虽然以く结尾，但属于特殊例外，て形是行って，读作 itte。",
+                        "en": "行く ends in く but is an exception: its te-form is 行って, read as itte."
                       }
                     },
                     {
@@ -4629,16 +4629,16 @@
                           "しって"
                         ],
                         "en": [
-                          "shite",
-                          "sute",
-                          "surute",
-                          "shitte"
+                          "して",
+                          "すて",
+                          "するて",
+                          "しって"
                         ]
                       },
                       "ans": 0,
                       "exp": {
-                        "zh": "する是不规则动词，て形是して。",
-                        "en": "する is an irregular verb; its te-form is して."
+                        "zh": "する是不规则动词，て形是して，读作 shite。",
+                        "en": "する is an irregular verb; its te-form is して, read as shite."
                       }
                     }
                   ]
@@ -4647,25 +4647,1029 @@
                   "id": 2,
                   "titleZh": "试卷 2：形容词 — い形容词与な形容词",
                   "titleEn": "Paper 2: Adjectives — i-Adjectives & na-Adjectives",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "い形容词「高い」的否定形（现在）是？",
+                        "en": "What is the negative (present) form of the i-adjective 高い?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "高くない",
+                          "高いない",
+                          "高ない",
+                          "高いくない"
+                        ],
+                        "en": [
+                          "高くない",
+                          "高いない",
+                          "高ない",
+                          "高いくない"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "い形容词否定：词尾い换成く，加ない。读作 takakunai。",
+                        "en": "i-adjectives: replace い with く and add ない, read as takakunai."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "な形容词「静か」的否定形（现在）是？",
+                        "en": "What is the negative (present) form of the na-adjective 静か?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "静かではない",
+                          "静かくない",
+                          "静かない",
+                          "静かだない"
+                        ],
+                        "en": [
+                          "静かではない",
+                          "静かくない",
+                          "静かない",
+                          "静かだない"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "な形容词否定：加ではない（或じゃない）。读作 shizuka dewa nai。",
+                        "en": "na-adjectives: add ではない (or じゃない), read as shizuka dewa nai."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "い形容词「おいしい」的过去肯定形是？",
+                        "en": "What is the past affirmative form of the i-adjective おいしい?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "おいしかった",
+                          "おいしいだった",
+                          "おいしいた",
+                          "おいしくた"
+                        ],
+                        "en": [
+                          "おいしかった",
+                          "おいしいだった",
+                          "おいしいた",
+                          "おいしくた"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "い形容词过去式：词尾い换成かった。读作 oishikatta。",
+                        "en": "i-adjective past tense: replace い with かった, read as oishikatta."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "な形容词「元気」的过去肯定形是？",
+                        "en": "What is the past affirmative form of the na-adjective 元気?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "元気だった",
+                          "元気かった",
+                          "元気た",
+                          "元気だた"
+                        ],
+                        "en": [
+                          "元気だった",
+                          "元気かった",
+                          "元気た",
+                          "元気だた"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "な形容词过去式：加だった。读作 genki datta。",
+                        "en": "na-adjective past tense: add だった, read as genki datta."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "い形容词「いい」的否定形是？（特殊）",
+                        "en": "What is the negative form of the i-adjective いい? (Exception)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "よくない",
+                          "いくない",
+                          "いいくない",
+                          "いではない"
+                        ],
+                        "en": [
+                          "よくない",
+                          "いくない",
+                          "いいくない",
+                          "いではない"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "いい是特殊形容词，否定形是よくない（不是いくない），读作 yokunai。",
+                        "en": "いい is irregular: negative is よくない, read as yokunai."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "形容词「きれい」属于哪一类？",
+                        "en": "Which type of adjective is きれい?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "い形容词",
+                          "な形容词",
+                          "两者都是",
+                          "两者都不是"
+                        ],
+                        "en": [
+                          "い形容词",
+                          "な形容词",
+                          "两者都是",
+                          "两者都不是"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "きれい虽然词尾是い，但实际是な形容词（きれいな花）。",
+                        "en": "Despite ending in い, きれい is a na-adjective (きれいな花)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "い形容词「赤い」修饰名词时的形式是？",
+                        "en": "How does the i-adjective 赤い modify a noun?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "赤い車",
+                          "赤な車",
+                          "赤の車",
+                          "赤だ車"
+                        ],
+                        "en": [
+                          "赤い車",
+                          "赤な車",
+                          "赤の車",
+                          "赤だ車"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "い形容词直接修饰名词，不需加な或の。读作 akai kuruma。",
+                        "en": "i-adjectives directly modify nouns. Read as akai kuruma."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "な形容词「便利」修饰名词时的形式是？",
+                        "en": "How does the na-adjective 便利 modify a noun?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "便利い道具",
+                          "便利な道具",
+                          "便利の道具",
+                          "便利だ道具"
+                        ],
+                        "en": [
+                          "便利い道具",
+                          "便利な道具",
+                          "便利の道具",
+                          "便利だ道具"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "な形容词修饰名词时加な。读作 benrina dougu。",
+                        "en": "na-adjectives add な before nouns. Read as benrina dougu."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "い形容词「寒い」修饰动词时变成？",
+                        "en": "How does the i-adjective 寒い become an adverb?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "寒く",
+                          "寒いに",
+                          "寒くて",
+                          "寒くに"
+                        ],
+                        "en": [
+                          "寒く",
+                          "寒いに",
+                          "寒くて",
+                          "寒くに"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "い形容词副词化：词尾い换成く。读作 samuku（例：寒くなる）。",
+                        "en": "i-adverbs: replace い with く. Read as samuku (e.g. 寒くなる)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "な形容词「上手」修饰动词时变成？",
+                        "en": "How does the na-adjective 上手 become an adverb?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "上手に",
+                          "上手く",
+                          "上手で",
+                          "上手くに"
+                        ],
+                        "en": [
+                          "上手に",
+                          "上手く",
+                          "上手で",
+                          "上手くに"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "な形容词副词化：加に。读作 jouzu ni（例：上手に話す）。",
+                        "en": "na-adverbs: add に. Read as jouzu ni (e.g. 上手に話す)."
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 3,
                   "titleZh": "试卷 3：存在句 — あります与います",
                   "titleEn": "Paper 3: Existence — Arimasu & Imasu",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「本があります」应该用哪个动词？",
+                        "en": "Which verb is used in 本___?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "あります",
+                          "います",
+                          "です",
+                          "なります"
+                        ],
+                        "en": [
+                          "あります",
+                          "います",
+                          "です",
+                          "なります"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "あります用于无生命事物（书、物品等）。",
+                        "en": "あります is used for inanimate things such as books and objects."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「猫がいます」应该用哪个动词？",
+                        "en": "Which verb is used in 猫___?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "あります",
+                          "います",
+                          "です",
+                          "なります"
+                        ],
+                        "en": [
+                          "あります",
+                          "います",
+                          "です",
+                          "なります"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "います用于有生命的事物（人或动物）。",
+                        "en": "います is used for living things like people and animals."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「〜が___」中，无生命事物应该填？",
+                        "en": "In 〜が___, which verb is used for inanimate things?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "あります",
+                          "います",
+                          "します",
+                          "きます"
+                        ],
+                        "en": [
+                          "あります",
+                          "います",
+                          "します",
+                          "きます"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "无生命（物品、植物、抽象概念）用あります。",
+                        "en": "Inanimate things (objects, plants, abstract concepts) use あります."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「〜が___」中，人或有生命动物应该填？",
+                        "en": "In 〜が___, which verb is used for people or living animals?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "あります",
+                          "います",
+                          "します",
+                          "なります"
+                        ],
+                        "en": [
+                          "あります",
+                          "います",
+                          "します",
+                          "なります"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "有生命的人或动物用います。",
+                        "en": "Living people or animals use います."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「机の上___本があります」应该填哪个助词？",
+                        "en": "Which particle fills the blank in 机の上___本があります?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "に",
+                          "を",
+                          "が",
+                          "で"
+                        ],
+                        "en": [
+                          "に",
+                          "を",
+                          "が",
+                          "で"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「〜に〜があります」是存在句的固定句型。",
+                        "en": "〜に〜があります is the fixed pattern for existence."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「公園___子供がいます」应该填哪个助词？",
+                        "en": "Which particle fills the blank in 公園___子供がいます?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "に",
+                          "を",
+                          "が",
+                          "へ"
+                        ],
+                        "en": [
+                          "に",
+                          "を",
+                          "が",
+                          "へ"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "表示场所的助词是に。",
+                        "en": "に marks the location in existence sentences."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "问「有…吗？」的正确句型是？",
+                        "en": "Which is the correct pattern to ask 'Is there ...?'"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜がありますか",
+                          "〜はあります",
+                          "〜があるだ",
+                          "〜ありますの"
+                        ],
+                        "en": [
+                          "〜がありますか",
+                          "〜はあります",
+                          "〜があるだ",
+                          "〜ありますの"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "疑问句：〜がありますか / 〜がいますか。",
+                        "en": "Questions use 〜がありますか / 〜がいますか."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「冷蔵庫に牛乳があります」的意思是？",
+                        "en": "Which is the meaning of 冷蔵庫に牛乳があります?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "冰箱里有牛奶",
+                          "冰箱在牛奶里",
+                          "牛奶在冰箱外",
+                          "冰箱和牛奶"
+                        ],
+                        "en": [
+                          "冰箱里有牛奶",
+                          "冰箱在牛奶里",
+                          "牛奶在冰箱外",
+                          "冰箱和牛奶"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "场所に + 物が + あります = 在…有…。",
+                        "en": "Place に + object が + あります = there is ... at ..."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「部屋に誰がいますか」的正确句型使用了哪个动词？",
+                        "en": "Which verb is used in 部屋に誰がいますか?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "います",
+                          "あります",
+                          "です",
+                          "します"
+                        ],
+                        "en": [
+                          "います",
+                          "あります",
+                          "です",
+                          "します"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "誰（谁）指人，用います提问。",
+                        "en": "誰 (who) refers to people, so います is used."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "被问「何がありますか」时，回答应该用？",
+                        "en": "When asked 何がありますか, what should the answer use?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜がいます",
+                          "〜があります",
+                          "〜はいます",
+                          "〜だ"
+                        ],
+                        "en": [
+                          "〜がいます",
+                          "〜があります",
+                          "〜はいます",
+                          "〜だ"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "何（什么）指物，用あります回答。",
+                        "en": "何 (what) refers to objects, so あります is used."
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 4,
                   "titleZh": "试卷 4：日常会话 — 邀请、拒绝、请求",
                   "titleEn": "Paper 4: Daily Conversation — Inviting, Declining, Requesting",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "邀请别人一起去，应该用？",
+                        "en": "Which phrase invites someone to go together?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "一緒に行きませんか",
+                          "一緒に行きます",
+                          "一緒に行きました",
+                          "一緒に行く"
+                        ],
+                        "en": [
+                          "一緒に行きませんか",
+                          "一緒に行きます",
+                          "一緒に行きました",
+                          "一緒に行く"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜ませんか是礼貌的邀请句型。",
+                        "en": "〜ませんか is the polite invitation pattern."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「〜ませんか」主要用于？",
+                        "en": "What is 〜ませんか mainly used for?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "邀请",
+                          "命令",
+                          "拒绝",
+                          "禁止"
+                        ],
+                        "en": [
+                          "邀请",
+                          "命令",
+                          "拒绝",
+                          "禁止"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜ませんか：礼貌地邀请对方。",
+                        "en": "〜ませんか: politely invite someone."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "礼貌地拒绝邀请，应该用？",
+                        "en": "Which phrase politely declines an invitation?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "すみません、ちょっと…",
+                          "いいえ、行きます",
+                          "はい、行きません",
+                          "だめ"
+                        ],
+                        "en": [
+                          "すみません、ちょっと…",
+                          "いいえ、行きます",
+                          "はい、行きません",
+                          "だめ"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「すみません、ちょっと…」是典型的委婉拒绝。",
+                        "en": "すみません、ちょっと… is a typical soft refusal."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "提议一起做某事，应该用？",
+                        "en": "Which ending suggests doing something together?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜ましょう",
+                          "〜ませんか",
+                          "〜てください",
+                          "〜ないでください"
+                        ],
+                        "en": [
+                          "〜ましょう",
+                          "〜ませんか",
+                          "〜てください",
+                          "〜ないでください"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜ましょう：提议一起做某事。",
+                        "en": "〜ましょう: suggest doing something together."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "请求别人做某事，应该用？",
+                        "en": "Which ending makes a polite request?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜てください",
+                          "〜ましょう",
+                          "〜ませんか",
+                          "〜ないでください"
+                        ],
+                        "en": [
+                          "〜てください",
+                          "〜ましょう",
+                          "〜ませんか",
+                          "〜ないでください"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜てください：请求对方做某事。",
+                        "en": "〜てください: polite request."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "请求别人不要做某事，应该用？",
+                        "en": "Which ending makes a polite negative request?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜ないでください",
+                          "〜てください",
+                          "〜ましょう",
+                          "〜ませんか"
+                        ],
+                        "en": [
+                          "〜ないでください",
+                          "〜てください",
+                          "〜ましょう",
+                          "〜ませんか"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜ないでください：请求对方不要做某事。",
+                        "en": "〜ないでください: polite negative request."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "请求许可（可以…吗？），应该用？",
+                        "en": "Which pattern is used to ask permission?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜てもいいですか",
+                          "〜てはいけません",
+                          "〜てください",
+                          "〜ましょう"
+                        ],
+                        "en": [
+                          "〜てもいいですか",
+                          "〜てはいけません",
+                          "〜てください",
+                          "〜ましょう"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜てもいいですか：请求许可。",
+                        "en": "〜てもいいですか: asking for permission."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示禁止（不可以…），应该用？",
+                        "en": "Which pattern expresses prohibition?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜てはいけません",
+                          "〜てもいいですか",
+                          "〜てください",
+                          "〜ましょう"
+                        ],
+                        "en": [
+                          "〜てはいけません",
+                          "〜てもいいですか",
+                          "〜てください",
+                          "〜ましょう"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜てはいけません：表示禁止。",
+                        "en": "〜てはいけません: prohibition."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "请求别人帮忙，应该用？",
+                        "en": "Which phrase asks someone for a favor?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "手伝ってくれませんか",
+                          "手伝いました",
+                          "手伝いません",
+                          "手伝ってください"
+                        ],
+                        "en": [
+                          "手伝ってくれませんか",
+                          "手伝いました",
+                          "手伝いません",
+                          "手伝ってください"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜てくれませんか：礼貌地请求对方帮忙。",
+                        "en": "〜てくれませんか: politely ask someone for a favor."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "礼貌地请求或委托时，应该用？",
+                        "en": "Which phrase is used to politely request or entrust?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "〜をお願いします",
+                          "〜をください",
+                          "〜がほしい",
+                          "〜たいです"
+                        ],
+                        "en": [
+                          "〜をお願いします",
+                          "〜をください",
+                          "〜がほしい",
+                          "〜たいです"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜をお願いします：礼貌地请求或委托。",
+                        "en": "〜をお願いします: polite request or entrust."
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": 5,
                   "titleZh": "试卷 5：时间表达 — 年月日与频率",
                   "titleEn": "Paper 5: Time Expressions — Dates & Frequency",
-                  "questions": []
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「去年」读作？",
+                        "en": "How is 去年 read?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "きょねん",
+                          "きよねん",
+                          "さくねん",
+                          "ことし"
+                        ],
+                        "en": [
+                          "きょねん",
+                          "きよねん",
+                          "さくねん",
+                          "ことし"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "去年读作きょねん，意为去年。",
+                        "en": "去年 is read きょねん, meaning last year."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「来年」读作？",
+                        "en": "How is 来年 read?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "らいねん",
+                          "きよねん",
+                          "さくねん",
+                          "ことし"
+                        ],
+                        "en": [
+                          "らいねん",
+                          "きよねん",
+                          "さくねん",
+                          "ことし"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "来年读作らいねん，意为明年。",
+                        "en": "来年 is read らいねん, meaning next year."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「毎日」读作？",
+                        "en": "How is 毎日 read?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "まいにち",
+                          "まいひ",
+                          "まいにち",
+                          "まいにじ"
+                        ],
+                        "en": [
+                          "まいにち",
+                          "まいひ",
+                          "まいにち",
+                          "まいにじ"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "毎日读作まいにち，意为每天。",
+                        "en": "毎日 is read まいにち, meaning every day."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「〜時〜分」中，「時」读作？",
+                        "en": "In 〜時〜分, how is 時 read?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "じ",
+                          "とき",
+                          "し",
+                          "けい"
+                        ],
+                        "en": [
+                          "じ",
+                          "とき",
+                          "し",
+                          "けい"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜時读作〜じ（如 3 時 = さんじ）。",
+                        "en": "〜時 is read 〜じ (e.g. 3 時 = さんじ)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「午前」的意思是？",
+                        "en": "What does 午前 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "上午",
+                          "下午",
+                          "晚上",
+                          "凌晨"
+                        ],
+                        "en": [
+                          "上午",
+                          "下午",
+                          "晚上",
+                          "凌晨"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "午前（ごぜん）：上午/早上。",
+                        "en": "午前 (ごぜん): AM / morning."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「午後」的意思是？",
+                        "en": "What does 午後 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "上午",
+                          "下午",
+                          "晚上",
+                          "凌晨"
+                        ],
+                        "en": [
+                          "上午",
+                          "下午",
+                          "晚上",
+                          "凌晨"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "午後（ごご）：下午。",
+                        "en": "午後 (ごご): PM / afternoon."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「月曜日___金曜日まで」应该填哪个助词？",
+                        "en": "Which particle fills the blank in 月曜日___金曜日まで?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "から",
+                          "まで",
+                          "より",
+                          "ほど"
+                        ],
+                        "en": [
+                          "から",
+                          "まで",
+                          "より",
+                          "ほど"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜から〜まで：从…到…。",
+                        "en": "〜から〜まで: from ... to ..."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「总是」的日语是？",
+                        "en": "Which word means 'always'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "いつも",
+                          "たまに",
+                          "ときどき",
+                          "ぜんぜん"
+                        ],
+                        "en": [
+                          "いつも",
+                          "たまに",
+                          "ときどき",
+                          "ぜんぜん"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "いつも：总是、经常。",
+                        "en": "いつも: always."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「偶尔」的日语是？",
+                        "en": "Which word means 'occasionally'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "たまに",
+                          "いつも",
+                          "ぜんぜん",
+                          "まいにち"
+                        ],
+                        "en": [
+                          "たまに",
+                          "いつも",
+                          "ぜんぜん",
+                          "まいにち"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "たまに：偶尔、有时候。",
+                        "en": "たまに: occasionally."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「〜前に」的意思是？",
+                        "en": "What does 〜前に mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "…之前",
+                          "…之后",
+                          "…的时候",
+                          "…期间"
+                        ],
+                        "en": [
+                          "…之前",
+                          "…之后",
+                          "…的时候",
+                          "…期间"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "〜前に：在…之前（时间）。",
+                        "en": "〜前に: before (in time)."
+                      }
+                    }
+                  ]
                 }
               ]
             },
