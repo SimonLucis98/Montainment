@@ -293,7 +293,9 @@
 
         <!-- 题目 -->
         <div class="admin-panel tab-content hidden" id="tab-questions">
-          <h2>❓ 题目管理 <span class="badge-count" id="questionBadge">0</span></h2>
+          <h2>❓ 题目管理 <span class="badge-count" id="questionBadge">0</span>
+            <button type="button" class="btn-admin btn-admin-success" id="bulkImportBtn" style="margin-left:auto; padding:6px 18px; font-size:13px;">📥 批量导入题目</button>
+          </h2>
           <div class="admin-form-row">
             <div class="admin-form-group"><label>所属类别</label><select id="qCatSelect"><option value="">-- 请选择 --</option></select></div>
             <div class="admin-form-group"><label>所属科目</label><select id="qSubjectSelect"><option value="">-- 请先选类别 --</option></select></div>
@@ -1860,9 +1862,188 @@
         switchTab('categories');
       }
 
+      // ========== 批量导入题目 ==========
+      document.getElementById('bulkImportBtn').addEventListener('click', function() {
+        const catId = document.getElementById('qCatSelect').value;
+        const subjectId = document.getElementById('qSubjectSelect').value;
+        const level = parseInt(document.getElementById('qDiffSelect').value);
+        const paperId = parseInt(document.getElementById('qPaperSelect').value);
+
+        const info = document.getElementById('bulkTargetInfo');
+        if (!catId || !subjectId || isNaN(level) || isNaN(paperId)) {
+          info.innerHTML = '<span style="color:#d14c4c;">⚠️ 请先在页面上选择 类别 → 科目 → 难度 → 试卷，然后再点批量导入</span>';
+        } else {
+          const paper = getPaper(catId, subjectId, level, paperId);
+          if (paper) {
+            const existing = paper.questions ? paper.questions.length : 0;
+            info.innerHTML = '🎯 目标试卷：<strong>' + paper.titleZh + '</strong>（当前 ' + existing + ' 题）';
+          }
+        }
+
+        document.getElementById('bulkImportOverlay').classList.remove('hidden');
+        document.getElementById('bulkImportStatus').textContent = '';
+        document.getElementById('bulkImportStatus').className = 'upload-status';
+      });
+
+      document.getElementById('bulkImportCancelBtn').addEventListener('click', function() {
+        document.getElementById('bulkImportOverlay').classList.add('hidden');
+      });
+
+      document.getElementById('bulkImportFile').addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) { document.getElementById('bulkImportText').value = e.target.result; };
+        reader.readAsText(file);
+      });
+
+      document.getElementById('bulkImportConfirmBtn').addEventListener('click', function() {
+        const status = document.getElementById('bulkImportStatus');
+        const catId = document.getElementById('qCatSelect').value;
+        const subjectId = document.getElementById('qSubjectSelect').value;
+        const level = parseInt(document.getElementById('qDiffSelect').value);
+        const paperId = parseInt(document.getElementById('qPaperSelect').value);
+
+        if (!catId || !subjectId || isNaN(level) || isNaN(paperId)) {
+          status.textContent = '❌ 请先在页面上选择试卷';
+          status.className = 'upload-status error';
+          return;
+        }
+
+        const paper = getPaper(catId, subjectId, level, paperId);
+        if (!paper) {
+          status.textContent = '❌ 试卷不存在';
+          status.className = 'upload-status error';
+          return;
+        }
+
+        const text = document.getElementById('bulkImportText').value.trim();
+        if (!text) {
+          status.textContent = '❌ 请输入 JSON 内容或上传文件';
+          status.className = 'upload-status error';
+          return;
+        }
+
+        let parsed;
+        try { parsed = JSON.parse(text); }
+        catch (e) {
+          status.textContent = '❌ JSON 格式错误：' + e.message;
+          status.className = 'upload-status error';
+          return;
+        }
+
+        let questions = [];
+        if (Array.isArray(parsed)) questions = parsed;
+        else if (parsed && Array.isArray(parsed.questions)) questions = parsed.questions;
+        else {
+          status.textContent = '❌ 格式错误：需要一个数组，或 {questions: [...]} 对象';
+          status.className = 'upload-status error';
+          return;
+        }
+
+        if (questions.length === 0) {
+          status.textContent = '❌ 没有题目';
+          status.className = 'upload-status error';
+          return;
+        }
+
+        const valid = [];
+        const errors = [];
+        questions.forEach(function(q, i) {
+          if (!q || !q.q || !q.q.zh || !q.q.en ||
+              !q.opts || !Array.isArray(q.opts.zh) || !Array.isArray(q.opts.en) ||
+              q.opts.zh.length !== 4 || q.opts.en.length !== 4 ||
+              typeof q.ans !== 'number' || q.ans < 0 || q.ans > 3 ||
+              !q.exp || !q.exp.zh || !q.exp.en) {
+            errors.push(i + 1);
+          } else {
+            valid.push(q);
+          }
+        });
+
+        if (valid.length === 0) {
+          status.textContent = '❌ 所有题目格式不正确，请检查字段 q / opts / ans / exp';
+          status.className = 'upload-status error';
+          return;
+        }
+
+        const mode = document.getElementById('bulkImportMode').value;
+        if (!paper.questions) paper.questions = [];
+
+        if (mode === 'replace') {
+          if (!confirm('将替换试卷「' + paper.titleZh + '」的全部 ' + paper.questions.length + ' 道题目，确定吗？')) return;
+          paper.questions = valid;
+        } else {
+          paper.questions = paper.questions.concat(valid);
+        }
+
+        renderQuestions();
+        updateStats();
+        updateJsonEditor();
+        populateSelects();
+
+        const errMsg = errors.length > 0 ? '（' + errors.length + ' 题格式错误已跳过：第 ' + errors.join(',') + ' 条）' : '';
+        status.textContent = '✅ 成功导入 ' + valid.length + ' 题' + errMsg + '，当前试卷共 ' + paper.questions.length + ' 题';
+        status.className = 'upload-status success';
+        showToast('✅ 成功导入 ' + valid.length + ' 题', 'success');
+
+        document.getElementById('bulkImportText').value = '';
+        document.getElementById('bulkImportFile').value = '';
+      });
+
       window.initAdmin = initAdmin;
     })();
   </script>
+
+  <!-- 📥 批量导入题目 弹窗 -->
+  <div class="login-overlay hidden" id="bulkImportOverlay" style="z-index:1001;">
+    <div class="login-box" style="max-width:760px; width:95%; text-align:left;">
+      <h2 style="margin-bottom:6px;">📥 批量导入题目</h2>
+      <p style="color:#6b7a8f; font-size:13px; margin-bottom:16px;">粘贴 JSON 数组，或上传 .json 文件。将导入到当前选中的试卷。</p>
+
+      <div class="admin-form-group">
+        <label>🎯 目标试卷</label>
+        <div id="bulkTargetInfo" style="padding:10px 14px; background:#f6f8fc; border-radius:10px; font-size:13px; color:#0b1c33; line-height:1.5;">
+          请先在「题目管理」页选择 类别 → 科目 → 难度 → 试卷
+        </div>
+      </div>
+
+      <div class="admin-form-group">
+        <label>导入模式</label>
+        <select id="bulkImportMode">
+          <option value="append">➕ 追加到现有题目</option>
+          <option value="replace">🔄 替换所有题目（清空后导入）</option>
+        </select>
+      </div>
+
+      <div class="admin-form-group">
+        <label>JSON 内容（数组格式）</label>
+        <textarea id="bulkImportText" rows="12" style="font-family:'Courier New',monospace; font-size:12px;" placeholder='[
+  {
+    "q": { "zh": "题目中文", "en": "Question EN" },
+    "opts": {
+      "zh": ["A选项", "B选项", "C选项", "D选项"],
+      "en": ["Option A", "Option B", "Option C", "Option D"]
+    },
+    "ans": 0,
+    "exp": { "zh": "中文解析", "en": "English explanation" }
+  }
+]'></textarea>
+      </div>
+
+      <div class="admin-form-group">
+        <label>或上传 JSON 文件</label>
+        <input type="file" id="bulkImportFile" accept=".json,application/json" style="padding:8px; border:2px dashed #e6ecf3; border-radius:12px; background:#fafcff;" />
+      </div>
+
+      <div class="upload-status" id="bulkImportStatus"></div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+        <button type="button" class="btn-admin btn-admin-success" id="bulkImportConfirmBtn">✅ 确认导入</button>
+        <button type="button" class="btn-admin btn-admin-outline" id="bulkImportCancelBtn">取消</button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
