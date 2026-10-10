@@ -8220,132 +8220,132 @@
                     {
                       "q": {
                         "zh": "古典日语助动词「けり」主要表示什么？",
-                        "en": "What does the classical Japanese auxiliary けり mainly express?"
+                        "en": "What does the classical Japanese auxiliary keri mainly express?"
                       },
                       "opts": {
                         "zh": [
                           "完了",
-                          "過去（回想）",
+                          "过去（回想）",
                           "推量",
                           "打消"
                         ],
                         "en": [
-                          "完了",
-                          "過去（回想）",
-                          "推量",
-                          "打消"
+                          "Completion (perfective)",
+                          "Past (recollection)",
+                          "Conjecture",
+                          "Negation"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "「けり」是过去助动词，常用于和歌、物语中表回忆。",
-                        "en": "けり is a past auxiliary, often used in waka and monogatari for recollection."
+                        "en": "Keri is a past auxiliary, often used in waka and monogatari for recollection."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语「〜べし」的意思是？",
-                        "en": "What does the classical Japanese 〜べし mean?"
+                        "en": "What does the classical Japanese 〜beshi mean?"
                       },
                       "opts": {
                         "zh": [
                           "禁止",
-                          "過去",
+                          "过去",
                           "应当／必须",
                           "否定"
                         ],
                         "en": [
-                          "禁止",
-                          "過去",
-                          "应当／必须",
-                          "否定"
+                          "Prohibition",
+                          "Past",
+                          "Should / Must",
+                          "Negation"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「べし」表示应当、必须、推量等多种意思，依上下文而定。",
-                        "en": "べし expresses 'should / must / probably', depending on context."
+                        "en": "Beshi expresses 'should / must / probably', depending on context."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语「〜む（ん）」主要表示？",
-                        "en": "What does the classical Japanese 〜む（ん） mainly express?"
+                        "en": "What does the classical Japanese 〜mu (n) mainly express?"
                       },
                       "opts": {
                         "zh": [
                           "推量／意志",
-                          "過去",
+                          "过去",
                           "否定",
                           "完了"
                         ],
                         "en": [
-                          "推量／意志",
-                          "過去",
-                          "否定",
-                          "完了"
+                          "Conjecture / Volition",
+                          "Past",
+                          "Negation",
+                          "Completion"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "「む（ん）」表示推量或意志，相当于现代日语的「〜だろう／〜しよう」。",
-                        "en": "む（ん） expresses conjecture or volition, equivalent to modern 〜だろう／〜しよう."
+                        "en": "Mu (n) expresses conjecture or volition, equivalent to modern 〜darou / 〜shiyou."
                       }
                     },
                     {
                       "q": {
                         "zh": "「風吹けば」中的「吹け」是什么活用形？",
-                        "en": "In 風吹けば, what conjugation form is 吹け?"
+                        "en": "In Kaze fukeba, what conjugation form is fuke?"
                       },
                       "opts": {
                         "zh": [
                           "未然形",
-                          "連用形",
+                          "连用形",
                           "已然形",
                           "命令形"
                         ],
                         "en": [
-                          "未然形",
-                          "連用形",
-                          "已然形",
-                          "命令形"
+                          "Mizenkei (irrealis)",
+                          "Renyokei (continuative)",
+                          "Izenkei (realis)",
+                          "Meireikei (imperative)"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「已然形 + ば」表示确定条件，相当于现代日语的「〜ので／〜と」。",
-                        "en": "已然形 + ば expresses a definite condition, like modern 〜ので／〜と."
+                        "en": "Izenkei + ba expresses a definite condition, like modern 〜node / 〜to."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语「〜ず」的意思是？",
-                        "en": "What does the classical Japanese 〜ず mean?"
+                        "en": "What does the classical Japanese 〜zu mean?"
                       },
                       "opts": {
                         "zh": [
-                          "過去",
+                          "过去",
                           "完了",
                           "否定",
                           "推量"
                         ],
                         "en": [
-                          "過去",
-                          "完了",
-                          "否定",
-                          "推量"
+                          "Past",
+                          "Completion",
+                          "Negation",
+                          "Conjecture"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「ず」是否定助动词，相当于现代日语的「〜ない」。",
-                        "en": "ず is a negative auxiliary, equivalent to modern 〜ない."
+                        "en": "Zu is a negative auxiliary, equivalent to modern 〜nai."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语「ありがたし」的现代日语对应是？",
-                        "en": "What is the modern Japanese equivalent of the classical ありがたし?"
+                        "en": "What is the modern Japanese equivalent of the classical arigatashi?"
                       },
                       "opts": {
                         "zh": [
@@ -8355,97 +8355,97 @@
                           "うれしい"
                         ],
                         "en": [
-                          "ありがとう",
-                          "めずらしい",
-                          "ありがたい",
-                          "うれしい"
+                          "arigatou",
+                          "mezurashii",
+                          "arigatai",
+                          "ureshii"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「ありがたし」→现代「ありがたい」，意为难得、值得感谢。",
-                        "en": "ありがたし → modern ありがたい, meaning 'precious / grateful'."
+                        "en": "Arigatashi → modern arigatai, meaning 'precious / grateful'."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语「をかし」的意思是？",
-                        "en": "What does the classical Japanese をかし mean?"
+                        "en": "What does the classical Japanese wokashi mean?"
                       },
                       "opts": {
                         "zh": [
-                          "おかしい／趣がある",
-                          "うつくしい",
-                          "こわい",
-                          "かなしい"
+                          "有趣／有风情",
+                          "美丽",
+                          "可怕",
+                          "悲伤"
                         ],
                         "en": [
-                          "おかしい／趣がある",
-                          "うつくしい",
-                          "こわい",
-                          "かなしい"
+                          "Charming / Witty",
+                          "Beautiful",
+                          "Scary",
+                          "Sad"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "「をかし」是平安文学中常见的美的概念，表示有趣、有风情。",
-                        "en": "をかし is an aesthetic term in Heian literature meaning 'charming / witty'."
+                        "en": "Wokashi is an aesthetic term in Heian literature meaning 'charming / witty'."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语「いと」的意思是？",
-                        "en": "What does the classical Japanese いと mean?"
+                        "en": "What does the classical Japanese ito mean?"
                       },
                       "opts": {
                         "zh": [
-                          "糸",
-                          "とても",
-                          "いっしょに",
-                          "いつも"
+                          "糸（丝线）",
+                          "非常",
+                          "一起",
+                          "总是"
                         ],
                         "en": [
-                          "糸",
-                          "とても",
-                          "いっしょに",
-                          "いつも"
+                          "Thread",
+                          "Very",
+                          "Together",
+                          "Always"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "「いと」是副词，意为非常、很，如「いとをかし」（非常有趣）。",
-                        "en": "いと is an adverb meaning 'very', as in いとをかし (very charming)."
+                        "en": "Ito is an adverb meaning 'very', as in ito wokashi (very charming)."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语「〜けむ」表示什么？",
-                        "en": "What does the classical Japanese 〜けむ express?"
+                        "en": "What does the classical Japanese 〜kemu express?"
                       },
                       "opts": {
                         "zh": [
                           "禁止",
                           "命令",
                           "完了",
-                          "過去推量"
+                          "过去推量"
                         ],
                         "en": [
-                          "禁止",
-                          "命令",
-                          "完了",
-                          "過去推量"
+                          "Prohibition",
+                          "Command",
+                          "Completion",
+                          "Past conjecture"
                         ]
                       },
                       "ans": 3,
                       "exp": {
                         "zh": "「けむ」是过去推量助动词，相当于「〜ただろう」。",
-                        "en": "けむ is a past conjectural auxiliary, equivalent to 〜ただろう."
+                        "en": "Kemu is a past conjectural auxiliary, equivalent to 〜tarou."
                       }
                     },
                     {
                       "q": {
                         "zh": "古典日语断定助动词「なり」的接续方式是？",
-                        "en": "How does the classical copula なり attach?"
+                        "en": "How does the classical copula nari attach?"
                       },
                       "opts": {
                         "zh": [
@@ -8455,16 +8455,16 @@
                           "接终止形"
                         ],
                         "en": [
-                          "接未然形",
-                          "接连体形或名词",
-                          "接命令形",
-                          "接终止形"
+                          "Attaches to mizenkei (irrealis)",
+                          "Attaches to rentaikei or nouns",
+                          "Attaches to meireikei (imperative)",
+                          "Attaches to shuushikei (conclusive)"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "断定「なり」接在名词或连体形之后，相当于现代日语的「〜である」。",
-                        "en": "The copula なり attaches to nouns or the attributive form, like modern 〜である."
+                        "en": "The copula nari attaches to nouns or the attributive form, like modern 〜de aru."
                       }
                     }
                   ]
@@ -8477,7 +8477,7 @@
                     {
                       "q": {
                         "zh": "「ドキドキ」表示什么？",
-                        "en": "What does ドキドキ express?"
+                        "en": "What does doki-doki express?"
                       },
                       "opts": {
                         "zh": [
@@ -8487,22 +8487,22 @@
                           "风吹声"
                         ],
                         "en": [
-                          "心跳加速／紧张激动",
-                          "物体滚动",
-                          "水流声",
-                          "风吹声"
+                          "Heart pounding (nervous/excited)",
+                          "Objects rolling",
+                          "Sound of water flowing",
+                          "Sound of wind blowing"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "「ドキドキ」形容心脏剧烈跳动，用于紧张、期待或恐惧。",
-                        "en": "ドキドキ describes a pounding heart — from nervousness, excitement, or fear."
+                        "en": "Doki-doki describes a pounding heart — from nervousness, excitement, or fear."
                       }
                     },
                     {
                       "q": {
                         "zh": "「ワクワク」表示什么？",
-                        "en": "What does ワクワク express?"
+                        "en": "What does waku-waku express?"
                       },
                       "opts": {
                         "zh": [
@@ -8512,22 +8512,22 @@
                           "疼痛"
                         ],
                         "en": [
-                          "烦躁不安",
-                          "紧张害怕",
-                          "期待兴奋",
-                          "疼痛"
+                          "Restlessness",
+                          "Nervousness / Fear",
+                          "Excited anticipation",
+                          "Pain"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「ワクワク」形容因期待而心情激动。",
-                        "en": "ワクワク expresses excitement from anticipation."
+                        "en": "Waku-waku expresses excitement from anticipation."
                       }
                     },
                     {
                       "q": {
                         "zh": "「キラキラ」表示什么？",
-                        "en": "What does キラキラ express?"
+                        "en": "What does kira-kira express?"
                       },
                       "opts": {
                         "zh": [
@@ -8537,22 +8537,22 @@
                           "蓬松"
                         ],
                         "en": [
-                          "缓慢移动",
-                          "闪闪发光",
-                          "湿漉漉",
-                          "蓬松"
+                          "Slow movement",
+                          "Sparkling / Glittering",
+                          "Wet / Damp",
+                          "Fluffy"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "「キラキラ」形容星星、宝石等闪烁的样子。",
-                        "en": "キラキラ describes things like stars or jewels sparkling."
+                        "en": "Kira-kira describes things like stars or jewels sparkling."
                       }
                     },
                     {
                       "q": {
                         "zh": "「ペラペラ」形容什么？",
-                        "en": "What does ペラペラ describe?"
+                        "en": "What does pera-pera describe?"
                       },
                       "opts": {
                         "zh": [
@@ -8562,22 +8562,22 @@
                           "说话流利／翻页声"
                         ],
                         "en": [
-                          "柔软蓬松",
-                          "安静无声",
-                          "笨重",
-                          "说话流利／翻页声"
+                          "Soft and fluffy",
+                          "Silent",
+                          "Heavy",
+                          "Fluent speech / Sound of flipping pages"
                         ]
                       },
                       "ans": 3,
                       "exp": {
                         "zh": "「ペラペラ」形容外语流利，也形容翻书页的声音。",
-                        "en": "ペラペラ describes fluent foreign speech or the sound of flipping pages."
+                        "en": "Pera-pera describes fluent foreign speech or the sound of flipping pages."
                       }
                     },
                     {
                       "q": {
                         "zh": "「ぐるぐる」表示什么？",
-                        "en": "What does ぐるぐる express?"
+                        "en": "What does guru-guru express?"
                       },
                       "opts": {
                         "zh": [
@@ -8587,22 +8587,22 @@
                           "突然停止"
                         ],
                         "en": [
-                          "慢慢移动",
-                          "笔直前进",
-                          "一圈一圈地转",
-                          "突然停止"
+                          "Moving slowly",
+                          "Going straight",
+                          "Spinning round and round",
+                          "Stopping suddenly"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「ぐるぐる」形容东西不停旋转或缠绕多圈。",
-                        "en": "ぐるぐる describes something spinning or wrapping around repeatedly."
+                        "en": "Guru-guru describes something spinning or wrapping around repeatedly."
                       }
                     },
                     {
                       "q": {
                         "zh": "「のろのろ」形容什么？",
-                        "en": "What does のろのろ describe?"
+                        "en": "What does noro-noro describe?"
                       },
                       "opts": {
                         "zh": [
@@ -8612,22 +8612,22 @@
                           "安静、无声"
                         ],
                         "en": [
-                          "缓慢、慢吞吞",
-                          "迅速、飞快",
-                          "轻快、灵活",
-                          "安静、无声"
+                          "Slow and sluggish",
+                          "Fast and swift",
+                          "Nimble and light",
+                          "Quiet and silent"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "「のろのろ」形容动作慢吞吞，比如堵车时缓慢移动。",
-                        "en": "のろのろ describes slow, sluggish movement, like traffic crawling."
+                        "en": "Noro-noro describes slow, sluggish movement, like traffic crawling."
                       }
                     },
                     {
                       "q": {
                         "zh": "「しっかり」表示什么？",
-                        "en": "What does しっかり express?"
+                        "en": "What does shikkari express?"
                       },
                       "opts": {
                         "zh": [
@@ -8637,22 +8637,22 @@
                           "随便、敷衍"
                         ],
                         "en": [
-                          "松散、不牢固",
-                          "结实、牢固／可靠",
-                          "软弱、无力",
-                          "随便、敷衍"
+                          "Loose and unstable",
+                          "Firm and reliable",
+                          "Weak and powerless",
+                          "Careless and perfunctory"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "「しっかり」形容牢固、确实，也指人可靠、做事踏实。",
-                        "en": "しっかり means 'firmly / solidly', or 'reliable / dependable' for people."
+                        "en": "Shikkari means 'firmly / solidly', or 'reliable / dependable' for people."
                       }
                     },
                     {
                       "q": {
                         "zh": "「そっと」表示什么？",
-                        "en": "What does そっと express?"
+                        "en": "What does sotto express?"
                       },
                       "opts": {
                         "zh": [
@@ -8662,22 +8662,22 @@
                           "愤怒地"
                         ],
                         "en": [
-                          "用力地",
-                          "快速地",
-                          "轻轻地／悄悄地",
-                          "愤怒地"
+                          "With force",
+                          "Quickly",
+                          "Gently / Quietly",
+                          "Angrily"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「そっと」表示动作轻柔、悄悄地进行。",
-                        "en": "そっと describes doing something gently or quietly."
+                        "en": "Sotto describes doing something gently or quietly."
                       }
                     },
                     {
                       "q": {
                         "zh": "「ぺこぺこ」除了表示肚子饿，还表示？",
-                        "en": "Besides 'hungry', what else does ぺこぺこ express?"
+                        "en": "Besides 'hungry', what else does peko-peko express?"
                       },
                       "opts": {
                         "zh": [
@@ -8687,22 +8687,22 @@
                           "颜色鲜艳"
                         ],
                         "en": [
-                          "不停地点头／不停鞠躬",
-                          "走路很快",
-                          "声音很大",
-                          "颜色鲜艳"
+                          "Repeatedly nodding / bowing",
+                          "Walking fast",
+                          "Loud voice",
+                          "Bright colors"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "「ぺこぺこ」也表示不停地点头或鞠躬（ペコペコ）。",
-                        "en": "ぺこぺこ also means repeatedly nodding or bowing."
+                        "en": "Peko-peko also means repeatedly nodding or bowing."
                       }
                     },
                     {
                       "q": {
                         "zh": "「うっかり」表示什么？",
-                        "en": "What does うっかり express?"
+                        "en": "What does ukkari express?"
                       },
                       "opts": {
                         "zh": [
@@ -8712,16 +8712,16 @@
                           "认真地"
                         ],
                         "en": [
-                          "故意地",
-                          "小心地",
-                          "一不留神／无意中",
-                          "认真地"
+                          "On purpose",
+                          "Carefully",
+                          "Carelessly / Inadvertently",
+                          "Seriously"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「うっかり」表示因不留神而犯错，如「うっかり忘れた」。",
-                        "en": "うっかり means 'carelessly / inadvertently', e.g. うっかり忘れた (accidentally forgot)."
+                        "en": "Ukkari means 'carelessly / inadvertently', e.g. ukkari wasureta (accidentally forgot)."
                       }
                     }
                   ]
@@ -8991,7 +8991,7 @@
                     {
                       "q": {
                         "zh": "「吾輩は猫である」的作者是？",
-                        "en": "Who wrote 吾輩は猫である?"
+                        "en": "Who wrote Wagahai wa Neko de Aru?"
                       },
                       "opts": {
                         "zh": [
@@ -9001,22 +9001,22 @@
                           "夏目漱石"
                         ],
                         "en": [
-                          "太宰治",
-                          "芥川龍之介",
-                          "川端康成",
-                          "夏目漱石"
+                          "Osamu Dazai",
+                          "Ryunosuke Akutagawa",
+                          "Yasunari Kawabata",
+                          "Natsume Soseki"
                         ]
                       },
                       "ans": 3,
                       "exp": {
                         "zh": "「吾輩は猫である」是夏目漱石 1905 年发表的长篇小说。",
-                        "en": "吾輩は猫である is a novel by 夏目漱石, published in 1905."
+                        "en": "Wagahai wa Neko de Aru is a novel by Natsume Soseki, published in 1905."
                       }
                     },
                     {
                       "q": {
                         "zh": "「国境の長いトンネルを抜けると雪国であった」出自哪部作品？",
-                        "en": "Which work opens with 国境の長いトンネルを抜けると雪国であった?"
+                        "en": "Which work opens with 'Kokkyou no nagai tonneru wo nukeru to yukiguni de atta'?"
                       },
                       "opts": {
                         "zh": [
@@ -9026,22 +9026,22 @@
                           "「古都」"
                         ],
                         "en": [
-                          "「伊豆の踊子」",
-                          "「雪国」",
-                          "「千羽鶴」",
-                          "「古都」"
+                          "Izu no Odoriko",
+                          "Yukiguni (Snow Country)",
+                          "Senbazuru (Thousand Cranes)",
+                          "Koto (The Old Capital)"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "这是川端康成《雪国》的著名开篇。",
-                        "en": "This is the famous opening line of 川端康成's 雪国."
+                        "en": "This is the famous opening line of Yasunari Kawabata's Yukiguni."
                       }
                     },
                     {
                       "q": {
                         "zh": "「メロスは激怒した」出自哪部作品？",
-                        "en": "Which work begins with メロスは激怒した?"
+                        "en": "Which work begins with 'Merosu wa gekido shita'?"
                       },
                       "opts": {
                         "zh": [
@@ -9051,22 +9051,22 @@
                           "「坊っちゃん」"
                         ],
                         "en": [
-                          "「人間失格」",
-                          "「斜陽」",
-                          "「走れメロス」",
-                          "「坊っちゃん」"
+                          "Ningen Shikkaku (No Longer Human)",
+                          "Shayou (The Setting Sun)",
+                          "Hashire Merosu (Run, Melos!)",
+                          "Botchan"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "这是太宰治《走れメロス》的开篇。",
-                        "en": "This is the opening of 太宰治's 走れメロス."
+                        "en": "This is the opening of Osamu Dazai's Hashire Merosu."
                       }
                     },
                     {
                       "q": {
                         "zh": "《羅生門》的作者是？",
-                        "en": "Who wrote 羅生門?"
+                        "en": "Who wrote Rashoumon?"
                       },
                       "opts": {
                         "zh": [
@@ -9076,22 +9076,22 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "芥川龍之介",
-                          "夏目漱石",
-                          "太宰治",
-                          "宮沢賢治"
+                          "Ryunosuke Akutagawa",
+                          "Natsume Soseki",
+                          "Osamu Dazai",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "《羅生門》是芥川龍之介 1915 年发表的短篇小说。",
-                        "en": "羅生門 is a short story by 芥川龍之介, published in 1915."
+                        "en": "Rashoumon is a short story by Ryunosuke Akutagawa, published in 1915."
                       }
                     },
                     {
                       "q": {
                         "zh": "「雨ニモマケズ」的作者是？",
-                        "en": "Who wrote 雨ニモマケズ?"
+                        "en": "Who wrote Ame ni mo Makezu?"
                       },
                       "opts": {
                         "zh": [
@@ -9101,22 +9101,22 @@
                           "太宰治"
                         ],
                         "en": [
-                          "川端康成",
-                          "夏目漱石",
-                          "宮沢賢治",
-                          "太宰治"
+                          "Yasunari Kawabata",
+                          "Natsume Soseki",
+                          "Kenji Miyazawa",
+                          "Osamu Dazai"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「雨ニモマケズ」是宮沢賢治的代表诗作。",
-                        "en": "雨ニモマケズ is a representative poem by 宮沢賢治."
+                        "en": "Ame ni mo Makezu is a representative poem by Kenji Miyazawa."
                       }
                     },
                     {
                       "q": {
                         "zh": "《坊っちゃん》的作者是？",
-                        "en": "Who wrote 坊っちゃん?"
+                        "en": "Who wrote Botchan?"
                       },
                       "opts": {
                         "zh": [
@@ -9126,22 +9126,22 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "太宰治",
-                          "夏目漱石",
-                          "芥川龍之介",
-                          "宮沢賢治"
+                          "Osamu Dazai",
+                          "Natsume Soseki",
+                          "Ryunosuke Akutagawa",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "《坊っちゃん》是夏目漱石 1906 年发表的中篇小说。",
-                        "en": "坊っちゃん is a novella by 夏目漱石, published in 1906."
+                        "en": "Botchan is a novella by Natsume Soseki, published in 1906."
                       }
                     },
                     {
                       "q": {
                         "zh": "《人間失格》的作者是？",
-                        "en": "Who wrote 人間失格?"
+                        "en": "Who wrote Ningen Shikkaku?"
                       },
                       "opts": {
                         "zh": [
@@ -9151,22 +9151,22 @@
                           "芥川龍之介"
                         ],
                         "en": [
-                          "太宰治",
-                          "夏目漱石",
-                          "川端康成",
-                          "芥川龍之介"
+                          "Osamu Dazai",
+                          "Natsume Soseki",
+                          "Yasunari Kawabata",
+                          "Ryunosuke Akutagawa"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "《人間失格》是太宰治 1948 年发表的自传性小说。",
-                        "en": "人間失格 is an autobiographical novel by 太宰治, published in 1948."
+                        "en": "Ningen Shikkaku is an autobiographical novel by Osamu Dazai, published in 1948."
                       }
                     },
                     {
                       "q": {
                         "zh": "《銀河鉄道の夜》的作者是？",
-                        "en": "Who wrote 銀河鉄道の夜?"
+                        "en": "Who wrote Ginga Tetsudou no Yoru?"
                       },
                       "opts": {
                         "zh": [
@@ -9176,22 +9176,22 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "夏目漱石",
-                          "太宰治",
-                          "川端康成",
-                          "宮沢賢治"
+                          "Natsume Soseki",
+                          "Osamu Dazai",
+                          "Yasunari Kawabata",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 3,
                       "exp": {
                         "zh": "《銀河鉄道の夜》是宮沢賢治的童话代表作。",
-                        "en": "銀河鉄道の夜 is 宮沢賢治's representative children's story."
+                        "en": "Ginga Tetsudou no Yoru is Kenji Miyazawa's representative children's story."
                       }
                     },
                     {
                       "q": {
                         "zh": "《伊豆の踊子》的作者是？",
-                        "en": "Who wrote 伊豆の踊子?"
+                        "en": "Who wrote Izu no Odoriko?"
                       },
                       "opts": {
                         "zh": [
@@ -9201,22 +9201,22 @@
                           "夏目漱石"
                         ],
                         "en": [
-                          "太宰治",
-                          "芥川龍之介",
-                          "川端康成",
-                          "夏目漱石"
+                          "Osamu Dazai",
+                          "Ryunosuke Akutagawa",
+                          "Yasunari Kawabata",
+                          "Natsume Soseki"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "《伊豆の踊子》是川端康成 1926 年发表的短篇小说。",
-                        "en": "伊豆の踊子 is a short story by 川端康成, published in 1926."
+                        "en": "Izu no Odoriko is a short story by Yasunari Kawabata, published in 1926."
                       }
                     },
                     {
                       "q": {
                         "zh": "《蜘蛛の糸》的作者是？",
-                        "en": "Who wrote 蜘蛛の糸?"
+                        "en": "Who wrote Kumo no Ito?"
                       },
                       "opts": {
                         "zh": [
@@ -9226,16 +9226,16 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "夏目漱石",
-                          "芥川龍之介",
-                          "太宰治",
-                          "宮沢賢治"
+                          "Natsume Soseki",
+                          "Ryunosuke Akutagawa",
+                          "Osamu Dazai",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "《蜘蛛の糸》是芥川龍之介 1918 年发表的儿童文学短篇。",
-                        "en": "蜘蛛の糸 is a children's short story by 芥川龍之介, published in 1918."
+                        "en": "Kumo no Ito is a children's short story by Ryunosuke Akutagawa, published in 1918."
                       }
                     }
                   ]
@@ -9248,7 +9248,7 @@
                     {
                       "q": {
                         "zh": "正式商务邮件开头「拝啓」之后，结尾应该用？",
-                        "en": "In a formal business letter, which closing pairs with the opening 拝啓?"
+                        "en": "In a formal business letter, which closing pairs with the opening Haikei?"
                       },
                       "opts": {
                         "zh": [
@@ -9258,22 +9258,22 @@
                           "かしこ"
                         ],
                         "en": [
-                          "以上",
-                          "敬具",
-                          "草々",
-                          "かしこ"
+                          "Ijou",
+                          "Keigu",
+                          "Sousou",
+                          "Kashiko"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "「拝啓」对应结尾「敬具」；「前略」对应「草々」。",
-                        "en": "拝啓 pairs with 敬具; 前略 pairs with 草々."
+                        "en": "Haikei pairs with Keigu; Zenryaku pairs with Sousou."
                       }
                     },
                     {
                       "q": {
                         "zh": "「〜いただきたく存じます」的礼貌程度属于？",
-                        "en": "What politeness level does 〜いただきたく存じます represent?"
+                        "en": "What politeness level does 〜itadakitaku zonjimasu represent?"
                       },
                       "opts": {
                         "zh": [
@@ -9283,38 +9283,38 @@
                           "随意"
                         ],
                         "en": [
-                          "普通",
-                          "丁寧",
-                          "最高敬语（正式文书）",
-                          "随意"
+                          "Plain",
+                          "Polite",
+                          "Most honorific (formal writing)",
+                          "Casual"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「〜いただきたく存じます」是极高礼貌的请求表达，多用于正式文书。",
-                        "en": "〜いただきたく存じます is an extremely polite request, used in formal writing."
+                        "en": "〜itadakitaku zonjimasu is an extremely polite request, used in formal writing."
                       }
                     },
                     {
                       "q": {
                         "zh": "「〜の程、よろしくお願い申し上げます」的意思是？",
-                        "en": "What does 〜の程、よろしくお願い申し上げます mean?"
+                        "en": "What does 〜no hodo, yoroshiku onegai moushiagemasu mean?"
                       },
                       "opts": {
                         "zh": [
-                          "请您多多关照／敬请惠允",
                           "请尽快回复",
                           "请勿打扰",
-                          "请稍等片刻"
+                          "请稍等片刻",
+                          "请您多多关照／敬请惠允"
                         ],
                         "en": [
-                          "请您多多关照／敬请惠允",
-                          "请尽快回复",
-                          "请勿打扰",
-                          "请稍等片刻"
+                          "Please reply soon",
+                          "Do not disturb",
+                          "Please wait a moment",
+                          "I humbly ask for your kind consideration"
                         ]
                       },
-                      "ans": 0,
+                      "ans": 3,
                       "exp": {
                         "zh": "这是商务文书结尾常用的最敬语，表示「敬请多多关照」。",
                         "en": "This is a most-honorific closing phrase in business writing, meaning 'I humbly ask for your kind consideration'."
@@ -9333,38 +9333,38 @@
                           "確認して"
                         ],
                         "en": [
-                          "確認してください",
-                          "確認してくれ",
-                          "ご確認のほどお願い申し上げます",
-                          "確認して"
+                          "Kakunin shite kudasai",
+                          "Kakunin shite kure",
+                          "Go-kakunin no hodo onegai moushiagemasu",
+                          "Kakunin shite"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「ご確認のほどお願い申し上げます」是最敬语，用于正式文书。",
-                        "en": "ご確認のほどお願い申し上げます is the most honorific, used in formal writing."
+                        "en": "Go-kakunin no hodo onegai moushiagemasu is the most honorific, used in formal writing."
                       }
                     },
                     {
                       "q": {
                         "zh": "「〜させていただきたく」与「〜させていただければ幸いです」的区别是？",
-                        "en": "What distinguishes 〜させていただきたく from 〜させていただければ幸いです?"
+                        "en": "What distinguishes 〜sasete itadakitaku from 〜sasete itadakereba saiwai desu?"
                       },
                       "opts": {
                         "zh": [
-                          "前者更直接、后者更委婉",
                           "前者更随意",
                           "两者完全相同",
-                          "后者更不礼貌"
+                          "后者更不礼貌",
+                          "前者更直接、后者更委婉"
                         ],
                         "en": [
-                          "前者更直接、后者更委婉",
-                          "前者更随意",
-                          "两者完全相同",
-                          "后者更不礼貌"
+                          "The former is more casual",
+                          "Both are identical",
+                          "The latter is more impolite",
+                          "The former is more direct, the latter more indirect"
                         ]
                       },
-                      "ans": 0,
+                      "ans": 3,
                       "exp": {
                         "zh": "前者偏直接宣告，后者偏委婉请求，后者礼貌度更高。",
                         "en": "The former states more directly; the latter is more indirect and polite."
@@ -9373,7 +9373,7 @@
                     {
                       "q": {
                         "zh": "「存じ上げる」是「知る」的哪种形式？",
-                        "en": "What form of 知る is 存じ上げる?"
+                        "en": "What form of shiru is zonjiageru?"
                       },
                       "opts": {
                         "zh": [
@@ -9383,16 +9383,16 @@
                           "美化语"
                         ],
                         "en": [
-                          "尊敬语",
-                          "谦让语",
-                          "丁寧語",
-                          "美化语"
+                          "Sonkeigo (honorific)",
+                          "Kenjougo (humble)",
+                          "Teineigo (polite)",
+                          "Bikago (beautifying)"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "「存じ上げる」是谦让语，表示我（谦逊地）认识/知道某人。",
-                        "en": "存じ上げる is a humble form meaning 'I (humbly) know someone'."
+                        "en": "Zonjiageru is a humble form meaning 'I (humbly) know someone'."
                       }
                     },
                     {
@@ -9408,22 +9408,22 @@
                           "了解"
                         ],
                         "en": [
-                          "わかった",
-                          "わかりました",
-                          "かしこまりました",
-                          "了解"
+                          "Wakatta",
+                          "Wakarimashita",
+                          "Kashikomarimashita",
+                          "Ryoukai"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「かしこまりました」是最高敬语，适合对客户使用。",
-                        "en": "かしこまりました is the most honorific form, appropriate for clients."
+                        "en": "Kashikomarimashita is the most honorific form, appropriate for clients."
                       }
                     },
                     {
                       "q": {
                         "zh": "「〜のおかげをもちまして」的意思是？",
-                        "en": "What does 〜のおかげをもちまして mean?"
+                        "en": "What does 〜no okage wo mochimashite mean?"
                       },
                       "opts": {
                         "zh": [
@@ -9433,22 +9433,22 @@
                           "虽然…"
                         ],
                         "en": [
-                          "因为…的错",
-                          "多亏了…／承蒙…",
-                          "即使…",
-                          "虽然…"
+                          "Because of ... (blame)",
+                          "Thanks to ... / Owing to ...",
+                          "Even if ...",
+                          "Although ..."
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "「おかげをもちまして」是谦敬语，表示承蒙…、多亏了…。",
-                        "en": "おかげをもちまして is a humble-honorific expression meaning 'thanks to / owing to'."
+                        "en": "Okage wo mochimashite is a humble-honorific expression meaning 'thanks to / owing to'."
                       }
                     },
                     {
                       "q": {
                         "zh": "「〜でございます」属于哪种敬语？",
-                        "en": "Which keigo category does 〜でございます belong to?"
+                        "en": "Which keigo category does 〜de gozaimasu belong to?"
                       },
                       "opts": {
                         "zh": [
@@ -9458,22 +9458,22 @@
                           "美化语"
                         ],
                         "en": [
-                          "尊敬语",
-                          "谦让语",
-                          "最高级丁寧語",
-                          "美化语"
+                          "Sonkeigo (honorific)",
+                          "Kenjougo (humble)",
+                          "Most polite teineigo",
+                          "Bikago (beautifying)"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「でございます」是「です」的最高级郑重语，用于客服、商务。",
-                        "en": "でございます is the most honorific form of です, used in customer service and business."
+                        "en": "De gozaimasu is the most honorific form of desu, used in customer service and business."
                       }
                     },
                     {
                       "q": {
                         "zh": "正式文书开头「謹啓」的意思是？",
-                        "en": "What does the formal opening 謹啓 mean?"
+                        "en": "What does the formal opening Kinkei mean?"
                       },
                       "opts": {
                         "zh": [
@@ -9483,16 +9483,16 @@
                           "以上"
                         ],
                         "en": [
-                          "敬启／恭敬地开启",
-                          "前略",
-                          "匆匆",
-                          "以上"
+                          "Respectfully opening (very formal salutation)",
+                          "Skipping the salutation",
+                          "Hastily",
+                          "That is all"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "「謹啓」是极郑重的书信开头，比「拝啓」更正式。",
-                        "en": "謹啓 is an extremely formal letter opening, more formal than 拝啓."
+                        "en": "Kinkei is an extremely formal letter opening, more formal than Haikei."
                       }
                     }
                   ]
