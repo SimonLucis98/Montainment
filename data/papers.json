@@ -8230,10 +8230,10 @@
                           "打消"
                         ],
                         "en": [
-                          "完了",
-                          "過去（回想）",
-                          "推量",
-                          "打消"
+                          "Perfective",
+                          "Past (recollection)",
+                          "Conjecture",
+                          "Negation"
                         ]
                       },
                       "ans": 1,
@@ -8280,10 +8280,10 @@
                           "完了"
                         ],
                         "en": [
-                          "推量／意志",
-                          "過去",
-                          "否定",
-                          "完了"
+                          "Conjecture / Volition",
+                          "Past",
+                          "Negation",
+                          "Perfective"
                         ]
                       },
                       "ans": 0,
@@ -8305,10 +8305,10 @@
                           "命令形"
                         ],
                         "en": [
-                          "未然形",
-                          "連用形",
-                          "已然形",
-                          "命令形"
+                          "Irrealis form (mizenkei)",
+                          "Continuative form (ren'youkei)",
+                          "Realis form (izenkei)",
+                          "Imperative form (meireikei)"
                         ]
                       },
                       "ans": 2,
@@ -8455,10 +8455,10 @@
                           "終止形"
                         ],
                         "en": [
-                          "未然形",
-                          "連体形或名词",
-                          "命令形",
-                          "終止形"
+                          "Irrealis form (mizenkei)",
+                          "Attributive form (rentaikei) or noun",
+                          "Imperative form (meireikei)",
+                          "Conclusive form (shuushikei)"
                         ]
                       },
                       "ans": 1,
@@ -9001,16 +9001,16 @@
                           "夏目漱石"
                         ],
                         "en": [
-                          "太宰治",
-                          "芥川龍之介",
-                          "川端康成",
-                          "夏目漱石"
+                          "Osamu Dazai",
+                          "Ryūnosuke Akutagawa",
+                          "Yasunari Kawabata",
+                          "Natsume Sōseki"
                         ]
                       },
                       "ans": 3,
                       "exp": {
                         "zh": "「吾輩は猫である」是夏目漱石 1905 年发表的长篇小说。",
-                        "en": "Wagahai wa Neko de Aru is a novel by Natsume Soseki, published in 1905."
+                        "en": "「吾輩は猫である」Wagahai wa Neko de Aru is a novel by Natsume Sōseki, published in 1905."
                       }
                     },
                     {
@@ -9076,16 +9076,16 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "芥川龍之介",
-                          "夏目漱石",
-                          "太宰治",
-                          "宮沢賢治"
+                          "Ryūnosuke Akutagawa",
+                          "Natsume Sōseki",
+                          "Osamu Dazai",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "《羅生門》是芥川龍之介 1915 年发表的短篇小说。",
-                        "en": "Rashoumon is a short story by Ryunosuke Akutagawa, published in 1915."
+                        "en": "《羅生門》Rashoumon is a short story by Ryūnosuke Akutagawa, published in 1915."
                       }
                     },
                     {
@@ -9101,16 +9101,16 @@
                           "太宰治"
                         ],
                         "en": [
-                          "川端康成",
-                          "夏目漱石",
-                          "宮沢賢治",
-                          "太宰治"
+                          "Yasunari Kawabata",
+                          "Natsume Sōseki",
+                          "Kenji Miyazawa",
+                          "Osamu Dazai"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "「雨ニモマケズ」是宮沢賢治的代表诗作。",
-                        "en": "Ame ni mo Makezu is a representative poem by Kenji Miyazawa."
+                        "en": "「雨ニモマケズ」Ame ni mo Makezu is a representative poem by Kenji Miyazawa."
                       }
                     },
                     {
@@ -9126,16 +9126,16 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "太宰治",
-                          "夏目漱石",
-                          "芥川龍之介",
-                          "宮沢賢治"
+                          "Osamu Dazai",
+                          "Natsume Sōseki",
+                          "Ryūnosuke Akutagawa",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "《坊っちゃん》是夏目漱石 1906 年发表的中篇小说。",
-                        "en": "Botchan is a novella by Natsume Soseki, published in 1906."
+                        "en": "《坊っちゃん》Botchan is a novella by Natsume Sōseki, published in 1906."
                       }
                     },
                     {
@@ -9151,16 +9151,16 @@
                           "芥川龍之介"
                         ],
                         "en": [
-                          "太宰治",
-                          "夏目漱石",
-                          "川端康成",
-                          "芥川龍之介"
+                          "Osamu Dazai",
+                          "Natsume Sōseki",
+                          "Yasunari Kawabata",
+                          "Ryūnosuke Akutagawa"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "《人間失格》是太宰治 1948 年发表的自传性小说。",
-                        "en": "Ningen Shikkaku is an autobiographical novel by Osamu Dazai, published in 1948."
+                        "en": "《人間失格》Ningen Shikkaku is an autobiographical novel by Osamu Dazai, published in 1948."
                       }
                     },
                     {
@@ -9176,16 +9176,16 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "夏目漱石",
-                          "太宰治",
-                          "川端康成",
-                          "宮沢賢治"
+                          "Natsume Sōseki",
+                          "Osamu Dazai",
+                          "Yasunari Kawabata",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 3,
                       "exp": {
                         "zh": "《銀河鉄道の夜》是宮沢賢治的童话代表作。",
-                        "en": "Ginga Tetsudou no Yoru is Kenji Miyazawa's representative children's story."
+                        "en": "《銀河鉄道の夜》Ginga Tetsudou no Yoru is Kenji Miyazawa's representative children's story."
                       }
                     },
                     {
@@ -9201,16 +9201,16 @@
                           "夏目漱石"
                         ],
                         "en": [
-                          "太宰治",
-                          "芥川龍之介",
-                          "川端康成",
-                          "夏目漱石"
+                          "Osamu Dazai",
+                          "Ryūnosuke Akutagawa",
+                          "Yasunari Kawabata",
+                          "Natsume Sōseki"
                         ]
                       },
                       "ans": 2,
                       "exp": {
                         "zh": "《伊豆の踊子》是川端康成 1926 年发表的短篇小说。",
-                        "en": "Izu no Odoriko is a short story by Yasunari Kawabata, published in 1926."
+                        "en": "《伊豆の踊子》Izu no Odoriko is a short story by Yasunari Kawabata, published in 1926."
                       }
                     },
                     {
@@ -9226,16 +9226,16 @@
                           "宮沢賢治"
                         ],
                         "en": [
-                          "夏目漱石",
-                          "芥川龍之介",
-                          "太宰治",
-                          "宮沢賢治"
+                          "Natsume Sōseki",
+                          "Ryūnosuke Akutagawa",
+                          "Osamu Dazai",
+                          "Kenji Miyazawa"
                         ]
                       },
                       "ans": 1,
                       "exp": {
                         "zh": "《蜘蛛の糸》是芥川龍之介 1918 年发表的儿童文学短篇。",
-                        "en": "Kumo no Ito is a children's short story by Ryunosuke Akutagawa, published in 1918."
+                        "en": "《蜘蛛の糸》Kumo no Ito is a children's short story by Ryūnosuke Akutagawa, published in 1918."
                       }
                     }
                   ]
