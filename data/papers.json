@@ -5422,7 +5422,7 @@
                     {
                       "q": {
                         "zh": "「去年」读作？",
-                        "en": "How is 去年 read?"
+                        "en": "How is the Japanese word for 'last year' read?"
                       },
                       "opts": {
                         "zh": [
@@ -5441,13 +5441,13 @@
                       "ans": 0,
                       "exp": {
                         "zh": "去年读作きょねん，意为去年。",
-                        "en": "去年 is read きょねん, meaning last year."
+                        "en": "The Japanese word for 'last year' is 去年, read as きょねん."
                       }
                     },
                     {
                       "q": {
                         "zh": "「来年」读作？",
-                        "en": "How is 来年 read?"
+                        "en": "How is the Japanese word for 'next year' read?"
                       },
                       "opts": {
                         "zh": [
@@ -5466,38 +5466,38 @@
                       "ans": 0,
                       "exp": {
                         "zh": "来年读作らいねん，意为明年。",
-                        "en": "来年 is read らいねん, meaning next year."
+                        "en": "The Japanese word for 'next year' is 来年, read as らいねん."
                       }
                     },
                     {
                       "q": {
                         "zh": "「毎日」读作？",
-                        "en": "How is 毎日 read?"
+                        "en": "How is the Japanese word for 'every day' read?"
                       },
                       "opts": {
                         "zh": [
                           "まいにち",
                           "まいひ",
-                          "まいにち",
-                          "まいにじ"
+                          "まいにじ",
+                          "まいび"
                         ],
                         "en": [
                           "まいにち",
                           "まいひ",
-                          "まいにち",
-                          "まいにじ"
+                          "まいにじ",
+                          "まいび"
                         ]
                       },
                       "ans": 0,
                       "exp": {
                         "zh": "毎日读作まいにち，意为每天。",
-                        "en": "毎日 is read まいにち, meaning every day."
+                        "en": "The Japanese word for 'every day' is 毎日, read as まいにち."
                       }
                     },
                     {
                       "q": {
-                        "zh": "「〜時〜分」中，「時」读作？",
-                        "en": "In 〜時〜分, how is 時 read?"
+                        "zh": "日语时间表达中，「時」读作？",
+                        "en": "In a Japanese time expression like 3 時 15 分, how is 時 read?"
                       },
                       "opts": {
                         "zh": [
@@ -5516,13 +5516,13 @@
                       "ans": 0,
                       "exp": {
                         "zh": "〜時读作〜じ（如 3 時 = さんじ）。",
-                        "en": "〜時 is read 〜じ (e.g. 3 時 = さんじ)."
+                        "en": "〜時 is read as 〜じ (e.g. 3 時 = さんじ)."
                       }
                     },
                     {
                       "q": {
                         "zh": "「午前」的意思是？",
-                        "en": "What does 午前 mean?"
+                        "en": "What does the Japanese word 午前 mean?"
                       },
                       "opts": {
                         "zh": [
@@ -5541,13 +5541,13 @@
                       "ans": 0,
                       "exp": {
                         "zh": "午前（ごぜん）：上午/早上。",
-                        "en": "午前 (ごぜん): AM / morning."
+                        "en": "午前 (ごぜん) means AM / morning."
                       }
                     },
                     {
                       "q": {
                         "zh": "「午後」的意思是？",
-                        "en": "What does 午後 mean?"
+                        "en": "What does the Japanese word 午後 mean?"
                       },
                       "opts": {
                         "zh": [
@@ -5566,13 +5566,13 @@
                       "ans": 1,
                       "exp": {
                         "zh": "午後（ごご）：下午。",
-                        "en": "午後 (ごご): PM / afternoon."
+                        "en": "午後 (ごご) means PM / afternoon."
                       }
                     },
                     {
                       "q": {
                         "zh": "「月曜日___金曜日まで」应该填哪个助词？",
-                        "en": "Which particle fills the blank in 月曜日___金曜日まで?"
+                        "en": "Which particle fills the blank in the Japanese phrase 月曜日___金曜日まで?"
                       },
                       "opts": {
                         "zh": [
@@ -5591,13 +5591,13 @@
                       "ans": 0,
                       "exp": {
                         "zh": "〜から〜まで：从…到…。",
-                        "en": "〜から〜まで: from ... to ..."
+                        "en": "〜から〜まで means 'from ... to ...'."
                       }
                     },
                     {
                       "q": {
                         "zh": "表示「总是」的日语是？",
-                        "en": "Which word means 'always'?"
+                        "en": "Which Japanese word means 'always'?"
                       },
                       "opts": {
                         "zh": [
@@ -5616,13 +5616,13 @@
                       "ans": 0,
                       "exp": {
                         "zh": "いつも：总是、经常。",
-                        "en": "いつも: always."
+                        "en": "いつも means 'always'."
                       }
                     },
                     {
                       "q": {
                         "zh": "表示「偶尔」的日语是？",
-                        "en": "Which word means 'occasionally'?"
+                        "en": "Which Japanese word means 'occasionally'?"
                       },
                       "opts": {
                         "zh": [
@@ -5641,13 +5641,13 @@
                       "ans": 0,
                       "exp": {
                         "zh": "たまに：偶尔、有时候。",
-                        "en": "たまに: occasionally."
+                        "en": "たまに means 'occasionally'."
                       }
                     },
                     {
                       "q": {
                         "zh": "「〜前に」的意思是？",
-                        "en": "What does 〜前に mean?"
+                        "en": "What does the Japanese expression 〜前に mean?"
                       },
                       "opts": {
                         "zh": [
@@ -5666,7 +5666,7 @@
                       "ans": 0,
                       "exp": {
                         "zh": "〜前に：在…之前（时间）。",
-                        "en": "〜前に: before (in time)."
+                        "en": "〜前に means 'before (in time)'."
                       }
                     }
                   ]
