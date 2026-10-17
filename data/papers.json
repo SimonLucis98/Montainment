@@ -12803,13 +12803,2585 @@
               "level": 1,
               "labelZh": "初学者",
               "labelEn": "Beginner",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：基础助词（기본 조사）学习",
+                  "titleEn": "Paper 1: Basic Particles (기본 조사)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "저___ 학생입니다.（填入正确的助词）",
+                        "en": "저___ 학생입니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "은",
+                          "는",
+                          "이",
+                          "가"
+                        ],
+                        "en": [
+                          "은",
+                          "는",
+                          "이",
+                          "가"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「저」是主题，「은/는」表主题。저无收音，用는。",
+                        "en": "저 is the topic; 은/는 marks the topic. 저 has no final consonant, so use 는."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "책___ 책상 위에 있습니다.（填入正确的助词）",
+                        "en": "책___ 책상 위에 있습니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "은",
+                          "는",
+                          "이",
+                          "가"
+                        ],
+                        "en": [
+                          "은",
+                          "는",
+                          "이",
+                          "가"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「책」是新信息的主语，「이/가」表主语。책有收音ㄱ，用이。",
+                        "en": "책 is the subject (new information); 이/가 marks the subject. 책 has final ㄱ, so use 이."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "사과___ 먹습니다.（填入正确的助词）",
+                        "en": "사과___ 먹습니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "은",
+                          "는",
+                          "을",
+                          "를"
+                        ],
+                        "en": [
+                          "은",
+                          "는",
+                          "을",
+                          "를"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「사과」是宾语，「을/를」表宾语。사과无收音，用를。",
+                        "en": "사과 is the object; 을/를 marks the object. 사과 has no final consonant, so use 를."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "학교___ 갑니다.（填入正确的助词）",
+                        "en": "학교___ 갑니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "에",
+                          "에서",
+                          "의",
+                          "을"
+                        ],
+                        "en": [
+                          "에",
+                          "에서",
+                          "의",
+                          "을"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「에」表方向（去某处）。",
+                        "en": "에 marks direction (going to a place)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "집___ 공부합니다.（填入正确的助词）",
+                        "en": "집___ 공부합니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "에",
+                          "의",
+                          "에서",
+                          "을"
+                        ],
+                        "en": [
+                          "에",
+                          "의",
+                          "에서",
+                          "을"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「에서」表动作发生的场所。学习是动作，用에서。",
+                        "en": "에서 marks the place where an action occurs. Studying is an action, so use 에서."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "저___ 책입니다.（填入正确的助词）",
+                        "en": "저___ 책입니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "에",
+                          "의",
+                          "에서",
+                          "을"
+                        ],
+                        "en": [
+                          "에",
+                          "의",
+                          "에서",
+                          "을"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「의」表所有格，相当于「的」。",
+                        "en": "의 marks possession, equivalent to 's / of'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「은/는」和「이/가」的主要区别是？",
+                        "en": "What is the main difference between 「은/는」 and 「이/가」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "은/는 表主题，이/가 表主语",
+                          "都是主语助词",
+                          "都是宾语助词",
+                          "都是场所助词"
+                        ],
+                        "en": [
+                          "은/는 marks the topic; 이/가 marks the subject",
+                          "Both mark the subject",
+                          "Both mark the object",
+                          "Both mark the place"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "은/는 强调「关于…」，이/가 强调「是…（谁/什么）」。",
+                        "en": "은/는 emphasizes 'as for ...'; 이/가 emphasizes 'it is (who/what)'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「에」和「에서」的主要区别是？",
+                        "en": "What is the main difference between 「에」 and 「에서」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "都是场所助词",
+                          "都是方向助词",
+                          "에 表方向/存在场所，에서 表动作场所",
+                          "에 表时间，에서 表方向"
+                        ],
+                        "en": [
+                          "Both mark place",
+                          "Both mark direction",
+                          "에 marks direction/existence; 에서 marks the place of an action",
+                          "에 marks time; 에서 marks direction"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「학교에 가다」（方向）、「학교에서 공부하다」（动作场所）。",
+                        "en": "학교에 가다 (direction); 학교에서 공부하다 (place of action)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "동생___ 학교에 갑니다.（填入正确的助词）",
+                        "en": "동생___ 학교에 갑니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "은",
+                          "이",
+                          "는",
+                          "가"
+                        ],
+                        "en": [
+                          "은",
+                          "이",
+                          "는",
+                          "가"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「동생」是新信息主语，用이/가。동생有收音ㅇ，用이。",
+                        "en": "동생 is the subject (new information). 동생 has final ㅇ, so use 이."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "물___ 마십니다.（填入正确的助词）",
+                        "en": "물___ 마십니다. (Fill in the correct particle)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "은",
+                          "는",
+                          "을",
+                          "를"
+                        ],
+                        "en": [
+                          "은",
+                          "는",
+                          "을",
+                          "를"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「물」是宾语，用을/를。물有收音ㄹ，用을。",
+                        "en": "물 is the object. 물 has final ㄹ, so use 을."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：基础动词与해요体（ 기본 동사와 해요체）学习",
+                  "titleEn": "Paper 2: Basic Verbs & Haeyo-Form (기본 동사와 해요체)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「먹다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「먹다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "먹습니다",
+                          "먹어요",
+                          "먹을 거예요",
+                          "먹어서"
+                        ],
+                        "en": [
+                          "먹습니다",
+                          "먹어요",
+                          "먹을 거예요",
+                          "먹어서"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "먹다 的词干 먹 加 어요 → 먹어요。",
+                        "en": "The stem 먹 + 어요 → 먹어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「가다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「가다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "가요",
+                          "갑니다",
+                          "갈 거예요",
+                          "가서"
+                        ],
+                        "en": [
+                          "가요",
+                          "갑니다",
+                          "갈 거예요",
+                          "가서"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "가다 的词干 가 + 아요，合并为 가요。",
+                        "en": "The stem 가 + 아요, contracted to 가요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「하다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「하다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "합니다",
+                          "할 거예요",
+                          "하서",
+                          "해요"
+                        ],
+                        "en": [
+                          "합니다",
+                          "할 거예요",
+                          "하서",
+                          "해요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "하다 的해요体固定为 해요（不规则）。",
+                        "en": "하다 has the irregular haeyo-form 해요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「오다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「오다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "옵니다",
+                          "올 거예요",
+                          "와요",
+                          "오서"
+                        ],
+                        "en": [
+                          "옵니다",
+                          "올 거예요",
+                          "와요",
+                          "오서"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "오다 的词干 오 + 아요，合并为 와요。",
+                        "en": "The stem 오 + 아요, contracted to 와요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「먹다」的否定形式是？",
+                        "en": "What is the negative form of 「먹다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "안 먹어요",
+                          "먹어요",
+                          "먹었어요",
+                          "먹을 거예요"
+                        ],
+                        "en": [
+                          "안 먹어요",
+                          "먹어요",
+                          "먹었어요",
+                          "먹을 거예요"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "短否定：안 + 动词。안 먹어요（不吃）。",
+                        "en": "Short negation: 안 + verb. 안 먹어요 (do not eat)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「공부하다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「공부하다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "공부합니다",
+                          "공부해요",
+                          "공부할 거예요",
+                          "공부하서"
+                        ],
+                        "en": [
+                          "공부합니다",
+                          "공부해요",
+                          "공부할 거예요",
+                          "공부하서"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "하다 类动词的해요体：공부하다 → 공부해요。",
+                        "en": "하다-verbs form haeyo as: 공부하다 → 공부해요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「보다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「보다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "봅니다",
+                          "볼 거예요",
+                          "보아서",
+                          "봐요"
+                        ],
+                        "en": [
+                          "봅니다",
+                          "볼 거예요",
+                          "보아서",
+                          "봐요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "보다 的词干 보 + 아요，合并为 봐요。",
+                        "en": "The stem 보 + 아요, contracted to 봐요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「자다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「자다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "잡니다",
+                          "잘 거예요",
+                          "자요",
+                          "자서"
+                        ],
+                        "en": [
+                          "잡니다",
+                          "잘 거예요",
+                          "자요",
+                          "자서"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "자다 的词干 자 + 아요，合并为 자요。",
+                        "en": "The stem 자 + 아요, contracted to 자요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「마시다」的해요体（现在时）是？",
+                        "en": "What is the haeyo-form (present) of 「마시다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "마십니다",
+                          "마셔요",
+                          "마실 거예요",
+                          "마시서"
+                        ],
+                        "en": [
+                          "마십니다",
+                          "마셔요",
+                          "마실 거예요",
+                          "마시서"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "마시다（ㅣ结尾）的词干 마시 + 어요，合并为 마셔요。",
+                        "en": "Stem 마시 (ending in ㅣ) + 어요, contracted to 마셔요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "名词后表示「是…」的해요体是？",
+                        "en": "Which haeyo-form means 'is ...' after a noun?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "입니다",
+                          "일 거예요",
+                          "이서",
+                          "이에요/예요"
+                        ],
+                        "en": [
+                          "입니다",
+                          "일 거예요",
+                          "이서",
+                          "이에요/예요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "名词 + 이에요（有收音）/ 예요（无收音）。如：학생이에요、의사예요。",
+                        "en": "Noun + 이에요 (after final consonant) / 예요 (after vowel). E.g. 학생이에요, 의사예요."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：过去式与将来式（과거형과 미래형）学习",
+                  "titleEn": "Paper 3: Past & Future Tense (과거형과 미래형)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「먹다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「먹다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "먹었어요",
+                          "먹어요",
+                          "먹을 거예요",
+                          "먹습니다"
+                        ],
+                        "en": [
+                          "먹었어요",
+                          "먹어요",
+                          "먹을 거예요",
+                          "먹습니다"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "词干 먹 + 었어요 → 먹었어요。",
+                        "en": "Stem 먹 + 었어요 → 먹었어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「가다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「가다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "가요",
+                          "갈 거예요",
+                          "갔어요",
+                          "갑니다"
+                        ],
+                        "en": [
+                          "가요",
+                          "갈 거예요",
+                          "갔어요",
+                          "갑니다"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "词干 가 + 았어요，合并为 갔어요。",
+                        "en": "Stem 가 + 았어요, contracted to 갔어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「하다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「하다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "해요",
+                          "했어요",
+                          "할 거예요",
+                          "합니다"
+                        ],
+                        "en": [
+                          "해요",
+                          "했어요",
+                          "할 거예요",
+                          "합니다"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "하다 的过去式为 했어요（不规则）。",
+                        "en": "The past of 하다 is 했어요 (irregular)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「오다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「오다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "와요",
+                          "올 거예요",
+                          "옵니다",
+                          "왔어요"
+                        ],
+                        "en": [
+                          "와요",
+                          "올 거예요",
+                          "옵니다",
+                          "왔어요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "词干 오 + 았어요，合并为 왔어요。",
+                        "en": "Stem 오 + 았어요, contracted to 왔어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「먹다」的将来式（해요体）是？",
+                        "en": "What is the future tense (haeyo-form) of 「먹다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "먹었어요",
+                          "먹어요",
+                          "먹을 거예요",
+                          "먹습니다"
+                        ],
+                        "en": [
+                          "먹었어요",
+                          "먹어요",
+                          "먹을 거예요",
+                          "먹습니다"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "将来式：词干 + 을/ㄹ 거예요。먹有收音ㄱ，用을：먹을 거예요。",
+                        "en": "Future: stem + 을/ㄹ 거예요. 먹 has final ㄱ, so use 을: 먹을 거예요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「가다」的将来式（해요体）是？",
+                        "en": "What is the future tense (haeyo-form) of 「가다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "갈 거예요",
+                          "갔어요",
+                          "가요",
+                          "갑니다"
+                        ],
+                        "en": [
+                          "갈 거예요",
+                          "갔어요",
+                          "가요",
+                          "갑니다"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "가 无收音，用 ㄹ：갈 거예요。",
+                        "en": "가 has no final consonant, so use ㄹ: 갈 거예요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「보다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「보다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "봐요",
+                          "봤어요",
+                          "볼 거예요",
+                          "봅니다"
+                        ],
+                        "en": [
+                          "봐요",
+                          "봤어요",
+                          "볼 거예요",
+                          "봅니다"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "词干 보 + 았어요，合并为 봤어요。",
+                        "en": "Stem 보 + 았어요, contracted to 봤어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「자다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「자다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "자요",
+                          "잘 거예요",
+                          "잡니다",
+                          "잤어요"
+                        ],
+                        "en": [
+                          "자요",
+                          "잘 거예요",
+                          "잡니다",
+                          "잤어요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "词干 자 + 았어요，合并为 잤어요。",
+                        "en": "Stem 자 + 았어요, contracted to 잤어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「공부하다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「공부하다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "공부했어요",
+                          "공부해요",
+                          "공부할 거예요",
+                          "공부합니다"
+                        ],
+                        "en": [
+                          "공부했어요",
+                          "공부해요",
+                          "공부할 거예요",
+                          "공부합니다"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "하다 类动词的过去式：공부하다 → 공부했어요。",
+                        "en": "하다-verbs in the past: 공부하다 → 공부했어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「마시다」的过去式（해요体）是？",
+                        "en": "What is the past tense (haeyo-form) of 「마시다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "마셔요",
+                          "마실 거예요",
+                          "마셨어요",
+                          "마십니다"
+                        ],
+                        "en": [
+                          "마셔요",
+                          "마실 거예요",
+                          "마셨어요",
+                          "마십니다"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "마시 的词干 + 었어요，合并为 마셨어요。",
+                        "en": "Stem 마시 + 었어요, contracted to 마셨어요."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：数字与量词（ 숫자와 단위）学习",
+                  "titleEn": "Paper 4: Numbers & Counters (숫자와 단위)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "汉字数词「오」对应数字几？",
+                        "en": "Which number does the Sino-Korean numeral 「오」 represent?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "3",
+                          "5",
+                          "4",
+                          "6"
+                        ],
+                        "en": [
+                          "3",
+                          "5",
+                          "4",
+                          "6"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "汉字数词：일(1) 이(2) 삼(3) 사(4) 오(5) 육(6) 칠(7) 팔(8) 구(9) 십(10)。",
+                        "en": "Sino-Korean numerals: 일(1) 이(2) 삼(3) 사(4) 오(5) 육(6) 칠(7) 팔(8) 구(9) 십(10)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "固有数词「넷」对应数字几？",
+                        "en": "Which number does the native Korean numeral 「넷」 represent?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "2",
+                          "3",
+                          "4",
+                          "5"
+                        ],
+                        "en": [
+                          "2",
+                          "3",
+                          "4",
+                          "5"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "固有数词：하나(1) 둘(2) 셋(3) 넷(4) 다섯(5) 여섯(6) 일곱(7) 여덟(8) 아홉(9) 열(10)。",
+                        "en": "Native Korean numerals: 하나(1) 둘(2) 셋(3) 넷(4) 다섯(5) 여섯(6) 일곱(7) 여덟(8) 아홉(9) 열(10)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字数词「십」对应数字几？",
+                        "en": "Which number does the Sino-Korean numeral 「십」 represent?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "8",
+                          "9",
+                          "11",
+                          "10"
+                        ],
+                        "en": [
+                          "8",
+                          "9",
+                          "11",
+                          "10"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「십」= 10。",
+                        "en": "십 = 10."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "固有数词「다섯」对应数字几？",
+                        "en": "Which number does the native Korean numeral 「다섯」 represent?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "5",
+                          "3",
+                          "4",
+                          "6"
+                        ],
+                        "en": [
+                          "5",
+                          "3",
+                          "4",
+                          "6"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "다섯 = 5。",
+                        "en": "다섯 = 5."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「한 명」的意思是？",
+                        "en": "What does 「한 명」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "一个人",
+                          "一个物品",
+                          "一天",
+                          "一个小时"
+                        ],
+                        "en": [
+                          "one person",
+                          "one item",
+                          "one day",
+                          "one hour"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "명（名）是人的量词。한 명 = 一个人。",
+                        "en": "명 is the counter for people. 한 명 = one person."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「세 시」的意思是？",
+                        "en": "What does 「세 시」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "两点",
+                          "三点",
+                          "四点",
+                          "五点"
+                        ],
+                        "en": [
+                          "two o'clock",
+                          "three o'clock",
+                          "four o'clock",
+                          "five o'clock"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "시（时）是时间的量词。세 시 = 三点。",
+                        "en": "시 is the counter for time (o'clock). 세 시 = three o'clock."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「개」是什么量词？",
+                        "en": "What does the counter 「개」 count?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "个（物品）",
+                          "人",
+                          "只（动物）",
+                          "杯"
+                        ],
+                        "en": [
+                          "items",
+                          "people",
+                          "animals",
+                          "cups"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "개 用于数物品，相当于中文的「个」。",
+                        "en": "개 counts items, like 'pieces' or 'items'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「명」是什么量词？",
+                        "en": "What does the counter 「명」 count?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "个（物品）",
+                          "人",
+                          "只（动物）",
+                          "杯"
+                        ],
+                        "en": [
+                          "items",
+                          "people",
+                          "animals",
+                          "cups"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "명 用于数人，相当于中文的「名/位」。",
+                        "en": "명 counts people."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "固有数词「하나」在量词前会变成？",
+                        "en": "How does the native Korean numeral 「하나」 change before a counter?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "하나",
+                          "한",
+                          "하나씩",
+                          "하나의"
+                        ],
+                        "en": [
+                          "하나",
+                          "한",
+                          "하나씩",
+                          "하나의"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "固有数词 1-4 在量词前变化：하나→한、둘→두、셋→세、넷→네。",
+                        "en": "Native numerals 1–4 shorten before counters: 하나→한, 둘→두, 셋→세, 넷→네."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "汉字数词「이」对应数字几？",
+                        "en": "Which number does the Sino-Korean numeral 「이」 represent?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "1",
+                          "3",
+                          "4",
+                          "2"
+                        ],
+                        "en": [
+                          "1",
+                          "3",
+                          "4",
+                          "2"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「이」= 2。",
+                        "en": "이 = 2."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：日常会话（일상 회화）学习",
+                  "titleEn": "Paper 5: Daily Conversation (일상 회화)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「안녕하세요」的意思是？",
+                        "en": "What does 「안녕하세요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你好",
+                          "谢谢",
+                          "再见",
+                          "对不起"
+                        ],
+                        "en": [
+                          "Hello",
+                          "Thank you",
+                          "Goodbye",
+                          "Sorry"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "안녕하세요 是韩语最常用的问候语，意为「你好」。",
+                        "en": "안녕하세요 is the most common Korean greeting, meaning 'hello'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「감사합니다」的意思是？",
+                        "en": "What does 「감사합니다」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你好",
+                          "谢谢",
+                          "再见",
+                          "对不起"
+                        ],
+                        "en": [
+                          "Hello",
+                          "Thank you",
+                          "Goodbye",
+                          "Sorry"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "감사합니다 是「谢谢」的正式说法。",
+                        "en": "감사합니다 is the formal way to say 'thank you'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「죄송합니다」的意思是？",
+                        "en": "What does 「죄송합니다」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你好",
+                          "谢谢",
+                          "再见",
+                          "对不起"
+                        ],
+                        "en": [
+                          "Hello",
+                          "Thank you",
+                          "Goodbye",
+                          "Sorry"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "죄송합니다 是「对不起」的正式说法。",
+                        "en": "죄송합니다 is the formal way to say 'sorry'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「안녕히 가세요」的意思是？",
+                        "en": "What does 「안녕히 가세요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你好",
+                          "谢谢",
+                          "再见（对离开的人说）",
+                          "欢迎光临"
+                        ],
+                        "en": [
+                          "Hello",
+                          "Thank you",
+                          "Goodbye (to someone leaving)",
+                          "Welcome"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "안녕히 가세요 是对离开的人说的「再见」。",
+                        "en": "안녕히 가세요 is said to someone who is leaving."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「만나서 반갑습니다」的意思是？",
+                        "en": "What does 「만나서 반갑습니다」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "很高兴见到你",
+                          "请多关照",
+                          "好久不见",
+                          "再见"
+                        ],
+                        "en": [
+                          "Nice to meet you",
+                          "Please take care of me",
+                          "Long time no see",
+                          "Goodbye"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "初次见面时说「만나서 반갑습니다」，意为「很高兴见到你」。",
+                        "en": "만나서 반갑습니다 means 'nice to meet you' and is said when meeting someone for the first time."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「이름이 뭐예요?」的意思是？",
+                        "en": "What does 「이름이 뭐예요?」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你叫什么名字？",
+                          "你多大了？",
+                          "你从哪里来？",
+                          "你在做什么？"
+                        ],
+                        "en": [
+                          "What is your name?",
+                          "How old are you?",
+                          "Where are you from?",
+                          "What are you doing?"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "이름（名字）+ 이 뭐예요?（是什么？）= 你叫什么名字？",
+                        "en": "이름 (name) + 이 뭐예요? (what is?) = 'What is your name?'"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「얼마예요?」的意思是？",
+                        "en": "What does 「얼마예요?」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "多少钱？",
+                          "这是什么？",
+                          "在哪里？",
+                          "什么时候？"
+                        ],
+                        "en": [
+                          "How much is it?",
+                          "What is this?",
+                          "Where is it?",
+                          "When?"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "얼마 意为「多少」，얼마예요? 是购物时询问价格的说法。",
+                        "en": "얼마 means 'how much'; 얼마예요? asks for a price when shopping."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「주세요」的意思是？",
+                        "en": "What does 「주세요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "请给我",
+                          "请吃",
+                          "请坐",
+                          "请看"
+                        ],
+                        "en": [
+                          "Please give me",
+                          "Please eat",
+                          "Please sit",
+                          "Please look"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "주세요 是「请给我」的意思，用于点餐、购物。",
+                        "en": "주세요 means 'please give me', used when ordering or shopping."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「맛있어요」的意思是？",
+                        "en": "What does 「맛있어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "好吃",
+                          "难吃",
+                          "好看",
+                          "好听"
+                        ],
+                        "en": [
+                          "Delicious",
+                          "Tasteless",
+                          "Pretty",
+                          "Pleasant to hear"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "맛（味道）+ 있어요（有）= 好吃。",
+                        "en": "맛 (taste) + 있어요 (there is) = delicious."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「괜찮아요」的意思是？",
+                        "en": "What does 「괜찮아요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "没关系",
+                          "不客气",
+                          "对不起",
+                          "谢谢"
+                        ],
+                        "en": [
+                          "It's okay",
+                          "You're welcome",
+                          "Sorry",
+                          "Thank you"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "괜찮아요 可表示「没关系」「我没事」「还行」。",
+                        "en": "괜찮아요 can mean 'it's okay', 'I'm fine', or 'not bad'."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "level": 2,
               "labelZh": "高级初学者",
               "labelEn": "Advanced Beginner",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：不规则动词与形容词（불규칙 동사와 형용사）学习",
+                  "titleEn": "Paper 1: Irregular Verbs & Adjectives (불규칙 동사와 형용사)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「춥다」（冷）的해요体是？",
+                        "en": "What is the haeyo-form of 「춥다」 (cold)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "추버요",
+                          "추워요",
+                          "춥어요",
+                          "추우어요"
+                        ],
+                        "en": [
+                          "추버요",
+                          "추워요",
+                          "춥어요",
+                          "추우어요"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅂ不规则：词干춥的ㅂ变우，加어요→추워요。",
+                        "en": "ㅂ-irregular: the ㅂ in the stem 춥 becomes 우, then add 어요 → 추워요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「덥다」（热）的해요体是？",
+                        "en": "What is the haeyo-form of 「덥다」 (hot)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "더워요",
+                          "덥어요",
+                          "더버요",
+                          "더우어요"
+                        ],
+                        "en": [
+                          "더워요",
+                          "덥어요",
+                          "더버요",
+                          "더우어요"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㅂ不规则：덥 → 더우 + 어요 → 더워요。",
+                        "en": "ㅂ-irregular: 덥 → 더우 + 어요 → 더워요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「듣다」（听）的해요体是？",
+                        "en": "What is the haeyo-form of 「듣다」 (to listen)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "듣어요",
+                          "드러요",
+                          "들어요",
+                          "듣어"
+                        ],
+                        "en": [
+                          "듣어요",
+                          "드러요",
+                          "들어요",
+                          "듣어"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㄷ不规则：词干듣的ㄷ变ㄹ，加어요→들어요。",
+                        "en": "ㄷ-irregular: the ㄷ in the stem 듣 becomes ㄹ, then add 어요 → 들어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「걷다」（走）的해요体是？",
+                        "en": "What is the haeyo-form of 「걷다」 (to walk)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "걷어요",
+                          "거러요",
+                          "걷어",
+                          "걸어요"
+                        ],
+                        "en": [
+                          "걷어요",
+                          "거러요",
+                          "걷어",
+                          "걸어요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "ㄷ不规则：걷 → 걸 + 어요 → 걸어요。",
+                        "en": "ㄷ-irregular: 걷 → 걸 + 어요 → 걸어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「짓다」（建造/做）的해요体是？",
+                        "en": "What is the haeyo-form of 「짓다」 (to build/make)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "짓어요",
+                          "지어요",
+                          "지서요",
+                          "짓어"
+                        ],
+                        "en": [
+                          "짓어요",
+                          "지어요",
+                          "지서요",
+                          "짓어"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "ㅅ不规则：词干짓的ㅅ脱落，加어요→지어요。",
+                        "en": "ㅅ-irregular: the ㅅ in the stem 짓 drops, then add 어요 → 지어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「낫다」（好/痊愈）的해요体是？",
+                        "en": "What is the haeyo-form of 「낫다」 (to be better/recover)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "낫아요",
+                          "나서요",
+                          "나아요",
+                          "낫어"
+                        ],
+                        "en": [
+                          "낫아요",
+                          "나서요",
+                          "나아요",
+                          "낫어"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "ㅅ不规则：낫 → 나 + 아요 → 나아요。",
+                        "en": "ㅅ-irregular: 낫 → 나 + 아요 → 나아요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「모르다」（不知道）的해요体是？",
+                        "en": "What is the haeyo-form of 「모르다」 (to not know)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "몰라요",
+                          "모러요",
+                          "모르어요",
+                          "모라요"
+                        ],
+                        "en": [
+                          "몰라요",
+                          "모러요",
+                          "모르어요",
+                          "모라요"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "르不规则：르变ㄹㄹ，모르→몰라，加요→몰라요。",
+                        "en": "르-irregular: 르 becomes ㄹㄹ. 모르 → 몰라 + 요 → 몰라요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「부르다」（唱/叫）的해요体是？",
+                        "en": "What is the haeyo-form of 「부르다」 (to sing/call)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "부러요",
+                          "부르어요",
+                          "부라요",
+                          "불러요"
+                        ],
+                        "en": [
+                          "부러요",
+                          "부르어요",
+                          "부라요",
+                          "불러요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "르不规则：부르 → 불러 + 요 → 불러요。",
+                        "en": "르-irregular: 부르 → 불러 + 요 → 불러요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「쓰다」（写/用）的해요体是？",
+                        "en": "What is the haeyo-form of 「쓰다」 (to write/use)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "쓰어요",
+                          "써요",
+                          "스어요",
+                          "쓰어"
+                        ],
+                        "en": [
+                          "쓰어요",
+                          "써요",
+                          "스어요",
+                          "쓰어"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "으不规则：词干쓰的ㅡ脱落，加어요→써요。",
+                        "en": "으-irregular: the ㅡ in the stem 쓰 drops, then add 어요 → 써요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「살다」（居住）的해요体是？（注意ㄹ的特殊性）",
+                        "en": "What is the haeyo-form of 「살다」 (to live)? (Note the special ㄹ rule)"
+                      },
+                      "opts": {
+                        "zh": [
+                          "살아요",
+                          "사라요",
+                          "살어요",
+                          "사아요"
+                        ],
+                        "en": [
+                          "살아요",
+                          "사라요",
+                          "살어요",
+                          "사아요"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "ㄹ不规则：살的ㄹ在元音前保留，加아요→살아요。",
+                        "en": "ㄹ-irregular: the ㄹ in 살 is kept before a vowel, so add 아요 → 살아요."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：连接词尾（연결 어미）学习",
+                  "titleEn": "Paper 2: Connecting Endings (연결 어미)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "表示「并列/顺序」的连接词尾是？",
+                        "en": "Which connecting ending expresses 'and / and then'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-지만",
+                          "-고",
+                          "-면",
+                          "-서"
+                        ],
+                        "en": [
+                          "-지만",
+                          "-고",
+                          "-면",
+                          "-서"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「-고」表并列或动作的顺序：밥을 먹고 갔어요（吃完饭去了）。",
+                        "en": "-고 marks coordination or sequence: 밥을 먹고 갔어요 (ate and then left)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「转折」的连接词尾是？",
+                        "en": "Which connecting ending expresses 'but / although'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-고",
+                          "-니까",
+                          "-지만",
+                          "-면"
+                        ],
+                        "en": [
+                          "-고",
+                          "-니까",
+                          "-지만",
+                          "-면"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「-지만」表转折：피곤하지만 공부해요（虽然累但学习）。",
+                        "en": "-지만 marks contrast: 피곤하지만 공부해요 (tired but studying)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「条件（如果）」的连接词尾是？",
+                        "en": "Which connecting ending expresses 'if'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-고",
+                          "-서",
+                          "-지만",
+                          "-면"
+                        ],
+                        "en": [
+                          "-고",
+                          "-서",
+                          "-지만",
+                          "-면"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「-면」表条件：비가 오면 안 가요（如果下雨就不去）。",
+                        "en": "-면 marks a condition: 비가 오면 안 가요 (if it rains, I won't go)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「原因」的连接词尾是？",
+                        "en": "Which connecting ending expresses 'because'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-아/어서",
+                          "-고",
+                          "-지만",
+                          "-면"
+                        ],
+                        "en": [
+                          "-아/어서",
+                          "-고",
+                          "-지만",
+                          "-면"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「-아/어서」表原因：비가 와서 못 갔어요（因为下雨没去）。",
+                        "en": "-아/어서 marks cause: 비가 와서 못 갔어요 (because it rained, couldn't go)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「비가 와서 못 갔어요」的意思是？",
+                        "en": "What does 「비가 와서 못 갔어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "下雨了但去了",
+                          "因为下雨没去",
+                          "如果下雨就不去",
+                          "下雨后去了"
+                        ],
+                        "en": [
+                          "It rained but I went",
+                          "Because it rained, I couldn't go",
+                          "If it rains, I won't go",
+                          "After it rained, I went"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-아/어서 表原因 + 못（不能）：因为下雨没能去。",
+                        "en": "-아/어서 marks cause + 못 (cannot): because it rained, I couldn't go."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「피곤하지만 공부해요」的意思是？",
+                        "en": "What does 「피곤하지만 공부해요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "虽然累但学习",
+                          "因为累所以学习",
+                          "如果累就学习",
+                          "累了再学习"
+                        ],
+                        "en": [
+                          "Although tired, I study",
+                          "Because I'm tired, I study",
+                          "If I'm tired, I'll study",
+                          "After being tired, I study"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "-지만 表转折：虽然累但学习。",
+                        "en": "-지만 marks contrast: although tired, I study."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "比「-아/어서」更正式的原因连接词尾是？",
+                        "en": "Which cause ending is more formal than 「-아/어서」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-고",
+                          "-니까",
+                          "-면",
+                          "-지만"
+                        ],
+                        "en": [
+                          "-고",
+                          "-니까",
+                          "-면",
+                          "-지만"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「-니까」表原因，比-아/어서更正式。例：늦었으니까 빨리 가세요。",
+                        "en": "-니까 marks cause and is more formal than -아/어서. E.g. 늦었으니까 빨리 가세요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「밥을 먹고 학교에 갔어요」的意思是？",
+                        "en": "What does 「밥을 먹고 학교에 갔어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为吃饭没去学校",
+                          "边吃饭边去学校",
+                          "吃完饭去了学校",
+                          "想吃饭后去学校"
+                        ],
+                        "en": [
+                          "Because I ate, I didn't go to school",
+                          "Ate while going to school",
+                          "Ate and then went to school",
+                          "Want to eat before going to school"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-고 表动作顺序：吃完饭去了学校。",
+                        "en": "-고 marks sequence: ate and then went to school."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「目的（去做某事）」的连接词尾是？",
+                        "en": "Which connecting ending expresses 'in order to do'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-고",
+                          "-러",
+                          "-지만",
+                          "-면"
+                        ],
+                        "en": [
+                          "-고",
+                          "-러",
+                          "-지만",
+                          "-면"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「-러」表目的，常与가다/오다连用：한국어를 배우러 한국에 갔어요。",
+                        "en": "-러 marks purpose, often with 가다/오다: 한국어를 배우러 한국에 갔어요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「한국어를 배우러 한국에 갔어요」的意思是？",
+                        "en": "What does 「한국어를 배우러 한국에 갔어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "在韩国学了韩语",
+                          "学完韩语回了国",
+                          "想学韩语",
+                          "为了学韩语去了韩国"
+                        ],
+                        "en": [
+                          "Studied Korean in Korea",
+                          "Finished studying Korean and returned",
+                          "Want to learn Korean",
+                          "Went to Korea to learn Korean"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "-러 表目的：为了学韩语去了韩国。",
+                        "en": "-러 marks purpose: went to Korea in order to learn Korean."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：冠形词形（관형사형）学习",
+                  "titleEn": "Paper 3: Noun-modifying Forms (관형사형)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "动词现在时修饰名词用哪个形式？",
+                        "en": "Which form does a verb use to modify a noun in the present tense?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-는",
+                          "-은",
+                          "-을/ㄹ",
+                          "-던"
+                        ],
+                        "en": [
+                          "-는",
+                          "-은",
+                          "-을/ㄹ",
+                          "-던"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "动词现在时：-는。例：먹는 사람（正在吃的人）。",
+                        "en": "Verb present: -는. E.g. 먹는 사람 (the person eating)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词过去时修饰名词用哪个形式？",
+                        "en": "Which form does a verb use to modify a noun in the past tense?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-는",
+                          "-은/ㄴ",
+                          "-을/ㄹ",
+                          "-던"
+                        ],
+                        "en": [
+                          "-는",
+                          "-은/ㄴ",
+                          "-을/ㄹ",
+                          "-던"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "动词过去时：-은/ㄴ。例：먹은 사람（吃过的人）。",
+                        "en": "Verb past: -은/ㄴ. E.g. 먹은 사람 (the person who ate)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词将来时修饰名词用哪个形式？",
+                        "en": "Which form does a verb use to modify a noun in the future tense?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-은",
+                          "-는",
+                          "-을/ㄹ",
+                          "-던"
+                        ],
+                        "en": [
+                          "-은",
+                          "-는",
+                          "-을/ㄹ",
+                          "-던"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "动词将来时：-을/ㄹ。例：먹을 사람（要吃的人）。",
+                        "en": "Verb future: -을/ㄹ. E.g. 먹을 사람 (the person who will eat)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "形容词修饰名词（现在）用哪个形式？",
+                        "en": "Which form does an adjective use to modify a noun (present)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-는",
+                          "-을/ㄹ",
+                          "-던",
+                          "-은/ㄴ"
+                        ],
+                        "en": [
+                          "-는",
+                          "-을/ㄹ",
+                          "-던",
+                          "-은/ㄴ"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "形容词现在时：-은/ㄴ。例：예쁜 꽃（漂亮的花）。",
+                        "en": "Adjective present: -은/ㄴ. E.g. 예쁜 꽃 (pretty flower)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「먹는 사람」的意思是？",
+                        "en": "What does 「먹는 사람」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "吃过的人",
+                          "正在吃的人",
+                          "要吃的人",
+                          "不吃的人"
+                        ],
+                        "en": [
+                          "The person who ate",
+                          "The person eating",
+                          "The person who will eat",
+                          "The person who doesn't eat"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "먹 + 는 + 사람：正在吃的人。",
+                        "en": "먹 + 는 + 사람: the person eating (present)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「먹은 사람」的意思是？",
+                        "en": "What does 「먹은 사람」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "正在吃的人",
+                          "要吃的人",
+                          "吃过的人",
+                          "不吃的人"
+                        ],
+                        "en": [
+                          "The person eating",
+                          "The person who will eat",
+                          "The person who ate",
+                          "The person who doesn't eat"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "먹 + 은 + 사람：吃过的人（过去）。",
+                        "en": "먹 + 은 + 사람: the person who ate (past)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「먹을 사람」的意思是？",
+                        "en": "What does 「먹을 사람」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "正在吃的人",
+                          "吃过的人",
+                          "不吃的人",
+                          "要吃的人"
+                        ],
+                        "en": [
+                          "The person eating",
+                          "The person who ate",
+                          "The person who doesn't eat",
+                          "The person who will eat"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "먹 + 을 + 사람：要吃的人（将来）。",
+                        "en": "먹 + 을 + 사람: the person who will eat (future)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「예쁜 꽃」中「예쁜」的原形是？",
+                        "en": "What is the dictionary form of 「예쁜」 in 「예쁜 꽃」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "예쁘다",
+                          "예쁜다",
+                          "예뿌다",
+                          "예쁘"
+                        ],
+                        "en": [
+                          "예쁘다",
+                          "예쁜다",
+                          "예뿌다",
+                          "예쁘"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "예쁘다（ㅡ脱落）→ 예쁜。",
+                        "en": "예쁘다 (ㅡ drops) → 예쁜."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「읽는 책」的意思是？",
+                        "en": "What does 「읽는 책」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "读过的书",
+                          "要读的书",
+                          "正在读的书",
+                          "不读的书"
+                        ],
+                        "en": [
+                          "The book that was read",
+                          "The book to read later",
+                          "The book being read",
+                          "The book not read"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "읽 + 는 + 책：正在读的书（现在时定语）。",
+                        "en": "읽 + 는 + 책: the book being read (present modifier)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「작년에 산 차」中「산」的原形是？",
+                        "en": "What is the dictionary form of 「산」 in 「작년에 산 차」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "사다",
+                          "살다",
+                          "산다",
+                          "사"
+                        ],
+                        "en": [
+                          "사다",
+                          "살다",
+                          "산다",
+                          "사"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "사다（买）→ 산（过去定语）。",
+                        "en": "사다 (to buy) → 산 (past modifier)."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：比较与程度（비교와 정도）学习",
+                  "titleEn": "Paper 4: Comparison & Degree (비교와 정도)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "表示「A比B…」用哪个助词？",
+                        "en": "Which particle expresses 'A is more ... than B'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "보다",
+                          "처럼",
+                          "만큼",
+                          "제일"
+                        ],
+                        "en": [
+                          "보다",
+                          "처럼",
+                          "만큼",
+                          "제일"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「보다」表比较：사과가 배보다 맛있어요（苹果比梨好吃）。",
+                        "en": "보다 marks comparison: 사과가 배보다 맛있어요 (apples are tastier than pears)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「사과가 배보다 맛있어요」的意思是？",
+                        "en": "What does 「사과가 배보다 맛있어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "苹果和梨一样好吃",
+                          "苹果比梨好吃",
+                          "梨比苹果好吃",
+                          "苹果没有梨好吃"
+                        ],
+                        "en": [
+                          "Apples and pears are equally tasty",
+                          "Apples are tastier than pears",
+                          "Pears are tastier than apples",
+                          "Apples are less tasty than pears"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "A가 B보다 ~：A 比 B 更 ~。",
+                        "en": "A가 B보다 ~: A is more ~ than B."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「最…」的副词是？",
+                        "en": "Which adverb means 'the most'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "더",
+                          "덜",
+                          "제일/가장",
+                          "보다"
+                        ],
+                        "en": [
+                          "더",
+                          "덜",
+                          "제일/가장",
+                          "보다"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "제일 / 가장：最。例：이게 제일 좋아요（这个最好）。",
+                        "en": "제일 / 가장: the most. E.g. 이게 제일 좋아요 (this is the best)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「오늘이 어제보다 더워요」的意思是？",
+                        "en": "What does 「오늘이 어제보다 더워요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "今天和昨天一样热",
+                          "昨天比今天热",
+                          "今天不热",
+                          "今天比昨天热"
+                        ],
+                        "en": [
+                          "Today and yesterday are equally hot",
+                          "Yesterday was hotter than today",
+                          "Today isn't hot",
+                          "Today is hotter than yesterday"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "오늘이 어제보다：今天比昨天。더워요：热。",
+                        "en": "오늘이 어제보다: today more than yesterday. 더워요: hot."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「像…一样」的助词是？",
+                        "en": "Which particle means 'like / as ... as'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "처럼",
+                          "보다",
+                          "만큼",
+                          "제일"
+                        ],
+                        "en": [
+                          "처럼",
+                          "보다",
+                          "만큼",
+                          "제일"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「처럼」表相似：새처럼 날고 싶어요（想如鸟一样飞翔）。",
+                        "en": "처럼 marks similarity: 새처럼 날고 싶어요 (I want to fly like a bird)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「达到…程度」的助词是？",
+                        "en": "Which particle expresses 'to the extent of ...'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "보다",
+                          "만큼",
+                          "처럼",
+                          "제일"
+                        ],
+                        "en": [
+                          "보다",
+                          "만큼",
+                          "처럼",
+                          "제일"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「만큼」表程度：형만큼 키가 커요（和哥哥一样高）。",
+                        "en": "만큼 expresses extent: 형만큼 키가 커요 (as tall as my brother)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「형만큼 키가 커요」的意思是？",
+                        "en": "What does 「형만큼 키가 커요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "比哥哥高",
+                          "哥哥比我高",
+                          "和哥哥一样高",
+                          "比哥哥矮"
+                        ],
+                        "en": [
+                          "Taller than my brother",
+                          "My brother is taller than me",
+                          "As tall as my brother",
+                          "Shorter than my brother"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "만큼 表程度：和哥哥一样高。",
+                        "en": "만큼 marks extent: as tall as my brother."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "表示「更…」的副词是？",
+                        "en": "Which adverb means 'more'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "제일",
+                          "가장",
+                          "덜",
+                          "더"
+                        ],
+                        "en": [
+                          "제일",
+                          "가장",
+                          "덜",
+                          "더"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「더」表示更：더 먹어요（再吃点）。",
+                        "en": "더 means 'more': 더 먹어요 (eat more)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「이게 제일 좋아요」的意思是？",
+                        "en": "What does 「이게 제일 좋아요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "这个最好",
+                          "这个更好",
+                          "这个不好",
+                          "这个比较好"
+                        ],
+                        "en": [
+                          "This is the best",
+                          "This is better",
+                          "This is not good",
+                          "This is relatively good"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "제일（最）+ 좋아요（好）= 最好。",
+                        "en": "제일 (most) + 좋아요 (good) = the best."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「동생은 저보다 어려요」的意思是？",
+                        "en": "What does 「동생은 저보다 어려요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "弟弟比我大",
+                          "弟弟比我小",
+                          "弟弟和我一样大",
+                          "弟弟很高"
+                        ],
+                        "en": [
+                          "My younger sibling is older than me",
+                          "My younger sibling is younger than me",
+                          "My younger sibling is the same age as me",
+                          "My younger sibling is tall"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "저보다（比我）+ 어려요（年轻）= 比我小。",
+                        "en": "저보다 (than me) + 어려요 (young) = younger than me."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：敬语与半语（존댓말과 반말）学习",
+                  "titleEn": "Paper 5: Honorific & Casual Speech (존댓말과 반말)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "敬语词尾「-시-」加在动词词干后，表示？",
+                        "en": "What does the honorific suffix 「-시-」 express when added to a verb stem?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "尊敬主语",
+                          "尊敬听者",
+                          "谦让",
+                          "否定"
+                        ],
+                        "en": [
+                          "Respect for the subject",
+                          "Respect for the listener",
+                          "Humility (lowering oneself)",
+                          "Negation"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「-시-」提高主语的尊敬度：선생님이 가세요（老师去）。",
+                        "en": "-시- raises the subject's status: 선생님이 가세요 (the teacher goes)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「먹다」的敬语形式是？",
+                        "en": "What is the honorific form of 「먹다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "먹시다",
+                          "드시다",
+                          "잡수시다",
+                          "먹어요"
+                        ],
+                        "en": [
+                          "먹시다",
+                          "드시다",
+                          "잡수시다",
+                          "먹어요"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「드시다」是먹다的敬语，比잡수시다更常用。",
+                        "en": "드시다 is the honorific form of 먹다, more common than 잡수시다."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「있다」的敬语形式是？",
+                        "en": "What is the honorific form of 「있다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "있으시다",
+                          "있시다",
+                          "있어요",
+                          "계시다"
+                        ],
+                        "en": [
+                          "있으시다",
+                          "있시다",
+                          "있어요",
+                          "계시다"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「계시다」是있다的敬语，用于尊敬主语。",
+                        "en": "계시다 is the honorific form of 있다, used to respect the subject."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「자다」的敬语形式是？",
+                        "en": "What is the honorific form of 「자다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "자시다",
+                          "잤다",
+                          "주무시다",
+                          "자요"
+                        ],
+                        "en": [
+                          "자시다",
+                          "잤다",
+                          "주무시다",
+                          "자요"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「주무시다」是자다的敬语。",
+                        "en": "주무시다 is the honorific form of 자다."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「나이」的敬语是？",
+                        "en": "What is the honorific word for 「나이」 (age)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "연세",
+                          "나이시",
+                          "연령",
+                          "살"
+                        ],
+                        "en": [
+                          "연세",
+                          "나이시",
+                          "연령",
+                          "살"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「연세」是나이的敬语，问长辈年龄时说연세。",
+                        "en": "연세 is the honorific word for 나이; use it when asking an elder's age."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「밥」的敬语是？",
+                        "en": "What is the honorific word for 「밥」 (meal)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "식사",
+                          "진지",
+                          "밥시",
+                          "음식"
+                        ],
+                        "en": [
+                          "식사",
+                          "진지",
+                          "밥시",
+                          "음식"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「진지」是밥的敬语，多用于长辈。식사更一般。",
+                        "en": "진지 is the honorific word for 밥, usually for elders. 식사 is more general."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "对长辈说话应该用？",
+                        "en": "Which speech style should you use with elders?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "반말",
+                          "平语",
+                          "존댓말",
+                          "半语"
+                        ],
+                        "en": [
+                          "반말 (casual)",
+                          "平语 (plain)",
+                          "존댓말 (honorific)",
+                          "半语 (semi-casual)"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "对长辈、陌生人用존댓말（敬语）。",
+                        "en": "Use 존댓말 (honorific speech) with elders and strangers."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "对亲近的朋友说话可以用？",
+                        "en": "Which speech style can you use with close friends?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "존댓말",
+                          "敬语",
+                          "합쇼体",
+                          "반말"
+                        ],
+                        "en": [
+                          "존댓말 (honorific)",
+                          "敬语 (honorific)",
+                          "합쇼体 (formal)",
+                          "반말 (casual)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "对亲近的朋友、晚辈用반말（半语/平语）。",
+                        "en": "Use 반말 (casual speech) with close friends and juniors."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「할아버지께서 진지를 잡수세요」中，「잡수세요」是哪个词的敬语？",
+                        "en": "In 「할아버지께서 진지를 잡수세요」, what is the honorific word 「잡수세요」 based on?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "먹다",
+                          "마시다",
+                          "자다",
+                          "있다"
+                        ],
+                        "en": [
+                          "먹다 (eat)",
+                          "마시다 (drink)",
+                          "자다 (sleep)",
+                          "있다 (exist)"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「잡수시다」是먹다的敬语，比드시다更尊敬。",
+                        "en": "잡수시다 is the honorific form of 먹다, more honorific than 드시다."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「선생님께서 교실에 계세요」中，「계세요」是哪个词的敬语？",
+                        "en": "In 「선생님께서 교실에 계세요」, what is the honorific word 「계세요」 based on?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "가다",
+                          "있다",
+                          "오다",
+                          "먹다"
+                        ],
+                        "en": [
+                          "가다 (go)",
+                          "있다 (exist)",
+                          "오다 (come)",
+                          "먹다 (eat)"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「계시다」是있다的敬语，表示「在（某处）」。",
+                        "en": "계시다 is the honorific form of 있다, meaning 'to be (somewhere)'."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "level": 3,
