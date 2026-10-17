@@ -12806,7 +12806,7 @@
               "papers": [
                 {
                   "id": 1,
-                  "titleZh": "试卷 1：基础助词（기본 조사）学习",
+                  "titleZh": "试卷 1：基础助词（기본 조사）",
                   "titleEn": "Paper 1: Basic Particles (기본 조사)",
                   "questions": [
                     {
@@ -13063,7 +13063,7 @@
                 },
                 {
                   "id": 2,
-                  "titleZh": "试卷 2：基础动词与해요体（ 기본 동사와 해요체）学习",
+                  "titleZh": "试卷 2：基础动词与해요体（ 기본 동사와 해요체）",
                   "titleEn": "Paper 2: Basic Verbs & Haeyo-Form (기본 동사와 해요체)",
                   "questions": [
                     {
@@ -13320,7 +13320,7 @@
                 },
                 {
                   "id": 3,
-                  "titleZh": "试卷 3：过去式与将来式（과거형과 미래형）学习",
+                  "titleZh": "试卷 3：过去式与将来式（과거형과 미래형）",
                   "titleEn": "Paper 3: Past & Future Tense (과거형과 미래형)",
                   "questions": [
                     {
@@ -13577,7 +13577,7 @@
                 },
                 {
                   "id": 4,
-                  "titleZh": "试卷 4：数字与量词（ 숫자와 단위）学习",
+                  "titleZh": "试卷 4：数字与量词（ 숫자와 단위）",
                   "titleEn": "Paper 4: Numbers & Counters (숫자와 단위)",
                   "questions": [
                     {
@@ -13834,7 +13834,7 @@
                 },
                 {
                   "id": 5,
-                  "titleZh": "试卷 5：日常会话（일상 회화）学习",
+                  "titleZh": "试卷 5：日常会话（일상 회화）",
                   "titleEn": "Paper 5: Daily Conversation (일상 회화)",
                   "questions": [
                     {
@@ -14098,7 +14098,7 @@
               "papers": [
                 {
                   "id": 1,
-                  "titleZh": "试卷 1：不规则动词与形容词（불규칙 동사와 형용사）学习",
+                  "titleZh": "试卷 1：不规则动词与形容词（불규칙 동사와 형용사）",
                   "titleEn": "Paper 1: Irregular Verbs & Adjectives (불규칙 동사와 형용사)",
                   "questions": [
                     {
@@ -14355,7 +14355,7 @@
                 },
                 {
                   "id": 2,
-                  "titleZh": "试卷 2：连接词尾（연결 어미）学习",
+                  "titleZh": "试卷 2：连接词尾（연결 어미）",
                   "titleEn": "Paper 2: Connecting Endings (연결 어미)",
                   "questions": [
                     {
@@ -14612,7 +14612,7 @@
                 },
                 {
                   "id": 3,
-                  "titleZh": "试卷 3：冠形词形（관형사형）学习",
+                  "titleZh": "试卷 3：冠形词形（관형사형）",
                   "titleEn": "Paper 3: Noun-modifying Forms (관형사형)",
                   "questions": [
                     {
@@ -14869,7 +14869,7 @@
                 },
                 {
                   "id": 4,
-                  "titleZh": "试卷 4：比较与程度（비교와 정도）学习",
+                  "titleZh": "试卷 4：比较与程度（비교와 정도）",
                   "titleEn": "Paper 4: Comparison & Degree (비교와 정도)",
                   "questions": [
                     {
@@ -15126,7 +15126,7 @@
                 },
                 {
                   "id": 5,
-                  "titleZh": "试卷 5：敬语与半语（존댓말과 반말）学习",
+                  "titleZh": "试卷 5：敬语与半语（존댓말과 반말）",
                   "titleEn": "Paper 5: Honorific & Casual Speech (존댓말과 반말)",
                   "questions": [
                     {
@@ -15387,7 +15387,1293 @@
               "level": 3,
               "labelZh": "中级",
               "labelEn": "Intermediate",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：间接引语（간접 인용）",
+                  "titleEn": "Paper 1: Indirect Speech (간접 인용)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "陈述句的间接引语用哪个词尾？",
+                        "en": "Which ending is used for indirect speech of a statement?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-냐고 하다",
+                          "-자고 하다",
+                          "-다고 하다",
+                          "-라고 하다"
+                        ],
+                        "en": [
+                          "-냐고 하다",
+                          "-자고 하다",
+                          "-다고 하다",
+                          "-라고 하다"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "陈述句间接引语：词干 + -다고 하다。例：간다고 했어요（说要去）。",
+                        "en": "Statements take -다고 하다: 간다고 했어요 (said he/she is going)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "疑问句的间接引语用哪个词尾？",
+                        "en": "Which ending is used for indirect speech of a question?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-냐고 하다",
+                          "-다고 하다",
+                          "-자고 하다",
+                          "-라고 하다"
+                        ],
+                        "en": [
+                          "-냐고 하다",
+                          "-다고 하다",
+                          "-자고 하다",
+                          "-라고 하다"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "疑问句间接引语：-냐고 하다（或 -느냐고 하다）。例：가냐고 물었어요（问去不去）。",
+                        "en": "Questions take -냐고 하다: 가냐고 물었어요 (asked whether he/she is going)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "命令句的间接引语用哪个词尾？",
+                        "en": "Which ending is used for indirect speech of a command?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-다고 하다",
+                          "-냐고 하다",
+                          "-자고 하다",
+                          "-(으)라고 하다"
+                        ],
+                        "en": [
+                          "-다고 하다",
+                          "-냐고 하다",
+                          "-자고 하다",
+                          "-(으)라고 하다"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "命令句间接引语：-(으)라고 하다。例：앉으라고 했어요（让坐下）。",
+                        "en": "Commands take -(으)라고 하다: 앉으라고 했어요 (told him/her to sit)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "共动句（提议）的间接引语用哪个词尾？",
+                        "en": "Which ending is used for indirect speech of a suggestion ('let's')?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-다고 하다",
+                          "-자고 하다",
+                          "-냐고 하다",
+                          "-라고 하다"
+                        ],
+                        "en": [
+                          "-다고 하다",
+                          "-자고 하다",
+                          "-냐고 하다",
+                          "-라고 하다"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "共动句间接引语：-자고 하다。例：같이 가자고 했어요（提议一起去）。",
+                        "en": "Suggestions take -자고 하다: 같이 가자고 했어요 (suggested going together)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「밥을 먹는다고 했어요」的意思是？",
+                        "en": "What does 「밥을 먹는다고 했어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "问了要不要吃饭",
+                          "说了在吃饭／要吃饭",
+                          "让我吃饭",
+                          "一起吃饭吧"
+                        ],
+                        "en": [
+                          "Asked whether to eat",
+                          "Said that he/she is eating / will eat",
+                          "Told me to eat",
+                          "Let's eat together"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-ㄴ/는다고 하다 是陈述句间接引语：说了在吃饭。",
+                        "en": "-ㄴ/는다고 하다 is indirect speech for statements: said that he/she is eating."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「어디에 가냐고 물었어요」的意思是？",
+                        "en": "What does 「어디에 가냐고 물었어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "说了要去的地方",
+                          "让我去那里",
+                          "问了要去哪里",
+                          "提议一起去"
+                        ],
+                        "en": [
+                          "Said where to go",
+                          "Told me to go there",
+                          "Asked where he/she is going",
+                          "Suggested going together"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-냐고 묻다 = 问…。问了要去哪里。",
+                        "en": "-냐고 묻다 means 'asked whether/where'. Asked where he/she is going."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「천천히 하라고 했어요」的意思是？",
+                        "en": "What does 「천천히 하라고 했어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "让我慢慢做",
+                          "问我做得慢不慢",
+                          "说做得很慢",
+                          "一起慢慢做"
+                        ],
+                        "en": [
+                          "Told me to do it slowly",
+                          "Asked if I'm slow",
+                          "Said it was done slowly",
+                          "Let's do it slowly together"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "-(으)라고 하다 表命令：让我慢慢做。",
+                        "en": "-(으)라고 하다 marks commands: told me to do it slowly."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「같이 가자고 했어요」的意思是？",
+                        "en": "What does 「같이 가자고 했어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "说了已经去了",
+                          "问要不要去",
+                          "让我自己去",
+                          "提议一起去"
+                        ],
+                        "en": [
+                          "Said he/she already went",
+                          "Asked whether to go",
+                          "Told me to go alone",
+                          "Suggested going together"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "-자고 하다 表提议：提议一起去。",
+                        "en": "-자고 하다 marks suggestions: suggested going together."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "名词的间接引语（「是学生」）用哪个词尾？",
+                        "en": "Which ending is used for indirect speech of a noun statement ('is a student')?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-다고 하다",
+                          "-냐고 하다",
+                          "-(이)라고 하다",
+                          "-자고 하다"
+                        ],
+                        "en": [
+                          "-다고 하다",
+                          "-냐고 하다",
+                          "-(이)라고 하다",
+                          "-자고 하다"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "名词 + -(이)라고 하다。例：학생이라고 했어요（说是学生）。",
+                        "en": "Noun + -(이)라고 하다: 학생이라고 했어요 (said he/she is a student)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-다고 했어요」的口语缩略形式是？",
+                        "en": "What is the colloquial contraction of 「-다고 했어요」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-냈어요",
+                          "-댔어요",
+                          "-잤어요",
+                          "-랬어요"
+                        ],
+                        "en": [
+                          "-냈어요",
+                          "-댔어요",
+                          "-잤어요",
+                          "-랬어요"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-다고 했어요 → -댔어요（口语中常见）。",
+                        "en": "-다고 했어요 contracts to -댔어요 in casual speech."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：被动与使役（피동과 사동）",
+                  "titleEn": "Paper 2: Passive & Causative (피동과 사동)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「보다」（看）的被动形是？",
+                        "en": "What is the passive form of 「보다」 (to see)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "보리다",
+                          "보이다",
+                          "보기다",
+                          "보게 하다"
+                        ],
+                        "en": [
+                          "보리다",
+                          "보이다",
+                          "보기다",
+                          "보게 하다"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "보다 的被动形是 보이다（被看见／看得见）。",
+                        "en": "The passive of 보다 is 보이다 (to be seen / to be visible)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「문이 열렸어요」中「열리다」是什么形式？",
+                        "en": "In 「문이 열렸어요」, what form is 「열리다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "열다的敬语",
+                          "열다的使役",
+                          "열다的否定",
+                          "열다的被动"
+                        ],
+                        "en": [
+                          "Honorific of 열다",
+                          "Causative of 열다",
+                          "Negative of 열다",
+                          "Passive of 열다"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "열리다 是 열다（开）的被动：门被打开了。",
+                        "en": "열리다 is the passive of 열다 (to open): the door was opened."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「먹이다」是什么形式？",
+                        "en": "What form is 「먹이다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "먹다的使役（喂）",
+                          "먹다的被动",
+                          "먹다的敬语",
+                          "먹다的否定"
+                        ],
+                        "en": [
+                          "Causative of 먹다 (to feed)",
+                          "Passive of 먹다",
+                          "Honorific of 먹다",
+                          "Negative of 먹다"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "먹이다 是 먹다 的使役：喂（让吃）。",
+                        "en": "먹이다 is the causative of 먹다: to feed (make someone eat)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-게 하다」表示什么？",
+                        "en": "What does 「-게 하다」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "被动",
+                          "推测",
+                          "使役（让…做）",
+                          "否定"
+                        ],
+                        "en": [
+                          "Passive",
+                          "Conjecture",
+                          "Causative (make someone do)",
+                          "Negation"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-게 하다 是最通用的使役结构：웃게 하다（让人笑）。",
+                        "en": "-게 하다 is the most general causative pattern: 웃게 하다 (make someone laugh)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「아이를 웃겼어요」的意思是？",
+                        "en": "What does 「아이를 웃겼어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "孩子笑了",
+                          "把孩子逗笑了",
+                          "孩子被笑了",
+                          "孩子不笑"
+                        ],
+                        "en": [
+                          "The child laughed",
+                          "Made the child laugh",
+                          "The child was laughed at",
+                          "The child didn't laugh"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "웃기다 是 웃다 的使役：把孩子逗笑了。",
+                        "en": "웃기다 is the causative of 웃다: made the child laugh."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「도둑이 잡혔어요」的意思是？",
+                        "en": "What does 「도둑이 잡혔어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "小偷被抓了（被动）",
+                          "小偷抓了人",
+                          "小偷在逃跑",
+                          "小偷被释放了"
+                        ],
+                        "en": [
+                          "The thief was caught (passive)",
+                          "The thief caught someone",
+                          "The thief is running away",
+                          "The thief was released"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "잡히다 是 잡다（抓）的被动：小偷被抓了。",
+                        "en": "잡히다 is the passive of 잡다 (to catch): the thief was caught."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-시키다」主要用于什么？",
+                        "en": "What is 「-시키다」 mainly used for?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "汉字词名词 + 시키다 构成使役",
+                          "表被动",
+                          "表尊敬",
+                          "表否定"
+                        ],
+                        "en": [
+                          "Forming causatives with Sino-Korean nouns",
+                          "Marking the passive",
+                          "Marking honorifics",
+                          "Marking negation"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "汉字词名词 + 시키다：공부시키다（让学习）、이해시키다（让人理解）。",
+                        "en": "Sino-Korean noun + 시키다: 공부시키다 (make someone study), 이해시키다 (make someone understand)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「동생에게 책을 읽게 했어요」的意思是？",
+                        "en": "What does 「동생에게 책을 읽게 했어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "弟弟读了书",
+                          "弟弟被读了书",
+                          "让弟弟读书",
+                          "和弟弟一起读书"
+                        ],
+                        "en": [
+                          "My sibling read a book",
+                          "My sibling was read a book",
+                          "Made my sibling read a book",
+                          "Read a book with my sibling"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-게 하다 使役：让弟弟读书。",
+                        "en": "-게 하다 causative: made my sibling read a book."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "被动与使役的区别是？",
+                        "en": "What is the difference between passive and causative?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "两者完全相同",
+                          "被动：主语被做；使役：主语让做",
+                          "被动＝使役",
+                          "被动表尊敬"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "Passive: the subject receives the action; causative: the subject makes someone act",
+                          "Passive = causative",
+                          "Passive marks honorifics"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "被动：门被开了（문이 열렸다）；使役：我让门开了（문을 열게 했다）。",
+                        "en": "Passive: the door was opened (문이 열렸다); causative: I made the door open (문을 열게 했다)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「길이 막혔어요」中「막히다」是什么形式？",
+                        "en": "In 「길이 막혔어요」, what form is 「막히다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "막다的使役",
+                          "막다的敬语",
+                          "막다的被动（路被堵了）",
+                          "막다的否定"
+                        ],
+                        "en": [
+                          "Causative of 막다",
+                          "Honorific of 막다",
+                          "Passive of 막다 (the road is blocked)",
+                          "Negative of 막다"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "막히다 是 막다（堵）的被动：路被堵了。",
+                        "en": "막히다 is the passive of 막다 (to block): the road is blocked."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：推测与意志（추측과 의지）",
+                  "titleEn": "Paper 3: Conjecture & Volition (추측과 의지)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「-겠-」主要表示什么？",
+                        "en": "What does 「-겠-」 mainly express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "过去",
+                          "被动",
+                          "否定",
+                          "意志／推测"
+                        ],
+                        "en": [
+                          "Past",
+                          "Passive",
+                          "Negation",
+                          "Volition / Conjecture"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "-겠- 可表说话人意志（제가 하겠습니다）或推测（비가 오겠어요）。",
+                        "en": "-겠- expresses the speaker's volition (제가 하겠습니다) or conjecture (비가 오겠어요)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-(으)ㄹ 것이다」主要表示什么？",
+                        "en": "What does 「-(으)ㄹ 것이다」 mainly express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "将来／推测",
+                          "过去",
+                          "命令",
+                          "被动"
+                        ],
+                        "en": [
+                          "Future / Conjecture",
+                          "Past",
+                          "Command",
+                          "Passive"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "-(으)ㄹ 것이다 表将来计划或推测：내일 갈 거예요（明天打算去）。",
+                        "en": "-(으)ㄹ 것이다 marks future plans or conjecture: 내일 갈 거예요 (I plan to go tomorrow)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-(으)ㄹ 것 같다」主要表示什么？",
+                        "en": "What does 「-(으)ㄹ 것 같다」 mainly express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "确定的事实",
+                          "过去的经历",
+                          "推测（好像…）",
+                          "命令"
+                        ],
+                        "en": [
+                          "Certain fact",
+                          "Past experience",
+                          "Conjecture (it seems ...)",
+                          "Command"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-(으)ㄹ 것 같다 表推测：비가 올 것 같아요（好像要下雨）。",
+                        "en": "-(으)ㄹ 것 같다 marks conjecture: 비가 올 것 같아요 (it seems it will rain)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-나 보다」主要表示什么？",
+                        "en": "What does 「-나 보다」 mainly express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "亲眼所见",
+                          "基于观察的推测",
+                          "听说",
+                          "命令"
+                        ],
+                        "en": [
+                          "Directly witnessed",
+                          "Conjecture based on observation",
+                          "Hearsay",
+                          "Command"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-나 보다 表示基于观察的推测：아직 안 왔나 봐요（看来还没来）。",
+                        "en": "-나 보다 expresses conjecture based on observation: 아직 안 왔나 봐요 (looks like he/she hasn't come yet)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「비가 올 것 같아요」的意思是？",
+                        "en": "What does 「비가 올 것 같아요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "好像要下雨",
+                          "雨停了",
+                          "没下雨",
+                          "下过雨了"
+                        ],
+                        "en": [
+                          "It seems it will rain",
+                          "The rain stopped",
+                          "It isn't raining",
+                          "It rained"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "-(으)ㄹ 것 같다：好像要下雨。",
+                        "en": "-(으)ㄹ 것 같다: it seems it will rain."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「내일 갈 거예요」的意思是？",
+                        "en": "What does 「내일 갈 거예요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "昨天去了",
+                          "今天去",
+                          "不去",
+                          "明天打算去"
+                        ],
+                        "en": [
+                          "Went yesterday",
+                          "Will go today",
+                          "Won't go",
+                          "I plan to go tomorrow"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "-(으)ㄹ 것이다 表将来计划：明天打算去。",
+                        "en": "-(으)ㄹ 것이다 marks future plans: I plan to go tomorrow."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「제가 하겠습니다」表达的是？",
+                        "en": "What does 「제가 하겠습니다」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你做吧",
+                          "我来做（表意志）",
+                          "一起做",
+                          "不做"
+                        ],
+                        "en": [
+                          "You do it",
+                          "I'll do it (volition)",
+                          "Let's do it together",
+                          "Won't do it"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-겠- 表说话人意志：我来做。",
+                        "en": "-겠- expresses the speaker's volition: I'll do it."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-나 보다」与「-것 같다」的区别是？",
+                        "en": "What is the difference between 「-나 보다」 and 「-것 같다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "-것 같다 比 -나 보다 更依赖证据",
+                          "-나 보다 比 -것 같다 更依赖观察到的证据",
+                          "两者不能互换使用"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "-것 같다 relies more on evidence than -나 보다",
+                          "-나 보다 relies more on observed evidence than -것 같다",
+                          "They can never be interchanged"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-나 보다 更强调「从观察到的迹象推断」；-것 같다 是更通用的「好像」。",
+                        "en": "-나 보다 emphasizes inference from observed signs; -것 같다 is a more general 'seems'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-아/어 보이다」表示什么？",
+                        "en": "What does 「-아/어 보이다」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "过去",
+                          "看起来…",
+                          "命令",
+                          "被动"
+                        ],
+                        "en": [
+                          "Past",
+                          "Looks / Seems ...",
+                          "Command",
+                          "Passive"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-아/어 보이다 表视觉印象：맛있어 보여요（看起来好吃）。",
+                        "en": "-아/어 보이다 marks visual impression: 맛있어 보여요 (looks delicious)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-겠-」与「-(으)ㄹ 것이다」的主要区别是？",
+                        "en": "What is the main difference between 「-겠-」 and 「-(으)ㄹ 것이다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-겠- 更常用于第一人称意志；-(으)ㄹ 것이다 更常用于第三人称推测／计划",
+                          "完全相同",
+                          "-겠- 只表过去",
+                          "-(으)ㄹ 것이다 只表命令"
+                        ],
+                        "en": [
+                          "-겠- is more common for first-person volition; -(으)ㄹ 것이다 for third-person conjecture/plans",
+                          "They are identical",
+                          "-겠- only expresses the past",
+                          "-(으)ㄹ 것이다 only expresses commands"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "제가 하겠습니다（第一人称意志）／그가 갈 것이다（第三人称推测）。",
+                        "en": "제가 하겠습니다 (1st-person volition) / 그가 갈 것이다 (3rd-person conjecture)."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：进阶连接词尾（심화 연결 어미）",
+                  "titleEn": "Paper 4: Advanced Connecting Endings (심화 연결 어미)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「-는데」主要表示什么？",
+                        "en": "What does 「-는데」 mainly express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "原因（书面）",
+                          "命令",
+                          "背景铺垫／轻微转折",
+                          "被动"
+                        ],
+                        "en": [
+                          "Cause (written)",
+                          "Command",
+                          "Background / mild contrast",
+                          "Passive"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-는데 表背景或轻微转折：비가 오는데 우산이 없어요（在下雨，可我没伞）。",
+                        "en": "-는데 sets the background or mild contrast: 비가 오는데 우산이 없어요 (it's raining, but I have no umbrella)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-면서」表示什么？",
+                        "en": "What does 「-면서」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "同时进行",
+                          "先后顺序",
+                          "原因",
+                          "条件"
+                        ],
+                        "en": [
+                          "Doing simultaneously",
+                          "Sequence",
+                          "Cause",
+                          "Condition"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "-면서 表同时进行：음악을 들으면서 공부해요（边听音乐边学习）。",
+                        "en": "-면서 marks simultaneous actions: 음악을 들으면서 공부해요 (studying while listening to music)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-더라도」表示什么？",
+                        "en": "What does 「-더라도」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为",
+                          "如果",
+                          "为了",
+                          "即使／纵然（让步）"
+                        ],
+                        "en": [
+                          "Because",
+                          "If",
+                          "In order to",
+                          "Even if / Although (concession)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "-더라도 表让步：아무리 바쁘더라도 밥은 먹어요（再忙也吃饭）。",
+                        "en": "-더라도 marks concession: 아무리 바쁘더라도 밥은 먹어요 (even if busy, I eat)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-도록」主要表示什么？",
+                        "en": "What does 「-도록」 mainly express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "被动",
+                          "目的／程度（使得…）",
+                          "过去",
+                          "疑问"
+                        ],
+                        "en": [
+                          "Passive",
+                          "Purpose / extent (so that ...)",
+                          "Past",
+                          "Question"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-도록 可表目的（잊지 않도록 메모하세요）或程度（목이 아프도록 말했어요）。",
+                        "en": "-도록 marks purpose (잊지 않도록 메모하세요) or extent (목이 아프도록 말했어요)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-기 때문에」与「-아/어서」的区别是？",
+                        "en": "What is the difference between 「-기 때문에」 and 「-아/어서」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "-기 때문에 不能表原因",
+                          "-기 때문에 更书面，且可用于命令句之后",
+                          "-아/어서 更正式"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "-기 때문에 cannot express cause",
+                          "-기 때문에 is more formal and can precede commands",
+                          "-아/어서 is more formal"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-아/어서 后面不能接命令句；-기 때문에 可以：비가 오기 때문에 우산을 가져가세요。",
+                        "en": "-아/어서 cannot precede a command; -기 때문에 can: 비가 오기 때문에 우산을 가져가세요."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「비가 오는데 우산이 없어요」的意思是？",
+                        "en": "What does 「비가 오는데 우산이 없어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "在下雨，可我没伞",
+                          "因为下雨带了伞",
+                          "雨停了",
+                          "没下雨"
+                        ],
+                        "en": [
+                          "It's raining, but I have no umbrella",
+                          "Because it rained, I brought an umbrella",
+                          "The rain stopped",
+                          "It isn't raining"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "-는데 表背景＋轻微转折：在下雨，可我没伞。",
+                        "en": "-는데 sets background + mild contrast: it's raining, but I have no umbrella."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「음악을 들으면서 공부해요」的意思是？",
+                        "en": "What does 「음악을 들으면서 공부해요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "听完音乐再学习",
+                          "学习时听不到音乐",
+                          "为了学习听音乐",
+                          "一边听音乐一边学习"
+                        ],
+                        "en": [
+                          "Study after listening to music",
+                          "Can't hear music while studying",
+                          "Listen to music in order to study",
+                          "Study while listening to music"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "-면서 表同时：一边听音乐一边学习。",
+                        "en": "-면서 marks simultaneity: studying while listening to music."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「아무리 바빠도 밥은 먹어요」的意思是？",
+                        "en": "What does 「아무리 바빠도 밥은 먹어요」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为忙所以不吃饭",
+                          "再忙也吃饭",
+                          "忙的时候不吃饭",
+                          "不忙才吃饭"
+                        ],
+                        "en": [
+                          "Because I'm busy, I don't eat",
+                          "Even if busy, I eat",
+                          "I don't eat when busy",
+                          "I eat only when not busy"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "아무리 + -아/어도 表让步：再忙也吃饭。",
+                        "en": "아무리 + -아/어도 marks concession: even if busy, I eat."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-도록」的两种主要含义是？",
+                        "en": "What are the two main meanings of 「-도록」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "被动和使役",
+                          "过去和将来",
+                          "目的（为了）和程度（到…地步）",
+                          "尊敬和谦让"
+                        ],
+                        "en": [
+                          "Passive and causative",
+                          "Past and future",
+                          "Purpose (in order to) and extent (to the point of)",
+                          "Honorific and humble"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-도록：①目的 잊지 않도록（为了不忘记）②程度 웃도록（到笑的地步）。",
+                        "en": "-도록: (1) purpose 잊지 않도록 (so as not to forget); (2) extent 웃도록 (to the point of laughing)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-는데」与「-지만」的区别是？",
+                        "en": "What is the difference between 「-는데」 and 「-지만」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "-는데 更柔和、常作背景铺垫；-지만 转折更直接",
+                          "-지만 更柔和",
+                          "两者都只用于书面语"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "-는데 is softer and often sets the background; -지만 marks a more direct contrast",
+                          "-지만 is softer",
+                          "Both are used only in writing"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-는데 语气柔和，常铺垫背景；-지만 转折明显：비가 오지만 갈 거예요。",
+                        "en": "-는데 is softer and sets the background; -지만 marks clear contrast: 비가 오지만 갈 거예요."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：敬语进阶与正式体（심화 존댓말과 격식체）",
+                  "titleEn": "Paper 5: Advanced Honorifics & Formal Style (심화 존댓말과 격식체)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "합쇼体（-ㅂ니다/습니다）主要用于？",
+                        "en": "Where is the formal style (-ㅂ니다/습니다) mainly used?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "朋友之间",
+                          "正式场合／对长辈",
+                          "日记",
+                          "歌词"
+                        ],
+                        "en": [
+                          "Between friends",
+                          "Formal settings / with elders",
+                          "Diaries",
+                          "Song lyrics"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "-ㅂ니다/습니다 是正式体，用于演讲、新闻、对长辈或客户。",
+                        "en": "-ㅂ니다/습니다 is the formal style, used in speeches, news, and with elders or clients."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "해요体与합니다体的区别是？",
+                        "en": "What is the difference between the 해요 style and the 합니다 style?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "해요体更正式",
+                          "합니다体只用于书面",
+                          "합니다体比해요体更正式"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "해요 is more formal",
+                          "합니다 is only written",
+                          "합니다 is more formal than 해요"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "합니다体比해요体更正式：감사합니다（正式）／고마워요（一般礼貌）。",
+                        "en": "합니다 is more formal than 해요: 감사합니다 (formal) / 고마워요 (polite)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「선생님___ 오십니다」应填哪个助词？",
+                        "en": "Which particle fills the blank in 「선생님___ 오십니다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "께서",
+                          "이",
+                          "가",
+                          "은"
+                        ],
+                        "en": [
+                          "께서",
+                          "이",
+                          "가",
+                          "은"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "尊敬主语时用 께서 代替 이/가：선생님께서 오십니다。",
+                        "en": "With an honored subject, 께서 replaces 이/가: 선생님께서 오십니다."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「선생님께서 오십니다」中「-시-」的作用是？",
+                        "en": "In 「선생님께서 오십니다」, what is the role of 「-시-」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表被动",
+                          "表过去",
+                          "尊敬主语（老师）",
+                          "表否定"
+                        ],
+                        "en": [
+                          "Passive",
+                          "Past",
+                          "Honorific for the subject (the teacher)",
+                          "Negation"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "-시- 提高主语的尊敬度：오시다（来，敬语）。",
+                        "en": "-시- honors the subject: 오시다 (to come, honorific)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「자다」（睡）的敬语形式是？",
+                        "en": "What is the honorific form of 「자다」 (to sleep)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "자시다",
+                          "주무시다",
+                          "잤다",
+                          "자요"
+                        ],
+                        "en": [
+                          "자시다",
+                          "주무시다",
+                          "잤다",
+                          "자요"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "주무시다 是 자다 的敬语。",
+                        "en": "주무시다 is the honorific form of 자다."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「연세가 어떻게 되세요?」是在问什么？",
+                        "en": "What is 「연세가 어떻게 되세요?」 asking?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "年龄（敬语）",
+                          "姓名",
+                          "住址",
+                          "职业"
+                        ],
+                        "en": [
+                          "Age (honorific)",
+                          "Name",
+                          "Address",
+                          "Occupation"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "연세 是 나이（年龄）的敬语，用于问长辈。",
+                        "en": "연세 is the honorific word for 나이 (age), used with elders."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「제가 말씀드리겠습니다」中「말씀드리다」体现的是？",
+                        "en": "In 「제가 말씀드리겠습니다」, what does 「말씀드리다」 demonstrate?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "尊敬听者",
+                          "被动",
+                          "使役",
+                          "谦让（压低自己）"
+                        ],
+                        "en": [
+                          "Honorific for the listener",
+                          "Passive",
+                          "Causative",
+                          "Humble form (lowering oneself)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "말씀드리다 是谦让语：我（谦逊地）说。",
+                        "en": "말씀드리다 is a humble form: I (humbly) say."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「말씀」是哪个词的敬语？",
+                        "en": "Which word is 「말씀」 the honorific form of?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "글",
+                          "소리",
+                          "말（话）",
+                          "이야기"
+                        ],
+                        "en": [
+                          "글 (writing)",
+                          "소리 (sound)",
+                          "말 (words/speech)",
+                          "이야기 (story)"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "말씀 是 말（话）的敬语。",
+                        "en": "말씀 is the honorific form of 말 (words/speech)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「-습니다」与「-ㅂ니다」的使用区别是？",
+                        "en": "What is the difference between 「-습니다」 and 「-ㅂ니다」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "-습니다 用于无收音词干，-ㅂ니다 用于有收音",
+                          "-습니다 用于有收音词干，-ㅂ니다 用于无收音",
+                          "完全相同",
+                          "-ㅂ니다 只用于疑问"
+                        ],
+                        "en": [
+                          "-습니다 after stems without a final consonant; -ㅂ니다 after stems with one",
+                          "-습니다 after stems with a final consonant; -ㅂ니다 after stems without one",
+                          "They are identical",
+                          "-ㅂ니다 is only for questions"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "有收音：먹습니다；无收音：갑니다。",
+                        "en": "With final consonant: 먹습니다; without: 갑니다."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "正式场合道谢，最恰当的说法是？",
+                        "en": "Which is the most appropriate way to thank someone in a formal setting?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "감사드립니다",
+                          "고마워",
+                          "고맙다",
+                          "땡큐"
+                        ],
+                        "en": [
+                          "감사드립니다",
+                          "고마워",
+                          "고맙다",
+                          "땡큐"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "감사드립니다 是 감사합니다 的谦让形式，最正式。",
+                        "en": "감사드립니다 is the humble form of 감사합니다, the most formal."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "level": 4,
