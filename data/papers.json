@@ -8503,19 +8503,19 @@
                       },
                       "opts": {
                         "zh": [
-                          "いつもお世話になっております",
-                          "いつもお世話様です",
                           "どうも",
-                          "お疲れ様です"
+                          "いつもお世話になっております",
+                          "お疲れ様です",
+                          "もしもし"
                         ],
                         "en": [
-                          "いつもお世話になっております",
-                          "いつもお世話様です",
                           "どうも",
-                          "お疲れ様です"
+                          "いつもお世話になっております",
+                          "お疲れ様です",
+                          "もしもし"
                         ]
                       },
-                      "ans": 0,
+                      "ans": 1,
                       "exp": {
                         "zh": "「いつもお世話になっております」是商务电话的标准开场敬语。",
                         "en": "いつもお世話になっております is the standard business phone greeting."
@@ -8548,6 +8548,31 @@
                     },
                     {
                       "q": {
+                        "zh": "「社長がおっしゃいました」中，「おっしゃる」是谁的动词？",
+                        "en": "In 社長がおっしゃいました, whose action does おっしゃる describe?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "说话人自己",
+                          "听话人",
+                          "第三方",
+                          "社长（尊敬语）"
+                        ],
+                        "en": [
+                          "The speaker",
+                          "The listener",
+                          "A third party",
+                          "The president (honorific)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "おっしゃる是「言う」的尊敬语，主语是社长。",
+                        "en": "おっしゃる is the honorific form of 言う; the subject is the president."
+                      }
+                    },
+                    {
+                      "q": {
                         "zh": "请客户稍等时，最礼貌的说法是？",
                         "en": "Which is the most polite way to ask a client to wait?"
                       },
@@ -8555,17 +8580,17 @@
                         "zh": [
                           "待ってください",
                           "ちょっと待って",
-                          "少々お待ちいただけますでしょうか",
-                          "待ってくれますか"
+                          "待ってくれますか",
+                          "少々お待ちいただけますでしょうか"
                         ],
                         "en": [
                           "待ってください",
                           "ちょっと待って",
-                          "少々お待ちいただけますでしょうか",
-                          "待ってくれますか"
+                          "待ってくれますか",
+                          "少々お待ちいただけますでしょうか"
                         ]
                       },
-                      "ans": 2,
+                      "ans": 3,
                       "exp": {
                         "zh": "「少々お待ちいただけますでしょうか」是最敬的表达，含谦让 + 敬语请求。",
                         "en": "少々お待ちいただけますでしょうか is the most polite, combining humble and honorific forms."
@@ -8580,13 +8605,13 @@
                         "zh": [
                           "我（谦逊地）做…",
                           "您做…",
-                          "请让我做…（请求许可，但已决定做）",
+                          "请让我做…（请求许可）",
                           "被迫做…"
                         ],
                         "en": [
                           "I will (humbly) do ...",
                           "You will do ...",
-                          "Please let me do ... (asking permission, but already decided)",
+                          "Please let me do ... (asking permission)",
                           "Be forced to do ..."
                         ]
                       },
@@ -8598,24 +8623,49 @@
                     },
                     {
                       "q": {
+                        "zh": "「〜ていただけますか」的礼貌等级是？",
+                        "en": "What is the politeness level of 〜ていただけますか?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "较礼貌（对上级可用）",
+                          "普通体",
+                          "丁寧語（です・ます程度）",
+                          "最敬语（对客户可用）"
+                        ],
+                        "en": [
+                          "Fairly polite (suitable for superiors)",
+                          "Plain form",
+                          "Teineigo (です・ます level)",
+                          "Most honorific (suitable for clients)"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「〜ていただけますか」是较礼貌的请求，对上级和客户都能用。",
+                        "en": "〜ていただけますか is a fairly polite request, suitable for superiors and clients."
+                      }
+                    },
+                    {
+                      "q": {
                         "zh": "「かしこまりました」的适用场景是？",
                         "en": "When is かしこまりました appropriately used?"
                       },
                       "opts": {
                         "zh": [
                           "对朋友答应某事",
+                          "对家人答应某事",
                           "对客户或上级答应某事",
-                          "对下属答应某事",
-                          "对家人答应某事"
+                          "对下属答应某事"
                         ],
                         "en": [
                           "Agreeing with a friend",
+                          "Agreeing with family",
                           "Agreeing with a client or superior",
-                          "Agreeing with a subordinate",
-                          "Agreeing with family"
+                          "Agreeing with a subordinate"
                         ]
                       },
-                      "ans": 1,
+                      "ans": 2,
                       "exp": {
                         "zh": "「かしこまりました」是「わかりました」的谦让语，用于客户或上级。",
                         "en": "かしこまりました is the humble form of わかりました, used with clients or superiors."
@@ -8654,18 +8704,18 @@
                       "opts": {
                         "zh": [
                           "更简略的说法",
-                          "更谦逊、更正式的说法",
                           "更尊敬的说法",
+                          "更谦逊、更正式的说法",
                           "更随意的说法"
                         ],
                         "en": [
                           "A shorter form",
-                          "A more humble and formal form",
                           "A more honorific form",
+                          "A more humble and formal form",
                           "A more casual form"
                         ]
                       },
-                      "ans": 1,
+                      "ans": 2,
                       "exp": {
                         "zh": "「〜ております」是「〜ています」的谦让语，用于对客户或上级。",
                         "en": "〜ております is the humble version of 〜ています, used with clients or superiors."
@@ -8679,18 +8729,18 @@
                       "opts": {
                         "zh": [
                           "尊敬语",
-                          "谦让语",
                           "郑重语",
-                          "美化语"
+                          "美化语",
+                          "谦让语"
                         ],
                         "en": [
                           "Sonkeigo (honorific)",
-                          "Kenjougo (humble)",
                           "Teineigo (polite)",
-                          "Bikago (beautifying)"
+                          "Bikago (beautifying)",
+                          "Kenjougo (humble)"
                         ]
                       },
-                      "ans": 1,
+                      "ans": 3,
                       "exp": {
                         "zh": "「ご〜いたす」是谦让语，压低自己以尊敬对方。",
                         "en": "ご〜いたす is a kenjougo (humble) structure, lowering oneself to respect the other."
