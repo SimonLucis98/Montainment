@@ -481,7 +481,6 @@
             background: rgba(201,168,124,0.12);
             color: #e8e0d8;
         }
-        /* 🆕 分类选中状态 */
         .sidebar-tags .tag.active {
             background: rgba(201,168,124,0.2);
             color: #e8e0d8;
@@ -1005,7 +1004,7 @@
         // ================================================================
         let READ_DATA = [];
         let currentIndex = 0;
-        let activeCategory = null;   // 🆕 当前选中的分类（null = 全部）
+        let activeCategory = null;   // 当前选中的分类（null = 全部）
         const grid = document.getElementById('readGrid');
         const overlay = document.getElementById('readerOverlay');
         const closeBtn = document.getElementById('closeReader');
@@ -1079,23 +1078,38 @@
             return i18n.currentLang === 'en' ? 'No items in this category' : '该分类下暂无内容';
         }
 
+        // 🆕 解析 YouTube 视频 ID 以自动获取封面
+        function getYoutubeId(url) {
+            if (!url) return null;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
         function getCoverHtml(item, typeIcon, title) {
-            const hasCover = item.cover && item.cover.trim() !== '';
-            if (hasCover) {
-                return `<div class="card-cover"><img src="${item.cover}" alt="${title}" loading="lazy" /></div>`;
+            let imgSrc = item.cover && item.cover.trim() !== '' ? item.cover : null;
+
+            // 🆕 如果没手动设置封面，且是视频/音乐，尝试抓取 YouTube 封面
+            if (!imgSrc && (item.type === 'video' || item.type === 'music') && item.url) {
+                const ytId = getYoutubeId(item.url);
+                if (ytId) {
+                    imgSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+                }
+            }
+
+            if (imgSrc) {
+                return `<div class="card-cover"><img src="${imgSrc}" alt="${title}" loading="lazy" /></div>`;
             }
             return `<div class="card-cover"><span class="cover-emoji-fallback">${typeIcon}</span></div>`;
         }
 
-        // ===== 侧边栏：热门推荐（🆕 反向取最新的 4 篇） =====
+        // ===== 侧边栏：热门推荐 =====
         function renderHot() {
             const container = document.getElementById('hotList');
-            // 先过滤出有当前语言的项
             const candidates = [];
             READ_DATA.forEach((item, idx) => {
                 if (hasCurrentLang(item)) candidates.push({ item, idx });
             });
-            // 🆕 反向排序：越靠后（越晚添加）越"新"，越优先展示
             const hotItems = candidates.slice(-4).reverse();
 
             if (hotItems.length === 0) {
@@ -1107,10 +1121,18 @@
                 const loc = getLocalized(item);
                 const icon = getTypeIcon(item.type);
                 const tag = getShortTypeLabel(item.type);
-                const hasCover = item.cover && item.cover.trim() !== '';
-                const leftHtml = hasCover
-                    ? `<img src="${item.cover}" alt="" class="s-thumb" loading="lazy" />`
+                let imgSrc = item.cover && item.cover.trim() !== '' ? item.cover : null;
+                
+                // 🆕 热门推荐里也自动抓取 YouTube 封面
+                if (!imgSrc && (item.type === 'video' || item.type === 'music') && item.url) {
+                    const ytId = getYoutubeId(item.url);
+                    if (ytId) imgSrc = `https://img.youtube.com/vi/${ytId}/mqdefault.jpg`; // 侧边栏用小图
+                }
+
+                const leftHtml = imgSrc
+                    ? `<img src="${imgSrc}" alt="" class="s-thumb" loading="lazy" />`
                     : `<span class="s-icon">${icon}</span>`;
+
                 html += `
                     <div class="sidebar-item" data-idx="${idx}">
                         ${leftHtml}
@@ -1137,7 +1159,7 @@
             });
         }
 
-        // ===== 侧边栏：分类（🆕 支持点击过滤） =====
+        // ===== 侧边栏：分类 =====
         function renderCategories() {
             const container = document.getElementById('categoryTags');
             const cats = [];
@@ -1157,19 +1179,16 @@
                 const activeClass = (activeCategory === cat) ? ' active' : '';
                 html += `<span class="tag${activeClass}" data-cat="${cat}">${cat}</span>`;
             });
-            // 🆕 加一个"全部"标签
             if (activeCategory !== null) {
                 html = `<span class="tag" data-cat="__ALL__">${i18n.currentLang === 'en' ? 'All' : '全部'}</span>` + html;
             }
             container.innerHTML = html;
-            // 🆕 绑定点击
             container.querySelectorAll('.tag').forEach(tag => {
                 tag.addEventListener('click', function() {
                     const cat = this.dataset.cat;
                     if (cat === '__ALL__') {
                         activeCategory = null;
                     } else {
-                        // 再次点击同一个分类 → 取消筛选
                         activeCategory = (activeCategory === cat) ? null : cat;
                     }
                     renderList();
@@ -1177,13 +1196,12 @@
             });
         }
 
-        // ===== 主列表渲染（🆕 支持分类过滤） =====
+        // ===== 主列表渲染 =====
         function renderList() {
             const lang = i18n.currentLang || 'zh';
             const visibleItems = [];
             READ_DATA.forEach((item, idx) => {
                 if (!hasCurrentLang(item)) return;
-                // 🆕 分类过滤
                 if (activeCategory !== null) {
                     const loc = getLocalized(item);
                     if (loc.category !== activeCategory) return;
@@ -1285,7 +1303,6 @@
                 readerBody.textContent = loc.content || '(内容为空)';
                 readerBody.style.display = 'block';
             }
-            // 上一篇/下一篇 只走"当前过滤后的可见列表"
             const visibleList = [];
             READ_DATA.forEach((it, i) => {
                 if (!hasCurrentLang(it)) return;
