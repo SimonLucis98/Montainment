@@ -192,6 +192,11 @@ const i18n = {
       'articleread.invalid_param': 'Invalid article parameter.',
       'articleread.not_article': 'This content is not an article.',
 
+      // -------- 🆕 页脚合规链接 --------
+      'footer.about': 'About Us',
+      'footer.privacy': 'Privacy Policy',
+      'footer.terms': 'Terms of Use',
+
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · A static website that makes learning more fun',
       'common.lang_switch': 'EN',
@@ -380,6 +385,11 @@ const i18n = {
       'articleread.no_param': '缺少文章参数，请从沉浸式工坊进入。',
       'articleread.invalid_param': '文章参数无效。',
       'articleread.not_article': '该内容不是文章类型。',
+
+      // -------- 🆕 页脚合规链接 --------
+      'footer.about': '关于我们',
+      'footer.privacy': '隐私政策',
+      'footer.terms': '使用条款',
 
       // -------- 通用 --------
       'common.footer': '© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站',
