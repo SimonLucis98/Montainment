@@ -95,6 +95,13 @@
 
         .empty-state { text-align:center; padding:40px 20px; color:#aaa; }
 
+        /* 🆕 页面底部合规页脚 */
+        .site-footer { text-align: center; padding: 40px 20px; margin-top: 20px; border-top: 1px solid #e0dcd5; }
+        .site-footer .legal-links { margin-bottom: 12px; font-size: 14px; }
+        .site-footer .legal-links a { color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s; }
+        .site-footer .legal-links a:hover { color: #1a1a2e; }
+        .site-footer .copyright { font-size: 13px; color: #aaa; }
+
         @media (max-width:600px) {
             .detail-info { padding:18px; }
             .detail-info .title { font-size:21px; }
@@ -117,7 +124,7 @@
 </head>
 <body>
 
-    <!-- ===== 导航栏（与全局一致） ===== -->
+    <!-- ===== 导航栏 ===== -->
     <header class="site-header">
         <nav class="nav-bar">
             <a href="index.html" class="brand">
@@ -169,6 +176,16 @@
         </div>
     </main>
 
+    <!-- 🆕 合规页脚 -->
+    <footer class="site-footer">
+        <div class="legal-links">
+            <a href="about.html" data-i18n="footer.about">关于我们</a> | 
+            <a href="privacy.html" data-i18n="footer.privacy">隐私政策</a> | 
+            <a href="terms.html" data-i18n="footer.terms">使用条款</a>
+        </div>
+        <div class="copyright" data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
+    </footer>
+
     <!-- 回到顶部按钮 -->
     <button class="back-to-top" id="backToTopBtn" aria-label="回到顶部">↑</button>
 
@@ -177,7 +194,6 @@
     <script>
         // ================================================================
         //  story-read.html —— 小说详情 + 阅读
-        //  不包含汉堡菜单代码，由 common.js 统一处理
         // ================================================================
 
         const detailHero = document.getElementById('detailHero');
@@ -369,13 +385,13 @@
 
         function getCoverEmoji(title) {
             const map = {
-                '灰':'🏚️','星':'⭐','魔':'🔮','时':'⏳','风':'🌪️','火':'🔥','水':'💧','暗':'🌙','光':'☀️','梦':'🌌',
+                '灰':'🏡️','星':'⭐','魔':'🔮','时':'⏳','风':'🌪️','火':'🔥','水':'💧','暗':'🌙','光':'☀️','梦':'🌌',
                 '剑':'⚔️','龙':'🐉','凤':'🦅','雪':'❄️','月':'🌙','海':'🌊','山':'⛰️','森':'🌲','林':'🌳','城':'🏰',
                 '塔':'🗼','桥':'🌉','夜':'🌃','晨':'🌅','宇':'🌌','宙':'🌠','未':'🔮','来':'🚀','古':'🏛️','老':'🕰️',
                 '新':'✨','世':'🌍','界':'🌎','王':'👑','骑':'🐴','勇':'🛡️','士':'⚔️','法':'📜','师':'🧙','猎':'🏹',
-                '人':'🧑','神':'⚡','妖':'🌸','怪':'👾','灵':'👻','魂':'💫','血':'🩸','骨':'💀','瞳':'👁️','翼':'🦇',
-                '心':'❤️','意':'🧠','念':'💭','情':'💝','爱':'💖','生':'🌱','死':'🕊️','命':'🌀','运':'🎲','真':'💎',
-                '美':'🌸','善':'😇','恶':'👿','明':'🌞','白':'⬜','黑':'⬛','红':'🔴','蓝':'🔵','绿':'🟢','黄':'🟡',
+                '人':'🧑','神':'⚡','妖':'🌹','怪':'👾','灵':'👻','魂':'💫','血':'🩸','骨':'💀','眼':'👁️','翼':'🦇',
+                '心':'❤️','意':'🧠','念':'💭','情':'💝','爱':'💖','生':'🌱','死':'🕊️','命':'🌐','运':'🎲','真':'💎',
+                '美':'🌹','善':'😮','恶':'👿','明':'🌝','白':'⬜','黑':'⬛','红':'🔴','蓝':'🔵','绿':'🟢','黄':'🟡',
                 '金':'🪙','银':'🥈','宝':'💎','钱':'💰','财':'🏦'
             };
             return map[title.charAt(0)] || '📖';
