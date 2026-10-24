@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联系我们 | Montainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #f5f2ed; font-family: 'Nunito', system-ui, sans-serif; min-height: 100vh; }
+    
+    .legal-container { max-width: 800px; margin: 60px auto; padding: 20px 24px; color: #333; line-height: 1.8; min-height: 60vh; }
+    
+    .legal-container h1 { font-size: 32px; color: #1a1a2e; margin-bottom: 24px; text-align: center; }
+    .legal-container h2 { font-size: 22px; color: #1a1a2e; margin: 40px 0 16px; border-bottom: 1px solid #e0dcd5; padding-bottom: 8px; }
+    .legal-container h3 { font-size: 18px; color: #3d3a35; margin: 24px 0 12px; }
+    .legal-container p { margin-bottom: 16px; font-size: 16px; color: #4a4540; }
+    .legal-container strong { color: #1a1a2e; font-weight: 700; }
+    .legal-container ul { margin-bottom: 16px; padding-left: 20px; }
+    .legal-container li { margin-bottom: 8px; font-size: 16px; color: #4a4540; }
+    
+    .highlight-box {
+      background: #fff;
+      border-left: 4px solid #8a9b7a;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 24px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    
+    /* 内容隐藏/显示逻辑 */
+    .lang-content { display: none; }
+    .lang-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <!-- ============ 顶部导航栏 ============ -->
+  <header class="site-header">
+    <nav class="nav-bar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">✦</span>
+        Montainment · 蒙堂木下
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+        <li><a href="quiz.html" data-i18n="nav.quiz">学堂</a></li>
+        <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
+        <li><a href="story.html" data-i18n="nav.story">故事工坊</a></li>
+        <li><a href="immersive.html" data-i18n="nav.immersive">🌙 沉浸式工坊</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main class="legal-container">
+    
+    <!-- ===== 中文内容区 ===== -->
+    <div id="content-zh" class="lang-content">
+      <h1>联系我们</h1>
+      
+      <h2>欢迎与你交流</h2>
+      <p>感谢你访问 Montainment。</p>
+      <p>无论你有任何疑问、建议、发现了技术问题，或只是想分享你对网站内容的想法，我们都欢迎你的来信。</p>
+
+      <h2>你可以联系哪些事项？</h2>
+      <ul>
+        <li><strong>一般咨询：</strong>关于 Montainment、网站功能或内容的问题。</li>
+        <li><strong>意见与建议：</strong>对新学习工具、游戏、故事、文章或其他体验的建议。</li>
+        <li><strong>技术问题：</strong>页面、互动活动、游戏或其他网站功能无法正常运作。</li>
+        <li><strong>内容与版权事项：</strong>关于内容所有权、署名、使用许可或潜在版权问题的咨询。</li>
+        <li><strong>合作咨询：</strong>与创意、教育或其他相关领域有关的合作提案。</li>
+      </ul>
+
+      <h2>联系方式</h2>
+      <div class="highlight-box">
+        <p><strong>电子邮件：</strong> mengmuxiatales@gmail.com (请替换为你的真实邮箱)</p>
+      </div>
+      <p>请尽量使用清楚的邮件主题，并提供足够的信息，以便我们理解你的问题。如果你遇到技术问题，可以附上相关页面链接、使用的浏览器，以及问题的简短描述，帮助我们进行检查。</p>
+      <p>我们会尽可能查看合理的咨询，并在可行的情况下回复。不过，我们无法保证固定的回复时间，也无法保证每封邮件都能获得回复。</p>
+      <p style="color: #d14c4c; font-weight: 600;">请勿在邮件中提供密码、付款资料、政府身份证号码或其他敏感个人信息。</p>
+      
+      <p style="margin-top: 40px; font-style: italic; color: #6b7a8f;">感谢你帮助 Montainment 持续改善。</p>
+      <p><strong>学习一点，发现一点，享受当下。</strong></p>
+    </div>
+
+    <!-- ===== 英文内容区 ===== -->
+    <div id="content-en" class="lang-content">
+      <h1>Contact Us</h1>
+      
+      <h2>We'd Love to Hear From You</h2>
+      <p>Thank you for visiting Montainment.</p>
+      <p>Whether you have a question, a suggestion, have discovered a technical issue, or would simply like to share your thoughts about our content, we welcome your message.</p>
+
+      <h2>What Can You Contact Us About?</h2>
+      <ul>
+        <li><strong>General enquiries:</strong> Questions about Montainment, our website, or our content.</li>
+        <li><strong>Feedback and suggestions:</strong> Ideas for new learning tools, games, stories, articles, or other experiences.</li>
+        <li><strong>Technical issues:</strong> Problems with a page, interactive activity, game, or other website feature.</li>
+        <li><strong>Content and copyright concerns:</strong> Requests concerning content ownership, attribution, permissions, or potential copyright issues.</li>
+        <li><strong>Collaboration enquiries:</strong> Relevant creative, educational, or other partnership proposals.</li>
+      </ul>
+
+      <h2>Get in Touch</h2>
+      <div class="highlight-box">
+        <p><strong>Email:</strong> mengmuxiatales@gmail.com</p>
+      </div>
+      <p>Please provide a clear subject line and enough detail for us to understand your enquiry. For technical issues, including the page link, your browser, and a short description of the problem may help us investigate it.</p>
+      <p>We aim to review genuine enquiries and respond when reasonably possible. However, we cannot guarantee a response time or a reply to every message.</p>
+      <p style="color: #d14c4c; font-weight: 600;">Please do not include passwords, payment information, government identification numbers, or other sensitive personal information in your message.</p>
+      
+      <p style="margin-top: 40px; font-style: italic; color: #6b7a8f;">Thank you for helping us make Montainment better.</p>
+      <p><strong>Learn something. Discover something. Enjoy the experience.</strong></p>
+    </div>
+
+  </main>
+
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <div class="container" style="text-align: center;">
+      <div style="margin-bottom: 12px; font-size: 14px;">
+        <a href="about.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.about">关于我们</a> | 
+        <a href="contact.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'">联系我们</a> |
+        <a href="privacy.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.privacy">隐私政策</a> | 
+        <a href="terms.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.terms">使用条款</a>
+      </div>
+      <div data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="common.js"></script>
+  <script>
+    // 监听语言切换，显示对应内容
+    function updateLegalContent() {
+      const lang = window.i18n ? i18n.currentLang : 'en';
+      
+      document.querySelectorAll('.lang-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      const activeContent = document.getElementById('content-' + lang);
+      if (activeContent) {
+        activeContent.classList.add('active');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateLegalContent);
+    document.addEventListener('languageChanged', updateLegalContent);
+  </script>
+
+</body>
+</html>
