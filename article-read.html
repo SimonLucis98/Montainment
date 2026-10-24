@@ -375,6 +375,31 @@
             color: #5a4a2a;
         }
 
+        /* 🆕 ===== 全局合规页脚 ===== */
+        .global-footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .global-footer .legal-links {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .global-footer .legal-links a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: 0.2s;
+        }
+        .global-footer .legal-links a:hover {
+            color: #e8e0d8;
+        }
+        .global-footer .copyright {
+            color: #666;
+            font-size: 13px;
+        }
+
         /* ===== 加载 / 错误状态 ===== */
         .loading-box,
         .error-box {
@@ -595,6 +620,18 @@
             </div>
         </div>
     </main>
+
+    <!-- 🆕 ============ 全局合规页脚 ============ -->
+    <footer class="global-footer">
+        <div class="legal-links">
+            <a href="about.html" data-i18n="footer.about">关于我们</a> | 
+            <a href="privacy.html" data-i18n="footer.privacy">隐私政策</a> | 
+            <a href="terms.html" data-i18n="footer.terms">使用条款</a>
+        </div>
+        <div class="copyright" data-i18n="common.footer">
+            © 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站
+        </div>
+    </footer>
 
     <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
 
@@ -898,7 +935,6 @@
                 if (currentArticle) renderArticle(currentArticle);
             });
 
-            // 🆕 汉堡菜单由 common.js 统一处理，此处不再重复绑定
             // 🆕 启动
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', loadArticle);
