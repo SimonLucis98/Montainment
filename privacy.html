@@ -4,63 +4,259 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>隐私政策 | Montainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .legal-container { max-width: 800px; margin: 60px auto; padding: 20px; color: #333; line-height: 1.8; }
-    .legal-container h1 { font-size: 32px; color: #1a1a2e; margin-bottom: 20px; }
-    .legal-container h2 { font-size: 20px; color: #1a1a2e; margin: 30px 0 10px; }
-    .legal-container p { margin-bottom: 16px; }
+    body { background: #f5f2ed; font-family: 'Nunito', system-ui, sans-serif; min-height: 100vh; }
+    
+    .legal-container { max-width: 800px; margin: 60px auto; padding: 20px 24px; color: #333; line-height: 1.8; min-height: 60vh; }
+    
+    .legal-container h1 { font-size: 32px; color: #1a1a2e; margin-bottom: 24px; text-align: center; }
+    .legal-container h2 { font-size: 22px; color: #1a1a2e; margin: 40px 0 16px; border-bottom: 1px solid #e0dcd5; padding-bottom: 8px; }
+    .legal-container h3 { font-size: 18px; color: #3d3a35; margin: 24px 0 12px; }
+    .legal-container p { margin-bottom: 16px; font-size: 16px; color: #4a4540; }
+    .legal-container strong { color: #1a1a2e; font-weight: 700; }
+    .legal-container ul { margin-bottom: 16px; padding-left: 20px; }
+    .legal-container li { margin-bottom: 8px; font-size: 16px; color: #4a4540; }
+    .legal-container a { color: #2a6df4; text-decoration: none; border-bottom: 1px dashed rgba(42,109,244,0.4); transition: 0.2s; }
+    .legal-container a:hover { color: #1a4fd4; border-bottom-color: #1a4fd4; }
+    
+    /* 内容隐藏/显示逻辑 */
+    .lang-content { display: none; }
+    .lang-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
+
+  <!-- ============ 顶部导航栏 ============ -->
   <header class="site-header">
     <nav class="nav-bar">
-      <a href="index.html" class="brand"><span class="brand-mark">✦</span> Montainment · 蒙堂木下</a>
+      <a href="index.html" class="brand">
+        <span class="brand-mark">✦</span>
+        Montainment · 蒙堂木下
+      </a>
       <ul class="nav-links">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="quiz.html">学堂</a></li>
-        <li><a href="game.html">游戏</a></li>
-        <li><a href="story.html">故事工坊</a></li>
-        <li><a href="immersive.html">🌙 沉浸式工坊</a></li>
+        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+        <li><a href="quiz.html" data-i18n="nav.quiz">学堂</a></li>
+        <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
+        <li><a href="story.html" data-i18n="nav.story">故事工坊</a></li>
+        <li><a href="immersive.html" data-i18n="nav.immersive">🌙 沉浸式工坊</a></li>
       </ul>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
     </nav>
   </header>
 
   <main class="legal-container">
-    <h1>隐私政策 / Privacy Policy</h1>
-    <p>最后更新日期：2026年10月</p>
     
-    <p>欢迎访问 Montainment（以下简称“本网站”）。我们非常重视您的隐私。本隐私政策说明了我们如何收集、使用和保护您的信息。</p>
+    <!-- ===== 中文内容区 ===== -->
+    <div id="content-zh" class="lang-content">
+      <h1>隐私政策</h1>
+      <p><strong>生效日期: 2026年10月24日</strong></p>
 
-    <h2>1. 我们收集的信息</h2>
-    <p>本网站是一个纯静态网站，我们不会主动收集您的个人身份信息（如姓名、地址）。但是，为了分析网站流量，我们使用了第三方服务（如 Google Analytics），这可能会收集您的匿名使用数据（如 IP 地址、浏览器类型、访问时长等）。</p>
+      <h2>1. 简介</h2>
+      <p>欢迎来到 Montainment（以下简称“本网站”“我们”）。</p>
+      <p>我们尊重访客的隐私，并希望清楚说明，当你访问本网站时，相关信息可能如何被处理。</p>
+      <p>本隐私政策说明我们目前的做法，以及支持本网站运行的第三方服务可能涉及的信息处理方式。</p>
 
-    <h2>2. Cookie 和网络信标</h2>
-    <p>本网站使用 Cookie 来提升您的浏览体验。Cookie 是放置在您设备上的小文本文件。您可以通过浏览器设置拒绝 Cookie，但这可能会影响网站的某些功能。</p>
+      <h2>2. 我们直接收集的信息</h2>
+      <p>Montainment 旨在让访客无需注册账号，即可使用学习资源、互动活动、阅读材料、故事、文章、影片、音乐及其他内容。</p>
+      <p>截至本政策发布之日：</p>
+      <ul>
+        <li>访问本网站的一般内容不需要注册账号。</li>
+        <li>我们目前不提供专门收集访客姓名、电话号码或其他个人资料的网站表单；如未来新增相关功能，将视情况提供适当说明。</li>
+        <li>我们目前不经营网站内的付款或购物系统。</li>
+        <li>我们不会有意通过学习游戏或互动工具收集个人资料。</li>
+      </ul>
+      <p>如果某项互动功能是在访客的浏览器本地运行，输入的信息可能只存在于当前浏览器会话或用户设备中，具体取决于该功能的实际实现方式。除非相关功能已经经过设计和验证，否则我们不会保证所有输入资料都只保留在本地。</p>
 
-    <h2>3. 第三方广告 (Google AdSense)</h2>
-    <p>我们可能会使用 Google AdSense 来展示广告。作为第三方供应商，Google 会使用 Cookie 在本网站上投放广告。Google 使用 DoubleClick DART Cookie，使其能够根据您对本网站及互联网上其他网站的访问情况，向您投放广告。</p>
-    <p>您可以访问 Google 的广告和内容网络隐私政策（<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">https://policies.google.com/technologies/ads</a>）来了解如何退出 DART Cookie 的使用。</p>
+      <h2>3. 技术信息与网站托管</h2>
+      <p>当你访问网站时，网站托管服务、网络基础设施或浏览器可能会处理提供网站内容和维护安全所需的技术信息。</p>
+      <p>这些信息可能包括 IP 地址、浏览器及设备信息、访问的页面、访问时间，以及技术错误或安全日志。</p>
+      <p>Montainment 使用第三方网站基础设施进行托管。我们没有自行运营用于注册访客个人资料的网站数据库，但无法保证托管或基础设施服务商不会为了提供服务而处理技术信息。</p>
+      <p>相关处理方式受对应服务商的条款和隐私政策约束。</p>
 
-    <h2>4. 外部链接</h2>
-    <p>本网站可能包含指向外部网站的链接（如 YouTube、Cloudinary 等）。我们不对这些外部网站的隐私做法或内容负责。</p>
+      <h2>4. Cookie 与类似技术</h2>
+      <p>除非我们新增相关功能并更新本政策，否则 Montainment 不会有意部署自有广告 Cookie 或行为追踪工具。</p>
+      <p>但是，网站所使用或嵌入的第三方服务可能使用 Cookie、本地存储或类似技术。实际情况取决于具体服务及其整合方式。</p>
+      <p>你可以通过浏览器设置查看和管理可用的 Cookie 选项。阻止某些技术可能影响部分第三方功能的正常运作。</p>
 
-    <h2>5. 政策更新</h2>
-    <p>我们可能会不时更新本隐私政策。任何更改都会在此页面上发布。</p>
+      <h2>5. 第三方服务与嵌入内容</h2>
+      <p>本网站可能链接或嵌入 YouTube 及其他内容服务、基础设施服务商提供的内容。</p>
+      <p>当你与嵌入内容互动、点击外部链接或使用第三方功能时，相关服务商可能接收技术信息、使用 Cookie，或按照其自身政策处理信息。</p>
+      <p>例如，嵌入的 YouTube 影片在加载或播放时，可能与 Google 或 YouTube 系统进行通信。你访问本网站，并不代表我们能够独立控制这些服务商的数据处理方式。</p>
+      <p>如需了解详情，请阅读相关第三方的隐私政策。</p>
 
-    <h2>Contact Us</h2>
-    <p>如果您对本隐私政策有任何疑问，请通过邮箱联系：your-email@example.com</p>
+      <h2>6. 广告与未来的营运收入</h2>
+      <p>未来，Montainment 可能引入 Google AdSense 等第三方广告服务，以支持网站的运营与发展。</p>
+      <p>如果启用广告服务，广告服务商可能根据适用设置及相关要求，处理或接收 IP 地址、浏览器或设备信息、Cookie 标识符、广告互动信息，或用于投放、个性化、衡量及改善广告的信息。</p>
+      <p>第三方可能使用 Cookie、网络信标或类似技术进行广告投放与效果衡量。</p>
+      <p>在启用这些服务前，我们会检查并更新本隐私政策，以反映实际使用的服务，并根据适用法律及服务商政策提供必要的通知或同意机制。</p>
+      <p>你可以通过以下链接了解 Google 的相关做法：</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy/partners" target="_blank" rel="noopener">Google 如何使用与其服务合作的网站或应用提供的信息</a></li>
+        <li><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google 广告技术说明</a></li>
+      </ul>
+
+      <h2>7. 信息的使用方式</h2>
+      <p>我们目前没有经营一个用于收集访客个人资料、进行营销或建立用户画像的网站系统。</p>
+      <p>不过，托管基础设施或第三方服务处理的技术信息，可能被相关服务商用于提供网站内容、维护安全、防止滥用、排查技术问题、衡量服务表现，或按照其自身政策提供服务。</p>
+      <p>如果未来新增需要额外信息的功能，我们会视情况更新相关说明。</p>
+
+      <h2>8. 信息分享</h2>
+      <p>Montainment 不出售由本网站直接收集的个人信息。</p>
+      <p>由于目前没有经营网站个人资料数据库，我们也不会将此类数据库独立提供给广告商。</p>
+      <p>不过，当你访问或使用第三方服务时，网站托管商、嵌入内容服务商、广告服务商或其他第三方，仍可能通过其技术直接处理相关信息。此类处理受对应服务商的条款及隐私政策约束。</p>
+
+      <h2>9. 数据保存与安全</h2>
+      <p>按照目前的一般内容模式，Montainment 不维护用于访客账号的个人资料数据库。</p>
+      <p>但是，网站托管商或第三方服务商仍可能根据其运营需求、政策或法律义务保存技术日志或其他信息。</p>
+      <p>我们会在自身可控制的范围内采取合理措施维护网站及其内容。但任何互联网传输或储存系统都无法保证绝对安全。</p>
+
+      <h2>10. 儿童隐私</h2>
+      <p>Montainment 可能提供适合不同年龄层的教育及娱乐内容，但这并不意味着我们会有意收集儿童的个人信息。</p>
+      <p>目前，儿童及其他访客均无需创建账号即可访问网站的一般内容。</p>
+      <p>父母或监护人应适当监督儿童使用线上服务，特别是在涉及第三方影片、外部链接或广告时。如果未来推出会收集儿童个人信息的功能，我们会在上线前进行单独评估，并采取适当保障措施。</p>
+
+      <h2>11. 你的选择与权利</h2>
+      <p>根据你所在的地区及适用法律，你可能对与你有关的个人信息享有相关权利。</p>
+      <p>如果信息由第三方服务直接处理，你可能需要联系相应服务商，或使用其提供的隐私控制功能。</p>
+      <p>你也可以通过设备或浏览器设置管理部分 Cookie 及浏览器权限。具体选项取决于你使用的浏览器和相关第三方服务。</p>
+
+      <h2>12. 外部链接</h2>
+      <p>本网站可能包含指向外部网站及服务的链接。我们不对这些外部网站的内容、安全性或隐私处理方式负责。</p>
+      <p>使用外部服务前，请先阅读相关服务商的政策。</p>
+
+      <h2>13. 本政策的修改</h2>
+      <p>当网站功能、广告安排、第三方整合或法律义务发生变化时，我们可能更新本隐私政策。</p>
+      <p>最新版本将发布在本页面，并注明生效日期。</p>
+
+      <h2>14. 联系方式</h2>
+      <p>如对本隐私政策有任何疑问，请通过以下方式联系：</p>
+      <p><strong>电子邮件：</strong> mengmuxiatales@gmail.com</p>
+    </div>
+
+    <!-- ===== 英文内容区 ===== -->
+    <div id="content-en" class="lang-content">
+      <h1>Privacy Policy</h1>
+      <p><strong>Effective Date: 24 October 2026</strong></p>
+
+      <h2>1. Introduction</h2>
+      <p>Welcome to Montainment (“we,” “our,” or “us”). We respect your privacy and aim to be transparent about how information may be handled when you visit our website.</p>
+      <p>This Privacy Policy explains our current practices and the potential use of third-party services that support our website.</p>
+
+      <h2>2. Information We Directly Collect</h2>
+      <p>Montainment is designed to provide learning resources, interactive activities, reading materials, stories, articles, videos, music, and other content without requiring visitors to create an account.</p>
+      <p>At the time of publication:</p>
+      <ul>
+        <li>We do not require visitors to register an account to access our general content.</li>
+        <li>We do not provide website forms intended to collect visitors' names, telephone numbers, or other personal details, unless a feature is specifically introduced and accompanied by appropriate notice.</li>
+        <li>We do not operate a website-based payment or shopping system.</li>
+        <li>We do not intentionally collect personal information through our learning games or interactive tools.</li>
+      </ul>
+      <p>Where an interactive feature runs locally in your browser, information entered into that feature may remain within your browser session or on your device, depending on how the feature is implemented. We will not claim that information remains local unless the relevant feature has been designed and verified to work that way.</p>
+
+      <h2>3. Technical Information and Website Hosting</h2>
+      <p>When you access a website, the hosting provider, network infrastructure, or browser may process technical information necessary to deliver and secure the website.</p>
+      <p>Such information may include IP addresses, browser and device information, requested pages, timestamps, and technical error or security logs.</p>
+      <p>Montainment is hosted using third-party website infrastructure. We do not operate our own website-based personal-data registration database. However, we cannot guarantee that hosting or infrastructure providers do not process technical information as part of providing their services.</p>
+      <p>Any such processing is subject to the relevant provider's terms and privacy practices.</p>
+
+      <h2>4. Cookies and Similar Technologies</h2>
+      <p>Montainment does not intentionally deploy its own advertising cookies or behavioural tracking tools unless we introduce such functionality and update this Policy accordingly.</p>
+      <p>However, third-party services embedded in or used by the website may use cookies, local storage, or similar technologies. Their use depends on the specific service and how it is integrated.</p>
+      <p>You can review and manage available cookie settings through your browser. Blocking certain technologies may affect how some third-party features operate.</p>
+
+      <h2>5. Third-Party Services and Embedded Content</h2>
+      <p>Our website may link to or embed content from third-party services, including YouTube and other content or infrastructure providers.</p>
+      <p>When you interact with embedded content, follow an external link, or use a third-party feature, the relevant provider may receive technical information, use cookies, or process information according to its own policies.</p>
+      <p>For example, embedded YouTube videos may communicate with Google or YouTube systems when loaded or played. Visiting our website does not mean that we independently control the data practices of these providers.</p>
+      <p>Please review the privacy policies of the relevant third parties for further information.</p>
+
+      <h2>6. Advertising and Future Monetisation</h2>
+      <p>Montainment may introduce third-party advertising services, including Google AdSense, in the future to help support the operation and development of the website.</p>
+      <p>If advertising services are introduced, advertising providers may process or receive information such as IP addresses, browser or device information, cookie identifiers, advertising interactions, or information used to deliver, personalise, measure, and improve advertisements, subject to applicable settings and requirements.</p>
+      <p>Third parties may use cookies, web beacons, or similar technologies for advertising and measurement purposes.</p>
+      <p>Before enabling such services, we will review and update this Privacy Policy to reflect the services actually used and provide any notices or consent mechanisms required by applicable law and provider policies.</p>
+      <p>You can learn more about Google's practices here:</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy/partners" target="_blank" rel="noopener">How Google uses information from sites or apps that use its services</a></li>
+        <li><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google advertising technologies</a></li>
+      </ul>
+
+      <h2>7. How We Use Information</h2>
+      <p>We do not operate a website-based system for collecting visitors' personal details for marketing or account profiling.</p>
+      <p>Technical information processed by hosting infrastructure or third-party services may be used by the relevant providers to deliver website content, maintain security, prevent abuse, troubleshoot technical problems, measure service performance, or provide their services according to their own policies.</p>
+      <p>If we introduce features that require additional information, we will update the relevant notices as appropriate.</p>
+
+      <h2>8. Data Sharing</h2>
+      <p>We do not sell personal information collected directly by Montainment.</p>
+      <p>We do not independently share a website-based personal-information database with advertisers because we do not currently operate such a database.</p>
+      <p>However, hosting providers, embedded content providers, advertising providers, or other third-party services may process information directly through their technologies when you access or interact with those services. Such processing is governed by their respective terms and privacy policies.</p>
+
+      <h2>9. Data Retention and Security</h2>
+      <p>Montainment does not maintain a website-based personal-data account database under its current general-content model.</p>
+      <p>Technical logs or other information may nevertheless be retained by hosting or third-party providers for periods determined by their operational requirements, policies, or legal obligations.</p>
+      <p>We take reasonable steps within our control to maintain the website and its content. However, no internet transmission or storage system can be guaranteed to be completely secure.</p>
+
+      <h2>10. Children's Privacy</h2>
+      <p>Montainment may provide educational and entertainment content suitable for a broad audience. The presence of such content does not mean that we intentionally collect children's personal information.</p>
+      <p>We do not currently require children or other visitors to create accounts to access our general content.</p>
+      <p>Parents and guardians should supervise children's use of online services, particularly when third-party videos, links, or advertising are involved. If a feature that collects personal information from children is introduced, it will require separate assessment and appropriate safeguards before launch.</p>
+
+      <h2>11. Your Choices and Rights</h2>
+      <p>Depending on your location and applicable law, you may have rights concerning personal information processed about you.</p>
+      <p>For information handled directly by third-party services, you may need to contact the relevant provider or use its privacy controls.</p>
+      <p>You may also manage certain cookies and browser permissions through your device or browser settings. The available options depend on your browser and the third-party services involved.</p>
+
+      <h2>12. External Links</h2>
+      <p>Our website may contain links to external websites and services. We are not responsible for their content, security, or privacy practices.</p>
+      <p>Please review the relevant provider's policies before using external services.</p>
+
+      <h2>13. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy when our website features, advertising arrangements, third-party integrations, or legal obligations change.</p>
+      <p>The latest version will be published on this page with its effective date.</p>
+
+      <h2>14. Contact</h2>
+      <p>For questions regarding this Privacy Policy, please contact:</p>
+      <p><strong>Email:</strong> mengmuxiatales@gmail.com</p>
+    </div>
+
   </main>
 
+  <!-- ============ 页脚 ============ -->
   <footer class="site-footer">
-    <div class="container">
-      <div style="margin-bottom: 10px;">
-        <a href="about.html" style="margin: 0 10px; color: inherit;">关于我们</a> | 
-        <a href="privacy.html" style="margin: 0 10px; color: inherit;">隐私政策</a> | 
-        <a href="terms.html" style="margin: 0 10px; color: inherit;">使用条款</a>
+    <div class="container" style="text-align: center;">
+      <div style="margin-bottom: 12px; font-size: 14px;">
+        <a href="about.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.about">关于我们</a> | 
+        <a href="privacy.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.privacy">隐私政策</a> | 
+        <a href="terms.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.terms">使用条款</a>
       </div>
-      © 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站
+      <div data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
     </div>
   </footer>
+
+  <script src="i18n.js"></script>
+  <script src="common.js"></script>
+  <script>
+    // 监听语言切换，显示对应内容
+    function updateLegalContent() {
+      const lang = window.i18n ? i18n.currentLang : 'en';
+      
+      document.querySelectorAll('.lang-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      const activeContent = document.getElementById('content-' + lang);
+      if (activeContent) {
+        activeContent.classList.add('active');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateLegalContent);
+    document.addEventListener('languageChanged', updateLegalContent);
+  </script>
+
 </body>
 </html>
