@@ -194,6 +194,7 @@ const i18n = {
 
       // -------- 🆕 页脚合规链接 --------
       'footer.about': 'About Us',
+      'footer.contact': 'Contact Us',
       'footer.privacy': 'Privacy Policy',
       'footer.terms': 'Terms of Use',
 
@@ -388,6 +389,7 @@ const i18n = {
 
       // -------- 🆕 页脚合规链接 --------
       'footer.about': '关于我们',
+      'footer.contact': '联系我们',
       'footer.privacy': '隐私政策',
       'footer.terms': '使用条款',
 
