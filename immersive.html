@@ -572,6 +572,34 @@
             display:flex; align-items:center;
         }
 
+        /* 🆕 沉浸式专属极简页脚 */
+        .immersive-footer {
+            text-align: center;
+            padding: 40px 20px 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(201,168,124, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .immersive-footer .legal-links {
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+        .immersive-footer .legal-links a {
+            color: rgba(232,224,216,0.4);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: 0.2s;
+        }
+        .immersive-footer .legal-links a:hover {
+            color: #c9a87c;
+        }
+        .immersive-footer .copyright {
+            color: rgba(232,224,216,0.3);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 1200px) {
             .read-grid { grid-template-columns: repeat(5, 1fr); }
         }
@@ -701,6 +729,18 @@
 
         </div>
     </main>
+
+    <!-- 🆕 沉浸式专属合规页脚 -->
+    <footer class="immersive-footer">
+        <div class="legal-links">
+            <a href="about.html" data-i18n="footer.about">关于我们</a> | 
+            <a href="privacy.html" data-i18n="footer.privacy">隐私政策</a> | 
+            <a href="terms.html" data-i18n="footer.terms">使用条款</a>
+        </div>
+        <div class="copyright" data-i18n="common.footer">
+            © 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站
+        </div>
+    </footer>
 
     <div class="reader-overlay" id="readerOverlay">
         <div class="reader-modal">
