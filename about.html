@@ -4,27 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>关于我们 | Montainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
     body { background: #f5f2ed; font-family: 'Nunito', system-ui, sans-serif; min-height: 100vh; }
     
     .legal-container { max-width: 800px; margin: 60px auto; padding: 20px 24px; color: #333; line-height: 1.8; min-height: 60vh; }
     
-    /* 顶部导航与语言切换 */
-    .legal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #e0dcd5; }
-    .legal-header .back-link { color: #888; text-decoration: none; font-weight: 600; transition: 0.2s; }
-    .legal-header .back-link:hover { color: #1a1a2e; }
+    .legal-container h1 { font-size: 32px; color: #1a1a2e; margin-bottom: 30px; text-align: center; }
+    .legal-container h2 { font-size: 22px; color: #1a1a2e; margin: 40px 0 16px; border-bottom: 1px solid #e0dcd5; padding-bottom: 8px; }
+    .legal-container h3 { font-size: 18px; color: #3d3a35; margin: 24px 0 12px; }
+    .legal-container p { margin-bottom: 16px; font-size: 16px; color: #4a4540; }
+    .legal-container strong { color: #1a1a2e; font-weight: 700; }
     
-    .lang-switch { display: flex; gap: 8px; background: #e8e4dd; padding: 4px; border-radius: 20px; }
-    .lang-btn { background: transparent; border: none; padding: 6px 16px; border-radius: 16px; font-size: 13px; font-weight: 700; color: #888; cursor: pointer; transition: 0.2s; font-family: inherit; }
-    .lang-btn.active { background: #fff; color: #1a1a2e; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-
-    /* 内容区 */
-    .legal-container h1 { font-size: 32px; color: #1a1a2e; margin-bottom: 24px; }
-    .legal-container h2 { font-size: 20px; color: #1a1a2e; margin: 30px 0 12px; }
-    .legal-container p { margin-bottom: 16px; }
-    
-    /* 隐藏特定语言 */
+    /* 内容隐藏/显示逻辑 */
     .lang-content { display: none; }
     .lang-content.active { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -32,75 +26,135 @@
 </head>
 <body>
 
+  <!-- ============ 顶部导航栏 ============ -->
+  <header class="site-header">
+    <nav class="nav-bar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">✦</span>
+        Montainment · 蒙堂木下
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+        <li><a href="quiz.html" data-i18n="nav.quiz">学堂</a></li>
+        <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
+        <li><a href="story.html" data-i18n="nav.story">故事工坊</a></li>
+        <li><a href="immersive.html" data-i18n="nav.immersive">🌙 沉浸式工坊</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
   <main class="legal-container">
     
-    <!-- 顶部操作栏 -->
-    <div class="legal-header">
-      <a href="index.html" class="back-link" id="backBtn">← 返回首页</a>
-      <div class="lang-switch">
-        <button class="lang-btn" data-lang="zh" onclick="switchLang('zh')">中文</button>
-        <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
-      </div>
-    </div>
-
     <!-- ===== 中文内容区 ===== -->
     <div id="content-zh" class="lang-content">
-      <h1>关于我们 / About Us</h1>
-      <h2>欢迎来到蒙堂木下</h2>
-      <!-- 👇 这里放你等下给我的中文正文 -->
-      <p>（这里等下替换成你的中文内容）</p>
+      <h1>关于 Montainment</h1>
       
-      <h2>联系方式</h2>
-      <p>（这里放中文的联系方式）</p>
-      <p style="font-weight: 700;">📧 Email: your-email@example.com</p>
+      <h2>一个学习、探索与想象的数字空间</h2>
+      <p>欢迎来到 <strong>Montainment</strong> —— 一个让学习与娱乐相结合、让好奇心引领探索、让想象力自由生长的数字空间。</p>
+      <p>Montainment 汇集了多种线上体验，包括互动学习工具、教育游戏、语言学习资源、阅读材料、原创故事、文章、影片、音乐，以及其他创意内容。</p>
+      <p>我们相信，互联网不应该只是一个不断滑动屏幕的地方。它也可以让我们学习新知识、培养新技能、享受一个故事、发现不同的观点，或在忙碌的生活中停下来，享受一段有意义的时光。</p>
+
+      <h2>你可以在这里发现什么？</h2>
+      <h3>学习与探索</h3>
+      <p>体验语言学习资源、教育内容、互动练习，以及以浏览器为基础的学习工具，让学习变得更有趣。</p>
+      
+      <h3>阅读与发现</h3>
+      <p>阅读不同主题的故事、文章、虚构世界、创意观点与其他文字内容。</p>
+      
+      <h3>游戏与互动</h3>
+      <p>参与互动活动和教育游戏，在体验中培养好奇心、参与感与探索精神。</p>
+      
+      <h3>观看、聆听与放松</h3>
+      <p>欣赏影片、音乐、氛围体验及其他视听创作，用于娱乐、启发灵感或放松心情。</p>
+
+      <h2>我们的内容创作理念</h2>
+      <p>Montainment 是一个独立开发的项目，结合原创构思、人类创意、数字工具与 AI 辅助创作。</p>
+      <p>根据不同项目，内容可能由创作者进行撰写、设计、编程、编辑或制作，并在部分创作环节使用 AI 工具辅助。我们希望持续开发真正有用、有趣、值得体验的内容，而不是单纯追求发布数量。</p>
+      <p>这里的内容可能涉及不同主题与风格。我们不将自己局限于单一领域，因为好奇心本来就不受类别限制。</p>
+
+      <h2>我们的使命</h2>
+      <p>我们的使命是建立一个容易接触的数字空间，让每一位访客都能在这里学习一点新知识、发现一些新事物、享受有趣的体验，或获得一点灵感。</p>
+      <p>无论你是来练习语言、玩学习游戏、阅读故事、探索观点，还是聆听音乐，我们都希望你能在这里找到值得花时间体验的内容。</p>
+      <p><strong>学习一点，发现一点，享受当下。</strong></p>
+      <p>感谢你来到 Montainment。</p>
+
+      <h2>联系我们</h2>
+      <p>如果你有任何建议、合作意向或版权问题，欢迎随时联系我：</p>
+      <p>📧 Email: your-email@example.com (请替换为你的真实邮箱)</p>
     </div>
 
     <!-- ===== 英文内容区 ===== -->
     <div id="content-en" class="lang-content">
-      <h1>About Us</h1>
-      <h2>Welcome to MENG TALES</h2>
-      <!-- 👇 这里放你等下给我的英文正文 -->
-      <p>(Your English content goes here)</p>
+      <h1>About Montainment</h1>
+      
+      <h2>A Little Place for Learning, Discovery, and Imagination</h2>
+      <p>Welcome to <strong>Montainment</strong> — a digital space where learning meets entertainment, curiosity leads to discovery, and imagination has room to grow.</p>
+      <p>Montainment brings together a variety of online experiences, including interactive learning tools, educational games, language-learning resources, reading materials, original stories, articles, videos, music, and other creative content.</p>
+      <p>We believe the internet can be more than a place to scroll. It can be a place to explore something new, develop a skill, enjoy a story, discover a different perspective, or simply take a break and enjoy a meaningful moment.</p>
+
+      <h2>What You'll Find Here</h2>
+      <h3>Learn & Explore</h3>
+      <p>Discover language-learning resources, educational materials, interactive exercises, and browser-based learning experiences designed to make learning more engaging.</p>
+      
+      <h3>Read & Discover</h3>
+      <p>Explore stories, articles, fictional worlds, ideas, and other written content covering a variety of subjects.</p>
+      
+      <h3>Play & Interact</h3>
+      <p>Try interactive activities and educational games designed to encourage curiosity, participation, and exploration.</p>
+      
+      <h3>Watch, Listen & Unwind</h3>
+      <p>Enjoy videos, music, ambient experiences, and creative audiovisual content for entertainment, inspiration, or relaxation.</p>
+
+      <h2>Our Approach to Content</h2>
+      <p>Montainment is an independently developed project that combines original ideas, human creativity, digital tools, and AI-assisted creation.</p>
+      <p>Depending on the project, content may be written, designed, programmed, edited, or produced by the creator, with AI tools assisting certain parts of the creative process. We aim to develop experiences that are useful, engaging, and enjoyable rather than publishing content simply for the sake of volume.</p>
+      <p>Our content may cover different subjects and styles. We do not limit ourselves to a single category because curiosity rarely stays within one box.</p>
+
+      <h2>Our Mission</h2>
+      <p>Our mission is to create an accessible digital space where people can learn something, discover something, enjoy something, or find a little inspiration whenever they visit.</p>
+      <p>Whether you come here to practise a language, play a learning game, read a story, explore an idea, or listen to music, we hope you find something worth your time.</p>
+      <p><strong>Learn something. Discover something. Enjoy the experience.</strong></p>
+      <p>Thank you for being part of Montainment.</p>
 
       <h2>Contact Us</h2>
-      <p>(Your English contact info goes here)</p>
-      <p style="font-weight: 700;">📧 Email: your-email@example.com</p>
+      <p>If you have any suggestions, collaboration intentions, or copyright issues, please contact us via:</p>
+      <p>📧 Email: your-email@example.com</p>
     </div>
 
   </main>
 
-  <script src="i18n.js"></script>
-  <script>
-    // 初始化：获取当前语言，默认中文
-    function getCurrentLang() {
-      const saved = localStorage.getItem('lang');
-      return saved ? saved : 'zh'; // 默认给中文，因为合规页面优先照顾国内审核
-    }
+  <!-- ============ 页脚 ============ -->
+  <footer class="site-footer">
+    <div class="container" style="text-align: center;">
+      <div style="margin-bottom: 12px; font-size: 14px;">
+        <a href="about.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.about">关于我们</a> | 
+        <a href="privacy.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.privacy">隐私政策</a> | 
+        <a href="terms.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.terms">使用条款</a>
+      </div>
+      <div data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
+    </div>
+  </footer>
 
-    // 切换语言核心函数
-    function switchLang(lang) {
-      // 1. 更新按钮高亮状态
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-      });
+  <script src="i18n.js"></script>
+  <script src="common.js"></script>
+  <script>
+    // 监听语言切换，显示对应内容
+    function updateLegalContent() {
+      const lang = window.i18n ? i18n.currentLang : 'en';
       
-      // 2. 显示对应的内容
       document.querySelectorAll('.lang-content').forEach(el => {
         el.classList.remove('active');
       });
-      document.getElementById('content-' + lang).classList.add('active');
-
-      // 3. 更新返回按钮的文字
-      document.getElementById('backBtn').textContent = lang === 'zh' ? '← 返回首页' : '← Back to Home';
-
-      // 4. 把语言记录到本地，这样全站其他页面也会同步
-      localStorage.setItem('lang', lang);
+      
+      const activeContent = document.getElementById('content-' + lang);
+      if (activeContent) {
+        activeContent.classList.add('active');
+      }
     }
 
-    // 页面加载时自动执行
-    document.addEventListener('DOMContentLoaded', () => {
-      switchLang(getCurrentLang());
-    });
+    document.addEventListener('DOMContentLoaded', updateLegalContent);
+    document.addEventListener('languageChanged', updateLegalContent);
   </script>
 
 </body>
