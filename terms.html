@@ -4,60 +4,252 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>使用条款 | Montainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .legal-container { max-width: 800px; margin: 60px auto; padding: 20px; color: #333; line-height: 1.8; }
-    .legal-container h1 { font-size: 32px; color: #1a1a2e; margin-bottom: 20px; }
-    .legal-container h2 { font-size: 20px; color: #1a1a2e; margin: 30px 0 10px; }
-    .legal-container p { margin-bottom: 16px; }
+    body { background: #f5f2ed; font-family: 'Nunito', system-ui, sans-serif; min-height: 100vh; }
+    
+    .legal-container { max-width: 800px; margin: 60px auto; padding: 20px 24px; color: #333; line-height: 1.8; min-height: 60vh; }
+    
+    .legal-container h1 { font-size: 32px; color: #1a1a2e; margin-bottom: 24px; text-align: center; }
+    .legal-container h2 { font-size: 22px; color: #1a1a2e; margin: 40px 0 16px; border-bottom: 1px solid #e0dcd5; padding-bottom: 8px; }
+    .legal-container p { margin-bottom: 16px; font-size: 16px; color: #4a4540; }
+    .legal-container strong { color: #1a1a2e; font-weight: 700; }
+    .legal-container ul { margin-bottom: 16px; padding-left: 20px; }
+    .legal-container li { margin-bottom: 8px; font-size: 16px; color: #4a4540; }
+    
+    /* 内容隐藏/显示逻辑 */
+    .lang-content { display: none; }
+    .lang-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
+
+  <!-- ============ 顶部导航栏 ============ -->
   <header class="site-header">
     <nav class="nav-bar">
-      <a href="index.html" class="brand"><span class="brand-mark">✦</span> Montainment · 蒙堂木下</a>
+      <a href="index.html" class="brand">
+        <span class="brand-mark">✦</span>
+        Montainment · 蒙堂木下
+      </a>
       <ul class="nav-links">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="quiz.html">学堂</a></li>
-        <li><a href="game.html">游戏</a></li>
-        <li><a href="story.html">故事工坊</a></li>
-        <li><a href="immersive.html">🌙 沉浸式工坊</a></li>
+        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+        <li><a href="quiz.html" data-i18n="nav.quiz">学堂</a></li>
+        <li><a href="game.html" data-i18n="nav.game">游戏</a></li>
+        <li><a href="story.html" data-i18n="nav.story">故事工坊</a></li>
+        <li><a href="immersive.html" data-i18n="nav.immersive">🌙 沉浸式工坊</a></li>
       </ul>
+      <button class="nav-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
     </nav>
   </header>
 
   <main class="legal-container">
-    <h1>使用条款 / Terms of Use</h1>
-    <p>最后更新日期：2026年10月</p>
+    
+    <!-- ===== 中文内容区 ===== -->
+    <div id="content-zh" class="lang-content">
+      <h1>使用条款</h1>
+      <p><strong>生效日期: 2026年10月24日</strong></p>
 
-    <p>欢迎访问 Montainment（蒙堂木下）。通过访问和使用本网站，您同意遵守以下条款和条件。如果您不同意这些条款，请不要使用本网站。</p>
+      <h2>1. 接受本使用条款</h2>
+      <p>欢迎来到 Montainment（以下简称“本网站”“我们”）。</p>
+      <p>当你访问或使用本网站时，即表示你同意本使用条款。如果你不同意这些条款，请停止使用本网站。</p>
+      <p>本条款适用于你对网站及其一般内容的使用，包括教育资源、互动工具、游戏、阅读材料、故事、文章、影片、音乐及其他创意内容。</p>
 
-    <h2>1. 知识产权</h2>
-    <p>本网站上的所有内容，包括但不限于文字（小说、文章）、图形、Logo、原创游戏代码以及音频/视频素材，均归 Montainment（蒙堂木下）所有，受版权法保护。</p>
-    <p>您可以出于个人、非商业目的浏览、阅读和分享本网站的链接。但未经明确许可，您不得复制、修改、分发或将本网站的内容用于商业用途。</p>
+      <h2>2. 网站用途</h2>
+      <p>Montainment 提供线上教育、资讯、互动及娱乐内容。</p>
+      <p>本网站主要用于一般学习、探索与娱乐。除非另有明确说明，网站内容仅供一般资讯及娱乐用途，不应取代专业意见。</p>
+      <p>随着项目发展，我们可能新增、修改、暂停或移除网站功能及内容。</p>
 
-    <h2>2. 网站使用规范</h2>
-    <p>您同意不会使用本网站进行任何违法或未经授权的活动。禁止使用任何自动化程序（如爬虫）恶意抓取本网站的数据，或试图破坏网站的正常运行。</p>
+      <h2>3. 知识产权与内容权利</h2>
+      <p>除非另有说明，为 Montainment 创作的网站材料，包括原创文字、故事、设计、图像、代码、互动体验及原创视听编排，其权利属于相关创作者，或依据适用许可及授权使用。</p>
+      <p>部分内容可能由 AI 辅助创作、由 AI 生成、依据第三方许可使用、嵌入外部平台，或受到其他独立权利及条款约束。内容出现在本网站上，并不代表 Montainment 拥有其中所有底层素材的权利。</p>
+      <p>你可以出于个人及合法目的访问和使用本网站。</p>
+      <p>除法律明确允许，或相关权利人明确授权外，你不得以侵犯适用权利或违反许可条款的方式，复制、重新发布、重新分发、出售、再许可或商业利用网站内容。</p>
+      <p>你不得删除相关版权声明，也不得将他人的作品冒称为自己的作品。</p>
 
-    <h2>3. 免责声明</h2>
-    <p>本网站的所有内容均按“原样”提供。虽然我们尽力确保内容（如测验答案、文章观点）的准确性，但我们不对其完整性或准确性作出任何明示或暗示的保证。您使用本网站信息的风险由您自行承担。</p>
+      <h2>4. 教育工具与互动游戏</h2>
+      <p>我们的学习资源、游戏、测验及互动工具旨在支持学习与探索。</p>
+      <p>我们会尽力让这些体验保持实用并正常运作，但无法保证所有功能始终可用、完全没有错误、兼容所有设备，或适合每一种学习需求。</p>
+      <p>教育内容仅供一般学习用途。不同用户的学习成果可能有所不同，我们不保证特定的学习成效、考试成绩、语言能力或其他成果。</p>
 
-    <h2>4. 第三方链接</h2>
-    <p>本网站包含了跳转至第三方网站（如 YouTube、GitHub 等）的链接。这些链接仅为方便用户而提供。我们无法控制第三方网站的内容，因此不对其内容或隐私政策承担任何责任。</p>
+      <h2>5. 故事、文章与资讯内容</h2>
+      <p>故事、虚构情境、评论及其他文字或视听材料，可能包含虚构、诠释、简化或创意加工的元素。</p>
+      <p>当内容涉及历史、心理学、科学、文化或其他事实性主题时，我们会尽力负责任地呈现相关信息。但我们不保证每项内容都完整无遗漏、完全没有错误，或适合作为研究或决策的唯一依据。</p>
+      <p>涉及心理学、健康、法律、财务或其他专业领域的内容，仅供一般资讯或娱乐用途，不构成专业意见、诊断、治疗，也不能取代向合格专业人士咨询。</p>
 
-    <h2>5. 条款变更</h2>
-    <p>我们保留随时修改这些使用条款的权利。修改后的条款将在发布到本页面后立即生效。</p>
+      <h2>6. 合理使用规范</h2>
+      <p>你同意不会：</p>
+      <ul>
+        <li>将本网站用于违法目的，或以违反适用法律的方式使用网站。</li>
+        <li>尝试干扰、破坏、过度占用或危害网站及其基础设施。</li>
+        <li>未经授权尝试访问网站系统、相关服务或受保护的资源。</li>
+        <li>绕过技术保护措施，或干扰互动功能的正常运行。</li>
+        <li>以侵犯权利、违反适用法律或不合理干扰网站运作的方式，复制、抓取或系统性提取网站内容。</li>
+        <li>虚假声称拥有内容的权利，或利用网站材料侵犯他人的权利。</li>
+      </ul>
+      <p>我们可能采取合理措施，保护网站及其内容免受滥用。</p>
+
+      <h2>7. 第三方服务与外部链接</h2>
+      <p>本网站可能包含指向第三方服务的链接或整合功能，包括影片平台、网站托管服务及其他外部网站。</p>
+      <p>第三方服务独立运营，并可能拥有自己的使用条款、隐私政策、可用性条件及内容规则。</p>
+      <p>我们无法控制或保证外部服务的可用性、准确性、安全性或处理方式。你使用这些服务时，须遵守其适用条款。</p>
+
+      <h2>8. 广告与网站营运支持</h2>
+      <p>未来，Montainment 可能展示第三方广告，以支持网站的运营与发展。</p>
+      <p>广告服务商可能适用自身的条款、技术及隐私处理方式。广告出现在本网站上，并不必然代表 Montainment 对相关产品或服务作出认可或推荐。</p>
+      <p>当我们新增广告或其他网站服务时，可能更新本条款。</p>
+
+      <h2>9. 网站可用性与变更</h2>
+      <p>我们会尽力维持网站的可访问性与正常运作，但不保证网站始终不中断，也不保证所有功能永远保持不变。</p>
+      <p>在合理必要的情况下，包括维护、技术调整、安全或开发需要，我们可能更新、暂停或停止网站的任何部分。</p>
+
+      <h2>10. 免责声明</h2>
+      <p>在适用法律允许的范围内，本网站及其内容均以“现状”及“现有可用状态”提供。</p>
+      <p>我们不作出一般性保证，承诺网站永不中断、完全没有错误、内容绝对准确、兼容所有设备，或适用于每一种特定用途。</p>
+      <p>本条款不排除适用法律明确规定不得排除的权利或保障。</p>
+
+      <h2>11. 责任限制</h2>
+      <p>在适用法律允许的范围内，对于因使用、无法使用或依赖本网站及其内容而产生的间接、附带、特殊或后果性损失，Montainment 及相关创作者不承担责任。</p>
+      <p>本条款不排除或限制适用法律禁止排除或限制的责任。</p>
+      <p>你仍须对自己使用本网站的方式，以及依据网站信息作出的决定负责。</p>
+
+      <h2>12. 隐私</h2>
+      <p>你使用本网站时，也须参考我们的《隐私政策》。该政策说明我们目前的信息处理方式，以及第三方服务可能扮演的角色。</p>
+      <p>如需进一步了解，请阅读《隐私政策》。</p>
+
+      <h2>13. 本条款的修改</h2>
+      <p>当网站、功能或适用要求发生变化时，我们可能修订本使用条款。</p>
+      <p>最新版本将发布在本页面，并注明生效日期。在修订条款生效后继续使用本网站，即表示你在适用法律允许的范围内接受修订后的条款。</p>
+
+      <h2>14. 适用法律</h2>
+      <p>本条款旨在遵守适用法律。如需指定适用法律，本条款以马来西亚法律为准，但须遵守适用的法律要求，以及你所在司法管辖区内任何不可排除的强制性权利。</p>
+
+      <h2>15. 联系方式</h2>
+      <p>如对本使用条款有任何疑问，请通过以下方式联系：</p>
+      <p><strong>电子邮件：</strong> mengmuxiatales@gmail.com</p>
+    </div>
+
+    <!-- ===== 英文内容区 ===== -->
+    <div id="content-en" class="lang-content">
+      <h1>Terms of Use</h1>
+      <p><strong>Effective Date: 24 October 2026</strong></p>
+
+      <h2>1. Acceptance of These Terms</h2>
+      <p>Welcome to Montainment (“we,” “our,” or “us”).</p>
+      <p>By accessing or using this website, you agree to these Terms of Use. If you do not agree with these terms, please discontinue use of the website.</p>
+      <p>These terms apply to your use of the website and its general content, including educational resources, interactive tools, games, reading materials, stories, articles, videos, music, and other creative content.</p>
+
+      <h2>2. Purpose of the Website</h2>
+      <p>Montainment provides online educational, informational, interactive, and entertainment content.</p>
+      <p>The website is intended for general learning, exploration, and enjoyment. Unless expressly stated otherwise, the content is provided for informational and entertainment purposes and is not a substitute for professional advice.</p>
+      <p>We may add, modify, suspend, or remove website features or content as the project develops.</p>
+
+      <h2>3. Intellectual Property and Content Rights</h2>
+      <p>Unless otherwise stated, website materials created for Montainment, including original text, stories, designs, graphics, code, interactive experiences, and original audiovisual arrangements, are owned by the relevant creator or used under applicable permission or licence.</p>
+      <p>Some content may be AI-assisted, AI-generated, third-party licensed, embedded from external platforms, or otherwise subject to separate rights and terms. The presence of content on this website does not mean that Montainment owns every underlying element.</p>
+      <p>You may access and use the website for personal, lawful purposes.</p>
+      <p>Unless expressly permitted by law or by the relevant rights holder, you may not reproduce, republish, redistribute, sell, sublicense, or commercially exploit website content in a way that infringes applicable rights or licence terms.</p>
+      <p>You may not remove relevant copyright notices or misrepresent another person's work as your own.</p>
+
+      <h2>4. Educational Tools and Interactive Games</h2>
+      <p>Our learning resources, games, quizzes, and interactive tools are provided to support learning and exploration.</p>
+      <p>We aim to make these experiences useful and functional, but we do not guarantee that every feature will always be available, error-free, compatible with every device, or suitable for every learning need.</p>
+      <p>Educational content is provided for general learning purposes. Individual results may vary, and we do not guarantee particular learning outcomes, examination results, language proficiency, or other achievements.</p>
+
+      <h2>5. Stories, Articles, and Informational Content</h2>
+      <p>Stories, fictional scenarios, commentary, and other written or audiovisual materials may contain fictional, interpretive, simplified, or creative elements.</p>
+      <p>Where content discusses history, psychology, science, culture, or other factual subjects, we aim to present it responsibly. However, we do not guarantee that every item is exhaustive, error-free, or suitable as the sole basis for research or decision-making.</p>
+      <p>Content related to psychology, health, law, finance, or other professional subjects is for general informational or entertainment purposes only and does not constitute professional advice, diagnosis, treatment, or a substitute for consultation with a qualified professional.</p>
+
+      <h2>6. Acceptable Use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use the website for unlawful purposes or in violation of applicable laws.</li>
+        <li>Attempt to disrupt, damage, overload, or compromise the website or its infrastructure.</li>
+        <li>Attempt to gain unauthorised access to the website, its systems, or related services.</li>
+        <li>Circumvent technical protections or interfere with the operation of interactive features.</li>
+        <li>Copy, scrape, or systematically extract website content in a manner that infringes rights, violates applicable law, or unreasonably interferes with the website.</li>
+        <li>Misrepresent ownership of content or use website materials to infringe another person's rights.</li>
+      </ul>
+      <p>We may take reasonable steps to protect the website and its content against misuse.</p>
+
+      <h2>7. Third-Party Services and External Links</h2>
+      <p>The website may include links to or integrations with third-party services, including video platforms, hosting services, or other external websites.</p>
+      <p>Third-party services operate independently and may have their own terms, privacy policies, availability conditions, and content rules.</p>
+      <p>We do not control or guarantee the availability, accuracy, security, or practices of external services. Your use of those services is subject to their applicable terms.</p>
+
+      <h2>8. Advertising and Website Support</h2>
+      <p>Montainment may display third-party advertisements in the future to support the website's operation and development.</p>
+      <p>Advertising providers may apply their own terms, technologies, and privacy practices. The presence of an advertisement does not necessarily constitute an endorsement or recommendation by Montainment.</p>
+      <p>We may update these terms as advertising or other website services are introduced.</p>
+
+      <h2>9. Availability and Changes</h2>
+      <p>We aim to maintain an accessible and functional website but do not guarantee uninterrupted availability or that all features will remain unchanged.</p>
+      <p>We may update, suspend, or discontinue any part of the website when reasonably necessary, including for maintenance, technical changes, security, or development.</p>
+
+      <h2>10. Disclaimer of Warranties</h2>
+      <p>To the extent permitted by applicable law, the website and its content are provided on an “as is” and “as available” basis.</p>
+      <p>We make no general guarantee that the website will be uninterrupted, error-free, completely accurate, compatible with every device, or suitable for every particular purpose.</p>
+      <p>Nothing in these terms excludes a right or protection that cannot lawfully be excluded under applicable law.</p>
+
+      <h2>11. Limitation of Liability</h2>
+      <p>To the extent permitted by applicable law, Montainment and the relevant creator shall not be liable for indirect, incidental, special, or consequential loss arising from the use of, inability to use, or reliance on the website or its content.</p>
+      <p>Nothing in these terms excludes or limits liability where such exclusion or limitation is prohibited by applicable law.</p>
+      <p>You remain responsible for your use of the website and for making decisions based on information found on it.</p>
+
+      <h2>12. Privacy</h2>
+      <p>Your use of the website is also subject to our Privacy Policy, which explains our current information-handling practices and the role of third-party services.</p>
+      <p>Please review the Privacy Policy for further information.</p>
+
+      <h2>13. Changes to These Terms</h2>
+      <p>We may revise these Terms of Use when the website, its features, or applicable requirements change.</p>
+      <p>The latest version will be published on this page with its effective date. Continued use of the website after revised terms become effective constitutes acceptance of the revised terms to the extent permitted by applicable law.</p>
+
+      <h2>14. Governing Law</h2>
+      <p>These terms are intended to operate subject to applicable laws. Where a governing law must be specified, these terms shall be governed by the laws of Malaysia, subject to applicable legal requirements and any mandatory rights that apply in your jurisdiction.</p>
+
+      <h2>15. Contact</h2>
+      <p>If you have questions about these Terms of Use, please contact:</p>
+      <p><strong>Email:</strong> mengmuxiatales@gmail.com</p>
+    </div>
+
   </main>
 
+  <!-- ============ 页脚 ============ -->
   <footer class="site-footer">
-    <div class="container">
-      <div style="margin-bottom: 10px;">
-        <a href="about.html" style="margin: 0 10px; color: inherit;">关于我们</a> | 
-        <a href="privacy.html" style="margin: 0 10px; color: inherit;">隐私政策</a> | 
-        <a href="terms.html" style="margin: 0 10px; color: inherit;">使用条款</a>
+    <div class="container" style="text-align: center;">
+      <div style="margin-bottom: 12px; font-size: 14px;">
+        <a href="about.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.about">关于我们</a> | 
+        <a href="contact.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'">联系我们</a> |
+        <a href="privacy.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.privacy">隐私政策</a> | 
+        <a href="terms.html" style="color: #888; text-decoration: none; margin: 0 8px; transition: 0.2s;" onmouseover="this.style.color='#1a1a2e'" onmouseout="this.style.color='#888'" data-i18n="footer.terms">使用条款</a>
       </div>
-      © 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站
+      <div data-i18n="common.footer">© 2026 Montainment · 蒙堂木下 · 一个让学习更好玩的静态网站</div>
     </div>
   </footer>
+
+  <script src="i18n.js"></script>
+  <script src="common.js"></script>
+  <script>
+    // 监听语言切换，显示对应内容
+    function updateLegalContent() {
+      const lang = window.i18n ? i18n.currentLang : 'en';
+      
+      document.querySelectorAll('.lang-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      const activeContent = document.getElementById('content-' + lang);
+      if (activeContent) {
+        activeContent.classList.add('active');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateLegalContent);
+    document.addEventListener('languageChanged', updateLegalContent);
+  </script>
+
 </body>
 </html>
