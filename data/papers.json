@@ -16759,7 +16759,1293 @@
               "level": 2,
               "labelZh": "高级初学者",
               "labelEn": "Advanced Beginner",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：动作的进行与完成",
+                  "titleEn": "Paper 1: Progressive & Completed Actions (动作的进行与完成)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「他在吃饭」中「在」表示什么？",
+                        "en": "In 「他在吃饭」, what does 「在」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "将来",
+                          "动作进行",
+                          "过去经历",
+                          "动作完成"
+                        ],
+                        "en": [
+                          "Future",
+                          "Progressive action",
+                          "Past experience",
+                          "Completed action"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「在 + 动词」表示动作正在进行，相当于英语 be + V-ing。",
+                        "en": "在 + verb marks an action in progress, like 'be + V-ing'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我吃了饭」中「了」表示什么？",
+                        "en": "In 「我吃了饭」, what does 「了」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "动作进行",
+                          "将来",
+                          "动作完成",
+                          "过去经历"
+                        ],
+                        "en": [
+                          "Progressive action",
+                          "Future",
+                          "Completed action",
+                          "Past experience"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "动词后的「了」表示动作已经完成。",
+                        "en": "了 after the verb marks a completed action."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我去过北京」中「过」表示什么？",
+                        "en": "In 「我去过北京」, what does 「过」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "过去经历",
+                          "动作进行",
+                          "动作完成",
+                          "将来"
+                        ],
+                        "en": [
+                          "Past experience",
+                          "Progressive action",
+                          "Completed action",
+                          "Future"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「过」表示曾经有过某种经历。",
+                        "en": "过 marks a past experience."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪句表示「正在做」？",
+                        "en": "Which sentence means 'is doing (right now)'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我吃了饭",
+                          "我去过北京",
+                          "我要吃饭",
+                          "他在吃饭"
+                        ],
+                        "en": [
+                          "我吃了饭",
+                          "我去过北京",
+                          "我要吃饭",
+                          "他在吃饭"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「在 + 动词」表示动作正在进行：他在吃饭。",
+                        "en": "在 + verb expresses an ongoing action: 他在吃饭."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪句表示「已经做完」？",
+                        "en": "Which sentence means 'has already done'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他在吃饭",
+                          "我吃了饭",
+                          "我去过北京",
+                          "我要吃饭"
+                        ],
+                        "en": [
+                          "他在吃饭",
+                          "我吃了饭",
+                          "我去过北京",
+                          "我要吃饭"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "动词 + 了 表示动作已完成：我吃了饭。",
+                        "en": "Verb + 了 marks completion: 我吃了饭."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪句表示「曾经做过」？",
+                        "en": "Which sentence means 'has done before (experience)'?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他在吃饭",
+                          "我吃了饭",
+                          "我去过北京",
+                          "我要吃饭"
+                        ],
+                        "en": [
+                          "他在吃饭",
+                          "我吃了饭",
+                          "我去过北京",
+                          "我要吃饭"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "动词 + 过 表示过去经历：我去过北京。",
+                        "en": "Verb + 过 marks past experience: 我去过北京."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「在」和「了」的主要区别是？",
+                        "en": "What is the main difference between 「在」 and 「了」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "在 表进行，了 表完成",
+                          "两者相同",
+                          "在 表完成，了 表进行",
+                          "两者都表将来"
+                        ],
+                        "en": [
+                          "在 marks progressive; 了 marks completion",
+                          "They are identical",
+                          "在 marks completion; 了 marks progressive",
+                          "Both mark future"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「在」表示正在进行，「了」表示已经完成。",
+                        "en": "在 marks an ongoing action; 了 marks a completed action."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「了」和「过」的主要区别是？",
+                        "en": "What is the main difference between 「了」 and 「过」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "两者相同",
+                          "了 表经历，过 表完成",
+                          "两者都表进行",
+                          "了 表完成，过 表经历"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "了 marks experience; 过 marks completion",
+                          "Both mark progressive",
+                          "了 marks completion; 过 marks experience"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「了」强调动作完成，「过」强调曾经有过某种经历。",
+                        "en": "了 emphasizes completion; 过 emphasizes past experience."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「他正在睡觉」的意思是？",
+                        "en": "What does 「他正在睡觉」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他睡过觉",
+                          "他正在睡觉",
+                          "他睡了觉",
+                          "他要去睡觉"
+                        ],
+                        "en": [
+                          "He has slept before",
+                          "He is sleeping right now",
+                          "He has finished sleeping",
+                          "He is about to sleep"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「正在」是「在」的强调形式，表示正在进行。",
+                        "en": "正在 is the emphatic form of 在, meaning 'right now'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我没吃过日本菜」的意思是？",
+                        "en": "What does 「我没吃过日本菜」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我正在吃日本菜",
+                          "我吃完了日本菜",
+                          "我从没吃过日本菜",
+                          "我要吃日本菜"
+                        ],
+                        "en": [
+                          "I am eating Japanese food",
+                          "I finished eating Japanese food",
+                          "I have never eaten Japanese food",
+                          "I want to eat Japanese food"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「没 + 动词 + 过」表示从未有过某经历。",
+                        "en": "没 + verb + 过 means 'have never done'."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：结果补语",
+                  "titleEn": "Paper 2: Resultative Complements (结果补语)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「吃完」的意思是？",
+                        "en": "What does 「吃完」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "开始吃",
+                          "不想吃",
+                          "吃完（吃光）",
+                          "正在吃"
+                        ],
+                        "en": [
+                          "Start eating",
+                          "Don't want to eat",
+                          "Finish eating",
+                          "Be eating"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "完 作结果补语，表示动作完成到底：吃完 = eat up。",
+                        "en": "完 as a resultative complement means 'finish completely': 吃完 = eat up."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「看完」的意思是？",
+                        "en": "What does 「看完」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "看完（看完整）",
+                          "开始看",
+                          "不想看",
+                          "正在看"
+                        ],
+                        "en": [
+                          "Finish watching/reading",
+                          "Start watching",
+                          "Don't want to watch",
+                          "Be watching"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "看完 = finish watching (to the end)。",
+                        "en": "看完 = finish watching (to the end)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「做好」的意思是？",
+                        "en": "What does 「做好」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "开始做",
+                          "不想做",
+                          "正在做",
+                          "做好（做完）"
+                        ],
+                        "en": [
+                          "Start doing",
+                          "Don't want to do",
+                          "Be doing",
+                          "Finish doing (properly)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "好 作结果补语，表示完成或做得妥当：做好 = do well / finish。",
+                        "en": "好 as a resultative complement means 'do well / finish': 做好."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「听懂」的意思是？",
+                        "en": "What does 「听懂」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "开始听",
+                          "听懂",
+                          "不想听",
+                          "正在听"
+                        ],
+                        "en": [
+                          "Start listening",
+                          "Understand (by listening)",
+                          "Don't want to listen",
+                          "Be listening"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "懂 作结果补语，表示听完后理解了：听懂 = understand。",
+                        "en": "懂 as a resultative complement means 'understand as a result of listening'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「看见」的意思是？",
+                        "en": "What does 「看见」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "看见（看到）",
+                          "开始看",
+                          "不想看",
+                          "正在看"
+                        ],
+                        "en": [
+                          "See / Catch sight of",
+                          "Start looking",
+                          "Don't want to look",
+                          "Be looking"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "见 作结果补语，表示看的结果是看到了：看见 = see。",
+                        "en": "见 as a resultative complement marks the result of looking: 看见 = see."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「找到」的意思是？",
+                        "en": "What does 「找到」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "开始找",
+                          "找不到",
+                          "找到",
+                          "不想找"
+                        ],
+                        "en": [
+                          "Start looking",
+                          "Cannot find",
+                          "Find (successfully)",
+                          "Don't want to look"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "到 作结果补语，表示动作达到目标：找到 = find。",
+                        "en": "到 as a resultative complement marks achieving the goal: 找到 = find."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "结果补语的结构是？",
+                        "en": "What is the structure of a resultative complement?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "动词 + 得 + 补语",
+                          "形容词 + 补语",
+                          "动词 + 补语",
+                          "补语 + 动词"
+                        ],
+                        "en": [
+                          "Verb + 得 + complement",
+                          "Adjective + complement",
+                          "Verb + complement",
+                          "Complement + verb"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "结果补语：动词 + 结果补语（完、好、懂、见、到等），如吃完、做好。",
+                        "en": "Resultative complement: verb + result (完, 好, 懂, 见, 到, etc.), e.g. 吃完, 做好."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我吃完了饭」的意思是？",
+                        "en": "What does 「我吃完了饭」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我正在吃饭",
+                          "我吃完了饭",
+                          "我要吃饭",
+                          "我还没吃饭"
+                        ],
+                        "en": [
+                          "I am eating",
+                          "I finished eating",
+                          "I want to eat",
+                          "I haven't eaten"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "吃完 + 了 = 已经吃完。",
+                        "en": "吃完 + 了 = have finished eating."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「他做完了作业」的意思是？",
+                        "en": "What does 「他做完了作业」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他做完了作业",
+                          "他正在做作业",
+                          "他不想做作业",
+                          "他还没做作业"
+                        ],
+                        "en": [
+                          "He finished his homework",
+                          "He is doing his homework",
+                          "He doesn't want to do homework",
+                          "He hasn't done homework yet"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "做完 + 了 = 已经做完。",
+                        "en": "做完 + 了 = have finished doing."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "结果补语的否定形式是？",
+                        "en": "What is the negative form of a resultative complement?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "不 + 动词 + 补语",
+                          "没 + 动词 + 补语",
+                          "动词 + 不 + 补语",
+                          "动词 + 没 + 补语"
+                        ],
+                        "en": [
+                          "不 + verb + complement",
+                          "没 + verb + complement",
+                          "verb + 不 + complement",
+                          "verb + 没 + complement"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "结果补语的否定用「没」：没吃完、没看懂、没找到。",
+                        "en": "The negative uses 没: 没吃完, 没看懂, 没找到."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：趋向补语",
+                  "titleEn": "Paper 3: Directional Complements (趋向补语)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「进来」的意思是？",
+                        "en": "What does 「进来」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "出去",
+                          "进来",
+                          "回来",
+                          "上去"
+                        ],
+                        "en": [
+                          "Go out",
+                          "Come in",
+                          "Come back",
+                          "Go up"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "进来 = come in（向说话人方向进来）。",
+                        "en": "进来 = come in (toward the speaker)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「出去」的意思是？",
+                        "en": "What does 「出去」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "出去",
+                          "进来",
+                          "回来",
+                          "下去"
+                        ],
+                        "en": [
+                          "Go out",
+                          "Come in",
+                          "Come back",
+                          "Go down"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "出去 = go out（远离说话人方向出去）。",
+                        "en": "出去 = go out (away from the speaker)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「起来」的意思是？",
+                        "en": "What does 「起来」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "下去",
+                          "出去",
+                          "回来",
+                          "起来（向上／开始）"
+                        ],
+                        "en": [
+                          "Down",
+                          "Out",
+                          "Back",
+                          "Up / Begin"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "起来 = get up；也可引申为「开始」：笑起来（start laughing）。",
+                        "en": "起来 = get up; it can also mean 'start': 笑起来 (start laughing)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「下去」的意思是？",
+                        "en": "What does 「下去」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "上去",
+                          "下去（向下／继续）",
+                          "回来",
+                          "进来"
+                        ],
+                        "en": [
+                          "Go up",
+                          "Down / Continue",
+                          "Come back",
+                          "Come in"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "下去 = go down；也可引申为「继续」：说下去（keep talking）。",
+                        "en": "下去 = go down; it can also mean 'continue': 说下去 (keep talking)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「上来」的意思是？",
+                        "en": "What does 「上来」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "下去",
+                          "出去",
+                          "上来",
+                          "回去"
+                        ],
+                        "en": [
+                          "Go down",
+                          "Go out",
+                          "Come up",
+                          "Go back"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "上来 = come up（向说话人方向上来）。",
+                        "en": "上来 = come up (toward the speaker)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「回去」的意思是？",
+                        "en": "What does 「回去」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "进去",
+                          "进来",
+                          "出去",
+                          "回去（回到原处）"
+                        ],
+                        "en": [
+                          "Go in",
+                          "Come in",
+                          "Go out",
+                          "Go back"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "回去 = go back（回到原来的地方）。",
+                        "en": "回去 = go back (to the original place)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「走过来」的意思是？",
+                        "en": "What does 「走过来」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "走过去",
+                          "走过来（朝说话人走来）",
+                          "走回来",
+                          "跑过来"
+                        ],
+                        "en": [
+                          "Walk over (away)",
+                          "Walk over (toward the speaker)",
+                          "Walk back",
+                          "Run over"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "过来 = come over（朝说话人方向走来）。",
+                        "en": "过来 = come over (toward the speaker)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "趋向补语「来」和「去」的区别是？",
+                        "en": "What is the difference between 「来」 and 「去」 as directional complements?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "两者相同",
+                          "来 远离说话人方向，去 朝说话人方向",
+                          "来 朝说话人方向，去 远离说话人方向",
+                          "两者都表回来"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "来 = away from the speaker; 去 = toward the speaker",
+                          "来 = toward the speaker; 去 = away from the speaker",
+                          "Both mean 'come back'"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "来 表示朝说话人方向移动，去 表示远离说话人方向移动。",
+                        "en": "来 marks movement toward the speaker; 去 marks movement away."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「他跑出去了」的意思是？",
+                        "en": "What does 「他跑出去了」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他跑回来了",
+                          "他走进来了",
+                          "他坐下了",
+                          "他跑出去了"
+                        ],
+                        "en": [
+                          "He ran back",
+                          "He walked in",
+                          "He sat down",
+                          "He ran out"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "跑 + 出去 + 了 = ran out。",
+                        "en": "跑 + 出去 + 了 = ran out."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「请进来」的意思是？",
+                        "en": "What does 「请进来」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "请进来",
+                          "请出去",
+                          "请坐下",
+                          "请回去"
+                        ],
+                        "en": [
+                          "Please come in",
+                          "Please go out",
+                          "Please sit down",
+                          "Please go back"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "进来 = come in；请进来 = please come in。",
+                        "en": "进来 = come in; 请进来 = please come in."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：比较句",
+                  "titleEn": "Paper 4: Comparison Sentences (比较句)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「我比你高」的意思是？",
+                        "en": "What does 「我比你高」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你比我高",
+                          "我跟你一样高",
+                          "我不知道谁高",
+                          "我比你高"
+                        ],
+                        "en": [
+                          "You are taller than me",
+                          "I am as tall as you",
+                          "I don't know who is taller",
+                          "I am taller than you"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "A 比 B + 形容词 = A is more ... than B。",
+                        "en": "A 比 B + adjective = A is more ... than B."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「他没有我高」的意思是？",
+                        "en": "What does 「他没有我高」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他没有我高",
+                          "他比我高",
+                          "他跟我一样高",
+                          "他不知道我多高"
+                        ],
+                        "en": [
+                          "He is not as tall as me",
+                          "He is taller than me",
+                          "He is as tall as me",
+                          "He doesn't know my height"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "A 没有 B + 形容词 = A is not as ... as B。",
+                        "en": "A 没有 B + adjective = A is not as ... as B."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我跟你一样高」的意思是？",
+                        "en": "What does 「我跟你一样高」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我比你高",
+                          "我跟你一样高",
+                          "我没有你高",
+                          "我不知道你多高"
+                        ],
+                        "en": [
+                          "I am taller than you",
+                          "I am as tall as you",
+                          "I am not as tall as you",
+                          "I don't know your height"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "A 跟 B 一样 + 形容词 = A is as ... as B。",
+                        "en": "A 跟 B 一样 + adjective = A is as ... as B."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「比」字句的结构是？",
+                        "en": "What is the structure of the 比 construction?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "A 比 B + 很 + 形容词",
+                          "A 比 B 形容词",
+                          "A 比 B + 形容词",
+                          "A + 形容词 + 比 B"
+                        ],
+                        "en": [
+                          "A 比 B + 很 + adjective",
+                          "A 比 B adjective (verb final)",
+                          "A 比 B + adjective",
+                          "A + adjective + 比 B"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "基本结构：A 比 B + 形容词，如「我比你高」。",
+                        "en": "Basic structure: A 比 B + adjective, e.g. 我比你高."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「A 比 B + 形容词」的意思是？",
+                        "en": "What does 'A 比 B + adjective' mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "A 比 B 更（形容词）",
+                          "A 和 B 一样",
+                          "A 不如 B",
+                          "B 比 A 更"
+                        ],
+                        "en": [
+                          "A is more (adjective) than B",
+                          "A and B are the same",
+                          "A is not as good as B",
+                          "B is more than A"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "A 比 B + 形容词 = A is more (adjective) than B。",
+                        "en": "A 比 B + adjective = A is more (adjective) than B."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「A 没有 B + 形容词」的意思是？",
+                        "en": "What does 'A 没有 B + adjective' mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "A 比 B 更",
+                          "A 和 B 一样",
+                          "A 比 B 高",
+                          "A 不如 B（形容词）"
+                        ],
+                        "en": [
+                          "A is more than B",
+                          "A and B are the same",
+                          "A is taller than B",
+                          "A is not as (adjective) as B"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "A 没有 B + 形容词 = A is not as (adjective) as B。",
+                        "en": "A 没有 B + adjective = A is not as (adjective) as B."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「A 跟 B 一样 + 形容词」的意思是？",
+                        "en": "What does 'A 跟 B 一样 + adjective' mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "A 比 B 更",
+                          "A 和 B 一样（形容词）",
+                          "A 不如 B",
+                          "B 比 A 更"
+                        ],
+                        "en": [
+                          "A is more than B",
+                          "A and B are equally (adjective)",
+                          "A is not as good as B",
+                          "B is more than A"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "A 跟 B 一样 + 形容词 = A is as (adjective) as B。",
+                        "en": "A 跟 B 一样 + adjective = A is as (adjective) as B."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「今天比昨天热」的意思是？",
+                        "en": "What does 「今天比昨天热」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "今天和昨天一样热",
+                          "昨天比今天热",
+                          "今天比昨天热",
+                          "今天不热"
+                        ],
+                        "en": [
+                          "Today and yesterday are equally hot",
+                          "Yesterday was hotter than today",
+                          "Today is hotter than yesterday",
+                          "Today isn't hot"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "今天比昨天 + 热 = 今天更热。",
+                        "en": "今天比昨天 + 热 = today is hotter."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「这个比那个贵」的意思是？",
+                        "en": "What does 「这个比那个贵」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "这个比那个贵",
+                          "那个比这个贵",
+                          "两个一样贵",
+                          "这个不贵"
+                        ],
+                        "en": [
+                          "This is more expensive than that",
+                          "That is more expensive than this",
+                          "Both are equally expensive",
+                          "This isn't expensive"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "这个比那个 + 贵 = 这个更贵。",
+                        "en": "这个比那个 + 贵 = this is more expensive."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "比较句中不能说「我比你很高」，原因是？",
+                        "en": "Why can't we say 「我比你很高」 in a 比 sentence?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为「比」后面不能加形容词",
+                          "因为「很」不能和「比」同时用",
+                          "因为「你」不能做宾语",
+                          "因为「高」不能用于比较"
+                        ],
+                        "en": [
+                          "Because 比 cannot be followed by an adjective",
+                          "Because 很 cannot be used together with 比",
+                          "Because 你 cannot be the object",
+                          "Because 高 cannot be used in comparisons"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「比」字句中，形容词前一般不加「很」（「我比你高」即可）。",
+                        "en": "In 比 sentences, 很 is not used before the adjective; 我比你高 is sufficient."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：能愿动词",
+                  "titleEn": "Paper 5: Modal Verbs (能愿动词)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「能」的主要意思是？",
+                        "en": "What does 「能」 mainly mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "想",
+                          "应该",
+                          "能（能力／可能）",
+                          "必须"
+                        ],
+                        "en": [
+                          "Want to",
+                          "Should",
+                          "Can (ability / possibility)",
+                          "Must"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "能 = can（有能力或可能性）：我能游泳。",
+                        "en": "能 = can (ability or possibility): 我能游泳."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「会」的主要意思是？",
+                        "en": "What does 「会」 mainly mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "会（学会的技能）",
+                          "能",
+                          "必须",
+                          "想"
+                        ],
+                        "en": [
+                          "Can (a learned skill)",
+                          "Can (physical ability)",
+                          "Must",
+                          "Want to"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "会 = can（学会的技能）：我会说中文。",
+                        "en": "会 = can (a learned skill): 我会说中文."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「可以」的主要意思是？",
+                        "en": "What does 「可以」 mainly mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "必须",
+                          "想",
+                          "应该",
+                          "可以（许可）"
+                        ],
+                        "en": [
+                          "Must",
+                          "Want to",
+                          "Should",
+                          "May (permission)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "可以 = may（许可）：我可以进来吗？",
+                        "en": "可以 = may (permission): 我可以进来吗？"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「应该」的主要意思是？",
+                        "en": "What does 「应该」 mainly mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "想",
+                          "应该",
+                          "能",
+                          "必须"
+                        ],
+                        "en": [
+                          "Want to",
+                          "Should",
+                          "Can",
+                          "Must"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "应该 = should：你应该休息。",
+                        "en": "应该 = should: 你应该休息."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「必须」的主要意思是？",
+                        "en": "What does 「必须」 mainly mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "想",
+                          "可以",
+                          "必须",
+                          "能"
+                        ],
+                        "en": [
+                          "Want to",
+                          "May",
+                          "Must",
+                          "Can"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "必须 = must：你必须去。",
+                        "en": "必须 = must: 你必须去."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「能」和「会」的主要区别是？",
+                        "en": "What is the main difference between 「能」 and 「会」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "能 表能力／条件，会 表学会的技能",
+                          "两者相同",
+                          "能 表技能，会 表许可",
+                          "两者都表许可"
+                        ],
+                        "en": [
+                          "能 = ability/condition; 会 = a learned skill",
+                          "They are identical",
+                          "能 = a skill; 会 = permission",
+                          "Both mean permission"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "能 强调能力或客观条件，会 强调通过学learned的技能。",
+                        "en": "能 emphasizes ability/condition; 会 emphasizes a skill acquired through learning."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我可以进来吗？」的意思是？",
+                        "en": "What does 「我可以进来吗？」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我必须进来吗？",
+                          "我会进来。",
+                          "我不能进来。",
+                          "我可以进来吗？"
+                        ],
+                        "en": [
+                          "Must I come in?",
+                          "I will come in.",
+                          "I can't come in.",
+                          "May I come in?"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "可以 + 吗 = 请求许可。",
+                        "en": "可以 + 吗 = asking permission."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「你应该休息」的意思是？",
+                        "en": "What does 「你应该休息」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你想休息",
+                          "你应该休息",
+                          "你必须休息",
+                          "你可以休息"
+                        ],
+                        "en": [
+                          "You want to rest",
+                          "You should rest",
+                          "You must rest",
+                          "You may rest"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "应该 = should（建议）。",
+                        "en": "应该 = should (suggestion)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「你必须去」的意思是？",
+                        "en": "What does 「你必须去」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你可以去",
+                          "你应该去",
+                          "你必须去",
+                          "你想去"
+                        ],
+                        "en": [
+                          "You may go",
+                          "You should go",
+                          "You must go",
+                          "You want to go"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "必须 = must（强制）。",
+                        "en": "必须 = must (obligation)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我会说中文」的意思是？",
+                        "en": "What does 「我会说中文」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我会说中文",
+                          "我可以学中文",
+                          "我必须说中文",
+                          "我想说中文"
+                        ],
+                        "en": [
+                          "I can speak Chinese",
+                          "I can learn Chinese",
+                          "I must speak Chinese",
+                          "I want to speak Chinese"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "会 = 学会的技能：我会说中文。",
+                        "en": "会 = a learned skill: 我会说中文."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "level": 3,
