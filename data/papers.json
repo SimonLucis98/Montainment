@@ -18051,19 +18051,3877 @@
               "level": 3,
               "labelZh": "中级",
               "labelEn": "Intermediate",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：把字句与被字句",
+                  "titleEn": "Paper 1: Ba & Bei Constructions (把字句与被字句)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「我把书放在桌子上」的意思是？",
+                        "en": "What does 「我把书放在桌子上」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "书把我放在桌子上",
+                          "我把书放在桌子上",
+                          "我被书放在桌子上",
+                          "桌子被书放在上面"
+                        ],
+                        "en": [
+                          "The book put me on the table",
+                          "I put the book on the table",
+                          "I was put on the table by the book",
+                          "The table was put above by the book"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "把字句：主语 + 把 + 宾语 + 动词 + 补语。我把书 + 放在 + 桌子上。",
+                        "en": "把-construction: subject + 把 + object + verb + complement. 我把书放在桌子上."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "把字句的基本结构是？",
+                        "en": "What is the basic structure of the 把-construction?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "宾语+把+主语+动词",
+                          "主语+把+宾语+动词+补语",
+                          "主语+被+宾语+动词",
+                          "宾语+被+主语+动词"
+                        ],
+                        "en": [
+                          "Object + 把 + subject + verb",
+                          "Subject + 把 + object + verb + complement",
+                          "Subject + 被 + object + verb",
+                          "Object + 被 + subject + verb"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "把字句：主语 + 把 + 宾语 + 动词 + 其他成分（补语、了等）。",
+                        "en": "把-construction: subject + 把 + object + verb + other element (complement, 了, etc.)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「他打破了杯子」改成被字句是？",
+                        "en": "How do you turn 「他打破了杯子」 into a 被-construction?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他被子打破了",
+                          "杯子打破了他",
+                          "杯子被他打破了",
+                          "被他杯子打破了"
+                        ],
+                        "en": [
+                          "他被子打破了",
+                          "杯子打破了他",
+                          "杯子被他打破了",
+                          "被他杯子打破了"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "被字句：受事 + 被 + 施事 + 动词 + 其他成分。杯子 + 被 + 他 + 打破了。",
+                        "en": "被-construction: patient + 被 + agent + verb + other element. 杯子被他打破了."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我吃了饭」改成把字句是？",
+                        "en": "How do you turn 「我吃了饭」 into a 把-construction?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "饭把我吃了",
+                          "我被饭吃了",
+                          "我把吃了饭",
+                          "我把饭吃了"
+                        ],
+                        "en": [
+                          "饭把我吃了",
+                          "我被饭吃了",
+                          "我把吃了饭",
+                          "我把饭吃了"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "把字句：主语 + 把 + 宾语 + 动词（+ 其他）。我把 + 饭 + 吃了。",
+                        "en": "把-construction: subject + 把 + object + verb (+ other). 我把饭吃了."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "被字句的否定形式是？",
+                        "en": "What is the negative form of a 被-construction?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "主语+没+被+宾语+动词",
+                          "主语+不+被+宾语+动词",
+                          "主语+被+不+宾语+动词",
+                          "主语+被+宾语+没+动词"
+                        ],
+                        "en": [
+                          "Subject + 没 + 被 + object + verb",
+                          "Subject + 不 + 被 + object + verb",
+                          "Subject + 被 + 不 + object + verb",
+                          "Subject + 被 + object + 没 + verb"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "被字句的否定通常用「没被」：杯子没被他打破。",
+                        "en": "被-construction is usually negated with 没被: 杯子没被他打破."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "把字句的否定形式是？",
+                        "en": "What is the negative form of a 把-construction?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "把+不+动词",
+                          "不+把+动词",
+                          "没+把+动词",
+                          "把+没+动词"
+                        ],
+                        "en": [
+                          "把 + 不 + verb",
+                          "不 + 把 + verb",
+                          "没 + 把 + verb",
+                          "把 + 没 + verb"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "表示动作未完成时，用「没把」：我没把作业做完。",
+                        "en": "When the action isn't completed, use 没把: 我没把作业做完."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "把字句和被字句的主要区别是？",
+                        "en": "What is the main difference between 把- and 被-constructions?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "两者完全相同",
+                          "把字句以宾语为焦点，被字句以主语为焦点",
+                          "把字句表示被动，被字句表示主动",
+                          "把字句用于书面，被字句用于口语"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "把 focuses on the object; 被 focuses on the subject",
+                          "把 is passive; 被 is active",
+                          "把 is written; 被 is spoken"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "把字句强调「把某物怎样处理」，被字句强调「某物遭遇了什么」。",
+                        "en": "把 emphasizes 'what was done to the object'; 被 emphasizes 'what happened to the subject'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪句是正确的把字句？",
+                        "en": "Which sentence is a correct 把-construction?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我把饭吃完了",
+                          "我吃完了把饭",
+                          "饭把我吃完了",
+                          "把我饭吃完了"
+                        ],
+                        "en": [
+                          "我把饭吃完了",
+                          "我吃完了把饭",
+                          "饭把我吃完了",
+                          "把我饭吃完了"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "正确结构：主语 + 把 + 宾语 + 动词 + 补语。我把饭吃完了。",
+                        "en": "Correct structure: subject + 把 + object + verb + complement. 我把饭吃完了."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "被字句常用于什么情境？",
+                        "en": "When is the 被-construction typically used?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表示主动做某事",
+                          "表示高兴的事情",
+                          "表示命令",
+                          "表示主语遭遇不如意的事情"
+                        ],
+                        "en": [
+                          "Active doing",
+                          "Joyful events",
+                          "Commands",
+                          "The subject experiencing something undesirable"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "被字句传统上多用于不如意、被动遭遇的情况，现代用法已扩大。",
+                        "en": "被 is traditionally used for undesirable or passive experiences, though modern usage has broadened."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「我把作业做完了」的否定形式是？",
+                        "en": "What is the negative form of 「我把作业做完了」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "我不把作业做完了",
+                          "我把作业没做完",
+                          "我没把作业做完",
+                          "作业被我做完没"
+                        ],
+                        "en": [
+                          "我不把作业做完了",
+                          "我把作业没做完",
+                          "我没把作业做完",
+                          "作业被我做完没"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "动作未完成用「没把」：我没把作业做完。",
+                        "en": "If the action isn't completed, use 没把: 我没把作业做完."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：因果关系句",
+                  "titleEn": "Paper 2: Cause & Effect (因果关系句)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「因为下雨，所以我没去」的意思是？",
+                        "en": "What does 「因为下雨，所以我没去」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为下雨所以我去了",
+                          "虽然下雨但我去了",
+                          "如果下雨我就不去",
+                          "因为下雨所以我没去"
+                        ],
+                        "en": [
+                          "Because it rained, I went",
+                          "Although it rained, I went",
+                          "If it rains, I won't go",
+                          "Because it rained, I didn't go"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "因为…所以…：表因果关系。因为下雨 + 所以没去。",
+                        "en": "因为…所以… marks cause and effect: because it rained, I didn't go."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「因为…所以…」的用法是？",
+                        "en": "What does 「因为…所以…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表因果",
+                          "表转折",
+                          "表让步",
+                          "表条件"
+                        ],
+                        "en": [
+                          "Cause and effect",
+                          "Contrast",
+                          "Concession",
+                          "Condition"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "因为…所以… 是汉语最常见的因果连词搭配。",
+                        "en": "因为…所以… is the most common cause-and-effect pair in Chinese."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「由于」的语体特点是？",
+                        "en": "What is the register of 「由于」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "仅用于口语",
+                          "偏书面语",
+                          "仅用于疑问",
+                          "仅用于否定"
+                        ],
+                        "en": [
+                          "Only spoken",
+                          "More formal / written",
+                          "Only in questions",
+                          "Only in negation"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「由于」较书面，常见于新闻、公文、说明文。",
+                        "en": "由于 is more formal and common in news, official documents, and expository writing."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「既然…就…」的用法是？",
+                        "en": "What does 「既然…就…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表假设",
+                          "表条件",
+                          "表推断（基于已知前提）",
+                          "表让步"
+                        ],
+                        "en": [
+                          "Hypothesis",
+                          "Condition",
+                          "Inference (based on a known premise)",
+                          "Concession"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "既然…就…：以已知事实为前提做推断。既然你来了，就一起吃吧。",
+                        "en": "既然…就…: infer from a known fact. 既然你来了，就一起吃吧."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「因此」的意思是？",
+                        "en": "What does 「因此」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "所以",
+                          "但是",
+                          "而且",
+                          "如果"
+                        ],
+                        "en": [
+                          "Therefore / So",
+                          "But",
+                          "Moreover",
+                          "If"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "因此 = 所以，书面语，表结果。",
+                        "en": "因此 means 'therefore / so' — a written form marking result."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「于是」的意思是？",
+                        "en": "What does 「于是」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "如果",
+                          "于是（表示承接动作）",
+                          "虽然",
+                          "因为"
+                        ],
+                        "en": [
+                          "If",
+                          "And then (marks a follow-up action)",
+                          "Although",
+                          "Because"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "于是：表承接，前后动作有先后承接关系。",
+                        "en": "于是 marks a follow-up action, indicating sequence."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「因为…所以…」和「既然…就…」的区别是？",
+                        "en": "What is the difference between 「因为…所以…」 and 「既然…就…」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "都是转折",
+                          "因为表客观原因，既然表推断（基于已知前提）",
+                          "因为表条件，既然表因果"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "Both express contrast",
+                          "因为 states an objective cause; 既然 infers from a known premise",
+                          "因为 is conditional; 既然 is causal"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "因为…所以… 强调客观原因；既然…就… 强调基于已知前提的推断。",
+                        "en": "因为…所以… emphasizes an objective cause; 既然…就… infers from a known premise."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「他病了，所以没来」的意思是？",
+                        "en": "What does 「他病了，所以没来」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他病了但来了",
+                          "他来了但他没病",
+                          "如果他不病就来",
+                          "他病了所以没来"
+                        ],
+                        "en": [
+                          "He was sick but came",
+                          "He came but he wasn't sick",
+                          "If he weren't sick, he would come",
+                          "He was sick, so he didn't come"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "因为病了，所以没来。因果关系。",
+                        "en": "Because he was sick, he didn't come — a cause-and-effect relation."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「既然你来了，就一起吃吧」的意思是？",
+                        "en": "What does 「既然你来了，就一起吃吧」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "既然你来了，就一起吃吧",
+                          "如果你来了",
+                          "因为你还没来",
+                          "虽然你来了"
+                        ],
+                        "en": [
+                          "Since you're here, let's eat together",
+                          "If you came",
+                          "Because you haven't come yet",
+                          "Although you came"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "既然…就…：既然你来了（已知前提），就一起吃（推断动作）。",
+                        "en": "既然…就…: since you're here (known premise), let's eat together (inferred action)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「由于天气原因，比赛取消了」中「由于」可以替换为？",
+                        "en": "In 「由于天气原因，比赛取消了」, 「由于」 can be replaced with?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "但是",
+                          "因为",
+                          "虽然",
+                          "如果"
+                        ],
+                        "en": [
+                          "但是",
+                          "因为",
+                          "虽然",
+                          "如果"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "由于 = 因为，都表原因；由于更书面。",
+                        "en": "由于 = 因为, both marking cause; 由于 is more formal."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：转折与让步",
+                  "titleEn": "Paper 3: Contrast & Concession (转折与让步)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「虽然…但是…」的用法是？",
+                        "en": "What does 「虽然…但是…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表因果",
+                          "表条件",
+                          "表转折",
+                          "表假设"
+                        ],
+                        "en": [
+                          "Cause and effect",
+                          "Condition",
+                          "Contrast",
+                          "Hypothesis"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "虽然…但是…：表事实转折。虽然下雨，但是他去了。",
+                        "en": "虽然…但是… marks factual contrast: although it rained, he still went."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「即使…也…」的用法是？",
+                        "en": "What does 「即使…也…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表因果",
+                          "表让步（假设让步）",
+                          "表条件",
+                          "表转折"
+                        ],
+                        "en": [
+                          "Cause and effect",
+                          "Concession (hypothetical)",
+                          "Condition",
+                          "Contrast"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "即使…也…：假设让步。即使下雨，我也要去。",
+                        "en": "即使…也… marks hypothetical concession: even if it rains, I will go."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「虽然…但是…」和「即使…也…」的区别是？",
+                        "en": "What is the difference between 「虽然…但是…」 and 「即使…也…」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "都是因果",
+                          "都是条件",
+                          "虽然表事实转折，即使表假设让步"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "Both express cause",
+                          "Both express condition",
+                          "虽然 marks factual contrast; 即使 marks hypothetical concession"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "虽然…但是… 描述已发生或已知的事实；即使…也… 描述假设情形。",
+                        "en": "虽然…但是… describes a real or known fact; 即使…也… describes a hypothetical situation."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「尽管」的意思是？",
+                        "en": "What does 「尽管」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为",
+                          "虽然（书面）",
+                          "如果",
+                          "而且"
+                        ],
+                        "en": [
+                          "Because",
+                          "Although (formal)",
+                          "If",
+                          "Moreover"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "尽管 = 虽然，语体更书面。",
+                        "en": "尽管 = 虽然, but more formal."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「可是」的意思是？",
+                        "en": "What does 「可是」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "但是",
+                          "因为",
+                          "所以",
+                          "如果"
+                        ],
+                        "en": [
+                          "But",
+                          "Because",
+                          "So",
+                          "If"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "可是 = 但是，口语常用。",
+                        "en": "可是 = 但是 (but), common in spoken Chinese."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「然而」的语体特点是？",
+                        "en": "What is the register of 「然而」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "口语",
+                          "疑问",
+                          "书面",
+                          "命令"
+                        ],
+                        "en": [
+                          "Spoken",
+                          "Interrogative",
+                          "Written",
+                          "Imperative"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "然而：书面语中的转折连词。",
+                        "en": "然而 is a written conjunction meaning 'however'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「虽然下雨，他还是去了」的意思是？",
+                        "en": "What does 「虽然下雨，他还是去了」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为下雨他没去",
+                          "虽然下雨他还是去了",
+                          "如果下雨他不去",
+                          "下雨了所以他去了"
+                        ],
+                        "en": [
+                          "Because it rained, he didn't go",
+                          "Although it rained, he still went",
+                          "If it rains, he won't go",
+                          "It rained, so he went"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "虽然…还是…：事实转折。",
+                        "en": "虽然…还是…: factual contrast."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「即使下雨，我也要去」的意思是？",
+                        "en": "What does 「即使下雨，我也要去」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为下雨所以去",
+                          "虽然下雨但去（事实）",
+                          "只有不下雨才去",
+                          "即使下雨也要去（假设让步）"
+                        ],
+                        "en": [
+                          "Because it rains, I'll go",
+                          "Although it rains, I'll go (factual)",
+                          "I'll go only if it doesn't rain",
+                          "Even if it rains, I'll go (hypothetical concession)"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "即使…也…：假设让步。",
+                        "en": "即使…也…: hypothetical concession."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「他很有钱，可是不快乐」的意思是？",
+                        "en": "What does 「他很有钱，可是不快乐」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他很有钱可是不快乐",
+                          "他很有钱也很快乐",
+                          "因为他有钱他快乐",
+                          "如果他有钱他就快乐"
+                        ],
+                        "en": [
+                          "He's rich but unhappy",
+                          "He's rich and happy",
+                          "Because he's rich, he's happy",
+                          "If he were rich, he'd be happy"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "可是：表转折。",
+                        "en": "可是 marks contrast."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「尽管很累，他还是完成了工作」中「尽管」可以替换为？",
+                        "en": "In 「尽管很累，他还是完成了工作」, 「尽管」 can be replaced with?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "因为",
+                          "所以",
+                          "虽然",
+                          "如果"
+                        ],
+                        "en": [
+                          "因为",
+                          "所以",
+                          "虽然",
+                          "如果"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "尽管 = 虽然，可互换；尽管更书面。",
+                        "en": "尽管 = 虽然 and is interchangeable; 尽管 is more formal."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：动词与形容词重叠",
+                  "titleEn": "Paper 4: Reduplication (动词与形容词重叠)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「看看」的意思是？",
+                        "en": "What does 「看看」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "看完",
+                          "看一看（短暂／尝试）",
+                          "看不见",
+                          "看着"
+                        ],
+                        "en": [
+                          "Finish reading",
+                          "Take a look (brief / try)",
+                          "Cannot see",
+                          "Be looking"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "动词重叠 AA 式：表示短暂、尝试、语气轻松。看看 = have a look。",
+                        "en": "Verb AA reduplication: brief, tentative, casual. 看看 = have a look."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "动词重叠的主要功能是？",
+                        "en": "What is the main function of verb reduplication?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表示完成",
+                          "表示将来",
+                          "表示短暂或尝试",
+                          "表示否定"
+                        ],
+                        "en": [
+                          "Mark completion",
+                          "Mark future",
+                          "Mark brief or tentative action",
+                          "Mark negation"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "动词重叠（看看、试试）：动作短暂、轻松、尝试。",
+                        "en": "Verb reduplication (看看, 试试): brief, casual, tentative action."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「试试」的意思是？",
+                        "en": "What does 「试试」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "试完",
+                          "不试",
+                          "试过",
+                          "试一试"
+                        ],
+                        "en": [
+                          "Finish trying",
+                          "Not try",
+                          "Tried before",
+                          "Give it a try"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "试试 = try it (briefly)。",
+                        "en": "试试 = give it a try (briefly)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「高高兴兴」是哪种重叠？",
+                        "en": "What type of reduplication is 「高高兴兴」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "动词重叠",
+                          "ABAB 式形容词重叠",
+                          "AABB 式形容词重叠",
+                          "名词重叠"
+                        ],
+                        "en": [
+                          "Verb reduplication",
+                          "ABAB adjective reduplication",
+                          "AABB adjective reduplication",
+                          "Noun reduplication"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "AABB 式：高兴 → 高高兴兴，强调程度、生动描述。",
+                        "en": "AABB: 高兴 → 高高兴兴, emphasizing vivid, intensified description."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「干干净净」的意思是？",
+                        "en": "What does 「干干净净」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "干净（加强）",
+                          "有点干净",
+                          "不干净",
+                          "正在干净"
+                        ],
+                        "en": [
+                          "Clean (intensified)",
+                          "A bit clean",
+                          "Not clean",
+                          "Getting clean"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "AABB 式形容词重叠：加强程度、生动描述。",
+                        "en": "AABB adjective reduplication intensifies and makes the description vivid."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「商量商量」是哪种重叠？",
+                        "en": "What type of reduplication is 「商量商量」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "AABB 式",
+                          "ABAB 式",
+                          "AA 式",
+                          "ABB 式"
+                        ],
+                        "en": [
+                          "AABB",
+                          "ABAB",
+                          "AA",
+                          "ABB"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "双音节动词重叠用 ABAB：商量商量、研究研究。",
+                        "en": "Two-syllable verbs reduplicate as ABAB: 商量商量, 研究研究."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "形容词 AABB 式重叠的主要作用是？",
+                        "en": "What is the main effect of AABB adjective reduplication?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表示完成",
+                          "表示否定",
+                          "表示比较",
+                          "加强程度或生动描述"
+                        ],
+                        "en": [
+                          "Mark completion",
+                          "Mark negation",
+                          "Mark comparison",
+                          "Intensify or add vividness"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "AABB 式让描述更生动、程度更强：干干净净、高高兴兴、清清楚楚。",
+                        "en": "AABB makes the description more vivid and intense: 干干净净, 高高兴兴, 清清楚楚."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「你看看这本书」中「看看」的作用是？",
+                        "en": "What is the function of 「看看」 in 「你看看这本书」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表示短暂／尝试",
+                          "表示完成",
+                          "表示进行",
+                          "表示否定"
+                        ],
+                        "en": [
+                          "Brief / tentative",
+                          "Completed",
+                          "Progressive",
+                          "Negative"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "看看：语气轻松，动作短暂。",
+                        "en": "看看: casual, brief action."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「红红的脸」和「红红火火」的区别是？",
+                        "en": "What is the difference between 「红红的脸」 and 「红红火火」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "都是完成",
+                          "AA 式表程度，AABB 式表生动强调",
+                          "都是否定"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "Both mark completion",
+                          "AA marks degree; AABB adds vivid emphasis",
+                          "Both are negative"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "AA（红红）强调程度；AABB（红红火火）更生动、常用于描写气氛。",
+                        "en": "AA (红红) stresses degree; AABB (红红火火) is more vivid and often describes atmosphere."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪个是 ABAB 式重叠？",
+                        "en": "Which of the following is an ABAB reduplication?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "看看",
+                          "高高兴兴",
+                          "干干净净",
+                          "商量商量"
+                        ],
+                        "en": [
+                          "看看",
+                          "高高兴兴",
+                          "干干净净",
+                          "商量商量"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "商量商量：双音节动词 ABAB 重叠；其余分别 AA、AABB、AABB。",
+                        "en": "商量商量: two-syllable verb in ABAB; the others are AA, AABB, AABB."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：条件句与假设句",
+                  "titleEn": "Paper 5: Conditionals (条件句与假设句)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「如果…就…」的用法是？",
+                        "en": "What does 「如果…就…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表因果",
+                          "表转折",
+                          "表条件",
+                          "表让步"
+                        ],
+                        "en": [
+                          "Cause and effect",
+                          "Contrast",
+                          "Condition",
+                          "Concession"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "如果…就…：表条件。如果下雨，我就不去。",
+                        "en": "如果…就… marks a condition: if it rains, I won't go."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「要是…就…」的用法是？",
+                        "en": "What does 「要是…就…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表条件（口语）",
+                          "表因果",
+                          "表转折",
+                          "表让步"
+                        ],
+                        "en": [
+                          "Condition (spoken)",
+                          "Cause and effect",
+                          "Contrast",
+                          "Concession"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "要是…就… 是如果…就… 的口语版本。",
+                        "en": "要是…就… is the spoken version of 如果…就…."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「只有…才…」的用法是？",
+                        "en": "What does 「只有…才…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表充分条件",
+                          "表必要条件",
+                          "表转折",
+                          "表因果"
+                        ],
+                        "en": [
+                          "Sufficient condition",
+                          "Necessary condition",
+                          "Contrast",
+                          "Cause and effect"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "只有…才…：必要条件。只有努力，才能成功。",
+                        "en": "只有…才… marks a necessary condition: only by working hard can you succeed."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「只要…就…」的用法是？",
+                        "en": "What does 「只要…就…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表必要条件",
+                          "表转折",
+                          "表让步",
+                          "表充分条件"
+                        ],
+                        "en": [
+                          "Necessary condition",
+                          "Contrast",
+                          "Concession",
+                          "Sufficient condition"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "只要…就…：充分条件。只要努力，就会进步。",
+                        "en": "只要…就… marks a sufficient condition: as long as you work hard, you'll improve."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「除非…否则…」的用法是？",
+                        "en": "What does 「除非…否则…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表唯一条件",
+                          "表充分条件",
+                          "表因果",
+                          "表转折"
+                        ],
+                        "en": [
+                          "The only condition",
+                          "Sufficient condition",
+                          "Cause and effect",
+                          "Contrast"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "除非…否则…：只有这个条件成立才能改变结果。",
+                        "en": "除非…否则… marks an exclusive condition: only if this holds can the outcome change."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「如果…就…」和「只有…才…」的区别是？",
+                        "en": "What is the difference between 「如果…就…」 and 「只有…才…」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "都是必要条件",
+                          "都是充分条件",
+                          "如果表充分条件，只有表必要条件"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "Both are necessary conditions",
+                          "Both are sufficient conditions",
+                          "如果 marks sufficient; 只有 marks necessary"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "如果…就… 是充分条件（不一定唯一）；只有…才… 是必要条件（唯一）。",
+                        "en": "如果…就… is a sufficient condition (not necessarily unique); 只有…才… is a necessary condition (unique)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「只要…就…」和「只有…才…」的区别是？",
+                        "en": "What is the difference between 「只要…就…」 and 「只有…才…」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "只要表必要，只有表充分",
+                          "只要表充分，只有表必要",
+                          "都是转折"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "只要 = necessary; 只有 = sufficient",
+                          "只要 = sufficient; 只有 = necessary",
+                          "Both express contrast"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "只要…就…：充分条件（够了就行）；只有…才…：必要条件（必须有）。",
+                        "en": "只要…就…: sufficient (enough is enough); 只有…才…: necessary (must have)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「如果明天下雨，我就不去」的意思是？",
+                        "en": "What does 「如果明天下雨，我就不去」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "明天不下雨就不去",
+                          "如果明天下雨我就不去",
+                          "明天一定下雨",
+                          "明天一定不去"
+                        ],
+                        "en": [
+                          "If it doesn't rain tomorrow, I won't go",
+                          "If it rains tomorrow, I won't go",
+                          "It will definitely rain tomorrow",
+                          "I definitely won't go tomorrow"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "如果 + 假设条件，就 + 结果。",
+                        "en": "如果 + hypothetical condition, 就 + result."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「只有努力，才能成功」的意思是？",
+                        "en": "What does 「只有努力，才能成功」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "努力一定成功",
+                          "不努力也能成功",
+                          "只有努力才能成功",
+                          "努力不成功"
+                        ],
+                        "en": [
+                          "Effort always leads to success",
+                          "You can succeed without effort",
+                          "Only by working hard can you succeed",
+                          "Effort never leads to success"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "只有…才…：必要条件。",
+                        "en": "只有…才…: necessary condition."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「除非你道歉，否则我不原谅你」的意思是？",
+                        "en": "What does 「除非你道歉，否则我不原谅你」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "你道歉我就原谅",
+                          "你不道歉我也原谅",
+                          "你道歉也不原谅",
+                          "除非你道歉否则我不原谅你"
+                        ],
+                        "en": [
+                          "If you apologize, I'll forgive you",
+                          "Even if you don't apologize, I'll forgive you",
+                          "Even if you apologize, I won't forgive you",
+                          "Unless you apologize, I won't forgive you"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "除非…否则…：只有你道歉这个条件成立，我才会原谅。",
+                        "en": "除非…否则…: only if you apologize will I forgive you."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "level": 4,
               "labelZh": "高级",
               "labelEn": "Advanced",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：成语与四字格",
+                  "titleEn": "Paper 1: Idioms & Four-Character Expressions (成语与四字格)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「一石二鸟」的意思是？",
+                        "en": "What does 「一石二鸟」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "一块石头两只鸟",
+                          "一举两得",
+                          "只有一只鸟",
+                          "石头很重"
+                        ],
+                        "en": [
+                          "一块石头两只鸟",
+                          "一举两得",
+                          "只有一只鸟",
+                          "石头很重"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "一石二鸟：一块石头打中两只鸟，比喻一举两得。",
+                        "en": "一石二鸟: one stone hits two birds — kill two birds with one stone."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「画蛇添足」的意思是？",
+                        "en": "What does 「画蛇添足」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "画蛇添足（做多余的事反而坏事）",
+                          "画蛇添足（画得很像）",
+                          "画蛇添足（画得很快）",
+                          "画蛇添足（蛇有脚）"
+                        ],
+                        "en": [
+                          "画蛇添足（做多余的事反而坏事）",
+                          "画蛇添足（画得很像）",
+                          "画蛇添足（画得很快）",
+                          "画蛇添足（蛇有脚）"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "画蛇添足：给蛇画脚，比喻做了多余的事反而坏事。",
+                        "en": "画蛇添足: drawing feet on a snake — doing something unnecessary that ruins the result."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「亡羊补牢」的意思是？",
+                        "en": "What does 「亡羊补牢」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "亡羊补牢（为时已晚）",
+                          "亡羊补牢（羊死了）",
+                          "亡羊补牢（为时未晚，及时补救）",
+                          "亡羊补牢（羊跑得快）"
+                        ],
+                        "en": [
+                          "亡羊补牢（为时已晚）",
+                          "亡羊补牢（羊死了）",
+                          "亡羊补牢（为时未晚，及时补救）",
+                          "亡羊补牢（羊跑得快）"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "亡羊补牢：羊丢了再修羊圈，比喻出了问题及时补救还不算晚。",
+                        "en": "亡羊补牢: repairing the pen after losing sheep — it's not too late to fix things."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「守株待兔」的意思是？",
+                        "en": "What does 「守株待兔」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "守株待兔（守着树等兔子）",
+                          "守株待兔（保护动物）",
+                          "守株待兔（种地）",
+                          "守株待兔（死守经验，不知变通）"
+                        ],
+                        "en": [
+                          "守株待兔（守着树等兔子）",
+                          "守株待兔（保护动物）",
+                          "守株待兔（种地）",
+                          "守株待兔（死守经验，不知变通）"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "守株待兔：守着树桩等兔子撞上来，比喻死守经验、不知变通。",
+                        "en": "守株待兔: waiting by a stump for a rabbit to run into it — sticking to a fixed method without adapting."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「掩耳盗铃」的意思是？",
+                        "en": "What does 「掩耳盗铃」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "掩耳盗铃（捂住耳朵偷铃铛）",
+                          "掩耳盗铃（自欺欺人）",
+                          "掩耳盗铃（听不见声音）",
+                          "掩耳盗铃（偷东西很厉害）"
+                        ],
+                        "en": [
+                          "掩耳盗铃（捂住耳朵偷铃铛）",
+                          "掩耳盗铃（自欺欺人）",
+                          "掩耳盗铃（听不见声音）",
+                          "掩耳盗铃（偷东西很厉害）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "掩耳盗铃：捂住自己的耳朵偷铃铛，比喻自欺欺人。",
+                        "en": "掩耳盗铃: covering one's ears while stealing a bell — deceiving oneself."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「井底之蛙」的意思是？",
+                        "en": "What does 「井底之蛙」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "井底之蛙（青蛙在井里）",
+                          "井底之蛙（青蛙很聪明）",
+                          "井底之蛙（见识短浅）",
+                          "井底之蛙（井水很甜）"
+                        ],
+                        "en": [
+                          "井底之蛙（青蛙在井里）",
+                          "井底之蛙（青蛙很聪明）",
+                          "井底之蛙（见识短浅）",
+                          "井底之蛙（井水很甜）"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "井底之蛙：井底的青蛙只能看到井口大小的天，比喻见识短浅。",
+                        "en": "井底之蛙: a frog at the bottom of a well can only see a patch of sky — narrow-mindedness."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「对牛弹琴」的意思是？",
+                        "en": "What does 「对牛弹琴」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "对牛弹琴（牛喜欢音乐）",
+                          "对牛弹琴（弹琴很厉害）",
+                          "对牛弹琴（弹琴给牛听）",
+                          "对牛弹琴（对外行人讲专业话）"
+                        ],
+                        "en": [
+                          "对牛弹琴（牛喜欢音乐）",
+                          "对牛弹琴（弹琴很厉害）",
+                          "对牛弹琴（弹琴给牛听）",
+                          "对牛弹琴（对外行人讲专业话）"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "对牛弹琴：对着牛弹琴，比喻对不懂的人讲道理或讲专业话。",
+                        "en": "对牛弹琴: playing the lute to a cow — explaining something to someone who cannot appreciate it."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「塞翁失马」的意思是？",
+                        "en": "What does 「塞翁失马」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "塞翁失马（马丢了很伤心）",
+                          "塞翁失马（祸福难料，坏事可能变成好事）",
+                          "塞翁失马（马找到了）",
+                          "塞翁失马（老人骑马）"
+                        ],
+                        "en": [
+                          "塞翁失马（马丢了很伤心）",
+                          "塞翁失马（祸福难料，坏事可能变成好事）",
+                          "塞翁失马（马找到了）",
+                          "塞翁失马（老人骑马）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "塞翁失马：边塞老人丢了马，后来马带回好马，比喻祸福相倚、难以预料。",
+                        "en": "塞翁失马: an old man at the frontier lost his horse, which later returned with a fine horse — fortune and misfortune are unpredictable."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「杯弓蛇影」的意思是？",
+                        "en": "What does 「杯弓蛇影」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "杯弓蛇影（杯子里有弓和蛇）",
+                          "杯弓蛇影（喝了很多酒）",
+                          "杯弓蛇影（因疑心而自惊）",
+                          "杯弓蛇影（射箭很准）"
+                        ],
+                        "en": [
+                          "杯弓蛇影（杯子里有弓和蛇）",
+                          "杯弓蛇影（喝了很多酒）",
+                          "杯弓蛇影（因疑心而自惊）",
+                          "杯弓蛇影（射箭很准）"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "杯弓蛇影：把酒杯里的弓影当成蛇，比喻因疑心而自相惊扰。",
+                        "en": "杯弓蛇影: mistaking the reflection of a bow in a cup for a snake — being frightened by one's own suspicions."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「刻舟求剑」的意思是？",
+                        "en": "What does 「刻舟求剑」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "刻舟求剑（在船上刻记号找剑）",
+                          "刻舟求剑（不知道变通）",
+                          "刻舟求剑（剑掉水里了）",
+                          "刻舟求剑（船走得很慢）"
+                        ],
+                        "en": [
+                          "刻舟求剑（在船上刻记号找剑）",
+                          "刻舟求剑（不知道变通）",
+                          "刻舟求剑（剑掉水里了）",
+                          "刻舟求剑（船走得很慢）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "刻舟求剑：剑掉水里在船上刻记号，比喻不知变通，拘泥旧法。",
+                        "en": "刻舟求剑: marking the boat where the sword fell — being inflexible and failing to adapt to changed circumstances."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：书面语与口语差异",
+                  "titleEn": "Paper 2: Written vs Spoken Chinese (书面语与口语差异)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "书面语「之」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「之」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "地",
+                          "的",
+                          "得",
+                          "着"
+                        ],
+                        "en": [
+                          "地",
+                          "的",
+                          "得",
+                          "着"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「之」在书面语中相当于口语的「的」，如「三分之一」=「三分之一的」。",
+                        "en": "Written 之 corresponds to spoken 的, e.g. 三分之一 = one third."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「其」对应的口语是？",
+                        "en": "Which spoken form corresponds to the written 「其」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他的／她的／它的",
+                          "那",
+                          "这",
+                          "什么"
+                        ],
+                        "en": [
+                          "他的／她的／它的",
+                          "那",
+                          "这",
+                          "什么"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「其」在书面语中表示「他的／她的／它的」，如「其父」=「他的父亲」。",
+                        "en": "Written 其 means 'his/her/its', e.g. 其父 = his father."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「此」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「此」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "这",
+                          "那",
+                          "什么",
+                          "哪里"
+                        ],
+                        "en": [
+                          "这",
+                          "那",
+                          "什么",
+                          "哪里"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「此」在书面语中相当于「这」，如「此人」=「这个人」。",
+                        "en": "Written 此 corresponds to spoken 这, e.g. 此人 = this person."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「何」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「何」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "这",
+                          "那",
+                          "什么",
+                          "哪里"
+                        ],
+                        "en": [
+                          "这",
+                          "那",
+                          "什么",
+                          "哪里"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「何」在书面语中相当于「什么」，如「为何」=「为什么」。",
+                        "en": "Written 何 corresponds to spoken 什么, e.g. 为何 = why."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「即」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「即」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "然后",
+                          "所以",
+                          "就",
+                          "如果"
+                        ],
+                        "en": [
+                          "然后",
+                          "所以",
+                          "就",
+                          "如果"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「即」在书面语中相当于「就是／就」，如「即日起」=「从今天起」。",
+                        "en": "Written 即 corresponds to 就是/就, e.g. 即日起 = starting today."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「亦」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「亦」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "也",
+                          "而且",
+                          "所以",
+                          "但是"
+                        ],
+                        "en": [
+                          "也",
+                          "而且",
+                          "所以",
+                          "但是"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「亦」在书面语中相当于「也」，如「亦然」=「这也是这样」。",
+                        "en": "Written 亦 corresponds to 也, e.g. 亦然 = also so."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「莫」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「莫」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "没有",
+                          "不要",
+                          "可以",
+                          "应该"
+                        ],
+                        "en": [
+                          "没有",
+                          "不要",
+                          "可以",
+                          "应该"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「莫」在书面语中相当于「不要」，如「莫忘」=「不要忘记」。",
+                        "en": "Written 莫 corresponds to 不要, e.g. 莫忘 = don't forget."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「以」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「以」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "在",
+                          "到",
+                          "用",
+                          "从"
+                        ],
+                        "en": [
+                          "在",
+                          "到",
+                          "用",
+                          "从"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「以」在书面语中可相当于「用」，如「以笔写字」=「用笔写字」。",
+                        "en": "Written 以 can correspond to 用, e.g. 以笔写字 = write with a pen."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "书面语「于」对应的口语是？",
+                        "en": "Which spoken word corresponds to the written 「于」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "在",
+                          "到",
+                          "从",
+                          "和"
+                        ],
+                        "en": [
+                          "在",
+                          "到",
+                          "从",
+                          "和"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「于」在书面语中可相当于「在」，如「出生于北京」=「生在北京」。",
+                        "en": "Written 于 can correspond to 在, e.g. 出生于北京 = born in Beijing."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「据悉」「日前」等词主要出现在？",
+                        "en": "Where do words like 「据悉」 and 「日前」 mainly appear?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "口语对话",
+                          "儿童读物",
+                          "新闻书面语",
+                          "诗歌"
+                        ],
+                        "en": [
+                          "Spoken dialogue",
+                          "Children's books",
+                          "News and formal writing",
+                          "Poetry"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「据悉」「日前」是典型的新闻书面语。",
+                        "en": "据悉 and 日前 are typical written news words."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：新闻阅读",
+                  "titleEn": "Paper 3: News Reading Comprehension (新闻阅读)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「据悉」的意思是？",
+                        "en": "What does 「据悉」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "根据消息",
+                          "必须知道",
+                          "详细解释",
+                          "据我判断"
+                        ],
+                        "en": [
+                          "According to reports",
+                          "Must know",
+                          "Explain in detail",
+                          "In my judgment"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "据悉：新闻用语，意为「根据得到的消息」。",
+                        "en": "据悉: a news phrase meaning 'according to reports'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「日前」的意思是？",
+                        "en": "What does 「日前」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "今天",
+                          "几天前",
+                          "明天",
+                          "前天"
+                        ],
+                        "en": [
+                          "Today",
+                          "A few days ago",
+                          "Tomorrow",
+                          "The day before yesterday"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "日前：几天前，常用于新闻叙述过去发生的事件。",
+                        "en": "日前: a few days ago, common in news writing."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「相关部门」的意思是？",
+                        "en": "What does 「相关部门」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "主要部门",
+                          "有关部门",
+                          "无关部门",
+                          "所有部门"
+                        ],
+                        "en": [
+                          "Main department",
+                          "Relevant departments",
+                          "Irrelevant departments",
+                          "All departments"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "相关部门 = 有关部门，常用于新闻报道。",
+                        "en": "相关部门 = 'relevant departments', common in news."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「截至目前」的意思是？",
+                        "en": "What does 「截至目前」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "到了某个时候",
+                          "直到明天",
+                          "到目前",
+                          "在此刻之前"
+                        ],
+                        "en": [
+                          "Until some time",
+                          "Until tomorrow",
+                          "Up to now",
+                          "Before this moment"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "截至目前：到现在为止，常用于新闻叙述进度。",
+                        "en": "截至目前: up to now / so far, common in news."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「进一步」的意思是？",
+                        "en": "What does 「进一步」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "进一步（更加）",
+                          "进去一步",
+                          "退后一步",
+                          "原地不动"
+                        ],
+                        "en": [
+                          "Further / Go a step further",
+                          "Step in",
+                          "Step back",
+                          "Stay in place"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "进一步：更加、深入一步，常用于新闻、报告。",
+                        "en": "进一步 means 'further / go a step further', common in news and reports."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「引发关注」的意思是？",
+                        "en": "What does 「引发关注」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "引发问题",
+                          "引起注意",
+                          "引发争论",
+                          "引起反对"
+                        ],
+                        "en": [
+                          "Cause problems",
+                          "Draw attention",
+                          "Spark debate",
+                          "Provoke opposition"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "引发关注：引起关注、成为焦点。",
+                        "en": "引发关注 means 'draw attention / become a focus'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「发表声明」的意思是？",
+                        "en": "What does 「发表声明」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "发表演讲",
+                          "发出通知",
+                          "发布声明",
+                          "发出邀请"
+                        ],
+                        "en": [
+                          "Give a speech",
+                          "Send a notice",
+                          "Issue a statement",
+                          "Send an invitation"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "发表声明：发布正式声明。",
+                        "en": "发表声明 means 'issue a formal statement'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「回应」的意思是？",
+                        "en": "What does 「回应」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "回答",
+                          "回应",
+                          "回忆",
+                          "回避"
+                        ],
+                        "en": [
+                          "Answer",
+                          "Respond",
+                          "Recall",
+                          "Avoid"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "回应：对某事做出回答、反应。",
+                        "en": "回应 means 'respond / reply to something'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「持续」的意思是？",
+                        "en": "What does 「持续」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "继续",
+                          "停止",
+                          "维持",
+                          "改变"
+                        ],
+                        "en": [
+                          "Continue",
+                          "Stop",
+                          "Maintain",
+                          "Change"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "持续：不间断地继续。",
+                        "en": "持续 means 'continue without interruption'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「相关负责人」的意思是？",
+                        "en": "What does 「相关负责人」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "负责的人",
+                          "全部的人",
+                          "相关的人",
+                          "负责人"
+                        ],
+                        "en": [
+                          "Someone in charge",
+                          "Everyone",
+                          "Related people",
+                          "The person in charge"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "相关负责人：该事项的负责人员。",
+                        "en": "相关负责人 means 'the person in charge (of the matter)'."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：惯用语与俗语",
+                  "titleEn": "Paper 4: Colloquial Expressions (惯用语与俗语)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「拍马屁」的意思是？",
+                        "en": "What does 「拍马屁」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "拍马屁股",
+                          "骑马比赛",
+                          "奉承／讨好",
+                          "拍马跑得快"
+                        ],
+                        "en": [
+                          "拍马屁股",
+                          "骑马比赛",
+                          "奉承／讨好",
+                          "拍马跑得快"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "拍马屁：比喻讨好别人、说奉承话。",
+                        "en": "拍马屁 means 'flatter / suck up to someone'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「走后门」的意思是？",
+                        "en": "What does 「走后门」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "从后面进去",
+                          "用关系／通过关系办事",
+                          "走错方向",
+                          "走到屋子后面"
+                        ],
+                        "en": [
+                          "从后面进去",
+                          "用关系／通过关系办事",
+                          "走错方向",
+                          "走到屋子后面"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "走后门：通过非正当关系办事。",
+                        "en": "走后门 means 'use connections to get things done'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「开夜车」的意思是？",
+                        "en": "What does 「开夜车」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "夜里开车",
+                          "开快车",
+                          "上夜班",
+                          "熬夜工作或学习"
+                        ],
+                        "en": [
+                          "夜里开车",
+                          "开快车",
+                          "上夜班",
+                          "熬夜工作或学习"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "开夜车：比喻熬夜工作或学习。",
+                        "en": "开夜车 means 'stay up late working or studying'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「炒鱿鱼」的意思是？",
+                        "en": "What does 「炒鱿鱼」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "炒鱿鱼丝",
+                          "解雇／辞退",
+                          "做菜",
+                          "工作努力"
+                        ],
+                        "en": [
+                          "炒鱿鱼丝",
+                          "解雇／辞退",
+                          "做菜",
+                          "工作努力"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "炒鱿鱼：比喻解雇、辞退某人。",
+                        "en": "炒鱿鱼 means 'fire / dismiss someone'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「戴绿帽子」的意思是？",
+                        "en": "What does 「戴绿帽子」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "戴绿色帽子",
+                          "妻子不忠",
+                          "喜欢绿色",
+                          "冬天保暖"
+                        ],
+                        "en": [
+                          "戴绿色帽子",
+                          "妻子不忠",
+                          "喜欢绿色",
+                          "冬天保暖"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "戴绿帽子：指男子的妻子有外遇。",
+                        "en": "戴绿帽子 means 'be cheated on by one's wife'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「吃醋」的意思是？",
+                        "en": "What does 「吃醋」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "喝醋",
+                          "吃酸菜",
+                          "嫉妒",
+                          "吃醋"
+                        ],
+                        "en": [
+                          "喝醋",
+                          "吃酸菜",
+                          "嫉妒",
+                          "吃醋"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "吃醋：比喻嫉妒。",
+                        "en": "吃醋 means 'be jealous'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「碰钉子」的意思是？",
+                        "en": "What does 「碰钉子」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "碰到钉子",
+                          "遇到挫折／被拒绝",
+                          "钉子很硬",
+                          "做木工"
+                        ],
+                        "en": [
+                          "碰到钉子",
+                          "遇到挫折／被拒绝",
+                          "钉子很硬",
+                          "做木工"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "碰钉子：比喻受到拒绝或遭遇阻碍。",
+                        "en": "碰钉子 means 'meet a setback / be rejected'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「背黑锅」的意思是？",
+                        "en": "What does 「背黑锅」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "背黑色的锅",
+                          "背锅走",
+                          "替人受过",
+                          "做饭"
+                        ],
+                        "en": [
+                          "背黑色的锅",
+                          "背锅走",
+                          "替人受过",
+                          "做饭"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "背黑锅：比喻代人受过、承担不属于自己的罪名。",
+                        "en": "背黑锅 means 'take the blame for someone else'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「穿小鞋」的意思是？",
+                        "en": "What does 「穿小鞋」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "暗中为难／报复",
+                          "鞋子太小",
+                          "脚太小",
+                          "走路很慢"
+                        ],
+                        "en": [
+                          "暗中为难／报复",
+                          "鞋子太小",
+                          "脚太小",
+                          "走路很慢"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "穿小鞋：比喻暗中对人刁难、报复。",
+                        "en": "穿小鞋 means 'secretly make things difficult for someone'."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「泼冷水」的意思是？",
+                        "en": "What does 「泼冷水」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "泼冷水",
+                          "很冷",
+                          "洗冷水澡",
+                          "打击别人的热情"
+                        ],
+                        "en": [
+                          "泼冷水",
+                          "很冷",
+                          "洗冷水澡",
+                          "打击别人的热情"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "泼冷水：比喻打击别人的热情。",
+                        "en": "泼冷水 means 'dampen someone's enthusiasm'."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：高级语法综合",
+                  "titleEn": "Paper 5: Advanced Grammar (高级语法综合)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「把…当作…」的用法是？",
+                        "en": "What does 「把…当作…」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "把A当作B（把A放在B上）",
+                          "把A当作B（把A视为B）",
+                          "把A当作B（把A换成B）",
+                          "把A当作B（把A给B）"
+                        ],
+                        "en": [
+                          "把A当作B（把A放在B上）",
+                          "把A当作B（把A视为B）",
+                          "把A当作B（把A换成B）",
+                          "把A当作B（把A给B）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "把…当作…：把 A 视为 B。如：我把他当作朋友。",
+                        "en": "把…当作…: treat A as B. E.g. 我把他当作朋友."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「被认为」的用法是？",
+                        "en": "What does 「被认为」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "被认为（主动认为）",
+                          "被认为（被动认为）",
+                          "被认为（将来）",
+                          "被认为（否定）"
+                        ],
+                        "en": [
+                          "被认为（主动认为）",
+                          "被认为（被动认为）",
+                          "被认为（将来）",
+                          "被认为（否定）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "被认为 + 结果：被（大家）认为。如：他被认为是最优秀的学生。",
+                        "en": "被认为 + result: be regarded as. E.g. 他被认为是最优秀的学生."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「得」作补语标记时，结构是？",
+                        "en": "When 「得」 marks a complement, what is the structure?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "形容词 + 得",
+                          "得 + 动词",
+                          "动词 + 得 + 补语",
+                          "补语 + 得 + 动词"
+                        ],
+                        "en": [
+                          "形容词 + 得",
+                          "得 + 动词",
+                          "动词 + 得 + 补语",
+                          "补语 + 得 + 动词"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "动词 + 得 + 程度补语：跑得快、说得好、高兴得很。",
+                        "en": "Verb + 得 + complement of degree: 跑得快, 说得好, 高兴得很."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「了」用于句末时表示？",
+                        "en": "What does sentence-final 「了」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "动作完成",
+                          "情况变化（新情况）",
+                          "经历",
+                          "进行"
+                        ],
+                        "en": [
+                          "Action completion",
+                          "Change of state (a new situation)",
+                          "Past experience",
+                          "Progressive"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "句末「了」表示情况变化：下雨了、他不来了。",
+                        "en": "Sentence-final 了 marks a change of state: 下雨了 (it's raining now); 他不来了 (he's no longer coming)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「着」的用法是？",
+                        "en": "What does 「着」 express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "动作完成",
+                          "进行／持续",
+                          "经历",
+                          "将来"
+                        ],
+                        "en": [
+                          "Completed action",
+                          "Progressive / Continuation",
+                          "Past experience",
+                          "Future"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "着（zhe）表示动作或状态的持续：开着门、坐着、笑着。",
+                        "en": "着 (zhe) marks ongoing action or state: 开着门, 坐着, 笑着."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「呢」用于什么句型？",
+                        "en": "What kind of sentence uses 「呢」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表示完成",
+                          "表示进行",
+                          "表示疑问或确认",
+                          "表示否定"
+                        ],
+                        "en": [
+                          "Completion",
+                          "Progressive",
+                          "Question or confirmation",
+                          "Negation"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "呢（ne）用于疑问或确认：你去哪儿呢？、他在家呢。",
+                        "en": "呢 (ne) is used for questions or confirmation: 你去哪儿呢？; 他在家呢."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「吧」常用于什么句型？",
+                        "en": "What kind of sentence often uses 「吧」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表示推测或建议",
+                          "表示否定",
+                          "表示完成",
+                          "表示比较"
+                        ],
+                        "en": [
+                          "Conjecture or suggestion",
+                          "Negation",
+                          "Completion",
+                          "Comparison"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "吧（ba）表示推测或建议：他是老师吧？、我们走吧。",
+                        "en": "吧 (ba) marks conjecture or suggestion: 他是老师吧？; 我们走吧."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「啊」常表示？",
+                        "en": "What does 「啊」 often express?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "疑问",
+                          "感叹",
+                          "命令",
+                          "过去"
+                        ],
+                        "en": [
+                          "Question",
+                          "Exclamation",
+                          "Command",
+                          "Past"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "啊（a）常表示感叹或语气：真美啊！、你好啊！",
+                        "en": "啊 (a) is often used for exclamation or tone: 真美啊！; 你好啊！"
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "兼语句的结构是？",
+                        "en": "What is the structure of a pivotal sentence (兼语句)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "主语 + 把 + 宾语 + 动词",
+                          "主语 + 被 + 宾语 + 动词",
+                          "形容词 + 得 + 补语",
+                          "主语 + 动词1 + 兼语（宾＋主） + 动词2"
+                        ],
+                        "en": [
+                          "Subject + 把 + object + verb",
+                          "Subject + 被 + object + verb",
+                          "Adjective + 得 + complement",
+                          "Subject + verb1 + pivot (object + subject) + verb2"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "兼语句：请他来（请 + 他 + 来）、让他说（让 + 他 + 说）。",
+                        "en": "Pivotal sentence: 请他来 (请 + 他 + 来); 让他说 (让 + 他 + 说)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「跑得快」中「快」是什么成分？",
+                        "en": "In 「跑得快」, what is 「快」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "宾语",
+                          "主语",
+                          "程度补语",
+                          "定语"
+                        ],
+                        "en": [
+                          "Object",
+                          "Subject",
+                          "Complement of degree",
+                          "Attributive"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "得后的「快」是程度补语：跑得快、说得好、写得很清楚。",
+                        "en": "快 after 得 is a complement of degree: 跑得快, 说得好, 写得很清楚."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "level": 5,
               "labelZh": "大师",
               "labelEn": "Expert",
-              "papers": []
+              "papers": [
+                {
+                  "id": 1,
+                  "titleZh": "试卷 1：文言文基础",
+                  "titleEn": "Paper 1: Classical Chinese Basics (文言文基础)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "文言虚词「之」最常见的意思是？",
+                        "en": "What is the most common meaning of the classical particle 「之」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "的／代词",
+                          "和",
+                          "如果",
+                          "但是"
+                        ],
+                        "en": [
+                          "'s / pronoun",
+                          "and",
+                          "if",
+                          "but"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「之」可作结构助词（相当于「的」）或代词（相当于「他／它」），如「赤子之心」「求之不得」。",
+                        "en": "之 can be a structural particle ('s) or a pronoun ('him/it'), e.g. 赤子之心; 求之不得."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「而」最常见的意思是？",
+                        "en": "What is the most common meaning of the classical particle 「而」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "的",
+                          "如果",
+                          "和／但是（连接）",
+                          "所以"
+                        ],
+                        "en": [
+                          "'s",
+                          "if",
+                          "and / but (connective)",
+                          "so"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「而」连接前后成分，可表并列、转折、递进等，如「学而时习之」。",
+                        "en": "而 connects clauses, marking coordination, contrast, or progression, e.g. 学而时习之."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「其」最常见的意思是？",
+                        "en": "What is the most common meaning of the classical particle 「其」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "那么",
+                          "如果",
+                          "但是",
+                          "他的／它的"
+                        ],
+                        "en": [
+                          "then",
+                          "if",
+                          "but",
+                          "his / its"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「其」常作代词，表示「他的／它的」，如「其父」「各得其所」。",
+                        "en": "其 is usually a pronoun meaning 'his/its', e.g. 其父; 各得其所."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「以」最常见的意思是？",
+                        "en": "What is the most common meaning of the classical particle 「以」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "但是",
+                          "用／因为",
+                          "所以",
+                          "如果"
+                        ],
+                        "en": [
+                          "but",
+                          "with / because",
+                          "so",
+                          "if"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「以」可表工具（用）、原因（因为）、目的（为了），如「以笔写字」「不以物喜」。",
+                        "en": "以 marks instrument ('with'), cause ('because'), or purpose ('in order to'), e.g. 以笔写字; 不以物喜."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「于」最常见的意思是？",
+                        "en": "What is the most common meaning of the classical particle 「于」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "和",
+                          "但是",
+                          "所以",
+                          "在／比"
+                        ],
+                        "en": [
+                          "and",
+                          "but",
+                          "so",
+                          "in / than"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「于」可表地点（在）、比较（比）、被动（被），如「生于北京」「青出于蓝」。",
+                        "en": "于 marks place ('in'), comparison ('than'), or passive, e.g. 生于北京; 青出于蓝."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「者」的作用是？",
+                        "en": "What is the function of the classical particle 「者」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表判断或提取名词（…的人／事）",
+                          "表否定",
+                          "表将来",
+                          "表感叹"
+                        ],
+                        "en": [
+                          "Marks judgment or nominalizes ('the one who')",
+                          "Marks negation",
+                          "Marks future",
+                          "Marks exclamation"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「者」可作代词（…的人／事）或表判断，如「学者」「知者乐水」。",
+                        "en": "者 nominalizes ('the one who') or marks judgment, e.g. 学者; 知者乐水."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「也」最常用于？",
+                        "en": "What is the most common function of the classical particle 「也」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表疑问",
+                          "表句末判断或停顿",
+                          "表否定",
+                          "表将来"
+                        ],
+                        "en": [
+                          "Marks question",
+                          "Marks judgment or pause at the end of a clause",
+                          "Marks negation",
+                          "Marks future"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「也」常用于句末表判断或停顿，如「仁者，爱人」也可作「仁者，爱人也」。",
+                        "en": "也 usually ends a clause to mark judgment or pause, e.g. 仁者，爱人也."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「乎」最常用于？",
+                        "en": "What is the most common function of the classical particle 「乎」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表感叹",
+                          "表否定",
+                          "表将来",
+                          "表疑问或感叹"
+                        ],
+                        "en": [
+                          "Marks exclamation",
+                          "Marks negation",
+                          "Marks future",
+                          "Marks question or exclamation"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「乎」常用于句末表疑问或感叹，如「不亦说乎？」「天乎！」",
+                        "en": "乎 usually ends a clause marking a question or exclamation, e.g. 不亦说乎; 天乎."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "文言虚词「焉」的作用是？",
+                        "en": "What is the function of the classical particle 「焉」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "表否定",
+                          "句末语气词／兼词（于之）",
+                          "表将来",
+                          "表感叹"
+                        ],
+                        "en": [
+                          "Marks negation",
+                          "Sentence-final particle / fusion (at it)",
+                          "Marks future",
+                          "Marks exclamation"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「焉」可作句末语气词（如「有焉」）或兼词（于之），如「三人行，必有我师焉」。",
+                        "en": "焉 can be a sentence-final particle or a fusion word (at it), e.g. 三人行，必有我师焉."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「学而时习之，不亦说乎」出自？",
+                        "en": "Which classic work does 「学而时习之，不亦说乎」 come from?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "《孟子》",
+                          "《庄子》",
+                          "《论语》",
+                          "《老子》"
+                        ],
+                        "en": [
+                          "孟子 (Mencius)",
+                          "庄子 (Zhuangzi)",
+                          "论语 (Analects)",
+                          "老子 (Laozi)"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "此句出自《论语·学而》，是孔子论学的名句。",
+                        "en": "This passage is from the Analects (论语), chapter 学而, a famous saying of Confucius."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "titleZh": "试卷 2：高级成语与典故",
+                  "titleEn": "Paper 2: Advanced Idioms & Allusions (高级成语与典故)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「三人成虎」的意思是？",
+                        "en": "What does 「三人成虎」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "三人合作能打虎",
+                          "三个人一起扮老虎",
+                          "三人变成了老虎",
+                          "谣言重复多次，便能使人相信"
+                        ],
+                        "en": [
+                          "Three people can fight a tiger",
+                          "Three people dress up as a tiger",
+                          "Three people turn into tigers",
+                          "A repeated rumor is believed"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "三人成虎：多人重复谣言，便能使人信以为真。出自《战国策》。",
+                        "en": "三人成虎: a repeated rumor is believed. From the Strategies of the Warring States."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「刻鹄类鹜」的意思是？",
+                        "en": "What does 「刻鹄类鹜」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "刻鹄类鹜（模仿得虽不逼真，尚能近似）",
+                          "刻鹄类鹜（刻得很像）",
+                          "刻鹄类鹜（雕工很好）",
+                          "刻鹄类鹜（画鹄画鹜）"
+                        ],
+                        "en": [
+                          "刻鹄类鹜（模仿得虽不逼真，尚能近似）",
+                          "刻鹄类鹜（刻得很像）",
+                          "刻鹄类鹜（雕工很好）",
+                          "刻鹄类鹜（画鹄画鹜）"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "刻鹄类鹜：刻天鹅不成，还能像只鸭子；比喻模仿得虽不逼真，尚能近似。",
+                        "en": "刻鹄类鹜: carving a swan and getting a duck — imitating imperfectly but recognizably."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「户枢不蠹」的意思是？",
+                        "en": "What does 「户枢不蠹」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "门轴不会生虫",
+                          "门轴很脏",
+                          "屋子很久没人",
+                          "户枢不蠹（经常运动不易侵蚀）"
+                        ],
+                        "en": [
+                          "Door hinges don't get worms",
+                          "Door hinges are dirty",
+                          "The house is empty",
+                          "户枢不蠹（经常运动不易侵蚀）"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "户枢不蠹：常转动的门轴不会被虫蛀；比喻经常运动不易受外物侵蚀。",
+                        "en": "户枢不蠹: a frequently moving door hinge won't be eaten by worms — frequent use keeps things from decay."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「阳春白雪」的意思是？",
+                        "en": "What does 「阳春白雪」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "阳春白雪（高雅的文艺作品）",
+                          "阳春白雪（天气好）",
+                          "阳春白雪（冬天下雪）",
+                          "阳春白雪（春天的雪"
+                        ],
+                        "en": [
+                          "阳春白雪（高雅的文艺作品）",
+                          "阳春白雪（天气好）",
+                          "阳春白雪（冬天下雪）",
+                          "阳春白雪（春天的雪"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "阳春白雪：战国时楚国的高雅乐曲；后比喻高深的、不通俗的文学艺术。",
+                        "en": "阳春白雪: a refined ancient melody of Chu; now a metaphor for high-brow, refined arts."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「下里巴人」的意思是？",
+                        "en": "What does 「下里巴人」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "下里巴人（乡下人）",
+                          "下里巴人（通俗的文艺作品）",
+                          "下里巴人（下层人）",
+                          "下里巴人（巴蜀地区）"
+                        ],
+                        "en": [
+                          "下里巴人（乡下人）",
+                          "下里巴人（通俗的文艺作品）",
+                          "下里巴人（下层人）",
+                          "下里巴人（巴蜀地区）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "下里巴人：战国时楚国的通俗乐曲；后比喻通俗的文艺作品。与「阳春白雪」相对。",
+                        "en": "下里巴人: a popular melody of ancient Chu; now a metaphor for popular arts, the opposite of 阳春白雪."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「东施效颦」的意思是？",
+                        "en": "What does 「东施效颦」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "东施效颦（东施学着皱眉）",
+                          "东施效颦（盲目模仿反而更丑）",
+                          "东施效颦（东施很漂亮）",
+                          "东施效颦（模仿得很像）"
+                        ],
+                        "en": [
+                          "东施效颦（东施学着皱眉）",
+                          "东施效颦（盲目模仿反而更丑）",
+                          "东施效颦（东施很漂亮）",
+                          "东施效颦（模仿得很像）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "东施效颦：丑女东施模仿美女西施皱眉，反而更丑；比喻盲目模仿，效果适得其反。",
+                        "en": "东施效颦: the ugly woman Dongshi imitates the beauty Xishi's frown — blind imitation makes things worse."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「沈鱼落雁」的意思是？",
+                        "en": "What does 「沉鱼落雁」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "沉鱼落雁（鱼沉下去雁落下来）",
+                          "沉鱼落雁（形容女子极美）",
+                          "沉鱼落雁（形容天气）",
+                          "沉鱼落雁（形容鱼的重量）"
+                        ],
+                        "en": [
+                          "沉鱼落雁（鱼沉下去雁落下来）",
+                          "沉鱼落雁（形容女子极美）",
+                          "沉鱼落雁（形容天气）",
+                          "沉鱼落雁（形容鱼的重量）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "沉鱼落雁：鱼见之沉入水底，雁见之降落沙洲；形容女子容貌极美。",
+                        "en": "沉鱼落雁: fish sink and geese fall at the sight of her beauty — describing an extremely beautiful woman."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「破镜重圆」的意思是？",
+                        "en": "What does 「破镜重圆」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "破镜重圆（镜子破了又圆了）",
+                          "破镜重圆（夫妻失散后重新团聚）",
+                          "破镜重圆（镜子买新的）",
+                          "破镜重圆（破了的镜子不能用）"
+                        ],
+                        "en": [
+                          "破镜重圆（镜子破了又圆了）",
+                          "破镜重圆（夫妻失散后重新团聚）",
+                          "破镜重圆（镜子买新的）",
+                          "破镜重圆（破了的镜子不能用）"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "破镜重圆：比喻夫妻失散或分离后重新团聚。出自南朝陈乐昌公主故事。",
+                        "en": "破镜重圆: a broken mirror made whole again — a metaphor for a separated couple reuniting."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「望洋兴叹」的意思是？",
+                        "en": "What does 「望洋兴叹」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "望洋兴叹（望着大海感叹自己的渺小）",
+                          "望洋兴叹（望着洋人叹气）",
+                          "望洋兴叹（感叹海洋大）",
+                          "望洋兴叹（喜欢海洋）"
+                        ],
+                        "en": [
+                          "望洋兴叹（望着大海感叹自己的渺小）",
+                          "望洋兴叹（望着洋人叹气）",
+                          "望洋兴叹（感叹海洋大）",
+                          "望洋兴叹（喜欢海洋）"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "望洋兴叹：原指面对伟大的事物感叹自己的渺小；后比喻因力量不够而感到无可奈何。",
+                        "en": "望洋兴叹: originally, sighing at one's smallness before greatness; now, feeling helpless due to lack of power."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「分道扬镳」的意思是？",
+                        "en": "What does 「分道扬镳」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "分道扬镳（分路而行）",
+                          "分道扬镳（分成两组）",
+                          "分道扬镳（各走各的路，因志趣不同）",
+                          "分道扬镳（一起去旅行）"
+                        ],
+                        "en": [
+                          "分道扬镳（分路而行）",
+                          "分道扬镳（分成两组）",
+                          "分道扬镳（各走各的路，因志趣不同）",
+                          "分道扬镳（一起去旅行）"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "分道扬镳：分路而行；比喻因志趣不同而各走各的路。",
+                        "en": "分道扬镳: to part ways; a metaphor for going separate ways due to different goals or interests."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "titleZh": "试卷 3：修辞与文学表达",
+                  "titleEn": "Paper 3: Rhetoric & Literary Devices (修辞与文学表达)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「红的像火，粉的像霞，白的像雪」用了什么修辞？",
+                        "en": "What rhetorical device is used in 「红的像火，粉的像霞，白的像雪」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "比喻",
+                          "拟人",
+                          "夸张",
+                          "排比"
+                        ],
+                        "en": [
+                          "Metaphor/Simile",
+                          "Personification",
+                          "Hyperbole",
+                          "Parallelism"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "三个结构相同的「…的像…」连用，是排比。",
+                        "en": "Three parallel clauses with the same structure form 排比 (parallelism)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「月亮悄悄地爬上了树梢」用了什么修辞？",
+                        "en": "What rhetorical device is used in 「月亮悄悄地爬上了树梢」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "排比",
+                          "拟人",
+                          "比喻",
+                          "夸张"
+                        ],
+                        "en": [
+                          "Parallelism",
+                          "Personification",
+                          "Metaphor",
+                          "Hyperbole"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「悄悄地爬」把月亮当作人来写，是拟人。",
+                        "en": "Giving the moon the human action of 'climbing quietly' is personification."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「飞流直下三千尺」用了什么修辞？",
+                        "en": "What rhetorical device is used in 「飞流直下三千尺」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "夸张",
+                          "拟人",
+                          "比喻",
+                          "排比"
+                        ],
+                        "en": [
+                          "Hyperbole",
+                          "Personification",
+                          "Metaphor",
+                          "Parallelism"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "「三千尺」是夸张，用来形容瀑布极高。",
+                        "en": "三千尺 is hyperbole, emphasizing the waterfall's extreme height."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「弯弯的月亮像小船」用了什么修辞？",
+                        "en": "What rhetorical device is used in 「弯弯的月亮像小船」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "拟人",
+                          "夸张",
+                          "排比",
+                          "比喻"
+                        ],
+                        "en": [
+                          "Personification",
+                          "Hyperbole",
+                          "Parallelism",
+                          "Simile/Metaphor"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "「像」是比喻词，把月亮比作小船，是比喻。",
+                        "en": "像 marks a simile: comparing the moon to a small boat."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「春天像刚落地的娃娃，从头到脚都是新的」用了什么修辞？",
+                        "en": "What rhetorical device is used in 「春天像刚落地的娃娃，从头到脚都是新的」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "排比",
+                          "拟人",
+                          "比喻",
+                          "夸张"
+                        ],
+                        "en": [
+                          "Parallelism",
+                          "Personification",
+                          "Simile/Metaphor",
+                          "Hyperbole"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「像刚落地的娃娃」把春天比作新生儿，是比喻。",
+                        "en": "像刚落地的娃娃 compares spring to a newborn — a simile."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「问君能有几多愁？恰似一江春水向东流」出自？",
+                        "en": "「问君能有几多愁？恰似一江春水向东流」 comes from?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "李白",
+                          "杜甫",
+                          "李煜",
+                          "苏轼"
+                        ],
+                        "en": [
+                          "Li Bai",
+                          "Du Fu",
+                          "Li Yu",
+                          "Su Shi"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "此句出自李煜《虞美人》，是亡国之君的绝唱。",
+                        "en": "This line is from Li Yu's 虞美人, a famous lament of the fallen Southern Tang emperor."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「大江东去，浪淘尽，千古风流人物」出自？",
+                        "en": "「大江东去，浪淘尽，千古风流人物」 comes from?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "苏轼",
+                          "李煜",
+                          "李白",
+                          "辛弃疾"
+                        ],
+                        "en": [
+                          "Su Shi",
+                          "Li Yu",
+                          "Li Bai",
+                          "Xin Qiji"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "此句出自苏轼《念奴娇·赤壁怀古》。",
+                        "en": "This line is from Su Shi's 念奴娇·赤壁怀古."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「春眠不觉晓，处处闻啼鸟」的作者是？",
+                        "en": "Who wrote 「春眠不觉晓，处处闻啼鸟」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "李白",
+                          "杜甫",
+                          "王维",
+                          "孟浩然"
+                        ],
+                        "en": [
+                          "Li Bai",
+                          "Du Fu",
+                          "Wang Wei",
+                          "Meng Haoran"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "此句出自孟浩然《春晓》。",
+                        "en": "This line is from Meng Haoran's 春晓."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「床前明月光，疑是地上霜」用了什么修辞？",
+                        "en": "What rhetorical device is used in 「床前明月光，疑是地上霜」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "夸张",
+                          "拟人",
+                          "比喻",
+                          "排比"
+                        ],
+                        "en": [
+                          "Hyperbole",
+                          "Personification",
+                          "Simile/Metaphor",
+                          "Parallelism"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「疑是地上霜」把月光比作霜，是比喻。出自李白《静夜思》。",
+                        "en": "疑是地上霜 compares moonlight to frost — a simile. From Li Bai's 静夜思."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「对偶」的特点是什么？",
+                        "en": "What characterizes 「对偶」 (antithesis)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "前后两句字数相等、结构对称",
+                          "用拟人手法",
+                          "夸张地描写",
+                          "三个以上句子并列"
+                        ],
+                        "en": [
+                          "Two lines of equal length with symmetrical structure",
+                          "Using personification",
+                          "Exaggerated description",
+                          "Three or more parallel lines"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "对偶：前后两句字数相等、结构对称、意义相关，如「两个黄鹂鸣翠柳，一行白鹭上青天」。",
+                        "en": "对偶 (antithesis): two clauses of equal length and symmetrical structure, e.g. 两个黄鹂鸣翠柳，一行白鹭上青天."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "titleZh": "试卷 4：书面语高级辨析",
+                  "titleEn": "Paper 4: Advanced Written Register (书面语高级辨析)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「鉴于」最常用于什么语境？",
+                        "en": "In what context is 「鉴于」 most commonly used?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "口语对话",
+                          "文学描写",
+                          "正式书面语",
+                          "儿童读物"
+                        ],
+                        "en": [
+                          "Spoken dialogue",
+                          "Literary description",
+                          "Formal written language",
+                          "Children's books"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "鉴于：书面语，常用于公文、报告、说明文，表「考虑到」。",
+                        "en": "鉴于 is a formal written word for 'in view of / considering', common in official documents and reports."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「予以」最常用于什么语境？",
+                        "en": "In what context is 「予以」 most commonly used?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "文学诗歌",
+                          "儿童读物",
+                          "口语对话",
+                          "正式书面语"
+                        ],
+                        "en": [
+                          "Literary poetry",
+                          "Children's books",
+                          "Spoken dialogue",
+                          "Formal written language"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "予以：书面语，常用于「予以支持」「予以处罚」。",
+                        "en": "予以 is a formal written word, e.g. 予以支持 (give support); 予以处罚 (impose a penalty)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「乃至」的意思是？",
+                        "en": "What does 「乃至」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "和",
+                          "甚至",
+                          "所以",
+                          "因为"
+                        ],
+                        "en": [
+                          "and",
+                          "even / up to",
+                          "so",
+                          "because"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "乃至：甚至，书面语。如「十年乃至二十年」。",
+                        "en": "乃至 means 'even / up to', a formal written word: e.g. 十年乃至二十年 (ten or even twenty years)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「遵循」的意思是？",
+                        "en": "What does 「遵循」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "跟随／按照",
+                          "违反",
+                          "改变",
+                          "放弃"
+                        ],
+                        "en": [
+                          "Follow / Abide by",
+                          "Violate",
+                          "Change",
+                          "Give up"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "遵循：书面语，意为按照、依从。如「遵循规律」。",
+                        "en": "遵循 means 'follow / abide by', e.g. 遵循规律 (follow the laws/rules)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「加以」最常用于？",
+                        "en": "What is 「加以」 most commonly used for?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "口头叙述",
+                          "小说描写",
+                          "正式书面语（对…进行…）",
+                          "儿童用语"
+                        ],
+                        "en": [
+                          "Spoken narration",
+                          "Novel description",
+                          "Formal writing (to do something to ...)",
+                          "Children's language"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "加以：书面语，常用「加以说明」「加以分析」。",
+                        "en": "加以 is a formal written pattern, e.g. 加以说明 (give an explanation); 加以分析 (carry out analysis)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「暨」的意思是？",
+                        "en": "What does 「暨」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "和／及",
+                          "如果",
+                          "所以",
+                          "但是"
+                        ],
+                        "en": [
+                          "and",
+                          "if",
+                          "so",
+                          "but"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "暨：书面语，意为「和、及」，常用于会议名称。如「毕业典礼暨颁奖仪式」。",
+                        "en": "暨 is a formal written word meaning 'and', often in event names, e.g. 毕业典礼暨颁奖仪式."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「颇」的意思是？",
+                        "en": "What does 「颇」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "非常",
+                          "稍微",
+                          "很／相当（书面）",
+                          "一点"
+                        ],
+                        "en": [
+                          "Extremely",
+                          "Slightly",
+                          "Quite / Rather (formal)",
+                          "A little"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "颇：书面语，意为「很、相当」。如「颇受欢迎」「颇有研究」。",
+                        "en": "颇 is a formal word meaning 'quite / rather', e.g. 颇受欢迎 (quite popular); 颇有研究 (has considerable research)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「尚」的意思是？",
+                        "en": "What does 「尚」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "还／仍然（书面）",
+                          "已经",
+                          "立刻",
+                          "从不"
+                        ],
+                        "en": [
+                          "Still / Yet (formal)",
+                          "Already",
+                          "Immediately",
+                          "Never"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "尚：书面语，意为「还、仍然」。如「尚未完成」「尚需努力」。",
+                        "en": "尚 is a formal word meaning 'still / yet', e.g. 尚未完成 (not yet completed); 尚需努力 (still needs effort)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「该」在公文中常表示？",
+                        "en": "In official documents, what does 「该」 usually mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "应该",
+                          "这个／那个（指代已提过的人或事）",
+                          "该当",
+                          "必须"
+                        ],
+                        "en": [
+                          "Should",
+                          "This/That (referring to previously mentioned)",
+                          "Deserving",
+                          "Must"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "公文中的「该」是代词，指代前面提到的人或事物，如「该校」「该公司」。",
+                        "en": "In official documents, 该 is a pronoun referring back to something mentioned, e.g. 该校 (the said school); 该公司 (the said company)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「予以」和「给以」的区别是？",
+                        "en": "What is the difference between 「予以」 and 「给以」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "完全相同",
+                          "予以更正式，给以更口语",
+                          "给以更正式",
+                          "都不用于书面"
+                        ],
+                        "en": [
+                          "They are identical",
+                          "予以 is more formal; 给以 is more colloquial",
+                          "给以 is more formal",
+                          "Neither is used in writing"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "予以和给以都表示「对…给以…」，予以更正式，常用于公文。",
+                        "en": "Both mean 'to give / apply', but 予以 is more formal and common in official documents."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "titleZh": "试卷 5：综合辨析",
+                  "titleEn": "Paper 5: Comprehensive Discrimination (综合辨析)",
+                  "questions": [
+                    {
+                      "q": {
+                        "zh": "「推敲」一词的来源是？",
+                        "en": "What is the origin of the word 「推敲」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "贾岛和韩愈讨论诗句「推」和「敲」",
+                          "关于推车和敲门的动作",
+                          "一首古诗",
+                          "一个成语故事"
+                        ],
+                        "en": [
+                          "Jia Dao and Han Yu debating 推 vs 敲 in a poem",
+                          "Pushing carts and knocking on doors",
+                          "An ancient poem",
+                          "A historical idiom"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "推敲：唐代诗人贾岛斟酌「推」与「敲」二字，韩愈建议「敲」；后比喻反复斟酌字句。",
+                        "en": "推敲 comes from the Tang poet Jia Dao pondering 推 vs 敲, advised by Han Yu; now it means carefully polishing words."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「刮目相看」的意思是？",
+                        "en": "What does 「刮目相看」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "擦亮眼睛看",
+                          "眯着眼看",
+                          "用新的眼光看待",
+                          "看了一眼"
+                        ],
+                        "en": [
+                          "擦亮眼睛看",
+                          "眯着眼看",
+                          "用新的眼光看待",
+                          "看了一眼"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "刮目相看：擦亮眼睛，用新眼光看待某人（因对方进步大）。",
+                        "en": "刮目相看 means to look at someone with new eyes (because of their great progress)."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「不胫而走」的意思是？",
+                        "en": "What does 「不胫而走」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "没有腿却跑了",
+                          "不胫而走（不跑步）",
+                          "不胫而走（走路）",
+                          "消息传得很快"
+                        ],
+                        "en": [
+                          "没有腿却跑了",
+                          "不胫而走（不跑步）",
+                          "不胫而走（走路）",
+                          "消息传得很快"
+                        ]
+                      },
+                      "ans": 3,
+                      "exp": {
+                        "zh": "不胫而走：没有腿却能跑；比喻消息传播得非常快。",
+                        "en": "不胫而走: running without legs — a metaphor for news spreading rapidly."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「胶柱鼓瑟」的意思是？",
+                        "en": "What does 「胶柱鼓瑟」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "把柱胶住再弹瑟（比喻拘泥不知变通）",
+                          "弹琴技术高超",
+                          "不会弹琴",
+                          "瑟坏了"
+                        ],
+                        "en": [
+                          "把柱胶住再弹瑟（比喻拘泥不知变通）",
+                          "弹琴技术高超",
+                          "不会弹琴",
+                          "瑟坏了"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "胶柱鼓瑟：把瑟上的柱粘住再弹，比喻拘泥固执、不知变通。",
+                        "en": "胶柱鼓瑟: gluing the tuning pegs before playing — a metaphor for stubbornness and inflexibility."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「不落窠臼」的意思是？",
+                        "en": "What does 「不落窠臼」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "不落俗套、有独创性",
+                          "不落进陷阱",
+                          "不掉下去",
+                          "不进洞"
+                        ],
+                        "en": [
+                          "不落俗套、有独创性",
+                          "不落进陷阱",
+                          "不掉下去",
+                          "不进洞"
+                        ]
+                      },
+                      "ans": 0,
+                      "exp": {
+                        "zh": "不落窠臼：比喻不落俗套，有独创性。",
+                        "en": "不落窠臼 means not following conventional patterns — being original."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪句的「之」是代词？",
+                        "en": "In which sentence is 「之」 used as a pronoun?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "赤子之心",
+                          "久而久之",
+                          "求之不得",
+                          "之一"
+                        ],
+                        "en": [
+                          "赤子之心",
+                          "久而久之",
+                          "求之不得",
+                          "之一"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「求之不得」中的「之」是代词（指代所求之物）；其余「之」是结构助词。",
+                        "en": "In 求之不得, 之 is a pronoun (the thing sought); in the others, 之 is a structural particle."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪句使用了「对偶」？",
+                        "en": "Which sentence uses 「对偶」 (antithesis)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他跑得很快",
+                          "两个黄鹂鸣翠柳，一行白鹭上青天",
+                          "因为下雨所以没去",
+                          "她美得像一朵花"
+                        ],
+                        "en": [
+                          "他跑得很快",
+                          "两个黄鹂鸣翠柳，一行白鹭上青天",
+                          "因为下雨所以没去",
+                          "她美得像一朵花"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "「两个黄鹂鸣翠柳，一行白鹭上青天」：字数相等、结构对称，是对偶。",
+                        "en": "两个黄鹂鸣翠柳，一行白鹭上青天 has equal length and symmetrical structure — 对偶."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「问君能有几多愁」的作者是？",
+                        "en": "Who wrote 「问君能有几多愁」?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "苏轼",
+                          "李白",
+                          "李煜",
+                          "杜甫"
+                        ],
+                        "en": [
+                          "Su Shi",
+                          "Li Bai",
+                          "Li Yu",
+                          "Du Fu"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "此句出自李煜《虞美人》。",
+                        "en": "This line is from Li Yu's 虞美人."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "「破釜沉舟」的意思是？",
+                        "en": "What does 「破釜沉舟」 mean?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "打碎锅沉掉船",
+                          "决心拼搏、义无反顾",
+                          "做饭",
+                          "坐船"
+                        ],
+                        "en": [
+                          "打碎锅沉掉船",
+                          "决心拼搏、义无反顾",
+                          "做饭",
+                          "坐船"
+                        ]
+                      },
+                      "ans": 1,
+                      "exp": {
+                        "zh": "破釜沉舟：砸锅沉船，比喻下定决心，义无反顾。出自项羽巨鹿之战。",
+                        "en": "破釜沉舟: break the cauldrons and sink the boats — a resolve to fight with no retreat. From Xiang Yu at the Battle of Julu."
+                      }
+                    },
+                    {
+                      "q": {
+                        "zh": "下列哪句使用了「拟人」？",
+                        "en": "Which sentence uses 「拟人」 (personification)?"
+                      },
+                      "opts": {
+                        "zh": [
+                          "他像一只小鸟",
+                          "小鸟飞走了",
+                          "小鸟在树上唱歌",
+                          "小鸟很美"
+                        ],
+                        "en": [
+                          "他像一只小鸟",
+                          "小鸟飞走了",
+                          "小鸟在树上唱歌",
+                          "小鸟很美"
+                        ]
+                      },
+                      "ans": 2,
+                      "exp": {
+                        "zh": "「小鸟在唱歌」把小鸟当作人来写，是拟人；「他像一只小鸟」是比喻。",
+                        "en": "小鸟在树上唱歌 treats the bird as a person — personification; 他像一只小鸟 is a simile."
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
