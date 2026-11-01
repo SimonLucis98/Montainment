@@ -48245,7 +48245,7 @@
       "subjects": [
         {
           "id": "Home_Cooking",
-          "emoji": "Home_Cooking",
+          "emoji": "Home",
           "labelZh": "家务与烹饪",
           "labelEn": "Housework and Cooking",
           "difficulties": [
@@ -48767,7 +48767,7 @@
         },
         {
           "id": "Communication",
-          "emoji": "Communication",
+          "emoji": "Commu",
           "labelZh": "沟通与职场",
           "labelEn": "Communication and Workplace",
           "difficulties": [
